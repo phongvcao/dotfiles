@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Categories=;
+Comment=Edit file in Vim
+Exec=vim %f
+GenericName=Process Viewer
+Hidden=false
+Icon=/usr/share/vim/vim.png
+Name=Vim 7.4
+Terminal=true
+Type=Application
+Version=1.0

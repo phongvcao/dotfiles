@@ -1,0 +1,206 @@
+" vim:filetype=vim
+" Since we are using , and . alot in our key  mappings,
+" let's map them into <leader> and <localleader> so we
+" won't have to type them over and over.
+map , <leader>
+map . <localleader>
+
+" Trying to be minimalist - nonavigation and notabs
+" Everything is done using buffers
+set gui=nonavigation
+set gui=notabs
+
+" Disable auto-focus into the 1st textbox of Firefox
+" when visiting a webpage
+set focuscontent
+
+" No close-tab buttons
+set! browser.tabs.closeButtons=2
+
+" Set completion
+set complete=hSb
+
+" Set max items to display in completion. We set to 20 to make abundant space
+" for History and Google Suggestion to live together, as well as in cases we
+" open more than 20 tabs. Also, it will be compatible (in term of looks) with
+" dmenu of i3wm
+set maxitems=20
+
+" Set coccoc.com as default search engine for Vimperator
+set defsearch=c
+
+" Keys remappings - Compatible with default Vim keybindings
+" But you can change them if you like
+nnoremap ; :
+nnoremap : ;
+cnoremap jk <Esc>
+inoremap jk <Esc>
+vnoremap jk <Esc><Esc>
+inoremap j jj<BS>
+nnoremap <leader>/ :set hlsearch!<CR>
+nnoremap <localleader>nb :set gui=navigation<CR>
+nnoremap <localleader>nn :set gui=nonavigation<CR>
+nnoremap <localleader>tb :set gui=tabs<CR>
+nnoremap <localleader>nt :set gui=notabs<CR>
+nnoremap <leader>vs y:tabopen<CR> :viewsource<Space><C-v><CR> :tabdetach<CR>
+nnoremap <localleader>vs :tabopen<CR> :viewsource <Tab>
+nnoremap <leader>t :tabopen http://coccoc.com/search#!<CR>
+nnoremap <leader>h :open http://coccoc.com/search#!<CR>
+nnoremap <C-r> :forward<CR>
+inoremap <C-r> <Esc>:forward<CR>
+vnoremap <C-r> <Esc>:forward<CR>
+inoremap <C-a> <Ins><C-a><Ins>
+inoremap <C-S-p> <Esc>i<C-S-p>
+nnoremap <C-S-p> i<C-S-p>
+vnoremap <C-S-p> <Esc>i<C-S-p>
+nnoremap <localleader>j <C-S-k>
+nnoremap <leader>k <PageUp>
+nnoremap <leader>j <PageDown>
+nnoremap <localleader>P :dialog printpreview<CR>
+nnoremap <leader>P :dialog print<CR>
+nnoremap gf <nop>
+nnoremap v cv
+vnoremap v cv
+nnoremap <BS> <nop>
+nnoremap <C-u> :back<CR>
+nnoremap <localleader>c ;c
+nnoremap <leader>b b
+nnoremap b :tabopen<CR> :bmarks<Space>
+nnoremap <localleader>bo :bmarks!<CR>
+nnoremap H 1000h
+nnoremap L 1000l
+nnoremap <localleader>ba :bmark -folder TOOLBAR <Tab>
+nnoremap <localleader>bd :delbmarks <Tab>
+nnoremap <localleader>br :delbmarks!<CR>
+nnoremap <leader>r :restart<CR>
+nnoremap <localleader>hi :tabopen<CR> :history<Space><CR>
+nnoremap <leader>f F
+nnoremap <localleader>f ;w
+nnoremap F <nop>
+nnoremap <leader>a :tabopen<CR> :addons<CR>
+nnoremap <leader>d :tabopen<CR> :downloads<CR>
+nnoremap <leader>A :tabattach<Space>
+nnoremap <leader>D :tabdetach<CR>
+nnoremap <leader>M :tabmove<Space>
+nnoremap <leader>< :tabmove -1<CR>
+nnoremap <leader>> :tabmove +1<CR>
+nnoremap <leader>w :winopen<CR>
+nnoremap <localleader>w :winclose<CR>
+nnoremap <leader>o O
+nnoremap O <nop>
+nnoremap <localleader>d :tabopen<CR>~
+nnoremap <C-t> <nop>
+nnoremap d <nop>
+nnoremap c d
+nnoremap _ d
+nnoremap <C-h> <nop>
+nnoremap <leader>m <nop>
+nnoremap <leader>z <nop>
+nnoremap <leader>x <nop>
+nnoremap <leader>. <nop>
+nnoremap = :zoom 100<CR>
+cnoremap <C-h> <left>
+cnoremap <C-l> <right>
+nnoremap q :quit<CR>
+nnoremap <leader>n :tabopen<CR> ~
+nnoremap ~ <nop>
+nnoremap ! 1
+nnoremap @j 2j
+nnoremap @h 2h
+nnoremap @k 2k
+nnoremap @l 2l
+nnoremap @! 21
+nnoremap @@ 22
+nnoremap @# 23
+nnoremap @$ 24
+nnoremap @% 25
+nnoremap @^ 26
+nnoremap @& 27
+nnoremap @* 28
+nnoremap @( 29
+nnoremap @) 20
+nnoremap !@ 12
+nnoremap #@ 32
+nnoremap $@ 42
+nnoremap %@ 52
+nnoremap ^@ 62
+nnoremap &@ 72
+nnoremap *@ 82
+nnoremap (@ 92
+nnoremap )@ 02
+nnoremap @d 2d
+nnoremap @y 2y
+nnoremap @ 2
+nnoremap # 3
+nnoremap $ 4
+nnoremap % 5
+nnoremap ^ 6
+nnoremap & 7
+nnoremap * 8
+nnoremap ( 9
+nnoremap ) 0
+
+" These highlights are responsible for GUI colors & stuffs
+highlight -append Bell font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Boolean font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CmdLine font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CmdLine>* font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CmdOutput font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompDesc font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompGroup font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompGroup:not(:first-of-type) font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompIcon font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompIcon>img font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompItem font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompItem>* font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompItem[selected] font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompMsg font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompResult font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompTitle font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append CompTitle>* font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append ContentSeparator font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Disabled font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Enabled font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append ErrorMsg font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Filter font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append FrameIndicator font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Function font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Hint font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Hint::after font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+" highlight -append HintActive font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+" highlight -append HintElem font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append HintImage font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Indicator font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append InfoMsg font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Key font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Keyword font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append LineNr font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Logo font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Mapping font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Message font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append ModeMsg font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append MoreMsg font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append NonText font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Normal font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Null font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Number font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Object font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Preview font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Prompt font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append PromptText font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Question font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append StatusLine font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+" highlight -append Search font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append StatusLine font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append String font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append TabNumber font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+" highlight -append TabClose font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+" highlight -append TabIcon font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+" highlight -append TabIconNumber font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append TabNumber font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+" highlight -append TabText font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Tag font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append Title font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append URL font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append URL:hover font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;
+highlight -append WarningMsg font-family: "Dejavu Sans Mono", monospace; font-size: 9px; font-weight: bold;

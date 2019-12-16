@@ -1,0 +1,356 @@
+# vim:filetype=zsh
+alias "sudo"="sudo "
+alias "reload"="source \${HOME}/.bashrc"
+alias "install"="sudo pacman-db-upgrade; sudo pacman -S"
+alias "ainstall"="yaourt -S --aur --noconfirm"
+alias "remove"="sudo pacman -R"
+alias "removeall"="sudo pacman -Rsc"
+alias "autoremove"="sudo pacman -R \$(pacman -Qdtq)"
+alias "autoclean"="sudo pacman --noconfirm -Scc; sudo pacman -R \$(pacman -Qdtq)"
+alias "update"="sudo pacman-db-upgrade; \
+    sudo pacman -Syyu --force; \
+    sudo pacman --noconfirm -Syyu --force; \
+    sudo pacman-db-upgrade; \
+    yaourt --noconfirm -Syyu --aur --force; \
+    sudo python2 -m pip install --upgrade pip; \
+    sudo python3 -m pip install --upgrade pip; \
+    pipreview; \
+    sudo pkgfile --update; \
+    sudo cp ${HOME}/.dotfiles/root${xkbdir}/keypad ${xkbdir}/keypad; \
+    sudo pacman -Scc --noconfirm; \
+    sudo pacman -R \$(pacman -Qdtq) --noconfirm; \
+    cd ${HOME}/.dotfiles >/dev/null 2>&1; \
+    git add -A; \
+    git commit -m 'Commit for merging with Github repo'; \
+    git pull -X theirs --no-edit origin master; \
+    git push origin master; \
+    upgrade_oh_my_zsh; \
+    echo 'y' | command vim -c 'set nomore' +NeoBundleInstall! +NeoBundleUpdate! +NeoBundleClean! +qall!; \
+    ${HOME}/.tmux/plugins/tpm/bin/update_plugins all; \
+    cd - >/dev/null 2>&1;"
+alias "dbupdate"="sudo pacman -Syy; sudo pacman-db-upgrade"
+alias "installed"="sudo pacman -Qm; sudo yaourt -Qm;"
+alias "tree"="command tree --dirsfirst -C -F -L"
+alias "treehidden"="command tree --dirsfirst -C -F -A -L"
+alias "treefull"="command tree --dirsfirst -C -F"
+alias "sysenable"="sudo systemctl enable"
+alias "sysdisable"="sudo systemctl disable"
+alias "sysstart"="sudo systemctl start"
+alias "sysstop"="sudo systemctl stop"
+alias "sysrestart"="sudo systemctl restart"
+alias "root"="su --login"
+alias "bash"="$(which bash)"
+alias "killeclim"="/usr/share/eclipse/eclim -command shutdown"
+alias "lss"="command_ls -F -X"
+alias "lsc"="command_ls -A -1"
+alias "lsla"="command_ls -L -A"
+alias "lse"="command_ls -A -l -s | command_grep -E \"[\-](([rw\-]{2})x){1,3}\""
+alias "lsd"="command_ls -d -A -l */ .*/"
+alias "ls"="lsg"
+alias "lr"="lsrgr"
+alias "lsa"="lsag"
+# ln -s -f <original_file> <destination_symlink>
+alias "ln"="command ln -s -f"
+alias "vi"="vim"
+alias "vimrc"="echo 'y' | command vim -c 'set nomore' +NeoBundleInstall! +NeoBundleUpdate! +NeoBundleClean! +qall!"
+alias "echo"="echo -e"
+alias "cgdisk"="sudo cgdisk"
+alias "lsblk"="echo LSBLK:; command lsblk -f; echo; echo DF:; command df -h --output"
+alias "df"="echo LSBLK:; command lsblk -f; echo; echo DF:; command df -h --output"
+alias "realpath"="realpath"
+alias "mkdir"="mkdir -p"
+alias "cp"="cp -rf"
+alias "gparted"="sudo gparted"
+alias "mkconfig"="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+alias "modprobe"="sudo modprobe"
+alias "lsmod"="lsmod"
+# alias "sudo"="command sudo --preserve-env --set-home"
+# alias "visudo"="command sudo --preserve-env --set-home visudo"
+alias "diff"="vimdiff"
+alias "ddiff"="dirdiff"
+alias "cmd"="command"
+alias "cowsay"="fortune | cowsay"
+alias "kill"="command kill -9"
+alias "pkill"="pkill"
+alias "brewfix"="command sudo chown -R \"${USER}\":admin /usr/local; \
+    command sudo chown -R \"${USER}\":admin /Library/Caches/Homebrew; \
+    command sudo chown -R \"${USER}\":admin /Users/phongvcao/Library;"
+alias "chown"="command sudo chown -R \"${USER}\":admin"
+alias "wego"="wego 5"
+alias "wesj"="wego 'San Jose, CA' 5"
+alias "wesc"="wego 'Santa Clara, CA' 5"
+alias "weph"="wego 'Philadelphia, PA' 5"
+alias "weny"="wego 'New York, NY' 5"
+alias "wesb"="wego 'Stony Brook, NY' 5"
+alias "wehn"="wego 'Hanoi, VN' 5"
+alias "wegz"="wego 'GuangZhou, CN' 5"
+alias "weather"="weather-report --metric --cacheage=900"
+alias "nl"="command_nl"
+alias "mosh"="_mosh"
+alias "moshs"="mosh-server"
+alias "mosh-server"="sudo iptables -I INPUT 1 -p udp --dport 60000:61000 -j ACCEPT; \
+                     sudo service iptables save"
+alias "ps"="ps"
+alias "ifconfig"="ifconfig -a"
+alias "sed"="sed -i -r"
+alias "du"="sudo du -h --max-depth=1"
+alias "da"="sudo du -h -a --max-depth=1"
+alias "sort"="sort -h -b"
+alias "tmuxredraw"="tmuxattach"
+alias "fixchar"="tput sgr0"
+alias "zip"="command zip --symlinks -r"
+
+# Single-letter aliases for commonly-used command
+alias "c"="cat"
+alias "C"="command"
+alias "cr"="_clear"
+alias "clr"="_clear"
+alias "cn"="clean"
+alias "w"="stardict"
+alias "W"="vstardict"
+alias "w"=""
+# Type command "color" for more details
+alias "f"="fzf"
+alias "v"="vim"
+alias "V"="vimrc"
+alias "l"="lsg"
+alias "m"="man"
+alias "M"="cmus"
+alias "r"="ranger"
+alias "t"="htop"
+alias "s"="sudo"
+alias "S"="_ssh"
+alias "grep"="g"
+alias "a"="ag"
+alias "_"="cd -"
+
+# Tmuxinator
+# Never alias tmux as it would hinder FZF
+# alias "tmux"="tmux"
+alias "tmuxlist"="tmux list-sessions"
+alias "tmor"="tmuxinator"
+alias "tstart"="_tstart"
+alias "tstop"="_tstop"
+alias "tlocal"="tmuxinator local"
+alias "topen"="tmuxinator open"
+alias "tlist"="tmuxinator list"
+alias "tcopy"="tmuxinator copy"
+alias "tdelete"="tmuxinator delete"
+alias "tnew"="tmuxinator new"
+# alias "startlldb"="tstart"
+# alias "stoplldb"="tstop"
+alias "chmod"="chmod +x"
+
+# Upload format:
+# upload [source directory] [user]@[instance ip]:[destination directory on instance]
+alias "upload"="rsync -avz -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
+alias "scp"="scp -rp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+
+# Download format:
+# download [user]@[instance ip]:[source directory on instance] [path to local storage]
+alias "download"="rsync -chavzP --stats -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
+
+alias "htop"="command htop --user=\${USER}"
+alias "rtop"="command htop --user=root"
+alias "top"="command htop"
+alias "sxiv"="sxiv -baZ"
+alias "rm"="rm -rf"
+alias "mpv"="mpv --loop=inf"
+alias "disks"="sudo gnome-disks"
+alias "openshot"="rm -rf \${HOME}/.openshot && openshot"
+alias "xrdb"="xrdb \${HOME}/.Xresources"
+alias "sourceXresources"="xrdb \${HOME}/.Xresources"
+# alias "cgdb"="debug"
+# These variables are for configuring Qt themes
+alias "qt3config"="export QT_SELECT=3 && qtconfig"
+alias "qt4config"="export QT_SELECT=4 && qtconfig"
+alias "qt5config"="export QT_SELECT=5 && qtconfig"
+
+alias "p2install"="sudo pip2 install --install-option=\"--prefix=${USR_DIR}/\""
+alias "p2installed"="pip2 list"
+alias "p2remove"="sudo pip2 uninstall"
+alias "p2upgrade"="sudo pip2 install --upgrade"
+alias "p2show"="pip2 show"
+alias "p2list"="pip2 list"
+
+alias "pinstall"="sudo pip install --install-option=\"--prefix=${USR_DIR}/\""
+alias "pinstalled"="pip list"
+alias "premove"="sudo pip uninstall"
+alias "pupgrade"="sudo pip install --upgrade"
+alias "pshow"="pip show"
+alias "plist"="pip list"
+
+alias "pip"="pip3"
+alias "pip3"="python3 -m pip"
+alias "pip2"="python2 -m pip"
+alias "p3install"="sudo pip3 install --install-option=\"--prefix=${USR_DIR}/\""
+alias "p3installed"="pip3 list"
+alias "p3remove"="sudo pip3 uninstall"
+alias "p3upgrade"="sudo pip3 install --upgrade"
+alias "p3show"="pip3 show"
+alias "p3list"="pip3 list"
+
+
+alias "ninstall"="npm install"
+alias "ninstalled"="npm list"
+alias "nupgrade"="npm update"
+
+# Git aliases
+alias "addall"="git add -A"
+alias "add"="git add"
+alias "clone"="git clone"
+alias "commit"="git commit"
+alias "commim"="git commit -m"
+alias "commat"="git add -A; git commit"
+alias "commam"="git add -A; git commit -m"
+alias "amend"="git commit --amend"
+alias "push"="git push"
+alias "fush"="git push --force"
+alias "fetch"="git fetch"
+alias "merge"="git merge"
+alias "check"="git checkout"
+alias "new"="git checkout -b"
+alias "branch"="git branch"
+alias "remote"="git remote"
+alias "info"="echo BRANCH:; git branch -v; echo; echo REMOTE:; git remote -v"
+alias "status"="gitstatus"
+alias "init"="git init"
+alias "pull"="git pull"
+
+# To modify a commit:
+# - Issue: rebasei <commit_hash>
+# - Modify 'pick' to 'edit' in the line whose commit you want to modify.
+# - Make your changes and then commit them with the same message you had before:
+#   - Issue: commit --all --amend --no-edit
+#     to modify the commit
+# - Issue: rebasec
+#   to return back to the previous head commit
+#
+alias "rebase"="git rebase"
+alias "rebasei"="git rebase --interactive"
+alias "rebasec"="git rebase --continue"
+
+alias "log"="gitlog"
+alias "stash"="git stash"
+alias "unstage"="git rm --cache"
+alias "stage"="git add"
+alias "rename"="git branch -m"
+alias "name"="git config --global user.name"
+alias "email"="git config --global user.email"
+alias "editor"="git config --global core.editor"
+alias "pager"="git config --global core.pager"
+alias "config"="git config --list"
+alias "gdiff"="git diff"
+
+# Docker aliases
+alias "drun"="sudo docker run -d -t -i"
+alias "dcommit"="sudo docker commit --author=\"$(git config --global user.name) <$(git config --global user.email)>\""
+alias "dpush"="sudo docker push"
+alias "dlist"="sudo docker ps -a -n 20"
+alias "dlast"="sudo docker ps -l -n 20"
+alias "dlistall"="sudo docker ps -a -q"
+alias "dimagesall"="sudo docker images -a -q"
+alias "dinfo"="sudo docker info"
+alias "dstart"="sudo docker start"
+alias "drestart"="sudo docker restart"
+alias "dexec"="sudo docker exec -i -t"
+alias "dexecd"="sudo docker exec -d"
+alias "dstop"="sudo docker stop"
+alias "dkill"="sudo docker kill"
+alias "dremove"="sudo docker rm"
+alias "dremovei"="sudo docker rmi"
+alias "dattach"="sudo docker attach"
+alias "dlog"="sudo docker logs -t"
+alias "dtop"="sudo docker top"
+alias "dcreate"="sudo docker create --author=\"$(git config --global user.name) <$(git config --global user.email)>\""
+alias "dstats"="sudo docker stats"
+alias "dinspect"="sudo docker inspect"
+alias "dimages"="sudo docker images"
+alias "dpull"="sudo docker pull"
+alias "dsearch"="sudo docker search"
+alias "dlogin"="sudo docker login"
+alias "dhistory"="sudo docker history"
+alias "dport"="sudo docker port"
+alias "dip"="ip a show docker0"
+
+# Docker archlinux image aliases
+# darchstart runs the available and previously-stopped instance of Docker container
+alias "darchbuild"="sudo docker build -t=\"${USER}/archlinux\" ./"
+alias "darchrun"="sudo docker stop archlinux; \
+    sudo docker rm archlinux; \
+    sudo docker run -d --name archlinux -p 6789:22 -p 8080:80 -p 8443:443\
+    -v /home/${USER}/:/home/${USER} -i -t ${USER}/archlinux"
+alias "darchexec"="sudo docker exec -i -t archlinux /bin/bash"
+alias "darchexecd"="sudo docker exec -d archlinux"
+alias "darchstop"="sudo docker stop archlinux"
+alias "darchssh"="command ssh -A -X -l ${USER} 0.0.0.0 -p 6789"
+
+# This is only needed for new instance of Docker container
+alias "darchstart"="sudo docker start archlinux"
+
+# Vagrant aliases
+alias "vinit"="vagrant init"
+alias "vup"="vagrant up"
+alias "vssh"="vagrant ssh"
+alias "vsshc"="vagrant ssh-config"
+alias "vdestroy"="vagrant destroy"
+alias "vdestroyf"="vagrant destroy --force"
+alias "vbox"="vagrant box"
+alias "vadd"="vagrant box add"
+alias "vlist"="vagrant box list"
+alias "vremove"="vagrant box remove"
+alias "vrepackage"="vagrant box repackage"
+alias "vstatus"="vagrant status"
+alias "vreload"="vagrant reload"
+alias "vsuspend"="vagrant suspend"
+alias "vresume"="vagrant resume"
+alias "vhalt"="vagrant halt"
+alias "vprovision"="vagrant provision"
+alias "vuprovision"="vagrant up --provision"
+alias "vrprovision"="vagrant reload --provision"
+
+# vim-stardict aliases
+alias "whatis"="stardict"
+alias "whatvim"="vstardict"
+
+# # vimpager aliases
+alias "less"="${PAGER}"
+alias "zless"="${PAGER}"
+
+# pkgfile aliases - Query which packages a file/folder belongs to
+alias "pkgfile"="command pkgfile --search --verbose --ignorecase"
+alias "pkglist"="command pkgfile --list --directories --verbose --ignorecase --regex"
+alias "pkgupdate"="command sudo pkgfile --update"
+alias "pkgdir"="command pkgfile --search --directories --verbose --ignorecase"
+
+# Ready-baked commands with options
+alias "command_grep_stream"="command grep -E --color=always -T -s -I --exclude-dir={.git,.svn}"
+alias "command_grep"="command grep -E --color=always -T -s -n -H -I -C 5 --exclude-dir={.git,.svn}"
+alias "command_grep_stream_nocolor"="command grep -E --color=never -T -s -I --exclude-dir={.git,.svn}"
+alias "command_fgrep_stream"="command grep -F --color=always -T -s -I --exclude-dir={.git,.svn}"
+alias "command_fgrep"="command grep -F --color=always -T -s -n -H -I -C 5 --exclude-dir={.git,.svn}"
+alias "command_ssh"="command ssh -X -A -Y -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l"
+alias "command_mosh"="command mosh --ssh='ssh -X -A -Y -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
+alias "command_ag"="command ag --color-path '0;35' --color-match '1;31' --color-line-number '0;32' --nogroup --filename --color --silent --hidden --depth -1 --multiline"
+alias "command_cat"="command cat --number"
+alias "command_tee"="command tee"
+alias "command_nl"="command nl -ba -w 6"
+
+if ! type tmux > /dev/null 2>&1; then
+   alias "command_fzf"="command fzf"
+else
+   alias "command_fzf"="command fzf-tmux"
+fi
+
+# grc (Generic Colorizer) aliases
+alias "grc"="grc -es --colour=on"
+
+# Mac OS X specific
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    alias "gcc"="$(which gcc-5)"
+    alias "python"="$(which python3)"
+    alias "python2"="$(whereis python)"
+    alias "command_ls"="${USR_DIR}/bin/gls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color"
+else
+    alias "command_ls"="command ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color"
+fi

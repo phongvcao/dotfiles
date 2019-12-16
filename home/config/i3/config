@@ -1,0 +1,286 @@
+# vim:filetype=i3
+# Set $mod key
+set $mod Mod4
+
+# Set font
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango: Cantarell Bold 0
+
+# Disable title bar
+for_window [class="^.*"] border pixel 0
+
+# Set new windows' borders to 0 pixel
+new_window pixel 0
+new_float pixel 0
+
+floating_modifier $mod
+
+# Kill focused window
+bindsym $mod+q kill; exec killall -USR1 i3status
+
+# Start dmenu (a program launcher)
+# We set the height of dmenu to 10 so the whole desktop looks better
+bindsym $mod+space exec dmenu_run -i -b -fn 'DejaVu Sans Mono for Powerline:bold:pixelsize=9' -nf '#FFFFFF' -nb '#000000' -l 10 -sf '#FFFFFF' -sb '#285577'
+bindsym $mod+BackSpace exec /etc/lightdm/lightdm-display.sh; exec feh --bg-center "${HOME}/.config/i3/arch-white.png" --bg-center "${HOME}/.config/i3/arch-white.png"
+
+# Reload/Restart/Exit
+bindsym $mod+Mod1+C reload
+bindsym $mod+Mod1+R restart
+
+# Change focus
+bindsym $mod+h focus left; exec killall -USR1 i3status
+bindsym $mod+j focus down; exec killall -USR1 i3status
+bindsym $mod+k focus up; exec killall -USR1 i3status
+bindsym $mod+l focus right; exec killall -USR1 i3status
+
+# Move focused window
+bindsym $mod+Control+H move left 5px
+bindsym $mod+Control+J move down 5px
+bindsym $mod+Control+K move up 5px
+bindsym $mod+Control+L move right 5px
+
+# Move floating window
+mode "moveit" {
+    bindsym h move left 1px;
+    bindsym l move right 1px;
+    bindsym k move up 1px;
+    bindsym j move down 1px;
+    bindsym $mod+Shift+m mode "default"
+}
+
+bindsym $mod+m focus floating; mode "moveit"
+
+# Split in horizontal orientation
+bindsym $mod+Mod1+h split h
+bindsym $mod+Mod1+v split v
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Mod1+f fullscreen toggle global
+
+# Change container layout (stack, tabbed, default)
+bindsym $mod+s layout stacking
+bindsym $mod+Shift+s layout default
+bindsym $mod+t layout tabbed
+bindsym $mod+Shift+t layout default
+bindsym $mod+equal layout default
+
+# Toggle tiling / floating
+bindsym $mod+Mod1+Tab fullscreen disable; floating toggle
+
+# Change focus between tiling / floating windows
+bindsym $mod+Tab focus mode_toggle; exec killall -USR1 i3status
+
+# Focus on the parent container
+bindsym $mod+p focus parent; exec killall -USR1 i3status
+
+# Focus on the child container
+bindsym $mod+c focus child; exec killall -USR1 i3status
+
+# Switch to workspace
+bindsym $mod+1 workspace 1; exec killall -USR1 i3status
+bindsym $mod+2 workspace 2; exec killall -USR1 i3status
+bindsym $mod+3 workspace 3; exec killall -USR1 i3status
+bindsym $mod+4 workspace 4; exec killall -USR1 i3status
+bindsym $mod+5 workspace 5; exec killall -USR1 i3status
+bindsym $mod+6 workspace 6; exec killall -USR1 i3status
+bindsym $mod+7 workspace 7; exec killall -USR1 i3status
+bindsym $mod+8 workspace 8; exec killall -USR1 i3status
+bindsym $mod+9 workspace 9; exec killall -USR1 i3status
+bindsym $mod+0 workspace 10; exec killall -USR1 i3status
+
+# Move focused container to workspace
+bindsym $mod+Control+1 move container to workspace 1; workspace 1; exec killall -USR1 i3status
+bindsym $mod+Control+2 move container to workspace 2; workspace 2; exec killall -USR1 i3status
+bindsym $mod+Control+3 move container to workspace 3; workspace 3; exec killall -USR1 i3status
+bindsym $mod+Control+4 move container to workspace 4; workspace 4; exec killall -USR1 i3status
+bindsym $mod+Control+5 move container to workspace 5; workspace 5; exec killall -USR1 i3status
+bindsym $mod+Control+6 move container to workspace 6; workspace 6; exec killall -USR1 i3status
+bindsym $mod+Control+7 move container to workspace 7; workspace 7; exec killall -USR1 i3status
+bindsym $mod+Control+8 move container to workspace 8; workspace 8; exec killall -USR1 i3status
+bindsym $mod+Control+9 move container to workspace 9; workspace 9; exec killall -USR1 i3status
+bindsym $mod+Control+0 move container to workspace 10; workspace 10; exec killall -USR1 i3status
+
+# Move focused container to workspace
+bindsym $mod+Mod1+1 move container to workspace 1; exec killall -USR1 i3status
+bindsym $mod+Mod1+2 move container to workspace 2; exec killall -USR1 i3status
+bindsym $mod+Mod1+3 move container to workspace 3; exec killall -USR1 i3status
+bindsym $mod+Mod1+4 move container to workspace 4; exec killall -USR1 i3status
+bindsym $mod+Mod1+5 move container to workspace 5; exec killall -USR1 i3status
+bindsym $mod+Mod1+6 move container to workspace 6; exec killall -USR1 i3status
+bindsym $mod+Mod1+7 move container to workspace 7; exec killall -USR1 i3status
+bindsym $mod+Mod1+8 move container to workspace 8; exec killall -USR1 i3status
+bindsym $mod+Mod1+9 move container to workspace 9; exec killall -USR1 i3status
+bindsym $mod+Mod1+0 move container to workspace 10; exec killall -USR1 i3status
+
+# Move focused container to scratchpad workspace
+# In other words, make current window "minimized"
+bindsym $mod+minus move scratchpad
+bindsym $mod+Shift+minus scratchpad show; floating toggle
+
+# pulse audio volume control
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl -- set-sink-volume 0 '-5%'; exec killall -USR1 i3status
+bindsym $mod+XF86AudioLowerVolume exec /usr/bin/pactl -- set-sink-volume 0 '-5%'; exec killall -USR1 i3status
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl -- set-sink-volume 0 '+5%'; exec killall -USR1 i3status
+bindsym $mod+XF86AudioRaiseVolume exec /usr/bin/pactl -- set-sink-volume 0 '+5%'; exec killall -USR1 i3status
+bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume 0 0; exec killall -USR1 i3status
+bindsym $mod+XF86AudioMute exec /usr/bin/pactl set-sink-volume 0 0; exec killall -USR1 i3status
+bindsym $mod+Control+XF86AudioLowerVolume exec cmus-remote -v -5%; exec killall -USR1 i3status
+bindsym $mod+Control+XF86AudioRaiseVolume exec cmus-remote -v +5%; exec killall -USR1 i3status
+bindsym $mod+Control+XF86AudioMute exec cmus-remote -v 0%; exec killall -USR1 i3status
+
+bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -display $DISPLAY -inc 10; exec killall -USR1 i3status
+bindsym $mod+XF86MonBrightnessUp exec /usr/bin/xbacklight -display $DISPLAY -inc 10; exec killall -USR1 i3status
+bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -display $DISPLAY -dec 5; exec killall -USR1 i3status
+bindsym $mod+XF86MonBrightnessDown exec /usr/bin/xbacklight -display $DISPLAY -dec 5; exec killall -USR1 i3status
+
+# To know the name of sink port to set-sink-port in the following commands, run:
+# $ pacmd list-sinks
+#
+# So the name of the sink port is going to be the concatenation of the value of
+# "name: " and analog-output-*, separated by comma. For example:
+#
+# alsa_output.pci-0000_00_1b.0.analog-stereo analog-output-speaker
+#
+bindsym $mod+Mod1+XF86AudioRaiseVolume exec pacmd set-sink-port alsa_output.pci-0000_00_1b.0.analog-stereo analog-output-speaker && pacmd set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo False; exec killall -USR1 i3status
+bindsym $mod+Mod1+XF86AudioLowerVolume exec pacmd set-sink-port alsa_output.pci-0000_00_1b.0.analog-stereo analog-output-headphones && pacmd set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo False; exec killall -USR1 i3status
+
+# One bar on both screen
+bar {
+    i3bar_command /usr/bin/i3bar
+    position bottom
+    mode hide
+    modifier $mod
+    tray_output LVDS1
+    status_command $HOME/.config/i3/i3status.sh
+# For Firefox: Set Proportional font to Serif size 14
+# and Monospace to DejaVu Sans Mono for Powerline size 12
+    font pango: Cantarell Bold 8
+    colors {
+        background #000000
+        statusline #FFFFFF
+        focused_workspace  #ffffff #285577
+        active_workspace   #ffffff #333333
+        inactive_workspace #888888 #222222
+        urgent_workspace   #ffffff #900000
+    }
+}
+
+# Resize Window
+mode "resize" {
+    bindsym h resize shrink right 5px or 1ppt
+    bindsym Shift+h resize shrink left 5px or 1ppt
+    bindsym Control+h resize shrink width 5px or 1ppt
+    bindsym l resize grow right 5px or 1ppt
+    bindsym Shift+l resize grow left 5px or 1ppt
+    bindsym Control+l resize grow width 5px or 1ppt
+    bindsym j resize shrink up 5px or 1ppt
+    bindsym Shift+j resize shrink down 5px or 1ppt
+    bindsym Control+j resize shrink height 5px or 1ppt
+    bindsym k resize grow up 5px or 1ppt
+    bindsym Shift+k resize grow down 5px or 1ppt
+    bindsym Control+k resize grow height 5px or 1ppt
+
+    # back to normal: Return
+    bindsym $mod+Shift+R mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# workspace screens
+workspace 1 output LVDS1
+workspace 2 output VGA1
+workspace 3 output LVDS1
+workspace 4 output VGA1
+workspace 5 output LVDS1
+workspace 6 output VGA1
+workspace 7 output LVDS1
+workspace 8 output VGA1
+workspace 9 output LVDS1
+workspace 10 output VGA1
+
+# moving workspace
+bindsym $mod+Shift+l move workspace to output right; exec killall -USR1 i3status
+bindsym $mod+Shift+j move workspace to output down; exec killall -USR1 i3status
+bindsym $mod+Shift+k move workspace to output up; exec killall -USR1 i3status
+bindsym $mod+Shift+h move workspace to output left; exec killall -USR1 i3status
+
+# Blank & Never Blank Screen
+bindsym XF86ScreenSaver exec sleep 1 && xset dpms force off
+bindsym $mod+XF86ScreenSaver exec xset +dpms; exec xset s on; exec xset s 60 60
+bindsym $mod+Mod1+XF86ScreenSaver exec xset -dpms; exec xset s off
+bindsym $mod+Control+XF86ScreenSaver exec dm-tool lock
+
+# Screenshot Taking
+bindsym Print exec gnome-screenshot
+bindsym $mod+Print exec shutter
+bindsym $mod+Shift+Print exec killall shutter
+
+# Lock screen & Suspend
+# bindsym XF86Sleep exec beesu pm-suspend
+# bindsym $mod+XF86Sleep exec beesu service lightdm restart
+# bindsym $mod+Control+XF86Sleep exec beesu shutdown -P now
+# bindsym $mod+Shift+XF86Sleep exec beesu reboot
+# bindsym $mod+Mod1+XF86Sleep exec beesu pm-hibernate
+
+bindsym XF86Sleep exec gksu pm-suspend
+bindsym $mod+XF86Sleep exec gksu "systemctl restart lightdm"
+bindsym $mod+Control+XF86Sleep exec gksu "shutdown -P now"
+bindsym $mod+Shift+XF86Sleep exec gksu "reboot"
+bindsym $mod+Control+Mod1+XF86Sleep exec gksu "poweroff --force"
+bindsym $mod+Shift+Mod1+XF86Sleep exec gksu "reboot --force"
+# bindsym $mod+Mod1+XF86Sleep exec gksu pm-hibernate
+
+# Enable & Disable Network Manager
+# bindsym XF86WLAN exec beesu service NetworkManager start; exec killall -USR1 i3status
+# bindsym $mod+Shift+XF86WLAN exec beesu service NetworkManager stop; exec killall -USR1 i3status
+# bindsym $mod+XF86WLAN exec beesu service NetworkManager restart; exec killall -USR1 i3status
+
+bindsym XF86WLAN exec gksu service NetworkManager start; exec killall -USR1 i3status
+bindsym $mod+XF86WLAN exec gksu service NetworkManager restart; exec killall -USR1 i3status
+bindsym $mod+Mod1+XF86WLAN exec gksu service NetworkManager stop; exec killall -USR1 i3status
+
+# Hotkeys for popular applications
+bindsym $mod+i exec $HOME/.config/i3/ibus-daemon.sh
+bindsym $mod+Return exec gksu; exec killall -USR1 i3status
+bindsym $mod+Control+s exec gnome-terminal; exec killall -USR1 i3status
+
+bindsym $mod+w exec gnome-terminal -e "bash -c 'export TERM=xterm-256color && wego San_Jose && sleep 3600'"; exec killall -USR1 i3status
+bindsym $mod+Control+w exec gnome-terminal -e "bash -c 'export TERM=xterm-256color && wego Hanoi && sleep 3600'"; exec killall -USR1 i3status
+bindsym $mod+Shift+w exec gnome-terminal -e "bash -c 'export TERM=xterm-256color && wego GuangZhou && sleep 3600'"; exec killall -USR1 i3status
+bindsym $mod+Mod1+w exec gnome-terminal -e "bash -c 'export TERM=xterm-256color && wego Philadelphia && sleep 3600'"; exec killall -USR1 i3status
+bindsym $mod+Control+Mod1+w exec gnome-terminal -e "bash -c 'export TERM=xterm-256color && wego Stony_Brook && sleep 3600'"; exec killall -USR1 i3status
+
+# bindsym XF86WWW exec firefox; exec killall -USR1 i3status
+# bindsym XF86Mail exec firefox; exec killall -USR1 i3status
+bindsym $mod+Control+f exec firefox; exec killall -USR1 i3status
+bindsym $mod+Control+Mod1+f exec firefox --private-window; exec killall -USR1 i3status
+bindsym $mod+Control+t exec gnome-terminal -e "bash -c 'export TERM=xterm-256color && htop --user=${USER}'"; exec killall -USR1 i3status
+bindsym $mod+Control+u exec gnome-terminal -e "bash -c 'export TERM=xterm-256color && htop --user=root'"; exec killall -USR1 i3status
+bindsym $mod+Control+n exec /usr/local/netbeans-8.0.2/bin/netbeans; exec killall -USR1 i3status
+bindsym $mod+Control+m exec gnome-terminal -e "bash -c 'export TERM=xterm-256color && cmus'"; exec killall -USR1 i3status
+bindsym $mod+Control+r exec gnome-terminal -e "bash -c 'export TERM=xterm-256color && ranger'"; exec killall -USR1 i3status
+bindsym $mod+Control+v exec virtualbox; exec killall -USR1 i3status
+bindsym $mod+Control+d exec deja-dup-preferences; exec killall -USR1 i3status
+bindsym $mod+Control+e exec eclipse; exec killall -USR1 i3status
+bindsym $mod+Control+g exec gnome-control-center; exec killall -USR1 i3status
+bindsym $mod+Control+c exec google-chrome-stable; exec killall -USR1 i3status
+bindsym $mod+Control+Mod1+c exec google-chrome-stable --incognito; exec killall -USR1 i3status
+bindsym $mod+Control+y exec skype; exec killall -USR1 i3status
+# bindsym $mod+Control+w exec wireshark; exec killall -USR1 i3status
+bindsym $mod+Control+Shift+o exec rm -rf $HOME/.openshot; exec openshot; exec killall -USR1 i3status
+bindsym $mod+Control+o exec opera; exec killall -USR1 i3status
+bindsym $mod+Control+Mod1+o exec opera -private; exec killall -USR1 i3status
+bindsym $mod+Control+i exec gedit; exec killall -USR1 i3status
+bindsym $mod+Control+q exec mysql-workbench; exec killall -USR1 i3status
+
+# Refresh the whole system (for processes that hang)
+bindsym $mod+Control+BackSpace exec killall megasync; exec /usr/bin/megasync &; exec killall -USR1 i3status
+
+# Cmus remote control
+bindsym Pause exec cmus-remote -u; exec killall -USR1 i3status
+bindsym $mod+Pause exec cmus-remote -C "win-activate"; exec killall -USR1 i3status
+bindsym $mod+Mod1+Pause exec pkill -f Osmium.ogg
+
+# Execute necessary startup daemons
+exec --no-startup-id $HOME/.xinitrc

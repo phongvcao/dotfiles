@@ -1,0 +1,20 @@
+{
+    "groups": {
+		"active_window_status": {"fg": "gray8", "bg": "solarized:base02", "attrs": []},
+        	"window_status": { "fg": "solarized:base3", "bg": "solarized:base02" },
+        	"activity_status": { "fg": "solarized:base3", "bg": "solarized:base02" },
+        	"bell_status": {"fg": "gray8", "bg": "solarized:base02", "attrs": []},
+        	"window": { "fg": "solarized:base3", "bg": "solarized:base02" },
+        	"window:divider": { "fg": "gray8", "bg": "solarized:base02" },
+        	"window:current": {"fg": "white", "bg": "solarized:blue", "attrs": []},
+        	"window_name": {"fg": "white", "bg": "solarized:blue", "attrs": []},
+        	"session": {"fg": "solarized:base03", "bg": "gray90", "attrs": []},
+        	"session:prefix": {"fg": "white", "bg": "solarized:blue", "attrs": []},
+        	"date": { "fg": "solarized:base0", "bg": "solarized:base02" },
+        	"time": { "fg": "solarized:base3", "bg": "solarized:base01" },
+        	"time:divider": { "fg": "solarized:base3", "bg": "solarized:base01" },
+        	"hostname": { "fg": "solarized:base03", "bg": "solarized:base2" },
+        	"background:divider": { "fg": "solarized:base02", "bg": "solarized:base02" },
+        	"background": { "bg": "solarized:base02" }
+	}
+}

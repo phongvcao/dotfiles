@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/phongvcao/.dotfiles/home/megasync.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=MEGASync_1
+Name=MEGASync_phongvcao
+Comment[en_US]=
+Comment=

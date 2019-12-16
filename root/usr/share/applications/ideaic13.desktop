@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=IntelliJ IDEA
+Comment=IntelliJ IDEA 13.1
+Exec=/opt/intellij-idea/bin/idea.sh
+Icon=/opt/intellij-idea/bin/idea.png
+Terminal=false
+Type=Application
+Categories=GNOME;Application;Development;
+StartupNotify=true

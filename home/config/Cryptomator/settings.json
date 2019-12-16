@@ -1,0 +1,41 @@
+{
+  "directories": [
+    {
+      "id": "zxUi3skBRNnY",
+      "path": "/home/phongvcao/Google Drive/Cryptomator",
+      "mountName": "Cryptomator",
+      "unlockAfterStartup": false,
+      "revealAfterMount": true,
+      "usesIndividualMountPath": false,
+      "usesReadOnlyMode": false,
+      "mountFlags": ""
+    },
+    {
+      "id": "IKeAVkRfTciJ",
+      "path": "/home/phongvcao/Google Drive/00. Core Data",
+      "mountName": "00_Core_Data",
+      "unlockAfterStartup": false,
+      "revealAfterMount": true,
+      "usesIndividualMountPath": false,
+      "usesReadOnlyMode": false,
+      "mountFlags": ""
+    },
+    {
+      "id": "XIZtx2ayStVb",
+      "path": "/home/phongvcao/Google Drive/01. Shareable Data",
+      "mountName": "01_Shareable_Data",
+      "unlockAfterStartup": false,
+      "revealAfterMount": true,
+      "usesIndividualMountPath": false,
+      "usesReadOnlyMode": false,
+      "mountFlags": ""
+    }
+  ],
+  "askedForUpdateCheck": true,
+  "checkForUpdatesEnabled": true,
+  "port": 42427,
+  "numTrayNotifications": 3,
+  "preferredGvfsScheme": "dav",
+  "debugMode": false,
+  "preferredVolumeImpl": "FUSE"
+}

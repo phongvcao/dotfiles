@@ -1,0 +1,14 @@
+# Show previous image
+prev 3
+
+# Show next image
+next 1
+
+# Show menu
+menu 2
+
+# Zoom in the current image
+zoom_in C-4
+
+# Zoom out the current image
+zoom_out C-5

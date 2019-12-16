@@ -1,0 +1,157 @@
+!------------------------------------------------------------------------------
+! XTerm Settings
+!
+! xrdb -merge ~/.Xresources
+!------------------------------------------------------------------------------
+!
+! To perform copy & paste in XTerm, use Middle Click or Shift+Insert
+!
+
+XTerm*termName: xterm-256color
+XTerm*faceName: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+XTerm*faceNameDoublesize: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+XTerm*boldFont: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+XTerm*italicFont: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+XTerm*boldItalicFont: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+XTerm*font: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+XTerm*utf8Fonts.font: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+XTerm*utf8Fonts.boldFont: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+XTerm*boldMode: true
+XTerm*alwaysBoldMode: true
+XTerm*allowBoldFonts: true
+XTerm*loginShell: false
+XTerm*scrollBar: false
+XTerm*fastScroll: true
+XTerm*eightBitInput: false
+XTerm*colorMode: true
+XTerm*locale: true
+XTerm*utf8: 1
+XTerm*reverseVideo: false
+XTerm*selectToClipboard: false
+XTerm*inputMethod: ibus
+XTerm*borderWidth: 0
+XTerm*saveLines: 10000
+XTerm*visualBell: true
+XTerm*ttyModes: erase ^?
+! XTerm.VT100.Translations:    #override \n\
+!         Shift <KeyPress> Up:      scroll-back(1, line) \n\
+!         Shift <KeyPress> Down:    scroll-forw(1, line) \n\
+!         Shift <KeyPress> Insert:  string(0x1b) string(0x5b) string(2;2~) \n\
+!         Shift <KeyPress> C:  copy-selection(CLIPBOARD, CUT_BUFFER0, PRIMARY) \n\
+!         Shift <KeyPress> V:  insert-selection(CLIPBOARD, CUT_BUFFER0, PRIMARY)
+
+
+!------------------------------------------------------------------------------
+! UXTerm Settings
+!
+! xrdb -merge ~/.Xresources
+!------------------------------------------------------------------------------
+
+UXTerm*faceName: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+UXTerm*faceNameDoublesize: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+UXTerm*boldFont: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+UXTerm*italicFont: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+UXTerm*boldItalicFont: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+UXTerm*font: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+UXTerm*utf8Fonts.font: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+UXTerm*utf8Fonts.boldFont: Dejavu Sans Mono for Powerline:style=Bold:size=7:antialias=true
+UXTerm*boldMode: true
+UXTerm*alwaysBoldMode: true
+UXTerm*allowBoldFonts: true
+UXTerm*loginShell: false
+UXTerm*scrollBar: false
+UXTerm*fastScroll: true
+UXTerm*eightBitInput: false
+UXTerm*colorMode: true
+UXTerm*locale: true
+UXTerm*utf8: 1
+UXTerm*reverseVideo: false
+UXTerm*selectToClipboard: false
+UXTerm*inputMethod: ibus
+UXTerm*borderWidth: 0
+UXTerm*saveLines: 10000
+UXTerm*visualBell: true
+UXTerm*ttyModes: erase ^?
+! UXTerm.VT100.Translations:    #override \n\
+!         Shift <KeyPress> Up:      scroll-back(1, line) \n\
+!         Shift <KeyPress> Down:    scroll-forw(1, line) \n\
+!         Shift <KeyPress> Insert:  string(0x1b) string(0x5b) string(2;2~) \n\
+!         Shift <KeyPress> C:  copy-selection(CLIPBOARD, CUT_BUFFER0, PRIMARY) \n\
+!         Shift <KeyPress> V:  insert-selection(CLIPBOARD, CUT_BUFFER0, PRIMARY)
+
+
+!------------------------------------------------------------------------------
+! URxvt Settings
+!
+! xrdb -merge ~/.Xresources
+!------------------------------------------------------------------------------
+
+
+-- Infinality: http://www.octatech.net/blog/2014/08/ubuntu-like-debian-font-rendering-using-infinality-font/ --!
+Xft.lcdfilter: lcddefault
+!-- Xft settings -- !
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       none
+Xft.autohint:    true
+Xft.hinting:    true
+Xft.hintstyle:  hintsfull
+
+URxvt.font: xft:DejaVu Sans Mono for Powerline:bold:size=6
+URxvt.boldFont: xft:DejaVu Sans Mono for Powerline:bold:size=6
+URxvt.saveLines: 10000
+URxvt.internalBorder: 0
+URxvt.externalBorder: 0
+URxvt.termName: rxvt-256color
+URxvt.letterSpace: 0
+URxvt.scrollBar: false
+URxvt.imLocale: en_US.UTF-8
+URxvt.meta8: true
+URxvt.depth: 32
+
+
+!------------------------------------------------------------------------------
+! XTerm/UXTerm/URxvt Solarized
+!
+! xrdb -merge ~/.Xresources
+!------------------------------------------------------------------------------
+
+*background: #002b36
+*foreground: #839496
+!!*fading: 40
+*fadeColor: #002b36
+*cursorColor: #93a1a1
+*pointerColorBackground: #586e75
+*pointerColorForeground: #93a1a1
+
+!! black dark/light
+*color0: #073642
+*color8: #002b36
+
+!! red dark/light
+*color1: #dc322f
+*color9: #cb4b16
+
+!! green dark/light
+*color2: #859900
+*color10: #586e75
+
+!! yellow dark/light
+*color3: #b58900
+*color11: #657b83
+
+!! blue dark/light
+*color4: #268bd2
+*color12: #839496
+
+!! magenta dark/light
+*color5: #d33682
+*color13: #6c71c4
+
+!! cyan dark/light
+*color6: #2aa198
+*color14: #93a1a1
+
+!! white dark/light
+*color7: #eee8d5
+*color15: #fdf6e3
