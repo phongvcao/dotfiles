@@ -1,21 +1,8 @@
-rename dleyna-server-service.conf
-rename kglobalshortcutsrc
-rename
-rename konsolerc
-rename llpp.conf
-rename mimeapps.list
-rename monitors.xml
-rename QtProject.conf
-rename tagged
-rename Trolltech.conf
-rename u
 rename user-dirs.dirs
 rename user-dirs.locale
-filter (?i)dotfiles
 filter (?i).pl
 filter (?i)gdbinit
 rename .gdbinit.d
-filter (?i)
 filter (?i)shutt
 filter (?i)agignore
 filter (?i)zshrc
@@ -47,4 +34,17 @@ filter (?i)quiz
 filter (?i)mega
 filter (?i)local
 filter (?i)readme
+rename .%f
+filter (?i)iterm2
+filter (?i)
+filter (?i)kara
+filter (?i)dot
+filter (?i)dotfiles
+filter (?i)config
 filter (?i)trash
+mkdir 
+filter (?i)tmuxinator
+rename
+mkdir completions
+rename mux.fish
+rename tmuxinator.fish
