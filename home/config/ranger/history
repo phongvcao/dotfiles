@@ -1,5 +1,3 @@
-rename user-dirs.dirs
-rename user-dirs.locale
 filter (?i).pl
 filter (?i)gdbinit
 rename .gdbinit.d
@@ -28,7 +26,6 @@ mkdir CP2
 mkdir CP4
 filter (?i)cp
 rename LICENSE.md
-filter (?i)algorithms
 filter (?i)algoscoll
 filter (?i)quiz
 filter (?i)mega
@@ -43,8 +40,11 @@ filter (?i)dotfiles
 filter (?i)config
 filter (?i)trash
 mkdir 
-filter (?i)tmuxinator
 rename
 mkdir completions
 rename mux.fish
 rename tmuxinator.fish
+filter (?i)tmuxinator
+filter (?i)algorithms
+filter (?i)algos
+filter (?i)algo

@@ -63,8 +63,8 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
     if [[ -d /usr/local/Cellar/ruby ]]; then
         gems_version="$(ls /usr/local/lib/ruby/gems | tail -n 1)"
         gems_install_dir=/usr/local/lib/ruby/gems/${gems_version}/gems
-        tmuxinator_dir="$(ls ${gems_install_dir} | command grep -i tmuxinator | tail -n 1)"
-        source ${gems_install_dir}/${tmuxinator_dir}/completion/tmuxinator.bash
+        tmuxinator_dir="${HOME}/.config/tmuxinator"
+        source ${tmuxinator_dir}/completion/tmuxinator.bash
     fi
 fi
 
