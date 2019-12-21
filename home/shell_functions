@@ -966,14 +966,14 @@ echo "$(lsmod | command grep -i $*)"
 }
 
 function ssh() {
-if [ -f /usr/bin/mosh ] || [ -f /usr/local/bin/mosh ]; then
-    _mosh "$@"
-    if [[ $? -eq 127 ]]; then
-        _ssh "$@"
-    fi
-else
+# if [ -f /usr/bin/mosh ] || [ -f /usr/local/bin/mosh ]; then
+#     _mosh "$@"
+#     if [[ $? -eq 127 ]]; then
+#         _ssh "$@"
+#     fi
+# else
     _ssh "$@"
-fi
+# fi
 }
 
 function _ssh() {
