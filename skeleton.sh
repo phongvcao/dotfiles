@@ -211,10 +211,10 @@ bash ./set_dark.sh
 # c. Install dircolors-solarized for Terminal
 echo "${SCRIPT_NAME_PREFIX}${ACTION_NAME} dircolors-solarized for gnome-terminal ..."
 cd ${ORG_DS_TEMPDIR}
-sudo mkdir -p ${ETC_DIR}/dircolors
+sudo mkdir -p ${HOME}/.dircolors
 # PATH_BACKUP ${ETC_DIR}/dircolors/dircolors.ansi-dark
-sudo cp dircolors.ansi-dark ${ETC_DIR}/dircolors/dircolors.ansi-dark
-eval `dircolors ${ETC_DIR}/dircolors/dircolors.ansi-dark`
+sudo cp dircolors.ansi-dark ${HOME}/.dircolors/dircolors.ansi-dark
+eval `dircolors ${HOME}/.dircolors/dircolors.ansi-dark`
 
 cd ${ORG_ROOT_DIR}${PROFILE_D_DIR}
 # PATH_BACKUP ${PROFILE_D_DIR}/dircolors.sh
