@@ -354,3 +354,8 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
 else
     alias "command_ls"="command ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color"
 fi
+
+# Source custom aliases
+if [[ -f "${HOME}/.custom_shell_aliases" ]]; then
+    source "${HOME}/.custom_shell_aliases"
+fi
