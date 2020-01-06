@@ -204,6 +204,11 @@ if [[ -f "${HOME}/.vim/bundle/vim-stardict/bindings/zsh/stardict.zsh" ]]; then
     source "${HOME}/.vim/bundle/vim-stardict/bindings/zsh/stardict.zsh"
 fi
 
+# Source custom bash definitions
+if [[ -f ${HOME}/.custom_zshrc ]]; then
+    source "${HOME}/.custom_zshrc"
+fi
+
 # Key bindings
 # Never touch ^i because it is built-in <Tab> key
 bindkey '^[[Z' reverse-menu-complete
