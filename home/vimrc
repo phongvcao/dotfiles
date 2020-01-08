@@ -748,6 +748,9 @@ set foldlevel=99
 set foldcolumn=0
 " Only search opening folds
 set modelines=1
+
+" +clipboard doesn't work on ssh / mosh connection
+" ( X11 / GUI must be running )
 if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
    set clipboard=unnamedplus,unnamed
 else
