@@ -2896,9 +2896,16 @@ function! SetHighlight()
     highlight ChangesSignTextCh ctermbg=3 ctermfg=8
 
     " ShowMotion's highlights
-    highlight ShowMotion_SmallMotionGroup ctermbg=8 ctermfg=4
-    highlight ShowMotion_BigMotionGroup ctermbg=8 ctermfg=4
-    highlight ShowMotion_CharSearchGroup ctermbg=8 ctermfg=4
+    let s:uname = system("uname -s")
+    if s:uname =~ ".*Darwin.*"
+        highlight ShowMotion_SmallMotionGroup ctermbg=8 ctermfg=4
+        highlight ShowMotion_BigMotionGroup ctermbg=8 ctermfg=4
+        highlight ShowMotion_CharSearchGroup ctermbg=8 ctermfg=4
+    else
+        highlight ShowMotion_SmallMotionGroup ctermbg=4 ctermfg=8
+        highlight ShowMotion_BigMotionGroup ctermbg=4 ctermfg=8
+        highlight ShowMotion_CharSearchGroup ctermbg=4 ctermfg=8
+    endif
 
 endfunction
 
