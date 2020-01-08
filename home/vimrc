@@ -1924,7 +1924,7 @@ nnoremap <leader>f :NeoMRURec<CR>
 nnoremap <leader>m :silent! Unite -prompt=Maps(n)>\ \  mapping -auto-highlight -buffer-name=Normal\ Mode\ Mappings<CR>
 " nnoremap <leader>rf :silent! Unite find -buffer-name=uf -resume<CR>
 nnoremap <leader>/ :silent! Unite -prompt=Hist(/)>\ \  history/search -auto-highlight -buffer-name=Search\ History<CR>
-nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -buffer-name=Ctags\ List<CR>
+nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -buffer-name=Ctags<CR>
 " nnoremap <leader>hr/ :silent! Unite history/search -buffer-name=u/ -resume<CR>
 " nnoremap <leader>/ :FzfHistory/<CR>
 nnoremap <leader>; :silent! Unite -prompt=Hist(:)>\ \  history/command -auto-highlight -buffer-name=Command\ History<CR>
