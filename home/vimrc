@@ -1,6 +1,7 @@
 "
 " Configuration file for Vim 9.4 Compatible with both Linux & Windows
 "
+
 if filereadable( expand( '$HOME/.custom_vimrc' ) )
     source $HOME/.custom_vimrc
 endif
@@ -747,7 +748,7 @@ set foldlevel=99
 set foldcolumn=0
 " Only search opening folds
 set modelines=1
-if has( 'clipboard' )
+if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
    set clipboard=unnamedplus,unnamed
 else
    set clipboard=
