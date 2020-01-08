@@ -493,8 +493,10 @@ NeoBundle 'hotchpotch/perldoc-vim', {
             \ 'on_cmd' : 'Perldoc' }
 
 " Plugins (Golang)
-NeoBundle 'fatih/vim-go', {
-            \ 'on_ft' : [ 'go' ] }
+if !exists( 'g:custom_vimrc_no_vim_go' )
+    NeoBundle 'fatih/vim-go', {
+                \ 'on_ft' : [ 'go' ] }
+end
 
 " Plugins (JavaScript, XML, HTML, CSS)
 NeoBundle 'moll/vim-node', {
@@ -2315,9 +2317,24 @@ function! SetIndentation()
     set smartindent
     filetype indent on
 
-    setlocal tabstop=4
-    setlocal shiftwidth=4
-    setlocal softtabstop=4
+    if exists( 'g:custom_vimrc_tabstop' )
+        execute 'setlocal tabstop=' . g:custom_vimrc_tabstop
+    else
+        setlocal tabstop=4
+    endif
+
+    if exists( 'g:custom_vimrc_shiftwidth' )
+        execute 'setlocal shiftwidth=' . g:custom_vimrc_shiftwidth
+    else
+        setlocal shiftwidth=4
+    endif
+
+    if exists( 'g:custom_vimrc_softtabstop' )
+        execute 'setlocal softtabstop=' . g:custom_vimrc_softtabstop
+    else
+        setlocal softtabstop=4
+    endif
+
     set smarttab
     set expandtab
 
@@ -2325,9 +2342,25 @@ function! SetIndentation()
         setlocal noautoindent
         setlocal nocindent
         setlocal nosmartindent
-        setlocal tabstop=4
-        setlocal shiftwidth=4
-        setlocal softtabstop=4
+
+        if exists( 'g:custom_vimrc_tabstop' )
+            execute 'setlocal tabstop=' . g:custom_vimrc_tabstop
+        else
+            setlocal tabstop=4
+        endif
+
+        if exists( 'g:custom_vimrc_shiftwidth' )
+            execute 'setlocal shiftwidth=' . g:custom_vimrc_shiftwidth
+        else
+            setlocal shiftwidth=4
+        endif
+
+        if exists( 'g:custom_vimrc_softtabstop' )
+            execute 'setlocal softtabstop=' . g:custom_vimrc_softtabstop
+        else
+            setlocal softtabstop=4
+        endif
+
         setlocal nosmarttab
         setlocal expandtab
     endif
