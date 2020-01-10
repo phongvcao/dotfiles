@@ -64,3 +64,8 @@ case "${MANPATH}" in
         export MANPATH="${MANPATH_PREFIX}:${MANPATH}"
         ;;
 esac
+
+#
+# Modify $GOPATH
+#
+export GOPATH="${HOME}/.go"

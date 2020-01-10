@@ -110,16 +110,18 @@ NeoBundle 'Shougo/vimproc.vim', {
    " It needs to be enabled by default
    NeoBundle 'vim-scripts/YankRing.vim'
 " endif
-NeoBundle 'Shougo/neocomplete.vim', {
-            \ 'on_cmd' : 'NeoCompleteEnable',
-            \ 'depends' : [ 'mopp/googlesuggest-source.vim',
-            \               'mattn/googlesuggest-complete-vim',
-            \               'mattn/webapi-vim', 'ujihisa/neco-look' ],
-            \ 'disabled' : !has('lua') }
-NeoBundle 'Shougo/neocomplcache.vim', {
-            \ 'on_cmd' : 'NeoComplCacheEnable',
-            \ 'depends' : 'ujihisa/neco-look',
-            \ 'disabled' : has('lua') }
+" NeoBundle 'Shougo/neocomplete.vim', {
+"             \ 'on_cmd' : 'NeoCompleteEnable',
+"             \ 'depends' : [ 'mopp/googlesuggest-source.vim',
+"             \               'mattn/googlesuggest-complete-vim',
+"             \               'mattn/webapi-vim', 'ujihisa/neco-look' ],
+"             \ 'disabled' : !has('lua') }
+NeoBundle 'neoclide/coc.nvim', 'release', { 'build': { 'others': 'git checkout release' } }
+
+" NeoBundle 'Shougo/neocomplcache.vim', {
+"             \ 'on_cmd' : 'NeoComplCacheEnable',
+"             \ 'depends' : 'ujihisa/neco-look',
+"             \ 'disabled' : has('lua') }
 " No lazy-loading for osyo-manga/vim-over.
 " It must be enabled by default
 NeoBundle 'osyo-manga/vim-over'
@@ -468,8 +470,8 @@ NeoBundle 'stardiviner/AutoSQLUpperCase.vim', {
             \ 'on_ft' : 'sql' }
 
 " Plugins (Python)
-NeoBundle 'davidhalter/jedi-vim', {
-            \ 'on_ft' : [ 'python', 'vim' ] }
+" NeoBundle 'davidhalter/jedi-vim', {
+"             \ 'on_ft' : [ 'python', 'vim' ] }
 NeoBundle 'hdima/python-syntax', {
             \ 'on_ft' : [ 'python', 'vim' ] }
 NeoBundle 'bps/vim-textobj-python', {
@@ -748,7 +750,7 @@ if !exists('g:powerline_loaded')
     set statusline+=%F
 endif
 behave mswin
-set foldmethod=indent
+set foldmethod=manual
 set foldnestmax=10
 set foldlevel=99
 set foldcolumn=0
@@ -1028,7 +1030,7 @@ nnoremap <localleader>cb :set cursorbind!<CR>
 " Remap keys for auto-completing file names
 inoremap <C-f> <C-x><C-f>
 " Remap keys for auto-completing omnifunc
-inoremap <C-o> <C-x><C-o>
+inoremap <C-n> <C-x><C-o>
 " Remap keys for auto-completing completefunc
 inoremap <expr><C-l> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>"
 inoremap <Tab> <Tab>
@@ -1718,132 +1720,281 @@ let g:mta_use_matchparen_group=0
 let g:mta_set_default_matchtag_color=1
 nnoremap <Space>t :MtaJumpToOtherTag<CR>
 
-" neocomplete.vim settings & neocomplcache settings
-"" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
+" " neocomplete.vim settings & neocomplcache settings
+" "" Disable AutoComplPop.
+" let g:acp_enableAtStartup = 0
+"
+" function EnableAndComplete()
+"     if has('lua') && (!exists('neocomplete#is_enabled()') || !neocomplete#is_enabled())
+"         NeoCompleteEnable
+"         return neocomplete#start_manual_complete()
+"     elseif !has('lua') && (!exists('neocomplcache#is_enabled()') || !neocomplcache#is_enabled())
+"         NeoComplCacheEnable
+"         return neocomplcache#start_manual_complete()
+"     endif
+" endfunction
+"
+" if has("unix")
+"     let s:uname = system("uname -s")
+"     if s:uname == "Darwin"
+"         inoremap <expr><C-@> pumvisible() ? "\<C-n>" : EnableAndComplete()
+"     else
+"         inoremap <expr><C-Backspace> pumvisible() ? "\<C-n>" : EnableAndComplete()
+"     endif
+" endif
+" inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+" inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+" inoremap <expr><C-r> "\<C-w>"
+" inoremap <expr><C-u> "\<C-c>0Di"
+" if has('lua')
+"     " neocomplete.vim settings
+"     " Use neocomplete
+"     let g:neocomplete#enable_at_startup = 0
+"     let g:neocomplete#data_directory = $HOME . "/.vim/cache/neocomplete"
+"     " Use smartcase.
+"     let g:neocomplete#enable_ignore_case = 1
+"     let g:neocomplete#enable_smart_case = 0
+"     " Set minimum syntax keyword length.
+"     let g:neocomplete#min_keyword_length = 0
+"     let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+"
+"     " Define dictionary.
+"     let g:neocomplete#sources#dictionary#dictionaries = {
+"                 \ 'default' : '',
+"                 \ 'vimshell' : $HOME.'/.vimshell_hist',
+"                 \ 'scheme' : $HOME.'/.gosh_completions'
+"                 \ }
+"
+"     " Define keyword.
+"     if !exists('g:neocomplete#keyword_patterns')
+"         let g:neocomplete#keyword_patterns = {}
+"     endif
+"     let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+"
+"     let g:neocomplete#enable_auto_select = 1
+"     let g:neocomplete#disable_auto_complete = 1
+"
+"     " Enable heavy omni completion.
+"     if !exists('g:neocomplete#force_omni_input_patterns')
+"         let g:neocomplete#force_omni_input_patterns = {}
+"     endif
+"     let g:neocomplete#force_omni_input_patterns.c =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)'
+"     let g:neocomplete#force_omni_input_patterns.cpp =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplete#force_omni_input_patterns.objc =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplete#force_omni_input_patterns.objcpp =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
+"     let g:neocomplete#force_omni_input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"     let g:neocomplete#force_omni_input_patterns.python =
+"                 \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+"
+"     " For perlomni.vim setting.
+"     " https://github.com/c9s/perlomni.vim
+"     let g:neocomplete#force_omni_input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+"
+" else
+"     " neocomplcache.vim settings
+"     " Use neocomplcache.
+"     let g:neocomplcache_enable_at_startup = 0
+"     let g:neocomplcache_temporary_dir = $HOME . "/.vim/cache/neocomplcache"
+"     " Use smartcase.
+"     let g:neocomplcache_enable_ignore_case = 1
+"     let g:neocomplcache_enable_smart_case = 0
+"     " Set minimum syntax keyword length.
+"     let g:neocomplcache_min_syntax_length = 0
+"     let g:neocomplete#min_keyword_length = 0
+"     let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+"
+"     " Define dictionary.
+"     let g:neocomplcache_dictionary_filetype_lists = {
+"                 \ 'default' : '',
+"                 \ 'vimshell' : $HOME.'/.vimshell_hist',
+"                 \ 'scheme' : $HOME.'/.gosh_completions'
+"                 \ }
+"
+"     " Define keyword.
+"     if !exists('g:neocomplcache_keyword_patterns')
+"         let g:neocomplcache_keyword_patterns = {}
+"     endif
+"     let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+"
+"     let g:neocomplcache_enable_auto_select = 1
+"     let g:neocomplcache_disable_auto_complete = 1
+"
+"     " Enable heavy omni completion.
+"     if !exists('g:neocomplcache_force_omni_patterns')
+"         let g:neocomplcache_force_omni_patterns = {}
+"     endif
+"     let g:neocomplcache_force_overwrite_completefunc = 1
+"     let g:neocomplcache_force_omni_patterns.c =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)'
+"     let g:neocomplcache_force_omni_patterns.cpp =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplcache_force_omni_patterns.objc =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplcache_force_omni_patterns.objcpp =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplcache_force_omni_patterns.java = '\k\.\k*'
+"     let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"     let g:neocomplcache_force_omni_patterns.python =
+"                 \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+"
+"     " For perlomni.vim setting.
+"     " https://github.com/c9s/perlomni.vim
+"     let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" endif
 
-function EnableAndComplete()
-    if has('lua') && (!exists('neocomplete#is_enabled()') || !neocomplete#is_enabled())
-        NeoCompleteEnable
-        return neocomplete#start_manual_complete()
-    elseif !has('lua') && (!exists('neocomplcache#is_enabled()') || !neocomplcache#is_enabled())
-        NeoComplCacheEnable
-        return neocomplcache#start_manual_complete()
-    endif
-endfunction
+" coc.nvim
+" if hidden is not set, TextEdit might fail.
+set hidden
 
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=1
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 if has("unix")
     let s:uname = system("uname -s")
     if s:uname == "Darwin"
-        inoremap <expr><C-@> pumvisible() ? "\<C-n>" : EnableAndComplete()
+        inoremap <expr><C-@> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh() 
     else
-        inoremap <expr><C-Backspace> pumvisible() ? "\<C-n>" : EnableAndComplete()
+        inoremap <expr><C-Backspace> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh() 
     endif
 endif
 inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 inoremap <expr><C-r> "\<C-w>"
 inoremap <expr><C-u> "\<C-c>0Di"
-if has('lua')
-    " neocomplete.vim settings
-    " Use neocomplete
-    let g:neocomplete#enable_at_startup = 0
-    let g:neocomplete#data_directory = $HOME . "/.vim/cache/neocomplete"
-    " Use smartcase.
-    let g:neocomplete#enable_ignore_case = 1
-    let g:neocomplete#enable_smart_case = 0
-    " Set minimum syntax keyword length.
-    let g:neocomplete#min_keyword_length = 0
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-    " Define dictionary.
-    let g:neocomplete#sources#dictionary#dictionaries = {
-                \ 'default' : '',
-                \ 'vimshell' : $HOME.'/.vimshell_hist',
-                \ 'scheme' : $HOME.'/.gosh_completions'
-                \ }
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-    " Define keyword.
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
-    let g:neocomplete#enable_auto_select = 1
-    let g:neocomplete#disable_auto_complete = 1
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
-    " Enable heavy omni completion.
-    if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-    endif
-    let g:neocomplete#force_omni_input_patterns.c =
-                \ '[^.[:digit:] *\t]\%(\.\|->\)'
-    let g:neocomplete#force_omni_input_patterns.cpp =
-                \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-    let g:neocomplete#force_omni_input_patterns.objc =
-                \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-    let g:neocomplete#force_omni_input_patterns.objcpp =
-                \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-    let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
-    let g:neocomplete#force_omni_input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    let g:neocomplete#force_omni_input_patterns.python =
-                \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+" " Use `[g` and `]g` to navigate diagnostics
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"
+" " Remap keys for gotos
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
 
-    " For perlomni.vim setting.
-    " https://github.com/c9s/perlomni.vim
-    let g:neocomplete#force_omni_input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" " Use K to show documentation in preview window
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+"
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
-else
-    " neocomplcache.vim settings
-    " Use neocomplcache.
-    let g:neocomplcache_enable_at_startup = 0
-    let g:neocomplcache_temporary_dir = $HOME . "/.vim/cache/neocomplcache"
-    " Use smartcase.
-    let g:neocomplcache_enable_ignore_case = 1
-    let g:neocomplcache_enable_smart_case = 0
-    " Set minimum syntax keyword length.
-    let g:neocomplcache_min_syntax_length = 0
-    let g:neocomplete#min_keyword_length = 0
-    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-    " Define dictionary.
-    let g:neocomplcache_dictionary_filetype_lists = {
-                \ 'default' : '',
-                \ 'vimshell' : $HOME.'/.vimshell_hist',
-                \ 'scheme' : $HOME.'/.gosh_completions'
-                \ }
+" " Remap for rename current word
+" nmap <leader>rn <Plug>(coc-rename)
+"
+" " Remap for format selected region
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
-    " Define keyword.
-    if !exists('g:neocomplcache_keyword_patterns')
-        let g:neocomplcache_keyword_patterns = {}
-    endif
-    let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
-    let g:neocomplcache_enable_auto_select = 1
-    let g:neocomplcache_disable_auto_complete = 1
+let g:coc_config_home = $HOME . '/.config/vim'
+let g:coc_global_extensions = [
+            \ 'coc-json', 'coc-html', 'coc-css', 'coc-ember', 'coc-java',
+            \ 'coc-python', 'coc-highlight', 'coc-angular', 'coc-vimlsp',
+            \ 'coc-markdownlint', 'coc-calc', 'coc-tsserver', 'coc-yaml',
+            \ 'coc-snippets' ]
 
-    " Enable heavy omni completion.
-    if !exists('g:neocomplcache_force_omni_patterns')
-        let g:neocomplcache_force_omni_patterns = {}
-    endif
-    let g:neocomplcache_force_overwrite_completefunc = 1
-    let g:neocomplcache_force_omni_patterns.c =
-                \ '[^.[:digit:] *\t]\%(\.\|->\)'
-    let g:neocomplcache_force_omni_patterns.cpp =
-                \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-    let g:neocomplcache_force_omni_patterns.objc =
-                \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-    let g:neocomplcache_force_omni_patterns.objcpp =
-                \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-    let g:neocomplcache_force_omni_patterns.java = '\k\.\k*'
-    let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    let g:neocomplcache_force_omni_patterns.python =
-                \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+" " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+" xmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <leader>a  <Plug>(coc-codeaction-selected)
+"
+" " Remap for do codeAction of current line
+" nmap <leader>ac  <Plug>(coc-codeaction)
+" " Fix autofix problem of current line
+" nmap <leader>qf  <Plug>(coc-fix-current)
+"
+" " Create mappings for function text object, requires document symbols feature of languageserver.
+" xmap if <Plug>(coc-funcobj-i)
+" xmap af <Plug>(coc-funcobj-a)
+" omap if <Plug>(coc-funcobj-i)
+" omap af <Plug>(coc-funcobj-a)
+"
+" " Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+" nmap <silent> <TAB> <Plug>(coc-range-select)
+" xmap <silent> <TAB> <Plug>(coc-range-select)
+"
+" " Use `:Format` to format current buffer
+" command! -nargs=0 Format :call CocAction('format')
+"
+" " Use `:Fold` to fold current buffer
+" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+"
+" " use `:OR` for organize import of current buffer
+" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-    " For perlomni.vim setting.
-    " https://github.com/c9s/perlomni.vim
-    let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-endif
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" " Using CocList
+" " Show all diagnostics
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" " Manage extensions
+" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" " Show commands
+" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" " Find symbol of current document
+" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" " Search workspace symbols
+" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" " Resume latest coc list
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " vim-external settings
 nmap <leader>ee <Plug>(external-editor)
@@ -2375,17 +2526,17 @@ endfunction
 let g:Gitv_OpenHorizontal = 1
 let g:Gitv_DoNotMapCtrlKey = 1
 
-" jedi-vim settings
-let g:jedi#show_call_signatures = 0
-let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "<localleader>mc"
-let g:jedi#usages_command = ""
-let g:jedi#completions_command = ""
-let g:jedi#rename_command = ""
-let g:jedi#popup_on_dot = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#auto_vim_configuration = 0
+" " jedi-vim settings
+" let g:jedi#show_call_signatures = 0
+" let g:jedi#goto_assignments_command = ""
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#documentation_command = "<localleader>mc"
+" let g:jedi#usages_command = ""
+" let g:jedi#completions_command = ""
+" let g:jedi#rename_command = ""
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#smart_auto_mappings = 0
+" let g:jedi#auto_vim_configuration = 0
 
 " javascript-libraries-syntax.vim
 let g:used_javascript_libs = 'jquery,underscore,backbone,angularjs,angularui'
@@ -2438,11 +2589,13 @@ let g:magit_show_magit_mapping = '<nop>'
 let g:magit_default_sections = [ 'unstaged', 'staged', 'commit', 'info', 'global_help' ]
 
 function! FoldLevelToggle()
+    :set foldmethod=indent
     if ( &foldlevel > 1 )
         :setlocal foldlevel=1
     else
         :setlocal foldlevel=99
     endif
+    :set foldmethod=manual
 endfunction
 nnoremap za :call FoldLevelToggle()<CR>
 
@@ -3045,11 +3198,11 @@ augroup CustomAutoCmd
     " autocmd BufNewFile * :call StartFZFMru()
 
     " Enable omni completion.
-    if has('lua')
-        autocmd FileType java :let g:loaded_neocomplete = 1
-    else
-        autocmd FileType java :let g:loaded_neocomplcache = 1
-    endif
+    " if has('lua')
+    "     autocmd FileType java :let g:loaded_neocomplete = 1
+    " else
+    "     autocmd FileType java :let g:loaded_neocomplcache = 1
+    " endif
     autocmd BufRead,BufEnter * setlocal colorcolumn=80 textwidth=0
     " autocmd BufEnter * :SyntasticCheck
     autocmd FileType,BufEnter * :call SetOmnifunc()
