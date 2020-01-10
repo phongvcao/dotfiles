@@ -1979,9 +1979,9 @@ let g:coc_global_extensions = [
 " " Add status line support, for integration with other plugin, checkout `:h coc-status`
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" " Using CocList
-" " Show all diagnostics
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <leader>D  :<C-u>CocList diagnostics<CR>
 " " Manage extensions
 " nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " " Show commands
@@ -3182,6 +3182,8 @@ augroup CustomAutoCmd
     autocmd FileType vifm set filetype=vim
 
     autocmd BufEnter * :highlight MatchTag ctermfg=8 ctermbg=lightblue guifg=#002b36 guibg=lightblue
+    autocmd BufEnter * :highlight CocErrorFloat ctermbg=9 ctermfg=0 term=underline gui=underline
+    autocmd BufEnter * :highlight CocErrorFloat ctermbg=0 ctermfg=9 term=underline gui=underline
     autocmd SourcePre * :highlight VertSplit ctermbg=8 guibg=NONE ctermfg=11 guifg=#93a1a1
     " autocmd VimEnter,GUIEnter,VimLeave * :call DeleteSessionLocks()
 
