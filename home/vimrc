@@ -3183,7 +3183,7 @@ augroup CustomAutoCmd
 
     autocmd BufEnter * :highlight MatchTag ctermfg=8 ctermbg=lightblue guifg=#002b36 guibg=lightblue
     autocmd BufEnter * :highlight CocErrorFloat ctermbg=9 ctermfg=0 term=underline gui=underline
-    autocmd BufEnter * :highlight CocErrorFloat ctermbg=0 ctermfg=9 term=underline gui=underline
+    autocmd BufEnter * :highlight CocErrorSign ctermbg=0 ctermfg=9 term=underline gui=underline
     autocmd SourcePre * :highlight VertSplit ctermbg=8 guibg=NONE ctermfg=11 guifg=#93a1a1
     " autocmd VimEnter,GUIEnter,VimLeave * :call DeleteSessionLocks()
 
