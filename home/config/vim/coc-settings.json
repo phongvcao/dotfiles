@@ -11,5 +11,4 @@
       "filetypes": ["c", "cpp", "objc", "objcpp"]
     }
   },
-  "suggest.noselect": false,
 }
