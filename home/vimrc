@@ -3190,6 +3190,7 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight CocInfoSign ctermbg=0 ctermfg=4 term=underline gui=underline
     autocmd BufEnter * :highlight CocHintFloat ctermbg=2 ctermfg=0 term=underline gui=underline
     autocmd BufEnter * :highlight CocHintSign ctermbg=0 ctermfg=2 term=underline gui=underline
+    autocmd FileType unite let b:coc_suggest_disable = 1
 
     " MatchTagAlways
     autocmd BufEnter * :highlight MatchTag ctermfg=8 ctermbg=lightblue guifg=#002b36 guibg=lightblue
