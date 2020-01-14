@@ -1999,6 +1999,7 @@ nnoremap <silent> <leader>D  :<C-u>CocList diagnostics<CR>
 
 " vim-go settings
 let g:go_fmt_fail_silently = 1
+let g:go_fmt_autosave = 0
 
 " vim-external settings
 nmap <leader>ee <Plug>(external-editor)
