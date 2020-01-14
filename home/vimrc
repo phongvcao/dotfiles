@@ -1947,7 +1947,6 @@ let g:coc_global_extensions = [
             \ 'coc-python', 'coc-highlight', 'coc-angular', 'coc-vimlsp',
             \ 'coc-markdownlint', 'coc-calc', 'coc-tsserver', 'coc-yaml',
             \ 'coc-snippets' ]
-let g:go_fmt_fail_silently = 1
 
 " " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 " xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -1997,6 +1996,9 @@ nnoremap <silent> <leader>D  :<C-u>CocList diagnostics<CR>
 " nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " " Resume latest coc list
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" vim-go settings
+let g:go_fmt_fail_silently = 1
 
 " vim-external settings
 nmap <leader>ee <Plug>(external-editor)
