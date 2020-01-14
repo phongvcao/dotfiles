@@ -2372,9 +2372,9 @@ inoremap () ()
 inoremap [] []
 inoremap {} {}
 inoremap <> <<Space><Space>><left><left>
-" inoremap (<Space> (  )<C-c><left>i
-" inoremap [<Space> [  ]<C-c><left>i
-" inoremap {<Space> {  }<C-c><left>i
+inoremap (<Space> (  )<C-c><left>i
+inoremap [<Space> [  ]<C-c><left>i
+inoremap {<Space> {  }<C-c><left>i
 inoremap {<CR> {<CR>}<C-c>O
 inoremap (<CR> (<CR>)<C-c>O
 inoremap [<CR> [<CR>]<C-c>O
