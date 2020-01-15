@@ -1,6 +1,4 @@
-//
-// Created by Phong Cao.
-//
+// vim:filetype=cpp
 
 // uncomment to disable assert()
 // #define NDEBUG
