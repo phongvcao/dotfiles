@@ -495,10 +495,8 @@ NeoBundle 'hotchpotch/perldoc-vim', {
             \ 'on_cmd' : 'Perldoc' }
 
 " Plugins (Golang)
-if !exists( 'g:custom_vimrc_no_vim_go' )
-    NeoBundle 'fatih/vim-go', {
-                \ 'on_ft' : [ 'go' ] }
-end
+NeoBundle 'fatih/vim-go', {
+            \ 'on_ft' : [ 'go' ] }
 
 " Plugins (JavaScript, XML, HTML, CSS)
 NeoBundle 'moll/vim-node', {
