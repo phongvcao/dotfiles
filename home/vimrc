@@ -2087,10 +2087,10 @@ nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -bu
 nnoremap <leader>; :silent! Unite -prompt=Hist(:)>\ \  history/command -auto-highlight -buffer-name=Command\ History<CR>
 " nnoremap <leader>hr; :silent! Unite history/command -buffer-name=u/ -resume<CR>
 " nnoremap <leader>; :FzfHistory:<CR>
-nnoremap <leader>S :silent! Unite -prompt=Hist($_)>\ \  -auto-highlight -buffer-name=Shell\ History output/shellcmd:tac\ $HOME/.shell_history\ \|\ command\ grep\ -v\ '^$'\ \|\ head\ -n\ 1000\ -<CR>
+nnoremap <leader>S :silent! Unite -prompt=Hist($_)>\ \  -auto-highlight -buffer-name=Shell\ History output/shellcmd:tac\ $HOME/.shell_history\ \|\ grep\ -v\ '^$'\ \|\ head\ -n\ 1000\ -<CR>
 nnoremap " :silent! Unite -prompt=Regs(")>\ \  register -auto-highlight -buffer-name=Registers<CR>
 nnoremap M :silent! Unite -prompt=Msgs>\ \  -auto-highlight -buffer-name=Messages\ History output:message<CR>
-" nnoremap <leader>hrs :silent! Unite -buffer-name=sh -resume output/shellcmd:tac\ $HOME/.shell_history\ \|\ command\ grep\ -v\ '^$'\ \|\ head\ -n\ 1000\ -<CR>
+" nnoremap <leader>hrs :silent! Unite -buffer-name=sh -resume output/shellcmd:tac\ $HOME/.shell_history\ \|\ grep\ -v\ '^$'\ \|\ head\ -n\ 1000\ -<CR>
 nnoremap <leader><localleader>/ :silent! Unite -no-auto-resize -auto-highlight -winheight=20 -prompt-direction=top -buffer-name=Current\ Buffer -prompt=BLines>\ \  line:all<CR>
 nnoremap <leader><leader>/ :silent! Unite -no-auto-resize -auto-highlight -winheight=20 -prompt-direction=top -buffer-name=All\ Buffers -prompt=Lines>\ \  line:buffers<CR>
 let g:unite_split_rule = 'botright'
