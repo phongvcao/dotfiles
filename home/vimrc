@@ -117,6 +117,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 "             \               'mattn/webapi-vim', 'ujihisa/neco-look' ],
 "             \ 'disabled' : !has('lua') }
 NeoBundle 'neoclide/coc.nvim', 'release', { 'build': { 'others': 'git checkout release' } }
+NeoBundle 'dense-analysis/ale'
 
 " NeoBundle 'Shougo/neocomplcache.vim', {
 "             \ 'on_cmd' : 'NeoComplCacheEnable',
