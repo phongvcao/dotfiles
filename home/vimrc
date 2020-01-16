@@ -1896,10 +1896,11 @@ endfunction
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-o> pumvisible() ? "\<C-y>" : "\<C-g>u\<C-o>"
+" inoremap <expr> <C-o> pumvisible() ? "\<C-y>" : "\<C-g>u\<C-o>"
 " " Coc only does snippet and additional edit on confirm.
 " " Or use `complete_info` if your vim support it, like:
 " inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-o> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<C-o>"
 
 " " Use `[g` and `]g` to navigate diagnostics
 " nmap <silent> [g <Plug>(coc-diagnostic-prev)
