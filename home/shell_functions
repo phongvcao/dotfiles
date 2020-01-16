@@ -588,6 +588,20 @@ else
 fi
 }
 
+function lst() {
+if [[ -n "$2" ]]; then
+    command_ls -A -lt "$2" | g "$1"
+elif [[ -n "$1" ]]; then
+    if [[ -d "$1" ]]; then
+        command_ls -lt -A "$1"
+    else
+        command_ls -lt -A | g "$1"
+    fi
+else
+    command_ls -lt -A
+fi
+}
+
 function lsg() {
 if [[ -n "$2" ]]; then
     command_ls -A "$2" | g "$1"
