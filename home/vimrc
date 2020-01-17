@@ -2766,11 +2766,11 @@ endif
 " vim-template settings
 let g:templates_directory = $HOME . '/.dotfiles/home/config/vim/vim-template/'
 let g:templates_no_autocmd = 1
-command! AlgoCppTemplate Template algorithms.cpp
-command! AlgoGoTemplate Template algorithms.go
-command! AlgoJavaTemplate Template algorithms.java
-command! UVaCppTemplate Template algorithms_UVa.cpp
-command! UVaJavaTemplate Template algorithms_UVa.java
+command! AlCppTemplate Template algorithms.cpp
+command! AlGoTemplate Template algorithms.go
+command! AlJavaTemplate Template algorithms.java
+command! UVCppTemplate Template algorithms_UVa.cpp
+command! UVJavaTemplate Template algorithms_UVa.java
 
 " vim-surround settings
 let g:surround_no_mappings = 0
