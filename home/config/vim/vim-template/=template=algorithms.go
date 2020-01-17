@@ -1,5 +1,3 @@
-// vim:filetype=go
-
 package main
 
 import (
