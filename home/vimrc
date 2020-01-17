@@ -1029,7 +1029,7 @@ nnoremap <localleader>cb :set cursorbind!<CR>
 " Remap keys for auto-completing file names
 inoremap <C-f> <C-x><C-f>
 " Remap keys for auto-completing omnifunc
-inoremap <C-n> <C-x><C-o>
+inoremap <expr><C-o> pumvisible() ? "" : "\<C-x>\<C-o>"
 " Remap keys for auto-completing completefunc
 inoremap <expr><C-l> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>"
 inoremap <Tab> <Tab>
@@ -1892,7 +1892,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <C-n> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -1900,7 +1900,7 @@ endfunction
 " " Coc only does snippet and additional edit on confirm.
 " " Or use `complete_info` if your vim support it, like:
 " inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-o> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<C-o>"
+inoremap <expr> <C-y> complete_info()["selected"] != "-1" ? "\<C-y>" : ""
 
 " " Use `[g` and `]g` to navigate diagnostics
 " nmap <silent> [g <Plug>(coc-diagnostic-prev)
