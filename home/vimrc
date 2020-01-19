@@ -2370,8 +2370,10 @@ inoremap [; [<CR>];<C-c>O
 inoremap [, [<CR>],<C-c>O
 inoremap " ""<left>
 inoremap ' ''<left>
+inoremap ` ``<left>
 inoremap "" ""
 inoremap '' ''
+inoremap `` ``
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
