@@ -2004,6 +2004,7 @@ endif
 
 " vim-go settings
 let g:go_def_mapping_enabled = 0
+let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_autosave = 0
 let g:go_template_autocreate = 0
