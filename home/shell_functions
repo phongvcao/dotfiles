@@ -923,6 +923,11 @@ for (( i = 0; i < 17; ++i )); do
 done
 echo ""
 
+if [[ -f "${HOME}/.config/shell/print256colours.sh" ]]; then
+    ${HOME}/.config/shell/print256colours.sh
+    echo "";
+fi
+
 for x in 0 1 4 5 7 8; do
     for i in `seq 30 37`; do
         for a in `seq 40 47`; do
@@ -932,6 +937,7 @@ for x in 0 1 4 5 7 8; do
     done;
 done;
 echo "";
+
 tput sgr0
 }
 

@@ -29,7 +29,6 @@ filter (?i)mega
 filter (?i)readme
 rename .%f
 filter (?i)iterm2
-filter (?i)
 filter (?i)kara
 filter (?i)dot
 mkdir 
@@ -47,4 +46,5 @@ filter (?i)share
 filter (?i)trash
 filter (?i)dotfiles
 filter (?i)neo
+filter (?i)
 filter (?i)config
