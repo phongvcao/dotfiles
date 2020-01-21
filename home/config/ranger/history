@@ -1,6 +1,3 @@
-filter (?i).pl
-filter (?i)gdbinit
-rename .gdbinit.d
 filter (?i)shutt
 filter (?i)agignore
 filter (?i)zshrc
@@ -29,16 +26,12 @@ rename LICENSE.md
 filter (?i)algoscoll
 filter (?i)quiz
 filter (?i)mega
-filter (?i)local
 filter (?i)readme
 rename .%f
 filter (?i)iterm2
 filter (?i)
 filter (?i)kara
 filter (?i)dot
-filter (?i)dotfiles
-filter (?i)config
-filter (?i)trash
 mkdir 
 rename
 mkdir completions
@@ -48,3 +41,10 @@ filter (?i)tmuxinator
 filter (?i)algorithms
 filter (?i)algos
 filter (?i)algo
+filter (?i)neoqq
+filter (?i)local
+filter (?i)share
+filter (?i)trash
+filter (?i)dotfiles
+filter (?i)neo
+filter (?i)config
