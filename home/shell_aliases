@@ -99,7 +99,6 @@ alias "sort"="sort -h -b"
 alias "tmuxredraw"="tmuxattach"
 alias "fixchar"="tput sgr0"
 alias "zip"="command zip --symlinks -r"
-alias "about"="echo; echo; neofetch"
 alias "abt"="about"
 
 # Single-letter aliases for commonly-used command

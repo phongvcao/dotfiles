@@ -297,6 +297,16 @@ function fgv() {
 
 }
 
+function about() {
+    if [[ -n "$1" ]]; then
+        neofetch | g "$1"
+    else
+        echo
+        echo
+        neofetch
+    fi
+}
+
 function fgr() {
     local iregex_patterns=""
     local num_pattern='^[0-9]+$'
