@@ -918,11 +918,6 @@ function clean() {
 }
 
 function color() {
-for (( i = 0; i < 17; ++i )); do
-    echo "$(tput setaf $i)This is ($i) $(tput sgr0)";
-done
-echo ""
-
 if [[ -f "${HOME}/.config/shell/print256colours.sh" ]]; then
     ${HOME}/.config/shell/print256colours.sh
     echo "";
