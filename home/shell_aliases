@@ -100,7 +100,7 @@ alias "tmuxredraw"="tmuxattach"
 alias "fixchar"="tput sgr0"
 alias "zip"="command zip --symlinks -r"
 alias "about"="echo; echo; neofetch"
-alias "ab"="about"
+alias "abt"="about"
 
 # Single-letter aliases for commonly-used command
 alias "c"="cat"
