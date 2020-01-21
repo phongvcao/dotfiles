@@ -593,7 +593,8 @@ NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'StanAngeloff/php.vim'
 NeoBundle 'miya0001/vim-dict-wordpress'
 NeoBundle 'dsawardekar/wordpress.vim'
-NeoBundle 'stephpy/vim-php-cs-fixer'
+" Conflicts with YankRing <leader>p
+" NeoBundle 'stephpy/vim-php-cs-fixer'
 NeoBundle 'arnaud-lb/vim-php-namespace'
 NeoBundle 'akiyan/vim-textobj-php'
 NeoBundle 'Igorjan94/codeforces.vim'
@@ -844,7 +845,7 @@ endfunction
 nnoremap <C-c> :call CloseUniteWindow()<CR>
 inoremap <C-c> <C-c>:call CloseUniteWindow()<CR>
 
-if has('clipboard')
+if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
     inoremap <expr><C-p> pumvisible() ? "\<C-p>" : '<C-r>+'
     " Paste content of unnamed register to Vim command-mode
     cnoremap <C-p> <C-r>+
@@ -2149,10 +2150,13 @@ let g:unite_enable_auto_select = 0
    let g:yankring_history_dir = g:vimPath
    let g:yankring_replace_n_nkey = "<nop>"
    let g:yankring_replace_n_pkey = "<nop>"
-   let g:yankring_paste_v_akey = "<nop>"
+   let g:yankring_paste_v_akey ="<nop>"
+   let g:yankring_paste_n_bkey =''
+   let g:yankring_paste_n_akey =''
    let g:yankring_max_history = 1000000
    let g:yankring_max_element_length = 10000000
    let g:yankring_buffer_name = "Yank History"
+   let g:yankring_manual_clipboard_check = 1
    nnoremap <leader>p :silent! YRShow<CR>:setlocal wrap relativenumber number<CR>
    nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR>
    xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
@@ -3294,7 +3298,7 @@ augroup CustomAutoCmd
     autocmd VimEnter * :EMCommandLineNoreMap <C-d> <Del>
     autocmd VimEnter * :EMCommandLineNoreMap <C-a> <End><C-u>
     " Paste content of unnamed register to Vim command-mode
-    if has('clipboard')
+    if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
         autocmd VimEnter * :EMCommandLineNoreMap <C-p> <C-r>+
     else
         autocmd VimEnter * :EMCommandLineNoreMap <C-p> <C-r>\"
@@ -3322,7 +3326,7 @@ augroup CustomAutoCmd
     autocmd VimEnter * :OverCommandLineNoremap <C-d> <Del>
     autocmd VimEnter * :OverCommandLineNoremap <C-a> <End><C-u>
     " Paste content of unnamed register to Vim command-mode
-    if has('clipboard')
+    if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
         autocmd VimEnter * :OverCommandLineNoremap <C-p> <C-r>+
     else
         autocmd VimEnter * :OverCommandLineNoremap <C-p> <C-r>\"
