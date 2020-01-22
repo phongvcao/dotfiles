@@ -1054,7 +1054,7 @@ nnoremap <leader>k <PageUp>
 nnoremap <localleader>j <C-d>
 nnoremap <localleader>k <C-u>
 " Insert real <Tab> in Insert mode
-nnoremap <S-Tab> i<C-V><Tab>
+" nnoremap <S-Tab> i<C-V><Tab>
 
 " nnoremap <localleader>/ :execute "/" . escape(expand("<cword>"), g:escapeChars)<CR>
 " nnoremap <localleader>// :execute "/" . escape(expand("<cWORD>"), g:escapeChars)<CR>
@@ -2041,6 +2041,10 @@ let g:UltiSnipsEditSplit='vertical'
 let &rtp.=',~/.vim/bundle/vim-snippets/snippets/'
 let g:snips_no_mappings = 1
 imap <Tab> <Plug>snipMateNextOrTrigger
+imap <S-Tab> <Plug>snipMateBack
+smap <S-Tab> <Plug>snipMateBack
+xmap <S-Tab> <Plug>snipMateBack
+vmap <S-Tab> <Plug>snipMateBack
 " Jump between matching parentheses & curly braces & brackets on the same line
 " nnoremap % %
 
