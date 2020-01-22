@@ -2043,8 +2043,6 @@ let g:snips_no_mappings = 1
 imap <Tab> <Plug>snipMateNextOrTrigger
 imap <S-Tab> <Plug>snipMateBack
 smap <S-Tab> <Plug>snipMateBack
-xmap <S-Tab> <Plug>snipMateBack
-vmap <S-Tab> <Plug>snipMateBack
 " Jump between matching parentheses & curly braces & brackets on the same line
 " nnoremap % %
 
