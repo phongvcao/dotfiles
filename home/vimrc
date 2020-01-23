@@ -235,11 +235,11 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " It must be started by default
 Plug 'Valloric/vim-operator-highlight'
 
-" BEGIN:
+" BEGIN: arecarn/vim-crunch
 Plug 'arecarn/vim-crunch', {
             \ 'on' : 'Crunch' }
 Plug 'arecarn/selection.vim'
-" END:
+" END: arecarn/vim-crunch
 
 Plug 'KabbAmine/vZoom.vim'
 
@@ -836,7 +836,7 @@ let g:multi_cursor_select_all_key      = 'g<A-n>'
 let g:multi_cursor_next_key            = '<C-n>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<C-c>'
+let g:multi_cursor_quit_key            = 'jk'
 
 " undotree settings
 let g:undotree_WindowLayout = 4
