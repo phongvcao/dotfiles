@@ -8,21 +8,19 @@
 - link:
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux.conf
+    ~/.config/terminator:
+        create: true
+        path: config/terminator
     ~/.vim: vim
-    ~/.vimrc: vimrc
-  ~/.config/terminator:
-      create: true
-      path: config/terminator
-  ~/.vim: vim
-  ~/.vimrc:
-      relink: true
-      path: vimrc
-  ~/.zshrc:
-      force: true
-      path: zshrc
-  ~/.hammerspoon:
-      if: '[ `uname` = Darwin ]'
-      path: hammerspoon
+    ~/.vimrc:
+        relink: true
+        path: vimrc
+    ~/.zshrc:
+        force: true
+        path: zshrc
+    ~/.hammerspoon:
+        if: '[ `uname` = Darwin ]'
+        path: hammerspoon
 
 - create:
     - ~/downloads
