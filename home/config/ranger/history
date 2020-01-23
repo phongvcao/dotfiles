@@ -1,5 +1,3 @@
-filter (?i)agignore
-filter (?i)zshrc
 filter (?i)xresource
 filter (?i)gitconfig
 filter (?i)ideavimrc
@@ -46,5 +44,7 @@ filter (?i)neo
 filter (?i)
 filter (?i)config
 filter (?i)local
-filter (?i)trash
 filter (?i)dircolors
+filter (?i)nerd
+filter (?i)tmux_
+filter (?i)trash
