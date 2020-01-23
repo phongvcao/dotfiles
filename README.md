@@ -18,16 +18,8 @@ cd ~/.dotfiles # replace with the path to your dotfiles
 ./uninstall
 ```
 
-### License
-
-```bash
-cd ~/.dotfiles # replace with the path to your dotfiles
-./uninstall
-```
-
 ## License
 
-Released under the MIT License. See
-[LICENSE.md][license] for details.
+MIT License. See [LICENSE.md][license] for details.
 
 [license]: LICENSE.md
