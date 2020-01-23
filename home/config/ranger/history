@@ -1,4 +1,3 @@
-filter (?i)shutt
 filter (?i)agignore
 filter (?i)zshrc
 filter (?i)xresource
@@ -41,10 +40,11 @@ filter (?i)algorithms
 filter (?i)algos
 filter (?i)algo
 filter (?i)neoqq
-filter (?i)local
 filter (?i)share
-filter (?i)trash
 filter (?i)dotfiles
 filter (?i)neo
 filter (?i)
 filter (?i)config
+filter (?i)local
+filter (?i)trash
+filter (?i)dircolors
