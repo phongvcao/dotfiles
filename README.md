@@ -20,6 +20,6 @@ cd ~/.dotfiles # replace with the path to your dotfiles
 
 ## License
 
-MIT License. See [LICENSE.md][license] for details.
+Released under MIT License. See [LICENSE.md][license] for details.
 
 [license]: LICENSE.md
