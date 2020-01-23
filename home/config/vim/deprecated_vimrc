@@ -1,0 +1,674 @@
+"
+" Deprecated Vim Plugins
+"
+
+" let g:isNeoBundleInstalled = 1
+" let g:NeoBundleReadMe = expand(g:vimPath . '/bundle/neobundle.vim/README.md')
+" if (!filereadable(g:NeoBundleReadMe))
+"     echo 'Installing NeoBundle...'
+"     echo ''
+"     silent !mkdir -p ~/.vim/bundle
+"     silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+"     let g:isNeoBundleInstalled = 0
+" endif
+"
+" if has('vim_starting')
+"     if &compatible
+"         set nocompatible               " Be iMproved
+"     endif
+"
+"     " Required:
+"     set runtimepath+=~/.vim/bundle/neobundle.vim/
+" endif
+"
+" " Required:
+" call neobundle#begin(expand('~/.vim/bundle/'))
+"
+" " Let NeoBundle manage NeoBundle
+" " Required:
+" NeoBundleFetch 'Shougo/neobundle.vim'
+"
+" " My Bundles here:
+" " Refer to |:NeoBundle-examples|.
+" " Note: You don't set neobundle setting in .gvimrc!
+"
+" Plug 'vim-syntastic/syntastic', {
+"             \ 'on' : 'SyntasticCheck' }
+" Plug 'jistr/vim-nerdtree-tabs'
+" " delimitMate has to be place before vim-endwise
+" Plug 'Raimondi/delimitMate'
+" Plug 'tpope/vim-unimpaired', {
+"             \ 'on_map' : [ '[x', ']x', '[y', ']y' ] }
+" Plug 'tpope/vim-abolish', {
+"             \ 'on_map' : [ [ 'n', 'cr' ] ] }
+" Plug 'terryma/vim-expand-region'
+" " BEGIN: xolox/vim-shell
+" Plug 'xolox/vim-shell', {
+"             \ 'on' : [ 'Maximize', 'Fullscreen', 'Open', 'MakeWithShell',
+"             \          'LMakeWithShell' ] }
+" Plug 'xolox/vim-misc'
+" " END: xolox/vim-shell
+" Plug 'Shougo/neoyank.vim'
+" Plug 'osyo-manga/vim-hopping'
+" Plug 'vasconcelloslf/vim-foldfocus', {
+"             \ 'on_func' : 'FoldFocus' }
+" Plug 'tommcdo/vim-exchange', {
+"             \ 'on_map' : [ [ 'n', 'cx' ], [ 'x', 'X' ] ] }
+" Plug 'AndrewRadev/splitjoin.vim', {
+"             \ 'on_map' : [ 'gS', 'gJ' ] }
+" Plug 'AndrewRadev/id3.vim', {
+"             \ 'for' : 'mp3' }
+" Plug 'PeterRincker/vim-argumentative'
+
+" Plug 'chrisbra/NrrwRgn', {
+"             \ 'on' : [ 'NR', 'NRV', 'NRL', 'WidenRegion' ] }
+" No lazy-loading for chrisbra/changesPlugin. It needs to be enabled by default
+" Plug 'chrisbra/changesPlugin'
+" Plug 'tyru/current-func-info.vim'
+" Plug 'mopp/mulfiles.vim'
+" Plug 'uptech/vim-ping-cursor', {
+"             \ 'on' : 'PingCursor' }
+" Plug 'itchyny/vim-cursorword'
+" Plug 'vim-utils/vim-vertical-move', {
+" Plug 'janko-m/vim-test', {
+"             \ 'on' : [
+"             \     'TestNearest', 'TestFile', 'TestSuite', 'TestLast',
+"             \     'TestVisit' ] }
+" Plug 'junegunn/vim-github-dashboard', {
+"             \ 'on' : [ 'GHActivity', GHDashboard' ] }
+" Plug 'junegunn/limelight.vim', {
+"             \ 'on' : [ 'Limelight' ] }
+" " No lazy-loading for junegunn/vim-peekaboo.
+" " It must be enabled by default
+" Plug 'junegunn/vim-peekaboo'
+" Plug 'junegunn/fzf', {
+"             \ 'do' : g:vimPath . '/bundle/fzf/install --no-key-bindings --no-completion' }
+" Plug 'junegunn/fzf.vim' , {
+"             \ 'on' : [ 'FzfFiles', 'FzfLines', 'FzfBLines' ] }
+" Plug 'pbogut/fzf-mru.vim'
+" Plug 'KabbAmine/lazyList.vim', {
+"             \ 'on' : 'LazyList' }
+" Plug 'henrik/vim-indexed-search'
+" Plug 'danro/rename.vim', {
+"             \ 'on' : 'Rename' }
+" Plug 'kana/vim-grex', {
+"             \ 'on' : [ 'Grey', 'Gred' ] }
+" Plug 'embear/vim-foldsearch', {
+"             \ 'on' : [ 'Fw', 'Fs', 'Fp', 'FS', 'Fl', 'Fc', 'Fi', 'Fd', 'Fe' ] }
+" Plug 'kien/tabman.vim', {
+"             \ 'on' : [ 'TMToggle', 'TMFocus' ] }
+" Plug 'yegappan/scratch', {
+"             \ 'on' : [ 'Sscratch', 'Scratch' ] }
+" Plug 'benmills/vimux', {
+"             \ 'on' : 'Vimux' }
+" Plug 'mhinz/vim-startify', {
+"             \ 'on' : 'Startify' }
+" Plug 'mhinz/vim-grepper', {
+"             \ 'on' : 'Grepper' }
+" Plug 'salsifis/vim-transpose', {
+"             \ 'on' : [ 'Transpose', 'TransposeWords', 'TransposeTab',
+"             \              'TransposeCSV', 'TransposeInteractive' ] }
+" No lazy-loading for gorkunov/smartpairs.vim.
+" It must be started by default
+" Plug 'gorkunov/smartpairs.vim'
+" No lazy-loading for jszakmeister/vim-togglecursor.
+" It must be started by default
+" Plug 'jszakmeister/vim-togglecursor'
+" Plug 'embear/vim-localvimrc', {
+"             \ 'on' : [ 'LocalVimRC', 'LocalVimRCClear' ] }
+" Plug 'Floobits/floobits-vim'
+" No lazy-loading for mhinz/vim-signify.
+" It must be started by default
+" Plug 'mhinz/vim-signify'
+" Plug 'gregsexton/gitv', {
+"             \ 'on_cmd' : 'Gitv',
+"             \ 'depends' : 'vim-fugitive' }
+" Plug 'osyo-manga/vim-marching', {
+"             \ 'for' : [ 'c', 'cpp' ] }
+" Plug 'davidhalter/jedi-vim', {
+"             \ 'for' : [ 'python', 'vim' ] }
+" Plug 'marijnh/tern_for_vim', {
+"             \ 'for' : 'javascript' }
+" " Conflicts with YankRing <leader>p
+" Plug 'stephpy/vim-php-cs-fixer', {
+"             \ 'for' : 'php' }
+" Crucial: Copy the 'php.vim' file of https://github.com/StanAngeloff/php.vim to
+"          under g:vimPath . '/syntax' for better PHP Experience in Vim
+"          Drupal 7 Snippets: https://github.com/tanarurkerem/drupal-snippets
+"          Drupal Syntax Checking: http://technosophos.com/2012/01/10/syntax-checking-drupal-vim-0.html
+"          PHP & Drupal Coding Standard: http://www.echoditto.com/blog/getting-ahead-drupals-coding-standards-w-drupal-code-sniffer-vim-and-little-regex
+"
+" Plug 'm2mdas/phpcomplete-extended'          " (Required) For PHP
+" Plug 'm2mdas/phpcomplete-extended-symfony'  " (Required) For Symfony2
+"
+" (Required) For Drupal
+" Plug 'git://drupalcode.org/project/vimrc.git', {'rtp': 'bundle/vim-plugin-for-drupal/'}
+"
+" Plug 'tobyS/vmustache'                      " (Required) For PHP
+" Plug 'docteurklein/vim-symfony'             " (Optional) For Symfony2
+" Plug 'evidens/vim-twig'                     " (Required) For Symfony2
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'tyru/autochmodx.vim'
+" if has('win32') || has('win64')
+"     Plug 'vim-airline/vim-airline'
+" endif
+" " Plugins (conflicting)
+" Plug 'kshenoy/vim-signature'
+" Plug 'tpope/vim-scriptease'
+" Plug 'Rykka/clickable.vim'
+" Plug 'Rykka/clickable-things'
+" if ! has( 'lua' )
+"     " BEGIN: Shougo/neocomplcache.vim
+"     Plug 'Shougo/neocomplcache.vim', {
+"                 \ 'on' : 'NeoComplCacheEnable' }
+"     Plug 'ujihisa/neco-look' 
+"     " END: Shougo/neocomplcache.vim
+" else
+"     " BEGIN: Shougo/neocomplete.vim
+"     Plug 'Shougo/neocomplete.vim', {
+"                 \ 'on' : 'NeoCompleteEnable' }
+"     Plug 'mopp/googlesuggest-source.vim'
+"     Plug 'mattn/googlesuggest-complete-vim'
+"     Plug 'mattn/webapi-vim'
+"     Plug 'ujihisa/neco-look'
+"     " END: Shougo/neocomplete.vim
+" endif
+" Plug 'SirVer/ultisnips'
+
+" syntastic settings
+" Extra Checkers List:
+" clang gcc cppcheck perl flake8 pylint jslint nodejs-jshint php
+" php-codesniffer phpmd csslint sh xmllint nodejs-jsonlint mivok/markdownlint
+" shellcheck checkstyle mlint perl-critic clang-tools-extra
+let g:syntastic_python_python_exe = 'python3'
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_asm_compiler = 'gcc'
+let g:syntastic_cpp_checkers = [ 'clang++', 'gcc', 'cppcheck', 'clang_check', 'clang_tidy' ]
+let g:syntastic_c_checkers = [ 'gcc', 'cppcheck', 'clang_check', 'clang_tidy' ]
+let g:syntastic_enable_perl_checker = 1
+let g:syntastic_perl_checkers = [ 'perl', 'podchecker' ]
+let g:syntastic_python_checkers = [ 'flake8', 'pylint' ]
+let g:syntastic_javascript_checkers = [ 'jslint', 'jshint' ]
+let g:syntastic_java_checkers = [ 'javac', 'checkstyle' ]
+let g:syntastic_php_checkers = [ 'php', 'phpcs', 'phpmd' ]
+let g:syntastic_matlab_checkers = [ 'mlint' ]
+let g:syntastic_html_checkers = [ 'tidy', 'jshint' ]
+let g:syntastic_css_checkers = [ 'csslint', 'phpcs' ]
+let g:syntastic_sh_checkers = [ 'sh', 'shellcheck' ]
+let g:syntastic_xml_checkers = [ 'xmllint' ]
+let g:syntastic_xslt_checkers = [ 'xmllint' ]
+let g:syntastic_zsh_checkers = [ 'zsh', 'shellcheck' ]
+let g:syntastic_json_checkers = [ 'jsonlint' ]
+let g:syntastic_markdown_checkers = [ 'mdl' ]
+" let g:syntastic_vim_checkers = [ 'vint' ]
+nnoremap <leader>y :SyntasticCheck<CR>
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+            \ "mode" : "passive",
+            \ "active_filetypes" : [],
+            \ "passive_filetypes" : [] }
+" autocmd BufEnter * :SyntasticCheck
+
+
+" vim-nerdtree-tabs settings
+let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_focus_on_files = 1
+
+" delimitMate settings
+let g:delimitMate_matchpairs = '(:),[:],{:}'
+let g:delimitMate_expand_space = 1
+let g:delimitMate_expand_cr = 0
+let g:delimitMate_jump_expansion = 0
+
+" vim-unimpaired settings
+" vnoremap [x: Encode XML/HTML (visual & selection mode)
+" nnoremap [x: Encode XML/HTML (normal mode)
+" vnoremap ]x: Decode XML/HTML (visual & selection mode)
+" nnoremap ]x: Decode XML/HTML (normal mode)
+" vnoremap [y: Encode/Escape XML/HTML (visual & selection mode)
+" nnoremap [y: Encode/Escape XML/HTML (normal mode)
+" vnoremap ]y: Decode C String (visual & selection mode)
+" nnoremap ]y: Decode C String (normal mode)
+
+" vim-abolish settings
+" crs: coerce to snake_case
+" crm: coerce to MixedCase
+" crc: coerce to camelCase
+" cru: coerce to UPPER_CASE
+
+" " vim-expand-region
+" Conflicting with snipMate - must find another key bindings soon
+" vmap + <Plug>(expand_region_expand)
+" vmap - <Plug>(expand_region_shrink)
+
+" if has( 'clipboard' ) || has( 'xterm_clipboard' )
+"    " neoyank.vim settings
+"    nnoremap <leader>p :silent! Unite -prompt=Hist(dy)>\ \  history/yank -start-insert -buffer-name=Yank\ History<CR>
+"    xnoremap <silent> p "_dP
+"    " nnoremap yy yy:call neoyank#update()<CR>
+"    " nnoremap dd dd:call neoyank#update()<CR>
+"    " xnoremap y y<C-c>:call neoyank#update()<CR>
+"    " xnoremap d d<C-c>:call neoyank#update()<CR>
+"    let g:neoyank#limit = 1000000
+"    let g:neoyank#length = 10000000
+"    let g:neoyank#file = $HOME . "/.vim/cache/neoyank/yank_history.txt"
+" endif
+
+" " neoyank.vim settings
+" autocmd TextYankPost,TextChanged,VimLeavePre,WinEnter,BufWinEnter,CursorMoved,FocusGained,FocusLost * :silent! call neoyank#_append()
+
+" vim-hopping settings
+" let g:hopping#keymapping = {
+"             \	"\<C-n>" : "<Over>(hopping-next)",
+"             \	"\<C-p>" : "<Over>(hopping-prev)",
+"             \	"\<C-k>" : "<Over>(scroll-u)",
+"             \	"\<C-j>" : "<Over>(scroll-d)", }
+" let g:hopping#prompt = "Filter:> "
+" command! -bang -nargs=* FZFBLines call fzf#vim#buffer_lines(<q-args>, {'options': '--reverse'}, <bang>0)
+" command! -bang -nargs=* FZFLines call fzf#vim#lines(<q-args>, {'options': '--reverse'}, <bang>0)
+" command! -bang -nargs=* FZFBTags  call fzf#vim#buffer_tags(<q-args>, {'options': '--reverse'}, <bang>0)
+" nnoremap <leader><localleader>/ :FzfBLines<CR>
+" nnoremap <leader><leader>/ :FzfLines<CR>
+
+" vim-foldfocus settings
+" nnoremap <localleader>fh :call FoldFocus('vnew')<CR>
+" nnoremap <localleader>fv :call FoldFocus('new')<CR>
+" nnoremap <localleader>ft :call FoldFocus('tabedit')<CR>
+
+" vim-exchange settings
+let g:exchange_indent = '=='
+" cx : On first use, define the first {motion} to exchange.
+"      ON second use, define the second {motion} AND perform exchange.
+"      => {motion} here are text objects
+"      => cxiw : Exchange 2 words
+" cxx : Like cx, but use the current line
+" X : Like cx, but for visual mode
+" cxc : Clear any {motion} pending for exchange
+
+
+    " id3.vim settings
+    autocmd BufRead *.mp3 set filetype=mp3
+
+" vim-argumentative settings
+" <, and >, : Shifting arguments
+" [, and ], : Moving between argument boundaries
+" => Extra textobj:
+" a, : Select argument undercursor, including leading/trailing white space
+"      AND comma (,) separator
+" i, : Select argument undercursor only, without leading/trailing white space
+"      OR comma (,) separator
+let g:argumentative_no_mappings = 1
+nmap .[ <Plug>Argumentative_Prev
+nmap .] <Plug>Argumentative_Next
+xmap .[ <Plug>Argumentative_XPrev
+xmap .] <Plug>Argumentative_XNext
+nmap .< <Plug>Argumentative_MoveLeft
+nmap .> <Plug>Argumentative_MoveRight
+xmap i, <Plug>Argumentative_InnerTextObject
+xmap a, <Plug>Argumentative_OuterTextObject
+omap i, <Plug>Argumentative_OpPendingInnerTextObject
+omap a, <Plug>Argumentative_OpPendingOuterTextObject
+
+" NrrwRgn settings
+let g:nrrw_rgn_nohl = 1
+let g:nrrw_rgn_wdth = 40
+vnoremap <leader>e :NR<CR>
+
+" changesPlugin settings
+let g:changes_sign_text_utf8 = 0
+nnoremap <localleader>sh <Plug>(ChangesStageHunk)
+nnoremap <localleader>sr <Plug>(ChangesStageHunkRevert)
+" changesPlugin's highlights
+highlight ChangesSignTextAdd ctermbg=2 ctermfg=8
+highlight ChangesSignTextDel ctermbg=1 ctermfg=8
+highlight ChangesSignTextCh ctermbg=3 ctermfg=8
+
+" current-func-info.vim settings
+nnoremap <leader>? :echom cfi#get_func_name()<CR>
+
+" mulfiles.vim settings
+nnoremap ov :NeoMRUSplit<Space>
+nnoremap oh :NeoMRUVSplit<Space>
+nnoremap t :NeoMRUTab<Space>
+
+" " vim-ping-cursor
+" function! PingCursor()
+"    " highlight CursorColumn ctermbg=0 guibg=Grey40
+"    " highlight CursorLine ctermbg=0 guibg=Grey40
+"    set nocursorline nocursorcolumn
+"    redraw
+"    execute 'sleep 200m'
+"    set cursorline cursorcolumn
+" endfunction
+" nnoremap <CR> :redraw!<CR>:call PingCursor()<CR>
+
+" vim-cursorword settings
+" autocmd SourcePre * :highlight! CursorWord0 ctermbg=0 cterm=underline
+
+" vim-github-dashboard settings
+nnoremap <localleader>ga :GHActivity<Space>
+nnoremap <localleader>gd :GHDashboard<Space>
+
+" " limelight.vim settings
+" let g:limelight_conceal_ctermfg = 10
+" let g:limelight_paragraph_span = 1
+" nnoremap <leader>ll :Limelight!!<CR>
+
+" " vim-peekaboo settings
+" let g:peekaboo_window = 'botright 30new'
+
+" fzf.vim settings
+" nnoremap <leader><localleader>f :FzfFiles<Space>
+" nnoremap <leader><localleader>b :FzfBuffers<CR>
+" nnoremap <leader><localleader>L :FzfLines<CR>
+" nnoremap <leader><localleader>l :FzfBLines<CR>
+" nnoremap <leader><localleader>w :FzfWindows<CR>
+" nnoremap <leader><localleader>H :FzfHistory<CR>
+" nnoremap <leader><localleader>h/ :FzfHistory/<CR>
+" nnoremap <leader><localleader>h: :FzfHistory:<CR>
+" nnoremap <leader><localleader>c :FzfCommits<CR>
+" nnoremap <leader><localleader>C :FzfBCommits<CR>
+" let g:fzf_command_prefix = 'Fzf'
+" let g:fzf_layout = { 'down': '30' }
+
+" " fzf-mru.vim settings
+" let g:fzf_mru_relative = 0
+" let g:fzf_mru_case_sensitive = 0
+" let g:fzf_mru_max = 1000
+" let g:fzf_mru_exclude = ".*unite.*"
+" nnoremap <leader>o :FZFMru<CR>
+" function StartFZFMru()
+"     if !argc() && !exists('g:fzf_mru_disable_at_vimenter') && (&filetype != 'stardict')
+"         :FZFMru
+"         let t:startified = 1
+"     endif
+"
+"     " :NERDTree
+"     " wincmd w
+" endfunction
+" nnoremap <leader>b :FzfBuffers<CR> 
+" nnoremap <leader>m :FzfMaps<CR>
+" nnoremap <leader>/ :FzfHistory/<CR>
+" nnoremap <leader>; :FzfHistory:<CR>
+
+    " " fzf-mru.vim settings
+    " autocmd BufNewFile * :call StartFZFMru()
+
+" lazyList.vim settings
+nnoremap <leader>lo :LazyList<CR>
+nnoremap <leader>lc :LazyList ''<Left>
+vnoremap <leader>lo :LazyList<CR>
+vnoremap <leader>lc :LazyList ''<Left>
+
+" rename.vim settings
+nnoremap <localleader>mm :Rename!<Space>
+
+" vim-grex settings
+nnoremap ym :Grey<CR>
+nnoremap dm :Gred<CR>
+
+" vim-foldsearch settings
+let g:foldsearch_disable_mappings = 1
+let g:foldsearch_highlight = 0
+" nnoremap <localleader>fc :set foldmethod=manual<CR>:Fw<CR>
+" nnoremap <localleader>f/ :set foldmethod=manual<CR>:Fs<CR>
+" nnoremap <localleader>fs :set foldmethod=manual<CR>:Fp<Space>
+" nnoremap <localleader>fr :set foldmethod=manual<CR>:Fl<CR>
+" nnoremap <localleader>fe zE:set foldmethod=indent<CR>
+
+" " tabman.vim
+" let g:tabman_toggle = '<localleader>T'
+" let g:tabman_focus = '<localleader>t'
+" let g:tabman_width = 25
+" let g:tabman_side = 'right'
+" let g:tabman_specials = 0
+" let g:tabman_number = 0
+
+" scratch settings
+nnoremap <leader>sn :Sscratch<CR>
+nnoremap <leader>se :Scratch<CR>
+
+" " vim-startify settings
+" nnoremap <leader>st :Startify<CR>
+" let g:startify_relative_path = 0
+" let g:startify_files_number = 10
+" let g:startify_session_persistence = 0
+" let g:startify_session_autoload = 0
+" let g:startify_session_delete_buffers = 1
+" let g:startify_change_to_dir = 1
+" let g:startify_enable_special = 0
+" let g:startify_enable_unsafe = 0
+" let g:startify_custom_header = map(split(system('fortune | cowsay'), '\n'), '"   " . v:val') + ['']
+" let g:startify_custom_footer = [ '', "   Vim is charityware. Please read ':help uganda'.", '' ]
+"
+" function StartStartify()
+"     if !argc() && !exists('g:startify_disable_at_vimenter') && (&filetype != 'stardict')
+"         :FZFMru
+"         let t:startified = 1
+"     endif
+"
+"     " :NERDTree
+"     wincmd w
+" endfunction
+
+" smartpairs.vim settings
+" i*, ab : Select text & multiple lines inside *, where * is in <, >, ", ', `, (, ), [, ], {, } or t as tag
+" a*, ab : Select text & multiple lines inside *, where * is in <, >, ", ', `, (, ), [, ], {, } or t as tag
+" i<symbol> (i", i', i} for example) : Select text surrounded by <symbol>,
+"                                      not including <symbol>
+let g:smartpairs_key = 'q'
+let g:smartpairs_nextpairs_key = 'q'
+
+" vim-togglecursor settings
+let g:togglecursor_force = 'xterm'
+let g:togglecursor_default = 'blinking_block'
+
+" vim-signify settings
+let g:signify_vcs_list = [ 'git' ]
+" Change the following color to suit your theme
+
+" Gundo settings
+let g:gundo_width = 30
+let g:gundo_preview_bottom = 1
+let g:gundo_right = 1
+let t:gundo_is_opened = 0
+let g:gundo_prefer_python3 = 1
+
+" Gitv settings
+" nnoremap <localleader>gi :Gitv<CR>
+let g:Gitv_OpenHorizontal = 1
+let g:Gitv_DoNotMapCtrlKey = 1
+
+" vim-marching settings
+let g:marching_clang_command = 'clang'
+let g:marching#clang_command#options = { 'cpp' : '-std=c++17' }
+let g:marching_include_paths = []
+let g:marching_enable_neocomplete = 1
+
+" " jedi-vim settings
+" let g:jedi#show_call_signatures = 0
+" let g:jedi#goto_assignments_command = ""
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#documentation_command = "<localleader>mc"
+" let g:jedi#usages_command = ""
+" let g:jedi#completions_command = ""
+" let g:jedi#rename_command = ""
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#smart_auto_mappings = 0
+" let g:jedi#auto_vim_configuration = 0
+
+" PHP-CodeSniffer
+let g:syntastic_phpcs_conf=' --standard=DrupalCodingStandard --extensions=php,module,inc,install,test,profile,theme'
+
+" autochmodx.vim
+let g:autochmodx_no_BufWritePost_autocmd = 1
+let g:autochmodx_no_CursorHold_autocmd = 1
+nnoremap <leader>x :AutoChmodRun<CR>
+
+" vim-airline settings
+let g:airline_powerline_fonts = 1
+
+" if ( v:version > 704 )
+    " let &rtp.=',/usr/lib/python' . PythonExactVersion() . '/site-packages/powerline/bindings/vim/'
+    " let &rtp.=',/usr/local/lib/python' . PythonExactVersion() . '/site-packages/powerline/bindings/vim/'
+    " let &rtp.=',' . $HOME .'/Library/Python/' . PythonExactVersion() . '/lib/python/site-packages/powerline/bindings/vim/'
+" endif
+let g:airline_powerline_fonts = 1
+
+" powerline settings
+if has("python3")
+    let g:powerline_pycmd="py3"
+elseif has("python")
+endif
+
+" vim-signature settings
+let g:SignatureMap = { 'Leader' : 'm', 'ToggleMarkAtLine' : '\\', }
+let g:SignatureIncludeMarks = 'abcdefgikmnopqrstuwxyABCDEFGHIJKLMNOPQRSTUVWXYZ'
+" Enable omni completion.
+" if has('lua')
+"     autocmd FileType java :let g:loaded_neocomplete = 1
+" else
+"     autocmd FileType java :let g:loaded_neocomplcache = 1
+" end
+
+" " neocomplete.vim settings & neocomplcache settings
+" "" Disable AutoComplPop.
+" let g:acp_enableAtStartup = 0
+"
+" function EnableAndComplete()
+"     if has('lua') && (!exists('neocomplete#is_enabled()') || !neocomplete#is_enabled())
+"         NeoCompleteEnable
+"         return neocomplete#start_manual_complete()
+"     elseif !has('lua') && (!exists('neocomplcache#is_enabled()') || !neocomplcache#is_enabled())
+"         NeoComplCacheEnable
+"         return neocomplcache#start_manual_complete()
+"     endif
+" endfunction
+"
+" if has("unix")
+"     let s:uname = system("uname -s")
+"     if s:uname == "Darwin"
+"         inoremap <expr><C-@> pumvisible() ? "\<C-n>" : EnableAndComplete()
+"     else
+"         inoremap <expr><C-Backspace> pumvisible() ? "\<C-n>" : EnableAndComplete()
+"     endif
+" endif
+" inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+" inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+" inoremap <expr><C-r> "\<C-w>"
+" inoremap <expr><C-u> "\<C-c>0Di"
+" if has('lua')
+"     " neocomplete.vim settings
+"     " Use neocomplete
+"     let g:neocomplete#enable_at_startup = 0
+"     let g:neocomplete#data_directory = $HOME . "/.vim/cache/neocomplete"
+"     " Use smartcase.
+"     let g:neocomplete#enable_ignore_case = 1
+"     let g:neocomplete#enable_smart_case = 0
+"     " Set minimum syntax keyword length.
+"     let g:neocomplete#min_keyword_length = 0
+"     let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+"
+"     " Define dictionary.
+"     let g:neocomplete#sources#dictionary#dictionaries = {
+"                 \ 'default' : '',
+"                 \ 'vimshell' : $HOME.'/.vimshell_hist',
+"                 \ 'scheme' : $HOME.'/.gosh_completions'
+"                 \ }
+"
+"     " Define keyword.
+"     if !exists('g:neocomplete#keyword_patterns')
+"         let g:neocomplete#keyword_patterns = {}
+"     endif
+"     let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+"
+"     let g:neocomplete#enable_auto_select = 1
+"     let g:neocomplete#disable_auto_complete = 1
+"
+"     " Enable heavy omni completion.
+"     if !exists('g:neocomplete#force_omni_input_patterns')
+"         let g:neocomplete#force_omni_input_patterns = {}
+"     endif
+"     let g:neocomplete#force_omni_input_patterns.c =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)'
+"     let g:neocomplete#force_omni_input_patterns.cpp =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplete#force_omni_input_patterns.objc =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplete#force_omni_input_patterns.objcpp =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplete#force_omni_input_patterns.java = '\k\.\k*'
+"     let g:neocomplete#force_omni_input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"     let g:neocomplete#force_omni_input_patterns.python =
+"                 \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+"
+"     " For perlomni.vim setting.
+"     " https://github.com/c9s/perlomni.vim
+"     let g:neocomplete#force_omni_input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+"
+" else
+"     " neocomplcache.vim settings
+"     " Use neocomplcache.
+"     let g:neocomplcache_enable_at_startup = 0
+"     let g:neocomplcache_temporary_dir = $HOME . "/.vim/cache/neocomplcache"
+"     " Use smartcase.
+"     let g:neocomplcache_enable_ignore_case = 1
+"     let g:neocomplcache_enable_smart_case = 0
+"     " Set minimum syntax keyword length.
+"     let g:neocomplcache_min_syntax_length = 0
+"     let g:neocomplete#min_keyword_length = 0
+"     let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+"
+"     " Define dictionary.
+"     let g:neocomplcache_dictionary_filetype_lists = {
+"                 \ 'default' : '',
+"                 \ 'vimshell' : $HOME.'/.vimshell_hist',
+"                 \ 'scheme' : $HOME.'/.gosh_completions'
+"                 \ }
+"
+"     " Define keyword.
+"     if !exists('g:neocomplcache_keyword_patterns')
+"         let g:neocomplcache_keyword_patterns = {}
+"     endif
+"     let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+"
+"     let g:neocomplcache_enable_auto_select = 1
+"     let g:neocomplcache_disable_auto_complete = 1
+"
+"     " Enable heavy omni completion.
+"     if !exists('g:neocomplcache_force_omni_patterns')
+"         let g:neocomplcache_force_omni_patterns = {}
+"     endif
+"     let g:neocomplcache_force_overwrite_completefunc = 1
+"     let g:neocomplcache_force_omni_patterns.c =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)'
+"     let g:neocomplcache_force_omni_patterns.cpp =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplcache_force_omni_patterns.objc =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplcache_force_omni_patterns.objcpp =
+"                 \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"     let g:neocomplcache_force_omni_patterns.java = '\k\.\k*'
+"     let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"     let g:neocomplcache_force_omni_patterns.python =
+"                 \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+"
+"     " For perlomni.vim setting.
+"     " https://github.com/c9s/perlomni.vim
+"     let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" endif
+if
+
+    " googlesuggest-complete-vim settings
+    " setlocal completefunc=googlesuggest#Complete
+
+" UltiSnips settings
+let g:UltiSnipsExpandTrigger='<Tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:UltiSnipsSnippetDirectories=[ "~/.vim/bundle/vim-snippets/UltiSnips" ]
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit='vertical'
