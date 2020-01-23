@@ -100,7 +100,7 @@ uninstall ~/.Xresources
 uninstall ~/.zshrc
 
 echo "$(tput setaf 10)All links have been removed$(tput sgr 0)"
-echo "$(tput setaf 10)All paths have been removed$(tput sgr 0)"
+# echo "$(tput setaf 10)All paths have been removed$(tput sgr 0)"
 
 echo "Installing submodules [git submodule update --init --recursive]"
 command git submodule update --init --recursive 
