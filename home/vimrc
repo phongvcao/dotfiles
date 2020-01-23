@@ -1581,7 +1581,7 @@ endif
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_default_mapping = 0
-let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree' ]
+let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar' ]
 
 " Solarized Dark settings
 syntax enable
@@ -1682,6 +1682,9 @@ xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
 nnoremap gb :b<Space>
 
 " neomru.vim settings
+nnoremap ov :NeoMRUSplit<Space>
+nnoremap oh :NeoMRUVSplit<Space>
+nnoremap t :NeoMRUTab<Space>
 let g:neomru#file_mru_path = $HOME . "/.vim/cache/neomru/file"
 let g:neomru#directory_mru_path = $HOME . "/.vim/cache/neomru/directory"
 nnoremap O :NeoMRU<CR>
@@ -2074,8 +2077,8 @@ nnoremap mjj :BookmarkMoveDown<CR>
 nnoremap mg :BookmarkMoveToLine<CR>
 
 " calendar.vim settings
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
+let g:calendar_google_calendar = 0
+let g:calendar_google_task = 0
 "
 " vim-line settings
 " v_ : visually selects all the text in a line, except leading & trailing whitespaces

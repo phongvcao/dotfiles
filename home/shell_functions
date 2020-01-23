@@ -1185,18 +1185,42 @@ fi
 
 function year() {
 if [[ -n $1 ]]; then
-    cal "$1" --monday --color=always
+    command vim -c "Calendar -first_day=monday -view=year $1"
 else
-    cal "$(date +%Y)" --monday --color=always
+    command vim -c "Calendar -first_day=monday -view=year"
 fi
 }
 
 
 function month() {
 if [[ -n $1 ]]; then
-    cal "$1" --monday --color=always
+    command vim -c "Calendar -first_day=monday -view=month $1"
 else
-    cal --three --monday --color=always
+    command vim -c "Calendar -first_day=monday -view=month"
+fi
+}
+
+function week() {
+if [[ -n $1 ]]; then
+    command vim -c "Calendar -first_day=monday -view=week $1"
+else
+    command vim -c "Calendar -first_day=monday -view=week"
+fi
+}
+
+function day() {
+if [[ -n $1 ]]; then
+    command vim -c "Calendar -first_day=monday -view=clock $1"
+else
+    command vim -c "Calendar -first_day=monday -view=clock"
+fi
+}
+
+function calendar() {
+if [[ -n $1 ]]; then
+    command vim -c "Calendar -first_day=monday $1"
+else
+    command vim -c "Calendar -first_day=monday"
 fi
 }
 

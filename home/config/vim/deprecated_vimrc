@@ -329,9 +329,6 @@ highlight ChangesSignTextCh ctermbg=3 ctermfg=8
 nnoremap <leader>? :echom cfi#get_func_name()<CR>
 
 " mulfiles.vim settings
-nnoremap ov :NeoMRUSplit<Space>
-nnoremap oh :NeoMRUVSplit<Space>
-nnoremap t :NeoMRUTab<Space>
 
 " " vim-ping-cursor
 " function! PingCursor()

@@ -100,6 +100,7 @@ alias "tmuxredraw"="tmuxattach"
 alias "fixchar"="tput sgr0"
 alias "zip"="command zip --symlinks -r"
 alias "abt"="about"
+alias "cal"="calendar"
 
 # Single-letter aliases for commonly-used command
 alias "c"="cat"
