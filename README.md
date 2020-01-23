@@ -4,7 +4,7 @@ My personal configurations for Linux workstations
 
 ### Install
 
-First, clone the repository to `~/.dotfiles`, then
+First, clone the repository to your computer under `~/.dotfiles` folder, then
 
 ```bash
 cd ~/.dotfiles # replace with the path to your dotfiles
@@ -17,3 +17,17 @@ cd ~/.dotfiles # replace with the path to your dotfiles
 cd ~/.dotfiles # replace with the path to your dotfiles
 ./uninstall
 ```
+
+### License
+
+```bash
+cd ~/.dotfiles # replace with the path to your dotfiles
+./uninstall
+```
+
+## License
+
+Released under the MIT License. See
+[LICENSE.md][license] for details.
+
+[license]: LICENSE.md
