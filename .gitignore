@@ -1,5 +1,6 @@
 backup
 backup/*
+.ccls-cache
 config/cmus/command-history
 config/cmus/search-history
 config/cmus/cache
