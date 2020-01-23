@@ -20,6 +20,6 @@ cd ~/.dotfiles # replace with the path to your dotfiles
 
 ## License
 
-Released under MIT License. See [LICENSE.md][license] for details.
+Copyright (c) 2019 Phong V. Cao. Released under MIT License. See [LICENSE.md][license] for details.
 
 [license]: LICENSE.md
