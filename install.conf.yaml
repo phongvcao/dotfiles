@@ -97,9 +97,5 @@
     ~/.Xresources: home/Xresources
     ~/.zshrc: home/zshrc
 
-- create:
-    - ~/downloads
-    - ~/.vim/undo-history
-
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
