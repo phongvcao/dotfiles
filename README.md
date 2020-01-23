@@ -7,14 +7,14 @@ My personal configurations for Linux workstations
 First, clone the repository to your computer under `~/.dotfiles` folder, then
 
 ```bash
-cd ~/.dotfiles # replace with the path to your dotfiles
+cd ~/.dotfiles
 ./install
 ```
 
 ### Uninstall
 
 ```bash
-cd ~/.dotfiles # replace with the path to your dotfiles
+cd ~/.dotfiles
 ./uninstall
 ```
 
