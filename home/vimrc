@@ -564,11 +564,6 @@ vnoremap <Esc> <Esc>
 snoremap <Esc> <Esc>
 xnoremap <Esc> <Esc>
 
-nnoremap jk <Esc>
-nnoremap Jk <Esc>
-nnoremap jK <Esc>
-nnoremap JK <Esc>
-
 inoremap jk <Esc>l
 inoremap Jk <Esc>l
 inoremap jK <Esc>l
