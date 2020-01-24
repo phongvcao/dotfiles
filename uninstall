@@ -60,6 +60,7 @@ uninstall ~/.config/tagged
 uninstall ~/.config/Trolltech.conf
 uninstall ~/.config/user-dirs.dirs
 uninstall ~/.config/user-dirs.locale
+
 uninstall ~/.gdbinit.d
 uninstall ~/.grc
 uninstall ~/.IdeaIC13
@@ -85,7 +86,6 @@ uninstall ~/.shell_commands
 uninstall ~/.shell_functions
 uninstall ~/.shell_init
 uninstall ~/.shell_variables
-uninstall ~/.shell_install
 uninstall ~/.tigrc
 uninstall ~/.tmux.conf
 # uninstall ~/.tmux_old.conf
