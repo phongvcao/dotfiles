@@ -866,12 +866,14 @@ function vim() {
                 # cd "$1"
                 # fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command vim "${fzfResult}"
                 # cd "${CURDIR}"
-                command vim -c "NeoMRURec $@"
+                # command vim -c "NeoMRURec $@"
+                command vim
             else
                 command vim $@
             fi
         else
-            command vim -c "NeoMRU"
+            # command vim -c "NeoMRU"
+            command vim
         fi
     fi
 }
