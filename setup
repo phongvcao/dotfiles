@@ -1,7 +1,11 @@
 #!/usr/bin/env zsh
 if [[ "$(uname)" =~ "Darwin" ]]; then
-    if [ -z "$(command -v ccls)" ]; then
+    if [ -z "$(command -v brew)" ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+    if [ -z "$(command -v ccls)" ]; then
+        command sudo chown -R "${whoami}":admin /usr/local/bin /usr/local/etc /usr/local/sbin
+        command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin
         brew install tmuxinator ccls mosh coreutils binutils diffutils ed findutils \
             gawk watch wdiff gpatch rsync less openssh ctags go node llvm neofetch \
             zsh git tmux vim
