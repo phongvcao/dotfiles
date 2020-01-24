@@ -7,6 +7,9 @@
 
 - clean: ['~']
 
+- create:
+    - ~/.local/share/Trash/files
+
 - link:
     ~/.config/autostart: home/config/autostart
     ~/.config/bleachbit: home/config/bleachbit
@@ -96,6 +99,7 @@
     ~/.xinitrc: home/xinitrc
     ~/.Xresources: home/Xresources
     ~/.zshrc: home/zshrc
+    ~/.local/share/Trash/files: ~/.Trash
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
