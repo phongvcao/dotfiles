@@ -8,8 +8,7 @@ First, clone the repository to your computer under `~/.dotfiles` folder, then
 
 ```bash
 cd ~/.dotfiles
-./setup
-./install
+./setup && ./install
 ```
 
 ### Uninstall
