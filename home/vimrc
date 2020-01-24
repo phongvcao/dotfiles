@@ -327,15 +327,11 @@ Plug 'jelera/vim-javascript-syntax', {
 Plug 'digitaltoad/vim-jade'
 Plug 'othree/javascript-libraries-syntax.vim', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
-Plug 'ahayman/vim-nodejs-complete', {
-            \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'maksimr/vim-jsbeautify', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'beautify-web/js-beautify', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'elzr/vim-json', {
-            \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
-Plug 'pangloss/vim-javascript', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'heavenshell/vim-jsdoc', {
             \ 'on' : 'JsDoc' }

@@ -1,0 +1,92 @@
+#!/usr/bin/env zsh
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew install tmuxinator ccls mosh coreutils binutils diffutils ed findutils \
+        gawk watch wdiff gpatch rsync less openssh ctags go node llvm neofetch \
+        zsh git tmux vim
+else
+    sudo snap install ccls --classic
+    sudo apt-get install tmuxinator zsh git mosh neofetch ctags go nodejs npm \
+        vim-gtk3 tmux llvm less openssh-server coreutils binutils diffutils ed \
+        findutils gawk watch wdiff gpatch rsync
+fi
+
+cd "${HOME}"
+
+#
+# Install autojump
+#
+echo
+echo "Installing autojump"
+command git clone git://github.com/wting/autojump.git
+cd autojump
+./install.py
+
+#
+# Install pip3
+#
+echo
+echo "Installing pip3"
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py
+
+#
+# Install ranger
+#
+echo
+echo "Installing ranger"
+command sudo python3 -m pip install ranger-fm
+
+#
+# Install flake8
+#
+echo
+echo "Installing flake8"
+command sudo python3 -m pip install flake8
+
+#
+# Install jedi
+#
+echo
+echo "Installing jedi"
+command sudo python3 -m pip install jedi
+
+#
+# Install eslint
+#
+echo
+echo "Installing eslint"
+npm install eslint --save-dev
+# ./node_modules/.bin/eslint --init
+
+#
+# Install tsserver
+#
+echo
+echo "Installing tsserver"
+npm install typescript
+
+#
+# Install oh-my-zsh
+#
+echo
+echo "Installing oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+#
+# Clean up
+#
+echo
+echo "Cleaning up autojump"
+if [[ -d "${HOME}/autojump" ]]; then
+    command rm -rf "${HOME}/autojump"
+fi
+
+echo
+echo "Cleaning up get-pip.py"
+if [[ -f "${HOME}/get-pip.py" ]]; then
+    command rm -rf "${HOME}/get-pip.py"
+fi
+
+echo
+echo "==> Successfully executed all tasks"

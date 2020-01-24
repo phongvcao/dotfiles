@@ -76,13 +76,6 @@ elif [[ -f "${HOME}"/.autojump/share/autojump/autojump.bash ]]; then
     source "${HOME}"/.autojump/share/autojump/autojump.bash
 fi
 
-if [ -z "$(command -v autojump)" ]; then
-   cd "${HOME}"
-   command git clone git://github.com/wting/autojump.git
-   cd autojump
-   ./install.py
-fi
-
 # grc (Generic Colorizer) configuration.
 if [[ -f "${HOME}/.grc/grc.bashrc" ]]; then
     source "${HOME}/.grc/grc.bashrc"
