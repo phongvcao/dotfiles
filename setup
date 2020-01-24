@@ -103,17 +103,17 @@ fi
 if [ -z "$(command -v eslint)" ]; then
     echo
     echo "Installing eslint"
-    npm install -g eslint
+    sudo npm install -g eslint
     # ./node_modules/.bin/eslint --init
 fi
 
 #
-# Install tsserver
+# Install typescript / tsserver
 #
 if [ -z "$(command -v tsserver)" ]; then
     echo
-    echo "Installing tsserver"
-    npm install -g typescript
+    echo "Installing typescript / tsserver"
+    sudo npm install -g typescript
 fi
 
 #
