@@ -22,6 +22,34 @@ fi
 cd "${HOME}"
 
 #
+# Install dircolors-solarized
+#
+if [[ ! -d "${HOME}/.dircolors/" ]]; then
+    echo
+    echo "Installing dircolors-solarized"
+    curl -fLo ${HOME}/.dircolors/dircolors.ansi-dark --create-dirs \
+        https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark
+    if [[ -f $HOME/.dircolors/dircolors.ansi-dark ]]; then
+        eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
+    fi
+fi
+
+#
+# Install powerline-fonts
+#
+if [[ ! -d "${HOME}/.local/share/fonts/" ]]; then
+    curl -fLo ${HOME}/.local/share/fonts/DejaVu_Sans_Mono_for_Powerline.ttf --create-dirs \
+        https://github.com/powerline/fonts/raw/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20for%20Powerline.ttf
+    curl -fLo ${HOME}/.local/share/fonts/DejaVu_Sans_Mono_Oblique_for_Powerline.ttf --create-dirs \
+        https://github.com/powerline/fonts/raw/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Oblique%20for%20Powerline.ttf
+    curl -fLo ${HOME}/.local/share/fonts/DejaVu_Sans_Mono_Bold_for_Powerline.ttf --create-dirs \
+        https://github.com/powerline/fonts/raw/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Bold%20for%20Powerline.ttf
+    curl -fLo ${HOME}/.local/share/fonts/DejaVu_Sans_Mono_Bold_Oblique_for_Powerline.ttf --create-dirs \
+        https://github.com/powerline/fonts/raw/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Bold%20Oblique%20for%20Powerline.ttf
+    fc-cache -f -v
+fi
+
+#
 # Install autojump
 #
 if [ -z "$(command -v autojump)" ]; then
