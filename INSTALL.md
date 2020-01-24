@@ -1,6 +1,6 @@
 ## Install
 
-First, clone the repository to `~/.dotfiles` folder on your computer, then
+First, clone this repository to `~/.dotfiles` folder on your computer, then
 
 ```bash
 cd ~/.dotfiles
