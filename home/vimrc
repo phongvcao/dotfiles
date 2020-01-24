@@ -469,7 +469,7 @@ endif
 let mapleader=','  " leader is commas
 let maplocalleader='.' " local leader is period
 let g:escapeChars=' \/.*$^~[]'
-set updatetime=200
+set updatetime=300
 set hidden
 set ignorecase
 set number
@@ -1555,6 +1555,14 @@ nnoremap <silent> <leader>D  :<C-u>CocList diagnostics<CR>
 if exists('g:custom_ale_linters')
     let g:ale_linters = g:custom_ale_linters
 endif
+let g:ale_virtualenv_dir_names = []
+let g:ale_cache_executable_check_failures = 1
+let g:ale_completion_delay = 300
+let g:ale_completion_max_suggestions = 0
+let g:ale_lint_delay = 300
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_update_tagstack = 0
+let g:ale_use_global_executables = 1
 
 " vim-go settings
 let g:go_def_mapping_enabled = 0
