@@ -83,6 +83,7 @@
     ~/.shell_functions: home/shell_functions
     ~/.shell_init: home/shell_init
     ~/.shell_variables: home/shell_variables
+    ~/.shell_install: home/shell_install
     ~/.tigrc: home/tigrc
     ~/.tmux.conf: home/tmux.conf
     # ~/.tmux_old.conf: home/tmux_old.conf

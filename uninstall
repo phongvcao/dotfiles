@@ -85,6 +85,7 @@ uninstall ~/.shell_commands
 uninstall ~/.shell_functions
 uninstall ~/.shell_init
 uninstall ~/.shell_variables
+uninstall ~/.shell_install
 uninstall ~/.tigrc
 uninstall ~/.tmux.conf
 # uninstall ~/.tmux_old.conf

@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+if [ -z "$(command -v autojump)" ]; then
+   cd "${HOME}"
+   command git clone git://github.com/wting/autojump.git
+   cd autojump
+   ./install.py
+fi

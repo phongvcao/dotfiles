@@ -172,11 +172,9 @@ elif [[ -f "${HOME}"/.autojump/share/autojump/autojump.zsh ]]; then
     source "${HOME}"/.autojump/share/autojump/autojump.zsh
 fi
 
-if [ -z "$(command -v autojump)" ]; then
-   cd "${HOME}"
-   command git clone git://github.com/wting/autojump.git
-   cd autojump
-   ./install.py
+# Source all variables definition
+if [[ -f ${HOME}/.shell_install ]]; then
+    source "${HOME}/.shell_install"
 fi
 
 # grc (Generic Colorizer) configuration.
