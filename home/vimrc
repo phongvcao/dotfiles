@@ -559,40 +559,40 @@ nnoremap <leader>P :hardcopy ><Space>
 " nnoremap <localleader>ff :set filetype=
 " inoremap <Esc> <nop>
 " vnoremap <Esc> <nop>
-inoremap <Esc> <Esc>:call multiple_cursors#quit()<CR>
-vnoremap <Esc> <Esc>:call multiple_cursors#quit()<CR>
-snoremap <Esc> <Esc>:call multiple_cursors#quit()<CR>
-xnoremap <Esc> <Esc>:call multiple_cursors#quit()<CR>
+inoremap <Esc> <Esc>
+vnoremap <Esc> <Esc>
+snoremap <Esc> <Esc>
+xnoremap <Esc> <Esc>
 
-nnoremap jk <Esc>:call multiple_cursors#quit()<CR>
-nnoremap Jk <Esc>:call multiple_cursors#quit()<CR>
-nnoremap jK <Esc>:call multiple_cursors#quit()<CR>
-nnoremap JK <Esc>:call multiple_cursors#quit()<CR>
+nnoremap jk <Esc>
+nnoremap Jk <Esc>
+nnoremap jK <Esc>
+nnoremap JK <Esc>
 
-inoremap jk <Esc>l:call multiple_cursors#quit()<CR>
-inoremap Jk <Esc>l:call multiple_cursors#quit()<CR>
-inoremap jK <Esc>l:call multiple_cursors#quit()<CR>
-inoremap JK <Esc>l:call multiple_cursors#quit()<CR>
+inoremap jk <Esc>l
+inoremap Jk <Esc>l
+inoremap jK <Esc>l
+inoremap JK <Esc>l
 
-vnoremap jk <Esc>l:call multiple_cursors#quit()<CR>
-vnoremap Jk <Esc>l:call multiple_cursors#quit()<CR>
-vnoremap jK <Esc>l:call multiple_cursors#quit()<CR>
-vnoremap JK <Esc>l:call multiple_cursors#quit()<CR>
+vnoremap jk <Esc>l
+vnoremap Jk <Esc>l
+vnoremap jK <Esc>l
+vnoremap JK <Esc>l
 
 cnoremap jk <C-c>
 cnoremap Jk <C-c>
 cnoremap jK <C-c>
 cnoremap JK <C-c>
 
-snoremap jk <C-c>:call multiple_cursors#quit()<CR>
-snoremap Jk <C-c>:call multiple_cursors#quit()<CR>
-snoremap jK <C-c>:call multiple_cursors#quit()<CR>
-snoremap JK <C-c>:call multiple_cursors#quit()<CR>
+snoremap jk <C-c>
+snoremap Jk <C-c>
+snoremap jK <C-c>
+snoremap JK <C-c>
 
-xnoremap jk <C-c>:call multiple_cursors#quit()<CR>
-xnoremap Jk <C-c>:call multiple_cursors#quit()<CR>
-xnoremap jK <C-c>:call multiple_cursors#quit()<CR>
-xnoremap JK <C-c>:call multiple_cursors#quit()<CR>
+xnoremap jk <C-c>
+xnoremap Jk <C-c>
+xnoremap jK <C-c>
+xnoremap JK <C-c>
 
 onoremap jk <C-c>
 onoremap Jk <C-c>
@@ -615,10 +615,10 @@ function! CloseUniteWindow()
 endfunction
 
 nnoremap <C-c> :call CloseUniteWindow()<CR>
-inoremap <C-c> <C-c>:call CloseUniteWindow()<CR>:call multiple_cursors#quit()<CR>
-vnoremap <C-c> <C-c>:call multiple_cursors#quit()<CR>
-snoremap <C-c> <C-c>:call multiple_cursors#quit()<CR>
-xnoremap <C-c> <C-c>:call multiple_cursors#quit()<CR>
+inoremap <C-c> <C-c>:call CloseUniteWindow()<CR>
+vnoremap <C-c> <C-c>
+snoremap <C-c> <C-c>
+xnoremap <C-c> <C-c>
 
 if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
     inoremap <expr><C-p> pumvisible() ? "\<C-p>" : '<C-r>+'
@@ -855,7 +855,7 @@ let g:multi_cursor_select_all_key      = 'g<C-g>'
 let g:multi_cursor_next_key            = '<C-n>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = 'jk'
+let g:multi_cursor_quit_key            = '<C-c>'
 let g:multi_cursor_exit_from_visual_mode = 1
 let g:multi_cursor_exit_from_insert_mode = 1
 
