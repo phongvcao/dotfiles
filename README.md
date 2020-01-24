@@ -1,6 +1,6 @@
 # dotfiles
 
-My personal configurations for Linux workstations
+My personal configurations for Mac & Ubuntu workstations
 
 ### Install
 
