@@ -2,7 +2,7 @@
 
 My personal configurations for Mac & Ubuntu workstations
 
-### Install
+## Install
 
 First, clone the repository to your computer under `~/.dotfiles` folder, then
 
@@ -11,7 +11,7 @@ cd ~/.dotfiles
 ./setup && ./install
 ```
 
-### Uninstall
+## Uninstall
 
 ```bash
 cd ~/.dotfiles
