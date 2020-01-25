@@ -514,8 +514,10 @@ set modelines=1
 " ( X11 / GUI must be running )
 if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
    set clipboard=unnamedplus,unnamed
+   nnoremap <localleader>y :%y+<CR>
 else
    set clipboard=
+   nnoremap <localleader>y :%y"<CR>
 endif
 set backspace=2
 set sidescroll=1
