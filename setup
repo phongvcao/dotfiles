@@ -7,19 +7,21 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         command sudo chown -R "${whoami}":admin /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
         command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
         brew install tmuxinator ccls mosh coreutils binutils diffutils ed findutils \
-            gawk watch wdiff gpatch rsync less openssh ctags go node llvm neofetch \
+            gawk watch wdiff patch rsync less openssh ctags go node llvm neofetch \
             zsh git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
-            screen wget bash emacs gdb gpatch m4 make nano file-formula python svn \
-            unzip cmake xclip docker
+            screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
+            cmake xclip docker curl gpatch htop
         brew cask install vagrant
     fi
 else
     if [ -z "$(command -v ccls)" ]; then
+	    sudo apt-get update -y; sudo apt-get upgrade -y; sudo apt-get dist-upgrade -y
         sudo apt-get install -y tmuxinator zsh git mosh neofetch ctags nodejs npm \
             vim-gtk3 tmux llvm less openssh-server coreutils binutils diffutils ed \
-            findutils gawk watch wdiff gpatch rsync indent sed tar grep gzip screen \
+            findutils gawk watch patch wdiff rsync indent sed tar grep gzip screen \
             wget bash emacs gdb patch m4 make nano python unzip cmake snapd \
-            ibus-unikey feh xclip vagrant shutter docker bleachbit gparted bleachbit
+            ibus-unikey feh xclip vagrant shutter docker bleachbit gparted bleachbit \
+	    curl htop
         sudo snap install ccls go --classic
     fi
 fi
