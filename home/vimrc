@@ -514,10 +514,8 @@ set modelines=1
 " ( X11 / GUI must be running )
 if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
    set clipboard=unnamedplus,unnamed
-   nnoremap <localleader>y :%y+<CR>
 else
    set clipboard=
-   nnoremap <localleader>y :%y"<CR>
 endif
 set backspace=2
 set sidescroll=1
@@ -591,6 +589,9 @@ onoremap jk <C-c>
 onoremap Jk <C-c>
 onoremap jK <C-c>
 onoremap JK <C-c>
+
+" Yank the whole file
+nnoremap ggyG ggyG
 
 function! CloseUniteWindow()
     execute ":normal! \<C-c>"
