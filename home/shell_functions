@@ -79,6 +79,12 @@ else
 fi
 }
 
+function br() {
+    command sudo chown -R $(whoami) /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
+    command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
+    eval "brew $@"
+}
+
 function gbgui() {
     cd "${HOME}/GunBot"
     chmod "${HOME}/GunBot/gunthy-gui-linux-x64"
