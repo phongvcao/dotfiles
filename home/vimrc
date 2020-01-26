@@ -1564,6 +1564,22 @@ let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_autosave = 0
 let g:go_template_autocreate = 0
+nnoremap GL :GoDebugStart<CR>
+nnoremap GT :GoDebugTest<CR>
+nnoremap GR :GoDebugRestart<CR>
+nnoremap GQ :GoDebugStop<CR>
+nnoremap GB :GoDebugBreakpoint<CR>
+nnoremap GC :GoDebugContinue<CR>
+nnoremap GN :GoDebugNext<CR>
+nnoremap GS :GoDebugStep<CR>
+nnoremap GO :GoDebugStepOut<CR>
+nnoremap GA :GoDebugSet<Space>
+nnoremap GP :GoDebugPrint<Space>
+let g:go_debug_windows = {
+            \ 'vars':       'leftabove 30vnew',
+            \ 'stack':      'leftabove 20new',
+            \ 'goroutines': 'botright 30new',
+            \ 'out':        'botright 10new', }
 
 " vim-external settings
 nmap <leader>ee <Plug>(external-editor)
