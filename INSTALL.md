@@ -1,15 +1,15 @@
 ## Install
 
-### Local
+### 1. Locally
 
 First, clone this repository to `~/.dotfiles` folder on your computer, then
 
 ```bash
 cd ~/.dotfiles
-bash ./setup && bash ./install && vim
+bash ./setup && bash ./install
 ```
 
-### Remote
+### 2. Remotely
 
 First, issue the following command on the remote machine:
 

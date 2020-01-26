@@ -4,7 +4,7 @@ My personal configurations for Mac & Ubuntu workstations
 
 ## Install
 
-### Local
+### 1. Locally
 
 First, clone this repository to `~/.dotfiles` folder on your computer, then
 
@@ -13,7 +13,7 @@ cd ~/.dotfiles
 bash ./setup && bash ./install
 ```
 
-### Remote
+### 2. Remotely
 
 First, issue the following command on the remote machine:
 
