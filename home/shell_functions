@@ -955,7 +955,7 @@ echo "";
 tput sgr0
 }
 
-function share() {
+function sshare() {
     if [[ -n "$2" ]]; then
         screen -d -m -S $1; screen -S $1 -X multiuser on; screen -S $1 -X acladd $2
     elif [[ -n "$1" ]]; then
@@ -963,6 +963,10 @@ function share() {
     else
         echo "error: command must be of the form share <session_name> <user_name>"
     fi
+}
+
+function sattach() {
+    screen -x "$1"
 }
 
 function tmuxstart() {
