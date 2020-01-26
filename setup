@@ -78,6 +78,7 @@ if [ -z "$(command -v pip3)" ]; then
     echo "Installing pip3"
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     python3 get-pip.py
+    python get-pip.py
 fi
 
 #
@@ -87,6 +88,7 @@ if [ -z "$(command -v ranger)" ]; then
     echo
     echo "Installing ranger"
     command sudo python3 -m pip install ranger-fm
+    command sudo python -m pip install ranger-fm
 fi
 
 #
@@ -96,6 +98,7 @@ if [ -z "$(command -v flake8)" ]; then
     echo
     echo "Installing flake8"
     command sudo python3 -m pip install flake8
+    command sudo python -m pip install flake8
 fi
 
 #
@@ -105,6 +108,7 @@ if [ -z "$(pip list | command grep -i jedi)" ]; then
     echo
     echo "Installing jedi"
     command sudo python3 -m pip install jedi
+    command sudo python -m pip install jedi
 fi
 
 #
