@@ -1368,7 +1368,7 @@ while [[ "$(pwd)" =~ ".*cmake-build-debug.*" ]]; do
 done
 }
 
-function debug() {
+function lldb() {
     local arg1="$1"
     if [[ -f ${arg1} ]]; then
         binary_file="${arg1}"
@@ -1385,6 +1385,7 @@ function debug() {
             fi
         fi
     fi
+
     lldb "${binary_file}"
 }
 

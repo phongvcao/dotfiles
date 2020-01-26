@@ -99,6 +99,15 @@ if [ -z "$(command -v flake8)" ]; then
 fi
 
 #
+# Install pudb
+#
+if [ -z "$(command -v pudb3)" ]; then
+    echo
+    echo "Installing pudb3"
+    command sudo python3 -m pip install pudb
+fi
+
+#
 # Install jedi
 #
 if [ -z "$(pip list | command grep -i jedi)" ]; then
