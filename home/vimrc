@@ -72,7 +72,6 @@ Plug 'chrisbra/BufTimer', {
             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " END: Shougo/unite.vim
 Plug 'vim-scripts/YankRing.vim'
-Plug 'idanarye/vim-vebugger'
 
 " BEGIN: neoclide/coc.nvim
 Plug 'neoclide/coc.nvim', {

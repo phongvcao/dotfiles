@@ -6,7 +6,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
     if [ -z "$(command -v ccls)" ]; then
         command sudo chown -R "${whoami}":admin /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
         command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
-        brew install tmuxinator ccls mosh coreutils binutils diffutils ed findutils \
+        brew install ccls mosh coreutils binutils diffutils ed findutils \
             gawk watch wdiff patch rsync less openssh ctags go node llvm neofetch \
             zsh git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
@@ -26,7 +26,6 @@ else
             ibus-unikey feh xclip vagrant shutter docker bleachbit gparted bleachbit \
 	        curl htop g++ python-pip python3-pip lldb clang
         sudo snap install ccls go --classic
-        sudo gem install tmuxinator
     fi
 fi
 
@@ -80,10 +79,6 @@ if [ -z "$(command -v pip3)" ]; then
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     python3 get-pip.py
 fi
-
-#
-# Install voltron
-#
 
 #
 # Install ranger

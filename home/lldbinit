@@ -6,3 +6,4 @@ command script import ~/.voltron/lldb_voltron.py
 command alias v voltron update
 command alias V voltron update
 voltron init
+gui
