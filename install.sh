@@ -10,4 +10,4 @@ rm -rf ${HOME}/.dotfiles
 git clone https://github.com/phongvcao/dotfiles.git ${HOME}/.dotfiles
 
 cd ${HOME}/.dotfiles
-./setup && install && vim
+./setup && ./install && vim
