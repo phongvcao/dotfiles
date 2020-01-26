@@ -61,6 +61,7 @@
     ~/.config/user-dirs.dirs: home/config/user-dirs.dirs
     ~/.config/user-dirs.locale: home/config/user-dirs.locale
     ~/.config/gdb: home/config/gdb
+    ~/.config/pudb/pudb.cfg: home/config/pudb/pudb.cfg
 
     ~/.gdbinit.d: home/gdbinit.d
     ~/.grc: home/grc
