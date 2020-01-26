@@ -1,6 +1,6 @@
 ## Install
 
-### 1. Locally
+### Locally
 
 First, clone this repository to `~/.dotfiles` folder on your computer, then
 
@@ -9,7 +9,7 @@ cd ~/.dotfiles
 bash ./setup && bash ./install
 ```
 
-### 2. Remotely
+### Remotely
 
 First, issue the following command on the remote machine:
 

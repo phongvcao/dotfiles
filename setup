@@ -113,7 +113,11 @@ fi
 if [ -z "$(command -v ansible)" ]; then
     echo
     echo "Installing ansible"
-    sudo npm install -g ansible
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        sudo npm install --prefix /usr/local/lib/node_modules/npm/ -g ansible
+    else
+        sudo npm install --prefix /usr/share/npm/ -g ansible
+    fi
 fi
 
 #

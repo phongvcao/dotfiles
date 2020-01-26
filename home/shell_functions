@@ -1360,12 +1360,32 @@ echo -ne "${calc_args}\n quit" | gcalccmd | sed 's:^> ::g'
 }
 
 function buildcmake() {
-cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' -B ./cmake-build-debug
+cmake -G 'CodeBlocks - Unix Makefiles' -B ./cmake-build-debug
 cd ./cmake-build-debug && make
 
 while [[ "$(pwd)" =~ ".*cmake-build-debug.*" ]]; do
     cd ..
 done
+}
+
+function debug() {
+    local arg1="$1"
+    if [[ -f ${arg1} ]]; then
+        binary_file="${arg1}"
+    else
+        if [[ -f "bin/${arg1}" ]]; then
+            binary_file="bin/${arg1}"
+        else
+            if [[ -f "build/${arg1}" ]]; then
+                binary_file="build/${arg1}"
+            else
+                if [[ -f "cmake-build-debug/${arg1}" ]]; then
+                    binary_file="cmake-build-debug/${arg1}"
+                fi
+            fi
+        fi
+    fi
+    lldb "${binary_file}"
 }
 
 function buildgdb() {

@@ -60,6 +60,7 @@
     ~/.config/Trolltech.conf: home/config/Trolltech.conf
     ~/.config/user-dirs.dirs: home/config/user-dirs.dirs
     ~/.config/user-dirs.locale: home/config/user-dirs.locale
+    ~/.config/gdb: home/config/gdb
 
     ~/.gdbinit.d: home/gdbinit.d
     ~/.grc: home/grc
