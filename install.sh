@@ -6,6 +6,7 @@ sudo adduser ${USER} admin
 
 sudo apt-get install -y git
 cd ${HOME}
+rm -rf ${HOME}/.dotfiles
 git clone https://github.com/phongvcao/dotfiles.git ${HOME}/.dotfiles
 
 cd ${HOME}/.dotfiles
