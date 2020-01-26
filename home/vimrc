@@ -592,6 +592,10 @@ onoremap JK <C-c>
 
 " Yank the whole file
 nnoremap ggyG ggyG
+nnoremap GG G
+vnoremap GG G
+xnoremap GG G
+snoremap GG G
 
 function! CloseUniteWindow()
     execute ":normal! \<C-c>"
@@ -1716,9 +1720,6 @@ let g:yankring_manual_clipboard_check = 1
 nnoremap <leader>p :silent! YRShow<CR>:setlocal wrap relativenumber number<CR>
 nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR>
 xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
-
-" vim-bufferline settings
-nnoremap gb :b<Space>
 
 " neomru.vim settings
 nnoremap ov :NeoMRUSplit<Space>

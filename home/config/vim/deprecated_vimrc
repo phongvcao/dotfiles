@@ -673,3 +673,6 @@ let g:UltiSnipsSnippetDirectories=[ "~/.vim/bundle/vim-snippets/UltiSnips" ]
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit='vertical'
+
+" vim-bufferline settings
+" nnoremap gb :b<Space>
