@@ -102,6 +102,8 @@ alias "zip"="command zip --symlinks -r"
 alias "ab"="about"
 alias "cal"="calendar"
 alias "codesign"="command codesign --entitlements ~/.config/gdb/gdb.xml -fs gdb-cert /usr/local/bin/gdb"
+alias "command_lldb"="command lldb"
+alias "pdb"="echo 'Remember to add \"import pdb; pdb.set_trace() to the python program\"'; command python3 "
 
 # Single-letter aliases for commonly-used command
 alias "c"="cat"

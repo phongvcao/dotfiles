@@ -102,6 +102,7 @@
     ~/.Xresources: home/Xresources
     ~/.zshrc: home/zshrc
     ~/.local/share/Trash/files: ~/.Trash
+    ~/.pdbrc.py: home/pdbrc.py
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

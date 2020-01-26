@@ -102,13 +102,11 @@ if [ -z "$(command -v flake8)" ]; then
 fi
 
 #
-# Install pudb
+# Install pdbpp
 #
-if [ -z "$(command -v pudb3)" ]; then
-    echo
-    echo "Installing pudb3"
-    command sudo python3 -m pip install pudb
-fi
+echo
+echo "Installing pdbpp"
+command sudo python3 -m pip install pdbpp
 
 #
 # Install jedi

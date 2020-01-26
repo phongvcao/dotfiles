@@ -1386,7 +1386,7 @@ function lldb() {
         fi
     fi
 
-    lldb "${binary_file}"
+    command lldb "${binary_file}"
 }
 
 function buildgdb() {
