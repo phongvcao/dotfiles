@@ -962,13 +962,13 @@ function share() {
 function tmuxstart() {
 unset TMPDIR
 
-if [[ ! "$TERM" =~ screen ]]; then
-    if [[ -f /usr/local/bin/tmux ]]; then
-        exec /usr/local/bin/tmux -2
-    elif [[ -f /usr/bin/tmux ]]; then
-        exec /usr/bin/tmux -2
-    fi
+# if [[ ! "$TERM" =~ screen ]]; then
+if [[ -f /usr/local/bin/tmux ]]; then
+    exec /usr/local/bin/tmux -2
+elif [[ -f /usr/bin/tmux ]]; then
+    exec /usr/bin/tmux -2
 fi
+# fi
 }
 
 function tmuxattach() {
