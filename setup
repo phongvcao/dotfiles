@@ -24,7 +24,7 @@ else
             findutils gawk watch patch wdiff rsync indent sed tar grep gzip screen \
             wget bash emacs gdb patch m4 make nano python unzip cmake snapd \
             ibus-unikey feh xclip vagrant shutter docker bleachbit gparted bleachbit \
-	        curl htop g++
+	        curl htop g++ python-pip python3-pip
         sudo snap install ccls go --classic
     fi
 fi
