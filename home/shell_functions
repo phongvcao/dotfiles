@@ -955,6 +955,10 @@ echo "";
 tput sgr0
 }
 
+function share() {
+    screen -d -m -S $1; screen -S $1 -X multiuser on; screen -S $1 -X acladd $2
+}
+
 function tmuxstart() {
 unset TMPDIR
 
@@ -999,6 +1003,26 @@ function lsmodg() {
 echo "$(lsmod | command grep -i $*)"
 }
 
+function sshp() {
+    _sshp "$@"
+}
+
+function _sshp() {
+    if [[ -n "$5" ]]; then
+        command_ssh_passwd "$1" "$2" -p "$3" -i "$4" "$5"
+    elif [[ -n "$4" ]]; then
+        command_ssh_passwd "$1" "$2" -p "$3" "$4"
+    elif [[ -n "$3" ]]; then
+        command_ssh_passwd "$1" "$2" "$3"
+    elif [[ -n "$2" ]]; then
+        command_ssh_passwd "$1" "$2"
+    elif [[ -n "$1" ]]; then
+        command_ssh_passwd "${USER}" "$1"
+    else
+        command_ssh_passwd 
+    fi
+}
+
 function ssh() {
 if [ -f /usr/bin/mosh ] || [ -f /usr/local/bin/mosh ]; then
     _mosh "$@"
@@ -1011,19 +1035,19 @@ fi
 }
 
 function _ssh() {
-if [[ -n "$5" ]]; then
-    command_ssh "$1" "$2" -p "$3" -i "$4" "$5"
-elif [[ -n "$4" ]]; then
-    command_ssh "$1" "$2" -p "$3" "$4"
-elif [[ -n "$3" ]]; then
-    command_ssh "$1" "$2" "$3"
-elif [[ -n "$2" ]]; then
-    command_ssh "$1" "$2"
-elif [[ -n "$1" ]]; then
-    command_ssh "${USER}" "$1"
-else
-    command_ssh
-fi
+    if [[ -n "$5" ]]; then
+        command_ssh "$1" "$2" -p "$3" -i "$4" "$5"
+    elif [[ -n "$4" ]]; then
+        command_ssh "$1" "$2" -p "$3" "$4"
+    elif [[ -n "$3" ]]; then
+        command_ssh "$1" "$2" "$3"
+    elif [[ -n "$2" ]]; then
+        command_ssh "$1" "$2"
+    elif [[ -n "$1" ]]; then
+        command_ssh "${USER}" "$1"
+    else
+        command_ssh
+    fi
 }
 
 function _mosh() {

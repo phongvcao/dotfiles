@@ -330,6 +330,7 @@ alias "command_grep"="command grep -E --color=always -T -s -n -H -I -C 5 --exclu
 alias "command_grep_stream_nocolor"="command grep -E --color=never -T -s -I --exclude-dir={.git,.svn}"
 alias "command_fgrep_stream"="command grep -F --color=always -T -s -I --exclude-dir={.git,.svn}"
 alias "command_fgrep"="command grep -F --color=always -T -s -n -H -I -C 5 --exclude-dir={.git,.svn}"
+alias "command_ssh_passwd"="command ssh -X -A -Y -o PreferredAuthentications=password -o PubkeyAuthentication=no -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l"
 alias "command_ssh"="command ssh -X -A -Y -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l"
 alias "command_mosh"="command mosh --ssh='ssh -X -A -Y -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
 alias "command_ag"="command ag --color-path '0;35' --color-match '1;31' --color-line-number '0;32' --nogroup --filename --color --silent --hidden --depth -1 --multiline"

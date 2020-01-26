@@ -345,7 +345,7 @@ Plug 'mattn/emmet-vim', {
             \ 'for' : [ 'css', 'html', 'xhtml', 'xml', 'jinja', 'php', 'jsp',
             \           'htmldjango' ] }
 " BEGIN: sukima/xmledit
-let g:xmleditPath = g:vimPath . '/bundle/xmledit/ftplugin/'
+let g:xmleditPath = g:vimPath . '/plugged/xmledit/ftplugin/'
 Plug 'sukima/xmledit', {
             \ 'do' : 'ln -s -f ' . g:xmleditPath . 'xml.vim ' . g:xmleditPath . 'html.vim; ' .
             \        'ln -s -f ' . g:xmleditPath . 'xml.vim ' . g:xmleditPath . 'xhtml.vim; ' .
@@ -1582,7 +1582,7 @@ map z? <Plug>(incsearch-easymotion-?)
 map zg/ <Plug>(incsearch-easymotion-stay)
 
 " vim-snipmate settings
-let &rtp.=',~/.vim/bundle/vim-snippets/snippets/'
+let &rtp.=',~/.vim/plugged/vim-snippets/snippets/'
 let g:snips_no_mappings = 1
 imap <Tab> <Plug>snipMateNextOrTrigger
 smap <Tab> <Plug>snipMateNextOrTrigger
