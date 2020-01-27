@@ -1,5 +1,5 @@
 dashboard -layout history source stack variables threads breakpoints
-dashboard source -style height 50
+dashboard source -style height 30
 dashboard variables -style compact False
 dashboard variables -style align True
 dashboard stack -style compact False
