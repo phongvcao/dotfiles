@@ -109,6 +109,10 @@ fi
 cd "${CURDIR}"
 }
 
+function manual() {
+    command vim -c "Tman $@"
+}
+
 function gitstatus() {
 if [[ -n $1 ]]; then
     CURDIR="${PWD}"

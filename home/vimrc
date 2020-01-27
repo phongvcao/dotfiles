@@ -281,7 +281,7 @@ Plug 'nacitar/a.vim', {
             \          'IHT', 'IHN' ],
             \ 'for' : [ 'cpp', 'c', 'objc', 'objcpp', 'coffee', 'cython' ] }
 Plug 'vim-utils/vim-man', {
-            \ 'on' : [ 'Man', 'Vman' ] }
+            \ 'on' : [ 'Man', 'Vman', 'Sman', 'Tman' ] }
 Plug 'octol/vim-cpp-enhanced-highlight', {
             \ 'for' : [ 'cpp', 'c' ] }
 
