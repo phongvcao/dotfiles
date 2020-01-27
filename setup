@@ -80,7 +80,8 @@ if [ -z "$(command -v pip3)" ]; then
     echo
     echo "Installing pip3"
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-    python3 get-pip.py
+    command sudo python3 get-pip.py
+    command sudo python2 get-pip.py
 fi
 
 #
@@ -90,6 +91,7 @@ if [ -z "$(command -v ranger)" ]; then
     echo
     echo "Installing ranger"
     command sudo python3 -m pip install ranger-fm
+    command sudo python2 -m pip install ranger-fm
 fi
 
 #
@@ -99,6 +101,7 @@ if [ -z "$(command -v flake8)" ]; then
     echo
     echo "Installing flake8"
     command sudo python3 -m pip install flake8
+    command sudo python2 -m pip install flake8
 fi
 
 #
@@ -109,6 +112,9 @@ echo "Installing pdbpp"
 command sudo python3 -m pip install pdbpp
 command sudo python3 -m pip uninstall --yes pdbpp
 command sudo python3 -m pip install git+https://github.com/pdbpp/pdbpp
+command sudo python2 -m pip install pdbpp
+command sudo python2 -m pip uninstall --yes pdbpp
+command sudo python2 -m pip install git+https://github.com/pdbpp/pdbpp
 
 #
 # Install jedi
@@ -117,7 +123,16 @@ if [ -z "$(pip list | command grep -i jedi)" ]; then
     echo
     echo "Installing jedi"
     command sudo python3 -m pip install jedi
+    command sudo python2 -m pip install jedi
 fi
+
+#
+# Install pygments
+#
+echo
+echo "Installing pygments"
+command sudo python3 -m pip install pygments
+command sudo python2 -m pip install pygments
 
 #
 # Install ansible

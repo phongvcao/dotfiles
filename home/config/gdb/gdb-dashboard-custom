@@ -6,6 +6,7 @@ dashboard stack -style compact False
 dashboard stack -style align True
 dashboard -style max_value_length 100
 dashboard -style value_truncation_string '...'
+dashboard -style syntax_highlighting 'solarized-dark'
 
 # Solarized Dark
 dashboard -style divider_fill_style_primary '0;34'
