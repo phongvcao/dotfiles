@@ -70,4 +70,5 @@ esac
 # Modify $GOPATH
 #
 export GOPATH="${HOME}/.go"
+export GOPATHORG="${HOME}/.go"
 export GO111MODULE="auto"
