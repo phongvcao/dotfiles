@@ -110,17 +110,31 @@ cd "${CURDIR}"
 }
 
 function gop() {
-    if [[ $1 == 'append' ]]; then
+    if [[ $1 == 'back' ]]; then
         export GOPATH=${GOPATH}:$(readlink -f $2)
-    elif [[ $1 == 'prepend' ]]; then
+    elif [[ $1 == 'front' ]]; then
         export GOPATH=$(readlink -f $2):${GOPATH}
     elif [[ $1 == 'reset' ]]; then
         export GOPATH=${GOPATHORG}
-    elif [[ $1 == 'show' ]]; then
-        echo "${GOPATH}"
     elif [[ -z $1 ]]; then
-        echo "Usage: go path [append|prepend] <path>"
-        echo "       go path [reset|show]"
+        echo
+        echo "\$GOPATH: ${GOPATH}"
+        echo
+        echo "Usage: gop [COMMAND] [PATH]"
+        echo
+        echo
+        echo "gop back [PATH]"
+        echo "    Push path to back of \$GOPATH"
+        echo
+        echo "gop front [PATH]"
+        echo "    Push path to front of \$GOPATH"
+        echo
+        echo "gop reset"
+        echo "    Reset \$GOPATH to original value"
+        echo
+        echo "gop"
+        echo "    Show \$GOPATH and command usage"
+        echo
     fi
 }
 
