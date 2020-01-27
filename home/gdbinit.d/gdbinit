@@ -1,0 +1,6 @@
+dashboard -layout history source stack variables threads breakpoints
+dashboard source -style height 50
+dashboard variables -style compact False
+dashboard variables -style align True
+dashboard stack -style compact False
+dashboard stack -style align True

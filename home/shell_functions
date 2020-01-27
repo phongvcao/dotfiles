@@ -1360,12 +1360,17 @@ echo -ne "${calc_args}\n quit" | gcalccmd | sed 's:^> ::g'
 }
 
 function buildcmake() {
-cmake -G 'CodeBlocks - Unix Makefiles' -B ./cmake-build-debug
-cd ./cmake-build-debug && make
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        CC="$(which gcc-9)" CXX="$(which g++-9)" cmake -DCMAKE_C_COMPILER="$(which gcc-9)" -DCMAKE_CXX_COMPILER="$(which g++-9)" -DCMAKE_CXX_FLAGS="-fno-inline" -DCMAKE_BUILD_TYPE=debug -G 'CodeBlocks - Unix Makefiles' -B ./cmake-build-debug
+    else
+        CC="$(which gcc)" CXX="$(which g++)" cmake -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_CXX_COMPILER="$(which g++)" -DCMAKE_CXX_FLAGS="-fno-inline" -DCMAKE_CC_FLAGS="-fno-inline" -DCMAKE_BUILD_TYPE=debug -G 'CodeBlocks - Unix Makefiles' -B ./cmake-build-debug
+    fi
 
-while [[ "$(pwd)" =~ ".*cmake-build-debug.*" ]]; do
-    cd ..
-done
+    cd ./cmake-build-debug && make
+
+    while [[ "$(pwd)" =~ ".*cmake-build-debug.*" ]]; do
+        cd ..
+    done
 }
 
 function lldb() {

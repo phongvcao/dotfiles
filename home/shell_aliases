@@ -352,7 +352,7 @@ alias "grc"="grc -es --colour=on"
 
 # Mac OS X specific
 if [[ "$(uname)" =~ "Darwin" ]]; then
-    alias "gcc"="$(which gcc-5)"
+    alias "gcc"="$(which gcc)"
     alias "python"="$(which python3)"
     alias "python2"="$(whereis python)"
     alias "command_ls"="${USR_DIR}/bin/gls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color"
