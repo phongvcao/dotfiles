@@ -2,3 +2,5 @@ set startup-with-shell off
 
 source ~/.config/gdb/gdb-dashboard
 source ~/.config/gdb/gdbinit-dashboard
+
+alias clr = dashboard -output
