@@ -1373,7 +1373,7 @@ function buildcmake() {
     done
 }
 
-function lldb() {
+function gdb() {
     local arg1="$1"
     if [[ -f ${arg1} ]]; then
         binary_file="${arg1}"
@@ -1391,7 +1391,7 @@ function lldb() {
         fi
     fi
 
-    command lldb "${binary_file}"
+    command gdb "${binary_file}"
 }
 
 function buildgdb() {
