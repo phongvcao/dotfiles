@@ -109,11 +109,11 @@ fi
 cd "${CURDIR}"
 }
 
-function help() {
+function man() {
     if [[ -n $2 ]]; then
-        command vim -c "Tman $1 $2"
+        command vim -c "Tman $1 $2 | tabclose 1"
     else
-        command vim -c "Tman $1"
+        command vim -c "Tman $1 | tabclose 1"
     fi
 }
 
