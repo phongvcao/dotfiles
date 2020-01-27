@@ -109,7 +109,7 @@ fi
 cd "${CURDIR}"
 }
 
-function manual() {
+function help() {
     command vim -c "Tman $@"
 }
 

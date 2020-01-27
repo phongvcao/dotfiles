@@ -29,6 +29,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             fi
         fi
     fi
+    PATH_PREFIX="$(brew --prefix)/opt/man-db/libexec/bin:${PATH_PREFIX}"
 else
     if [[ -d "${HOME}"/.gem/ruby ]]; then
         ruby_version="$(ls ${HOME}/.gem/ruby | tail -n 1)"

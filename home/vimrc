@@ -2139,6 +2139,7 @@ nnoremap <localleader>my :Pydoc<Space>
 nnoremap <localleader>me :Perldoc<Space>
 
 " vim-man settings
+let g:vim_man_cmd = '$(which man)'
 let g:man_width = 81
 nnoremap <localleader>mv :Man 3<Space>
 nnoremap <localleader>mh :Vman 3<Space>
