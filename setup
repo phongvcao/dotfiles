@@ -107,6 +107,8 @@ fi
 echo
 echo "Installing pdbpp"
 command sudo python3 -m pip install pdbpp
+command sudo python3 -m pip uninstall --yes pdbpp
+command sudo python3 -m pip install git+https://github.com/pdbpp/pdbpp
 
 #
 # Install jedi
