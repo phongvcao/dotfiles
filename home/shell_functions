@@ -110,7 +110,11 @@ cd "${CURDIR}"
 }
 
 function help() {
-    command vim -c "Tman $@"
+    if [[ -n $2 ]]; then
+        command vim -c "Tman $1 $2"
+    else
+        command vim -c "Tman $1"
+    fi
 }
 
 function gitstatus() {
