@@ -112,10 +112,19 @@ cd "${CURDIR}"
 function gop() {
     if [[ $1 == 'back' ]]; then
         export GOPATH=${GOPATH}:$(readlink -f $2)
+        echo
+        echo "\$GOPATH: ${GOPATH}"
+        echo
     elif [[ $1 == 'front' ]]; then
         export GOPATH=$(readlink -f $2):${GOPATH}
+        echo
+        echo "\$GOPATH: ${GOPATH}"
+        echo
     elif [[ $1 == 'reset' ]]; then
         export GOPATH=${GOPATHORG}
+        echo
+        echo "\$GOPATH: ${GOPATH}"
+        echo
     elif [[ -z $1 ]]; then
         echo
         echo "\$GOPATH: ${GOPATH}"
