@@ -1437,7 +1437,13 @@ function gdb() {
         fi
     fi
 
-    command gdb "${binary_file}"
+    if [[ -f "${binary_file}" ]]; then
+        command gdb "${binary_file}"
+    else
+        echo
+        echo "Executable ${binary_file} not found!"
+        echo
+    fi
 }
 
 function buildgdb() {
