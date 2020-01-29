@@ -1441,7 +1441,7 @@ function gdb() {
         command gdb "${binary_file}"
     else
         echo
-        echo "Executable ${binary_file} not found!"
+        echo "Executable \"${arg1}\" not found!"
         echo
     fi
 }
