@@ -184,6 +184,8 @@ Plug 'vim-utils/vim-most-minimal-folds'
 Plug 'boucherm/ShowMotion'
 Plug 'junegunn/vim-easy-align', {
             \ 'on' : [ 'EasyAlign', 'LiveEasyAlign' ] }
+Plug 'junegunn/goyo.vim', {
+            \ 'on' : 'Goyo' }
 Plug 'KabbAmine/vCoolor.vim', {
             \ 'on' : [ 'VCoolor', 'VCoolIns', 'VCase' ] }
 Plug 'ntpeters/vim-better-whitespace', {
@@ -2202,6 +2204,19 @@ let g:colortuner_filepath = $HOME . '/.vim/.vim-colortuner'
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" goyo.vim settings
+nnoremap F :Goyo<CR>
+let g:goyo_linenr = 1
+let g:goyo_width = '30%'
+let g:goyo_height = '100%'
+function! s:goyo_enter()
+    echom
+endfunction
+function! s:goyo_leave()
+    call HighlightCurrentLineNum()
+    call SetHighlight()
+endfunction
+
 " csv.vim settings
 " if ! &diff
 "    let g:csv_autocmd_arrange = 1
@@ -2439,6 +2454,18 @@ function! SetHighlight()
         highlight ShowMotion_CharSearchGroup ctermbg=4 ctermfg=8
     endif
 
+    " lightline.vim settings
+    " highlight EndOfBuffer ctermfg=8 ctermbg=8
+
+    highlight NonText ctermfg=8 ctermbg=8
+    highlight WildMenu ctermfg=4 ctermbg=8
+    highlight StatusLine ctermfg=0 ctermbg=12
+    highlight Pmenu ctermfg=0 ctermbg=12
+    highlight PmenuSel ctermfg=2 ctermbg=0
+    highlight PmenuSbar ctermfg=0 ctermbg=0
+    highlight PmenuThumb ctermfg=2 ctermbg=0
+    redraw!
+
 endfunction
 
 function! IsI3Running()
@@ -2523,17 +2550,6 @@ augroup CustomAutoCmd
     " Auto-indent lines on file read & file save
     autocmd BufEnter * :execute 'silent! set modifiable'
 
-    " lightline.vim settings
-    " autocmd VimEnter * :highlight EndOfBuffer ctermfg=8 ctermbg=8
-    autocmd VimEnter * :highlight NonText ctermfg=8 ctermbg=8
-    autocmd VimEnter * :highlight WildMenu ctermfg=4 ctermbg=8
-    autocmd VimEnter * :highlight StatusLine ctermfg=0 ctermbg=12
-    autocmd VimEnter * :highlight Pmenu ctermfg=0 ctermbg=12
-    autocmd VimEnter * :highlight PmenuSel ctermfg=2 ctermbg=0
-    autocmd VimEnter * :highlight PmenuSbar ctermfg=0 ctermbg=0
-    autocmd VimEnter * :highlight PmenuThumb ctermfg=2 ctermbg=0
-    autocmd BufWinEnter * :redraw!
-
     " ParenMatch settings
     autocmd BufEnter * :highlight ParenMatch term=bold cterm=bold ctermfg=1 ctermbg=10 guibg=DarkCyan
     autocmd BufEnter * :syntax sync fromstart
@@ -2542,7 +2558,7 @@ augroup CustomAutoCmd
     autocmd User SearchHiOn AnzuUpdateSearchStatusOutput
     autocmd User SearchHiOff echo g:anzu_no_match_word
 
-    autocmd BufEnter * :call SetHighlight()
+    autocmd VimEnter,BufEnter,BufWinEnter * :call SetHighlight()
     autocmd BufEnter,BufRead * :call HighlightCurrentLineNum()
     autocmd CursorHold,CursorHoldI,BufEnter,FocusGained,FocusLost * :checktime
     autocmd BufEnter *.vrapperrc,*.vimperatorrc,*.ideavimrc set filetype=vim
@@ -2561,6 +2577,10 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight CocHintSign ctermbg=0 ctermfg=2 term=underline gui=underline
     autocmd FileType unite let b:coc_suggest_disable = 1
 
+    " goyo.vim settings
+    autocmd! User GoyoEnter nested call <SID>goyo_enter()
+    autocmd! User GoyoLeave nested call <SID>goyo_leave()
+    
     " MatchTagAlways
     autocmd BufEnter * :highlight MatchTag ctermfg=8 ctermbg=lightblue guifg=#002b36 guibg=lightblue
 
