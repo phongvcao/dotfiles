@@ -2215,6 +2215,8 @@ endfunction
 function! s:goyo_leave()
     call HighlightCurrentLineNum()
     call SetHighlight()
+    call HighlightVertSplit()
+    call HighlightEasyMotion()
 endfunction
 
 " csv.vim settings
@@ -2542,6 +2544,23 @@ function! HighlightCurrentLineNum()
     highlight CursorLineNr ctermfg=226 cterm=bold guifg=Yellow gui=bold
 endfunction
 
+function! HighlightVertSplit()
+    highlight VertSplit ctermbg=8 guibg=NONE ctermfg=11 guifg=#93a1a1 
+endfunction
+
+" vim-easymotion settings
+function! HighlightEasyMotion()
+    " Highlight color of easymotion is same as incsearch.vim
+    " since easymotion has a search for char mode by pressing
+    " <Space>/
+    highlight EasyMotionTarget ctermfg=9 ctermbg=none
+    highlight EasyMotionTarget2First ctermfg=9 ctermbg=none
+    highlight EasyMotionTarget2Second ctermfg=9 ctermbg=none
+    highlight EasyMotionMoveHL ctermfg=9 ctermbg=none
+    highlight EasyMotionIncSearch ctermfg=9 ctermbg=none
+    highlight EasyMotionShade ctermfg=10 ctermbg=none
+endfunction
+
 command! PythonVersion call PythonVersion()
 
 augroup CustomAutoCmd
@@ -2584,7 +2603,7 @@ augroup CustomAutoCmd
     " MatchTagAlways
     autocmd BufEnter * :highlight MatchTag ctermfg=8 ctermbg=lightblue guifg=#002b36 guibg=lightblue
 
-    autocmd SourcePre * :highlight VertSplit ctermbg=8 guibg=NONE ctermfg=11 guifg=#93a1a1
+    autocmd SourcePre * call HighlightVertSplit()
     " autocmd VimEnter,GUIEnter,VimLeave * :call DeleteSessionLocks()
 
     " " Auto-load previous folds
@@ -2662,15 +2681,7 @@ augroup CustomAutoCmd
             autocmd VimEnter * :EMCommandLineNoreMap <C-p> <C-r>\"
         endif
     endif
-    " Highlight color of easymotion is same as incsearch.vim
-    " since easymotion has a search for char mode by pressing
-    " <Space>/
-    autocmd VimEnter * :highlight EasyMotionTarget ctermfg=9 ctermbg=none
-    autocmd VimEnter * :highlight EasyMotionTarget2First ctermfg=9 ctermbg=none
-    autocmd VimEnter * :highlight EasyMotionTarget2Second ctermfg=9 ctermbg=none
-    autocmd VimEnter * :highlight EasyMotionMoveHL ctermfg=9 ctermbg=none
-    autocmd VimEnter * :highlight EasyMotionIncSearch ctermfg=9 ctermbg=none
-    autocmd VimEnter * :highlight EasyMotionShade ctermfg=10 ctermbg=none
+    autocmd VimEnter * call HighlightEasyMotion()
 
     " vim-over settings
     if exists( ':EMCommandLineNoreMap' ) == 2
