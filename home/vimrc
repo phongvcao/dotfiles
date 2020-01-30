@@ -74,14 +74,18 @@ Plug 'chrisbra/BufTimer', {
 Plug 'vim-scripts/YankRing.vim'
 
 " BEGIN: neoclide/coc.nvim
-Plug 'neoclide/coc.nvim', {
-            \ 'branch' : 'release' }
-if has( 'unix' )
-    Plug 'wellle/tmux-complete.vim'
-    Plug 'chrisbra/SudoEdit.vim'
+if !exists('g:ycm_auto_trigger')
+    Plug 'neoclide/coc.nvim', {
+                \ 'branch' : 'release' }
+    if has( 'unix' )
+        Plug 'wellle/tmux-complete.vim'
+    endif
 endif
 " END: neoclide/coc.nvim
 
+if has( 'unix' )
+    Plug 'chrisbra/SudoEdit.vim'
+endif
 Plug 'dense-analysis/ale'
 Plug 'osyo-manga/vim-over'
 Plug 'terryma/vim-multiple-cursors'

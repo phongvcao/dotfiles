@@ -676,3 +676,9 @@ let g:UltiSnipsEditSplit='vertical'
 
 " vim-bufferline settings
 " nnoremap gb :b<Space>
+
+" YouCompleteMe options
+let g:ycm_auto_trigger = 1
+let g:ycm_key_invoke_completion = '<C-n>'
+let g:ycm_key_list_select_completion = [ '<C-n>', '<Down>' ]
+let g:ycm_key_list_previous_completion = [ '<C-p>', '<Up>' ]
