@@ -74,12 +74,10 @@ Plug 'chrisbra/BufTimer', {
 Plug 'vim-scripts/YankRing.vim'
 
 " BEGIN: neoclide/coc.nvim
-if !exists('g:ycm_auto_trigger')
-    Plug 'neoclide/coc.nvim', {
-                \ 'branch' : 'release' }
-    if has( 'unix' )
-        Plug 'wellle/tmux-complete.vim'
-    endif
+Plug 'neoclide/coc.nvim', {
+            \ 'branch' : 'release' }
+if has( 'unix' )
+    Plug 'wellle/tmux-complete.vim'
 endif
 " END: neoclide/coc.nvim
 
@@ -1493,7 +1491,11 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-let g:coc_config_home = $HOME . '/.config/vim'
+if exists( 'g:custom_coc_config_home' )
+    let g:coc_config_home = g:custom_coc_config_home 
+else
+    let g:coc_config_home = $HOME . '/.config/vim'
+endif
 let g:coc_global_extensions = [
             \ 'coc-json', 'coc-html', 'coc-css', 'coc-ember', 'coc-java',
             \ 'coc-python', 'coc-highlight', 'coc-angular', 'coc-vimlsp',
