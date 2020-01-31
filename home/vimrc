@@ -193,12 +193,7 @@ Plug 'ntpeters/vim-better-whitespace', {
 Plug 'osyo-manga/vim-anzu'
 Plug 'qxxxb/vim-searchhi'
 
-Plug 'MattesGroeger/vim-bookmarks' ", {
-            \ 'on' : [ 'BookmarkToggle', 'BookmarkAnnotate',
-            \          'BookmarkShowAll', 'BookmarkNext',
-            \          'BookmarkPrev', 'BookmarkClear',
-            \          'BookmarkClearAll', 'BookmarkMoveUp',
-            \          'BookmarkMoveDown', 'BookmarkMoveToLine' ] }
+Plug 'MattesGroeger/vim-bookmarks'
 
 "=====================================
 " END OF INSPECTED/RESEARCHED SO FAR
@@ -1661,7 +1656,8 @@ nnoremap <leader>g :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -a
 nnoremap <leader>rg :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -auto-highlight -start-insert -buffer-name=Grep -resume<CR>
 " nnoremap <leader>f :silent! Unite find -start-insert -buffer-name=uf<CR>
 nnoremap <leader>f :NeoMRURec<CR> 
-nnoremap <leader>m :silent! Unite -prompt=Maps(n)>\ \  mapping -auto-highlight -start-insert -buffer-name=Normal\ Mode\ Mappings<CR>
+nnoremap <leader>M :silent! Unite -prompt=Maps(n)>\ \  mapping -auto-highlight -start-insert -buffer-name=Normal\ Mode\ Mappings<CR>
+nnoremap <leader>m :silent! Unite -prompt=Bookmarks>\ \  vim_bookmarks -auto-highlight -start-insert -buffer-name=Bookmarks<CR>
 " nnoremap <leader>rf :silent! Unite find -start-insert -buffer-name=uf -resume<CR>
 nnoremap <leader>/ :silent! Unite -prompt=Hist(/)>\ \  history/search -auto-highlight -start-insert -buffer-name=Search\ History<CR>
 nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -start-insert -buffer-name=Ctags<CR>
@@ -2111,6 +2107,7 @@ nnoremap za :call FoldLevelToggle()<CR>
 let g:bookmark_auto_save_file = $HOME . '/.vim/vim-bookmarks'
 let g:bookmark_highlight_lines = 1
 let g:bookmark_no_default_key_mappings = 1
+let g:bookmark_location_list = 1
 nnoremap mm :BookmarkToggle<CR>
 nnoremap mi :BookmarkAnnotate<CR>
 nnoremap ma :BookmarkShowAll<CR>
@@ -2214,6 +2211,7 @@ function! s:goyo_enter()
     call SetHighlight()
     call HighlightVertSplit()
     call HighlightEasyMotion()
+    highlight StatusLine ctermfg=8 ctermbg=8
 endfunction
 
 function! s:goyo_leave()
@@ -2221,6 +2219,7 @@ function! s:goyo_leave()
     call SetHighlight()
     call HighlightVertSplit()
     call HighlightEasyMotion()
+    highlight StatusLine ctermfg=8 ctermbg=12
 endfunction
 
 " csv.vim settings
@@ -2465,7 +2464,7 @@ function! SetHighlight()
 
     highlight NonText ctermfg=8 ctermbg=8
     highlight WildMenu ctermfg=4 ctermbg=8
-    highlight StatusLine ctermfg=12 ctermbg=8
+    highlight StatusLine ctermfg=8 ctermbg=12
     highlight Pmenu ctermfg=0 ctermbg=12
     highlight PmenuSel ctermfg=2 ctermbg=0
     highlight PmenuSbar ctermfg=0 ctermbg=0
