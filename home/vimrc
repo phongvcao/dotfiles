@@ -1653,8 +1653,8 @@ nnoremap <leader>q :silent! Unite quickfix -auto-highlight -start-insert -buffer
 " nnoremap <leader>rq :silent! Unite quickfix -start-insert -buffer-name=Quickfix -resume<CR>
 nnoremap <leader>i :silent! Unite -prompt=Interactive>\ \  -auto-preview -start-insert -buffer-name=Interactive<CR>
 " nnoremap <leader>ri :silent! Unite -auto-preview -start-insert -buffer-name=Interactive -resume<CR>
-nnoremap <leader>g :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -auto-highlight -start-insert -buffer-name=Grep<CR>
-nnoremap <leader>rg :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -auto-highlight -start-insert -buffer-name=Grep -resume<CR>
+nnoremap <leader>g :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -no-auto-preview -auto-highlight -start-insert -buffer-name=Grep<CR>
+nnoremap <leader>rg :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -no-auto-preview -auto-highlight -start-insert -buffer-name=Grep -resume<CR>
 " nnoremap <leader>f :silent! Unite find -start-insert -buffer-name=uf<CR>
 nnoremap <leader>f :NeoMRURec<CR> 
 nnoremap <leader>M :silent! Unite -prompt=Maps(n)>\ \  mapping -auto-highlight -start-insert -buffer-name=Normal\ Mode\ Mappings<CR>
