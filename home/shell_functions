@@ -507,10 +507,14 @@ fi
 }
 
 function grs() {
-    if [[ "$(isAsciiOnly $1)" == 1 ]]; then
-        LC_ALL=C rgrs "$@"
+    if [[ -z "$(command -v rg)" ]]; then
+        if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+            LC_ALL=C rgrs "$@"
+        else
+            rgrs "$@"
+        fi
     else
-        rgrs "$@"
+        command_rg --case-sensitive "$@"
     fi
 }
 
