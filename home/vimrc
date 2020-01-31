@@ -2439,10 +2439,10 @@ endfunction
 
 function! SetHighlight()
     highlight Folded ctermfg=10 ctermbg=0
-    highlight BookmarkLine ctermbg=0 ctermfg=231
-    highlight BookmarkSign ctermbg=0 ctermfg=231
-    highlight BookmarkAnnotationSign ctermbg=0 ctermfg=231
-    highlight BookmarkAnnotationLine ctermbg=0 ctermfg=231
+    highlight BookmarkLine ctermbg=0 ctermfg=7
+    highlight BookmarkSign ctermbg=0 ctermfg=7
+    highlight BookmarkAnnotationSign ctermbg=0 ctermfg=7
+    highlight BookmarkAnnotationLine ctermbg=0 ctermfg=7
     highlight MatchTag ctermfg=234 ctermbg=lightblue guifg=#002b36 guibg=lightblue
     highlight SignColumn guibg=#002b36
     highlight SignColumn ctermbg=8
