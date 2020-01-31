@@ -2140,6 +2140,7 @@ let g:highlighturl_ctermfg = 13
 
 " pydoc.vim
 let g:pydoc_window_lines = 0.5
+let g:pydoc_perform_mappings = 0
 nnoremap <localleader>my :Pydoc<Space>
 
 " perldoc-vim
