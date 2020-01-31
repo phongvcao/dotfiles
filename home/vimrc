@@ -2212,8 +2212,12 @@ let g:goyo_linenr = 1
 let g:goyo_width = '30%'
 let g:goyo_height = '100%'
 function! s:goyo_enter()
-    echom
+    call HighlightCurrentLineNum()
+    call SetHighlight()
+    call HighlightVertSplit()
+    call HighlightEasyMotion()
 endfunction
+
 function! s:goyo_leave()
     call HighlightCurrentLineNum()
     call SetHighlight()
