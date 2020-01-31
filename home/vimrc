@@ -2492,8 +2492,6 @@ function! SetHighlight()
     highlight PmenuSel ctermfg=2 ctermbg=0
     highlight PmenuSbar ctermfg=0 ctermbg=0
     highlight PmenuThumb ctermfg=2 ctermbg=0
-    redraw!
-
 endfunction
 
 function! IsI3Running()
