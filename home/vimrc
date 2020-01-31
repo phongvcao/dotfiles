@@ -1820,20 +1820,21 @@ let g:unite_source_find_default_opts = ''
 let g:unite_source_find_default_expr = '-mount -iname "**"'
 let g:unite_source_find_max_candidates = 0
 
-" if executable('ag')
-"     let g:unite_source_grep_command = 'ag'
-"     let g:unite_source_grep_default_opts = '--nogroup --filename --vimgrep' .
-"                 \ ' --silent --hidden --depth -1 --smart-case --multiline'
-"     let g:unite_source_grep_recursive_opt = ''
-" elseif executable('grep')
+if executable('rg')
+    let g:unite_source_grep_command = 'rg'
+    let g:unite_source_grep_default_opts = '--no-messages --smart-case --vimgrep'
+    let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_grep_search_word_highlight = 'Error'
+elseif executable('grep')
     let g:unite_source_grep_command = 'grep'
     let g:unite_source_grep_default_opts = '-F -s -n -H -I -i --exclude-dir={.git,.svn,cmake-build-debug,.idea,CMakeFiles} -r'
     let g:unite_source_grep_recursive_opt = '-r'
     let g:unite_source_grep_search_word_highlight = 'Error'
-    if exists('*unite#custom#source')
-        call unite#custom#source('grep', 'max_candidates', 0)
-    endif
-" endif
+endif
+
+if exists('*unite#custom#source')
+    call unite#custom#source('grep', 'max_candidates', 0)
+endif
 
 highlight default link uniteSource__GrepFile helpVim
 highlight default link uniteSource__GrepLineNr Statement

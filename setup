@@ -10,7 +10,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             gawk watch wdiff patch rsync less openssh ctags go node llvm neofetch \
             zsh git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
-            cmake xclip docker curl gpatch htop llvm yarn man-db
+            cmake xclip docker curl gpatch htop llvm yarn man-db ripgrep
         brew cask install vagrant
         brew cask fetch eloston-chromium
         brew cask install eloston-chromium
@@ -26,7 +26,7 @@ else
             findutils gawk watch patch wdiff rsync indent sed tar grep gzip screen \
             wget bash emacs gdb patch m4 make nano python unzip cmake snapd \
             ibus-unikey feh xclip vagrant shutter docker bleachbit gparted bleachbit \
-	        curl htop g++ python-pip python3-pip lldb clang yarn
+	        curl htop g++ python-pip python3-pip lldb clang yarn ripgrep
 	    # NOTE: Also install ungoogled-chromium
         sudo snap install ccls go --classic
     fi

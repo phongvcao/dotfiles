@@ -210,18 +210,26 @@ function g() {
 # else
 #     gr "$@"
 # fi
-if [[ "$(isAsciiOnly $1)" == 1 ]]; then
-    LC_ALL=C fgr "$@"
+if [[ -z "$(command -v rg)" ]]; then
+    if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+        LC_ALL=C fgr "$@"
+    else
+        fgr "$@"
+    fi
 else
-    fgr "$@"
+    command_frg "$@"
 fi
 }
 
 function gs() {
-    if [[ "$(isAsciiOnly $1)" == 1 ]]; then
-        LC_ALL=C fgs "$@"
+    if [[ -z "$(command -v rg)" ]]; then
+        if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+            LC_ALL=C fgs "$@"
+        else
+            fgs "$@"
+        fi
     else
-        fgs "$@"
+        command_frg --case-sensitive "$@"
     fi
 }
 
@@ -487,10 +495,14 @@ function gr() {
 # else
 #     gr "$@"
 # fi
-if [[ "$(isAsciiOnly $1)" == 1 ]]; then
-    LC_ALL=C rgr "$@"
+if [[ -z "$(command -v rg)" ]]; then
+    if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+        LC_ALL=C rgr "$@"
+    else
+        rgr "$@"
+    fi
 else
-    rgr "$@"
+    command_rg "$@"
 fi
 }
 

@@ -330,11 +330,18 @@ alias "pkgupdate"="command sudo pkgfile --update"
 alias "pkgdir"="command pkgfile --search --directories --verbose --ignorecase"
 
 # Ready-baked commands with options
-alias "command_grep_stream"="command grep -E --color=always -T -s -I --exclude-dir={.git,.svn}"
 alias "command_grep"="command grep -E --color=always -T -s -n -H -I -C 5 --exclude-dir={.git,.svn}"
+alias "command_grep_stream"="command grep -E --color=always -T -s -I --exclude-dir={.git,.svn}"
 alias "command_grep_stream_nocolor"="command grep -E --color=never -T -s -I --exclude-dir={.git,.svn}"
-alias "command_fgrep_stream"="command grep -F --color=always -T -s -I --exclude-dir={.git,.svn}"
 alias "command_fgrep"="command grep -F --color=always -T -s -n -H -I -C 5 --exclude-dir={.git,.svn}"
+alias "command_fgrep_stream"="command grep -F --color=always -T -s -I --exclude-dir={.git,.svn}"
+
+alias "command_rg"="command rg --color always --no-heading --no-messages --smart-case -C 5"
+alias "command_rg_stream"="command rg --color always --no-heading --no-messages --smart-case --no-line-number"
+alias "command_rg_stream_nocolor"="command rg --color never --no-heading --no-messages --smart-case --no-line-number"
+alias "command_frg"="command rg --color always --no-heading --no-messages --smart-case -C 5 --fixed-strings"
+alias "command_frg_stream"="command rg --color always --no-heading --no-messages --smart-case --no-line-number --fixed-strings"
+
 alias "command_ssh_passwd"="command ssh -X -A -Y -o PreferredAuthentications=password -o PubkeyAuthentication=no -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l"
 alias "command_ssh"="command ssh -X -A -Y -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l"
 alias "command_mosh"="command mosh --ssh='ssh -X -A -Y -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
