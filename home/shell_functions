@@ -1769,3 +1769,8 @@ sudo "${tomcatdir}/startup.sh"
 function stoptomcat() {
 sudo "${tomcatdir}/shutdown.sh"
 }
+
+# Source custom aliases
+if [[ -f "${HOME}/.custom_shell_functions" ]]; then
+    source "${HOME}/.custom_shell_functions"
+fi
