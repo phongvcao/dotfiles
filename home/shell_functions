@@ -948,7 +948,7 @@ function vim() {
 
 function tee() {
     fileName="$2"
-    commandArgs="$1"
+    commandArgs="$1 2>&1"
     separator="echo '=========================================='"
     separatorNewline="echo '==========================================\n\n'"
     finalCommand="${separator}; command date; ${separator}; ${commandArgs}; ${separator}; command date; ${separator}"
