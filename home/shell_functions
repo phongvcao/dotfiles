@@ -236,7 +236,18 @@ else
         elif [[ -p "$2" ]]; then
             eval "command_frg '$1' '$2'"
         else
-            eval "command_frg '$1' '$2' ${type_adds} ${types}"
+            if [[ -n "$2" ]]; then
+                file_extensions=( $( echo $2 | tr ',' ' ' ) )
+
+                type_adds=""
+                types=""
+                for file_extension in "${file_extensions[@]}"; do
+                    type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+                    types=" --type ${file_extension}${types}"
+                done
+            fi
+
+            eval "command_frg '$1' ${type_adds} ${types}"
         fi
     elif [[ -n "$1" ]]; then
         if [[ -t 0 ]]; then
@@ -277,7 +288,18 @@ else
         elif [[ -p "$2" ]]; then
             eval "command_frg --case-sensitive '$1' '$2'"
         else
-            eval "command_frg --case-sensitive '$1' '$2' ${type_adds} ${types}"
+            if [[ -n "$2" ]]; then
+                file_extensions=( $( echo $2 | tr ',' ' ' ) )
+
+                type_adds=""
+                types=""
+                for file_extension in "${file_extensions[@]}"; do
+                    type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+                    types=" --type ${file_extension}${types}"
+                done
+            fi
+
+            eval "command_frg --case-sensitive '$1' ${type_adds} ${types}"
         fi
     elif [[ -n "$1" ]]; then
         if [[ -t 0 ]]; then
@@ -579,7 +601,18 @@ else
         elif [[ -p "$2" ]]; then
             eval "command_rg '$1' '$2'"
         else
-            eval "command_rg '$1' '$2' ${type_adds} ${types}"
+            if [[ -n "$2" ]]; then
+                file_extensions=( $( echo $2 | tr ',' ' ' ) )
+
+                type_adds=""
+                types=""
+                for file_extension in "${file_extensions[@]}"; do
+                    type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+                    types=" --type ${file_extension}${types}"
+                done
+            fi
+
+            eval "command_rg '$1' ${type_adds} ${types}"
         fi
     elif [[ -n "$1" ]]; then
         if [[ -t 0 ]]; then
@@ -620,7 +653,18 @@ else
         elif [[ -p "$2" ]]; then
             eval "command_rg --case-sensitive '$1' '$2'"
         else
-            eval "command_rg --case-sensitive '$1' '$2' ${type_adds} ${types}"
+            if [[ -n "$2" ]]; then
+                file_extensions=( $( echo $2 | tr ',' ' ' ) )
+
+                type_adds=""
+                types=""
+                for file_extension in "${file_extensions[@]}"; do
+                    type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+                    types=" --type ${file_extension}${types}"
+                done
+            fi
+
+            eval "command_rg --case-sensitive '$1' ${type_adds} ${types}"
         fi
     elif [[ -n "$1" ]]; then
         if [[ -t 0 ]]; then
