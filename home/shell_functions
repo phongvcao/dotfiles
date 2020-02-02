@@ -217,20 +217,78 @@ if [[ -z "$(command -v rg)" ]]; then
         fgr "$@"
     fi
 else
-    command_frg "$@"
+    if [[ -n "$3" ]]; then
+        file_extensions=( $( echo $3 | tr ',' ' ' ) )
+
+        type_adds=""
+        types=""
+        for file_extension in "${file_extensions[@]}"; do
+            type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+            types=" --type ${file_extension}${types}"
+        done
+    fi
+
+    if [[ -n "$2" ]]; then
+        if [[ -d "$2" ]]; then
+            eval "command_frg '$1' '$2' ${type_adds} ${types}"
+        elif [[ -f "$2" ]]; then
+            eval "command_frg '$1' '$2'"
+        elif [[ -p "$2" ]]; then
+            eval "command_frg '$1' '$2'"
+        else
+            eval "command_frg '$1' '$2' ${type_adds} ${types}"
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ -t 0 ]]; then
+            command_frg "$1" ./
+        else
+            command_frg_stream "$1"
+        fi
+    else
+        command_frg "$@"
+    fi
 fi
 }
 
 function gs() {
-    if [[ -z "$(command -v rg)" ]]; then
-        if [[ "$(isAsciiOnly $1)" == 1 ]]; then
-            LC_ALL=C fgs "$@"
+if [[ -z "$(command -v rg)" ]]; then
+    if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+        LC_ALL=C fgs "$@"
+    else
+        fgs "$@"
+    fi
+else
+    if [[ -n "$3" ]]; then
+        file_extensions=( $( echo $3 | tr ',' ' ' ) )
+
+        type_adds=""
+        types=""
+        for file_extension in "${file_extensions[@]}"; do
+            type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+            types=" --type ${file_extension}${types}"
+        done
+    fi
+
+    if [[ -n "$2" ]]; then
+        if [[ -d "$2" ]]; then
+            eval "command_frg --case-sensitive '$1' '$2' ${type_adds} ${types}"
+        elif [[ -f "$2" ]]; then
+            eval "command_frg --case-sensitive '$1' '$2'"
+        elif [[ -p "$2" ]]; then
+            eval "command_frg --case-sensitive '$1' '$2'"
         else
-            fgs "$@"
+            eval "command_frg --case-sensitive '$1' '$2' ${type_adds} ${types}"
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ -t 0 ]]; then
+            command_frg --case-sensitive "$1" ./
+        else
+            command_frg_stream --case-sensitive "$1"
         fi
     else
         command_frg --case-sensitive "$@"
     fi
+fi
 }
 
 function gv() {
@@ -502,20 +560,78 @@ if [[ -z "$(command -v rg)" ]]; then
         rgr "$@"
     fi
 else
-    command_rg "$@"
+    if [[ -n "$3" ]]; then
+        file_extensions=( $( echo $3 | tr ',' ' ' ) )
+
+        type_adds=""
+        types=""
+        for file_extension in "${file_extensions[@]}"; do
+            type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+            types=" --type ${file_extension}${types}"
+        done
+    fi
+
+    if [[ -n "$2" ]]; then
+        if [[ -d "$2" ]]; then
+            eval "command_rg '$1' '$2' ${type_adds} ${types}"
+        elif [[ -f "$2" ]]; then
+            eval "command_rg '$1' '$2'"
+        elif [[ -p "$2" ]]; then
+            eval "command_rg '$1' '$2'"
+        else
+            eval "command_rg '$1' '$2' ${type_adds} ${types}"
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ -t 0 ]]; then
+            command_rg "$1" ./
+        else
+            command_rg_stream "$1"
+        fi
+    else
+        command_rg "$@"
+    fi
 fi
 }
 
 function grs() {
-    if [[ -z "$(command -v rg)" ]]; then
-        if [[ "$(isAsciiOnly $1)" == 1 ]]; then
-            LC_ALL=C rgrs "$@"
+if [[ -z "$(command -v rg)" ]]; then
+    if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+        LC_ALL=C rgrs "$@"
+    else
+        rgrs "$@"
+    fi
+else
+    if [[ -n "$3" ]]; then
+        file_extensions=( $( echo $3 | tr ',' ' ' ) )
+
+        type_adds=""
+        types=""
+        for file_extension in "${file_extensions[@]}"; do
+            type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+            types=" --type ${file_extension}${types}"
+        done
+    fi
+
+    if [[ -n "$2" ]]; then
+        if [[ -d "$2" ]]; then
+            eval "command_rg --case-sensitive '$1' '$2' ${type_adds} ${types}"
+        elif [[ -f "$2" ]]; then
+            eval "command_rg --case-sensitive '$1' '$2'"
+        elif [[ -p "$2" ]]; then
+            eval "command_rg --case-sensitive '$1' '$2'"
         else
-            rgrs "$@"
+            eval "command_rg --case-sensitive '$1' '$2' ${type_adds} ${types}"
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ -t 0 ]]; then
+            command_rg --case-sensitive "$1" ./
+        else
+            command_rg_stream --case-sensitive "$1"
         fi
     else
         command_rg --case-sensitive "$@"
     fi
+fi
 }
 
 function rgrs() {
