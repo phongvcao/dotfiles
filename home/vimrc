@@ -39,12 +39,20 @@ call plug#begin('~/.vim/plugged')
 " My Plugs here:
 " BEGIN OF INSPECTED/RESEARCHED SO FAR
 " Plugins (core)
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'phongvcao/nerdtree-yank-plugin'
-Plug 'ivalkeen/nerdtree-execute'
-Plug 'EvanDotPro/nerdtree-chmod'
-Plug 'markgandolfo/nerdtree-fetch.vim'
+" BEGIN: scrooloose/nerdtree
+Plug 'scrooloose/nerdtree', {
+            \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
+Plug 'Xuyuanp/nerdtree-git-plugin', {
+            \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
+Plug 'phongvcao/nerdtree-yank-plugin', {
+            \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
+Plug 'ivalkeen/nerdtree-execute', {
+            \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
+Plug 'EvanDotPro/nerdtree-chmod', {
+            \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
+Plug 'markgandolfo/nerdtree-fetch.vim', {
+            \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
+" END: scrooloose/nerdtree
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-obsession', {
@@ -486,12 +494,7 @@ set tenc=utf8
 " nnoremap <CR> za
 " move to beginning/end of line
 " nnoremap oo :e<Space>
-nnoremap oo :NeoMRU<Space>
 nnoremap gg 100000k
-nnoremap <leader>N :NERDTreeToggle<CR>
-" nnoremap <leader>N :NERDTreeTabsToggle<CR>
-" nnoremap <localleader>n :NERDTreeFocusToggle<CR>
-" nnoremap <localleader>N :NERDTreeMirrorToggle<CR>
 set guioptions-=m  " remove menu bar
 set guioptions-=T  " remove toolbar
 set guioptions-=r  " remove right-hand scroll bar
@@ -665,10 +668,6 @@ nnoremap zR zR
 nnoremap zM zM
 nnoremap <leader>C :silent! tabclose<CR>
 nnoremap <leader>M :tabmove<Space>
-nnoremap <localleader>v :split<CR>:NeoMRU<CR>
-nnoremap <localleader>h :vsplit<CR>:NeoMRU<CR>
-nnoremap <localleader>t :tabnew<CR>:NeoMRU<CR>
-nnoremap <leader>sf :call ToggleSearchFoldOpen()<CR>
 " nnoremap <localleader>rw :call RefreshFoldsAllWindows()<CR>
 " Copy current buffer's filename
 nnoremap <localleader>by :let @a = expand("%:p")<CR>
@@ -686,8 +685,6 @@ nnoremap = <C-w>=
 nnoremap \ <C-w>\|
 " Maximum Height
 nnoremap \| <C-w>_
-nnoremap <localleader>H :NERDTreeClose<CR> :windo wincmd H<CR> :NERDTree %<CR>
-nnoremap <localleader>V :NERDTreeClose<CR> :windo wincmd K<CR> :NERDTree %<CR>
 " Jump to previously visited location
 nnoremap <C-o> <C-o>
 " Jump to more recently visited location
@@ -1368,6 +1365,12 @@ omap iM <Plug>(textobj-delimited-backward-i)
 omap aM <Plug>(textobj-delimited-backward-a)
 
 " NERDTree settings
+nnoremap <leader>n :NERDTreeToggle<CR>
+" nnoremap <leader>n :NERDTreeTabsToggle<CR>
+" nnoremap <localleader>n :NERDTreeFocusToggle<CR>
+" nnoremap <localleader>N :NERDTreeMirrorToggle<CR>
+nnoremap <localleader>H :NERDTreeClose<CR> :windo wincmd H<CR> :NERDTree %<CR>
+nnoremap <localleader>V :NERDTreeClose<CR> :windo wincmd K<CR> :NERDTree %<CR>
 let g:NERDTreeShowBookmarks = 1
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeChDirMode = 2
@@ -1725,6 +1728,11 @@ nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR
 xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
 
 " neomru.vim settings
+nnoremap oo :NeoMRU<Space>
+nnoremap <localleader>v :split<CR>:NeoMRU<CR>
+nnoremap <localleader>h :vsplit<CR>:NeoMRU<CR>
+nnoremap <localleader>t :tabnew<CR>:NeoMRU<CR>
+nnoremap <leader>sf :call ToggleSearchFoldOpen()<CR>
 nnoremap ov :NeoMRUSplit<Space>
 nnoremap oh :NeoMRUVSplit<Space>
 nnoremap t :NeoMRUTab<Space>
