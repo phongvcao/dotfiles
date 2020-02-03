@@ -71,7 +71,8 @@ alias "ddiff"="dirdiff"
 alias "cmd"="command"
 alias "cowsay"="fortune | cowsay"
 alias "kill"="command kill -9"
-alias "pkill"="pkill"
+alias "killp"="pkill"
+alias "killt"="fuser -k -n tcp"
 alias "brewfix"="command sudo chown -R \"${USER}\":admin /usr/local; \
     command sudo chown -R \"${USER}\":admin /Library/Caches/Homebrew; \
     command sudo chown -R \"${USER}\":admin /Users/phongvcao/Library;"
