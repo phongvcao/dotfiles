@@ -448,12 +448,12 @@ let g:vimBackupDir = g:vimPath . '/backup'
 let g:vimSwapDir = g:vimPath . '/swap'
 let g:vimUndoDir = g:vimPath . '/undo'
 
-if !isdirectory(g:vimBackupDir)
-    call mkdir(g:vimBackupDir)
+if !isdirectory( g:vimBackupDir )
+    call mkdir( g:vimBackupDir )
 endif
 
-if !isdirectory(g:vimSwapDir)
-    call mkdir(g:vimSwapDir)
+if !isdirectory( g:vimSwapDir )
+    call mkdir( g:vimSwapDir )
 endif
 
 if !isdirectory(g:vimUndoDir)
@@ -2107,6 +2107,10 @@ nnoremap za :call FoldLevelToggle()<CR>
 "             \ }
 
 " vim-bookmarks settings
+if filereadable( $HOME . "/.vim-bookmarks" )
+    call delete( fnameescape( $HOME . "/.vim-bookmarks" ) )
+endif
+
 let g:bookmark_auto_save_file = $HOME . '/.vim/vim-bookmarks'
 let g:bookmark_highlight_lines = 1
 let g:bookmark_no_default_key_mappings = 1
