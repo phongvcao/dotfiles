@@ -33,6 +33,7 @@ else
 fi
 
 cd "${HOME}"
+chsh -s $(which zsh)
 
 #
 # Install dircolors-solarized
