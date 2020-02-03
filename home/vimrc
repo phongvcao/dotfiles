@@ -2110,13 +2110,12 @@ nnoremap za :call FoldLevelToggle()<CR>
 if filereadable( $HOME . "/.vim-bookmarks" )
     call delete( fnameescape( $HOME . "/.vim-bookmarks" ) )
 endif
-
 let g:bookmark_auto_save_file = $HOME . '/.vim/vim-bookmarks'
 let g:bookmark_highlight_lines = 1
 let g:bookmark_no_default_key_mappings = 1
 let g:bookmark_location_list = 1
-let g:bookmark_sign = '>'
-let g:bookmark_annotation_sign = '>'
+let g:bookmark_sign = ">>"
+let g:bookmark_annotation_sign = ">>"
 nnoremap mm :BookmarkToggle<CR>
 nnoremap mi :BookmarkAnnotate<CR>
 nnoremap ma :BookmarkShowAll<CR>
@@ -2374,8 +2373,8 @@ endfunction
 
 function! SetHighlight()
     highlight Folded ctermfg=10 ctermbg=0
-    highlight BookmarkLine ctermbg=0 ctermfg=7
-    highlight BookmarkSign ctermbg=0 ctermfg=7
+    highlight BookmarkLine ctermbg=0 cterm=underline gui=underline
+    highlight BookmarkSign ctermbg=0 ctermfg=7 cterm=underline gui=underline
     highlight BookmarkAnnotationSign ctermbg=0 ctermfg=7
     highlight BookmarkAnnotationLine ctermbg=0 ctermfg=7
     highlight MatchTag ctermfg=234 ctermbg=lightblue guifg=#002b36 guibg=lightblue
