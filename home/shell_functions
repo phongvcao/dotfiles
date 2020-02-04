@@ -169,7 +169,7 @@ fi
 cd "${CURDIR}"
 }
 
-function find() {
+function dfs() {
 if [[ -n $3 ]]; then
     command find "$2" -maxdepth "$3" -mount -iregex ".*$1.*" \
         -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
@@ -195,6 +195,34 @@ else
     fi
 fi
 }
+
+function bfs() {
+if [[ -n $3 ]]; then
+    command bfs "$2" -maxdepth "$3" -mount -iregex ".*$1.*" \
+        -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+        --group-directories-first --color -A -d {} \;
+else
+    if [[ -n $2 ]]; then
+        command bfs "$2" -mount -iregex ".*$1.*" \
+            -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+            --group-directories-first --color -A -d {} \;
+    else
+        if [[ -n $1 ]]; then
+            command bfs . -mount -iregex ".*$1.*" \
+                -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d {} \;
+        else
+            command bfs . -mount -type d \
+                -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d {} \;
+            command bfs . -mount -type f \
+                -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d {} \;
+        fi
+    fi
+fi
+}
+
 
 function isAsciiOnly() {
 if [[ $1 = *[![:ascii:]]* ]]; then

@@ -106,6 +106,8 @@ alias "codesign"="command codesign --entitlements ~/.config/gdb/gdb.xml -fs gdb-
 alias "command_lldb"="command lldb"
 alias "pdb"="echo 'Remember to add \"import pdb; pdb.set_trace() to the python program\"'; command python3 "
 alias "quit"="exit"
+alias "find"="dfs"
+alias "finb"="dfs"
 
 # Single-letter aliases for commonly-used command
 alias "c"="cat"
