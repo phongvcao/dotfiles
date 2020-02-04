@@ -407,7 +407,6 @@ Plug 'dsawardekar/wordpress.vim', {
 
 Plug 'arnaud-lb/vim-php-namespace', {
             \ 'for' : 'php' }
-Plug 'Igorjan94/codeforces.vim'
 
 " Plugin (CSV)
 Plug 'chrisbra/csv.vim'
@@ -903,15 +902,15 @@ nmap W <Plug>(show-motion-b)
 nmap B <Plug>(show-motion-B)
 nmap E <Plug>(show-motion-e)
 
-" vCoolor settings
-nnoremap <localleader>co :VCoolor<CR>
-nnoremap <localleader>cr :VCoolIns r<CR>
-nnoremap <localleader>ca :VCoolIns ra<CR>
-nnoremap <localleader>ch :VCoolIns rh<CR>
-nnoremap <localleader>cc :VCase<CR>
+" " vCoolor settings
+" nnoremap <localleader>co :VCoolor<CR>
+" nnoremap <localleader>cr :VCoolIns r<CR>
+" nnoremap <localleader>ca :VCoolIns ra<CR>
+" nnoremap <localleader>ch :VCoolIns rh<CR>
+" nnoremap <localleader>cc :VCase<CR>
 
 " colorchart settings
-nnoremap <leader>cc :ColorChart<CR>
+nnoremap <localleader>cc :ColorChart<CR>
 
 " vim-textobj-entire settings
 " VISUAL & OPERATOR-PENDING MODES
@@ -1596,7 +1595,7 @@ nmap <leader>ef <Plug>(external-explorer)
 nmap <leader>eb <Plug>(external-browser)
 
 " vim-crunch (calculator for vim) settings
-nnoremap <leader>cl :Crunch<CR>
+nnoremap <localleader>cl :Crunch<CR>
 
 " incsearch.vim settings
 nmap / <Plug>(incsearch-forward)
@@ -1664,7 +1663,7 @@ nnoremap <leader>M :silent! Unite -prompt=Maps(n)>\ \  mapping -auto-highlight -
 nnoremap <leader>m :silent! Unite -prompt=BMarks>\ \  vim_bookmarks -auto-highlight -start-insert -buffer-name=Bookmarks<CR>
 " nnoremap <leader>rf :silent! Unite find -start-insert -buffer-name=uf -resume<CR>
 nnoremap <leader>/ :silent! Unite -prompt=Hist(/)>\ \  history/search -auto-highlight -start-insert -buffer-name=Search\ History<CR>
-nnoremap <leader>C :silent! Unite -prompt=Changes>\ \  change -auto-highlight -start-insert -buffer-name=Change\ History<CR>
+nnoremap <leader>c :silent! Unite -prompt=Changes>\ \  change -auto-highlight -start-insert -buffer-name=Change\ History<CR>
 nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -start-insert -buffer-name=Ctags<CR>
 " nnoremap <leader>hr/ :silent! Unite history/search -start-insert -buffer-name=u/ -resume<CR>
 nnoremap <leader>; :silent! Unite -prompt=Hist(:)>\ \  history/command command -auto-highlight -start-insert -buffer-name=Command\ History<CR>
@@ -2244,17 +2243,17 @@ highlight CSVColumnOdd ctermbg=0 ctermfg=2
 highlight CSVColumnEven ctermbg=8 ctermfg=3
 highlight CSVColumnHeaderOdd ctermbg=0 ctermfg=9
 highlight CSVColumnHeaderEven ctermbg=8 ctermfg=9
-nnoremap <leader>ca :AddColumn<CR>
-nnoremap <leader>cA :%ArrangeColumn!<CR>
-nnoremap <leader>cu :%UnArrangeColumn<CR>
-nnoremap <leader>cd :DeleteColumn<CR>
-nnoremap <leader>cv :Header<Space>
-nnoremap <leader>cV :Header!
-nnoremap <leader>cv :VHeader<Space>
-nnoremap <leader>cV :VHeader!
-nnoremap <leader>cy :Column<CR>
-nnoremap <leader>cm :MoveColumn<Space>
-nnoremap <leader>cr :NewRecord<Space>
+nnoremap <localleader>ca :AddColumn<CR>
+nnoremap <localleader>cA :%ArrangeColumn!<CR>
+nnoremap <localleader>cu :%UnArrangeColumn<CR>
+nnoremap <localleader>cd :DeleteColumn<CR>
+nnoremap <localleader>cv :Header<Space>
+nnoremap <localleader>cV :Header!
+nnoremap <localleader>cv :VHeader<Space>
+nnoremap <localleader>cV :VHeader!
+nnoremap <localleader>cy :Column<CR>
+nnoremap <localleader>cm :MoveColumn<Space>
+nnoremap <localleader>cr :NewRecord<Space>
 
 " Customize bindings according to current vim version
 if (v:version > 703)

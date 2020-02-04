@@ -178,6 +178,7 @@
 "             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 " Plug 'pangloss/vim-javascript', {
 "             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
+" Plug 'Igorjan94/codeforces.vim'
 
 " syntastic settings
 " Extra Checkers List:
