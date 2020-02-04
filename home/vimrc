@@ -666,7 +666,7 @@ nnoremap ze zE:set foldmethod=indent<CR>
 nnoremap zR zR
 " Close all folds
 nnoremap zM zM
-nnoremap <leader>C :silent! tabclose<CR>
+nnoremap C :silent! tabclose<CR>
 nnoremap <leader>M :tabmove<Space>
 " nnoremap <localleader>rw :call RefreshFoldsAllWindows()<CR>
 " Copy current buffer's filename
@@ -789,7 +789,7 @@ let g:lasttab = 1
 " Go to previously accessed buffer
 " nnoremap <C-u><C-b> :b#<CR>
 nnoremap _ :silent! q<CR>
-nnoremap C :silent! w!<CR>:bd<CR>
+" nnoremap C :silent! w!<CR>:bd<CR>
 nnoremap <leader>su :sort ui<CR>
 nnoremap S :shell<CR>
 " Scroll both splits in Vim
@@ -1664,6 +1664,7 @@ nnoremap <leader>M :silent! Unite -prompt=Maps(n)>\ \  mapping -auto-highlight -
 nnoremap <leader>m :silent! Unite -prompt=BMarks>\ \  vim_bookmarks -auto-highlight -start-insert -buffer-name=Bookmarks<CR>
 " nnoremap <leader>rf :silent! Unite find -start-insert -buffer-name=uf -resume<CR>
 nnoremap <leader>/ :silent! Unite -prompt=Hist(/)>\ \  history/search -auto-highlight -start-insert -buffer-name=Search\ History<CR>
+nnoremap <leader>C :silent! Unite -prompt=Changes>\ \  change -auto-highlight -start-insert -buffer-name=Change\ History<CR>
 nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -start-insert -buffer-name=Ctags<CR>
 " nnoremap <leader>hr/ :silent! Unite history/search -start-insert -buffer-name=u/ -resume<CR>
 nnoremap <leader>; :silent! Unite -prompt=Hist(:)>\ \  history/command command -auto-highlight -start-insert -buffer-name=Command\ History<CR>
