@@ -1,5 +1,27 @@
 # vim:filetype=zsh
 # Frequently-used commands/functions
+
+# Source extract.sh
+if [[ -f "${HOME}/.dotfiles/home/config/shell/extract.sh" ]]; then
+    source "${HOME}/.dotfiles/home/config/shell/extract.sh"
+fi
+
+function xtract() {
+    local fileName=$(basename -- "$1")
+    local nameNoExt="${fileName%%.*}"
+    if [[ -e "./${nameNoExt}" ]]; then
+        local val=0
+        while [[ -e "./${nameNoExt}_${val}" ]]; do
+            val=$((val + 1 ))
+        done
+        nameNoExt="${nameNoExt}_${val}"
+    fi
+    mkdir "${nameNoExt}"
+    cd "${nameNoExt}"
+    extract "../$1"
+    cd ../
+}
+
 function stopwatch() {
 BEGIN=$(date +%s)
 
@@ -1735,27 +1757,6 @@ fi
 # Reference: http://askubuntu.com/a/225177
 function dd() {
 command sudo dd if="$1" of="$2" oflag=direct bs=1048576
-}
-
-function extract() {
-if [ -f "$1" ]; then
-    case $1 in
-        *.tar.bz2)   tar xvjf "$1"    ;;
-        *.tar.gz)    tar xvzf "$1"    ;;
-        *.bz2)       bunzip2 "$1"     ;;
-        *.rar)       unrar x "$1"       ;;
-        *.gz)        gunzip "$1"      ;;
-        *.tar)       tar xvf "$1"     ;;
-        *.tbz2)      tar xvjf "$1"    ;;
-        *.tgz)       tar xvzf "$1"    ;;
-        *.zip)       unzip "$1"       ;;
-        *.Z)         uncompress "$1"  ;;
-        *.7z)        7z x "$1"        ;;
-        *)           echo "don't know how to extract '$1'..." ;;
-    esac
-else
-    echo "'$1' is not a valid file!"
-fi
 }
 
 function compress() {
