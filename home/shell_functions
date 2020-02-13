@@ -222,24 +222,24 @@ function bfs() {
 if [[ -n $3 ]]; then
     command bfs "$2" -maxdepth "$3" -mount -iregex ".*$1.*" \
         -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-        --group-directories-first --color -A -d {} \;
+        --group-directories-first --color -A -d {} \; 2>/dev/null
 else
     if [[ -n $2 ]]; then
         command bfs "$2" -mount -iregex ".*$1.*" \
             -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-            --group-directories-first --color -A -d {} \;
+            --group-directories-first --color -A -d {} \; 2>/dev/null
     else
         if [[ -n $1 ]]; then
             command bfs . -mount -iregex ".*$1.*" \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \;
+                --group-directories-first --color -A -d {} \; 2>/dev/null
         else
             command bfs . -mount -type d \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \;
+                --group-directories-first --color -A -d {} \; 2>/dev/null
             command bfs . -mount -type f \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \;
+                --group-directories-first --color -A -d {} \; 2>/dev/null
         fi
     fi
 fi
