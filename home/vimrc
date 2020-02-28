@@ -816,8 +816,8 @@ endfunction
 nnoremap <localleader>/ :set hlsearch!<CR>:call MaybeEmptySearchReg()<CR>
 vnoremap <localleader>/ :<C-u>set hlsearch!<CR>:call MaybeEmptySearchReg()<CR>
 " Page Scroll keymappings
-nnoremap <leader>j <PageDown>
-nnoremap <leader>k <PageUp>
+" nnoremap <leader>j <PageDown>
+" nnoremap <leader>k <PageUp>
 nnoremap <localleader>j <C-d>
 nnoremap <localleader>k <C-u>
 " Insert real <Tab> in Insert mode
@@ -1661,6 +1661,7 @@ nnoremap <leader>rg :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -
 nnoremap <leader>f :NeoMRURec<CR> 
 nnoremap <leader>M :silent! Unite -prompt=Maps(n)>\ \  mapping -auto-highlight -start-insert -buffer-name=Normal\ Mode\ Mappings<CR>
 nnoremap <leader>m :silent! Unite -prompt=BMarks>\ \  vim_bookmarks -auto-highlight -start-insert -buffer-name=Bookmarks<CR>
+nnoremap <leader>j :silent! Unite -prompt=Jumps>\ \  jump -auto-highlight -start-insert -buffer-name=Jumps<CR>
 " nnoremap <leader>rf :silent! Unite find -start-insert -buffer-name=uf -resume<CR>
 nnoremap <leader>/ :silent! Unite -prompt=Hist(/)>\ \  history/search -auto-highlight -start-insert -buffer-name=Search\ History<CR>
 nnoremap <leader>c :silent! Unite -prompt=Changes>\ \  change -auto-highlight -start-insert -buffer-name=Change\ History<CR>
