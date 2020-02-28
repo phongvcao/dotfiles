@@ -84,3 +84,8 @@ export "RANGER_LOAD_DEFAULT_RC"="FALSE"
 
 # For SSH
 unset "SSH_ASKPASS"
+
+# Source custom variables
+if [[ -f "${HOME}/.custom_shell_variables" ]]; then
+    source "${HOME}/.custom_shell_variables"
+fi

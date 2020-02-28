@@ -2119,8 +2119,8 @@ let g:bookmark_annotation_sign = ">>"
 nnoremap mm :BookmarkToggle<CR>
 nnoremap mi :BookmarkAnnotate<CR>
 nnoremap ma :BookmarkShowAll<CR>
-nnoremap mn :BookmarkNext<CR>
-nnoremap mp :BookmarkPrev<CR>
+nnoremap mn :BookmarkNext<CR>zt
+nnoremap mp :BookmarkPrev<CR>zt
 nnoremap mC :BookmarkClear<CR>
 nnoremap mc :BookmarkClearAll<CR>
 nnoremap mk :BookmarkMoveUp<CR>
