@@ -2120,10 +2120,10 @@ let g:bookmark_annotation_sign = ">>"
 nnoremap mm :BookmarkToggle<CR>
 nnoremap mi :BookmarkAnnotate<CR>
 nnoremap ma :BookmarkShowAll<CR>
-nnoremap mn :BookmarkNext<CR>
-nnoremap mp :BookmarkPrev<CR>
-nnoremap mC :BookmarkClear<CR>
-nnoremap mc :BookmarkClearAll<CR>
+nnoremap mn :BookmarkNext<CR>zz
+nnoremap mp :BookmarkPrev<CR>zz
+nnoremap mc :BookmarkClear<CR>
+nnoremap mC :BookmarkClearAll<CR>
 nnoremap mk :BookmarkMoveUp<CR>
 nnoremap mj :BookmarkMoveDown<CR>
 nnoremap m; :BookmarkMoveToLine<CR>
