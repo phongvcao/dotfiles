@@ -249,7 +249,8 @@ Plug 'arecarn/vim-crunch', {
 Plug 'arecarn/selection.vim'
 " END: arecarn/vim-crunch
 
-Plug 'KabbAmine/vZoom.vim'
+Plug 'KabbAmine/vZoom.vim', {
+      \ 'on' : 'VZoomAutoToggle' }
 
 Plug 'wesQ3/vim-windowswap'
 " No lazy-loading for myusuf3/numbers.vim.
@@ -2223,7 +2224,7 @@ let g:ophigh_filetypes_to_ignore = {
 
 
 " vZoom.vim settings
-nmap f <Plug>(vzoom)
+nnoremap f :silent! VZoomAutoToggle<CR>
 let g:vzoom = {}
 let g:vzoom.equalise_windows = 1
 
