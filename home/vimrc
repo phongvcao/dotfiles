@@ -781,7 +781,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-" nnoremap <C-w> <C-w>w
+nnoremap <C-w> <C-w>w
 nnoremap q :call WriteQuitAll()<CR>
 function WriteQuitAll()
   if expand('%p') != ''
@@ -1345,7 +1345,7 @@ nmap <Space>;d <Plug>(easyoperator-line-delete)
 nmap <Space>;y <Plug>(easyoperator-line-yank)
 
 "vim-choosewin settings
-nnoremap <C-w> :ChooseWin<CR>
+nnoremap <leader>w :ChooseWin<CR>
 let g:choosewin_overlay_clear_multibyte = 1
 let g:choosewin_overlay_enable = 1
 let g:choosewin_color_label = {
@@ -1670,7 +1670,7 @@ let g:unite_no_default_keymappings = 1
 let g:unite_source_rec_max_cache_files = 0
 let g:unite_data_directory = g:vimPath . '/cache/unite'
 nnoremap <leader>b :silent! Unite buffer -prompt=Buf>\ \  -winheight=10 -auto-highlight -start-insert -buffer-name=Buffers\ List<CR>
-nnoremap <leader>w :silent! Unite window -prompt=Win>\ \  -winheight=10 -auto-highlight -start-insert -buffer-name=Windows\ List<CR>
+" nnoremap <leader>w :silent! Unite window -prompt=Win>\ \  -winheight=10 -auto-highlight -start-insert -buffer-name=Windows\ List<CR>
 nnoremap <leader>t :silent! Unite tab -prompt=Tab>\ \  -winheight=10 -auto-highlight -start-insert -buffer-name=Tabs\ List<CR>
 " nnoremap <leader>rb :silent! Unite buffer -start-insert -buffer-name=ub -resume<CR>
 " nnoremap <leader>o :silent! Unite file_rec/async -start-insert -buffer-name=uo<CR>
