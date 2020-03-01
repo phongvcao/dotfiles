@@ -1306,9 +1306,9 @@ let g:textobj_multitextobj_textobjects_a = []
 "     <Leader>s            | Find(Search) {char} forward and backward.
 "                          | See |f| and |F|.
 map <Space> <Plug>(easymotion-prefix)
-map <Space>/ <Plug>(easymotion-sn)
+map <Space>s <Plug>(easymotion-sn)
 map <Space>? <Plug>(easymotion-sn)
-omap <Space>/ <Plug>(easymotion-tn)
+omap <Space>s <Plug>(easymotion-tn)
 map <Space><localleader> <Plug>(easymotion-repeat)
 map <Space>;j <Plug>(easymotion-j)
 map <Space>;k <Plug>(easymotion-k)
@@ -1319,7 +1319,7 @@ map <Space>h <Plug>(easymotion-linebackward)
 map <Space>B <Plug>(easymotion-B)
 map <Space>E <Plug>(easymotion-e)
 let g:EasyMotion_prompt = 'Search {n} chars: '
-nmap <Space>s <Plug>(easymotion-overwin-f)
+nmap <Space>/ <Plug>(easymotion-overwin-f2)
 " nmap <Space>;; <Plug>(easymotion-overwin-line)
 nmap <Space>;; <Plug>(easymotion-overwin-line)
 " vim-easymotion mapping that depends on numbers.vim
