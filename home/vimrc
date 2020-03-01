@@ -212,7 +212,8 @@ Plug 'haya14busa/vim-easyoperator-phrase'
 Plug 'haya14busa/vim-easyoperator-line'
 " END: easymotion/vim-easymotion
 
-Plug 't9md/vim-choosewin'
+Plug 't9md/vim-choosewin', {
+            \ 'on' : [ 'ChooseWin', 'ChooseWinSwap', 'ChooseWinSwapStay' ] }
 
 " BEGIN: lambdalisue/vim-pager
 Plug 'lambdalisue/vim-pager', {
@@ -1344,7 +1345,7 @@ nmap <Space>;d <Plug>(easyoperator-line-delete)
 nmap <Space>;y <Plug>(easyoperator-line-yank)
 
 "vim-choosewin settings
-nmap <C-w> <Plug>(choosewin)
+nnoremap <C-w> :ChooseWin<CR>
 let g:choosewin_overlay_clear_multibyte = 1
 let g:choosewin_overlay_enable = 1
 let g:choosewin_color_label = {
