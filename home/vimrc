@@ -212,6 +212,8 @@ Plug 'haya14busa/vim-easyoperator-phrase'
 Plug 'haya14busa/vim-easyoperator-line'
 " END: easymotion/vim-easymotion
 
+Plug 't9md/vim-choosewin'
+
 " BEGIN: lambdalisue/vim-pager
 Plug 'lambdalisue/vim-pager', {
             \ 'on' : 'PAGER' }
@@ -778,7 +780,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <C-w> <C-w>w
+" nnoremap <C-w> <C-w>w
 nnoremap q :call WriteQuitAll()<CR>
 function WriteQuitAll()
   if expand('%p') != ''
@@ -1340,6 +1342,22 @@ omap <Space>;v <Plug>(easyoperator-line-select)
 xmap <Space>;v <Plug>(easyoperator-line-select)
 nmap <Space>;d <Plug>(easyoperator-line-delete)
 nmap <Space>;y <Plug>(easyoperator-line-yank)
+
+"vim-choosewin settings
+nmap <C-w> <Plug>(choosewin)
+let g:choosewin_overlay_clear_multibyte = 1
+let g:choosewin_overlay_enable = 1
+let g:choosewin_color_label = {
+            \ 'cterm' : [ 4, 4 ] }
+let g:choosewin_color_overlay = {
+            \ 'cterm' : [ 0, 0 ] }
+let g:choosewin_color_overlay_current = {
+            \ 'cterm' : [ 4, 4 ] }
+let g:choosewin_blink_on_land      = 0 " don't blink at land
+let g:choosewin_statusline_replace = 0 " don't replace statusline
+let g:choosewin_tabline_replace    = 0 " don't replace tabline
+let g:choosewin_label = '123456789'
+let g:choosewin_tablabel = ''
 
 " vim-textobj-sentence settings
 " as : Select "around" sentence, including trailing white spaces
