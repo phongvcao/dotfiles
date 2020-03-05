@@ -604,6 +604,7 @@ nnoremap GG G
 vnoremap GG G
 xnoremap GG G
 snoremap GG G
+nnoremap G <nop>
 
 function! CloseUniteWindow()
     execute ":normal! \<C-c>"
