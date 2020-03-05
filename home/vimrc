@@ -564,6 +564,10 @@ vnoremap <Esc> <Esc>
 snoremap <Esc> <Esc>
 xnoremap <Esc> <Esc>
 
+snoremap <Backspace> <Backspace>i
+vnoremap <Backspace> <Backspace>i
+xnoremap <Backspace> <Backspace>i
+
 inoremap jk <Esc>l
 inoremap Jk <Esc>l
 inoremap jK <Esc>l
