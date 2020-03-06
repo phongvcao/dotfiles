@@ -2,10 +2,6 @@
 " Configuration file for Vim 9.4 Compatible with both Linux & Windows
 "
 
-if filereadable( expand( '$HOME/.custom_vimrc' ) )
-    source $HOME/.custom_vimrc
-endif
-
 if has('win32') || has('win64')
     let g:vimPath='C:/Users/pcao/vimfiles'
 elseif has('unix')
@@ -429,10 +425,10 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 
 " BEGIN: itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
-Plug 'edkolev/tmuxline.vim', {
-            \ 'on' : 'Tmuxline' }
-Plug 'edkolev/promptline.vim' , {
-            \ 'on' : 'PromptlineSnapshot' }
+" " Uncomment for generating promptline & tmuxline themes
+" Plug 'edkolev/tmuxline.vim', {
+"             \ 'on' : 'Tmuxline' }
+" Plug 'edkolev/promptline.vim'
 " END: itchyny/lightline.vim
 
 " Plugins (gui-specific)
@@ -446,6 +442,10 @@ Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
 " END: vim-plug
+
+if filereadable( expand( '$HOME/.custom_vimrc' ) )
+    source $HOME/.custom_vimrc
+endif
 
 let g:vimBackupDir = g:vimPath . '/backup'
 let g:vimSwapDir = g:vimPath . '/swap'
@@ -566,7 +566,6 @@ xnoremap <Esc> <Esc>
 
 snoremap <Backspace> <Backspace>i
 vnoremap <Backspace> <Backspace>i
-xnoremap <Backspace> <Backspace>i
 
 inoremap jk <Esc>l
 inoremap Jk <Esc>l
@@ -2129,15 +2128,28 @@ function! FoldLevelToggle()
 endfunction
 nnoremap za :call FoldLevelToggle()<CR>
 
-" " promptline.vim
-" let g:promptline_theme = 'lightline'
-" let g:promptline_preset = {
-"             \ 'a' : [ '$( hostname -s )' ],
-"             \ 'b' : [ '$USER' ],
-"             \ 'c' : [ promptline#slices#cwd() ],
-"             \ 'y' : [ promptline#slices#vcs_branch() ],
-"             \ 'warn' : [ promptline#slices#last_exit_code() ]
-"             \ }
+" " promptline.vim settings
+" if exists( "g:custom_promptline_theme" )
+"     let g:promptline_theme = g:custom_promptline_theme
+" else
+"     let g:promptline_theme = 'lightline'
+" endif
+"
+" if exists( "g:custom_promptline_preset" )
+"     let g:promptline_preset = g:custom_promptline_preset
+"     " :PromptlineSnapshot! $HOME/.custom_dotfiles/home/custom_promptline.sh
+" else
+"     let g:promptline_preset = {
+"                 \ 'a' : [ '$( hostname -s )' ],
+"                 \ 'b' : [ '$USER' ],
+"                 \ 'c' : [ promptline#slices#cwd() ],
+"                 \ 'x' : [ '$( promptlineVcsBranch )' ],
+"                 \ 'y' : [ '$( promptlineVcs )' ],
+"                 \ 'z' : [ '$( promptlineVcsDirName )' ],
+"                 \ 'warn' : [ promptline#slices#last_exit_code() ]
+"                 \ }
+"     " :PromptlineSnapshot! $HOME/.dotfiles/home/promptline.sh
+" endif
 
 " vim-bookmarks settings
 if filereadable( $HOME . "/.vim-bookmarks" )

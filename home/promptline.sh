@@ -29,11 +29,23 @@ function __promptline_ps1 {
   # section "c" slices
   __promptline_wrapper "$(__promptline_cwd)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
 
+  # section "x" header
+  slice_prefix="${x_bg}${sep}${x_fg}${x_bg}${space}" slice_suffix="$space${x_sep_fg}" slice_joiner="${x_fg}${x_bg}${alt_sep}${space}" slice_empty_prefix="${x_fg}${x_bg}${space}"
+  [ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
+  # section "x" slices
+  __promptline_wrapper "$( promptlineVcsBranch )" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+
   # section "y" header
   slice_prefix="${y_bg}${sep}${y_fg}${y_bg}${space}" slice_suffix="$space${y_sep_fg}" slice_joiner="${y_fg}${y_bg}${alt_sep}${space}" slice_empty_prefix="${y_fg}${y_bg}${space}"
   [ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
   # section "y" slices
-  __promptline_wrapper "$(__promptline_vcs_branch)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+  __promptline_wrapper "$( promptlineVcs )" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+
+  # section "z" header
+  slice_prefix="${z_bg}${sep}${z_fg}${z_bg}${space}" slice_suffix="$space${z_sep_fg}" slice_joiner="${z_fg}${z_bg}${alt_sep}${space}" slice_empty_prefix="${z_fg}${z_bg}${space}"
+  [ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
+  # section "z" slices
+  __promptline_wrapper "$( promptlineVcsDirName )" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
 
   # section "warn" header
   slice_prefix="${warn_bg}${sep}${warn_fg}${warn_bg}${space}" slice_suffix="$space${warn_sep_fg}" slice_joiner="${warn_fg}${warn_bg}${alt_sep}${space}" slice_empty_prefix="${warn_fg}${warn_bg}${space}"
@@ -43,20 +55,6 @@ function __promptline_ps1 {
 
   # close sections
   printf "%s" "${reset_bg}${sep}$reset$space"
-}
-function __promptline_vcs_branch {
-  local branch
-  local branch_symbol=" "
-
-  # git
-  if hash git 2>/dev/null; then
-    if branch=$( { git symbolic-ref --quiet HEAD || git rev-parse --short HEAD; } 2>/dev/null ); then
-      branch=${branch##*/}
-      printf "%s" "${branch_symbol}${branch:-unknown}"
-      return
-    fi
-  fi
-  return 1
 }
 function __promptline_cwd {
   local dir_limit="3"
@@ -127,10 +125,20 @@ function __promptline_right_prompt {
   # section "warn" slices
   __promptline_wrapper "$(__promptline_last_exit_code)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; }
 
+  # section "x" header
+  slice_prefix="${x_sep_fg}${rsep}${x_fg}${x_bg}${space}" slice_suffix="$space${x_sep_fg}" slice_joiner="${x_fg}${x_bg}${alt_rsep}${space}" slice_empty_prefix=""
+  # section "x" slices
+  __promptline_wrapper "$( promptlineVcsBranch )" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; }
+
   # section "y" header
   slice_prefix="${y_sep_fg}${rsep}${y_fg}${y_bg}${space}" slice_suffix="$space${y_sep_fg}" slice_joiner="${y_fg}${y_bg}${alt_rsep}${space}" slice_empty_prefix=""
   # section "y" slices
-  __promptline_wrapper "$(__promptline_vcs_branch)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; }
+  __promptline_wrapper "$( promptlineVcs )" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; }
+
+  # section "z" header
+  slice_prefix="${z_sep_fg}${rsep}${z_fg}${z_bg}${space}" slice_suffix="$space${z_sep_fg}" slice_joiner="${z_fg}${z_bg}${alt_rsep}${space}" slice_empty_prefix=""
+  # section "z" slices
+  __promptline_wrapper "$( promptlineVcsDirName )" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; }
 
   # close sections
   printf "%s" "$reset"
@@ -166,9 +174,15 @@ function __promptline {
   local warn_fg="${wrap}38;5;8${end_wrap}"
   local warn_bg="${wrap}48;5;3${end_wrap}"
   local warn_sep_fg="${wrap}38;5;3${end_wrap}"
+  local x_fg="${wrap}38;5;14${end_wrap}"
+  local x_bg="${wrap}48;5;0${end_wrap}"
+  local x_sep_fg="${wrap}38;5;0${end_wrap}"
   local y_fg="${wrap}38;5;8${end_wrap}"
   local y_bg="${wrap}48;5;11${end_wrap}"
   local y_sep_fg="${wrap}38;5;11${end_wrap}"
+  local z_fg="${wrap}38;5;8${end_wrap}"
+  local z_bg="${wrap}48;5;14${end_wrap}"
+  local z_sep_fg="${wrap}38;5;14${end_wrap}"
   if [[ -n ${ZSH_VERSION-} ]]; then
     PROMPT="$(__promptline_left_prompt)"
     RPROMPT="$(__promptline_right_prompt)"

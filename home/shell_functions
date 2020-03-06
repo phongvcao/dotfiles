@@ -101,6 +101,27 @@ else
 fi
 }
 
+function promptlineVcsDirName() {
+  local cur_git_dir=$(command git rev-parse --show-toplevel 2> /dev/null)
+  if [[ $? -eq 0 ]]; then
+      echo $(basename ${cur_git_dir} 2> /dev/null)
+  fi
+}
+
+function promptlineVcs() {
+  local cur_git_dir=$(command git rev-parse --show-toplevel 2> /dev/null)
+  if [[ $? -eq 0 ]]; then
+    echo " git"
+  fi
+}
+
+function promptlineVcsBranch() {
+  local cur_git_branch=$(command git --no-pager branch | command sed 's/[*]//')
+  if [[ $? -eq 0 ]]; then
+    echo " ${cur_git_branch}"
+  fi
+}
+
 function br() {
     command sudo chown -R $(whoami) /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
     command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
