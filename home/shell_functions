@@ -118,7 +118,7 @@ function promptlineVcs() {
 }
 
 function promptlineVcsBranch() {
-  local cur_git_branch=$(command git --no-pager branch 2> /dev/null | command sed 's/[*]//')
+  local cur_git_branch=$(command git --no-pager branch 2> /dev/null | command sed 's/[*] //')
   if [[ $? -eq 0 && -n "${cur_git_branch}" ]]; then
     echo " ${cur_git_branch}"
   else
