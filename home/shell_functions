@@ -103,22 +103,26 @@ fi
 
 function promptlineVcsDirName() {
   local cur_git_dir=$(command git rev-parse --show-toplevel 2> /dev/null)
-  if [[ $? -eq 0 ]]; then
+  if [[ $? -eq 0 && -n "${cur_git_dir}" ]]; then
       echo $(basename ${cur_git_dir} 2> /dev/null)
   fi
 }
 
 function promptlineVcs() {
   local cur_git_dir=$(command git rev-parse --show-toplevel 2> /dev/null)
-  if [[ $? -eq 0 ]]; then
+  if [[ $? -eq 0 && -n "${cur_git_dir}" ]]; then
     echo " git"
+  else
+    echo ""
   fi
 }
 
 function promptlineVcsBranch() {
-  local cur_git_branch=$(command git --no-pager branch | command sed 's/[*]//')
-  if [[ $? -eq 0 ]]; then
+  local cur_git_branch=$(command git --no-pager branch 2> /dev/null | command sed 's/[*]//')
+  if [[ $? -eq 0 && -n "${cur_git_branch}" ]]; then
     echo " ${cur_git_branch}"
+  else
+    echo ""
   fi
 }
 
