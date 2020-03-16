@@ -1190,8 +1190,19 @@ function tee() {
 
     eval "${finalCommand}" | command_tee "${fileName}" | command_nl
 
-    echo "==========================================\n\n"
-    echo "=========================================="
+    local length=${#2}
+
+    printf "\n\n==============="
+    for (( i = 0; i <= length; i++ )); do
+        printf "="
+    done
+
+    echo "\nOutput: ${2}"
+
+    for (( i = 0; i <= length; i++ )); do
+        printf "="
+    done
+    printf "===============\n\n"
 }
 
 function pid() {
