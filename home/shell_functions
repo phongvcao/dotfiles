@@ -1202,7 +1202,7 @@ function tee() {
     for (( i = 0; i <= length; i++ )); do
         printf "="
     done
-    printf "===============\n\n"
+    printf "===============\n\n\n"
 }
 
 function pid() {
