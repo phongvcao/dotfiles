@@ -1694,7 +1694,7 @@ nnoremap <leader>M :silent! Unite -prompt=Maps(n)>\ \  mapping -auto-highlight -
 nnoremap <leader>m :silent! Unite -prompt=BMarks>\ \  vim_bookmarks -auto-highlight -start-insert -buffer-name=Bookmarks<CR>
 nnoremap <leader>j :silent! Unite -prompt=Jumps>\ \  jump -auto-highlight -start-insert -buffer-name=Jumps<CR>
 " nnoremap <leader>rf :silent! Unite find -start-insert -buffer-name=uf -resume<CR>
-nnoremap <leader>/ :silent! Unite -prompt=Hist(/)>\ \  history/search -auto-highlight -start-insert -buffer-name=Search\ History<CR>
+nnoremap <leader>/ :silent! Unite -prompt=Hist(/)>\ \  history/search -start-insert -buffer-name=Search\ History<CR>
 nnoremap <leader>c :silent! Unite -prompt=Changes>\ \  change -auto-highlight -start-insert -buffer-name=Change\ History<CR>
 nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -start-insert -buffer-name=Ctags<CR>
 " nnoremap <leader>hr/ :silent! Unite history/search -start-insert -buffer-name=u/ -resume<CR>
