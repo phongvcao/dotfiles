@@ -8,6 +8,10 @@ elseif has('unix')
     let g:vimPath=$HOME . '/.vim'
 endif
 
+if filereadable( expand( '$HOME/.custom_pre_vimrc' ) )
+    source $HOME/.custom_pre_vimrc
+endif
+
 " BEGIN: vim-plug
 
 set nocompatible
@@ -106,6 +110,7 @@ else
     Plug 'dense-analysis/ale'
 endif
 " END: dense-analysis/ale
+
 Plug 'osyo-manga/vim-over'
 Plug 'terryma/vim-multiple-cursors'
 
@@ -460,8 +465,8 @@ call plug#end()
 
 " END: vim-plug
 
-if filereadable( expand( '$HOME/.custom_vimrc' ) )
-    source $HOME/.custom_vimrc
+if filereadable( expand( '$HOME/.custom_post_vimrc' ) )
+    source $HOME/.custom_post_vimrc
 endif
 
 let g:vimBackupDir = g:vimPath . '/backup'
