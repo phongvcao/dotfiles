@@ -2543,7 +2543,8 @@ function! SetOmnifunc()
 endfunction
 
 function! HighlightCurrentLineNum()
-    highlight CursorLineNr ctermfg=226 cterm=bold guifg=Yellow gui=bold
+    set cursorline
+    highlight! CursorLineNr ctermfg=226 cterm=bold guifg=Yellow gui=bold
 endfunction
 
 function! HighlightVertSplit()
