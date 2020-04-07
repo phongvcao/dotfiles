@@ -11,8 +11,6 @@ function uninstall() {
 
 }
 
-uninstall ~/Library/Preferences/com.googlecode.iterm2.plist
-uninstall ~/Library/Preferences/com.googlecode.iterm2.private.plist
 uninstall ~/.config/iTerm2
 uninstall ~/.config/autostart
 uninstall ~/.config/bleachbit

@@ -11,12 +11,6 @@
     - ~/.local/share/Trash/files
 
 - link:
-    ~/Library/Preferences/com.googlecode.iterm2.plist:
-        create: false
-        path: home/config/iTerm2/com.googlecode.iterm2.plist
-    ~/Library/Preferences/com.googlecode.iterm2.private.plist:
-        create: false
-        path: home/config/iTerm2/com.googlecode.iterm2.private.plist
     ~/.config/iTerm2: home/config/iTerm2
     ~/.config/autostart: home/config/autostart
     ~/.config/bleachbit: home/config/bleachbit
