@@ -749,7 +749,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Silence Bell</key>
-			<true/>
+			<false/>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -1568,6 +1568,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/phongvcao/.dotfiles/home/config/iTerm2</string>
+	<key>PromptOnQuitEvenIfThereAreNoWindows</key>
+	<false/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
