@@ -11,6 +11,9 @@ function uninstall() {
 
 }
 
+uninstall ~/Library/Preferences/com.googlecode.iterm2.plist
+uninstall ~/Library/Preferences/com.googlecode.iterm2.private.plist
+uninstall ~/.config/iTerm2
 uninstall ~/.config/autostart
 uninstall ~/.config/bleachbit
 uninstall ~/.config/brasero
@@ -26,7 +29,6 @@ uninstall ~/.config/gtk-2.0
 uninstall ~/.config/gtk-3.0
 uninstall ~/.config/htop
 uninstall ~/.config/i3
-uninstall ~/.config/iTerm2
 uninstall ~/.config/karabiner
 uninstall ~/.config/keepassxc
 uninstall ~/.config/lxterminal
