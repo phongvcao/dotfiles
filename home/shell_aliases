@@ -113,6 +113,9 @@ alias "finb"="bfs"
 alias "ref"="refresh"
 alias "refresh"="cd ${HOME}; cd -"
 
+# Force removal of a package
+alias "purge"="sudo dpkg --purge --force-all"
+
 # Single-letter aliases for commonly-used command
 alias "c"="cat"
 alias "C"="command"
