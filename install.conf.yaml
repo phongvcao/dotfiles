@@ -62,6 +62,10 @@
     ~/.config/user-dirs.locale: home/config/user-dirs.locale
     ~/.config/gdb: home/config/gdb
     ~/.config/pudb/pudb.cfg: home/config/pudb/pudb.cfg
+    ~/Library/Application Support/glances:
+        if: '[ `uname` = Darwin ]'
+        path: home/config/glances
+    ~/.config/glances: home/config/glances
 
     ~/.gdbinit.d: home/gdbinit.d
     ~/.grc: home/grc

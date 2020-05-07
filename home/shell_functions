@@ -1321,6 +1321,14 @@ function lsmodg() {
 echo "$(lsmod | command grep -i $*)"
 }
 
+function monitor() {
+    if [[ -n "$1" ]]; then
+        command glances --disable-webui --disable-bold --disable-bg --fs-free-space --sparkline -f "$1"
+    else
+        command glances --disable-webui --disable-bold --disable-bg --fs-free-space --sparkline
+    fi
+}
+
 function sshp() {
     _sshp "$@"
 }

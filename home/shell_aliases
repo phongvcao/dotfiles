@@ -112,6 +112,7 @@ alias "find"="dfs"
 alias "finb"="bfs"
 alias "ref"="refresh"
 alias "refresh"="cd ${HOME}; cd -"
+alias "mon"="monitor"
 
 # Force removal of a package
 alias "purge"="sudo dpkg --purge --force-all"
