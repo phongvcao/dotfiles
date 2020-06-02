@@ -1702,7 +1702,7 @@ nnoremap <leader>j :silent! Unite -prompt=Jumps>\ \  jump -auto-highlight -start
 " nnoremap <leader>rf :silent! Unite find -start-insert -buffer-name=uf -resume<CR>
 nnoremap <leader>/ :silent! Unite -prompt=Hist(/)>\ \  history/search -start-insert -buffer-name=Search\ History<CR>
 nnoremap <leader>c :silent! Unite -prompt=Changes>\ \  change -auto-highlight -start-insert -buffer-name=Change\ History<CR>
-nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -start-insert -buffer-name=Ctags<CR>
+nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -winheight=20 -prompt-direction=top -start-insert -buffer-name=Ctags<CR>
 " nnoremap <leader>hr/ :silent! Unite history/search -start-insert -buffer-name=u/ -resume<CR>
 nnoremap <leader>; :silent! Unite -prompt=Hist(:)>\ \  history/command command -auto-highlight -start-insert -buffer-name=Command\ History<CR>
 " nnoremap <leader>hr; :silent! Unite history/command -start-insert -buffer-name=u/ -resume<CR>
