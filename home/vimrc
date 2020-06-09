@@ -150,7 +150,7 @@ Plug 'vim-scripts/diffchar.vim', {
             \ 'on' : [ 'SDChar', 'RDChar' ] }
 Plug 'phongvcao/vim-stardict', {
             \ 'on' : [ 'StarDict', 'StarDictCursor' ] }
-Plug 'vasconcelloslf/vim-interestingwords'
+Plug 'lfv89/vim-interestingwords'
 if has( 'gui_running' )
     Plug 'zefei/vim-colortuner', {
                 \ 'on' : 'Colortuner' }
@@ -878,6 +878,7 @@ nnoremap <leader>u :UndotreeToggle<CR>
 " vim-interestingwords settings
 let g:interestingWordsRandomiseColors = 1
 let g:interestingWordsDefaultMappings = 1
+let g:interestingWordsTermColors = ['1', '2', '4', '5', '6', '7', '9', '13', '15']
 nnoremap <Insert> <Plug>InterestingWords
 nnoremap <localleader>w :call InterestingWords('n')<CR>
 vnoremap <localleader>w :call InterestingWords('v')<CR>
