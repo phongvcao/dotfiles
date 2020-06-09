@@ -195,7 +195,11 @@ Plug 'ntpeters/vim-better-whitespace', {
             \ 'on' : [ 'ToggleWhitespace', 'StripWhitespace' ] }
 Plug 'osyo-manga/vim-anzu'
 Plug 'qxxxb/vim-searchhi'
-Plug 'MattesGroeger/vim-bookmarks'
+Plug 'MattesGroeger/vim-bookmarks', {
+            \ 'on' : [ 'BookmarkToggle', 'BookmarkAnnotate', 'BookmarkShowAll',
+            \          'BookmarkNext', 'BookmarkPrev', 'BookmarkClear',
+            \          'BookmarkClearAll', 'BookmarkMoveUp', 'BookmarkMoveDown',
+            \          'BookmarkMoveToLine' ] }
 
 "=====================================
 " END OF INSPECTED/RESEARCHED SO FAR
@@ -1774,10 +1778,12 @@ nnoremap <localleader>t :tabnew<CR>:NeoMRU<CR>
 nnoremap <leader>sf :call ToggleSearchFoldOpen()<CR>
 nnoremap ov :NeoMRUSplit<Space>
 nnoremap oh :NeoMRUVSplit<Space>
+nnoremap OV :NeoMRUTopSplit<Space>
+nnoremap OH :NeoMRULeftVSplit<Space>
 nnoremap t :NeoMRUTab<Space>
 let g:neomru#file_mru_path = $HOME . "/.vim/cache/neomru/file"
 let g:neomru#directory_mru_path = $HOME . "/.vim/cache/neomru/directory"
-nnoremap O :NeoMRU<CR>
+" nnoremap O :NeoMRU<CR>
 nnoremap <leader>o <nop>
 let g:neomru#file_mru_limit = 1000000 
 let g:neomru#directory_mru_limit = 1000000 
@@ -1830,6 +1836,42 @@ function! InvokeNeoMRUSplit(...)
     endif
 endfunction
 command! -nargs=* -complete=file NeoMRUSplit call InvokeNeoMRUSplit( <f-args> )
+
+function! InvokeNeoMRULeftVSplit(...)
+    set nosplitright
+    let l:arg = join( a:000, '\\ ' )
+    if ( l:arg != '' )
+        if ! isdirectory( expand( l:arg ) )
+            execute "vsplit " . l:arg
+        else
+            execute "vsplit"
+            execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        endif
+    else
+        execute "vsplit"
+        execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+    endif
+    set splitright
+endfunction
+command! -nargs=* -complete=file NeoMRULeftVSplit call InvokeNeoMRULeftVSplit( <f-args> )
+
+function! InvokeNeoMRUTopSplit(...)
+    set nosplitbelow
+    let l:arg = join( a:000, '\\ ' )
+    if ( l:arg != '' )
+        if ! isdirectory( expand( l:arg ) )
+            execute "split " . l:arg
+        else
+            execute "split"
+            execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        endif
+    else
+        execute "split"
+        execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+    endif
+    set splitbelow
+endfunction
+command! -nargs=* -complete=file NeoMRUTopSplit call InvokeNeoMRUTopSplit( <f-args> )
 
 function! InvokeNeoMRUTab(...)
     let l:arg = join( a:000, '\\ ' )
