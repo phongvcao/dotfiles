@@ -1094,6 +1094,14 @@ function cat() {
     fi
 }
 
+function gitdiff() {
+if [[ -f "$1" ]]; then
+    command vim -c "Gdiffsplit!" "$1"
+else
+    echo "\nError: File \"$1\" not found\n"
+fi
+}
+
 function dirdiff() {
 if [[ -d "$1" ]]; then
     if [[ -d "$2" ]]; then

@@ -2159,6 +2159,9 @@ let g:lightline = {
     \ }
 let g:unite_force_overwrite_statusline = 0
 
+" vim-fugitive settings
+nnoremap <localleader>dg :Gdiffsplit!<CR>
+
 " gv.vim settings
 function! InvokeGVAndMagit()
     :GV
