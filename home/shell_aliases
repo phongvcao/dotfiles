@@ -141,9 +141,6 @@ alias "grep"="g"
 alias "a"="ag"
 alias "_"="cd -"
 alias "q"="quit"
-
-# Find and replace with far.vim
-alias "far"="command vim -c 'let g:far#window_layout=\"current\" | silent! Farp'"
 alias "fr"="far"
 
 # Tmuxinator
