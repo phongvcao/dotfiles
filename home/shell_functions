@@ -1109,7 +1109,7 @@ else
 fi
 }
 
-function diff() {
+function _diff() {
 if [[ -d "$1" ]]; then
     if [[ -d "$2" ]]; then
         command vim -c "DirDiff "$1" "$2""

@@ -49,6 +49,7 @@ alias "lsd"="command_ls -d -A -l */ .*/"
 alias "ls"="lsg"
 alias "lr"="lsrgr"
 alias "lsa"="lsag"
+alias "diff"="_diff"
 # ln -s -f <original_file> <destination_symlink>
 alias "ln"="command ln -s -f"
 alias "vi"="vim"
