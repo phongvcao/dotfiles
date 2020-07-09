@@ -1097,20 +1097,33 @@ function cat() {
 function gitdiff() {
 if [[ -f "$1" ]]; then
     command vim -c "Gdiffsplit!" "$1"
+elif [[ -d "$1" ]]; then
+    command git diff "$1"
 else
-    echo "\nError: File \"$1\" not found\n"
+    local cur_git_dir=$(command git rev-parse --git-dir 2> /dev/null)
+    if [[ -n "${cur_git_dir}" ]]; then
+        command git diff "$(pwd)"
+    else
+        echo "\nError: File / Directory \"$1\" not found\n"
+    fi
 fi
 }
 
-function dirdiff() {
+function diff() {
 if [[ -d "$1" ]]; then
     if [[ -d "$2" ]]; then
         command vim -c "DirDiff "$1" "$2""
     else
         echo "\nError: Directory \"$2\" not found\n"
     fi
+elif [[ -f "$1" ]]; then
+    if [[ -f "$2" ]]; then
+        command vimdiff "$1" "$2"
+    else
+        echo "\nError: File \"$2\" not found\n"
+    fi
 else
-    echo "\nError: Directory \"$1\" not found\n"
+    echo "\nError: File / Directory \"$1\" not found\n"
 fi
 }
 

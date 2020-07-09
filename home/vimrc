@@ -285,6 +285,7 @@ Plug 'LaTeX-Box-Team/LaTeX-Box', {
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'aymericbeaumet/symlink.vim'
+Plug 'moll/vim-bbye'
 " END: junegunn/gv.vim
 Plug 'jreybert/vimagit'
 
