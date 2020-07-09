@@ -213,6 +213,8 @@ Plug 'haya14busa/vim-easyoperator-phrase'
 Plug 'haya14busa/vim-easyoperator-line'
 " END: easymotion/vim-easymotion
 
+Plug 'brooth/far.vim', {
+            \ 'on' : [ 'Far', 'Farr', 'Farf', 'Refar', 'Fardo', 'Farundo', 'Farp' ] }
 Plug 't9md/vim-choosewin', {
             \ 'on' : [ 'ChooseWin', 'ChooseWinSwap', 'ChooseWinSwapStay' ] }
 
@@ -783,8 +785,8 @@ nnoremap <localleader>p/ "/p
 xnoremap <localleader>p: ":p
 xnoremap <localleader>p/ "/p
 " Easy window navigation
-nnoremap <leader>R <C-w>R
-nnoremap <leader>X <C-w><C-x>
+" nnoremap <leader>R <C-w>R
+" nnoremap <leader>X <C-w><C-x>
 nnoremap ye y$
 nnoremap yl ^vg_y$
 nnoremap <C-h> <C-w>h
@@ -1355,7 +1357,13 @@ xmap <Space>;v <Plug>(easyoperator-line-select)
 nmap <Space>;d <Plug>(easyoperator-line-delete)
 nmap <Space>;y <Plug>(easyoperator-line-yank)
 
-"vim-choosewin settings
+" far.vim settings
+nnoremap <leader>R :Farp<CR>
+let g:far#source = 'rg'
+let g:far#limit = 100000
+let g:far#preview_window_height = 40
+
+" vim-choosewin settings
 nnoremap <C-w> :ChooseWin<CR>
 let g:choosewin_overlay_clear_multibyte = 1
 let g:choosewin_overlay_enable = 1
