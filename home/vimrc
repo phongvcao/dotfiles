@@ -1362,6 +1362,7 @@ nnoremap <leader>R :Farp<CR>
 let g:far#source = 'rg'
 let g:far#limit = 100000
 let g:far#preview_window_height = 40
+let g:far#window_layout = 'tab'
 
 " vim-choosewin settings
 nnoremap <C-w> :ChooseWin<CR>

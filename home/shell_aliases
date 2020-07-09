@@ -143,7 +143,7 @@ alias "_"="cd -"
 alias "q"="quit"
 
 # Find and replace with far.vim
-alias "far"="command vim -c 'silent! Farp'"
+alias "far"="command vim -c 'let g:far#window_layout=\"current\" | silent! Farp'"
 alias "fr"="far"
 
 # Tmuxinator
