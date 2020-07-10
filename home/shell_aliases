@@ -126,7 +126,8 @@ alias "w"="stardict"
 alias "W"="vstardict"
 alias "w"=""
 # Type command "color" for more details
-alias "f"="fzf"
+# alias "f"="fzf"
+alias "f"="far"
 alias "v"="vim"
 alias "V"="vimrc"
 alias "l"="lsg"
@@ -140,7 +141,6 @@ alias "grep"="g"
 alias "a"="ag"
 alias "_"="cd -"
 alias "q"="quit"
-alias "fr"="far"
 
 # Tmuxinator
 # Never alias tmux as it would hinder FZF
