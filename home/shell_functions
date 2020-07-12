@@ -101,10 +101,6 @@ else
 fi
 }
 
-function far() {
-    command vim -c 'let g:far#window_layout="current" | silent! Farp' 
-}
-
 function promptlineVcsDirName() {
   local cur_git_dir=$(command git rev-parse --show-toplevel 2> /dev/null)
   if [[ $? -eq 0 && -n "${cur_git_dir}" ]]; then
@@ -295,7 +291,7 @@ if [[ -z "$(command -v rg)" ]]; then
     elif [[ -n "$1" ]]; then
         fgr "$@"
     else
-        far
+        command vim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 else
     if [[ -n "$3" ]]; then
@@ -337,7 +333,7 @@ else
             command_frg_stream "$1"
         fi
     else
-        far
+        command vim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 fi
 }
@@ -349,7 +345,7 @@ if [[ -z "$(command -v rg)" ]]; then
     elif [[ -n "$1" ]]; then
         fgs "$@"
     else
-        far
+        command vim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 else
     if [[ -n "$3" ]]; then
@@ -391,7 +387,7 @@ else
             command_frg_stream --case-sensitive "$1"
         fi
     else
-        far
+        command vim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 fi
 }
@@ -402,7 +398,7 @@ if [[ "$(isAsciiOnly $1)" == 1 ]]; then
 elif [[ -n "$1" ]]; then
     fgv "$@"
 else
-    far
+    command vim -c 'let g:far#window_layout="current" | silent! Farp'
 fi
 }
 
@@ -666,7 +662,7 @@ if [[ -z "$(command -v rg)" ]]; then
     elif [[ -n "$1" ]]; then
         rgr "$@"
     else
-        far
+        command vim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 else
     if [[ -n "$3" ]]; then
@@ -708,7 +704,7 @@ else
             command_rg_stream "$1"
         fi
     else
-        far
+        command vim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 fi
 }
