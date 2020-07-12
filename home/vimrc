@@ -1359,7 +1359,7 @@ nmap <Space>;d <Plug>(easyoperator-line-delete)
 nmap <Space>;y <Plug>(easyoperator-line-yank)
 
 " far.vim settings
-nnoremap <leader>R :Farp<CR>
+nnoremap <leader>R :let g:far#window_layout="tab"<CR>:Farp<CR>
 let g:far#source = 'rg'
 let g:far#limit = 100000
 let g:far#preview_window_height = 40
@@ -1372,7 +1372,7 @@ let g:far#enable_undo = 0
 " let g:far#auto_write_replaced_buffers = 1
 " let g:far#auto_write_undo_buffers = 1
 let g:far#mapping = {
-            \ 'jump_to_source' : [ '<Insert>' ],
+            \ 'jump_to_source' : [ 'oo' ],
             \ 'open_preview' : [ '<CR>' ],
             \ 'close_preview' : [ '<C-c>' ], }
 
