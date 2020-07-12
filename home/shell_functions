@@ -292,8 +292,10 @@ function g() {
 if [[ -z "$(command -v rg)" ]]; then
     if [[ "$(isAsciiOnly $1)" == 1 ]]; then
         LC_ALL=C fgr "$@"
-    else
+    elif [[ -n "$1" ]]; then
         fgr "$@"
+    else
+        far
     fi
 else
     if [[ -n "$3" ]]; then
@@ -335,7 +337,7 @@ else
             command_frg_stream "$1"
         fi
     else
-        command_frg "$@"
+        far
     fi
 fi
 }
@@ -344,8 +346,10 @@ function gs() {
 if [[ -z "$(command -v rg)" ]]; then
     if [[ "$(isAsciiOnly $1)" == 1 ]]; then
         LC_ALL=C fgs "$@"
-    else
+    elif [[ -n "$1" ]]; then
         fgs "$@"
+    else
+        far
     fi
 else
     if [[ -n "$3" ]]; then
@@ -387,7 +391,7 @@ else
             command_frg_stream --case-sensitive "$1"
         fi
     else
-        command_frg --case-sensitive "$@"
+        far
     fi
 fi
 }
@@ -395,8 +399,10 @@ fi
 function gv() {
 if [[ "$(isAsciiOnly $1)" == 1 ]]; then
     LC_ALL=C fgv "$@"
-else
+elif [[ -n "$1" ]]; then
     fgv "$@"
+else
+    far
 fi
 }
 
@@ -657,8 +663,10 @@ function gr() {
 if [[ -z "$(command -v rg)" ]]; then
     if [[ "$(isAsciiOnly $1)" == 1 ]]; then
         LC_ALL=C rgr "$@"
-    else
+    elif [[ -n "$1" ]]; then
         rgr "$@"
+    else
+        far
     fi
 else
     if [[ -n "$3" ]]; then
@@ -700,7 +708,7 @@ else
             command_rg_stream "$1"
         fi
     else
-        command_rg "$@"
+        far
     fi
 fi
 }

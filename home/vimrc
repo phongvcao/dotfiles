@@ -1365,6 +1365,12 @@ let g:far#limit = 100000
 let g:far#preview_window_height = 40
 let g:far#window_layout = 'tab'
 let g:far#status_line = 1
+let g:far#auto_preview = 0
+let g:far#auto_preview_on_start = 0
+let g:far#mapping = {
+            \ 'jump_to_source' : [ '<Insert>' ],
+            \ 'open_preview' : [ '<CR>' ],
+            \ 'close_preview' : [ '<C-c>' ], }
 
 " vim-choosewin settings
 nnoremap <C-w> :ChooseWin<CR>
@@ -2646,6 +2652,7 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight FarReplaceVal ctermfg=9
     autocmd BufEnter * :highlight FarFileStats ctermfg=2
     autocmd BufEnter * :highlight FarStatusLine ctermbg=8 ctermfg=4
+    autocmd BufEnter * :highlight FarExcludedItem ctermfg=10
 
     " goyo.vim settings
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
