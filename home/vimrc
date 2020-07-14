@@ -339,7 +339,9 @@ endif
 " No lazy-loading for wavded/vim-stylus.
 " It must be started by default
 Plug 'wavded/vim-stylus'
-Plug 'jelera/vim-javascript-syntax', {
+Plug 'pangloss/vim-javascript', {
+            \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
+Plug 'MaxMEllon/vim-jsx-pretty', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 " No lazy-loading for digitaltoad/vim-jade.
 " It must be started by default
