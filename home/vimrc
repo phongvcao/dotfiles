@@ -326,6 +326,8 @@ Plug 'fatih/vim-go', {
             \ 'do' : ':GoInstallBinaries' }
 
 " Plugins (TypeScript, JavaScript, XML, HTML, CSS)
+Plug 'hotoo/jsgf.vim', {
+            \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'HerringtonDarkholme/yats.vim', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'moll/vim-node', {
