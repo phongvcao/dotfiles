@@ -1675,6 +1675,10 @@ let g:ale_use_global_executables = 1
 "             \          'clazy', 'cppcheck', 'cpplint', 'cquery', 'flawfinder',
 "             \          'gcc' ] }
 
+" hotoo/jsgf.vim settings
+" Go to the file under cursor / visual selection
+nnoremap gf gf
+
 " yats.vim settings
 set re=0
 let g:yats_host_keyword = 1
