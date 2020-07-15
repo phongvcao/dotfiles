@@ -79,6 +79,8 @@ Plug 'Shougo/unite-session'
 Plug 'chrisbra/BufTimer', {
             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " END: Shougo/unite.vim
+Plug 'osyo-manga/vim-hopping', {
+            \ 'on' : [ 'HoppingStart' ] }
 Plug 'vim-scripts/YankRing.vim'
 
 " BEGIN: neoclide/coc.nvim
@@ -904,7 +906,7 @@ nnoremap <C-Insert> <Plug>ShowWhiteToggle
 nnoremap <localleader><Space> :ToggleWhitespace<CR>
 
 " vim-repeat settings
-nmap <localleader><leader> <Plug>(RepeatDot)
+nmap <nop> <Plug>(RepeatDot)
 
 " vim-endwise settings
 " let g:endwise_no_mappings = 1
@@ -1815,6 +1817,15 @@ nnoremap <leader>ss :call SaveUniteSession()<CR>
 
 " vim-dict settings
 nnoremap <leader>d :Dict<Space>
+
+" vim-hopping settings
+nnoremap <leader><localleader>? :HoppingStart<CR>
+let g:hopping#keymapping = {
+            \	"\<C-n>" : "<Over>(hopping-next)",
+            \	"\<C-p>" : "<Over>(hopping-prev)",
+            \	"\<C-k>" : "<Over>(scroll-u)",
+            \	"\<C-j>" : "<Over>(scroll-d)", }
+let g:hopping#prompt = "Filter:> "
 
 " YankRing.vim settings
 let g:yankring_window_height = 30
