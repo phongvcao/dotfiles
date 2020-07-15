@@ -404,7 +404,7 @@ Plug 'arnaud-lb/vim-php-namespace', {
 " Plugin (CSV)
 Plug 'chrisbra/csv.vim'
 
-" Plugin (Syntax Highlighting & Indent)
+" Plugin (Syntax Highlighting & Indentation for ALL languages)
 Plug 'sheerun/vim-polyglot'
 
 " BEGIN: garbas/vim-snipmate
