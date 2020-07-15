@@ -11,7 +11,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             zsh git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
             cmake xclip docker curl gpatch htop llvm yarn man-db ripgrep \
-            tavianator/tap/bfs atool unrar zip p7zip glances bat
+            tavianator/tap/bfs atool unrar zip p7zip glances bat ranger flake8
         brew cask install vagrant
         brew cask fetch eloston-chromium
         brew cask install eloston-chromium
@@ -28,7 +28,7 @@ else
             wget bash emacs gdb patch m4 make nano python unzip cmake snapd \
             ibus-unikey feh xclip vagrant shutter docker bleachbit gparted bleachbit \
 	        curl htop g++ python-pip python3-pip lldb clang yarn ripgrep bfs \
-	        atool unrar zip libarchive-tools p7zip-full glances bat
+	        atool unrar zip libarchive-tools p7zip-full glances bat ranger flake8
 	    # NOTE: Also install ungoogled-chromium
         sudo snap install ccls go --classic
     fi
@@ -99,26 +99,6 @@ if [ -z "$(command -v pip3)" ]; then
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     command sudo python3 get-pip.py
     command sudo python2 get-pip.py
-fi
-
-#
-# Install ranger
-#
-if [ -z "$(command -v ranger)" ]; then
-    echo
-    echo "Installing ranger"
-    command sudo python3 -m pip install ranger-fm
-    command sudo python2 -m pip install ranger-fm
-fi
-
-#
-# Install flake8
-#
-if [ -z "$(command -v flake8)" ]; then
-    echo
-    echo "Installing flake8"
-    command sudo python3 -m pip install flake8
-    command sudo python2 -m pip install flake8
 fi
 
 #
