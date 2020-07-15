@@ -68,16 +68,6 @@ if [[ -d "${FONT_DIR}" ]]; then
         https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Bold-Italic/complete/DejaVu%20Sans%20Mono%20Bold%20Oblique%20Nerd%20Font%20Complete%20Mono.ttf 
     fc-cache -f -v
 fi
-# if [[ -d "${FONT_DIR}" ]]; then
-#     curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_for_Powerline.ttf --create-dirs \
-#         https://github.com/powerline/fonts/raw/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20for%20Powerline.ttf
-#     curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Oblique_for_Powerline.ttf --create-dirs \
-#         https://github.com/powerline/fonts/raw/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Oblique%20for%20Powerline.ttf
-#     curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_for_Powerline.ttf --create-dirs \
-#         https://github.com/powerline/fonts/raw/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Bold%20for%20Powerline.ttf
-#     curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Oblique_for_Powerline.ttf --create-dirs \
-#         https://github.com/powerline/fonts/raw/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Bold%20Oblique%20for%20Powerline.ttf
-# fi
 
 #
 # Install autojump
