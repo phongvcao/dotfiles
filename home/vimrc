@@ -1664,6 +1664,7 @@ let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_autosave = 0
 let g:go_template_autocreate = 0
+let g:go_textobj_enabled = 0
 nnoremap GL :GoDebugStart<CR>
 nnoremap GT :GoDebugTest<CR>
 nnoremap GR :GoDebugRestart<CR>
