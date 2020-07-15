@@ -179,6 +179,32 @@
 " Plug 'pangloss/vim-javascript', {
 "             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 " Plug 'Igorjan94/codeforces.vim'
+" Plug 'octol/vim-cpp-enhanced-highlight', {
+"             \ 'for' : [ 'cpp', 'c' ] }
+" Plug 'hdima/python-syntax', {
+"             \ 'for' : [ 'python', 'vim' ] }
+" Plug 'vim-perl/vim-perl', {
+"             \ 'for' : 'perl' }
+" Plug 'HerringtonDarkholme/yats.vim', {
+"             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
+" Plug 'wavded/vim-stylus'
+" Plug 'pangloss/vim-javascript', {
+"             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
+" Plug 'MaxMEllon/vim-jsx-pretty', {
+"             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
+" " No lazy-loading for digitaltoad/vim-jade.
+" " It must be started by default
+" Plug 'digitaltoad/vim-jade'
+" Plug 'elzr/vim-json', {
+"             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
+" Plug 'MPogoda/octave.vim--', {
+"             \ 'for' : 'octave' }
+" Plug 'ingydotnet/yaml-vim', {
+"             \ 'for' : 'yaml' }
+" Plug 'pearofducks/ansible-vim', {
+"             \ 'for' : [ 'ansible', 'ansible_template', 'ansible_hosts' ] }
+" Plug 'StanAngeloff/php.vim', {
+"             \ 'for' : 'php' }
 
 " syntastic settings
 " Extra Checkers List:

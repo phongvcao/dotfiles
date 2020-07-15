@@ -26,7 +26,7 @@ else
     " Install missing plugins on startup
     autocmd VimEnter *
                 \ if len( filter( values( g:plugs ), '!isdirectory(v:val.dir)' ) )
-                \ | PlugInstall --sync | PlugUpdate | PlugUpgrade
+                \ | PlugInstall --sync | PlugUpdate | PlugUpgrade | PlugClean!
                 \ | endif
 endif
 
@@ -203,6 +203,8 @@ Plug 'MattesGroeger/vim-bookmarks', {
             \          'BookmarkNext', 'BookmarkPrev', 'BookmarkClear',
             \          'BookmarkClearAll', 'BookmarkMoveUp', 'BookmarkMoveDown',
             \          'BookmarkMoveToLine' ] }
+Plug 'prettier/vim-prettier', {
+            \ 'do': 'yarn install' }
 
 "=====================================
 " END OF INSPECTED/RESEARCHED SO FAR
@@ -299,22 +301,16 @@ Plug 'nacitar/a.vim', {
             \ 'for' : [ 'cpp', 'c', 'objc', 'objcpp', 'coffee', 'cython' ] }
 Plug 'vim-utils/vim-man', {
             \ 'on' : [ 'Man', 'Vman', 'Sman', 'Tman' ] }
-Plug 'octol/vim-cpp-enhanced-highlight', {
-            \ 'for' : [ 'cpp', 'c' ] }
 
 " Plugins (SQL)
 Plug 'stardiviner/AutoSQLUpperCase.vim', {
             \ 'for' : 'sql' }
 
 " Plugins (Python)
-Plug 'hdima/python-syntax', {
-            \ 'for' : [ 'python', 'vim' ] }
 Plug 'fs111/pydoc.vim', {
             \ 'on' : 'Pydoc' }
 
 " Plugins (Perl)
-Plug 'vim-perl/vim-perl', {
-            \ 'for' : 'perl' }
 Plug 'c9s/perlomni.vim', {
             \ 'for' : 'perl' }
 Plug 'hotchpotch/perldoc-vim', {
@@ -328,8 +324,6 @@ Plug 'fatih/vim-go', {
 " Plugins (TypeScript, JavaScript, XML, HTML, CSS)
 Plug 'hotoo/jsgf.vim', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
-Plug 'HerringtonDarkholme/yats.vim', {
-            \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'moll/vim-node', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'sidorares/node-vim-debugger', {
@@ -340,21 +334,11 @@ if has( 'python' )
 endif
 " No lazy-loading for wavded/vim-stylus.
 " It must be started by default
-Plug 'wavded/vim-stylus'
-Plug 'pangloss/vim-javascript', {
-            \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
-Plug 'MaxMEllon/vim-jsx-pretty', {
-            \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
-" No lazy-loading for digitaltoad/vim-jade.
-" It must be started by default
-Plug 'digitaltoad/vim-jade'
 Plug 'othree/javascript-libraries-syntax.vim', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'maksimr/vim-jsbeautify', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'beautify-web/js-beautify', {
-            \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
-Plug 'elzr/vim-json', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php' ] }
 Plug 'heavenshell/vim-jsdoc', {
             \ 'on' : 'JsDoc' }
@@ -386,8 +370,6 @@ Plug 'godlygeek/tabular'
 " END: plasticboy/vim-markdown
 
 " Plugins (MATLAB, Octave)
-Plug 'MPogoda/octave.vim--', {
-            \ 'for' : 'octave' }
 Plug 'pycckuu/MatlabFilesEdition', {
             \ 'for' : 'matlab' }
 
@@ -401,12 +383,8 @@ Plug 'hashivim/vim-vagrant', {
             \ 'on' : 'Vagrant' }
 
 " Plugins (Ansible, YAML, Jinja2)
-Plug 'ingydotnet/yaml-vim', {
-            \ 'for' : 'yaml' }
 Plug 'chase/vim-ansible-yaml', {
             \ 'for' : [ 'ansible', 'ansible_hosts' ] }
-Plug 'pearofducks/ansible-vim', {
-            \ 'for' : [ 'ansible', 'ansible_template', 'ansible_hosts' ] }
 Plug 'Glench/Vim-Jinja2-Syntax', {
             \ 'for' : [ 'html', 'xhtml', 'jinja', 'htmldjango' ] }
 
@@ -414,8 +392,6 @@ Plug 'Glench/Vim-Jinja2-Syntax', {
 Plug 'tobyS/pdv', {
             \ 'for' : 'php' }
 Plug 'shawncplus/phpcomplete.vim', {
-            \ 'for' : 'php' }
-Plug 'StanAngeloff/php.vim', {
             \ 'for' : 'php' }
 Plug 'miya0001/vim-dict-wordpress', {
             \ 'for' : 'php' }
@@ -427,6 +403,9 @@ Plug 'arnaud-lb/vim-php-namespace', {
 
 " Plugin (CSV)
 Plug 'chrisbra/csv.vim'
+
+" Plugin (Syntax Highlighting & Indent)
+Plug 'sheerun/vim-polyglot'
 
 " BEGIN: garbas/vim-snipmate
 Plug 'garbas/vim-snipmate'
@@ -1679,10 +1658,6 @@ let g:ale_use_global_executables = 1
 " Go to the file under cursor / visual selection
 nnoremap gf gf
 
-" yats.vim settings
-set re=0
-let g:yats_host_keyword = 1
-
 " vim-go settings
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
@@ -2359,8 +2334,13 @@ let g:surround_no_mappings = 0
 " *yss* : Add surroundings for current line
 " *ySS* : Add surroundings for current line AND put it on new line
 
-" python-syntax settings
+" vim-polyglot settings
+set re=0
+let g:yats_host_keyword = 1
 let g:python_highlight_all = 1
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
 
 " vim-windowswap settings
 let g:windowswap_map_keys = 0 "prevent default bindings
