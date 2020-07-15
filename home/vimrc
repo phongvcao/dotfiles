@@ -1804,10 +1804,10 @@ let g:unite_enable_auto_select = 0
 
 " unite-session settings
 function! SaveUniteSession()
-    if exists( '${VIM_SESSION_PREFIX}' )
-        execute "silent! UniteSessionSave " . $VIM_SESSION_PREFIX . strftime("_%Y-%m-%d_%H-%M-%S") . ".vim"
+    if exists( '${TMUX}' )
+        execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . "_" . substitute(system("tmux display-message -p '#W'"), '\n', '', 'g')  . ".vim"
     else
-        execute "silent! UniteSessionSave " . substitute(system("tmux display-message -p '#W'"), '\n', '', 'g') . strftime("_%Y-%m-%d_%H-%M-%S") . ".vim"
+        execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . ".vim"
     endif
 endfunction
 nnoremap <leader>sl :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  session<CR>
