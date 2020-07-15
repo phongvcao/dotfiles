@@ -75,6 +75,7 @@ Plug 'thinca/vim-quickrun'
 Plug 'm2mdas/unite-file-vcs'
 Plug 'thinca/vim-ref'
 Plug 'kmnk/vim-unite-giti'
+Plug 'Shougo/unite-session'
 Plug 'chrisbra/BufTimer', {
             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " END: Shougo/unite.vim
@@ -654,7 +655,7 @@ vnoremap E e
 nnoremap A I
 nnoremap a A
 nnoremap I li
-nnoremap <leader>ss :call IndentCurrentFile()<CR>
+nnoremap <localleader>ss :call IndentCurrentFile()<CR>
 " Bring current line to top of the window
 nnoremap zt zt
 " Bring current line to middle of the window
@@ -723,8 +724,8 @@ set tags=./tags;
 " Open .vimrc or _vimrc in a new split for easier adjustment
 nnoremap <leader>sh :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :split $MYVIMRC<CR>
-nnoremap <leader>sl :mkview<CR> :source $MYVIMRC<CR> :silent! loadview<CR> :call SetHighlight()<CR> :nohlsearch<CR>
-nnoremap <leader>sr :source $MYVIMRC<CR>
+nnoremap <localleader>sl :mkview<CR> :source $MYVIMRC<CR> :silent! loadview<CR> :call SetHighlight()<CR> :nohlsearch<CR>
+nnoremap <localleader>sr :source $MYVIMRC<CR>
 nnoremap j gj
 nnoremap k gk
 nnoremap ; :
@@ -1801,6 +1802,17 @@ let g:unite_source_rec_find_args = [
             \ '(', '-type', 'f', '-o', '-type', 'l', ')', '-print' ]
 let g:unite_enable_auto_select = 0
 
+" unite-session settings
+function! SaveUniteSession()
+    if exists( '${SESSION_PREFIX}' )
+        execute "silent! UniteSessionSave " . $SESSION_PREFIX . strftime("_%Y-%m-%d_%H-%M-%S") . ".vim"
+    else
+        execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . ".vim"
+    endif
+endfunction
+nnoremap <leader>sl :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  session<CR>
+nnoremap <leader>ss :call SaveUniteSession()<CR>
+
 " vim-dict settings
 nnoremap <leader>d :Dict<Space>
 
@@ -1972,12 +1984,17 @@ elseif executable('grep')
     let g:unite_source_grep_search_word_highlight = 'Error'
 endif
 
-if exists('*unite#custom#source')
-    call unite#custom#source('grep', 'max_candidates', 0)
-endif
-
 highlight default link uniteSource__GrepFile helpVim
 highlight default link uniteSource__GrepLineNr Statement
+
+function! CustomizeUnite()
+    if exists('*unite#custom#source')
+        call unite#custom#source('grep', 'max_candidates', 0)
+    endif
+    if exists('*unite#custom#source')
+        call unite#custom#source('session', 'sorters', 'sorter_reverse')
+    endif
+endfunction
 
 function! ConfigureUnite()
     if ( &filetype ==# 'unite' )
@@ -2692,6 +2709,7 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight CocInfoSign ctermbg=0 ctermfg=4 term=underline gui=underline
     autocmd BufEnter * :highlight CocHintFloat ctermbg=2 ctermfg=0 term=underline gui=underline
     autocmd BufEnter * :highlight CocHintSign ctermbg=0 ctermfg=2 term=underline gui=underline
+    autocmd BufEnter * :highlight CocFloating ctermbg=0 term=underline gui=underline
     autocmd FileType unite let b:coc_suggest_disable = 1
 
     " far.vim
@@ -2812,4 +2830,5 @@ augroup CustomAutoCmd
 
     " unite.vim settings
     autocmd BufWinEnter,FileType unite :call ConfigureUnite()
+    autocmd VimEnter * :call CustomizeUnite()
 augroup END
