@@ -1819,7 +1819,7 @@ nnoremap <leader>ss :call SaveUniteSession()<CR>
 nnoremap <leader>d :Dict<Space>
 
 " vim-hopping settings
-nnoremap <leader><localleader>? :HoppingStart<CR>
+nnoremap <Space>,/ :HoppingStart<CR>
 let g:hopping#keymapping = {
             \	"\<C-n>" : "<Over>(hopping-next)",
             \	"\<C-p>" : "<Over>(hopping-prev)",
