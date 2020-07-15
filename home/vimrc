@@ -1804,8 +1804,8 @@ let g:unite_enable_auto_select = 0
 
 " unite-session settings
 function! SaveUniteSession()
-    if exists( '${SESSION_PREFIX}' )
-        execute "silent! UniteSessionSave " . $SESSION_PREFIX . strftime("_%Y-%m-%d_%H-%M-%S") . ".vim"
+    if exists( '${VIM_SESSION_PREFIX}' )
+        execute "silent! UniteSessionSave " . $VIM_SESSION_PREFIX . strftime("_%Y-%m-%d_%H-%M-%S") . ".vim"
     else
         execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . ".vim"
     endif
