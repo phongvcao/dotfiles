@@ -1803,15 +1803,37 @@ let g:unite_source_rec_find_args = [
 let g:unite_enable_auto_select = 0
 
 " unite-session settings
-function! SaveUniteSession()
-    if exists( '${TMUX}' )
+
+function! InvokeNeoMRU(...)
+    let l:arg = join( a:000, '\\ ' )
+    if ( l:arg != '' )
+        if ! isdirectory( expand( l:arg ) )
+            execute "edit " . l:arg
+        else
+            execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        endif
+    else
+        execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+    endif
+endfunction
+command! -nargs=* -complete=file NeoMRU call InvokeNeoMRU( <f-args> )
+nnoremap <localleader>o :NeoMRU<CR>
+
+
+
+function! SaveSessionUnite(...)
+    let l:arg = join( a:000, '_' )
+    if ( l:arg != '' )
+        execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . "_" . l:arg  . ".vim"
+    elseif exists( '${TMUX}' )
         execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . "_" . substitute(system("tmux display-message -p '#W'"), '\n', '', 'g')  . ".vim"
     else
         execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . ".vim"
     endif
 endfunction
+command! -nargs=* UniteSaveSession call SaveSessionUnite( <f-args> )
+nnoremap <leader>ss :UniteSaveSession<Space>
 nnoremap <leader>sl :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  session<CR>
-nnoremap <leader>ss :call SaveUniteSession()<CR>
 
 " vim-dict settings
 nnoremap <leader>d :Dict<Space>
