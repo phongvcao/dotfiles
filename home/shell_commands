@@ -24,7 +24,7 @@ if [[ -t 0 ]]; then
     fi
 fi
 
-if [[ -n "$DISPLAY" && -n "$(command which xrdb)" ]]; then
+if [[ -n "$DISPLAY" && -n "$(command which xrdb)" && ! -n "${SSH_CLIENT}" ]]; then
     xrdb "${HOME}"/.Xresources
 fi
 
