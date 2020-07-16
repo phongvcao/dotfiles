@@ -98,6 +98,7 @@ uninstall ~/.weatherrc
 uninstall ~/.wegorc
 uninstall ~/.xinitrc
 uninstall ~/.Xresources
+uninstall ~/.p10k.zsh
 uninstall ~/.zshrc
 
 echo "$(tput setaf 10)All links have been removed$(tput sgr 0)"
