@@ -30,10 +30,10 @@ fi
 
 # exec >/dev/tty 2>/dev/tty </dev/tty
 
-PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-
-if [[ -f ${HOME}/.custom_promptline.sh ]]; then
-    source ${HOME}/.custom_promptline.sh
-elif [[ -f ${HOME}/.promptline.sh ]]; then
-    source ${HOME}/.promptline.sh
-fi
+# PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+#
+# if [[ -f ${HOME}/.custom_promptline.sh ]]; then
+#     source ${HOME}/.custom_promptline.sh
+# elif [[ -f ${HOME}/.promptline.sh ]]; then
+#     source ${HOME}/.promptline.sh
+# fi

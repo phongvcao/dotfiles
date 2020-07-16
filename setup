@@ -70,6 +70,22 @@ if [[ -d "${FONT_DIR}" ]]; then
 fi
 
 #
+# Install oh-my-zsh
+#
+if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
+    echo
+    echo "Installing oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+#
+# Install powerlevel10k
+#
+if [[ ! -d "${HOME}/.oh-my-zsh/custom/themes/powerlevel10k" ]]; then
+    cmd git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+fi
+
+#
 # Install autojump
 #
 if [ -z "$(command -v autojump)" ]; then
@@ -156,15 +172,6 @@ if [ -z "$(command -v tsserver)" ]; then
     echo
     echo "Installing typescript / tsserver"
     sudo yarn global add typescript
-fi
-
-#
-# Install oh-my-zsh
-#
-if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
-    echo
-    echo "Installing oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 #
