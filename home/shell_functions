@@ -1257,7 +1257,7 @@ command reset
 }
 
 function clean() {
-    clear
+    command clear
 
     if [[ -n "${TMUX}" ]]; then
         if [[ -f /usr/local/bin/tmux ]]; then
