@@ -2311,9 +2311,9 @@ nnoremap za :call FoldLevelToggle()<CR>
 "   call bar.left.add_left_sep()
 "
 "   call bar.right.add_right_sep()
-"   call bar.right.add('y', '%Y-%m-%d')
+"   call bar.right.add('y', '%Y-%m-%d ')
 "   call bar.right.add_right_alt_sep()
-"   call bar.right.add('y', '%H:%M:%S %p')
+"   call bar.right.add('y', '%H:%M:%S %p ')
 "   call bar.right.add_right_sep()
 "
 "   call bar.right.add('z', '#h')
