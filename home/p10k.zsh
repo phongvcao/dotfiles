@@ -212,7 +212,7 @@
   # Current directory background color.
   typeset -g POWERLEVEL9K_DIR_BACKGROUND=0
   # Default current directory foreground color.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=14
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=12
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
@@ -223,7 +223,7 @@
   typeset -g POWERLEVEL9K_DIR_SHORTENED_BACKGROUND=0
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=14
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=12
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BACKGROUND=0
   # Display anchor directory segments in bold.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
@@ -346,7 +346,7 @@
   typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=8
   typeset -g POWERLEVEL9K_VCS_CONFLICTED_BACKGROUND=1
   typeset -g POWERLEVEL9K_VCS_CONFLICTED_FOREGROUND=8
-  typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND=14
+  typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND=4
   typeset -g POWERLEVEL9K_VCS_LOADING_FOREGROUND=8
 
   # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
@@ -515,7 +515,7 @@
 
   ###################[ command_execution_time: duration of the last command ]###################
   # Execution time color.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=14
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=12
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=0
   # Show duration of the last command if takes at least this many seconds.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
@@ -1039,7 +1039,7 @@
 
   #################[ rust_version: rustc version (https://www.rust-lang.org) ]##################
   # Rust version color.
-  typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=14
+  typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=12
   typeset -g POWERLEVEL9K_RUST_VERSION_BACKGROUND=0
   # Show rust version only when in a rust project subdirectory.
   typeset -g POWERLEVEL9K_RUST_VERSION_PROJECT_ONLY=true
@@ -1502,7 +1502,7 @@
   ###########[ ip: ip address and bandwidth usage for a specified network interface ]###########
   # IP color.
   typeset -g POWERLEVEL9K_IP_BACKGROUND=0
-  typeset -g POWERLEVEL9K_IP_FOREGROUND=14
+  typeset -g POWERLEVEL9K_IP_FOREGROUND=12
   # The following parameters are accessible within the expansion:
   #
   #   Parameter             | Meaning
@@ -1538,7 +1538,7 @@
   typeset -g POWERLEVEL9K_BATTERY_CHARGED_FOREGROUND=2
   typeset -g POWERLEVEL9K_BATTERY_CHARGED_BACKGROUND=0
   # Show battery in yellow when it's discharging.
-  typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=14
+  typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=12
   typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND=0
   # Battery pictograms going from low to high level of charge.
   typeset -g POWERLEVEL9K_BATTERY_STAGES='\uf58d\uf579\uf57a\uf57b\uf57c\uf57d\uf57e\uf57f\uf580\uf581\uf578'
