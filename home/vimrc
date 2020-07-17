@@ -2232,9 +2232,14 @@ let g:lightline = {
     \ 'filename': '%F',
     \ },
     \ 'component_function': {
-    \   'readonly': 'LightlineReadonly',
+    \   'readonly': 'CustomLightlineReadonly',
     \   'filetype': 'CustomLightlineFiletype',
     \   'fileformat': 'CustomLightlineFileformat',
+    \   'fugitive': 'CustomLightlineFugitive',
+    \   'filename': 'CustomLightlineFilename',
+    \ },
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ],
     \ },
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' },
@@ -2242,13 +2247,29 @@ let g:lightline = {
     \   'tabnum': 'CustomLightlineTab',
     \ },
     \ }
+let g:unite_force_overwrite_statusline = 0
 
 function! CustomLightlineTab(n)
   let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
   return lightline#tab#tabnum(a:n) . '  ' . WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
 endfunction
 
-let g:unite_force_overwrite_statusline = 0
+function! CustomLightlineReadonly()
+    return &readonly ? '⭤' : ''
+endfunction
+
+function! CustomLightlineFilename()
+    return WebDevIconsGetFileTypeSymbol() . ' ' . substitute(expand('%:p'), '^' . $HOME, '~', 'g')
+endfunction
+
+function! CustomLightlineFugitive()
+    if exists('*FugitiveHead')
+        let branch = FugitiveHead()
+        return branch !=# '' ? '  '.branch : ''
+    endif
+    return ''
+endfunction
+
 function! CustomLightlineFiletype()
     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
