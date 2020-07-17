@@ -90,6 +90,7 @@
     nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
     vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
     load                  # CPU load
+    disk_usage            # disk usage
     battery               # internal battery
     ram                   # free RAM
     swap                  # used swap
@@ -100,7 +101,6 @@
     # =========================[ Line #2 ]=========================
     newline                 # \n
     ip                    # ip address and bandwidth usage for a specified network interface
-    disk_usage            # disk usage
     vpn_ip                # virtual private network indicator
     public_ip             # public IP address
     proxy                 # system-wide http/https/ftp proxy
@@ -884,15 +884,15 @@
   typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=14
 
   # Context format when running with privileges: user@hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n @ %m'
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n'
   # Context format when in SSH without privileges: user@hostname.
   typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n @ %m'
   # Default context format (no privileges, no SSH): user@hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n @ %m'
+  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n'
 
   # Don't show context unless running with privileges or in SSH.
   # Tip: Remove the next line to always show context.
-  typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
+  # typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_CONTEXT_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -1549,7 +1549,7 @@
   #####################################[ wifi: wifi speed ]#####################################
   # WiFi color.
   typeset -g POWERLEVEL9K_WIFI_FOREGROUND=0
-  typeset -g POWERLEVEL9K_WIFI_BACKGROUND=14
+  typeset -g POWERLEVEL9K_WIFI_BACKGROUND=11
   # Custom icon.
   # typeset -g POWERLEVEL9K_WIFI_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
