@@ -423,8 +423,7 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 " BEGIN: itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
 " " Uncomment for generating promptline & tmuxline themes
-" Plug 'edkolev/tmuxline.vim', {
-"             \ 'on' : 'Tmuxline' }
+" Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
 " END: itchyny/lightline.vim
 
@@ -2301,6 +2300,39 @@ nnoremap za :call FoldLevelToggle()<CR>
 "                 \ }
 "     " :PromptlineSnapshot! $HOME/.dotfiles/home/promptline.sh
 " endif
+
+" " tmuxline.vim settings
+" " Modify the function with this same name in
+" " ~/.vim/plugged/tmuxline.vim/blob/master/autoload/tmuxline/presets/powerline.vim
+" fun! tmuxline#presets#powerline#get()
+"   let bar = tmuxline#new()
+"
+"   call bar.left.add('a', '#S')
+"   call bar.left.add_left_sep()
+"
+"   call bar.right.add_right_sep()
+"   call bar.right.add('y', '%Y-%m-%d')
+"   call bar.right.add_right_alt_sep()
+"   call bar.right.add('y', '%H:%M:%S %p')
+"   call bar.right.add_right_sep()
+"
+"   call bar.right.add('z', '#h')
+"
+"   call bar.win.add('win.dim', '#I')
+"   call bar.win.add_left_alt_sep()
+"   call bar.win.add('win', '#W')
+"
+"   call bar.cwin.add_left_sep()
+"   call bar.cwin.add('cwin.dim', '#I')
+"   call bar.cwin.add_left_alt_sep()
+"   call bar.cwin.add('cwin', '#W')
+"   call bar.cwin.add_left_sep()
+"
+"   let bar.options['status-justify'] = 'left'
+"   let bar.win_options['window-status-activity-style'] = 'none'
+"
+"   return bar
+" endfun
 
 " vim-bookmarks settings
 if filereadable( $HOME . "/.vim-bookmarks" )
