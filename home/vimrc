@@ -2245,7 +2245,7 @@ let g:lightline = {
 
 function! CustomLightlineTab(n)
   let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
-  return lightline#tab#tabnum(a:n) . ' ' . WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
+  return lightline#tab#tabnum(a:n) . '  ' . WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
 endfunction
 
 let g:unite_force_overwrite_statusline = 0
