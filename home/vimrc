@@ -2239,7 +2239,7 @@ let g:lightline = {
     \   'filename': 'CustomLightlineFilename',
     \ },
     \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ],
+    \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive' ], ],
     \ },
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' },
