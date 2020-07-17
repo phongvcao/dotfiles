@@ -2237,8 +2237,17 @@ let g:lightline = {
     \   'fileformat': 'CustomLightlineFileformat',
     \ },
     \ 'separator': { 'left': '', 'right': '' },
-    \ 'subseparator': { 'left': '', 'right': '' }
+    \ 'subseparator': { 'left': '', 'right': '' },
+    \ 'tab_component_function': {
+    \   'tabnum': 'CustomLightlineTab',
+    \ },
     \ }
+
+function! CustomLightlineTab(n)
+  let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
+  return lightline#tab#tabnum(a:n) . ' ' . WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
+endfunction
+
 let g:unite_force_overwrite_statusline = 0
 function! CustomLightlineFiletype()
     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
