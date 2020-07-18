@@ -423,7 +423,7 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 " BEGIN: itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
 " " Uncomment for generating promptline & tmuxline themes
-" Plug 'edkolev/tmuxline.vim'
+Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
 " END: itchyny/lightline.vim
 
@@ -2350,12 +2350,12 @@ nnoremap za :call FoldLevelToggle()<CR>
 "
 "   call bar.win.add('win.dim', '#I')
 "   call bar.win.add_left_alt_sep()
-"   call bar.win.add('win', '#W')
+"   call bar.win.add('win', ' #W')
 "
 "   call bar.cwin.add_left_sep()
 "   call bar.cwin.add('cwin.dim', '#I')
 "   call bar.cwin.add_left_alt_sep()
-"   call bar.cwin.add('cwin', '#W')
+"   call bar.cwin.add('cwin', ' #W')
 "   call bar.cwin.add_left_sep()
 "
 "   let bar.options['status-justify'] = 'left'
