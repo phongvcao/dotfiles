@@ -2280,17 +2280,17 @@ function! CustomLightlineReadonly()
 endfunction
 
 let g:lightline_filename_pattern = {
-      \ '^' . $HOME: '~',
-      \ }
+            \ '^' . $HOME: '~',
+            \ }
 function! CustomLightlineFilename()
     let l:filename = expand('%:p')
     for pattern in keys(g:lightline_filename_pattern)
-      let l:filename = substitute(l:filename, pattern, g:lightline_filename_pattern[pattern], 'g')
+        let l:filename = substitute(l:filename, pattern, g:lightline_filename_pattern[pattern], 'g')
     endfor
     if exists('g:custom_lightline_filename_pattern')
-      for pattern in keys(g:custom_lightline_filename_pattern)
-        let l:filename = substitute(l:filename, pattern, g:custom_lightline_filename_pattern[pattern], 'g')
-      endfor
+        for pattern in keys(g:custom_lightline_filename_pattern)
+            let l:filename = substitute(l:filename, pattern, g:custom_lightline_filename_pattern[pattern], 'g')
+        endfor
     endif
     return WebDevIconsGetFileTypeSymbol() . ' ' . l:filename
 endfunction
