@@ -2279,8 +2279,20 @@ function! CustomLightlineReadonly()
     return &readonly ? '⭤' : ''
 endfunction
 
+let g:lightline_filename_pattern = {
+      \ '^' . $HOME: '~',
+      \ }
 function! CustomLightlineFilename()
-    return WebDevIconsGetFileTypeSymbol() . ' ' . substitute(expand('%:p'), '^' . $HOME, '~', 'g')
+    let l:filename = expand('%:p')
+    for pattern in keys(g:lightline_filename_pattern)
+      let l:filename = substitute(l:filename, pattern, g:lightline_filename_pattern[pattern], 'g')
+    endfor
+    if exists('g:custom_lightline_filename_pattern')
+      for pattern in keys(g:custom_lightline_filename_pattern)
+        let l:filename = substitute(l:filename, pattern, g:custom_lightline_filename_pattern[pattern], 'g')
+      endfor
+    endif
+    return WebDevIconsGetFileTypeSymbol() . ' ' . l:filename
 endfunction
 
 function! CustomLightlineFugitive()
