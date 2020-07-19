@@ -2248,7 +2248,7 @@ let g:lightline = {
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
-            \   'left': [ [ 'filename', 'fugitive' ] ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
