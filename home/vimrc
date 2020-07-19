@@ -2238,16 +2238,16 @@ let g:lightline = {
             \   'fileformat': 'CustomLightlineFileformat',
             \   'fugitive': 'CustomLightlineFugitive',
             \   'filename': 'CustomLightlineFilename',
-            \   'noscrollbar': 'CustomLightlinePercent',
+            \   'percent': 'CustomLightlinePercent',
             \ },
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'noscrollbar', 'filename', 'fugitive' ], ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive' ], ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
-            \   'left': [ [ 'noscrollbar', 'filename', 'fugitive' ] ],
+            \   'left': [ [ 'filename', 'fugitive' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
