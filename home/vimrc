@@ -2241,13 +2241,13 @@ let g:lightline = {
             \   'percent': 'CustomLightlinePercent',
             \ },
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive' ], ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'percent', 'filename', 'fugitive' ], ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
-            \   'left': [ [ 'filename', 'fugitive' ] ],
+            \   'left': [ [ 'percent', 'filename', 'fugitive' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
