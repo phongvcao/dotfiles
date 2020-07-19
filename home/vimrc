@@ -2103,6 +2103,8 @@ inoremap [<CR> [<CR>]<C-c>O
 
 " vim-over settings
 let g:over#command_line#enable_import_commandline_map = 0
+" Set gdefault so vim-over would show replacement in all matches in a line
+set gdefault
 nnoremap <leader>ra :OverCommandLine<CR>%s/
 nnoremap <leader>rl :OverCommandLine<CR>s/
 nnoremap <leader>rj :OverCommandLine<CR>.,$s/
