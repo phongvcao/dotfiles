@@ -425,6 +425,7 @@ Plug 'itchyny/lightline.vim'
 " " Uncomment for generating promptline & tmuxline themes
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
+Plug 'gcavallanti/vim-noscrollbar'
 " END: itchyny/lightline.vim
 
 " Plugins (gui-specific)
@@ -2224,34 +2225,49 @@ let g:stardict_colorize_output = 1
 " lightline.vim
 set noshowmode
 let g:lightline = {
-    \ 'colorscheme': 'solarized',
-    \ 'component': {
-    \   'lineinfo': ' %3l:%-2v',
-    \ 'absolutepath': '%F',
-    \ 'relativepath': '%F',
-    \ 'filename': '%F',
-    \ },
-    \ 'component_function': {
-    \   'readonly': 'CustomLightlineReadonly',
-    \   'filetype': 'CustomLightlineFiletype',
-    \   'fileformat': 'CustomLightlineFileformat',
-    \   'fugitive': 'CustomLightlineFugitive',
-    \   'filename': 'CustomLightlineFilename',
-    \ },
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive' ], ],
-    \ },
-    \ 'separator': { 'left': '', 'right': '' },
-    \ 'subseparator': { 'left': '', 'right': '' },
-    \ 'tab_component_function': {
-    \   'tabnum': 'CustomLightlineTab',
-    \ },
-    \ }
+            \ 'colorscheme': 'solarized',
+            \ 'component': {
+            \   'lineinfo': ' %3l:%-2v',
+            \ 'absolutepath': '%F',
+            \ 'relativepath': '%F',
+            \ 'filename': '%F',
+            \ },
+            \ 'component_function': {
+            \   'readonly': 'CustomLightlineReadonly',
+            \   'filetype': 'CustomLightlineFiletype',
+            \   'fileformat': 'CustomLightlineFileformat',
+            \   'fugitive': 'CustomLightlineFugitive',
+            \   'filename': 'CustomLightlineFilename',
+            \   'percent': 'CustomLightlinePercent',
+            \ },
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive' ], ],
+            \   'right': [ [ 'lineinfo' ],
+            \              [ 'percent' ],
+            \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+            \ },
+            \ 'inactive': {
+            \   'left': [ [ 'filename', 'fugitive' ] ],
+            \   'right': [ [ 'lineinfo' ],
+            \              [ 'percent' ],
+            \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+            \ },
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' },
+            \ 'tab_component_function': {
+            \   'tabnum': 'CustomLightlineTab',
+            \ },
+            \ }
+
 let g:unite_force_overwrite_statusline = 0
 
 function! CustomLightlineTab(n)
-  let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
-  return lightline#tab#tabnum(a:n) . '  ' . WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
+    let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
+    return lightline#tab#tabnum(a:n) . '  ' . WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
+endfunction
+
+function! CustomLightlinePercent()
+    return noscrollbar#statusline(15,'■','◫',['◧'],['◨']) . ' '
 endfunction
 
 function! CustomLightlineReadonly()
