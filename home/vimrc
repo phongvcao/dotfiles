@@ -2241,13 +2241,13 @@ let g:lightline = {
             \   'noscrollbar': 'CustomLightlinePercent',
             \ },
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive', 'noscrollbar' ], ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'noscrollbar', 'filename', 'fugitive' ], ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
-            \   'left': [ [ 'filename', 'fugitive', 'noscrollbar' ] ],
+            \   'left': [ [ 'noscrollbar', 'filename', 'fugitive' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
@@ -2268,7 +2268,7 @@ endfunction
 
 function! CustomLightlinePercent()
     if exists('*noscrollbar#statusline')
-        return noscrollbar#statusline(15,'■','◫',['◧'],['◨'])
+        return noscrollbar#statusline(10,'■','◫',['◧'],['◨'])
     else
         return ''
     endif
