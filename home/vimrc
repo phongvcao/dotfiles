@@ -2105,11 +2105,11 @@ inoremap [<CR> [<CR>]<C-c>O
 let g:over#command_line#enable_import_commandline_map = 0
 " Set gdefault so vim-over would show replacement in all matches in a line
 set gdefault
-nnoremap <leader>ra :OverCommandLine<CR>%s/
-nnoremap <leader>rl :OverCommandLine<CR>s/
-nnoremap <leader>rj :OverCommandLine<CR>.,$s/
-nnoremap <leader>rk :OverCommandLine<CR>0,.s/
-vnoremap <leader>ra :OverCommandLine<CR>s/
+nnoremap <leader>ra :set gdefault<CR>:OverCommandLine<CR>%s/
+nnoremap <leader>rl :set gdefault<CR>:OverCommandLine<CR>s/
+nnoremap <leader>rj :set gdefault<CR>:OverCommandLine<CR>.,$s/
+nnoremap <leader>rk :set gdefault<CR>:OverCommandLine<CR>0,.s/
+vnoremap <leader>ra :set gdefault<CR>:OverCommandLine<CR>s/
 
 " vim-php-namespace settings
 " nnoremap <leader>u :call PhpInsertUse()<CR>
@@ -2140,7 +2140,11 @@ nmap N <Plug>(anzu-N-with-echo)<Plug>(searchhi-update)
 set gdefault
 " nmap n <Plug>(anzu-n-with-echo)
 " nmap N <Plug>(anzu-N-with-echo)
-nmap zn <Plug>(anzu-jump)<Plug>(anzu-mode)
+function! SetNoGDefault()
+  set nogdefault
+endfunction
+nnoremap <silent><expr> <Plug>(set-nogdefault) SetNoGDefault()
+nmap zn <Plug>(set-nogdefault)<Plug>(anzu-jump)<Plug>(anzu-mode)
 nmap * <Plug>(anzu-star-with-echo)<Plug>(searchhi-update)
 nmap # <Plug>(anzu-sharp-with-echo)<Plug>(searchhi-update)
 let g:anzu_search_limit=1000000
