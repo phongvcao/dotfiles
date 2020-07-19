@@ -2238,16 +2238,16 @@ let g:lightline = {
             \   'fileformat': 'CustomLightlineFileformat',
             \   'fugitive': 'CustomLightlineFugitive',
             \   'filename': 'CustomLightlineFilename',
-            \   'percent': 'CustomLightlinePercent',
+            \   'noscrollbar': 'CustomLightlinePercent',
             \ },
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive' ], ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive', 'noscrollbar' ], ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
-            \   'left': [ [ 'filename', 'fugitive' ] ],
+            \   'left': [ [ 'filename', 'fugitive', 'noscrollbar' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
@@ -2267,7 +2267,7 @@ function! CustomLightlineTab(n)
 endfunction
 
 function! CustomLightlinePercent()
-    return noscrollbar#statusline(15,'■','◫',['◧'],['◨']) . ' '
+    return noscrollbar#statusline(15,'■','◫',['◧'],['◨'])
 endfunction
 
 function! CustomLightlineReadonly()
