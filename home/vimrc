@@ -2267,7 +2267,9 @@ function! CustomLightlineTab(n)
 endfunction
 
 function! CustomLightlinePercent()
-    return noscrollbar#statusline(15,'■','◫',['◧'],['◨'])
+    if isdirectory(expand(g:vimPath . '/plugged/vim-noscrollbar'))
+        return noscrollbar#statusline(15,'■','◫',['◧'],['◨'])
+    endif
 endfunction
 
 function! CustomLightlineReadonly()
