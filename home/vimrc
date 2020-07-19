@@ -2269,6 +2269,8 @@ endfunction
 function! CustomLightlinePercent()
     if exists('*noscrollbar#statusline')
         return noscrollbar#statusline(15,'■','◫',['◧'],['◨'])
+    else
+        return ''
     endif
 endfunction
 
