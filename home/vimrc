@@ -1798,8 +1798,6 @@ let g:unite_source_rec_find_args = [
             \ '(', '-type', 'f', '-o', '-type', 'l', ')', '-print' ]
 let g:unite_enable_auto_select = 0
 
-" unite-session settings
-
 function! InvokeNeoMRU(...)
     let l:arg = join( a:000, '\\ ' )
     if ( l:arg != '' )
@@ -1815,8 +1813,7 @@ endfunction
 command! -nargs=* -complete=file NeoMRU call InvokeNeoMRU( <f-args> )
 nnoremap <localleader>o :NeoMRU<CR>
 
-
-
+" unite-session settings
 function! SaveSessionUnite(...)
     let l:arg = join( a:000, '_' )
     if ( l:arg != '' )
@@ -1830,6 +1827,47 @@ endfunction
 command! -nargs=* UniteSaveSession call SaveSessionUnite( <f-args> )
 nnoremap <leader>ss :UniteSaveSession<Space>
 nnoremap <leader>sl :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  session<CR>
+
+"
+" Vim profiler / profiling
+" Run the following commands to see what makes Vim slow:
+"
+" profile start profile.log
+" profile func *
+" profile file *
+"
+" At this point do slow actions
+"
+" profile pause
+" noautocmd qall!
+"
+let g:vim_profile_running = 0
+function! StartProfileVim(...)
+    let l:arg = join( a:000, ' ' )
+    if ( g:vim_profile_running ==# 1 )
+        echoerr "Vim profiler is running!"
+    elseif ( l:arg != '' )
+        let g:vim_profile_running = 1
+        execute "profile start " . expand(l:arg)
+        profile func *
+        profile file *
+    else
+        echoerr "Missing filename argument!"
+    endif
+endfunction
+
+function! StopProfileVim()
+    if ( g:vim_profile_running ==# 1 )
+        let g:vim_profile_running = 0
+        profile pause
+        noautocmd qall!
+    else
+        echoerr "Vim profiler is not running!"
+    endif
+endfunction
+
+command! -nargs=* -complete=file ProfilerStart call StartProfileVim( <f-args> )
+command! -nargs=* ProfilerStop call StopProfileVim()
 
 " vim-dict settings
 nnoremap <leader>d :Dict<Space>
@@ -2236,13 +2274,13 @@ let g:lightline = {
             \   'mode': 'CustomLightlinePercent',
             \ },
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive' ], ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive', 'modified' ], ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'filename', 'fugitive' ] ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive', 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
