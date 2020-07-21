@@ -346,9 +346,9 @@ Plug 'Valloric/MatchTagAlways', {
 Plug 'mattn/emmet-vim', {
             \ 'for' : [ 'css', 'html', 'xhtml', 'xml', 'jinja', 'php', 'jsp',
             \           'htmldjango' ] }
-Plug 'chrisbra/Colorizer', {
+Plug 'ap/vim-css-color', {
             \ 'for' : [ 'css', 'html', 'xhtml', 'javascript', 'json', 'jsx', 
-            \           'typescript', 'html', 'php' ] }
+            \           'typescript', 'html', 'php', 'vim', 'python', 'go' ] }
 Plug 'AndrewRadev/tagalong.vim'
 " BEGIN: sukima/xmledit
 let g:xmleditPath = g:vimPath . '/plugged/xmledit/ftplugin/'
@@ -2120,14 +2120,6 @@ vmap gx <Plug>(openbrowser-smart-search)
 
 " emmet-vim settings
 let g:user_emmet_leader_key = '<c-e>'
-
-" Colorizer settings
-" let g:colorizer_auto_color = 1
-let g:colorizer_auto_filetype='css,html'
-let g:colorizer_skip_comments = 0
-let g:colorizer_x11_names = 1
-let g:colorizer_syntax = 1
-let g:colorizer_auto_map = 1
 
 " vim-anzu
 " After the move, the search status information is output to
