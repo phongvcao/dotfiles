@@ -419,7 +419,7 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 " BEGIN: itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
 " " Uncomment for generating promptline & tmuxline themes
-Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
 Plug 'gcavallanti/vim-noscrollbar'
 " END: itchyny/lightline.vim
