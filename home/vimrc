@@ -346,9 +346,7 @@ Plug 'Valloric/MatchTagAlways', {
 Plug 'mattn/emmet-vim', {
             \ 'for' : [ 'css', 'html', 'xhtml', 'xml', 'jinja', 'php', 'jsp',
             \           'htmldjango' ] }
-Plug 'ap/vim-css-color', {
-            \ 'for' : [ 'css', 'html', 'xhtml', 'javascript', 'json', 'jsx', 
-            \           'typescript', 'html', 'php', 'vim', 'python', 'go' ] }
+Plug 'ap/vim-css-color'
 Plug 'AndrewRadev/tagalong.vim'
 " BEGIN: sukima/xmledit
 let g:xmleditPath = g:vimPath . '/plugged/xmledit/ftplugin/'
