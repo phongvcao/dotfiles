@@ -206,6 +206,7 @@ Plug 'MattesGroeger/vim-bookmarks', {
             \          'BookmarkMoveToLine' ] }
 Plug 'prettier/vim-prettier', {
             \ 'do': 'yarn install' }
+Plug 'Shougo/echodoc.vim'
 
 "=====================================
 " END OF INSPECTED/RESEARCHED SO FAR
@@ -2410,6 +2411,9 @@ nnoremap mC :BookmarkClearAll<CR>
 nnoremap mk :BookmarkMoveUp<CR>
 nnoremap mj :BookmarkMoveDown<CR>
 nnoremap m; :BookmarkMoveToLine<CR>
+
+" echodoc.vim settings
+let g:echodoc_enable_at_startup = 1
 
 " calendar.vim settings
 let g:calendar_google_calendar = 0

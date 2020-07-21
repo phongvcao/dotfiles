@@ -1,4 +1,5 @@
 {
+    "coc.preferences.echodocSupport": true,
     "languageserver": {
         "golang": {
             "command": "~/.go/bin/gopls",
