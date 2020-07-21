@@ -206,6 +206,11 @@
 " Plug 'StanAngeloff/php.vim', {
 "             \ 'for' : 'php' }
 
+" " Plugins (i3wm)
+" Plug 'PotatoesMaster/i3-vim-syntax', {
+"             \ 'for' : 'i3' }
+" Plug 'mboughaba/i3config.vim'
+
 " syntastic settings
 " Extra Checkers List:
 " clang gcc cppcheck perl flake8 pylint jslint nodejs-jshint php

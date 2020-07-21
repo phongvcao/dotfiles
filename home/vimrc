@@ -275,10 +275,7 @@ Plug 'Chiel92/vim-autoformat', {
 Plug 'tpope/vim-eunuch', {
             \ 'on' : [ 'Remove', 'Unlink', 'Move', 'Rename', 'Chmod', 'Mkdir',
             \          'Find', 'Locate', 'Wall', 'SudoWrite', 'SudoEdit' ] }
-
-" Plugins (i3wm)
-Plug 'PotatoesMaster/i3-vim-syntax', {
-            \ 'for' : 'i3' }
+Plug 'ap/vim-css-color'
 
 " Plugins (Collaboration)
 Plug 'hsitz/VimOrganizer', {
@@ -352,6 +349,7 @@ Plug 'chrisbra/Colorizer', {
 Plug 'mattn/emmet-vim', {
             \ 'for' : [ 'css', 'html', 'xhtml', 'xml', 'jinja', 'php', 'jsp',
             \           'htmldjango' ] }
+Plug 'AndrewRadev/tagalong.vim'
 " BEGIN: sukima/xmledit
 let g:xmleditPath = g:vimPath . '/plugged/xmledit/ftplugin/'
 Plug 'sukima/xmledit', {
