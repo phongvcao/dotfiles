@@ -36,9 +36,6 @@
 "             \ 'on' : 'SyntasticCheck' }
 " Plug 'jistr/vim-nerdtree-tabs'
 " " delimitMate has to be place before vim-endwise
-" Plug 'Raimondi/delimitMate'
-" Plug 'tpope/vim-unimpaired', {
-"             \ 'on_map' : [ '[x', ']x', '[y', ']y' ] }
 " Plug 'tpope/vim-abolish', {
 "             \ 'on_map' : [ [ 'n', 'cr' ] ] }
 " Plug 'terryma/vim-expand-region'
@@ -210,6 +207,17 @@
 " Plug 'PotatoesMaster/i3-vim-syntax', {
 "             \ 'for' : 'i3' }
 " Plug 'mboughaba/i3config.vim'
+" Plug 'chrisbra/Colorizer', {
+"             \ 'for' : [ 'css', 'html', 'xhtml', 'javascript', 'json', 'jsx', 
+"             \           'typescript', 'html', 'php' ] }
+
+" Colorizer settings
+" let g:colorizer_auto_color = 1
+let g:colorizer_auto_filetype='css,html'
+let g:colorizer_skip_comments = 0
+let g:colorizer_x11_names = 1
+let g:colorizer_syntax = 1
+let g:colorizer_auto_map = 1
 
 " syntastic settings
 " Extra Checkers List:

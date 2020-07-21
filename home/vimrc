@@ -343,9 +343,6 @@ Plug 'heavenshell/vim-jsdoc', {
 Plug 'Valloric/MatchTagAlways', {
             \ 'for' : [ 'html', 'xhtml', 'xml', 'jinja', 'php', 'jsp',
             \           'htmldjango' ] }
-Plug 'chrisbra/Colorizer', {
-            \ 'for' : [ 'css', 'html', 'xhtml', 'javascript', 'json', 'jsx', 
-            \           'typescript', 'html', 'php' ] }
 Plug 'mattn/emmet-vim', {
             \ 'for' : [ 'css', 'html', 'xhtml', 'xml', 'jinja', 'php', 'jsp',
             \           'htmldjango' ] }
@@ -2117,14 +2114,6 @@ vnoremap <leader>ra :set gdefault<CR>:OverCommandLine<CR>s/
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
-
-" Colorizer settings
-" let g:colorizer_auto_color = 1
-let g:colorizer_auto_filetype='css,html'
-let g:colorizer_skip_comments = 0
-let g:colorizer_x11_names = 1
-let g:colorizer_syntax = 1
-let g:colorizer_auto_map = 1
 
 " emmet-vim settings
 let g:user_emmet_leader_key = '<c-e>'
