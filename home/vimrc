@@ -261,7 +261,7 @@ Plug 'arecarn/selection.vim'
 " END: arecarn/vim-crunch
 
 Plug 'KabbAmine/vZoom.vim', {
-      \ 'on' : 'VZoomAutoToggle' }
+            \ 'on' : 'VZoomAutoToggle' }
 
 Plug 'wesQ3/vim-windowswap'
 " No lazy-loading for myusuf3/numbers.vim.
@@ -512,9 +512,9 @@ set modelines=1
 " +clipboard doesn't work on ssh / mosh connection
 " ( X11 / GUI must be running )
 if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
-   set clipboard=unnamedplus,unnamed
+    set clipboard=unnamedplus,unnamed
 else
-   set clipboard=
+    set clipboard=
 endif
 set backspace=2
 set sidescroll=1
@@ -790,11 +790,11 @@ nnoremap <C-l> <C-w>l
 " nnoremap <C-w> <C-w>w
 nnoremap q :call WriteQuitAll()<CR>
 function WriteQuitAll()
-  if expand('%p') != ''
-    silent! wqa!
-  else
-    silent! qa!
-  endif
+    if expand('%p') != ''
+        silent! wqa!
+    else
+        silent! qa!
+    endif
 endfunction
 " Go to previously accessed window
 " nnoremap <C-u><C-w> <C-w><C-p>
@@ -1085,15 +1085,15 @@ omap iG <Plug>(textobj-comment-big-a)
 " aB : Select text between symbols given in g:textobj_multiblock_blocks, AND the symbols
 let g:textobj_multiblock_no_default_key_mappings = 1
 let g:textobj_multiblock_blocks = [
-	\	[ "(", ")" ],
-	\	[ "[", "]" ],
-	\	[ "{", "}" ],
-	\	[ '<', '>' ],
-	\	[ '"', '"', 1 ],
-    \	[ "'", "'", 1 ],
-	\	['\_^\s*\<function\>.*', '\_^\s*endfunction\_$'],
-	\	['\_^\s*\<if\>.*', '\_^\s*\<endif\>\s*\_$'],
-    \   ]
+            \	[ "(", ")" ],
+            \	[ "[", "]" ],
+            \	[ "{", "}" ],
+            \	[ '<', '>' ],
+            \	[ '"', '"', 1 ],
+            \	[ "'", "'", 1 ],
+            \	['\_^\s*\<function\>.*', '\_^\s*endfunction\_$'],
+            \	['\_^\s*\<if\>.*', '\_^\s*\<endif\>\s*\_$'],
+            \   ]
 xmap aB <Plug>(textobj-multiblock-a)
 xmap iB <Plug>(textobj-multiblock-i)
 omap aB <Plug>(textobj-multiblock-a)
@@ -1527,8 +1527,8 @@ inoremap <expr><C-r> "\<C-w>"
 inoremap <expr><C-u> "\<C-c>0Di"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
@@ -1574,11 +1574,11 @@ inoremap <expr> <C-y> pumvisible() ? "\<C-y>" : ""
 " nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 if exists( 'g:custom_coc_config_home' )
@@ -2052,16 +2052,16 @@ endfunction
 command! -nargs=* -complete=file NeoMRUTab call InvokeNeoMRUTab( <f-args> )
 
 function! InvokeNeoMRURec(...)
-   let l:arg = join( a:000, '\\ ' )
-   if ( l:arg != '' )
-      if ! isdirectory( expand( l:arg ) )
-         execute "edit " . l:arg
-      else
-         execute "silent! Unite -prompt=Open>\\ \\  directory_mru buffer file_mru file_rec/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
-      endif
-   else
-      execute "silent! Unite -prompt=Open>\\ \\  directory_mru buffer file_mru file_rec/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
-   endif
+    let l:arg = join( a:000, '\\ ' )
+    if ( l:arg != '' )
+        if ! isdirectory( expand( l:arg ) )
+            execute "edit " . l:arg
+        else
+            execute "silent! Unite -prompt=Open>\\ \\  directory_mru buffer file_mru file_rec/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        endif
+    else
+        execute "silent! Unite -prompt=Open>\\ \\  directory_mru buffer file_mru file_rec/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+    endif
 endfunction
 command! -nargs=* -complete=file NeoMRURec call InvokeNeoMRURec( <f-args> )
 " nnoremap <leader>hro :silent! Unite file_mru directory_mru buffer -start-insert -buffer-name=mru -resume<CR>
@@ -2210,7 +2210,7 @@ set gdefault
 " nmap n <Plug>(anzu-n-with-echo)
 " nmap N <Plug>(anzu-N-with-echo)
 function! SetNoGDefault()
-  set nogdefault
+    set nogdefault
 endfunction
 nnoremap <silent><expr> <Plug>(set-nogdefault) SetNoGDefault()
 nmap zn <Plug>(set-nogdefault)<Plug>(anzu-jump)<Plug>(anzu-mode)
@@ -2918,7 +2918,7 @@ augroup CustomAutoCmd
     " goyo.vim settings
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
     autocmd! User GoyoLeave nested call <SID>goyo_leave()
-    
+
     " MatchTagAlways
     autocmd BufEnter * :highlight MatchTag ctermfg=8 ctermbg=lightblue guifg=#002b36 guibg=lightblue
 
@@ -2933,7 +2933,7 @@ augroup CustomAutoCmd
     " vim-better-whitespace settings
     " autocmd InsertLeave * :.StripWhitespace
 
-    autocmd FileType * :call SetIndentation()
+    autocmd Syntax * :call SetIndentation()
 
     autocmd BufRead,BufEnter * setlocal colorcolumn=80 textwidth=0
     autocmd FileType,BufEnter * :call SetOmnifunc()
