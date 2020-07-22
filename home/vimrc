@@ -80,8 +80,7 @@ Plug 'chrisbra/BufTimer', {
             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " END: Shougo/unite.vim
 Plug 'vim-scripts/YankRing.vim'
-Plug 'pelodelfuego/vim-swoop', {
-            \ 'on' : [ 'Swoop' ] }
+Plug 'pelodelfuego/vim-swoop'
 
 " BEGIN: neoclide/coc.nvim
 Plug 'neoclide/coc.nvim', {
@@ -1899,7 +1898,7 @@ nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR
 xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
 
 " vim-swoop settings
-nnoremap <localleader>R :silent! Swoop!<CR>a
+nnoremap <leader>R :silent! call SwoopMulti()<CR>
 let g:swoopHighlight = ["hi! SwoopBufferLineHi ctermfg=8 ctermbg=3", "hi! SwoopPatternHi ctermfg=8 ctermbg=3"]
 let g:defaultWinSwoopHeight = 20
 function! FreezeSwoopContext()
