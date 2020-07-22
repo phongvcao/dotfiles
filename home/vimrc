@@ -1898,35 +1898,37 @@ nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR
 xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
 
 " vim-swoop settings
+let g:swoopUseDefaultKeyMap = 0
 nnoremap <leader>R :silent! call SwoopMulti()<CR>
 let g:swoopHighlight = ["hi! SwoopBufferLineHi ctermfg=8 ctermbg=3", "hi! SwoopPatternHi ctermfg=8 ctermbg=3"]
 let g:defaultWinSwoopHeight = 20
 function! FreezeSwoopContext()
     if expand('%f') =~? 'swoopBuf'
-        nunmap gg
-        nnoremap gg ggj
-        nunmap w
-        nunmap W
-        nunmap B
-        nunmap E
-        nnoremap w w
-        nnoremap W b
-        nnoremap B B
-        nnoremap E e
-    endif
-endfunction
-function! UnFreezeSwoopContext()
-    if expand('%f') =~? 'swoopBuf'
-        nunmap gg
-        nnoremap gg 100000k
-        nunmap w
-        nunmap W
-        nunmap B
-        nunmap E
-        nmap w <Plug>(show-motion-w)
-        nmap W <Plug>(show-motion-b)
-        nmap B <Plug>(show-motion-B)
-        nmap E <Plug>(show-motion-e)
+        silent! nunmap <buffer> gg
+        nnoremap <buffer> gg ggj
+        silent! nunmap <buffer> w
+        silent! nunmap <buffer> W
+        silent! nunmap <buffer> B
+        silent! nunmap <buffer> E
+        silent! nunmap <buffer> n
+        silent! nunmap <buffer> N
+        silent! nunmap <buffer> zn
+        nnoremap <buffer> w w
+        nnoremap <buffer> W b
+        nnoremap <buffer> B B
+        nnoremap <buffer> E e
+        nnoremap <buffer> n <nop>
+        nnoremap <buffer> N <nop>
+        nnoremap <buffer> zn <nop>
+        let @/ = "::NULL::"
+        nmap <buffer> / <nop>
+        nmap <buffer> ? <nop>
+        nmap <buffer> g/ <nop>
+        map <buffer> z/ <nop>
+        map <buffer> z? <nop>
+        map <buffer> zg/ <nop>
+    else
+        let @/ = "::NULL::"
     endif
 endfunction
 
@@ -2881,7 +2883,7 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight ParenMatch term=bold cterm=bold ctermfg=1 ctermbg=10 guibg=DarkCyan
     autocmd BufEnter * :syntax sync fromstart
 
-    " vim-searchhi settings
+    " " vim-searchhi settings
     autocmd User SearchHiOn AnzuUpdateSearchStatusOutput
     autocmd User SearchHiOff echo g:anzu_no_match_word
 
@@ -2979,8 +2981,7 @@ augroup CustomAutoCmd
     autocmd BufEnter *.org :call org#SetOrgFileType()
 
     " vim-swoop settings
-    autocmd! InsertLeave * :call FreezeSwoopContext()
-    autocmd! InsertEnter * :call UnFreezeSwoopContext()
+    autocmd! FileType * :call FreezeSwoopContext()
 
     " vim-easymotion settings
     if exists( ':EMCommandLineNoreMap' ) == 2
