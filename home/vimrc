@@ -2186,7 +2186,7 @@ nnoremap <leader>ra :set gdefault<CR>:OverCommandLine<CR>%s/
 nnoremap <leader>rl :set gdefault<CR>:OverCommandLine<CR>s/
 nnoremap <leader>rj :set gdefault<CR>:OverCommandLine<CR>.,$s/
 nnoremap <leader>rk :set gdefault<CR>:OverCommandLine<CR>0,.s/
-vnoremap <leader>ra :set gdefault<CR>:OverCommandLine<CR>s/
+vnoremap <leader>ra :<C-u>set gdefault<CR>:<C-u>OverCommandLine<CR>'<,'>s/
 
 " vim-php-namespace settings
 " nnoremap <leader>u :call PhpInsertUse()<CR>
