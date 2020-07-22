@@ -80,6 +80,8 @@ Plug 'chrisbra/BufTimer', {
             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " END: Shougo/unite.vim
 Plug 'vim-scripts/YankRing.vim'
+Plug 'pelodelfuego/vim-swoop', {
+            \ 'on' : [ 'Swoop' ] }
 
 " BEGIN: neoclide/coc.nvim
 Plug 'neoclide/coc.nvim', {
@@ -347,7 +349,8 @@ Plug 'mattn/emmet-vim', {
             \ 'for' : [ 'css', 'html', 'xhtml', 'xml', 'jinja', 'php', 'jsp',
             \           'htmldjango' ] }
 Plug 'ap/vim-css-color'
-Plug 'AndrewRadev/tagalong.vim'
+Plug 'AndrewRadev/tagalong.vim', {
+            \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php', 'xml' ] }
 " BEGIN: sukima/xmledit
 let g:xmleditPath = g:vimPath . '/plugged/xmledit/ftplugin/'
 Plug 'sukima/xmledit', {
@@ -602,6 +605,12 @@ function! CloseUniteWindow()
     execute ":normal! \<C-c>"
     if ( &filetype ==# 'unite' )
         execute ":UniteClose"
+    elseif ( expand( '%f' ) ==# 'swoopBuf' )
+        nmap w <Plug>(show-motion-w)
+        nmap W <Plug>(show-motion-b)
+        nmap B <Plug>(show-motion-B)
+        nmap E <Plug>(show-motion-e)
+        silent! q
     elseif ( &filetype ==# 'magit' ) || ( &filetype ==# 'GV' ) || ( &filetype ==# 'git' )
         if ( tabpagenr('$') == 1 )
             execute ":qall!"
@@ -1889,6 +1898,39 @@ nnoremap <leader>p :silent! YRShow<CR>:setlocal wrap relativenumber number<CR>
 nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR>
 xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
 
+" vim-swoop settings
+nnoremap <localleader>R :silent! Swoop!<CR>a
+let g:swoopHighlight = ["hi! SwoopBufferLineHi ctermfg=8 ctermbg=3", "hi! SwoopPatternHi ctermfg=8 ctermbg=3"]
+let g:defaultWinSwoopHeight = 20
+function! FreezeSwoopContext()
+    if expand('%f') =~? 'swoopBuf'
+        nunmap gg
+        nnoremap gg ggj
+        nunmap w
+        nunmap W
+        nunmap B
+        nunmap E
+        nnoremap w w
+        nnoremap W b
+        nnoremap B B
+        nnoremap E e
+    endif
+endfunction
+function! UnFreezeSwoopContext()
+    if expand('%f') =~? 'swoopBuf'
+        nunmap gg
+        nnoremap gg 100000k
+        nunmap w
+        nunmap W
+        nunmap B
+        nunmap E
+        nmap w <Plug>(show-motion-w)
+        nmap W <Plug>(show-motion-b)
+        nmap B <Plug>(show-motion-B)
+        nmap E <Plug>(show-motion-e)
+    endif
+endfunction
+
 " neomru.vim settings
 nnoremap oo :NeoMRU<Space>
 nnoremap <localleader>v :split<CR>:NeoMRU<CR>
@@ -2936,6 +2978,10 @@ augroup CustomAutoCmd
     " VimOrganizer settings
     autocmd! BufRead,BufWrite,BufWritePost,BufNewFile *.org
     autocmd BufEnter *.org :call org#SetOrgFileType()
+
+    " vim-swoop settings
+    autocmd! InsertLeave * :call FreezeSwoopContext()
+    autocmd! InsertEnter * :call UnFreezeSwoopContext()
 
     " vim-easymotion settings
     if exists( ':EMCommandLineNoreMap' ) == 2
