@@ -36,7 +36,7 @@ call plug#begin('~/.vim/plugged')
 " BEGIN OF INSPECTED/RESEARCHED SO FAR
 " Plugins (core)
 " BEGIN: scrooloose/nerdtree
-Plug 'scrooloose/nerdtree', {
+Plug 'preservim/nerdtree', {
             \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
 Plug 'Xuyuanp/nerdtree-git-plugin', {
             \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
@@ -47,6 +47,8 @@ Plug 'ivalkeen/nerdtree-execute', {
 Plug 'EvanDotPro/nerdtree-chmod', {
             \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
 Plug 'markgandolfo/nerdtree-fetch.vim', {
+            \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
+Plug 'liuchengxu/nerdtree-dash', {
             \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
 " END: scrooloose/nerdtree
 Plug 'tomtom/tcomment_vim'
@@ -81,6 +83,8 @@ Plug 'chrisbra/BufTimer', {
 " END: Shougo/unite.vim
 Plug 'vim-scripts/YankRing.vim'
 Plug 'pelodelfuego/vim-swoop'
+Plug 'matze/vim-move'
+Plug 'samoshkin/vim-mergetool'
 
 " BEGIN: neoclide/coc.nvim
 Plug 'neoclide/coc.nvim', {
@@ -416,6 +420,7 @@ Plug 'tomtom/tlib_vim'
 " BEGIN: haya14busa/incsearch.vim
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
 " END: haya14busa/incsearch.vim
 
 " BEGIN: itchyny/lightline.vim
@@ -1699,9 +1704,12 @@ nnoremap <localleader>cl :Crunch<CR>
 nmap / <Plug>(incsearch-forward)
 nmap ? <Plug>(incsearch-backward)
 nmap g/ <Plug>(incsearch-stay)
-map z/ <Plug>(incsearch-easymotion-/)
-map z? <Plug>(incsearch-easymotion-?)
-map zg/ <Plug>(incsearch-easymotion-stay)
+map Z? <Plug>(incsearch-easymotion-/)
+map Z/ <Plug>(incsearch-easymotion-?)
+map ZG/ <Plug>(incsearch-easymotion-stay)
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+map zg/ <Plug>(incsearch-fuzzy-stay)
 
 " vim-snipmate settings
 let &rtp.=',~/.vim/plugged/vim-snippets/snippets/'
@@ -1931,6 +1939,13 @@ function! FreezeSwoopContext()
         let @/ = "::NULL::"
     endif
 endfunction
+
+" vim-move settings
+let g:move_key_modifier = 'C'
+
+" vim-mergetool settings
+nnoremap <localleader>dm :MergetoolToggle<CR>
+let g:mergetool_layout = 'bmr'
 
 " neomru.vim settings
 nnoremap oo :NeoMRU<Space>
@@ -2317,7 +2332,7 @@ let g:lightline = {
             \   'mode': 'CustomLightlinePercent',
             \ },
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ], [ 'modified'] ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ], [ 'method', 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ] ]

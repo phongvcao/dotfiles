@@ -51,8 +51,6 @@
 "             \ 'on_func' : 'FoldFocus' }
 " Plug 'tommcdo/vim-exchange', {
 "             \ 'on_map' : [ [ 'n', 'cx' ], [ 'x', 'X' ] ] }
-" Plug 'AndrewRadev/splitjoin.vim', {
-"             \ 'on_map' : [ 'gS', 'gJ' ] }
 " Plug 'AndrewRadev/id3.vim', {
 "             \ 'for' : 'mp3' }
 " Plug 'PeterRincker/vim-argumentative'
@@ -210,6 +208,17 @@
 " Plug 'chrisbra/Colorizer', {
 "             \ 'for' : [ 'css', 'html', 'xhtml', 'javascript', 'json', 'jsx', 
 "             \           'typescript', 'html', 'php' ] }
+" Plug 'liuchengxu/vista.vim'
+
+" vista.vim settings
+nnoremap <localleader>T :Vista!!<CR>
+let g:vista_sidebar_width = 40
+let g:vista_no_mappings = 0
+let g:vista_default_executive = 'coc'
+
+function! CustomLightlineNearest() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
 
 " Colorizer settings
 " let g:colorizer_auto_color = 1
