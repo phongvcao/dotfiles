@@ -38,6 +38,9 @@ export "xkbdir"="/usr/share/X11/xkb/symbols"
 # Necessary environment variables
 export "MANWIDTH"=82
 export "VISUAL"="command vim"
+export "P4MERGE"="command vim"
+export "P4DIFF"="command vimdiff"
+export "P4EDITOR"="command vim -f -c 'call perforceutils#ShowConflicts()'"
 export "EDITOR"="${VISUAL}"
 export "PAGER"="command vim -c 'PAGER' -"
 export "XDG_CONFIG_HOME"="${HOME}/.config"

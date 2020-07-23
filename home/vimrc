@@ -86,6 +86,11 @@ Plug 'pelodelfuego/vim-swoop'
 Plug 'matze/vim-move'
 Plug 'samoshkin/vim-mergetool'
 
+" BEGIN: pcaneill/vim-perforce
+Plug 'pcaneill/vim-perforce'
+Plug 'vim-scripts/genutils'
+" END: pcaneill/vim-perforce
+
 " BEGIN: neoclide/coc.nvim
 Plug 'neoclide/coc.nvim', {
             \ 'branch' : 'release' }
@@ -1945,7 +1950,7 @@ let g:move_key_modifier = 'C'
 
 " vim-mergetool settings
 nnoremap <localleader>dm :MergetoolToggle<CR>
-let g:mergetool_layout = 'bmr'
+let g:mergetool_layout = 'brm'
 
 " neomru.vim settings
 nnoremap oo :NeoMRU<Space>
