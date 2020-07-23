@@ -1971,7 +1971,7 @@ let g:perforce_utils_vim_path = g:vimPath . '/plugged/vim-perforce/perforce/perf
 if filereadable( g:perforce_utils_vim_path )
     execute 'source ' . g:perforce_utils_vim_path
 endif
-nnoremap <localleader>dm :call InvokeMergeTool()<CR>
+nnoremap <localleader>dr :call InvokeMergeTool()<CR>
 
 " neomru.vim settings
 nnoremap oo :NeoMRU<Space>
