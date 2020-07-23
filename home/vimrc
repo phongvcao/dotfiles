@@ -84,7 +84,8 @@ Plug 'chrisbra/BufTimer', {
 Plug 'vim-scripts/YankRing.vim'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'matze/vim-move'
-Plug 'samoshkin/vim-mergetool'
+Plug 'samoshkin/vim-mergetool', {
+            \ 'on' : [ 'MergetoolToggle', 'MergetoolStart' ] }
 
 if executable('p4')
     " BEGIN: pcaneill/vim-perforce
