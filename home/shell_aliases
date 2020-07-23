@@ -222,6 +222,7 @@ if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
     alias "commam"="git add -A; git commit -m"
     alias "amend"="git commit --amend"
 fi
+alias "resolve"="git mergetool"
 alias "push"="git push"
 alias "fush"="git push --force"
 alias "fetch"="git fetch"
