@@ -2392,6 +2392,7 @@ nnoremap <localleader>dg :Gdiffsplit!<CR>
 
 " gv.vim settings
 function! InvokeGVAndMagit()
+    set shell=bash
     :GV
     :call magit#show_magit('h')
     :execute "normal! \<C-w>k"
