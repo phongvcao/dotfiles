@@ -1,5 +1,5 @@
 "
-" Configuration file for Vim 9.4 Compatible with both Linux & Windows
+" Configuration file for Vim 9.4 Compatible with both Linux & Windows ( only me )
 "
 
 if has('win32') || has('win64')
