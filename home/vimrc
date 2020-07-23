@@ -806,7 +806,7 @@ let g:lasttab = 1
 nnoremap _ :silent! q<CR>
 " nnoremap C :silent! w!<CR>:bd<CR>
 nnoremap <leader>su :sort ui<CR>
-nnoremap S :shell<CR>
+nnoremap S :set shell=$SHELL<CR>:shell<CR>
 " Scroll both splits in Vim
 nnoremap <localleader>sb :set scrollbind!<CR>
 nnoremap <localleader>cb :set cursorbind!<CR>
@@ -2372,6 +2372,7 @@ endfunction
 
 function! CustomLightlineFugitive()
     if exists('*FugitiveHead')
+        set shell=bash
         let branch = FugitiveHead()
         return branch !=# '' ? '  '.branch : ''
     endif
