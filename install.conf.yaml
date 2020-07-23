@@ -76,7 +76,7 @@
     ~/.wireshark: home/wireshark
     ~/.agignore: home/agignore
     ~/.bash_profile: home/bash_profile
-    ~/.bashrc: home/bashrc
+    ~/.bashrc_disabled: home/bashrc
     ~/.fehbg: home/fehbg
     ~/.gdbinit: home/gdbinit
     ~/.gitconfig: home/gitconfig

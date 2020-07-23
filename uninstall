@@ -70,7 +70,7 @@ uninstall ~/.voltron
 uninstall ~/.wireshark
 uninstall ~/.agignore
 uninstall ~/.bash_profile
-uninstall ~/.bashrc
+uninstall ~/.bashrc_disabled
 uninstall ~/.fehbg
 uninstall ~/.gdbinit
 uninstall ~/.gitconfig
