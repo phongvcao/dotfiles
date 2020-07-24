@@ -801,7 +801,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " nnoremap <C-w> <C-w>w
 nnoremap q :call WriteQuitAll()<CR>
-nnoremap Q :w<CR>:ReanimateSaveSession<CR>:call WriteQuitAll()<CR>
 function WriteQuitAll()
     if expand('%p') != ''
         silent! wqa!
@@ -1838,14 +1837,16 @@ command! -nargs=* -complete=file NeoMRU call InvokeNeoMRU( <f-args> )
 nnoremap <localleader>o :NeoMRU<CR>
 
 " vim-reanimate settings
-nnoremap <leader>ss :ReanimateSaveSession<Space>
-nnoremap <leader>sl :silent! Unite -start-insert -default-action=reanimate_load -buffer-name=Sessions -prompt=Sessions>\  reanimate<CR>
-nnoremap <leader>se :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  reanimate<CR>
+set sessionoptions-=options
 let g:reanimate_event_disables = {
             \	"_" : {
             \		"reanimate_confirm" : 1,
             \	},
             \ }
+nnoremap <leader>ss :ReanimateSaveSession<Space>
+nnoremap <leader>sl :silent! Unite -start-insert -default-action=reanimate_load -buffer-name=Sessions -prompt=Sessions>\  reanimate<CR>
+nnoremap <leader>se :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  reanimate<CR>
+nnoremap Q :w<CR>:ReanimateSaveSession<CR>:call WriteQuitAll()<CR>
 function! SaveSessionReanimate(...)
     let l:arg = join( a:000, '_' )
     if ( l:arg != '' )
