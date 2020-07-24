@@ -1,3 +1,4 @@
+" vim:filetype=vim
 "
 " Configuration file for Vim 9.4 Compatible with both Linux & Windows (not me)
 "
@@ -619,7 +620,7 @@ function! CloseUniteWindow()
         nmap W <Plug>(show-motion-b)
         nmap B <Plug>(show-motion-B)
         nmap E <Plug>(show-motion-e)
-        silent! q
+        :bd! swoopBuf
     elseif ( &filetype ==# 'magit' ) || ( &filetype ==# 'GV' ) || ( &filetype ==# 'git' )
         if ( tabpagenr('$') == 1 )
             execute ":qall!"
