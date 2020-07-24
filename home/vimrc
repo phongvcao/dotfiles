@@ -1,5 +1,5 @@
 "
-" Configuration file for Vim 9.4 Compatible with both Linux & Windows
+" Configuration file for Vim 9.4 Compatible with both Linux & Windows (not me)
 "
 
 if has('win32') || has('win64')
@@ -1957,10 +1957,10 @@ vmap <C-h> <Plug>MoveBlockLeft
 vmap <C-l> <Plug>MoveBlockRight
 
 " vim-mergetool settings
-function! InvokeMergeTool()
-  if search('^<<<<<<<') != 0 || search('^>>>>>>>') != 0 || search('^|||||||') != 0 || search('^=======')
+function! MaybeInvokeMergeTool()
+  if search('^(<<<<<<<\|>>>>>>>\|=======\||||||||)') != 0
     MergetoolToggle
-  else
+  elseif search('^(<<<<\|>>>>\|====)') != 0
     PFShowConflicts
   endif
 endfunction
@@ -1971,7 +1971,7 @@ let g:perforce_utils_vim_path = g:vimPath . '/plugged/vim-perforce/perforce/perf
 if filereadable( g:perforce_utils_vim_path )
     execute 'source ' . g:perforce_utils_vim_path
 endif
-nnoremap <localleader>dr :call InvokeMergeTool()<CR>
+nnoremap <localleader>dr :call MaybeInvokeMergeTool()<CR>
 
 " neomru.vim settings
 nnoremap oo :NeoMRU<Space>
