@@ -1839,8 +1839,8 @@ nnoremap <localleader>o :NeoMRU<CR>
 
 " vim-reanimate settings
 nnoremap <leader>ss :ReanimateSaveSession<Space>
-nnoremap <leader>sl :silent! Unite -start-insert -default-action=reanimate_load -buffer-name=Sessions -prompt=Sessions>\  reanimate -toggle<CR>
-nnoremap <leader>se :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  reanimate -toggle<CR>
+nnoremap <leader>sl :silent! Unite -start-insert -default-action=reanimate_load -buffer-name=Sessions -prompt=Sessions>\  reanimate<CR>
+nnoremap <leader>se :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  reanimate<CR>
 let g:reanimate_event_disables = {
             \	"_" : {
             \		"reanimate_confirm" : 1,
