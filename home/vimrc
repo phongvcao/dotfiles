@@ -1837,7 +1837,7 @@ command! -nargs=* -complete=file NeoMRU call InvokeNeoMRU( <f-args> )
 nnoremap <localleader>o :NeoMRU<CR>
 
 " vim-reanimate settings
-nnoremap <leader>ss :ReanimateSave<Space>
+nnoremap <leader>ss :ReanimateSaveSession<Space>
 nnoremap <leader>sl :silent! Unite -start-insert -default-action=reanimate_load -buffer-name=Sessions -prompt=Sessions>\  reanimate -toggle<CR>
 nnoremap <leader>se :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  reanimate -toggle<CR>
 let g:reanimate_event_disables = {
@@ -1845,6 +1845,17 @@ let g:reanimate_event_disables = {
             \		"reanimate_confirm" : 1,
             \	},
             \ }
+function! SaveSessionReanimate(...)
+    let l:arg = join( a:000, '_' )
+    if ( l:arg != '' )
+        execute "silent! ReanimateSave " . strftime("%Y-%m-%d_%H-%M-%S") . "_" . l:arg  . ".vim"
+    elseif exists( '${TMUX}' )
+        execute "silent! ReanimateSave " . strftime("%Y-%m-%d_%H-%M-%S") . "_" . substitute(system("tmux display-message -p '#W'"), '\n', '', 'g')  . ".vim"
+    else
+        execute "silent! ReanimateSave " . strftime("%Y-%m-%d_%H-%M-%S") . ".vim"
+    endif
+endfunction
+command! -nargs=* ReanimateSaveSession call SaveSessionReanimate( <f-args> )
 
 "
 " Vim profiler / profiling
