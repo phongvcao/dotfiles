@@ -77,7 +77,7 @@ Plug 'thinca/vim-quickrun'
 Plug 'm2mdas/unite-file-vcs'
 Plug 'thinca/vim-ref'
 Plug 'kmnk/vim-unite-giti'
-Plug 'Shougo/unite-session'
+Plug 'osyo-manga/vim-reanimate'
 Plug 'chrisbra/BufTimer', {
             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " END: Shougo/unite.vim
@@ -1836,20 +1836,15 @@ endfunction
 command! -nargs=* -complete=file NeoMRU call InvokeNeoMRU( <f-args> )
 nnoremap <localleader>o :NeoMRU<CR>
 
-" unite-session settings
-function! SaveSessionUnite(...)
-    let l:arg = join( a:000, '_' )
-    if ( l:arg != '' )
-        execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . "_" . l:arg  . ".vim"
-    elseif exists( '${TMUX}' )
-        execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . "_" . substitute(system("tmux display-message -p '#W'"), '\n', '', 'g')  . ".vim"
-    else
-        execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . ".vim"
-    endif
-endfunction
-command! -nargs=* UniteSaveSession call SaveSessionUnite( <f-args> )
-nnoremap <leader>ss :UniteSaveSession<Space>
-nnoremap <leader>sl :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  session<CR>
+" vim-reanimate settings
+nnoremap <leader>ss :ReanimateSave<Space>
+nnoremap <leader>sl :silent! Unite -start-insert -default-action=reanimate_load -buffer-name=Sessions -prompt=Sessions>\  reanimate -toggle<CR>
+nnoremap <leader>se :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  reanimate -toggle<CR>
+let g:reanimate_event_disables = {
+            \	"_" : {
+            \		"reanimate_confirm" : 1,
+            \	},
+            \ }
 
 "
 " Vim profiler / profiling
@@ -2157,10 +2152,13 @@ function! ConfigureUnite()
             snoremap <buffer> <C-u> <C-c>:execute "normal! G"<CR>:execute "normal! 0D"<CR>A
         endif
         " execute "normal! \<C-o>"
-        nnoremap <silent><buffer><expr> <CR> unite#do_action('default')
+        " nnoremap <silent><buffer><expr> <CR> unite#do_action('default')
+        nmap <buffer> <CR> <Plug>(unite_do_default_action) 
         imap <buffer> <CR> <Plug>(unite_do_default_action)
+
         imap <buffer> <Tab> <Plug>(unite_do_default_action)
-        nnoremap <silent><buffer><expr> <Tab> unite#do_action('default')
+        nmap <buffer> <Tab> <Plug>(unite_do_default_action) 
+
         imap <buffer><expr> <C-j> pumvisible() ? "\<C-n>" : '<Plug>(unite_select_next_line)'
         imap <buffer><expr> <C-k> pumvisible() ? "\<C-p>" : '<Plug>(unite_select_previous_line)'
         imap <buffer> <C-r> <Plug>(unite_delete_backward_word)
@@ -3045,7 +3043,7 @@ augroup CustomAutoCmd
             autocmd VimEnter * :EMCommandLineNoreMap <C-p> <C-r>\"
         endif
     endif
-    autocmd VimEnter * call HighlightEasyMotion()
+    autocmd BufEnter * call HighlightEasyMotion()
 
     " vim-over settings
     if exists( ':EMCommandLineNoreMap' ) == 2

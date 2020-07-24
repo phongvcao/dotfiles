@@ -46,6 +46,7 @@
 " Plug 'xolox/vim-misc'
 " " END: xolox/vim-shell
 " Plug 'Shougo/neoyank.vim'
+" Plug 'Shougo/unite-session'
 " Plug 'osyo-manga/vim-hopping'
 " Plug 'vasconcelloslf/vim-foldfocus', {
 "             \ 'on_func' : 'FoldFocus' }
@@ -210,6 +211,21 @@
 "             \           'typescript', 'html', 'php' ] }
 " Plug 'liuchengxu/vista.vim'
 " Plug 'ap/vim-css-color'
+
+" unite-session settings
+function! SaveSessionUnite(...)
+    let l:arg = join( a:000, '_' )
+    if ( l:arg != '' )
+        execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . "_" . l:arg  . ".vim"
+    elseif exists( '${TMUX}' )
+        execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . "_" . substitute(system("tmux display-message -p '#W'"), '\n', '', 'g')  . ".vim"
+    else
+        execute "silent! UniteSessionSave " . strftime("%Y-%m-%d_%H-%M-%S") . ".vim"
+    endif
+endfunction
+command! -nargs=* UniteSaveSession call SaveSessionUnite( <f-args> )
+nnoremap <leader>ss :UniteSaveSession<Space>
+nnoremap <leader>sl :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  session<CR>
 
 " vista.vim settings
 nnoremap <localleader>T :Vista!!<CR>

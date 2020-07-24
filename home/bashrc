@@ -63,8 +63,8 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
     if [[ -d /usr/local/Cellar/ruby ]]; then
         gems_version="$(ls /usr/local/lib/ruby/gems | tail -n 1)"
         gems_install_dir=/usr/local/lib/ruby/gems/${gems_version}/gems
-        tmuxinator_dir="${HOME}/.config/tmuxinator"
-        source ${tmuxinator_dir}/completion/tmuxinator.bash
+        tmuxinator_dir="$(ls ${gems_install_dir} | command grep -i tmuxinator | tail -n 1)"
+        source ${gems_install_dir}/${tmuxinator_dir}/completion/tmuxinator.bash
     fi
 fi
 
@@ -74,6 +74,13 @@ elif [[ -f /usr/local/share/autojump/autojump.bash ]]; then
     source /usr/local/share/autojump/autojump.bash
 elif [[ -f "${HOME}"/.autojump/share/autojump/autojump.bash ]]; then
     source "${HOME}"/.autojump/share/autojump/autojump.bash
+fi
+
+if [ -z "$(command -v autojump)" ]; then
+   cd "${HOME}"
+   command git clone git://github.com/wting/autojump.git
+   cd autojump
+   ./install.py
 fi
 
 # grc (Generic Colorizer) configuration.
