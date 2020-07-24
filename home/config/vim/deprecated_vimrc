@@ -209,6 +209,7 @@
 "             \ 'for' : [ 'css', 'html', 'xhtml', 'javascript', 'json', 'jsx', 
 "             \           'typescript', 'html', 'php' ] }
 " Plug 'liuchengxu/vista.vim'
+" Plug 'ap/vim-css-color'
 
 " vista.vim settings
 nnoremap <localleader>T :Vista!!<CR>
