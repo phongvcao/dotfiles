@@ -238,17 +238,20 @@ bindkey "^z" "" # kill-region
 bindkey "^v" "" # edit-command-line
 bindkey "^y" "" # copy-region-as-kill
 bindkey "^p" "" # yank
+bindkey "\t" "" # menu-complete
+bindkey "\v" "" # menu-complete
 bindkey -s "jk" ""
 
 # bindkey '^[[Z' reverse-menu-complete
 export KEYTIMEOUT=10
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins '^?' backward-delete-char 
-bindkey -M viins "^p" yank
 bindkey -M viins "^v" yank
 bindkey -M viins "^e" edit-command-line
 bindkey -M viins "^u" backward-kill-line
 bindkey -M viins "^r" backward-kill-word
+bindkey -M viins "^n" expand-or-complete
+bindkey -M viins "^p" reverse-menu-complete
 
 bindkey -M vicmd "a" vi-add-eol
 bindkey -M vicmd "j" history-search-forward
@@ -261,7 +264,6 @@ bindkey -M vicmd "b" beginning-of-line
 bindkey -M vicmd "e" end-of-line
 bindkey -M vicmd "ud" backward-kill-line
 bindkey -M vicmd "^e" edit-command-line
-
 bindkey -M vicmd "C" kill-word
 bindkey -M vicmd "c" backward-kill-word
 bindkey -M vicmd "x" delete-char
