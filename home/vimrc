@@ -1964,8 +1964,10 @@ vmap <C-l> <Plug>MoveBlockRight
 " vim-mergetool settings
 function! MaybeInvokeMergeTool()
   if search('^\(<<<<<<<\|>>>>>>>\|=======\||||||||\)') != 0
+    call SetIndentation()
     MergetoolStart
   elseif search('^\(<<<<\|>>>>\|====\)') != 0
+    call SetIndentation()
     PFShowConflicts
   endif
 endfunction
@@ -3001,7 +3003,7 @@ augroup CustomAutoCmd
     " vim-better-whitespace settings
     " autocmd InsertLeave * :.StripWhitespace
 
-    autocmd BufReadPost,Syntax * :call SetIndentation()
+    autocmd Syntax * :call SetIndentation()
 
     autocmd BufRead,BufEnter * setlocal colorcolumn=80 textwidth=0
     autocmd FileType,BufEnter * :call SetOmnifunc()

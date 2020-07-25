@@ -1122,7 +1122,7 @@ if [[ -d "$1" ]]; then
     fi
 elif [[ -f "$1" ]]; then
     if [[ -f "$2" ]]; then
-        command vimdiff "$1" "$2"
+        command vimdiff -c "call SetIndentation()" "$1" "$2"
     else
         command vim -f -c "call MaybeInvokeMergeTool()" "$1"
     fi
