@@ -106,6 +106,7 @@
     ~/.xinitrc: home/xinitrc
     ~/.Xresources: home/Xresources
     ~/.zshrc: home/zshrc
+    ~/.hushlogin: home/hushlogin
     ~/.local/share/Trash/files: ~/.Trash
     ~/.pdbrc.py: home/pdbrc.py
 
