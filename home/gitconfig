@@ -1,9 +1,12 @@
 [user]
     name = Phong V. Cao
     email = phongvcao@phongvcao.com
+
 [core]
     editor = command vim
     pager = command vim -c 'let g:fzf_mru_disable_at_vimenter = 1 | PAGER' - 
+    excludesfile = ~/.gitignore_global
+
 [color]
     ui = true
 

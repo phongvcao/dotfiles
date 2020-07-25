@@ -75,6 +75,7 @@
     ~/.voltron: home/voltron
     ~/.wireshark: home/wireshark
     ~/.agignore: home/agignore
+    ~/.gitignore_global: home/gitignore_global
     ~/.bash_profile: home/bash_profile
     ~/.bashrc_disabled: home/bashrc
     ~/.fehbg: home/fehbg
