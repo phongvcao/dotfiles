@@ -16,5 +16,5 @@
 
 [mergetool "vim_mergetool"]
     cmd = command vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
-    trustExitCode = false
+    trustExitCode = true
     keepBackup = true
