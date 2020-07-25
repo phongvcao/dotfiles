@@ -1,6 +1,6 @@
 " vim:filetype=vim
 "
-" Configuration file for Vim 9.4 Compatible with both Linux & Windows (my name)
+" Configuration file for Vim 9.4 Compatible with both Linux & Windows (my name not)
 "
 
 if has('win32') || has('win64')
