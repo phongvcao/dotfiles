@@ -1124,7 +1124,7 @@ elif [[ -f "$1" ]]; then
     if [[ -f "$2" ]]; then
         command vimdiff "$1" "$2"
     else
-        echo "\nError: File \"$2\" not found\n"
+        command vim -f -c "call MaybeInvokeMergeTool()" "$1"
     fi
 else
     echo "\nError: File / Directory \"$1\" not found\n"

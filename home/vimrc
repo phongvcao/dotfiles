@@ -799,7 +799,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " nnoremap <C-w> <C-w>w
-nnoremap q :call WriteQuitAll()<CR>
 function WriteQuitAll()
     if expand('%p') != ''
         silent! wqa!
@@ -1964,12 +1963,28 @@ vmap <C-l> <Plug>MoveBlockRight
 
 " vim-mergetool settings
 function! MaybeInvokeMergeTool()
-  if search('^(<<<<<<<\|>>>>>>>\|=======\||||||||)') != 0
-    MergetoolToggle
-  elseif search('^(<<<<\|>>>>\|====)') != 0
+  if search('^\(<<<<<<<\|>>>>>>>\|=======\||||||||\)') != 0
+    MergetoolStart
+  elseif search('^\(<<<<\|>>>>\|====\)') != 0
     PFShowConflicts
   endif
 endfunction
+
+function QuitMergetool()
+  " If we're in merge mode, exit
+  if get(g:, 'mergetool_in_merge_mode', 0)
+    call mergetool#stop()
+    return
+  endif
+
+  if &diff
+    " Quit diff mode intelligently...
+  endif
+  call WriteQuitAll()
+endfunction
+command MergetoolQuit call QuitMergetool()
+
+nnoremap q :QuitMergetool<CR>
 let g:mergetool_layout = 'brm'
 
 " vim-perforce settings
@@ -2986,7 +3001,7 @@ augroup CustomAutoCmd
     " vim-better-whitespace settings
     " autocmd InsertLeave * :.StripWhitespace
 
-    autocmd Syntax * :call SetIndentation()
+    autocmd BufReadPost,Syntax * :call SetIndentation()
 
     autocmd BufRead,BufEnter * setlocal colorcolumn=80 textwidth=0
     autocmd FileType,BufEnter * :call SetOmnifunc()
