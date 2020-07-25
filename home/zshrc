@@ -246,7 +246,7 @@ bindkey -M viins '^?' backward-delete-char
 bindkey -M viins "^p" yank
 bindkey -M viins "^v" yank
 bindkey -M viins "^e" edit-command-line
-bindkey -M viins "^d" backward-kill-line
+bindkey -M viins "^u" backward-kill-line
 bindkey -M viins "^r" backward-kill-word
 
 bindkey -M vicmd "a" vi-add-eol
@@ -258,7 +258,7 @@ bindkey -M vicmd "w" forward-word
 bindkey -M vicmd "W" backward-word
 bindkey -M vicmd "b" beginning-of-line
 bindkey -M vicmd "e" end-of-line
-bindkey -M vicmd "^d" backward-kill-line
+bindkey -M vicmd "ud" backward-kill-line
 bindkey -M vicmd "^e" edit-command-line
 
 bindkey -M vicmd "C" kill-word
@@ -285,7 +285,7 @@ bindkey -M visual "e" end-of-line
 bindkey -M visual "d" kill-region
 bindkey -M visual "x" delete-char
 bindkey -M visual "^x" backward-delete-char
-bindkey -M visual "^d" backward-kill-line
+bindkey -M visual "^u" backward-kill-line
 bindkey -M visual "^e" edit-command-line
 bindkey -M visual "y" copy-region-as-kill
 bindkey -M visual "p" yank
