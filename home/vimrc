@@ -1984,7 +1984,7 @@ function QuitMergetool()
 endfunction
 command MergetoolQuit call QuitMergetool()
 
-nnoremap q :QuitMergetool<CR>
+nnoremap q :MergetoolQuit<CR>
 let g:mergetool_layout = 'brm'
 
 " vim-perforce settings
