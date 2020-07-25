@@ -217,27 +217,84 @@ fi
 
 # Key bindings
 # Never touch ^i because it is built-in <Tab> key
-bindkey '^[[Z' reverse-menu-complete
-bindkey "^j" history-search-forward
-bindkey "^k" history-search-backward
-bindkey "^l" forward-char
-bindkey "^h" backward-char
-bindkey "^w" forward-word
-bindkey "^q" backward-word
-bindkey "^b" beginning-of-line
-bindkey "^e" end-of-line
-bindkey "^o" kill-line
-bindkey "^u" backward-kill-line
-bindkey "^t" kill-word
-bindkey "^r" backward-kill-word
-bindkey "^d" delete-char
-bindkey "^s" backward-delete-char
-bindkey "^a" kill-whole-line
-bindkey "^z" kill-region
-bindkey "^v" edit-command-line
-bindkey "^y" copy-region-as-kill
-bindkey "^p" yank
+# Learning vi-mode - disable emacs keybindings
+bindkey '^[[Z' "" # reverse-menu-complete
+bindkey "^j" "" # history-search-forward
+bindkey "^k" "" # history-search-backward
+bindkey "^l" "" # forward-char
+bindkey "^h" "" # backward-char
+bindkey "^w" "" # forward-word
+bindkey "^q" "" # backward-word
+bindkey "^b" "" # beginning-of-line
+bindkey "^e" "" # end-of-line
+bindkey "^o" "" # kill-line
+bindkey "^u" "" # backward-kill-line
+bindkey "^t" "" # kill-word
+bindkey "^r" "" # backward-kill-word
+bindkey "^d" "" # delete-char
+bindkey "^s" "" # backward-delete-char
+bindkey "^a" "" # kill-whole-line
+bindkey "^z" "" # kill-region
+bindkey "^v" "" # edit-command-line
+bindkey "^y" "" # copy-region-as-kill
+bindkey "^p" "" # yank
 bindkey -s "jk" ""
+
+# bindkey '^[[Z' reverse-menu-complete
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M viins '^?' backward-delete-char 
+bindkey -M viins "^p" yank
+bindkey -M viins "^v" yank
+bindkey -M viins "^e" edit-command-line
+bindkey -M viins "^d" backward-kill-line
+bindkey -M viins "^r" backward-kill-word
+
+bindkey -M vicmd "a" vi-add-eol
+bindkey -M vicmd "j" history-search-forward
+bindkey -M vicmd "k" history-search-backward
+bindkey -M vicmd "l" forward-char
+bindkey -M vicmd "h" backward-char
+bindkey -M vicmd "w" forward-word
+bindkey -M vicmd "W" backward-word
+bindkey -M vicmd "b" beginning-of-line
+bindkey -M vicmd "e" end-of-line
+bindkey -M vicmd "^d" backward-kill-line
+bindkey -M vicmd "^e" edit-command-line
+
+bindkey -M vicmd "C" kill-word
+bindkey -M vicmd "c" backward-kill-word
+bindkey -M vicmd "x" delete-char
+bindkey -M vicmd "^x" backward-delete-char
+bindkey -M vicmd "d" kill-whole-line
+bindkey -M vicmd "u" undo
+bindkey -M vicmd "^r" redo
+bindkey -M vicmd "^v" edit-command-line
+bindkey -M vicmd "y" copy-region-as-kill
+bindkey -M vicmd "p" yank
+bindkey -M vicmd '/' history-incremental-search-backward
+bindkey -M vicmd '?' history-incremental-search-forward
+
+bindkey -M visual 'jk' deactivate-region
+bindkey -M visual 'y' copy-region-as-kill
+bindkey -M visual "l" forward-char
+bindkey -M visual "h" backward-char
+bindkey -M visual "w" forward-word
+bindkey -M visual "W" backward-word
+bindkey -M visual "b" beginning-of-line
+bindkey -M visual "e" end-of-line
+bindkey -M visual "d" kill-region
+bindkey -M visual "x" delete-char
+bindkey -M visual "^x" backward-delete-char
+bindkey -M visual "^d" backward-kill-line
+bindkey -M visual "^e" edit-command-line
+bindkey -M visual "y" copy-region-as-kill
+bindkey -M visual "p" yank
+bindkey -M visual "^p" yank
+bindkey -M visual '/' history-incremental-search-backward
+bindkey -M visual '?' history-incremental-search-forward
+
+bindkey -s "jk" '\e'
+
 # Shift-Insert: Paste from Clipboard to gnome-terminal
 # C-y or tmux vi-mode copy: Copy from gnome-terminal to Clipboard
 # C-c: Abort what you're typing

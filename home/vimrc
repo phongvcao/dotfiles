@@ -2823,7 +2823,6 @@ function! SetHighlight()
 
     " lightline.vim settings
     " highlight EndOfBuffer ctermfg=8 ctermbg=8
-
     highlight StatusLine ctermfg=0 ctermbg=12
     highlight NonText ctermfg=8 ctermbg=8
     highlight WildMenu ctermfg=4 ctermbg=8
