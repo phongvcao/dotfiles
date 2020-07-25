@@ -8,3 +8,4 @@ config/cmus/autosave
 config/ranger/__pycache__/
 config/ranger/colorschemes/__pycache__/
 config/ranger/history
+*.orig
