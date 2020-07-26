@@ -2550,7 +2550,7 @@ function! CustomLightlineFilename()
 endfunction
 
 function! CustomLightlineFugitive()
-    if exists('*FugitiveHead')
+    if exists('*FugitiveHead') && &filetype !=# 'ctrlsf'
         set shell=bash
         let branch = FugitiveHead()
         return branch !=# '' ? '  '.branch : ''
