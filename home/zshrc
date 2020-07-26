@@ -218,6 +218,10 @@ fi
 # Key bindings
 # Never touch ^i because it is built-in <Tab> key
 # Learning vi-mode - disable emacs keybindings
+bindkey '^[[A' "" # up arrow
+bindkey '^[[B' "" # down arrow
+bindkey '^[[D' "" # left arrow
+bindkey '^[[C' "" # right arrow
 bindkey '^[[Z' "" # reverse-menu-complete
 bindkey "^j" "" # history-search-forward
 bindkey "^k" "" # history-search-backward
@@ -238,8 +242,8 @@ bindkey "^z" "" # kill-region
 bindkey "^v" "" # edit-command-line
 bindkey "^y" "" # copy-region-as-kill
 bindkey "^p" "" # yank
-bindkey "\t" "" # menu-complete
-bindkey "\v" "" # menu-complete
+bindkey "\t" "" # <Tab> - menu-complete
+bindkey "\v" "" # <Tab> - menu-complete
 bindkey -s "jk" ""
 
 # bindkey '^[[Z' reverse-menu-complete

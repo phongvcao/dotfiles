@@ -194,6 +194,10 @@ function gop() {
     fi
 }
 
+function key() {
+  command cat > /dev/null
+}
+
 function man() {
     if [[ -n $2 ]]; then
         command vim -c "Tman $1 $2 | tabclose 1"
