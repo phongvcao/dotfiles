@@ -55,6 +55,11 @@ case "${PATH}" in
 esac
 
 #
+# Modify $PYTHONPATH
+#
+export PYTHONPATH=${PYTHONPATH}:${PATH}
+
+#
 # Modify $MANPATH
 #
 MANPATH_PREFIX="/usr/local/man"
