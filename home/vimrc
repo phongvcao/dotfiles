@@ -1967,6 +1967,7 @@ nnoremap <leader>C :Twiggy<CR>
 " ctrlsf.vim settings
 nnoremap <leader>g :CtrlSF<Space>
 nnoremap <leader>rg :CtrlSFToggle<CR>
+command! -nargs=1 Search :let @/='\V' . escape(<q-args>, '\\')| normal! n
 let g:ctrlsf_auto_close = {
             \ "normal" : 0,
             \ "compact": 0
@@ -1988,25 +1989,25 @@ let g:ctrlsf_absolute_file_path = 0
 function! SetHighlightCtrlSF()
     if &filetype ==# 'ctrlsf'
         if g:ctrlsf_default_view_mode ==# 'normal'
-            syntax case match
-            syntax region ctrlsfHeader start=/\%1l/ end=/\%2l/
-                        \ contains=ctrlsfSearching,ctrlsfSearchDone,ctrlsfSearchCancelled,
-                        \ ctrlsfMatchCount,ctrlsfFileCount
+            " syntax case match
+            " syntax region ctrlsfHeader start=/\%1l/ end=/\%2l/
+            "             \ contains=ctrlsfSearching,ctrlsfSearchDone,ctrlsfSearchCancelled,
+            "             \ ctrlsfMatchCount,ctrlsfFileCount
             syntax match ctrlsfFilename        /^.*\ze:$/
             syntax match ctrlsfLnumMatch       /^\d\+:/
             syntax match ctrlsfLnumUnmatch     /^\d\+-/
-            syntax match ctrlsfCuttingLine     /^\.\+$/
-            syntax match ctrlsfSearching       /Searching\.\+/         contained
-            syntax match ctrlsfSearchDone      /Done!/                 contained
-            syntax match ctrlsfSearchCancelled /Cancelled./            contained
-            syntax match ctrlsfMatchCount      /\d\+\(\s*matched\)\@=/ contained
-            syntax match ctrlsfFileCount       /\d\+\(\s*files\)\@=/   contained
-        else
-            syntax case match
-            syntax match qfLineNr    /[^|]*/  contained contains=qfError
-            syntax match qfSeparator /|/      contained nextgroup=qfLineNr
-            syntax match qfFileName  /^[^|]*/ nextgroup=qfSeparator
-            syntax match qfError     /error/  contained
+            " syntax match ctrlsfCuttingLine     /^\.\+$/
+            " syntax match ctrlsfSearching       /Searching\.\+/         contained
+            " syntax match ctrlsfSearchDone      /Done!/                 contained
+            " syntax match ctrlsfSearchCancelled /Cancelled./            contained
+            " syntax match ctrlsfMatchCount      /\d\+\(\s*matched\)\@=/ contained
+            " syntax match ctrlsfFileCount       /\d\+\(\s*files\)\@=/   contained
+        " else
+        "     syntax case match
+        "     syntax match qfLineNr    /[^|]*/  contained contains=qfError
+        "     syntax match qfSeparator /|/      contained nextgroup=qfLineNr
+        "     syntax match qfFileName  /^[^|]*/ nextgroup=qfSeparator
+        "     syntax match qfError     /error/  contained
         endif
     endif
 
@@ -2014,10 +2015,10 @@ function! SetHighlightCtrlSF()
     highlight def link ctrlsfFilename        helpVim
     highlight def link ctrlsfLnumMatch       Statement
     highlight def link ctrlsfLnumUnmatch     Statement
-    highlight def link ctrlsfSelectedLine    Search
+    highlight def link ctrlsfSelectedLine    CursorLine
     highlight def link ctrlsfMatch           Title
     highlight def link ctrlsfSearching       Todo
-    highlight def link ctrlsfSearchDone      PreProc
+    highlight def link ctrlsfSearchDone      Statement
     highlight def link ctrlsfSearchCancelled Comment
     highlight def link ctrlsfMatchCount      Number
     highlight def link ctrlsfFileCount       Number
@@ -2028,7 +2029,7 @@ endfunction
 " vim-swoop settings
 let g:swoopUseDefaultKeyMap = 0
 nnoremap <leader>R :silent! call SwoopMulti()<CR>
-let g:swoopHighlight = ["hi! SwoopBufferLineHi ctermfg=4 ctermbg=8", "hi! SwoopPatternHi ctermfg=9 ctermbg=8"]
+let g:swoopHighlight = ["hi! SwoopBufferLineHi ctermfg=4 ctermbg=8", "hi! SwoopPatternHi ctermfg=8 ctermbg=3"]
 let g:defaultWinSwoopHeight = 20
 function! FreezeSwoopContext()
     if expand('%f') =~? 'swoopBuf'

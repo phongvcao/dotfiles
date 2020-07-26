@@ -299,46 +299,78 @@ if [[ -z "$(command -v rg)" ]]; then
     fi
 else
     if [[ -n "$3" ]]; then
-        file_extensions=( $( echo $3 | tr ',' ' ' ) )
-
-        type_adds=""
-        types=""
-        for file_extension in "${file_extensions[@]}"; do
-            type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
-            types=" --type ${file_extension}${types}"
-        done
+        file_extensions="$3"
     fi
 
     if [[ -n "$2" ]]; then
         if [[ -d "$2" ]]; then
-            eval "command_frg '$1' '$2' ${type_adds} ${types}"
+            if [[ -n "$3" ]]; then
+                command vim -c "CtrlSF -G *{${file_extensions}} $1 $2"
+            else
+                command vim -c "CtrlSF $1 $2"
+            fi
         elif [[ -f "$2" ]]; then
-            eval "command_frg '$1' '$2'"
+            command vim -c "silent! call SwoopPattern('\V$1')" "$2"
         elif [[ -p "$2" ]]; then
-            eval "command_frg '$1' '$2'"
+            command vim -c "silent! call SwoopPattern('\V$1')" "$2"
         else
             if [[ -n "$2" ]]; then
-                file_extensions=( $( echo $2 | tr ',' ' ' ) )
-
-                type_adds=""
-                types=""
-                for file_extension in "${file_extensions[@]}"; do
-                    type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
-                    types=" --type ${file_extension}${types}"
-                done
+                file_extensions="$2"
             fi
 
-            eval "command_frg '$1' ${type_adds} ${types}"
+            command vim -c "CtrlSF -G *{${file_extensions}} $1"
         fi
     elif [[ -n "$1" ]]; then
         if [[ -t 0 ]]; then
-            command_frg "$1" ./
+            command vim -c "CtrlSF $1"
         else
             command_frg_stream "$1"
         fi
     else
         command vim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
+
+    # if [[ -n "$3" ]]; then
+    #     file_extensions=( $( echo $3 | tr ',' ' ' ) )
+    #
+    #     type_adds=""
+    #     types=""
+    #     for file_extension in "${file_extensions[@]}"; do
+    #         type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+    #         types=" --type ${file_extension}${types}"
+    #     done
+    # fi
+    #
+    # if [[ -n "$2" ]]; then
+    #     if [[ -d "$2" ]]; then
+    #         eval "command_frg '$1' '$2' ${type_adds} ${types}"
+    #     elif [[ -f "$2" ]]; then
+    #         eval "command_frg '$1' '$2'"
+    #     elif [[ -p "$2" ]]; then
+    #         eval "command_frg '$1' '$2'"
+    #     else
+    #         if [[ -n "$2" ]]; then
+    #             file_extensions=( $( echo $2 | tr ',' ' ' ) )
+    #
+    #             type_adds=""
+    #             types=""
+    #             for file_extension in "${file_extensions[@]}"; do
+    #                 type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+    #                 types=" --type ${file_extension}${types}"
+    #             done
+    #         fi
+    #
+    #         eval "command_frg '$1' ${type_adds} ${types}"
+    #     fi
+    # elif [[ -n "$1" ]]; then
+    #     if [[ -t 0 ]]; then
+    #         command_frg "$1" ./
+    #     else
+    #         command_frg_stream "$1"
+    #     fi
+    # else
+    #     command vim -c 'let g:far#window_layout="current" | silent! Farp'
+    # fi
 fi
 }
 
@@ -353,46 +385,78 @@ if [[ -z "$(command -v rg)" ]]; then
     fi
 else
     if [[ -n "$3" ]]; then
-        file_extensions=( $( echo $3 | tr ',' ' ' ) )
-
-        type_adds=""
-        types=""
-        for file_extension in "${file_extensions[@]}"; do
-            type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
-            types=" --type ${file_extension}${types}"
-        done
+        file_extensions="$3"
     fi
 
     if [[ -n "$2" ]]; then
         if [[ -d "$2" ]]; then
-            eval "command_frg --case-sensitive '$1' '$2' ${type_adds} ${types}"
+            if [[ -n "$3" ]]; then
+                command vim -c "CtrlSF -G *{${file_extensions}} -S $1 $2"
+            else
+                command vim -c "CtrlSF -S $1 $2"
+            fi
         elif [[ -f "$2" ]]; then
-            eval "command_frg --case-sensitive '$1' '$2'"
+            command vim -c "silent! call SwoopPattern('$1\C')" "$2"
         elif [[ -p "$2" ]]; then
-            eval "command_frg --case-sensitive '$1' '$2'"
+            command vim -c "silent! call SwoopPattern('$1\C')" "$2"
         else
             if [[ -n "$2" ]]; then
-                file_extensions=( $( echo $2 | tr ',' ' ' ) )
-
-                type_adds=""
-                types=""
-                for file_extension in "${file_extensions[@]}"; do
-                    type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
-                    types=" --type ${file_extension}${types}"
-                done
+                file_extensions="$2"
             fi
 
-            eval "command_frg --case-sensitive '$1' ${type_adds} ${types}"
+            command vim -c "CtrlSF -G *{${file_extensions}} -S $1"
         fi
     elif [[ -n "$1" ]]; then
         if [[ -t 0 ]]; then
-            command_frg --case-sensitive "$1" ./
+            command vim -c "CtrlSF -S $1"
         else
-            command_frg_stream --case-sensitive "$1"
+            command_frg_stream "$1"
         fi
     else
         command vim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
+
+    # if [[ -n "$3" ]]; then
+    #     file_extensions=( $( echo $3 | tr ',' ' ' ) )
+    #
+    #     type_adds=""
+    #     types=""
+    #     for file_extension in "${file_extensions[@]}"; do
+    #         type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+    #         types=" --type ${file_extension}${types}"
+    #     done
+    # fi
+    #
+    # if [[ -n "$2" ]]; then
+    #     if [[ -d "$2" ]]; then
+    #         eval "command_frg --case-sensitive '$1' '$2' ${type_adds} ${types}"
+    #     elif [[ -f "$2" ]]; then
+    #         eval "command_frg --case-sensitive '$1' '$2'"
+    #     elif [[ -p "$2" ]]; then
+    #         eval "command_frg --case-sensitive '$1' '$2'"
+    #     else
+    #         if [[ -n "$2" ]]; then
+    #             file_extensions=( $( echo $2 | tr ',' ' ' ) )
+    #
+    #             type_adds=""
+    #             types=""
+    #             for file_extension in "${file_extensions[@]}"; do
+    #                 type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+    #                 types=" --type ${file_extension}${types}"
+    #             done
+    #         fi
+    #
+    #         eval "command_frg --case-sensitive '$1' ${type_adds} ${types}"
+    #     fi
+    # elif [[ -n "$1" ]]; then
+    #     if [[ -t 0 ]]; then
+    #         command_frg --case-sensitive "$1" ./
+    #     else
+    #         command_frg_stream --case-sensitive "$1"
+    #     fi
+    # else
+    #     command vim -c 'let g:far#window_layout="current" | silent! Farp'
+    # fi
 fi
 }
 
@@ -660,6 +724,7 @@ function gr() {
 # else
 #     gr "$@"
 # fi
+
 if [[ -z "$(command -v rg)" ]]; then
     if [[ "$(isAsciiOnly $1)" == 1 ]]; then
         LC_ALL=C rgr "$@"
@@ -670,47 +735,89 @@ if [[ -z "$(command -v rg)" ]]; then
     fi
 else
     if [[ -n "$3" ]]; then
-        file_extensions=( $( echo $3 | tr ',' ' ' ) )
-
-        type_adds=""
-        types=""
-        for file_extension in "${file_extensions[@]}"; do
-            type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
-            types=" --type ${file_extension}${types}"
-        done
+        file_extensions="$3"
     fi
 
     if [[ -n "$2" ]]; then
         if [[ -d "$2" ]]; then
-            eval "command_rg '$1' '$2' ${type_adds} ${types}"
+            if [[ -n "$3" ]]; then
+                command vim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF -G *{${file_extensions}} $1 $2"
+            else
+                command vim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF $1 $2"
+            fi
         elif [[ -f "$2" ]]; then
-            eval "command_rg '$1' '$2'"
+            command vim -c "silent! call SwoopPattern('$1')" "$2"
         elif [[ -p "$2" ]]; then
-            eval "command_rg '$1' '$2'"
+            command vim -c "silent! call SwoopPattern('$1')" "$2"
         else
             if [[ -n "$2" ]]; then
-                file_extensions=( $( echo $2 | tr ',' ' ' ) )
-
-                type_adds=""
-                types=""
-                for file_extension in "${file_extensions[@]}"; do
-                    type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
-                    types=" --type ${file_extension}${types}"
-                done
+                file_extensions="$2"
             fi
 
-            eval "command_rg '$1' ${type_adds} ${types}"
+            command vim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF -G *{${file_extensions}} $1"
         fi
     elif [[ -n "$1" ]]; then
         if [[ -t 0 ]]; then
-            command_rg "$1" ./
+            command vim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF $1"
         else
-            command_rg_stream "$1"
+            command_frg_stream "$1"
         fi
     else
         command vim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 fi
+
+# if [[ -z "$(command -v rg)" ]]; then
+#     if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+#         LC_ALL=C rgr "$@"
+#     elif [[ -n "$1" ]]; then
+#         rgr "$@"
+#     else
+#         command vim -c 'let g:far#window_layout="current" | silent! Farp'
+#     fi
+# else
+#     if [[ -n "$3" ]]; then
+#         file_extensions=( $( echo $3 | tr ',' ' ' ) )
+#
+#         type_adds=""
+#         types=""
+#         for file_extension in "${file_extensions[@]}"; do
+#             type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+#             types=" --type ${file_extension}${types}"
+#         done
+#     fi
+#
+#     if [[ -n "$2" ]]; then
+#         if [[ -d "$2" ]]; then
+#             eval "command_rg '$1' '$2' ${type_adds} ${types}"
+#         elif [[ -f "$2" ]]; then
+#             eval "command_rg '$1' '$2'"
+#         elif [[ -p "$2" ]]; then
+#             eval "command_rg '$1' '$2'"
+#         else
+#             if [[ -n "$2" ]]; then
+#                 file_extensions=( $( echo $2 | tr ',' ' ' ) )
+#
+#                 type_adds=""
+#                 types=""
+#                 for file_extension in "${file_extensions[@]}"; do
+#                     type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+#                     types=" --type ${file_extension}${types}"
+#                 done
+#             fi
+#
+#             eval "command_rg '$1' ${type_adds} ${types}"
+#         fi
+#     elif [[ -n "$1" ]]; then
+#         if [[ -t 0 ]]; then
+#             command_rg "$1" ./
+#         else
+#             command_rg_stream "$1"
+#         fi
+#     else
+#         command vim -c 'let g:far#window_layout="current" | silent! Farp'
+#     fi
+# fi
 }
 
 function grs() {
