@@ -1961,6 +1961,9 @@ let g:any_jump_colors = {
             \ }
 let g:any_jump_grouping_enabled = 1
 
+" rhysd/committia.vim settings
+let g:committia_min_window_width = 0
+
 " vim-twiggy settings
 nnoremap <leader>C :Twiggy<CR>
 
