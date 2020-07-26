@@ -194,7 +194,7 @@ function gop() {
     fi
 }
 
-function key() {
+function keystroke() {
   command cat > /dev/null
 }
 

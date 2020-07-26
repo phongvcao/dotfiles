@@ -9,6 +9,9 @@ elseif has('unix')
     let g:vimPath=$HOME . '/.vim'
 endif
 
+" Speed up Vim startup time (especially with vim-fugitive)
+set shell=bash\ --login
+
 " BEGIN: vim-plug
 
 set nocompatible
