@@ -1989,6 +1989,7 @@ let g:ctrlsf_position = 'right'
 let g:ctrlsf_selected_line_hl = 'op'
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_absolute_file_path = 0
+let g:ctrlsf_winsize = '50%'
 function! SetHighlightCtrlSF()
     if &filetype ==# 'ctrlsf'
         if g:ctrlsf_default_view_mode ==# 'normal'
