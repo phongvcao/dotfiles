@@ -221,56 +221,64 @@ cd "${CURDIR}"
 }
 
 function dfs() {
+local filename=""
 if [[ -n $3 ]]; then
-    command find "$2" -maxdepth "$3" -mount -iregex ".*$1.*" \
+    filename=$(command find "$2" -maxdepth "$3" -mount -iregex ".*$1.*" \
         -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-        --group-directories-first --color -A -d {} \;
+        --group-directories-first --color -A -d {} \; | fzf)
 else
     if [[ -n $2 ]]; then
-        command find "$2" -mount -iregex ".*$1.*" \
+        filename=$(command find "$2" -mount -iregex ".*$1.*" \
             -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-            --group-directories-first --color -A -d {} \;
+            --group-directories-first --color -A -d {} \; | fzf)
     else
         if [[ -n $1 ]]; then
-            command find . -mount -iregex ".*$1.*" \
+            filename=$(command find . -mount -iregex ".*$1.*" \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \;
+                --group-directories-first --color -A -d {} \; | fzf)
         else
-            command find . -mount -type d \
+            filename=$(command find . -mount -type d \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \;
-            command find . -mount -type f \
+                --group-directories-first --color -A -d {} \; | fzf)
+            filename=$(command find . -mount -type f \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \;
+                --group-directories-first --color -A -d {} \; | fzf)
         fi
     fi
+fi
+if [[ -n "${filename}" ]]; then
+    command vim "${filename}"
 fi
 }
 
 function bfs() {
+local filename=""
 if [[ -n $3 ]]; then
-    command bfs "$2" -maxdepth "$3" -mount -iregex ".*$1.*" \
+    filename=$(command bfs "$2" -maxdepth "$3" -mount -iregex ".*$1.*" \
         -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-        --group-directories-first --color -A -d {} \; 2>/dev/null
+        --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
 else
     if [[ -n $2 ]]; then
-        command bfs "$2" -mount -iregex ".*$1.*" \
+        filename=$(command bfs "$2" -mount -iregex ".*$1.*" \
             -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-            --group-directories-first --color -A -d {} \; 2>/dev/null
+            --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
     else
         if [[ -n $1 ]]; then
-            command bfs . -mount -iregex ".*$1.*" \
+            filename=$(command bfs . -mount -iregex ".*$1.*" \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \; 2>/dev/null
+                --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
         else
-            command bfs . -mount -type d \
+            filename=$(command bfs . -mount -type d \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \; 2>/dev/null
-            command bfs . -mount -type f \
+                --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
+            filename=$(command bfs . -mount -type f \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \; 2>/dev/null
+                --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
         fi
     fi
+fi
+if [[ -n "${filename}" ]]; then
+    command vim "${filename}"
 fi
 }
 
@@ -1252,7 +1260,7 @@ function ps() {
     fi
 }
 
-function fzf() {
+function _fzf() {
     if [[ -n "$2" ]]; then
         CURDIR="${PWD}"
         FZF_DEFAULT_COMMAND_DEFAULT="${FZF_DEFAULT_COMMAND}"

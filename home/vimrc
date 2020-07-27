@@ -103,6 +103,7 @@ Plug 'dyng/ctrlsf.vim', {
             \ 'on' : [ 'CtrlSF', 'CtrlSFOpen', 'CtrlSFToggle', 'CtrlSFUpdate',
             \          'CtrlSFClose', 'CtrlSFStop', 'CtrlSFClearHL',
             \          'CtrlSFToggleMap', 'CtrlSFFocus' ] }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 if executable('p4')
     " BEGIN: pcaneill/vim-perforce
