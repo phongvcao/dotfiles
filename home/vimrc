@@ -1774,6 +1774,7 @@ let g:winresizer_start_key = '+'
 
 " unite.vim settings
 let g:unite_no_default_keymappings = 1
+let g:unite_redraw_hold_candidates = 50000
 let g:unite_source_rec_max_cache_files = 0
 let g:unite_data_directory = g:vimPath . '/cache/unite'
 nnoremap <leader>b :silent! Unite buffer -prompt=Buf>\ \  -winheight=10 -start-insert -buffer-name=Buffers\ List<CR>
