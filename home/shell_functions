@@ -223,21 +223,21 @@ cd "${CURDIR}"
 function dfs() {
 local filename=""
 if [[ -n $3 ]]; then
-    filename=$(command fd "$1" "$2" -HI --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+    filename=$(fd "$1" "$2" -HI --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
         --group-directories-first --color -A -d {} \; | fzf)
 else
     if [[ -n $2 ]]; then
-        filename=$(command fd "$1" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+        filename=$(fd "$1" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
             --group-directories-first --color -A -d {} \; | fzf)
     else
         if [[ -n $1 ]]; then
-            filename=$(command fd "$1" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+            filename=$(fd "$1" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
         else
-            filename=$(command fd --type d -HI --exclude='*.git/' \
+            filename=$(fd --type d -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
-            filename=$(command fd --type f -HI --exclude='*.git/' \
+            filename=$(fd --type f -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
         fi
@@ -1056,32 +1056,32 @@ fi
 function lssl() {
 if [[ -n "$2" ]]; then
     if [[ "$1" =~ [[:upper:]] ]]; then
-        command fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+        fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
                 --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
     else
-        command fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+        fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
                 --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
     fi
 elif [[ -n "$1" ]]; then
     if [[ -d "$1" ]]; then
-        command fd . "$1" --max-depth 1 -HI --exclude='*.git/' \
+        fd . "$1" --max-depth 1 -HI --exclude='*.git/' \
                 --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \;
     else
         if [[ "$1" =~ [[:upper:]] ]]; then
-            command fd "$1" . --max-depth 1 -HI --exclude='*.git/' \
+            fd "$1" . --max-depth 1 -HI --exclude='*.git/' \
                     --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
         else
-            command fd "$1" . --max-depth 1 -HI --exclude='*.git/' \
+            fd "$1" . --max-depth 1 -HI --exclude='*.git/' \
                     --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
         fi
     fi
 else
-   command fd --max-depth 1 -HI --exclude='*.git/' \
+   fd --max-depth 1 -HI --exclude='*.git/' \
            --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
            --group-directories-first --color -A -d -h -1 -l {} \;
 fi
@@ -1090,32 +1090,32 @@ fi
 function lsl() {
 if [[ -n "$2" ]]; then
     if [[ "$1" =~ [[:upper:]] ]]; then
-        command fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+        fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
     else
-        command fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+        fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
     fi
 elif [[ -n "$1" ]]; then
     if [[ -d "$1" ]]; then
-        command fd . "$1" --max-depth 1 -HI --exclude='*.git/' \
+        fd . "$1" --max-depth 1 -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \;
     else
         if [[ "$1" =~ [[:upper:]] ]]; then
-            command fd "$1" --max-depth 1 -HI --exclude='*.git/' \
+            fd "$1" --max-depth 1 -HI --exclude='*.git/' \
                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
         else
-            command fd "$1" --max-depth 1 -HI --exclude='*.git/' \
+            fd "$1" --max-depth 1 -HI --exclude='*.git/' \
                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
         fi
     fi
 else
-   command fd --max-depth 1 -HI --exclude='*.git/' \
+   fd --max-depth 1 -HI --exclude='*.git/' \
            --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
            --group-directories-first --color -A -d -h -1 -l {} +
 fi
@@ -1124,45 +1124,45 @@ fi
 function lsr() {
 if [[ -n "$2" ]]; then
     if [[ "$1" =~ [[:upper:]] ]]; then
-        command fd -L "$1" "$2" -HI --exclude='*.git/' --type d \
+        fd -L "$1" "$2" -HI --exclude='*.git/' --type d \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor "$1"
-        command fd -L "$1" "$2" -HI --exclude='*.git/' --type l --type f \
+        fd -L "$1" "$2" -HI --exclude='*.git/' --type l --type f \
                 --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
     else
-        command fd -L "$1" "$2" -HI --exclude='*.git/' --type d \
+        fd -L "$1" "$2" -HI --exclude='*.git/' --type d \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor -i "$1"
-        command fd -L "$1" "$2" -HI --exclude='*.git/' --type l --type f \
+        fd -L "$1" "$2" -HI --exclude='*.git/' --type l --type f \
                 --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
     fi
 elif [[ -n "$1" ]]; then
     if [[ -d "$1" ]]; then
-        command fd -L . "$1" -HI --exclude='*.git/' --type d \
+        fd -L . "$1" -HI --exclude='*.git/' --type d \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null
-        command fd -L . "$1" -HI --exclude='*.git/' --type l --type f \
+        fd -L . "$1" -HI --exclude='*.git/' --type l --type f \
                 --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null
     else
         if [[ "$1" =~ [[:upper:]] ]]; then
-            command fd -L "$1" -HI --exclude='*.git/' --type d \
+            fd -L "$1" -HI --exclude='*.git/' --type d \
                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor "$1"
-            command fd -L "$1" -HI --exclude='*.git/' --type l --type f \
+            fd -L "$1" -HI --exclude='*.git/' --type l --type f \
                     -exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
         else
-            command fd -L "$1" -HI --exclude='*.git/' --type d \
+            fd -L "$1" -HI --exclude='*.git/' --type d \
                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor -i "$1"
-            command fd -L "$1" -HI --exclude='*.git/' --type l --type f \
+            fd -L "$1" -HI --exclude='*.git/' --type l --type f \
                     --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
         fi
     fi
 else
-    command fd -L -HI --exclude='*.git/' --type d \
+    fd -L -HI --exclude='*.git/' --type d \
             --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
             --group-directories-first --color -A -d {} \; 2>/dev/null
-    command fd -L -HI --exclude='*.git/' --type l --type f \
+    fd -L -HI --exclude='*.git/' --type l --type f \
             --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null
 fi
 }
