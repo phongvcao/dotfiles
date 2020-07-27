@@ -379,6 +379,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
     alias "python2"="$(whereis python)"
     alias "command_ls"="${USR_DIR}/bin/gls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color"
 else
+    alias "fd"="fdfind"
     alias "command_ls"="command ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color"
 fi
 
