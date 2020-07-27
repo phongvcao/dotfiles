@@ -244,7 +244,11 @@ else
     fi
 fi
 if [[ -n "${filename}" ]]; then
-    command vim "${filename}"
+    if [[ -d "${filename}" ]]; then
+        cd "${filename}"
+    else
+        command vim "${filename}"
+    fi
 fi
 }
 
@@ -275,7 +279,11 @@ else
     fi
 fi
 if [[ -n "${filename}" ]]; then
-    command vim "${filename}"
+    if [[ -d "${filename}" ]]; then
+        cd "${filename}"
+    else
+        command vim "${filename}"
+    fi
 fi
 }
 
