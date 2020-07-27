@@ -223,21 +223,21 @@ cd "${CURDIR}"
 function dfs() {
 local filename=""
 if [[ -n $3 ]]; then
-    filename=$(command fd "$1" "$2" -HI --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+    filename=$(command fd "$1" "$2" -HI --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
         --group-directories-first --color -A -d {} \; | fzf)
 else
     if [[ -n $2 ]]; then
-        filename=$(command fd "$1" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+        filename=$(command fd "$1" "$2" -HI --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
             --group-directories-first --color -A -d {} \; | fzf)
     else
         if [[ -n $1 ]]; then
-            filename=$(command fd "$1" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+            filename=$(command fd "$1" . -HI --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
         else
-            filename=$(command fd --type d -HI --exclude='*.git/' \
+            filename=$(command fd --type d -HI \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
-            filename=$(command fd --type f -HI --exclude='*.git/' \
+            filename=$(command fd --type f -HI \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
         fi
@@ -251,25 +251,25 @@ fi
 function bfs() {
 local filename=""
 if [[ -n $3 ]]; then
-    filename=$(command bfs "$2" -maxdepth "$3" -mount -iregex ".*$1.*" -not -iwholename '*.git/*' \
+    filename=$(command bfs "$2" -maxdepth "$3" -mount -iregex ".*$1.*" \
         -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
         --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
 else
     if [[ -n $2 ]]; then
-        filename=$(command bfs "$2" -mount -iregex ".*$1.*" -not -iwholename '*.git/*' \
+        filename=$(command bfs "$2" -mount -iregex ".*$1.*" \
             -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
             --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
     else
         if [[ -n $1 ]]; then
-            filename=$(command bfs . -mount -iregex ".*$1.*" -not -iwholename '*.git/*' \
+            filename=$(command bfs . -mount -iregex ".*$1.*" \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
         else
             filename=$(command bfs . -mount -type d \
-                -exec ls -F -X -L --dereference-command-line-symlink-to-dir -not -iwholename '*.git/*' \
+                -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
             filename=$(command bfs . -mount -type f \
-                -exec ls -F -X -L --dereference-command-line-symlink-to-dir -not -iwholename '*.git/*' \
+                -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
         fi
     fi
@@ -1056,32 +1056,32 @@ fi
 function lssl() {
 if [[ -n "$2" ]]; then
     if [[ "$1" =~ [[:upper:]] ]]; then
-        command fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+        command fd "$1" "$2" --max-depth 1 -HI \
                 --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
     else
-        command fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+        command fd "$1" "$2" --max-depth 1 -HI \
                 --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
     fi
 elif [[ -n "$1" ]]; then
     if [[ -d "$1" ]]; then
-        command fd . "$1" --max-depth 1 -HI --exclude='*.git/' \
+        command fd . "$1" --max-depth 1 -HI \
                 --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \;
     else
         if [[ "$1" =~ [[:upper:]] ]]; then
-            command fd "$1" . --max-depth 1 -HI --exclude='*.git/' \
+            command fd "$1" . --max-depth 1 -HI \
                     --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
         else
-            command fd "$1" . --max-depth 1 -HI --exclude='*.git/' \
+            command fd "$1" . --max-depth 1 -HI \
                     --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
         fi
     fi
 else
-   command fd --max-depth 1 -HI --exclude='*.git/' \
+   command fd --max-depth 1 -HI \
            --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
            --group-directories-first --color -A -d -h -1 -l {} \;
 fi
@@ -1090,33 +1090,33 @@ fi
 function lsl() {
 if [[ -n "$2" ]]; then
     if [[ "$1" =~ [[:upper:]] ]]; then
-        command fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+        command fd "$1" "$2" --max-depth 1 -HI \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
     else
-        command fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+        command fd "$1" "$2" --max-depth 1 -HI \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
     fi
 elif [[ -n "$1" ]]; then
     if [[ -d "$1" ]]; then
-        command fd . "$1" --max-depth 1 -HI --exclude='*.git/' \
+        command fd . "$1" --max-depth 1 -HI \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d -h -1 -l {} \;
+                --group-directories-first --color -A -d -h -1 -l {} +
     else
         if [[ "$1" =~ [[:upper:]] ]]; then
-            command fd "$1" --max-depth 1 -HI --exclude='*.git/' \
-                    --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                    --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
+            command fd "$1" --max-depth 1 -HI\
+                    -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                    --group-directories-first --color -A -d -h -1 -l {} + | g "$1"
         else
-            command fd "$1" --max-depth 1 -HI --exclude='*.git/' \
-                    --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                    --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
+            command fd "$1" --max-depth 1 \( -iname ".*$1*" -o -iname "*$1*" \) -not -name .\
+                    -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                    --group-directories-first --color -A -d -h -1 -l {} + | g "$1"
         fi
     fi
 else
-   command fd --max-depth 1 -HI --exclude='*.git/' \
-           --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+   command fd . -maxdepth 1 \( -name ".*" -o -name "*" \) -not -name .\
+           -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
            --group-directories-first --color -A -d -h -1 -l {} +
 fi
 }
@@ -1124,46 +1124,46 @@ fi
 function lsr() {
 if [[ -n "$2" ]]; then
     if [[ "$1" =~ [[:upper:]] ]]; then
-        command fd -L "$1" "$2" -HI --exclude='*.git/' --type d \
-                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+        command find -L "$2" -mount -type d -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+                -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor "$1"
-        command fd -L "$1" "$2" -HI --exclude='*.git/' --type l --type f \
-                --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
+        command find -L "$2" -mount \( -xtype l -o -type f \) -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+                -exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
     else
-        command fd -L "$1" "$2" -HI --exclude='*.git/' --type d \
-                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+        command find -L "$2" -mount -type d -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+                -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor -i "$1"
-        command fd -L "$1" "$2" -HI --exclude='*.git/' --type l --type f \
-                --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
+        command find -L "$2" -mount \( -xtype l -o -type f \) -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+                -exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
     fi
 elif [[ -n "$1" ]]; then
     if [[ -d "$1" ]]; then
-        command fd -L . "$1" -HI --exclude='*.git/' --type d \
-                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+        command find -L "$1" -mount -type d -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+                -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null
-        command fd -L . "$1" -HI --exclude='*.git/' --type l --type f \
-                --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null
+        command find -L "$1" -mount \( -xtype l -o -type f \) -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+                -exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null
     else
         if [[ "$1" =~ [[:upper:]] ]]; then
-            command fd -L "$1" -HI --exclude='*.git/' --type d \
-                    --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+            command find -L . -mount -type d -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+                    -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor "$1"
-            command fd -L "$1" -HI --exclude='*.git/' --type l --type f \
+            command find -L . -mount \( -xtype l -o -type f \) -not -iwholename '*.git*' -not -iwholename '*.svn*'\
                     -exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
         else
-            command fd -L "$1" -HI --exclude='*.git/' --type d \
-                    --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+            command find -L . -mount -type d -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+                    -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor -i "$1"
-            command fd -L "$1" -HI --exclude='*.git/' --type l --type f \
-                    --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
+            command find -L . -mount \( -xtype l -o -type f \) -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+                    -exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
         fi
     fi
 else
-    command fd -L -HI --exclude='*.git/' --type d \
-            --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+    command find -L . -mount -type d -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+            -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
             --group-directories-first --color -A -d {} \; 2>/dev/null
-    command fd -L -HI --exclude='*.git/' --type l --type f \
-            --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null
+    command find -L . -mount \( -xtype l -o -type f \) -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+            -exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null
 fi
 }
 
