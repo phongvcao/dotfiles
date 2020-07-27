@@ -223,21 +223,24 @@ cd "${CURDIR}"
 function dfs() {
 local filename=""
 if [[ -n $3 ]]; then
-    filename=$(fd "$1" "$2" -HI --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+    filename=$(fd "$1" "$2" -HI --type d --type f --type l --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
         --group-directories-first --color -A -d {} \; | fzf)
 else
     if [[ -n $2 ]]; then
-        filename=$(fd "$1" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+        filename=$(fd "$1" "$2" -HI --type d --type f --type l --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
             --group-directories-first --color -A -d {} \; | fzf)
     else
         if [[ -n $1 ]]; then
-            filename=$(fd "$1" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+            filename=$(fd "$1" . -HI --type d --type f --type l --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
         else
-            filename=$(fd --type d -HI --exclude='*.git/' \
+            filename=$(fd --type f -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
-            filename=$(fd --type f -HI --exclude='*.git/' \
+            filename=$(fd --type l -HI --exclude='*.git/' \
+                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d {} \; | fzf)
+            filename=$(fd --type d -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
         fi
@@ -255,24 +258,27 @@ fi
 function bfs() {
 local filename=""
 if [[ -n $3 ]]; then
-    filename=$(command bfs "$2" -maxdepth "$3" -mount -iregex ".*$1.*" -not -iwholename '*.git/*' \
+    filename=$(command bfs "$2" -maxdepth "$3" -mount -type d -type f -type l -iregex ".*$1.*" -not -iwholename '*.git/*' \
         -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
         --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
 else
     if [[ -n $2 ]]; then
-        filename=$(command bfs "$2" -mount -iregex ".*$1.*" -not -iwholename '*.git/*' \
+        filename=$(command bfs "$2" -mount -type d -type f -type l -iregex ".*$1.*" -not -iwholename '*.git/*' \
             -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
             --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
     else
         if [[ -n $1 ]]; then
-            filename=$(command bfs . -mount -iregex ".*$1.*" -not -iwholename '*.git/*' \
+            filename=$(command bfs . -mount -type d -type f -type l -iregex ".*$1.*" -not -iwholename '*.git/*' \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
         else
-            filename=$(command bfs . -mount -type d \
+            filename=$(command bfs . -mount -type f \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir -not -iwholename '*.git/*' \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
-            filename=$(command bfs . -mount -type f \
+            filename=$(command bfs . -mount -type l \
+                -exec ls -F -X -L --dereference-command-line-symlink-to-dir -not -iwholename '*.git/*' \
+                --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
+            filename=$(command bfs . -mount -type d \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir -not -iwholename '*.git/*' \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
         fi
@@ -1265,29 +1271,50 @@ function ps() {
     fi
 }
 
-function _fzf() {
-    if [[ -n "$2" ]]; then
-        CURDIR="${PWD}"
-        FZF_DEFAULT_COMMAND_DEFAULT="${FZF_DEFAULT_COMMAND}"
-        FZF_DEFAULT_COMMAND="\
-            command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
-            -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null"
-        cd "$1"
-        fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && echo "${fzfResult}"
-        FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND_DEFAULT}"
-        cd "${CURDIR}"
-    else
-        if [[ -n "$1" ]]; then
-            CURDIR="${PWD}"
-            cd "$1"
-            fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && echo "${fzfResult}"
-            cd "${CURDIR}"
-        else
-            fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && echo "${fzfResult}"
-            cd "${PWD}"
-        fi
-    fi
-}
+# function _fzf() {
+#     if [[ -n $3 ]]; then
+#         fd "$1" "$2" -HI --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+#             --group-directories-first --color -A -d {} \;
+#     else
+#         if [[ -n $2 ]]; then
+#             fd "$1" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+#                 --group-directories-first --color -A -d {} \;
+#         else
+#             if [[ -n $1 ]]; then
+#                 fd "$1" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+#                     --group-directories-first --color -A -d {} \;
+#             else
+#                 fd --type d -HI --exclude='*.git/' \
+#                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+#                     --group-directories-first --color -A -d {} \;
+#                 fd --type f -HI --exclude='*.git/' \
+#                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+#                     --group-directories-first --color -A -d {} \;
+#             fi
+#         fi
+#     fi
+#     # if [[ -n "$2" ]]; then
+#     #     CURDIR="${PWD}"
+#     #     FZF_DEFAULT_COMMAND_DEFAULT="${FZF_DEFAULT_COMMAND}"
+#     #     FZF_DEFAULT_COMMAND="\
+#     #         command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+#     #         -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null"
+#     #     cd "$1"
+#     #     fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && echo "${fzfResult}"
+#     #     FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND_DEFAULT}"
+#     #     cd "${CURDIR}"
+#     # else
+#     #     if [[ -n "$1" ]]; then
+#     #         CURDIR="${PWD}"
+#     #         cd "$1"
+#     #         fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && echo "${fzfResult}"
+#     #         cd "${CURDIR}"
+#     #     else
+#     #         fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && echo "${fzfResult}"
+#     #         cd "${PWD}"
+#     #     fi
+#     # fi
+# }
 
 function removeLsSuffix() {
     if [[ -n "${BASH_VERSION}" ]]; then
