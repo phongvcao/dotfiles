@@ -536,6 +536,7 @@ set foldlevel=99
 set foldcolumn=0
 " Only search opening folds
 set modelines=1
+set noswapfile
 
 " +clipboard doesn't work on ssh / mosh connection
 " ( X11 / GUI must be running )
@@ -2086,6 +2087,8 @@ function! MaybeInvokeMergeTool()
   elseif search('^\(<<<<\|>>>>\|====\)') != 0
     call SetIndentation()
     PFShowConflicts
+    exe 'vsplit ' . substitute(expand('%:p'), '\.Yours$', '', 'g')
+    diffthis
   endif
 endfunction
 
