@@ -2387,6 +2387,9 @@ vmap gx <Plug>(openbrowser-smart-search)
 " emmet-vim settings
 let g:user_emmet_leader_key = '<c-e>'
 
+" vim-markdown settings
+let g:vim_markdown_folding_disabled = 1
+
 " vim-anzu
 " After the move, the search status information is output to
 " the command line.
