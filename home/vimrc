@@ -2047,8 +2047,8 @@ endfunction
 " fzf.vim settings
 " fzf-preview.vim settings
 let g:fzf_preview_fzf_color_option = 'dark,hl:9,hl+:136,bg+:0,fg+:14,info:5,prompt:33,spinner:108,pointer:226,marker:235,header:33'
-" let $BAT_THEME = 'Solarized (light)'
-" let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'Solarized (light)'
+let $BAT_THEME = 'Solarized (light)'
+let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'Solarized (light)'
 " fzf command default options
 let g:fzf_preview_default_fzf_options = { '--reverse': v:true, '--preview-window': 'wrap' }
 " Add fzf quit mapping
@@ -2056,18 +2056,17 @@ let g:fzf_preview_quit_map = 1
 " Commands used for fzf preview.
 " The file name selected by fzf becomes {}
 " let g:fzf_preview_command = 'head -100 {-1}'                       " Not installed bat
-let g:fzf_preview_command = '/usr/local/bin/bat --color=always --style=grid {-1} --plain' " Installed bat
+let g:fzf_preview_command = 'bat --color=always --style=grid {-1} --plain' " Installed bat
 " Commands used for current file lines
-let g:fzf_preview_lines_command = 'head -100 {-1}'
-" let g:fzf_preview_lines_command = 'bat --color=always --plain --number'
-" let g:fzf_preview_lines_command = '/usr/local/bin/bat --color=always --plain --number'
+" let g:fzf_preview_lines_command = 'head -100 {-1}'
+let g:fzf_preview_lines_command = 'bat --color=always --plain --number'
 " Use vim-devicons
-" let g:fzf_preview_use_dev_icons = 1
+let g:fzf_preview_use_dev_icons = 1
 " devicons character width
-" let g:fzf_preview_dev_icon_prefix_string_length = 3
+let g:fzf_preview_dev_icon_prefix_string_length = 3
 " Devicons can make fzf-preview slow when the number of results is high
 " By default icons are disable when number of results is higher that 5000
-" let g:fzf_preview_dev_icons_limit = 5000
+let g:fzf_preview_dev_icons_limit = 5000
 
 " vim-swoop settings
 let g:swoopUseDefaultKeyMap = 0
