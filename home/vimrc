@@ -104,6 +104,7 @@ Plug 'dyng/ctrlsf.vim', {
             \          'CtrlSFClose', 'CtrlSFStop', 'CtrlSFClearHL',
             \          'CtrlSFToggleMap', 'CtrlSFFocus' ] }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'yuki-ycino/fzf-preview.vim'
 
 if executable('p4')
     " BEGIN: pcaneill/vim-perforce
@@ -2035,6 +2036,11 @@ function! SetHighlightCtrlSF()
     highlight def link qfFileName            Directory
     highlight def link qfError               Error
 endfunction
+
+" fzf-preview.vim settings
+let g:fzf_preview_fzf_color_option = 'dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254,info:254,prompt:37,spinner:108,pointer:235,marker:235'
+let $BAT_THEME = 'Solarized (dark)'
+let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'Solarized (dark)'
 
 " vim-swoop settings
 let g:swoopUseDefaultKeyMap = 0
