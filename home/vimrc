@@ -1972,6 +1972,7 @@ nnoremap <leader>C :Twiggy<CR>
 " ctrlsf.vim settings
 nnoremap <leader>g :CtrlSF<Space>
 nnoremap <leader>rg :CtrlSFToggle<CR>
+nnoremap <leader>sg :CtrlSFStop<CR>
 command! -nargs=1 Search :let @/='\V' . escape(<q-args>, '\\')| normal! n
 let g:ctrlsf_auto_close = {
             \ "normal" : 0,
@@ -2016,6 +2017,8 @@ function! SetHighlightCtrlSF()
         "     syntax match qfError     /error/  contained
         endif
     endif
+
+    setlocal number
 
     " highlightment group can be shared between different syntaxes
     highlight def link ctrlsfFilename        helpVim
