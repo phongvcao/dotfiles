@@ -190,14 +190,14 @@ if [[ -f "${HOME}/.grc/grc.zsh" ]]; then
     source "${HOME}/.grc/grc.zsh"
 fi
 
-# Source all functions definition
-if [[ -f ${HOME}/.shell_functions ]]; then
-    source "${HOME}/.shell_functions"
-fi
-
 # Source all aliases definition
 if [[ -f ${HOME}/.shell_aliases ]]; then
     source "${HOME}/.shell_aliases"
+fi
+
+# Source all functions definition
+if [[ -f ${HOME}/.shell_functions ]]; then
+    source "${HOME}/.shell_functions"
 fi
 
 # Source all variables definition
