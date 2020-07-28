@@ -2484,7 +2484,7 @@ let g:stardict_utf8_input = 1
 let g:stardict_data_dir = '/usr/share/stardict/dic'
 let g:stardict_colorize_output = 1
 
-" lightline.vim
+" lightline.vim settings
 set noshowmode
 let g:lightline = {
             \ 'colorscheme': 'solarized',
@@ -2502,18 +2502,19 @@ let g:lightline = {
             \   'filename': 'CustomLightlineFilename',
             \   'percent': 'CustomLightlinePercent',
             \   'mode': 'CustomLightlinePercent',
+            \   'diffmode': 'CustomLightlineDiffMode'
             \ },
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ], [ 'method', 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
-            \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+            \              [ 'diffmode', 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
             \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ], [ 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
-            \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+            \              [ 'diffmode', 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' },
@@ -2523,6 +2524,18 @@ let g:lightline = {
             \ }
 
 let g:unite_force_overwrite_statusline = 0
+
+function! CustomLightlineDiffMode()
+    if get(g:, 'mergetool_in_merge_mode', 0)
+        return '↸'
+    endif
+
+    if &diff
+        return '↹'
+    endif
+
+    return ''
+endfunction
 
 function! CustomLightlineTab(n)
     let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
