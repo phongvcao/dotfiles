@@ -94,7 +94,6 @@ Plug 'wellle/targets.vim'
 Plug 'kkoomen/vim-doge', {
             \ 'on' : [ 'DogeGenerate', 'DogeCreateDocStandard' ] }
 Plug 'pechorin/any-jump.vim'
-Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'rhysd/committia.vim'
 Plug 'drmikehenry/vim-fixkey'
 Plug 'sodapopcan/vim-twiggy', {
