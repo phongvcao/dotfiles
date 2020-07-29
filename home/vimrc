@@ -553,7 +553,9 @@ set noswapfile
 if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
     set clipboard=unnamedplus,unnamed
 else
-    set clipboard=
+    if has('$DISPLAY')
+        set clipboard=
+    endif
 endif
 set backspace=2
 set sidescroll=1

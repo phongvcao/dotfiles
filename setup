@@ -141,6 +141,15 @@ command sudo python3 -m pip install pygments
 command sudo python2 -m pip install pygments
 
 #
+# Install neovim (node.js extension)
+#
+if [ -z "$(command -v ansible)" ]; then
+    echo
+    echo "Installing neovim (node.js extension)"
+    npm install -g neovim
+fi
+
+#
 # Install ansible
 #
 if [ -z "$(command -v ansible)" ]; then
