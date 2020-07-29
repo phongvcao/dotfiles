@@ -25,7 +25,7 @@ alias "update"="sudo pacman-db-upgrade; \
     git pull -X theirs --no-edit origin master; \
     git push origin master; \
     upgrade_oh_my_zsh; \
-    echo 'y' | command vim -c 'set nomore' +NeoBundleInstall! +NeoBundleUpdate! +NeoBundleClean! +qall!; \
+    echo 'y' | command nvim -c 'set nomore' +NeoBundleInstall! +NeoBundleUpdate! +NeoBundleClean! +qall!; \
     ${HOME}/.tmux/plugins/tpm/bin/update_plugins all; \
     cd - >/dev/null 2>&1;"
 alias "dbupdate"="sudo pacman -Syy; sudo pacman-db-upgrade"
@@ -53,7 +53,7 @@ alias "diff"="_diff"
 # ln -s -f <original_file> <destination_symlink>
 alias "ln"="command ln -s -f"
 alias "vi"="vim"
-alias "vimrc"="echo 'y' | command vim -c 'set nomore' +NeoBundleInstall! +NeoBundleUpdate! +NeoBundleClean! +qall!"
+alias "vimrc"="echo 'y' | command nvim -c 'set nomore' +NeoBundleInstall! +NeoBundleUpdate! +NeoBundleClean! +qall!"
 alias "echo"="echo -e"
 alias "cgdisk"="sudo cgdisk"
 alias "lsblk"="echo LSBLK:; command lsblk -f; echo; echo DF:; command df -h --output"

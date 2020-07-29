@@ -149,7 +149,7 @@ if [[ -n $1 ]]; then
 fi
 if [[ $( command git rev-parse --git-dir ) =~ .git$ ]]; then
 command git fetch --all
-command vim -c "GVAndMagit"
+command nvim -c "GVAndMagit"
 else
 command git log
 fi
@@ -200,9 +200,9 @@ function keystroke() {
 
 function man() {
     if [[ -n $2 ]]; then
-        command vim -c "Tman $1 $2 | tabclose 1"
+        command nvim -c "Tman $1 $2 | tabclose 1"
     else
-        command vim -c "Tman $1 | tabclose 1"
+        command nvim -c "Tman $1 | tabclose 1"
     fi
 }
 
@@ -213,7 +213,7 @@ if [[ -n $1 ]]; then
 fi
 command git fetch --all
 if [[ $( command git rev-parse --git-dir ) =~ .git$ ]]; then
-command vim -c "MagitFullscreen"
+command nvim -c "MagitFullscreen"
 else
 command git status -uno 
 fi
@@ -250,7 +250,7 @@ if [[ -n "${filename}" ]]; then
     if [[ -d "${filename}" ]]; then
         cd "${filename}"
     else
-        command vim "${filename}"
+        command nvim "${filename}"
     fi
 fi
 }
@@ -288,7 +288,7 @@ if [[ -n "${filename}" ]]; then
     if [[ -d "${filename}" ]]; then
         cd "${filename}"
     else
-        command vim "${filename}"
+        command nvim "${filename}"
     fi
 fi
 }
@@ -314,7 +314,7 @@ if [[ -z "$(command -v rg)" ]]; then
     elif [[ -n "$1" ]]; then
         fgr "$@"
     else
-        command vim -c 'let g:far#window_layout="current" | silent! Farp'
+        command nvim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 else
     if [[ -n "$3" ]]; then
@@ -324,29 +324,29 @@ else
     if [[ -n "$2" ]]; then
         if [[ -d "$2" ]]; then
             if [[ -n "$3" ]]; then
-                command vim -c "CtrlSF -G *{${file_extensions}} '$1' $2"
+                command nvim -c "CtrlSF -G *{${file_extensions}} '$1' $2"
             else
-                command vim -c "CtrlSF '$1' $2"
+                command nvim -c "CtrlSF '$1' $2"
             fi
         elif [[ -f "$2" ]]; then
-            command vim -c "silent! call SwoopPattern('\V$1')" "$2"
+            command nvim -c "silent! call SwoopPattern('\V$1')" "$2"
         elif [[ -p "$2" ]]; then
-            command vim -c "silent! call SwoopPattern('\V$1')" "$2"
+            command nvim -c "silent! call SwoopPattern('\V$1')" "$2"
         else
             if [[ -n "$2" ]]; then
                 file_extensions="$2"
             fi
 
-            command vim -c "CtrlSF -G *{${file_extensions}} '$1'"
+            command nvim -c "CtrlSF -G *{${file_extensions}} '$1'"
         fi
     elif [[ -n "$1" ]]; then
         if [[ -t 0 ]]; then
-            command vim -c "CtrlSF '$1'"
+            command nvim -c "CtrlSF '$1'"
         else
             command_frg_stream "$1"
         fi
     else
-        command vim -c 'let g:far#window_layout="current" | silent! Farp'
+        command nvim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 
     # if [[ -n "$3" ]]; then
@@ -388,7 +388,7 @@ else
     #         command_frg_stream "$1"
     #     fi
     # else
-    #     command vim -c 'let g:far#window_layout="current" | silent! Farp'
+    #     command nvim -c 'let g:far#window_layout="current" | silent! Farp'
     # fi
 fi
 }
@@ -400,7 +400,7 @@ if [[ -z "$(command -v rg)" ]]; then
     elif [[ -n "$1" ]]; then
         fgs "$@"
     else
-        command vim -c 'let g:far#window_layout="current" | silent! Farp'
+        command nvim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 else
     if [[ -n "$3" ]]; then
@@ -410,29 +410,29 @@ else
     if [[ -n "$2" ]]; then
         if [[ -d "$2" ]]; then
             if [[ -n "$3" ]]; then
-                command vim -c "CtrlSF -G *{${file_extensions}} -S '$1' $2"
+                command nvim -c "CtrlSF -G *{${file_extensions}} -S '$1' $2"
             else
-                command vim -c "CtrlSF -S '$1' $2"
+                command nvim -c "CtrlSF -S '$1' $2"
             fi
         elif [[ -f "$2" ]]; then
-            command vim -c "silent! call SwoopPattern('$1\C')" "$2"
+            command nvim -c "silent! call SwoopPattern('$1\C')" "$2"
         elif [[ -p "$2" ]]; then
-            command vim -c "silent! call SwoopPattern('$1\C')" "$2"
+            command nvim -c "silent! call SwoopPattern('$1\C')" "$2"
         else
             if [[ -n "$2" ]]; then
                 file_extensions="$2"
             fi
 
-            command vim -c "CtrlSF -G *{${file_extensions}} -S '$1'"
+            command nvim -c "CtrlSF -G *{${file_extensions}} -S '$1'"
         fi
     elif [[ -n "$1" ]]; then
         if [[ -t 0 ]]; then
-            command vim -c "CtrlSF -S '$1'"
+            command nvim -c "CtrlSF -S '$1'"
         else
             command_frg_stream "$1"
         fi
     else
-        command vim -c 'let g:far#window_layout="current" | silent! Farp'
+        command nvim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 
     # if [[ -n "$3" ]]; then
@@ -474,7 +474,7 @@ else
     #         command_frg_stream --case-sensitive "$1"
     #     fi
     # else
-    #     command vim -c 'let g:far#window_layout="current" | silent! Farp'
+    #     command nvim -c 'let g:far#window_layout="current" | silent! Farp'
     # fi
 fi
 }
@@ -485,7 +485,7 @@ if [[ "$(isAsciiOnly $1)" == 1 ]]; then
 elif [[ -n "$1" ]]; then
     fgv "$@"
 else
-    command vim -c 'let g:far#window_layout="current" | silent! Farp'
+    command nvim -c 'let g:far#window_layout="current" | silent! Farp'
 fi
 }
 
@@ -750,7 +750,7 @@ if [[ -z "$(command -v rg)" ]]; then
     elif [[ -n "$1" ]]; then
         rgr "$@"
     else
-        command vim -c 'let g:far#window_layout="current" | silent! Farp'
+        command nvim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 else
     if [[ -n "$3" ]]; then
@@ -760,29 +760,29 @@ else
     if [[ -n "$2" ]]; then
         if [[ -d "$2" ]]; then
             if [[ -n "$3" ]]; then
-                command vim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF -G *{${file_extensions}} '$1' $2"
+                command nvim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF -G *{${file_extensions}} '$1' $2"
             else
-                command vim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF '$1' $2"
+                command nvim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF '$1' $2"
             fi
         elif [[ -f "$2" ]]; then
-            command vim -c "silent! call SwoopPattern('$1')" "$2"
+            command nvim -c "silent! call SwoopPattern('$1')" "$2"
         elif [[ -p "$2" ]]; then
-            command vim -c "silent! call SwoopPattern('$1')" "$2"
+            command nvim -c "silent! call SwoopPattern('$1')" "$2"
         else
             if [[ -n "$2" ]]; then
                 file_extensions="$2"
             fi
 
-            command vim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF -G *{${file_extensions}} '$1'"
+            command nvim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF -G *{${file_extensions}} '$1'"
         fi
     elif [[ -n "$1" ]]; then
         if [[ -t 0 ]]; then
-            command vim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF '$1'"
+            command nvim -c "let g:ctrlsf_regex_pattern = 1" -c "CtrlSF '$1'"
         else
             command_frg_stream "$1"
         fi
     else
-        command vim -c 'let g:far#window_layout="current" | silent! Farp'
+        command nvim -c 'let g:far#window_layout="current" | silent! Farp'
     fi
 fi
 
@@ -792,7 +792,7 @@ fi
 #     elif [[ -n "$1" ]]; then
 #         rgr "$@"
 #     else
-#         command vim -c 'let g:far#window_layout="current" | silent! Farp'
+#         command nvim -c 'let g:far#window_layout="current" | silent! Farp'
 #     fi
 # else
 #     if [[ -n "$3" ]]; then
@@ -834,7 +834,7 @@ fi
 #             command_rg_stream "$1"
 #         fi
 #     else
-#         command vim -c 'let g:far#window_layout="current" | silent! Farp'
+#         command nvim -c 'let g:far#window_layout="current" | silent! Farp'
 #     fi
 # fi
 }
@@ -1230,7 +1230,7 @@ function cat() {
 
 function gitdiff() {
 if [[ -f "$1" ]]; then
-    command vim -c "Gdiffsplit!" "$1"
+    command nvim -c "Gdiffsplit!" "$1"
 elif [[ -d "$1" ]]; then
     command git diff "$1"
 else
@@ -1246,15 +1246,15 @@ fi
 function _diff() {
 if [[ -d "$1" ]]; then
     if [[ -d "$2" ]]; then
-        command vim -c "DirDiff "$1" "$2""
+        command nvim -c "DirDiff "$1" "$2""
     else
         echo "\nError: Directory \"$2\" not found\n"
     fi
 elif [[ -f "$1" ]]; then
     if [[ -f "$2" ]]; then
-        command vimdiff -c "call SetIndentation()" "$1" "$2"
+        command nvimdiff -c "call SetIndentation()" "$1" "$2"
     else
-        command vim -f -c "call MaybeInvokeMergeTool()" "$1"
+        command nvim -f -c "call MaybeInvokeMergeTool()" "$1"
     fi
 else
     echo "\nError: File / Directory \"$1\" not found\n"
@@ -1339,7 +1339,7 @@ function vim() {
             command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
             -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null"
         cd "$1"
-        fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command vim "${fzfResult}"
+        fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command nvim "${fzfResult}"
         FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND_DEFAULT}"
         cd "${CURDIR}"
     else
@@ -1347,16 +1347,16 @@ function vim() {
             if [[ -d "$1" ]]; then
                 # CURDIR="${PWD}"
                 # cd "$1"
-                # fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command vim "${fzfResult}"
+                # fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command nvim "${fzfResult}"
                 # cd "${CURDIR}"
-                # command vim -c "NeoMRURec $@"
-                command vim
+                # command nvim -c "NeoMRURec $@"
+                command nvim
             else
-                command vim $@
+                command nvim $@
             fi
         else
-            # command vim -c "NeoMRU"
-            command vim
+            # command nvim -c "NeoMRU"
+            command nvim
         fi
     fi
 }
@@ -1723,42 +1723,42 @@ fi
 
 function year() {
 if [[ -n $1 ]]; then
-    command vim -c "Calendar -first_day=monday -view=year $1"
+    command nvim -c "Calendar -first_day=monday -view=year $1"
 else
-    command vim -c "Calendar -first_day=monday -view=year"
+    command nvim -c "Calendar -first_day=monday -view=year"
 fi
 }
 
 
 function month() {
 if [[ -n $1 ]]; then
-    command vim -c "Calendar -first_day=monday -view=month $1"
+    command nvim -c "Calendar -first_day=monday -view=month $1"
 else
-    command vim -c "Calendar -first_day=monday -view=month"
+    command nvim -c "Calendar -first_day=monday -view=month"
 fi
 }
 
 function week() {
 if [[ -n $1 ]]; then
-    command vim -c "Calendar -first_day=monday -view=week $1"
+    command nvim -c "Calendar -first_day=monday -view=week $1"
 else
-    command vim -c "Calendar -first_day=monday -view=week"
+    command nvim -c "Calendar -first_day=monday -view=week"
 fi
 }
 
 function day() {
 if [[ -n $1 ]]; then
-    command vim -c "Calendar -first_day=monday -view=clock $1"
+    command nvim -c "Calendar -first_day=monday -view=clock $1"
 else
-    command vim -c "Calendar -first_day=monday -view=clock"
+    command nvim -c "Calendar -first_day=monday -view=clock"
 fi
 }
 
 function calendar() {
 if [[ -n $1 ]]; then
-    command vim -c "Calendar -first_day=monday $1"
+    command nvim -c "Calendar -first_day=monday $1"
 else
-    command vim -c "Calendar -first_day=monday"
+    command nvim -c "Calendar -first_day=monday"
 fi
 }
 

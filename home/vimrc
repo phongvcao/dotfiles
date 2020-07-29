@@ -302,12 +302,14 @@ Plug 'KabbAmine/vZoom.vim', {
 Plug 'wesQ3/vim-windowswap'
 " No lazy-loading for myusuf3/numbers.vim.
 " It must be started by default
-Plug 'myusuf3/numbers.vim'
+if !has('nvim')
+    Plug 'myusuf3/numbers.vim'
+endif
 Plug 'will133/vim-dirdiff', {
             \ 'on' : 'DirDiff' }
 " No lazy-loading for nathanaelkane/vim-indent-guides.
 " It must be started by default
-Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Chiel92/vim-autoformat', {
             \ 'on' : [ 'Autoformat', 'RemoveTrailingSpaces' ] }
 Plug 'tpope/vim-eunuch', {
@@ -324,6 +326,9 @@ Plug 'LaTeX-Box-Team/LaTeX-Box', {
 " BEGIN: junegunn/gv.vim
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
+if !has('nvim')
+    Plug 'aymericbeaumet/symlink.vim'
+endif
 Plug 'moll/vim-bbye'
 Plug 'jreybert/vimagit'
 " END: junegunn/gv.vim
@@ -567,7 +572,9 @@ set title
 set encoding=utf8
 set fileformats=unix
 set fileformat=unix
-set anti
+if !has('nvim')
+    set anti
+endif
 set noerrorbells
 set magic
 set noautowrite
@@ -844,7 +851,12 @@ let g:lasttab = 1
 nnoremap _ :silent! q<CR>
 " nnoremap C :silent! w!<CR>:bd<CR>
 nnoremap <leader>su :sort ui<CR>
-nnoremap S :set shell=$SHELL<CR>:shell<CR>
+if !has('nvim')
+    nnoremap S :set shell=$SHELL<CR>:shell<CR>
+else
+    command! Term :set shell=zsh|:terminal
+    nnoremap S :Term<CR>
+endif
 " Scroll both splits in Vim
 nnoremap <localleader>sb :set scrollbind!<CR>
 nnoremap <localleader>cb :set cursorbind!<CR>
@@ -2054,7 +2066,7 @@ let g:fzf_preview_quit_map = 1
 " Commands used for fzf preview.
 " The file name selected by fzf becomes {}
 " let g:fzf_preview_command = 'head -100 {-1}'                       " Not installed bat
-let g:fzf_preview_command = 'bat --color=always --style=grid {-1} --plain' " Installed bat
+let g:fzf_preview_command = 'bat --color=always {-1} --plain' " Installed bat
 " Commands used for current file lines
 " let g:fzf_preview_lines_command = 'head -100 {-1}'
 let g:fzf_preview_lines_command = 'bat --color=always --plain --number'
@@ -2948,7 +2960,9 @@ if has('win32') || has('win64')
     set undodir=C:/Users/pcao/vimfiles/undo
 
     set viewdir=C:/Users/pcao/vimfiles/view
-    set viminfo='1000000,nC:/Users/pcao/vimfiles/_viminfo
+    if !has('nvim')
+        set viminfo='1000000,nC:/Users/pcao/vimfiles/_viminfo
+    endif
 
     " Open current file in browsers
     nnoremap <localleader>of :execute 'silent ! start firefox.exe "file:///' . expand('%:p') . '"'<CR>
@@ -2964,7 +2978,9 @@ elseif has('unix')
     set undodir=$HOME/.vim/undo
 
     set viewdir=$HOME/.vim/view
-    set viminfo='1000000,n$HOME/.vim/.viminfo
+    if !has('nvim')
+        set viminfo='1000000,n$HOME/.vim/.viminfo
+    endif
 
     " Open current file in browsers
     nnoremap <localleader>of :execute '!firefox ' . substitute(expand('%:p'), ' ', '\\ ', 'g')<CR>
