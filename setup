@@ -12,7 +12,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
             cmake xclip docker curl gpatch htop llvm yarn man-db ripgrep \
             tavianator/tap/bfs atool unrar zip p7zip glances bat ranger flake8 \
-            fzf fd
+            fzf fd neovim
         $(brew --prefix)/opt/fzf/install
         brew cask install vagrant
         brew cask fetch eloston-chromium
@@ -31,7 +31,7 @@ else
             ibus-unikey feh xclip vagrant shutter docker bleachbit gparted bleachbit \
 	        curl htop g++ python-pip python3-pip lldb clang yarn ripgrep bfs \
 	        atool unrar zip libarchive-tools p7zip-full glances bat ranger flake8 \
-	        fzf fd-find
+	        fzf fd-find neovim
 	    # NOTE: Also install ungoogled-chromium
         sudo snap install ccls go --classic
     fi
@@ -111,6 +111,14 @@ if [ -z "$(command -v pip3)" ]; then
 fi
 
 #
+# Install pynvim
+#
+echo
+echo "Installing pynvim"
+command python2 -m pip install pynvim
+command python3 -m pip install pynvim
+
+#
 # Install pdbpp
 #
 echo
@@ -143,11 +151,9 @@ command sudo python2 -m pip install pygments
 #
 # Install neovim (node.js extension)
 #
-if [ -z "$(command -v ansible)" ]; then
-    echo
-    echo "Installing neovim (node.js extension)"
-    npm install -g neovim
-fi
+echo
+echo "Installing neovim (node.js extension)"
+sudo npm install -g neovim
 
 #
 # Install ansible
