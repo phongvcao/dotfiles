@@ -309,7 +309,7 @@ Plug 'will133/vim-dirdiff', {
             \ 'on' : 'DirDiff' }
 " No lazy-loading for nathanaelkane/vim-indent-guides.
 " It must be started by default
-" Plug 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Chiel92/vim-autoformat', {
             \ 'on' : [ 'Autoformat', 'RemoveTrailingSpaces' ] }
 Plug 'tpope/vim-eunuch', {
@@ -1783,7 +1783,7 @@ endif
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_default_mapping = 0
-let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar' ]
+let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar', 'fzf' ]
 
 " Solarized Dark settings
 syntax enable
