@@ -3,8 +3,8 @@
     email = phongvcao@phongvcao.com
 
 [core]
-    editor = command vim
-    pager = command vim -c 'let g:fzf_mru_disable_at_vimenter = 1 | PAGER' - 
+    editor = command nvim
+    pager = command nvim -c 'let g:fzf_mru_disable_at_vimenter = 1 | PAGER' - 
     excludesfile = ~/.gitignore_global
 
 [color]
@@ -15,6 +15,6 @@
     conflictstyle = diff3
 
 [mergetool "vim_mergetool"]
-    cmd = command vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+    cmd = command nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
     trustExitCode = true
     keepBackup = true
