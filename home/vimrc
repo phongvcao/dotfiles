@@ -106,7 +106,7 @@ Plug 'dyng/ctrlsf.vim', {
 " BEGIN: junegunn/fzf.vim
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {
-            \ 'do': { -> fzf#install() } }
+            \ 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'yuki-ycino/fzf-preview.vim', { 
             \ 'branch': 'release' }
 " END: junegunn/fzf.vim
@@ -324,7 +324,6 @@ Plug 'LaTeX-Box-Team/LaTeX-Box', {
 " BEGIN: junegunn/gv.vim
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'aymericbeaumet/symlink.vim'
 Plug 'moll/vim-bbye'
 Plug 'jreybert/vimagit'
 " END: junegunn/gv.vim
