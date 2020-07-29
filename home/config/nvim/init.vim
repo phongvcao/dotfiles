@@ -13,3 +13,20 @@ let &packpath = &runtimepath
 
 " Source vimrc
 source ~/.vimrc
+
+" " DEBUG: for Neovim debugging purposes
+" call plug#begin('~/.vim/plugged')
+" " BEGIN: junegunn/fzf.vim
+" Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', {
+"             \ 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'liuchengxu/vista.vim'
+" Plug 'yuki-ycino/fzf-preview.vim', { 
+"             \ 'branch': 'release' }
+" " END: junegunn/fzf.vim
+" " BEGIN: neoclide/coc.nvim
+" Plug 'neoclide/coc.nvim', {
+"             \ 'branch' : 'release' }
+" " END: neoclide/coc.nvim
+" call plug#end()
+" " END OF DEBUG: for Neovim debugging purposes

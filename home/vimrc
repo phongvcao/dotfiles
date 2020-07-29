@@ -54,7 +54,7 @@ Plug 'markgandolfo/nerdtree-fetch.vim', {
             \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
 Plug 'liuchengxu/nerdtree-dash', {
             \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
-" END: scrooloose/nerdtree
+" " END: scrooloose/nerdtree
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-obsession', {
@@ -85,7 +85,7 @@ Plug 'osyo-manga/vim-reanimate'
 Plug 'chrisbra/BufTimer', {
             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " END: Shougo/unite.vim
-Plug 'vim-scripts/YankRing.vim'
+" Plug 'vim-scripts/YankRing.vim'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'matze/vim-move'
 Plug 'samoshkin/vim-mergetool', {
@@ -93,7 +93,7 @@ Plug 'samoshkin/vim-mergetool', {
 Plug 'wellle/targets.vim'
 Plug 'kkoomen/vim-doge', {
             \ 'on' : [ 'DogeGenerate', 'DogeCreateDocStandard' ] }
-Plug 'pechorin/any-jump.vim'
+" Plug 'pechorin/any-jump.vim'
 Plug 'rhysd/committia.vim'
 Plug 'drmikehenry/vim-fixkey'
 Plug 'sodapopcan/vim-twiggy', {
@@ -107,6 +107,8 @@ Plug 'dyng/ctrlsf.vim', {
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {
             \ 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'liuchengxu/vista.vim'
+Plug 'LeafCage/yankround.vim'
 Plug 'yuki-ycino/fzf-preview.vim', { 
             \ 'branch': 'release' }
 " END: junegunn/fzf.vim
@@ -1799,39 +1801,39 @@ let g:unite_no_default_keymappings = 1
 let g:unite_redraw_hold_candidates = 50000
 let g:unite_source_rec_max_cache_files = 0
 let g:unite_data_directory = g:vimPath . '/cache/unite'
-nnoremap <leader>b :silent! Unite buffer -prompt=Buf>\ \  -winheight=10 -start-insert -buffer-name=Buffers\ List<CR>
-nnoremap <leader>w :silent! Unite window -prompt=Win>\ \  -winheight=10 -start-insert -buffer-name=Windows\ List<CR>
-nnoremap <leader>t :silent! Unite tab -prompt=Tab>\ \  -winheight=10 -start-insert -buffer-name=Tabs\ List<CR>
-" nnoremap <leader>rb :silent! Unite buffer -start-insert -buffer-name=ub -resume<CR>
-" nnoremap <leader>o :silent! Unite file_rec/async -start-insert -buffer-name=uo<CR>
-" nnoremap <leader>ro :silent! Unite file_rec/async -start-insert -buffer-name=uo -resume<CR>
-" nnoremap <leader>o :silent! Unite file_rec/async -start-insert -buffer-name=uo<CR>
-" nnoremap <leader>ro :silent! Unite file_rec/async -start-insert -buffer-name=uo -resume<CR>
-nnoremap <leader>q :silent! Unite quickfix -auto-highlight -start-insert -buffer-name=Quickfix<CR>
-" nnoremap <leader>rq :silent! Unite quickfix -start-insert -buffer-name=Quickfix -resume<CR>
-nnoremap <leader>i :silent! Unite -prompt=Interactive>\ \  -auto-preview -start-insert -buffer-name=Interactive<CR>
-" nnoremap <leader>ri :silent! Unite -auto-preview -start-insert -buffer-name=Interactive -resume<CR>
-" nnoremap <leader>g :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -no-auto-preview -auto-highlight -start-insert -buffer-name=Grep<CR>
-" nnoremap <leader>rg :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -no-auto-preview -auto-highlight -start-insert -buffer-name=Grep -resume<CR>
-" nnoremap <leader>f :silent! Unite find -start-insert -buffer-name=uf<CR>
-nnoremap <leader>f :NeoMRURec<CR> 
-nnoremap <leader>M :silent! Unite -prompt=Maps(n)>\ \  mapping -auto-highlight -start-insert -buffer-name=Normal\ Mode\ Mappings<CR>
-nnoremap <leader>m :silent! Unite -prompt=BMarks>\ \  vim_bookmarks -auto-highlight -start-insert -buffer-name=Bookmarks<CR>
-nnoremap <leader>j :silent! Unite -prompt=Jumps>\ \  jump -auto-highlight -start-insert -buffer-name=Jumps<CR>
-" nnoremap <leader>rf :silent! Unite find -start-insert -buffer-name=uf -resume<CR>
-nnoremap <leader>/ :silent! Unite -prompt=Hist(/)>\ \  history/search -start-insert -buffer-name=Search\ History<CR>
-nnoremap <leader>c :silent! Unite -prompt=Changes>\ \  change -auto-highlight -start-insert -buffer-name=Change\ History<CR>
-nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -winheight=20 -prompt-direction=top -start-insert -buffer-name=Ctags<CR>
-" nnoremap <leader>hr/ :silent! Unite history/search -start-insert -buffer-name=u/ -resume<CR>
-nnoremap <leader>; :silent! Unite -prompt=Hist(:)>\ \  history/command command -auto-highlight -start-insert -buffer-name=Command\ History<CR>
-" nnoremap <leader>hr; :silent! Unite history/command -start-insert -buffer-name=u/ -resume<CR>
+" nnoremap <leader>b :silent! Unite buffer -prompt=Buf>\ \  -winheight=10 -start-insert -buffer-name=Buffers\ List<CR>
+" nnoremap <leader>w :silent! Unite window -prompt=Win>\ \  -winheight=10 -start-insert -buffer-name=Windows\ List<CR>
+" nnoremap <leader>t :silent! Unite tab -prompt=Tab>\ \  -winheight=10 -start-insert -buffer-name=Tabs\ List<CR>
+" " nnoremap <leader>rb :silent! Unite buffer -start-insert -buffer-name=ub -resume<CR>
+" " nnoremap <leader>o :silent! Unite file_rec/async -start-insert -buffer-name=uo<CR>
+" " nnoremap <leader>ro :silent! Unite file_rec/async -start-insert -buffer-name=uo -resume<CR>
+" " nnoremap <leader>o :silent! Unite file_rec/async -start-insert -buffer-name=uo<CR>
+" " nnoremap <leader>ro :silent! Unite file_rec/async -start-insert -buffer-name=uo -resume<CR>
+" nnoremap <leader>q :silent! Unite quickfix -auto-highlight -start-insert -buffer-name=Quickfix<CR>
+" " nnoremap <leader>rq :silent! Unite quickfix -start-insert -buffer-name=Quickfix -resume<CR>
+" nnoremap <leader>i :silent! Unite -prompt=Interactive>\ \  -auto-preview -start-insert -buffer-name=Interactive<CR>
+" " nnoremap <leader>ri :silent! Unite -auto-preview -start-insert -buffer-name=Interactive -resume<CR>
+" " nnoremap <leader>g :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -no-auto-preview -auto-highlight -start-insert -buffer-name=Grep<CR>
+" " nnoremap <leader>rg :silent! Unite grep -prompt=Grep>\ \  -no-quit -keep-focus -no-auto-preview -auto-highlight -start-insert -buffer-name=Grep -resume<CR>
+" " nnoremap <leader>f :silent! Unite find -start-insert -buffer-name=uf<CR>
+" nnoremap <leader>f :NeoMRURec<CR> 
+" nnoremap <leader>M :silent! Unite -prompt=Maps(n)>\ \  mapping -auto-highlight -start-insert -buffer-name=Normal\ Mode\ Mappings<CR>
+" nnoremap <leader>m :silent! Unite -prompt=BMarks>\ \  vim_bookmarks -auto-highlight -start-insert -buffer-name=Bookmarks<CR>
+" nnoremap <leader>j :silent! Unite -prompt=Jumps>\ \  jump -auto-highlight -start-insert -buffer-name=Jumps<CR>
+" " nnoremap <leader>rf :silent! Unite find -start-insert -buffer-name=uf -resume<CR>
+" nnoremap <leader>/ :silent! Unite -prompt=Hist(/)>\ \  history/search -start-insert -buffer-name=Search\ History<CR>
+" nnoremap <leader>c :silent! Unite -prompt=Changes>\ \  change -auto-highlight -start-insert -buffer-name=Change\ History<CR>
+" nnoremap <leader>T :silent! Unite -prompt=Ctags>\ \  outline -auto-highlight -winheight=20 -prompt-direction=top -start-insert -buffer-name=Ctags<CR>
+" " nnoremap <leader>hr/ :silent! Unite history/search -start-insert -buffer-name=u/ -resume<CR>
+" nnoremap <leader>; :silent! Unite -prompt=Hist(:)>\ \  history/command command -auto-highlight -start-insert -buffer-name=Command\ History<CR>
+" " nnoremap <leader>hr; :silent! Unite history/command -start-insert -buffer-name=u/ -resume<CR>
 nnoremap <leader>S :silent! Unite -prompt=Hist($_)>\ \  -auto-highlight -start-insert -buffer-name=Shell\ History output/shellcmd:tac\ $HOME/.shell_history\ \|\ grep\ -v\ '^$'\ \|\ head\ -n\ 1000\ -<CR>
 nnoremap <leader>B :silent! Unite -prompt=BufTimer>\ \  -auto-highlight -start-insert -buffer-name=Buffer\ Timer output:BufTimerReport<CR>
 nnoremap " :silent! Unite -prompt=Regs(")>\ \  register -auto-highlight -start-insert -buffer-name=Registers<CR>
 nnoremap M :silent! Unite -prompt=Msgs>\ \  -auto-highlight -start-insert -buffer-name=Messages\ History output:message<CR>
 " nnoremap <leader>hrs :silent! Unite -start-insert -buffer-name=sh -resume output/shellcmd:tac\ $HOME/.shell_history\ \|\ grep\ -v\ '^$'\ \|\ head\ -n\ 1000\ -<CR>
-nnoremap <leader><localleader>/ :silent! Unite -no-auto-resize -auto-highlight -winheight=20 -prompt-direction=top -start-insert -buffer-name=Current\ Buffer -prompt=BLines>\ \  line:all<CR>
-nnoremap <leader><leader>/ :silent! Unite -no-auto-resize -auto-highlight -winheight=20 -prompt-direction=top -start-insert -buffer-name=All\ Buffers -prompt=Lines>\ \  line:buffers<CR>
+" nnoremap <leader><localleader>/ :silent! Unite -no-auto-resize -auto-highlight -winheight=20 -prompt-direction=top -start-insert -buffer-name=Current\ Buffer -prompt=BLines>\ \  line:all<CR>
+" nnoremap <leader><leader>/ :silent! Unite -no-auto-resize -auto-highlight -winheight=20 -prompt-direction=top -start-insert -buffer-name=All\ Buffers -prompt=Lines>\ \  line:buffers<CR>
 let g:unite_split_rule = 'botright'
 
 if exists('*unite#custom#profile')
@@ -1946,44 +1948,44 @@ command! -nargs=* ProfilerStop call StopProfileVim()
 " vim-dict settings
 nnoremap <leader>d :Dict<Space>
 
-" YankRing.vim settings
-let g:yankring_window_height = 30
-let g:yankring_window_use_bottom = 1
-let g:yankring_history_dir = g:vimPath
-let g:yankring_replace_n_nkey = "<nop>"
-let g:yankring_replace_n_pkey = "<nop>"
-let g:yankring_paste_v_akey ="<nop>"
-let g:yankring_paste_n_bkey =''
-let g:yankring_paste_n_akey =''
-let g:yankring_max_history = 1000000
-let g:yankring_max_element_length = 10000000
-let g:yankring_buffer_name = "Yank History"
-let g:yankring_manual_clipboard_check = 1
-nnoremap <leader>p :silent! YRShow<CR>:setlocal wrap relativenumber number<CR>
-nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR>
-xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
+" " YankRing.vim settings
+" let g:yankring_window_height = 30
+" let g:yankring_window_use_bottom = 1
+" let g:yankring_history_dir = g:vimPath
+" let g:yankring_replace_n_nkey = "<nop>"
+" let g:yankring_replace_n_pkey = "<nop>"
+" let g:yankring_paste_v_akey ="<nop>"
+" let g:yankring_paste_n_bkey =''
+" let g:yankring_paste_n_akey =''
+" let g:yankring_max_history = 1000000
+" let g:yankring_max_element_length = 10000000
+" let g:yankring_buffer_name = "Yank History"
+" let g:yankring_manual_clipboard_check = 1
+" nnoremap <leader>p :silent! YRShow<CR>:setlocal wrap relativenumber number<CR>
+" nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR>
+" xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
 
 " vim-doge settings
 let g:doge_enable_mappings = 0
 let g:doge_mapping = '<localleader>D'
 
-" any-jump.vim settings
-let g:any_jump_colors = {
-            \ "plain_text":         "Comment",
-            \ "preview":            "Comment",
-            \ "preview_keyword":    "Operator",
-            \ "heading_text":       "Function",
-            \ "heading_keyword":    "Identifier",
-            \ "group_text":         "Comment",
-            \ "group_name":         "helpVim",
-            \ "more_button":        "Operator",
-            \ "more_explain":       "Comment",
-            \ "result_line_number": "Statement",
-            \ "result_text":        "Normal",
-            \ "result_path":        "helpVim",
-            \ "help":               "Comment"
-            \ }
-let g:any_jump_grouping_enabled = 1
+" " any-jump.vim settings
+" let g:any_jump_colors = {
+"             \ "plain_text":         "Comment",
+"             \ "preview":            "Comment",
+"             \ "preview_keyword":    "Operator",
+"             \ "heading_text":       "Function",
+"             \ "heading_keyword":    "Identifier",
+"             \ "group_text":         "Comment",
+"             \ "group_name":         "helpVim",
+"             \ "more_button":        "Operator",
+"             \ "more_explain":       "Comment",
+"             \ "result_line_number": "Statement",
+"             \ "result_text":        "Normal",
+"             \ "result_path":        "helpVim",
+"             \ "help":               "Comment"
+"             \ }
+" let g:any_jump_grouping_enabled = 1
 
 " rhysd/committia.vim settings
 let g:committia_min_window_width = 0
@@ -2057,9 +2059,15 @@ function! SetHighlightCtrlSF()
     highlight def link qfError               Error
 endfunction
 
+
+" vista.vim settings
+let g:vista_fzf_preview = ['right:50%']
+let g:vista_keep_fzf_colors = 1
+
 " fzf settings
-" fzf.vim settings
+
 " fzf-preview.vim settings
+let g:fzf_preview_floating_window_rate = 0.9
 let g:fzf_preview_fzf_color_option = 'dark,hl:9,hl+:136,bg+:0,fg+:14,info:5,prompt:33,spinner:108,pointer:226,marker:235,header:33'
 let $BAT_THEME = 'Solarized (light)'
 let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'Solarized (light)'
@@ -2081,6 +2089,58 @@ let g:fzf_preview_dev_icon_prefix_string_length = 3
 " Devicons can make fzf-preview slow when the number of results is high
 " By default icons are disable when number of results is higher that 5000
 let g:fzf_preview_dev_icons_limit = 5000
+nnoremap <leader>b :CocCommand fzf-preview.Buffers<CR>
+nnoremap <leader>w :CocCommand fzf-preview.AllBuffers<CR>
+nnoremap <leader>t :FzfWindows<CR>
+nnoremap <leader>q :CocCommand fzf-preview.Quickfix<CR>
+nnoremap <leader>f :CocCommand fzf-preview.MruFiles<CR> 
+nnoremap <leader>F :CocCommand fzf-preview.DirectoryFiles<CR> 
+nnoremap <leader>M :FzfMaps<CR>
+nnoremap <leader>m :CocCommand fzf-preview.Bookmarks<CR>
+nnoremap <leader>j :CocCommand fzf-preview.Jumps<CR>
+nnoremap <leader>/ :FzfHistory/<CR>
+nnoremap <leader>c :CocCommand fzf-preview.Changes<CR>
+" nnoremap <leader>T :CocCommand fzf-preview.VistaCtags<CR>
+" nnoremap <leader>T :CocCommand fzf-preview.VistaBufferCtags<CR>
+nnoremap <leader>; :FzfHistory:<CR>
+nnoremap <leader>p :CocCommand fzf-preview.Yankround<CR>
+nnoremap <leader><localleader>/ :CocCommand fzf-preview.Lines<CR>
+nnoremap <leader><leader>/ :CocCommand fzf-preview.BufferLines<CR>
+
+" fzf.vim settings
+nnoremap <leader><localleader>f :FzfFiles<Space>
+nnoremap <leader><localleader>b :FzfBuffers<CR>
+nnoremap <leader><localleader>L :FzfLines<CR>
+nnoremap <leader><localleader>l :FzfBLines<CR>
+nnoremap <leader><localleader>w :FzfWindows<CR>
+nnoremap <leader><localleader>H :FzfHistory<CR>
+nnoremap <leader><localleader>h/ :FzfHistory/<CR>
+nnoremap <leader><localleader>h: :FzfHistory:<CR>
+nnoremap <leader><localleader>c :FzfCommits<CR>
+nnoremap <leader><localleader>C :FzfBCommits<CR>
+let g:fzf_command_prefix = 'Fzf'
+let g:fzf_preview_window = 'right:50%'
+let g:fzf_layout = { 'window': { 'width': g:fzf_preview_floating_window_rate, 'height': g:fzf_preview_floating_window_rate } }
+
+" fzf-mru.vim settings
+let g:fzf_mru_relative = 0
+let g:fzf_mru_case_sensitive = 0
+let g:fzf_mru_max = 1000
+let g:fzf_mru_exclude = ".*unite.*"
+nnoremap <leader>o :FZFMru<CR>
+function StartFZFMru()
+    if !argc() && !exists('g:fzf_mru_disable_at_vimenter') && (&filetype != 'stardict')
+        :FZFMru
+        let t:startified = 1
+    endif
+
+    " :NERDTree
+    " wincmd w
+endfunction
+nnoremap <leader>b :FzfBuffers<CR> 
+nnoremap <leader>m :FzfMaps<CR>
+nnoremap <leader>/ :FzfHistory/<CR>
+nnoremap <leader>; :FzfHistory:<CR>
 
 " vim-swoop settings
 let g:swoopUseDefaultKeyMap = 0
