@@ -85,7 +85,7 @@ Plug 'osyo-manga/vim-reanimate'
 Plug 'chrisbra/BufTimer', {
             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " END: Shougo/unite.vim
-" Plug 'vim-scripts/YankRing.vim'
+Plug 'vim-scripts/YankRing.vim'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'matze/vim-move'
 Plug 'samoshkin/vim-mergetool', {
@@ -108,9 +108,14 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {
             \ 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'liuchengxu/vista.vim'
-Plug 'LeafCage/yankround.vim'
-Plug 'yuki-ycino/fzf-preview.vim', { 
-            \ 'branch': 'release' }
+if !has('nvim')
+    Plug 'yuki-ycino/fzf-preview.vim', {
+                \ 'branch': 'release' }
+else
+    Plug 'yuki-ycino/fzf-preview.vim', {
+                \ 'branch': 'release',
+                \ 'do': ':UpdateRemotePlugins' }
+endif
 " END: junegunn/fzf.vim
 
 if executable('p4')
@@ -238,11 +243,7 @@ Plug 'ntpeters/vim-better-whitespace', {
             \ 'on' : [ 'ToggleWhitespace', 'StripWhitespace' ] }
 Plug 'osyo-manga/vim-anzu'
 Plug 'qxxxb/vim-searchhi'
-Plug 'MattesGroeger/vim-bookmarks', {
-            \ 'on' : [ 'BookmarkToggle', 'BookmarkAnnotate', 'BookmarkShowAll',
-            \          'BookmarkNext', 'BookmarkPrev', 'BookmarkClear',
-            \          'BookmarkClearAll', 'BookmarkMoveUp', 'BookmarkMoveDown',
-            \          'BookmarkMoveToLine' ] }
+Plug 'MattesGroeger/vim-bookmarks'
 Plug 'prettier/vim-prettier', {
             \ 'do': 'yarn install' }
 Plug 'Shougo/echodoc.vim'
@@ -328,10 +329,10 @@ Plug 'LaTeX-Box-Team/LaTeX-Box', {
 " BEGIN: junegunn/gv.vim
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
-if !has('nvim')
-    Plug 'aymericbeaumet/symlink.vim'
-endif
 Plug 'moll/vim-bbye'
+if !has('nvim')
+    Plug 'aymericbeaumet/vim-symlink'
+endif
 Plug 'jreybert/vimagit'
 " END: junegunn/gv.vim
 
@@ -1948,22 +1949,22 @@ command! -nargs=* ProfilerStop call StopProfileVim()
 " vim-dict settings
 nnoremap <leader>d :Dict<Space>
 
-" " YankRing.vim settings
-" let g:yankring_window_height = 30
-" let g:yankring_window_use_bottom = 1
-" let g:yankring_history_dir = g:vimPath
-" let g:yankring_replace_n_nkey = "<nop>"
-" let g:yankring_replace_n_pkey = "<nop>"
-" let g:yankring_paste_v_akey ="<nop>"
-" let g:yankring_paste_n_bkey =''
-" let g:yankring_paste_n_akey =''
-" let g:yankring_max_history = 1000000
-" let g:yankring_max_element_length = 10000000
-" let g:yankring_buffer_name = "Yank History"
-" let g:yankring_manual_clipboard_check = 1
-" nnoremap <leader>p :silent! YRShow<CR>:setlocal wrap relativenumber number<CR>
-" nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR>
-" xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
+" YankRing.vim settings
+let g:yankring_window_height = 30
+let g:yankring_window_use_bottom = 1
+let g:yankring_history_dir = g:vimPath
+let g:yankring_replace_n_nkey = "<nop>"
+let g:yankring_replace_n_pkey = "<nop>"
+let g:yankring_paste_v_akey ="<nop>"
+let g:yankring_paste_n_bkey =''
+let g:yankring_paste_n_akey =''
+let g:yankring_max_history = 1000000
+let g:yankring_max_element_length = 10000000
+let g:yankring_buffer_name = "Yank History"
+let g:yankring_manual_clipboard_check = 1
+nnoremap <leader>p :silent! YRShow<CR>:setlocal wrap relativenumber number<CR>
+nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR>
+xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
 
 " vim-doge settings
 let g:doge_enable_mappings = 0
@@ -2059,11 +2060,6 @@ function! SetHighlightCtrlSF()
     highlight def link qfError               Error
 endfunction
 
-" yankround.vim settings
-let g:yankround_dir = g:vimPath
-let g:yankround_max_history = 10000000
-let g:yankround_max_element_length = 10000000
-
 " vista.vim settings
 let g:vista_fzf_preview = ['right:50%']
 let g:vista_keep_fzf_colors = 1
@@ -2104,24 +2100,14 @@ nnoremap <leader>m :CocCommand fzf-preview.Bookmarks<CR>
 nnoremap <leader>j :CocCommand fzf-preview.Jumps<CR>
 nnoremap <leader>/ :FzfHistory/<CR>
 nnoremap <leader>c :CocCommand fzf-preview.Changes<CR>
-" nnoremap <leader>T :CocCommand fzf-preview.VistaCtags<CR>
+nnoremap <leader>T :CocCommand fzf-preview.VistaCtags<CR>
 " nnoremap <leader>T :CocCommand fzf-preview.VistaBufferCtags<CR>
 nnoremap <leader>; :FzfHistory:<CR>
-nnoremap <leader>p :CocCommand fzf-preview.Yankround<CR>
+" nnoremap <leader>p :CocCommand fzf-preview.Yankround<CR>
 nnoremap <leader><localleader>/ :CocCommand fzf-preview.Lines<CR>
 nnoremap <leader><leader>/ :CocCommand fzf-preview.BufferLines<CR>
 
 " fzf.vim settings
-nnoremap <leader><localleader>f :FzfFiles<Space>
-nnoremap <leader><localleader>b :FzfBuffers<CR>
-nnoremap <leader><localleader>L :FzfLines<CR>
-nnoremap <leader><localleader>l :FzfBLines<CR>
-nnoremap <leader><localleader>w :FzfWindows<CR>
-nnoremap <leader><localleader>H :FzfHistory<CR>
-nnoremap <leader><localleader>h/ :FzfHistory/<CR>
-nnoremap <leader><localleader>h: :FzfHistory:<CR>
-nnoremap <leader><localleader>c :FzfCommits<CR>
-nnoremap <leader><localleader>C :FzfBCommits<CR>
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_preview_window = 'right:50%'
 let g:fzf_layout = { 'window': { 'width': g:fzf_preview_floating_window_rate, 'height': g:fzf_preview_floating_window_rate } }
@@ -2131,20 +2117,6 @@ let g:fzf_mru_relative = 0
 let g:fzf_mru_case_sensitive = 0
 let g:fzf_mru_max = 1000
 let g:fzf_mru_exclude = ".*unite.*"
-nnoremap <leader>o :FZFMru<CR>
-function StartFZFMru()
-    if !argc() && !exists('g:fzf_mru_disable_at_vimenter') && (&filetype != 'stardict')
-        :FZFMru
-        let t:startified = 1
-    endif
-
-    " :NERDTree
-    " wincmd w
-endfunction
-nnoremap <leader>b :FzfBuffers<CR> 
-nnoremap <leader>m :FzfMaps<CR>
-nnoremap <leader>/ :FzfHistory/<CR>
-nnoremap <leader>; :FzfHistory:<CR>
 
 " vim-swoop settings
 let g:swoopUseDefaultKeyMap = 0
@@ -2222,6 +2194,8 @@ let g:perforce_utils_vim_path = g:vimPath . '/plugged/vim-perforce/perforce/perf
 if filereadable( g:perforce_utils_vim_path )
     execute 'source ' . g:perforce_utils_vim_path
 endif
+let no_perforce_maps = 1
+let no_execmap_maps = 1
 nnoremap <localleader>dr :call MaybeInvokeMergeTool()<CR>
 
 " neomru.vim settings

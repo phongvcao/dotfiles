@@ -7,12 +7,13 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         command sudo chown -R "${whoami}":admin /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
         command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
         brew install ccls mosh coreutils binutils diffutils ed findutils gcc \
-            gawk watch wdiff patch rsync less openssh ctags go node llvm neofetch \
+            gawk watch wdiff patch rsync less openssh go node llvm neofetch \
             zsh git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
             cmake xclip docker curl gpatch htop llvm yarn man-db ripgrep \
             tavianator/tap/bfs atool unrar zip p7zip glances bat ranger flake8 \
             fzf fd neovim
+        brew install --HEAD universal-ctags/universal-ctags/universal-ctags
         $(brew --prefix)/opt/fzf/install
         brew cask install vagrant
         brew cask fetch eloston-chromium
@@ -34,6 +35,7 @@ else
 	        fzf fd-find neovim
 	    # NOTE: Also install ungoogled-chromium
         sudo snap install ccls go --classic
+        sudo snap install universal-ctags*.snap --dangerous
     fi
 fi
 
