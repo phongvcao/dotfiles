@@ -2097,8 +2097,6 @@ function! FreezeSwoopContext()
         map <buffer> z/ <nop>
         map <buffer> z? <nop>
         map <buffer> zg/ <nop>
-    else
-        let @/ = "::NULL::"
     endif
 endfunction
 
