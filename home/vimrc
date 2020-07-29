@@ -576,6 +576,8 @@ set fileformats=unix
 set fileformat=unix
 if !has('nvim')
     set anti
+else
+    set guicursor=
 endif
 set noerrorbells
 set magic
