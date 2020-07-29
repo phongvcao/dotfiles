@@ -586,7 +586,7 @@ set nojoinspaces
 set fillchars+=vert:│
 set selection=inclusive
 nnoremap <Space>t %
-nnoremap <leader>P :hardcopy ><Space>
+" nnoremap <leader>P :hardcopy ><Space>
 " nnoremap <localleader>ff :set filetype=
 " inoremap <Esc> <nop>
 " vnoremap <Esc> <nop>
@@ -685,7 +685,7 @@ else
     inoremap <expr><C-p> pumvisible() ? "\<C-p>" : '<C-r>"'
     " Paste content of unnamed register to Vim command-mode
     cnoremap <C-v> <C-r>"
-    nnoremap <C-p> i<C-r>"<C-c>
+    nnoremap <C-v> i<C-r>"<C-c>
 endif
 nnoremap .. .
 nnoremap <> ==$
@@ -750,7 +750,7 @@ set linebreak
 set nolist
 set wrapmargin=0
 set formatoptions+=t
-set pastetoggle=<F12>
+set pastetoggle=,P
 set ttyfast
 set undofile
 set undolevels=10000
