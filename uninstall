@@ -93,6 +93,7 @@ uninstall ~/.tmuxline.conf
 uninstall ~/.tmuxline_custom.conf
 uninstall ~/.vimperatorrc
 uninstall ~/.vimrc
+uninstall ~/.config/nvim/init.vim
 uninstall ~/.vrapperrc
 uninstall ~/.weatherrc
 uninstall ~/.wegorc
