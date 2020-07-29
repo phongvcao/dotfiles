@@ -2059,6 +2059,10 @@ function! SetHighlightCtrlSF()
     highlight def link qfError               Error
 endfunction
 
+" yankround.vim settings
+let g:yankround_dir = g:vimPath
+let g:yankround_max_history = 10000000
+let g:yankround_max_element_length = 10000000
 
 " vista.vim settings
 let g:vista_fzf_preview = ['right:50%']
