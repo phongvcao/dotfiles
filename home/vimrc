@@ -862,7 +862,7 @@ if !has('nvim')
     nnoremap S :set shell=$SHELL<CR>:shell<CR>
 else
     command! Term :set shell=zsh|:terminal
-    nnoremap S :Term<CR>
+    nnoremap S :Term<CR>:startinsert<CR>
 endif
 " Scroll both splits in Vim
 nnoremap <localleader>sb :set scrollbind!<CR>
@@ -3052,9 +3052,9 @@ function! SetHighlight()
     " ShowMotion's highlights
     let s:uname = system("uname -s")
     if s:uname =~ ".*Darwin.*"
-        highlight ShowMotion_SmallMotionGroup ctermfg=8 ctermbg=4
-        highlight ShowMotion_BigMotionGroup ctermfg=8 ctermbg=4
-        highlight ShowMotion_CharSearchGroup ctermfg=8 ctermbg=4
+        highlight ShowMotion_SmallMotionGroup cterm=NONE ctermfg=8 ctermbg=4
+        highlight ShowMotion_BigMotionGroup cterm=NONE ctermfg=8 ctermbg=4
+        highlight ShowMotion_CharSearchGroup cterm=NONE ctermfg=8 ctermbg=4
     else
         highlight ShowMotion_SmallMotionGroup ctermbg=4 ctermfg=8
         highlight ShowMotion_BigMotionGroup ctermbg=4 ctermfg=8
@@ -3321,6 +3321,10 @@ augroup CustomAutoCmd
         else
             autocmd VimEnter * :OverCommandLineNoremap <C-p> <C-r>\"
         endif
+    endif
+
+    if has('nvim')
+        autocmd TermOpen * setlocal nonumber norelativenumber
     endif
 
     " unite.vim settings
