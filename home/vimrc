@@ -108,6 +108,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {
             \ 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'liuchengxu/vista.vim'
+Plug 'MattesGroeger/vim-bookmarks'
 if !has('nvim')
     Plug 'yuki-ycino/fzf-preview.vim', {
                 \ 'branch': 'release' }
@@ -243,7 +244,6 @@ Plug 'ntpeters/vim-better-whitespace', {
             \ 'on' : [ 'ToggleWhitespace', 'StripWhitespace' ] }
 Plug 'osyo-manga/vim-anzu'
 Plug 'qxxxb/vim-searchhi'
-Plug 'MattesGroeger/vim-bookmarks'
 Plug 'prettier/vim-prettier', {
             \ 'do': 'yarn install' }
 Plug 'Shougo/echodoc.vim'
