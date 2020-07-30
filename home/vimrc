@@ -1966,7 +1966,7 @@ nnoremap <leader>; :FZFHistory:<CR>
 nnoremap <leader><localleader>/ :CocCommand fzf-preview.Lines<CR>
 nnoremap <leader><leader>/ :call InvokeFzfPreviewBufferLines()<CR>
 function! InvokeFzfPreviewBufferLines()
-    if exists('g:fzf_preview_bufferlines_path')
+    if exists('g:fzf_preview_bufferlines_path') && g:fzf_preview_bufferlines_path ==# 1
         execute 'cd ' . g:fzf_preview_bufferlines_path
     endif
     CocCommand fzf-preview.BufferLines
@@ -1990,6 +1990,13 @@ nnoremap OH :FzfMRULeftVSplit<Space>
 nnoremap t :FzfMRUTab<Space>
 " nnoremap O :FzfMRU<CR>
 nnoremap <leader>o :execute "FzfMRU ./"<CR>
+
+function! StartFzfMRU()
+  if exists('g:fzf_mrufiles_start') && g:fzf_mrufiles_start ==# 1
+    FzfMruFiles
+  endif
+  let g:fzf_mrufiles_start = 0
+endfunction
 
 function! InvokeFzfMRU(...)
     let l:arg = join( a:000, '\\ ' )
@@ -3144,6 +3151,9 @@ augroup CustomAutoCmd
             autocmd VimEnter * :OverCommandLineNoremap <C-p> <C-r>\"
         endif
     endif
+
+    " vim-mrufiles settings
+    autocmd SourcePost * call StartFzfMRU()
 
     if has('nvim')
         autocmd TermOpen * setlocal nonumber norelativenumber
