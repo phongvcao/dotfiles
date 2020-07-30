@@ -2704,7 +2704,7 @@ function! InvokeGVAndMagit()
     :execute "normal! \<C-w>k"
 endfunction
 command! -bang -nargs=* GVAndMagit silent! call InvokeGVAndMagit()
-nnoremap <leader>G :GVAndMagit<CR>
+nnoremap <localleader>G :GVAndMagit<CR>
 
 " vimagit settings
 command! -bang -nargs=* MagitFullscreen silent! call magit#show_magit('c') 
