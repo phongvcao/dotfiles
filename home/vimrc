@@ -106,7 +106,7 @@ Plug 'airblade/vim-rooter'
 " BEGIN: junegunn/fzf.vim
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {
-            \ 'dir': '~/.fzf', 'do': './install --all' }
+            \ 'do': { -> fzf#install() } }
 Plug 'liuchengxu/vista.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 if !has('nvim')
