@@ -1966,7 +1966,9 @@ nnoremap <leader>; :FZFHistory:<CR>
 nnoremap <leader><localleader>/ :CocCommand fzf-preview.Lines<CR>
 nnoremap <leader><leader>/ :call InvokeFzfPreviewBufferLines()<CR>
 function! InvokeFzfPreviewBufferLines()
-    execute 'cd ' . g:fzf_preview_bufferlines_path
+    if exists('g:fzf_preview_bufferlines_path')
+        execute 'cd ' . g:fzf_preview_bufferlines_path
+    endif
     CocCommand fzf-preview.BufferLines
 endfunction
 nnoremap <leader>g :FZFRg<Space>
