@@ -513,7 +513,7 @@ set updatetime=300
 set hidden
 set ignorecase
 set number
-" set re=1
+set re=1
 " set signcolumn=yes
 set hlsearch
 set shellslash
@@ -2824,7 +2824,10 @@ let g:surround_no_mappings = 0
 " *ySS* : Add surroundings for current line AND put it on new line
 
 " vim-polyglot settings
-set re=0
+" Neovim is slow with re=0
+if !has('nvim')
+    set re=0
+endif
 let g:yats_host_keyword = 1
 let g:python_highlight_all = 1
 let g:javascript_plugin_jsdoc = 1

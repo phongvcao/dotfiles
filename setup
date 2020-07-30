@@ -37,6 +37,10 @@ else
         sudo snap install ccls go --classic
         sudo snap install universal-ctags*.snap --dangerous
     fi
+
+    if [[ -n "${SSH_CLIENT}" ]]; then
+        sudo apt-get remove -y xsel xclip
+    fi
 fi
 
 cd "${HOME}"
