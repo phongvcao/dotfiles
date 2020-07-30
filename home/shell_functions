@@ -234,13 +234,7 @@ else
             filename=$(fd "$1" . -HI --type d --type f --type l --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
         else
-            filename=$(fd --type f -HI --exclude='*.git/' \
-                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \; | fzf)
-            filename=$(fd --type l -HI --exclude='*.git/' \
-                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \; | fzf)
-            filename=$(fd --type d -HI --exclude='*.git/' \
+            filename=$(fd --type f --type l --type d -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
         fi
@@ -1138,46 +1132,34 @@ fi
 function lsr() {
 if [[ -n "$2" ]]; then
     if [[ "$1" =~ [[:upper:]] ]]; then
-        fd -L "$1" "$2" -HI --exclude='*.git/' --type d \
+        fd -L "$1" "$2" -HI --exclude='*.git/' --type d --type l --type f \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor "$1"
-        fd -L "$1" "$2" -HI --exclude='*.git/' --type l --type f \
-                --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
     else
-        fd -L "$1" "$2" -HI --exclude='*.git/' --type d \
+        fd -L "$1" "$2" -HI --exclude='*.git/' --type d --type l --type f \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor -i "$1"
-        fd -L "$1" "$2" -HI --exclude='*.git/' --type l --type f \
-                --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
     fi
 elif [[ -n "$1" ]]; then
     if [[ -d "$1" ]]; then
-        fd -L . "$1" -HI --exclude='*.git/' --type d \
+        fd -L . "$1" -HI --exclude='*.git/' --type d --type l --type f \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null
-        fd -L . "$1" -HI --exclude='*.git/' --type l --type f \
-                --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null
     else
         if [[ "$1" =~ [[:upper:]] ]]; then
-            fd -L "$1" -HI --exclude='*.git/' --type d \
+            fd -L "$1" -HI --exclude='*.git/' --type d --type l --type f \
                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor "$1"
-            fd -L "$1" -HI --exclude='*.git/' --type l --type f \
-                    -exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
         else
-            fd -L "$1" -HI --exclude='*.git/' --type d \
+            fd -L "$1" -HI --exclude='*.git/' --type d --type l --type f \
                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor -i "$1"
-            fd -L "$1" -HI --exclude='*.git/' --type l --type f \
-                    --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null | g "$1"
         fi
     fi
 else
-    fd -L -HI --exclude='*.git/' --type d \
+    fd -L -HI --exclude='*.git/' --type d --type l --type f \
             --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
             --group-directories-first --color -A -d {} \; 2>/dev/null
-    fd -L -HI --exclude='*.git/' --type l --type f \
-            --exec ls -F -X --group-directories-first --color -A -d {} \; 2>/dev/null
 fi
 }
 

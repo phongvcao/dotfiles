@@ -60,7 +60,7 @@ if [[ "$(uname)" =~ "Linux" ]]; then
     export "VIM"="/usr/share/nvim"
     export "VIMRUNTIME"="/usr/share/nvim/runtime"
     export "USR_DIR"="/usr"
-    export "FZF_DEFAULT_COMMAND"="fdfind --type f -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; ; fdfind --type l -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; ; fdfind --type d -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
+    export "FZF_DEFAULT_COMMAND"="fdfind --type f --type d --type l -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
 elif [[ "$(uname)" =~ "Darwin" ]]; then
     export "VIM"="/usr/local/share/nvim"
     export "VIMRUNTIME"="/usr/local/share/nvim/runtime"

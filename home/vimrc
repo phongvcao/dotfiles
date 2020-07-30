@@ -82,8 +82,8 @@ Plug 'm2mdas/unite-file-vcs'
 Plug 'thinca/vim-ref'
 Plug 'kmnk/vim-unite-giti'
 Plug 'osyo-manga/vim-reanimate'
-Plug 'chrisbra/BufTimer', {
-            \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
+" Plug 'chrisbra/BufTimer', {
+"             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " END: Shougo/unite.vim
 Plug 'vim-scripts/YankRing.vim'
 Plug 'pelodelfuego/vim-swoop'
@@ -109,6 +109,7 @@ Plug 'junegunn/fzf', {
             \ 'do': { -> fzf#install() } }
 Plug 'liuchengxu/vista.vim'
 Plug 'MattesGroeger/vim-bookmarks'
+Plug 'markwu/vim-mrufiles'
 if !has('nvim')
     Plug 'yuki-ycino/fzf-preview.vim', {
                 \ 'branch': 'release' }
@@ -118,6 +119,8 @@ else
                 \ 'do': ':UpdateRemotePlugins' }
 endif
 " END: junegunn/fzf.vim
+
+Plug 'junegunn/vim-peekaboo'
 
 if executable('p4')
     " BEGIN: pcaneill/vim-perforce
@@ -1579,8 +1582,8 @@ if has("unix")
 endif
 inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-inoremap <expr><C-r> "\<C-w>"
-inoremap <expr><C-u> "\<C-c>0Di"
+inoremap <C-r> <C-w>
+inoremap <C-u> <C-c>0Di
 
 function! s:check_back_space() abort
     let col = col('.') - 1
@@ -1827,10 +1830,14 @@ let g:unite_data_directory = g:vimPath . '/cache/unite'
 " " nnoremap <leader>hr/ :silent! Unite history/search -start-insert -buffer-name=u/ -resume<CR>
 " nnoremap <leader>; :silent! Unite -prompt=Hist(:)>\ \  history/command command -auto-highlight -start-insert -buffer-name=Command\ History<CR>
 " " nnoremap <leader>hr; :silent! Unite history/command -start-insert -buffer-name=u/ -resume<CR>
-nnoremap <leader>S :silent! Unite -prompt=Hist($_)>\ \  -auto-highlight -start-insert -buffer-name=Shell\ History output/shellcmd:tac\ $HOME/.shell_history\ \|\ grep\ -v\ '^$'\ \|\ head\ -n\ 1000\ -<CR>
-nnoremap <leader>B :silent! Unite -prompt=BufTimer>\ \  -auto-highlight -start-insert -buffer-name=Buffer\ Timer output:BufTimerReport<CR>
-nnoremap " :silent! Unite -prompt=Regs(")>\ \  register -auto-highlight -start-insert -buffer-name=Registers<CR>
-nnoremap M :silent! Unite -prompt=Msgs>\ \  -auto-highlight -start-insert -buffer-name=Messages\ History output:message<CR>
+
+
+" nnoremap <leader>sl :silent! Unite -start-insert -default-action=reanimate_load -buffer-name=Sessions -prompt=Sessions>\  reanimate<CR>
+" nnoremap <leader>se :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  reanimate<CR>
+" nnoremap <leader>S :silent! Unite -prompt=Hist($_)>\ \  -auto-highlight -start-insert -buffer-name=Shell\ History output/shellcmd:tac\ $HOME/.shell_history\ \|\ grep\ -v\ '^$'\ \|\ head\ jj
+" nnoremap <leader>B :silent! Unite -prompt=BufTimer>\ \  -auto-highlight -start-insert -buffer-name=Buffer\ Timer output:BufTimerReport<CR>
+" nnoremap " :silent! Unite -prompt=Regs(")>\ \  register -auto-highlight -start-insert -buffer-name=Registers<CR>
+" nnoremap M :silent! Unite -prompt=Msgs>\ \  -auto-highlight -start-insert -buffer-name=Messages\ History output:message<CR>
 " nnoremap <leader>hrs :silent! Unite -start-insert -buffer-name=sh -resume output/shellcmd:tac\ $HOME/.shell_history\ \|\ grep\ -v\ '^$'\ \|\ head\ -n\ 1000\ -<CR>
 " nnoremap <leader><localleader>/ :silent! Unite -no-auto-resize -auto-highlight -winheight=20 -prompt-direction=top -start-insert -buffer-name=Current\ Buffer -prompt=BLines>\ \  line:all<CR>
 " nnoremap <leader><leader>/ :silent! Unite -no-auto-resize -auto-highlight -winheight=20 -prompt-direction=top -start-insert -buffer-name=All\ Buffers -prompt=Lines>\ \  line:buffers<CR>
@@ -1873,9 +1880,10 @@ let g:reanimate_event_disables = {
             \		"reanimate_confirm" : 1,
             \	},
             \ }
+let g:reanimate_save_dir = g:vimPath . '/reanimate/save_dir'
 nnoremap <leader>ss :ReanimateSaveSession<Space>
-nnoremap <leader>sl :silent! Unite -start-insert -default-action=reanimate_load -buffer-name=Sessions -prompt=Sessions>\  reanimate<CR>
-nnoremap <leader>se :silent! Unite -start-insert -buffer-name=Sessions -prompt=Sessions>\  reanimate<CR>
+nnoremap <leader>sl :call fzf#run(fzf#wrap({'source': 'ls ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateLoadSession', 'options': '--prompt=SessionLoad>' }))<CR>
+nnoremap <leader>sd :call fzf#run(fzf#wrap({'source': 'ls ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateDeleteSession', 'options': '--prompt=SessionDel>' }))<CR>
 nnoremap Q :w<CR>:ReanimateSaveSession<CR>:call WriteQuitAll()<CR>
 function! SaveSessionReanimate(...)
     let l:arg = join( a:000, '_' )
@@ -1888,6 +1896,19 @@ function! SaveSessionReanimate(...)
     endif
 endfunction
 command! -nargs=* ReanimateSaveSession call SaveSessionReanimate( <f-args> )
+
+function! LoadSessionReanimate(...)
+    let l:arg = join( a:000, '' )
+    execute "silent! ReanimateLoad " . l:arg
+endfunction
+command! -nargs=* ReanimateLoadSession call LoadSessionReanimate( <f-args> )
+
+function! DeleteSessionReanimate(...)
+    let l:arg = join( a:000, '' )
+    execute "!rm -rf " . g:reanimate_save_dir . '/default_category/' . l:arg
+endfunction
+command! -nargs=* ReanimateDeleteSession call DeleteSessionReanimate( <f-args> )
+
 
 "
 " Vim profiler / profiling
@@ -2044,45 +2065,49 @@ let g:fzf_preview_quit_map = 1
 " Commands used for fzf preview.
 " The file name selected by fzf becomes {}
 " let g:fzf_preview_command = 'head -100 {-1}'                       " Not installed bat
-let g:fzf_preview_command = 'bat --color=always {-1} --plain' " Installed bat
+let g:fzf_preview_command = 'bat --color=always {-1} --plain --number' " Installed bat
 " Commands used for current file lines
 " let g:fzf_preview_lines_command = 'head -100 {-1}'
 let g:fzf_preview_lines_command = 'bat --color=always --plain --number'
 " Use vim-devicons
-let g:fzf_preview_use_dev_icons = 1
-" devicons character width
-let g:fzf_preview_dev_icon_prefix_string_length = 3
-" Devicons can make fzf-preview slow when the number of results is high
-" By default icons are disable when number of results is higher that 5000
+let g:fzf_preview_use_dev_icons = 0
+" " devicons character width
+" let g:fzf_preview_dev_icon_prefix_string_length = 3
+" " Devicons can make fzf-preview slow when the number of results is high
+" " By default icons are disable when number of results is higher that 5000
 let g:fzf_preview_dev_icons_limit = 5000
 nnoremap <leader>b :CocCommand fzf-preview.Buffers<CR>
 nnoremap <leader>w :CocCommand fzf-preview.AllBuffers<CR>
-nnoremap <leader>t :FzfWindows<CR>
+nnoremap <leader>t :FZFWindows<CR>
 nnoremap <leader>q :CocCommand fzf-preview.Quickfix<CR>
-nnoremap <leader>f :CocCommand fzf-preview.MruFiles<CR> 
-nnoremap <leader>F :CocCommand fzf-preview.DirectoryFiles<CR> 
-nnoremap <leader>M :FzfMaps<CR>
+nnoremap <leader>f :FzfMruFiles<CR> 
+nnoremap <leader>F :FZFFiles<CR> 
+nnoremap <leader>M :FZFMaps<CR>
 nnoremap <leader>m :CocCommand fzf-preview.Bookmarks<CR>
 nnoremap <leader>j :CocCommand fzf-preview.Jumps<CR>
-nnoremap <leader>/ :FzfHistory/<CR>
+nnoremap <leader>/ :FZFHistory/<CR>
 nnoremap <leader>c :CocCommand fzf-preview.Changes<CR>
-nnoremap <leader>T :CocCommand fzf-preview.VistaCtags<CR>
+nnoremap <leader>T :FZFBTags<CR>
 " nnoremap <leader>T :CocCommand fzf-preview.VistaBufferCtags<CR>
-nnoremap <leader>; :FzfHistory:<CR>
+nnoremap <leader>; :FZFHistory:<CR>
 " nnoremap <leader>p :CocCommand fzf-preview.Yankround<CR>
 nnoremap <leader><localleader>/ :CocCommand fzf-preview.Lines<CR>
 nnoremap <leader><leader>/ :CocCommand fzf-preview.BufferLines<CR>
-nnoremap <leader>g :CocCommand fzf-preview.ProjectGrep<Space>
+nnoremap <leader>g :FZFRg<Space>
+nnoremap <leader>S :call fzf#run(fzf#wrap({ 'source': 'tac $HOME/.shell_history', 'options': '--prompt "Hist(\$_)"' }))<CR>
 
 " vim-rooter settings
 let g:rooter_targets = '/,*'
-let g:rooter_pattern = [ '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'CMakeLists.txt' ]
+let g:rooter_patterns = [ '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'CMakeLists.txt' ]
+if exists('g:custom_rooter_patterns')
+  let g:rooter_patterns += g:custom_rooter_patterns
+endif
 let g:rooter_manual_only = 0
 let g:rooter_silent_chdir = 1
 let g:rooter_resolve_links = 1
 
 " fzf.vim settings
-let g:fzf_command_prefix = 'Fzf'
+let g:fzf_command_prefix = 'FZF'
 let g:fzf_preview_window = 'right:50%'
 let g:fzf_layout = { 'window': { 'width': g:fzf_preview_floating_window_rate, 'height': g:fzf_preview_floating_window_rate } }
 
@@ -2091,6 +2116,9 @@ let g:fzf_mru_relative = 0
 let g:fzf_mru_case_sensitive = 0
 let g:fzf_mru_max = 1000
 let g:fzf_mru_exclude = ".*unite.*"
+
+" vim-peekaboo settings
+let g:peekaboo_ins_prefix = '<Insert>'
 
 " vim-swoop settings
 let g:swoopUseDefaultKeyMap = 0
@@ -2186,7 +2214,7 @@ nnoremap t :NeoMRUTab<Space>
 let g:neomru#file_mru_path = $HOME . "/.vim/cache/neomru/file"
 let g:neomru#directory_mru_path = $HOME . "/.vim/cache/neomru/directory"
 " nnoremap O :NeoMRU<CR>
-nnoremap <leader>o <nop>
+nnoremap <leader>o :execute "NeoMRU ./"<CR>
 let g:neomru#file_mru_limit = 1000000 
 let g:neomru#directory_mru_limit = 1000000 
 let g:unite_source_file_mru_limit = 1000000 
@@ -2198,11 +2226,11 @@ function! InvokeNeoMRU(...)
         if ! isdirectory( expand( l:arg ) )
             execute "edit " . l:arg
         else
-            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            execute "FZFFiles " . l:arg
             " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
-        execute "CocCommand fzf-preview.MruFiles"
+        execute "FzfMruFiles"
         " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
 endfunction
@@ -2216,12 +2244,12 @@ function! InvokeNeoMRUVSplit(...)
             execute "vsplit " . l:arg
         else
             execute "vsplit"
-            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            execute "FZFFiles " . l:arg
             " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
         execute "vsplit"
-        execute "CocCommand fzf-preview.MruFiles"
+        execute "FzfMruFiles"
         " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
 endfunction
@@ -2234,12 +2262,12 @@ function! InvokeNeoMRUSplit(...)
             execute "split " . l:arg
         else
             execute "split"
-            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            execute "FZFFiles " . l:arg
             " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
         execute "split"
-        execute "CocCommand fzf-preview.MruFiles"
+        execute "FzfMruFiles"
         " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
 endfunction
@@ -2253,12 +2281,12 @@ function! InvokeNeoMRULeftVSplit(...)
             execute "vsplit " . l:arg
         else
             execute "vsplit"
-            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            execute "FZFFiles " . l:arg
             " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
         execute "vsplit"
-        execute "CocCommand fzf-preview.MruFiles"
+        execute "FzfMruFiles"
         " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
     set splitright
@@ -2273,12 +2301,12 @@ function! InvokeNeoMRUTopSplit(...)
             execute "split " . l:arg
         else
             execute "split"
-            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            execute "FZFFiles " . l:arg
             " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
         execute "split"
-        execute "CocCommand fzf-preview.MruFiles"
+        execute "FzfMruFiles"
         " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
     set splitbelow
@@ -2292,12 +2320,12 @@ function! InvokeNeoMRUTab(...)
             execute "tabnew " . l:arg
         else
             execute "tabnew"
-            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            execute "FZFFiles " . l:arg
             " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
         execute "tabnew"
-        execute "CocCommand fzf-preview.MruFiles"
+        execute "FzfMruFiles"
         " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
 endfunction
@@ -2309,11 +2337,11 @@ function! InvokeNeoMRURec(...)
         if ! isdirectory( expand( l:arg ) )
             execute "edit " . l:arg
         else
-            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            execute "FZFFiles " . l:arg
             " execute "silent! Unite -prompt=Open>\\ \\  directory_mru buffer file_mru file_rec/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
-        execute "CocCommand fzf-preview.MruFiles"
+        execute "FzfMruFiles"
         " execute "silent! Unite -prompt=Open>\\ \\  directory_mru buffer file_mru file_rec/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
 endfunction
@@ -2631,7 +2659,11 @@ let g:lightline_filename_pattern = {
             \ '^' . $HOME: '~',
             \ }
 function! CustomLightlineFilename()
-    let l:filename = substitute(system('readlink -f ' . expand('%:p')), '\n', '', 'g')
+    let l:filename = system('readlink -f ' . expand('%:p'))
+    if l:filename !~ '^/.*'
+      return WebDevIconsGetFileTypeSymbol() . ' '
+    endif
+    let l:filename = substitute(l:filename, '\n', '', 'g')
     for pattern in keys(g:lightline_filename_pattern)
         let l:filename = substitute(l:filename, pattern, g:lightline_filename_pattern[pattern], 'g')
     endfor
@@ -2753,6 +2785,7 @@ if filereadable( $HOME . "/.vim-bookmarks" )
     call delete( fnameescape( $HOME . "/.vim-bookmarks" ) )
 endif
 let g:bookmark_auto_save_file = $HOME . '/.vim/vim-bookmarks'
+let g:bookmark_auto_save = 0
 let g:bookmark_highlight_lines = 1
 let g:bookmark_no_default_key_mappings = 1
 let g:bookmark_location_list = 1
@@ -2768,6 +2801,10 @@ nnoremap mC :BookmarkClearAll<CR>
 nnoremap mk :BookmarkMoveUp<CR>
 nnoremap mj :BookmarkMoveDown<CR>
 nnoremap m; :BookmarkMoveToLine<CR>
+
+" vim-mrufiles settings
+let g:mrufiles_cache_directory = $HOME . '/.vim/cache'
+let g:mrufiles_max_entries = 10000
 
 " echodoc.vim settings
 let g:echodoc_enable_at_startup = 1
@@ -3316,6 +3353,7 @@ augroup CustomAutoCmd
 
     if has('nvim')
         autocmd TermOpen * setlocal nonumber norelativenumber
+        autocmd TermLeave * set shell=bash\ --login
     endif
 
     " unite.vim settings
