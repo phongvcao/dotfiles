@@ -1327,17 +1327,17 @@ function vim() {
     else
         if [[ -n "$1" ]]; then
             if [[ -d "$1" ]]; then
-                # CURDIR="${PWD}"
-                # cd "$1"
-                # fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command nvim "${fzfResult}"
-                # cd "${CURDIR}"
-                # command nvim -c "NeoMRURec $@"
-                command nvim
+                CURDIR="${PWD}"
+                cd "$1"
+                fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command nvim "${fzfResult}"
+                cd "${CURDIR}"
+                # command nvim -c "FzfMRURec $@"
+                # command nvim
             else
                 command nvim $@
             fi
         else
-            # command nvim -c "NeoMRU"
+            # command nvim -c "FzfMRU"
             command nvim
         fi
     fi
