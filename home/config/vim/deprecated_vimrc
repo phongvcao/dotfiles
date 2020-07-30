@@ -233,6 +233,26 @@
 " " Plug 'chrisbra/BufTimer', {
 " "             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " " END: Shougo/unite.vim
+" Plug 'airblade/vim-rooter'
+
+" " vim-rooter settings
+" if exists('g:custom_rooter_targets')
+"   let g:rooter_targets = g:custom_rooter_targets
+" else
+"   let g:rooter_targets = '/,*'
+" endif
+" let g:rooter_targets = '/,*'
+" let g:rooter_patterns = [ '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'CMakeLists.txt' ]
+" if exists('g:custom_rooter_patterns')
+"   let g:rooter_patterns += g:custom_rooter_patterns
+" endif
+" let g:rooter_manual_only = 1
+" let g:rooter_silent_chdir = 1
+" let g:rooter_resolve_links = 1
+" let g:rooter_change_directory_for_non_project_files = 'current'
+
+    " " vim-rooter settings
+    " autocmd BufEnter,BufWinEnter * :Rooter
 
 " nnoremap <localleader>/ :execute "/" . escape(expand("<cword>"), g:escapeChars)<CR>
 " nnoremap <localleader>// :execute "/" . escape(expand("<cWORD>"), g:escapeChars)<CR>
@@ -243,31 +263,6 @@
 " nnoremap <localleader>/g :execute "vimgrep /" . escape(expand("<cword>"), g:escapeChars) . "/gj ./**/*"<CR> :Unite quickfix -toggle -wrap<CR>
 " nnoremap <localleader>//g :execute "vimgrep /" . escape(expand("<cWORD>"), g:escapeChars) . "/gj ./**/*"<CR> :Unite quickfix -toggle -wrap<CR>
 " vnoremap <localleader>/g "ay :execute "vimgrep /" . escape(@a, g:escapeChars) . "/gj ./**/*"<CR> :Unite quickfix -toggle -wrap<CR>
-
-function! CloseUniteWindow()
-    execute ":normal! \<C-c>"
-    if ( &filetype ==# 'unite' )
-        execute ":UniteClose"
-    elseif ( expand( '%f' ) ==# 'swoopBuf' )
-        nmap w <Plug>(show-motion-w)
-        nmap W <Plug>(show-motion-b)
-        nmap B <Plug>(show-motion-B)
-        nmap E <Plug>(show-motion-e)
-        :bd! swoopBuf
-    elseif ( &filetype ==# 'magit' ) || ( &filetype ==# 'GV' ) || ( &filetype ==# 'git' )
-        if ( tabpagenr('$') == 1 )
-            execute ":qall!"
-        elseif ( winnr('$') <= 3 )
-            execute ":tabclose"
-        endif
-    elseif ( expand( '%:p' ) =~ '.*Yank.*' )
-        execute 'silent! YRShow'
-    endif
-endfunction
-
-nnoremap <C-c> :call CloseUniteWindow()<CR>
-inoremap <C-c> <C-c>:call CloseUniteWindow()<CR>
-vnoremap <C-c> <C-c>
 
 " unite.vim settings
 let g:unite_no_default_keymappings = 1
