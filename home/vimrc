@@ -965,7 +965,7 @@ nnoremap <C-Insert> <Plug>ShowWhiteToggle
 nnoremap <localleader><Space> :ToggleWhitespace<CR>
 
 " vim-repeat settings
-nmap <nop> <Plug>(RepeatDot)
+nmap <Insert> <Plug>(RepeatDot)
 
 " vim-endwise settings
 " let g:endwise_no_mappings = 1
@@ -1867,21 +1867,6 @@ let g:unite_source_rec_find_args = [
             \ '(', '-type', 'f', '-o', '-type', 'l', ')', '-print' ]
 let g:unite_enable_auto_select = 0
 
-function! InvokeNeoMRU(...)
-    let l:arg = join( a:000, '\\ ' )
-    if ( l:arg != '' )
-        if ! isdirectory( expand( l:arg ) )
-            execute "edit " . l:arg
-        else
-            execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
-        endif
-    else
-        execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
-    endif
-endfunction
-command! -nargs=* -complete=file NeoMRU call InvokeNeoMRU( <f-args> )
-nnoremap <localleader>o :NeoMRU<CR>
-
 " vim-reanimate settings
 set sessionoptions-=options
 let g:reanimate_event_disables = {
@@ -1995,9 +1980,9 @@ let g:committia_min_window_width = 0
 nnoremap <leader>C :Twiggy<CR>
 
 " ctrlsf.vim settings
-nnoremap <leader>g :CtrlSF<Space>
-nnoremap <leader>rg :CtrlSFToggle<CR>
-nnoremap <leader>sg :CtrlSFStop<CR>
+nnoremap <localleader>g :CtrlSF<Space>
+nnoremap <localleader>rg :CtrlSFToggle<CR>
+nnoremap <localleader>sg :CtrlSFStop<CR>
 command! -nargs=1 Search :let @/='\V' . escape(<q-args>, '\\')| normal! n
 let g:ctrlsf_auto_close = {
             \ "normal" : 0,
@@ -2106,6 +2091,7 @@ nnoremap <leader>; :FzfHistory:<CR>
 " nnoremap <leader>p :CocCommand fzf-preview.Yankround<CR>
 nnoremap <leader><localleader>/ :CocCommand fzf-preview.Lines<CR>
 nnoremap <leader><leader>/ :CocCommand fzf-preview.BufferLines<CR>
+nnoremap <leader>g :CocCommand fzf-preview.ProjectGrep<Space>
 
 " fzf.vim settings
 let g:fzf_command_prefix = 'Fzf'
@@ -2224,10 +2210,12 @@ function! InvokeNeoMRU(...)
         if ! isdirectory( expand( l:arg ) )
             execute "edit " . l:arg
         else
-            execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
-        execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        execute "CocCommand fzf-preview.MruFiles"
+        " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
 endfunction
 command! -nargs=* -complete=file NeoMRU call InvokeNeoMRU( <f-args> )
@@ -2240,11 +2228,13 @@ function! InvokeNeoMRUVSplit(...)
             execute "vsplit " . l:arg
         else
             execute "vsplit"
-            execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
         execute "vsplit"
-        execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        execute "CocCommand fzf-preview.MruFiles"
+        " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
 endfunction
 command! -nargs=* -complete=file NeoMRUVSplit call InvokeNeoMRUVSplit( <f-args> )
@@ -2256,11 +2246,13 @@ function! InvokeNeoMRUSplit(...)
             execute "split " . l:arg
         else
             execute "split"
-            execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
         execute "split"
-        execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        execute "CocCommand fzf-preview.MruFiles"
+        " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
 endfunction
 command! -nargs=* -complete=file NeoMRUSplit call InvokeNeoMRUSplit( <f-args> )
@@ -2273,11 +2265,13 @@ function! InvokeNeoMRULeftVSplit(...)
             execute "vsplit " . l:arg
         else
             execute "vsplit"
-            execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
         execute "vsplit"
-        execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        execute "CocCommand fzf-preview.MruFiles"
+        " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
     set splitright
 endfunction
@@ -2291,11 +2285,13 @@ function! InvokeNeoMRUTopSplit(...)
             execute "split " . l:arg
         else
             execute "split"
-            execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
         execute "split"
-        execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        execute "CocCommand fzf-preview.MruFiles"
+        " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
     set splitbelow
 endfunction
@@ -2308,11 +2304,13 @@ function! InvokeNeoMRUTab(...)
             execute "tabnew " . l:arg
         else
             execute "tabnew"
-            execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            " execute "silent! Unite -prompt=Open>\\ \\  directory:" . l:arg . " directory_mru buffer file_mru file/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
         execute "tabnew"
-        execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        execute "CocCommand fzf-preview.MruFiles"
+        " execute "silent! Unite -prompt=Open>\\ \\  directory directory_mru buffer file_mru file/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
 endfunction
 command! -nargs=* -complete=file NeoMRUTab call InvokeNeoMRUTab( <f-args> )
@@ -2323,10 +2321,12 @@ function! InvokeNeoMRURec(...)
         if ! isdirectory( expand( l:arg ) )
             execute "edit " . l:arg
         else
-            execute "silent! Unite -prompt=Open>\\ \\  directory_mru buffer file_mru file_rec/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+            execute "CocCommand fzf-preview.DirectoryFiles " . l:arg
+            " execute "silent! Unite -prompt=Open>\\ \\  directory_mru buffer file_mru file_rec/async:" . l:arg . " file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
         endif
     else
-        execute "silent! Unite -prompt=Open>\\ \\  directory_mru buffer file_mru file_rec/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
+        execute "CocCommand fzf-preview.MruFiles"
+        " execute "silent! Unite -prompt=Open>\\ \\  directory_mru buffer file_mru file_rec/async file/new -start-insert -buffer-name=Open\\ Files\\ and\\ Directories"
     endif
 endfunction
 command! -nargs=* -complete=file NeoMRURec call InvokeNeoMRURec( <f-args> )
@@ -2674,6 +2674,7 @@ endfunction
 
 " vim-fugitive settings
 nnoremap <localleader>dg :Gdiffsplit!<CR>
+let g:fugitive_no_maps = 1
 
 " gv.vim settings
 function! InvokeGVAndMagit()
@@ -3051,9 +3052,9 @@ function! SetHighlight()
     " ShowMotion's highlights
     let s:uname = system("uname -s")
     if s:uname =~ ".*Darwin.*"
-        highlight ShowMotion_SmallMotionGroup ctermbg=8 ctermfg=4
-        highlight ShowMotion_BigMotionGroup ctermbg=8 ctermfg=4
-        highlight ShowMotion_CharSearchGroup ctermbg=8 ctermfg=4
+        highlight ShowMotion_SmallMotionGroup ctermfg=8 ctermbg=4
+        highlight ShowMotion_BigMotionGroup ctermfg=8 ctermbg=4
+        highlight ShowMotion_CharSearchGroup ctermfg=8 ctermbg=4
     else
         highlight ShowMotion_SmallMotionGroup ctermbg=4 ctermfg=8
         highlight ShowMotion_BigMotionGroup ctermbg=4 ctermfg=8
