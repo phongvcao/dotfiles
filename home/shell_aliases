@@ -54,6 +54,7 @@ alias "diff"="_diff"
 alias "ln"="command ln -s -f"
 alias "vi"="vim"
 alias "vimrc"="echo 'y' | command nvim -c 'set nomore' +NeoBundleInstall! +NeoBundleUpdate! +NeoBundleClean! +qall!"
+alias "vimo"="VIM='' command vim"
 alias "echo"="echo -e"
 alias "cgdisk"="sudo cgdisk"
 alias "lsblk"="echo LSBLK:; command lsblk -f; echo; echo DF:; command df -h --output"
@@ -113,9 +114,9 @@ alias "ref"="refresh"
 alias "refresh"="cd ${HOME}; cd -"
 alias "mon"="monitor"
 if [[ "$(uname)" =~ "Linux" ]]; then
-    alias "command_nvim"="VIM=/usr/share/nvim command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
+    alias "command_nvim"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
 elif [[ "$(uname)" =~ "Darwin" ]]; then
-    alias "command_nvim"="VIM=/usr/local/share/nvim command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
+    alias "command_nvim"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
 fi
 
 # Force removal of a package

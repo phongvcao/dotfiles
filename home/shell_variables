@@ -58,11 +58,13 @@ export "FZF_DEFAULT_OPTS"="--layout=reverse --exact --ansi --color=dark,hl:9,hl+
 
 if [[ "$(uname)" =~ "Linux" ]]; then
     export "USR_DIR"="/usr"
-    export "FZF_DEFAULT_COMMAND"="fdfind --type f --type d --type l -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
+    export "VIM"="${USR_DIR}/share/nvim"
+    export "FZF_DEFAULT_COMMAND"="command fdfind --type f --type d --type l -HI --exclude='*.git/' --exec ls -H -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
 elif [[ "$(uname)" =~ "Darwin" ]]; then
     export "ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR"="/usr/local/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/highlighters"
     export "USR_DIR"="/usr/local"
-    export "FZF_DEFAULT_COMMAND"="fd --type d --type f --type l -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
+    export "VIM"="${USR_DIR}/share/nvim"
+    export "FZF_DEFAULT_COMMAND"="command fd --type d --type f --type l -HI --exclude='*.git/' --exec ls -H -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
 fi
 
 export "FZF_DEFAULT_COMMAND_DEFAULT"="${FZF_DEFAULT_COMMAND}"
