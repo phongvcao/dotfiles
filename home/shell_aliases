@@ -112,7 +112,11 @@ alias "finb"="bfs"
 alias "ref"="refresh"
 alias "refresh"="cd ${HOME}; cd -"
 alias "mon"="monitor"
-alias "command_nvim"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
+if [[ "$(uname)" =~ "Linux" ]]; then
+    alias "command_nvim"="VIM=/usr/share/nvim command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
+elif [[ "$(uname)" =~ "Darwin" ]]; then
+    alias "command_nvim"="VIM=/usr/local/share/nvim command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
+fi
 
 # Force removal of a package
 alias "purge"="sudo dpkg --purge --force-all"

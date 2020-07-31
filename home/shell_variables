@@ -37,12 +37,12 @@ export "xkbdir"="/usr/share/X11/xkb/symbols"
 
 # Necessary environment variables
 export "MANWIDTH"=82
-export "VISUAL"="command nvim"
+export "VISUAL"="command_nvim"
 export "P4MERGE"="${HOME}/.dotfiles/home/config/shell/p4merge.sh"
-export "P4DIFF"="command nvim -d -c 'call SetIndentation()'"
-export "P4EDITOR"="command nvim -f -c 'call MaybeInvokeMergeTool()'"
+export "P4DIFF"="command_nvim -d -c 'call SetIndentation()'"
+export "P4EDITOR"="command_nvim -f -c 'call MaybeInvokeMergeTool()'"
 export "EDITOR"="${VISUAL}"
-export "PAGER"="command nvim -c 'PAGER' -"
+export "PAGER"="command_nvim -c 'PAGER' -"
 export "XDG_CONFIG_HOME"="${HOME}/.config"
 export "TMUXINATOR_CONFIG"="${HOME}/.config/tmuxinator"
 export "HISTSIZE"=10000000
@@ -57,11 +57,9 @@ export "GLOBIGNORE"=".:.."
 export "FZF_DEFAULT_OPTS"="--layout=reverse --exact --ansi --color=dark,hl:9,hl+:136,bg+:0,fg+:14,info:5,prompt:33,spinner:108,pointer:226,marker:235,header:33"
 
 if [[ "$(uname)" =~ "Linux" ]]; then
-    export "VIM"="/usr/share/nvim"
     export "USR_DIR"="/usr"
     export "FZF_DEFAULT_COMMAND"="fdfind --type f --type d --type l -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
 elif [[ "$(uname)" =~ "Darwin" ]]; then
-    export "VIM"="/usr/local/share/nvim"
     export "ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR"="/usr/local/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/highlighters"
     export "USR_DIR"="/usr/local"
     export "FZF_DEFAULT_COMMAND"="fd --type d --type f --type l -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
