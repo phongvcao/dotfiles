@@ -57,13 +57,11 @@ export "GLOBIGNORE"=".:.."
 export "FZF_DEFAULT_OPTS"="--layout=reverse --exact --ansi --color=dark,hl:9,hl+:136,bg+:0,fg+:14,info:5,prompt:33,spinner:108,pointer:226,marker:235,header:33"
 
 if [[ "$(uname)" =~ "Linux" ]]; then
-    # export "VIM"="/usr/share/nvim"
-    # export "VIMRUNTIME"="/usr/share/nvim/runtime"
+    export "VIM"="/usr/share/nvim"
     export "USR_DIR"="/usr"
     export "FZF_DEFAULT_COMMAND"="fdfind --type f --type d --type l -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
 elif [[ "$(uname)" =~ "Darwin" ]]; then
-    # export "VIM"="/usr/local/share/nvim"
-    # export "VIMRUNTIME"="/usr/local/share/nvim/runtime"
+    export "VIM"="/usr/local/share/nvim"
     export "ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR"="/usr/local/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/highlighters"
     export "USR_DIR"="/usr/local"
     export "FZF_DEFAULT_COMMAND"="fd --type d --type f --type l -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
