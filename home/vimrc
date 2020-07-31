@@ -65,6 +65,8 @@ Plug 'godlygeek/colorchart', {
             \ 'on' : 'ColorChart' }
 Plug 'Shougo/vimproc.vim', {
             \ 'do' : 'make' }
+Plug 'osyo-manga/vim-reanimate', {
+            \ 'on' :  [ 'ReanimateLoad', 'ReanimateSave' ] }
 " BEGIN: ryanoasis/vim-devicons 
 Plug 'ryanoasis/vim-devicons'
 " END: ryanoasis/vim-devicons
@@ -1755,8 +1757,8 @@ let g:reanimate_event_disables = {
             \ }
 let g:reanimate_save_dir = g:vimPath . '/reanimate/save_dir'
 nnoremap <leader>ss :ReanimateSaveSession<Space>
-nnoremap <leader>sl :call fzf#run(fzf#wrap({'source': 'ls ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateLoadSession', 'options': '--prompt=SessionLoad>' }))<CR>
-nnoremap <leader>sd :call fzf#run(fzf#wrap({'source': 'ls ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateDeleteSession', 'options': '--prompt=SessionDel>' }))<CR>
+nnoremap <leader>sl :call fzf#run(fzf#wrap({'source': 'ls ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateLoadSession', 'options': '--prompt="SessionLoad> "' }))<CR>
+nnoremap <leader>sd :call fzf#run(fzf#wrap({'source': 'ls ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateDeleteSession', 'options': '--prompt="SessionDel> "' }))<CR>
 nnoremap Q :w<CR>:ReanimateSaveSession<CR>:call WriteQuitAll()<CR>
 function! SaveSessionReanimate(...)
     let l:arg = join( a:000, '_' )
@@ -1973,7 +1975,7 @@ function! InvokeFzfPreviewBufferLines()
     CocCommand fzf-preview.BufferLines
 endfunction
 nnoremap <leader>g :FZFRg<Space>
-nnoremap <leader>S :call fzf#run(fzf#wrap({ 'source': 'tac $HOME/.shell_history', 'options': '--prompt "Hist(\$_)"' }))<CR>
+nnoremap <leader>S :call fzf#run(fzf#wrap({ 'source': 'tac $HOME/.shell_history', 'options': '--prompt "Hist(\$_)> "' }))<CR>
 
 " fzf.vim settings
 let g:fzf_command_prefix = 'FZF'
