@@ -1952,8 +1952,7 @@ let g:fzf_preview_use_dev_icons = 0
 " " By default icons are disable when number of results is higher that 5000
 let g:fzf_preview_dev_icons_limit = 5000
 nnoremap <leader>b :CocCommand fzf-preview.Buffers<CR>
-nnoremap <leader>w :CocCommand fzf-preview.AllBuffers<CR>
-nnoremap <leader>t :FZFWindows<CR>
+nnoremap <leader>w :FZFWindows<CR>
 nnoremap <leader>q :CocCommand fzf-preview.Quickfix<CR>
 nnoremap <leader>f :FzfMruFiles<CR> 
 nnoremap <leader>F :FZFFiles<CR> 
@@ -1962,8 +1961,8 @@ nnoremap <leader>m :CocCommand fzf-preview.Bookmarks<CR>
 nnoremap <leader>j :CocCommand fzf-preview.Jumps<CR>
 nnoremap <leader>/ :FZFHistory/<CR>
 nnoremap <leader>c :CocCommand fzf-preview.Changes<CR>
-nnoremap <leader>T :FZFBTags<CR>
-" nnoremap <leader>T :CocCommand fzf-preview.VistaBufferCtags<CR>
+nnoremap <leader>t :FZFBTags<CR>
+nnoremap <leader>T :CocCommand fzf-preview.VistaCtags<CR>
 nnoremap <leader>; :FZFHistory:<CR>
 " nnoremap <leader>p :CocCommand fzf-preview.Yankround<CR>
 nnoremap <leader><localleader>/ :CocCommand fzf-preview.Lines<CR>
@@ -3157,6 +3156,9 @@ augroup CustomAutoCmd
 
     " vim-mrufiles settings
     autocmd SourcePost * call StartFzfMRU()
+
+    " fzf-preview.vim settings
+    autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
     if has('nvim')
         autocmd TermOpen * setlocal nonumber norelativenumber

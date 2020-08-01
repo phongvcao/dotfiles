@@ -118,6 +118,7 @@ if [[ "$(uname)" =~ "Linux" ]]; then
 elif [[ "$(uname)" =~ "Darwin" ]]; then
     alias "command_nvim"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
 fi
+alias "rm"="_rm"
 
 # Force removal of a package
 alias "purge"="sudo dpkg --purge --force-all"
@@ -179,7 +180,6 @@ alias "htop"="command htop --user=\${USER}"
 alias "rtop"="command htop --user=root"
 alias "top"="command htop"
 alias "sxiv"="sxiv -baZ"
-alias "rm"="rm -rf"
 alias "mpv"="mpv --loop=inf"
 alias "disks"="sudo gnome-disks"
 alias "openshot"="rm -rf \${HOME}/.openshot && openshot"

@@ -223,18 +223,18 @@ cd "${CURDIR}"
 function dfs() {
 local filename=""
 if [[ -n $3 ]]; then
-    filename=$(fd "$1" "$2" -HI --type d --type f --type l --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+    filename=$(fd ".*$1.*" "$2" --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
         --group-directories-first --color -A -d {} \; | fzf)
 else
     if [[ -n $2 ]]; then
-        filename=$(fd "$1" "$2" -HI --type d --type f --type l --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+        filename=$(fd ".*$1.*" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
             --group-directories-first --color -A -d {} \; | fzf)
     else
         if [[ -n $1 ]]; then
-            filename=$(fd "$1" . -HI --type d --type f --type l --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+            filename=$(fd ".*$1.*" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
         else
-            filename=$(fd --type f --type l --type d -HI --exclude='*.git/' \
+            filename=$(fd -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; | fzf)
         fi
@@ -252,28 +252,22 @@ fi
 function bfs() {
 local filename=""
 if [[ -n $3 ]]; then
-    filename=$(command bfs "$2" -maxdepth "$3" -mount -type d -type f -type l -iregex ".*$1.*" -not -iwholename '*.git/*' \
+    filename=$(command bfs "$2" -maxdepth "$3" -mount -iname "*$1*" -not -iwholename '*.git/*' \
         -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
         --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
 else
     if [[ -n $2 ]]; then
-        filename=$(command bfs "$2" -mount -type d -type f -type l -iregex ".*$1.*" -not -iwholename '*.git/*' \
+        filename=$(command bfs "$2" -mount -iname "*$1*" -not -iwholename '*.git/*' \
             -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
             --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
     else
         if [[ -n $1 ]]; then
-            filename=$(command bfs . -mount -type d -type f -type l -iregex ".*$1.*" -not -iwholename '*.git/*' \
+            filename=$(command bfs . -mount -iname "*$1*" -not -iwholename '*.git/*' \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
         else
-            filename=$(command bfs . -mount -type f \
-                -exec ls -F -X -L --dereference-command-line-symlink-to-dir -not -iwholename '*.git/*' \
-                --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
-            filename=$(command bfs . -mount -type l \
-                -exec ls -F -X -L --dereference-command-line-symlink-to-dir -not -iwholename '*.git/*' \
-                --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
-            filename=$(command bfs . -mount -type d \
-                -exec ls -F -X -L --dereference-command-line-symlink-to-dir -not -iwholename '*.git/*' \
+            filename=$(command bfs . -mount -not -iwholename '*.git/*' \
+                -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
         fi
     fi
@@ -287,6 +281,18 @@ if [[ -n "${filename}" ]]; then
 fi
 }
 
+function _rm() {
+if [[ -n $1 ]]; then
+    command rm -rf "$1"
+else
+    filename=$(fd -HI --exclude='*.git/' \
+        --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+        --group-directories-first --color -A -d {} \; | fzf)
+    if [[ -n "${filename}" ]]; then
+        command rm -rf "${filename}"
+    fi
+fi
+}
 
 function isAsciiOnly() {
 if [[ $1 = *[![:ascii:]]* ]]; then
