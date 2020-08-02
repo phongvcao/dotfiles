@@ -9,7 +9,6 @@ let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
 
 " Set runtimepath for Neovim
 set runtimepath^=~/.vim
-" let &packpath = &runtimepath
 
 " Source vimrc
 source ~/.vimrc
