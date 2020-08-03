@@ -220,23 +220,33 @@ fi
 cd "${CURDIR}"
 }
 
+function cmd() {
+    if [[ -n "$1" ]]; then
+        eval "command $@"
+    else
+        local cmd_chosen="$(tac ${HOME}/.shell_history | fzf --prompt='Hist($_)> ')"
+        echo "${cmd_chosen}"
+        eval "${cmd_chosen}"
+    fi
+}
+
 function dfs() {
 local filename=""
 if [[ -n $3 ]]; then
     filename=$(fd ".*$1.*" "$2" --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-        --group-directories-first --color -A -d {} \; | fzf)
+        --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
 else
     if [[ -n $2 ]]; then
         filename=$(fd ".*$1.*" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-            --group-directories-first --color -A -d {} \; | fzf)
+            --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
     else
         if [[ -n $1 ]]; then
             filename=$(fd ".*$1.*" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \; | fzf)
+                --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
         else
             filename=$(fd -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \; | fzf)
+                --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
         fi
     fi
 fi
@@ -254,21 +264,21 @@ local filename=""
 if [[ -n $3 ]]; then
     filename=$(command bfs "$2" -maxdepth "$3" -mount -iname "*$1*" -not -iwholename '*.git/*' \
         -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-        --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
+        --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
 else
     if [[ -n $2 ]]; then
         filename=$(command bfs "$2" -mount -iname "*$1*" -not -iwholename '*.git/*' \
             -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-            --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
+            --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
     else
         if [[ -n $1 ]]; then
             filename=$(command bfs . -mount -iname "*$1*" -not -iwholename '*.git/*' \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
+                --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
         else
             filename=$(command bfs . -mount -not -iwholename '*.git/*' \
                 -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                --group-directories-first --color -A -d {} \; 2>/dev/null | fzf)
+                --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
         fi
     fi
 fi
@@ -287,7 +297,7 @@ if [[ -n $1 ]]; then
 else
     filename=$(fd -HI --exclude='*.git/' \
         --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-        --group-directories-first --color -A -d {} \; | fzf)
+        --group-directories-first --color -A -d {} \; | fzf --prompt="(Remove)> ${PWD}/")
     if [[ -n "${filename}" ]]; then
         command rm -rf "${filename}"
     fi
@@ -1327,7 +1337,7 @@ function vim() {
             command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
             -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null"
         cd "$1"
-        fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command_nvim "${fzfResult}"
+        fzfResult="$(command_fzf --prompt="(Vim) ${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command_nvim "${fzfResult}"
         FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND_DEFAULT}"
         cd "${CURDIR}"
     else
@@ -1335,7 +1345,7 @@ function vim() {
             if [[ -d "$1" ]]; then
                 CURDIR="${PWD}"
                 cd "$1"
-                fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command_nvim "${fzfResult}"
+                fzfResult="$(command_fzf --prompt="(Vim) ${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command_nvim "${fzfResult}"
                 cd "${CURDIR}"
                 # command_nvim -c "FzfMRURec $@"
                 # command_nvim
