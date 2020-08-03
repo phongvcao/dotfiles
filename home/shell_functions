@@ -252,8 +252,10 @@ else
 fi
 if [[ -n "${filename}" ]]; then
     if [[ -d "${filename}" ]]; then
+        echo "cd ${filename}"
         cd "${filename}"
     else
+        echo "vim ${filename}"
         command_nvim "${filename}"
     fi
 fi
@@ -284,8 +286,10 @@ else
 fi
 if [[ -n "${filename}" ]]; then
     if [[ -d "${filename}" ]]; then
+        echo "cd ${filename}"
         cd "${filename}"
     else
+        echo "vim ${filename}"
         command_nvim "${filename}"
     fi
 fi
