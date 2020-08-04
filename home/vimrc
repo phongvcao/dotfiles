@@ -1757,8 +1757,8 @@ let g:reanimate_event_disables = {
             \ }
 let g:reanimate_save_dir = g:vimPath . '/reanimate/save_dir'
 nnoremap <leader>ss :ReanimateSaveSession<Space>
-nnoremap <leader>sl :call fzf#run(fzf#wrap({'source': 'ls ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateLoadSession', 'options': '--prompt="SessionLoad> "' }))<CR>
-nnoremap <leader>sd :call fzf#run(fzf#wrap({'source': 'ls ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateDeleteSession', 'options': '--prompt="SessionDel> "' }))<CR>
+nnoremap <leader>sl :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateLoadSession', 'options': '--prompt="SessionLoad> "' }))<CR>
+nnoremap <leader>sd :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateDeleteSession', 'options': '--prompt="SessionDel> "' }))<CR>
 nnoremap Q :w<CR>:ReanimateSaveSession<CR>:call WriteQuitAll()<CR>
 function! SaveSessionReanimate(...)
     let l:arg = join( a:000, '_' )
