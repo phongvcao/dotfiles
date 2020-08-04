@@ -346,7 +346,7 @@ Plug 'hotchpotch/perldoc-vim', {
 " Plugins (Golang)
 Plug 'fatih/vim-go', {
             \ 'for' : [ 'go' ],
-            \ 'do' : ':GoInstallBinaries' }
+            \ 'do' : ':GoUpdateBinaries' }
 
 " Plugins (TypeScript, JavaScript, XML, HTML, CSS)
 Plug 'hotoo/jsgf.vim', {
@@ -1757,8 +1757,8 @@ let g:reanimate_event_disables = {
             \ }
 let g:reanimate_save_dir = g:vimPath . '/reanimate/save_dir'
 nnoremap <leader>ss :ReanimateSaveSession<Space>
-nnoremap <leader>sl :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateLoadSession', 'options': '--prompt="SessionLoad> "' }))<CR>
-nnoremap <leader>sd :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateDeleteSession', 'options': '--prompt="SessionDel> "' }))<CR>
+nnoremap <leader>sl :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateLoadSession', 'options': '--prompt="SessionLoad> "' }))<CR><CR>
+nnoremap <leader>sd :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateDeleteSession', 'options': '--prompt="SessionDel> "' }))<CR><CR>
 nnoremap Q :w<CR>:ReanimateSaveSession<CR>:call WriteQuitAll()<CR>
 function! SaveSessionReanimate(...)
     let l:arg = join( a:000, '_' )

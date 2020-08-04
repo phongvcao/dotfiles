@@ -1358,7 +1358,8 @@ function vim() {
             fi
         else
             # command_nvim -c "FzfMRU"
-            command_nvim -c 'let g:fzf_mrufiles_start = 1'
+            # command_nvim -c 'let g:fzf_mrufiles_start = 1'
+            command_nvim
         fi
     fi
 }
