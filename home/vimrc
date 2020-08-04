@@ -3017,7 +3017,7 @@ augroup CustomAutoCmd
     autocmd BufEnter * :execute 'silent! set modifiable'
 
     " ParenMatch settings
-    autocmd BufEnter * :highlight ParenMatch term=bold cterm=bold ctermfg=1 ctermbg=10 guibg=DarkCyan
+    autocmd BufEnter * :highlight ParenMatch term=bold cterm=bold ctermfg=1 ctermbg=12 guibg=DarkCyan
     autocmd BufEnter * :syntax sync fromstart
 
     " " vim-searchhi settings
