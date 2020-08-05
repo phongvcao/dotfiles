@@ -827,11 +827,12 @@ nnoremap <leader>su :sort ui<CR>
 
 if !has('nvim')
     nnoremap S :set shell=$SHELL<CR>:shell<CR>
+    nnoremap s :FloatermNew<CR>
 else
     tnoremap <C-o> <C-\><C-n>:buffer #<CR>
-    " command! Term :set shell=zsh|:terminal
-    " nnoremap S :Term<CR>:startinsert<CR>
-    nnoremap S :FloatermNew<CR>
+    command! Term :set shell=zsh|:terminal
+    nnoremap S :Term<CR>:startinsert<CR>
+    nnoremap s :FloatermNew<CR>
 endif
 " Scroll both splits in Vim
 nnoremap <localleader>sb :set scrollbind!<CR>
