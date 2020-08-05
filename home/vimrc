@@ -1612,7 +1612,7 @@ let g:coc_global_extensions = [
             \ 'coc-json', 'coc-html', 'coc-css', 'coc-ember', 'coc-java',
             \ 'coc-python', 'coc-highlight', 'coc-angular', 'coc-vimlsp',
             \ 'coc-markdownlint', 'coc-calc', 'coc-tsserver', 'coc-yaml',
-            \ 'coc-snippets', 'coc-fzf-preview' ]
+            \ 'coc-snippets', 'coc-fzf-preview', 'coc-go' ]
 
 " " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 " xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -1771,8 +1771,8 @@ let g:reanimate_event_disables = {
             \ }
 let g:reanimate_save_dir = g:vimPath . '/reanimate/save_dir'
 nnoremap <leader>ss :ReanimateSaveSession<Space>
-nnoremap <leader>sl :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateLoadSession', 'options': '--prompt="SessionLoad> "' }))<CR><CR>
-nnoremap <leader>sd :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateDeleteSession', 'options': '--prompt="SessionDel> "' }))<CR><CR>
+nnoremap <leader>sl :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateLoadSession', 'options': '--prompt="SessionLoad> "' }))<CR>
+nnoremap <leader>sd :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateDeleteSession', 'options': '--prompt="SessionDel> "' }))<CR>
 nnoremap Q :w<CR>:ReanimateSaveSession<CR>:call WriteQuitAll()<CR>
 function! SaveSessionReanimate(...)
     let l:arg = join( a:000, '_' )
