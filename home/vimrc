@@ -1617,7 +1617,9 @@ let g:coc_global_extensions = [
             \ 'coc-markdownlint', 'coc-calc', 'coc-tsserver', 'coc-yaml',
             \ 'coc-snippets', 'coc-fzf-preview', 'coc-go', 'coc-emmet',
             \ 'coc-cmake', 'coc-xml', 'coc-sql', 'coc-sourcekit', 'coc-sh',
-            \ 'coc-floaterm', 'coc-calc' ]
+            \ 'coc-floaterm', 'coc-calc', 'coc-eslint', 'coc-flutter',
+            \ 'coc-stylelint', 'coc-stylelintplus', 'coc-cssmodules',
+            \ 'coc-texlab', 'coc-vetur', 'coc-ecdict' ]
 
 " " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 " xmap <leader>a  <Plug>(coc-codeaction-selected)
