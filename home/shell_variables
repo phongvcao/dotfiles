@@ -37,12 +37,12 @@ export "xkbdir"="/usr/share/X11/xkb/symbols"
 
 # Necessary environment variables
 export "MANWIDTH"=82
-export "VISUAL"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
+export "VISUAL"="command nvim"
 export "P4MERGE"="${HOME}/.dotfiles/home/config/shell/p4merge.sh"
-export "P4DIFF"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"' -d -c 'call SetIndentation()'"
-export "P4EDITOR"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"' -f -c 'call MaybeInvokeMergeTool()'"
+export "P4DIFF"="command nvim -d -c 'call SetIndentation()'"
+export "P4EDITOR"="command nvim -f -c 'call MaybeInvokeMergeTool()'"
 export "EDITOR"="${VISUAL}"
-export "PAGER"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"' -c 'PAGER' -"
+export "PAGER"="command nvim -c 'PAGER' -"
 export "XDG_CONFIG_HOME"="${HOME}/.config"
 export "TMUXINATOR_CONFIG"="${HOME}/.config/tmuxinator"
 export "HISTSIZE"=10000000

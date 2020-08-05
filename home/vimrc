@@ -2012,6 +2012,12 @@ function! InvokeFzfPreviewBufferLines()
         CocCommand fzf-preview.BufferLines
     endif
 endfunction
+
+function! SetFzfPreviewBufferLinesPath()
+    if !exists('g:fzf_preview_bufferlines_path') || g:fzf_preview_bufferlines_path ==# ''
+        let g:fzf_preview_bufferlines_path = expand('%:p:h')
+    endif
+endfunction
 nnoremap <leader>g :FZFRg<Space>
 nnoremap <leader>S :call fzf#run(fzf#wrap({ 'source': 'tac $HOME/.shell_history', 'options': '--prompt "Hist(\$_)> "' }))<CR>
 
@@ -3171,6 +3177,7 @@ augroup CustomAutoCmd
 
     " fzf-preview.vim settings
     autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+    autocmd VimEnter * call SetFzfPreviewBufferLinesPath()
 
     if has('nvim')
         autocmd TermOpen * setlocal nonumber norelativenumber
