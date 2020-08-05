@@ -2137,7 +2137,7 @@ fi
 function ranger() {
 local tempfile='/tmp/chosendir'
 
-EDITOR=vim command ranger --choosedir="$tempfile" "${@:-$(pwd)}" --cmd="set preview_images false"
+EDITOR=nvim command ranger --choosedir="$tempfile" "${@:-$(pwd)}" --cmd="set preview_images false"
 
 test -f "$tempfile" &&
     if [ "$(command cat -- "$tempfile")" != "$(echo -n "$(pwd)")" ]; then
