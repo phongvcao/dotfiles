@@ -30,7 +30,7 @@ else
     " Install missing plugins on startup
     autocmd VimEnter *
                 \ if len( filter( values( g:plugs ), '!isdirectory(v:val.dir)' ) )
-                \ | PlugInstall --sync | PlugUpdate | PlugUpgrade
+                \ | PlugInstall --sync | PlugUpdate --sync | PlugUpgrade
                 \ | endif
 endif
 
