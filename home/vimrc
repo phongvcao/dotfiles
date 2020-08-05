@@ -126,6 +126,7 @@ if has( 'unix' )
     Plug 'wellle/tmux-complete.vim'
 endif
 " END: neoclide/coc.nvim
+Plug 'voldikss/vim-floaterm'
 
 if has( 'unix' )
     Plug 'chrisbra/SudoEdit.vim'
@@ -828,8 +829,9 @@ if !has('nvim')
     nnoremap S :set shell=$SHELL<CR>:shell<CR>
 else
     tnoremap <C-o> <C-\><C-n>:buffer #<CR>
-    command! Term :set shell=zsh|:terminal
-    nnoremap S :Term<CR>:startinsert<CR>
+    " command! Term :set shell=zsh|:terminal
+    " nnoremap S :Term<CR>:startinsert<CR>
+    nnoremap S :FloatermNew<CR>
 endif
 " Scroll both splits in Vim
 nnoremap <localleader>sb :set scrollbind!<CR>
@@ -1612,7 +1614,9 @@ let g:coc_global_extensions = [
             \ 'coc-json', 'coc-html', 'coc-css', 'coc-ember', 'coc-java',
             \ 'coc-python', 'coc-highlight', 'coc-angular', 'coc-vimlsp',
             \ 'coc-markdownlint', 'coc-calc', 'coc-tsserver', 'coc-yaml',
-            \ 'coc-snippets', 'coc-fzf-preview', 'coc-go' ]
+            \ 'coc-snippets', 'coc-fzf-preview', 'coc-go', 'coc-emmet',
+            \ 'coc-cmake', 'coc-xml', 'coc-sql', 'coc-sourcekit', 'coc-sh',
+            \ 'coc-floaterm', 'coc-calc' ]
 
 " " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 " xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -1662,6 +1666,12 @@ nnoremap <silent> <leader>D  :<C-u>CocList diagnostics<CR>
 " nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " " Resume latest coc list
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" vim-floaterm settings
+let g:floaterm_shell = $SHELL
+let g:floaterm_wintitle = v:false
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
 
 " ale settings
 if exists('g:custom_ale_linters')
