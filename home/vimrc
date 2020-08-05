@@ -1673,6 +1673,7 @@ let g:floaterm_shell = $SHELL
 let g:floaterm_wintitle = v:false
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
+highlight FloatermBorder ctermfg=10 ctermbg=8
 
 " ale settings
 if exists('g:custom_ale_linters')
