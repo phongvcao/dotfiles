@@ -1,5 +1,4 @@
 # vim:filetype=zsh
-alias "sudo"="sudo "
 alias "reload"="source \${HOME}/.bashrc"
 alias "install"="sudo pacman-db-upgrade; sudo pacman -S"
 alias "ainstall"="yaourt -S --aur --noconfirm"
