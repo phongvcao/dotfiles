@@ -1488,7 +1488,7 @@ endif
 " ranger.vim settings
 let g:NERDTreeHijackNetrw = 0 " add this line if you use NERDTree
 let g:ranger_replace_netrw = 1 " open ranger when vim open a directory
-nnoremap <localleader>f :Ranger<CR>
+nnoremap F :Ranger<CR>
 
 " bclose.vim settings
 let g:bclose_no_plugin_maps = 1
