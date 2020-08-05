@@ -23,8 +23,8 @@
                         "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"        
                     ]
                 }
-            },
+            }
         }
-    },
-    "diagnostic.displayByAle": true,
+    }
+    "diagnostic.displayByAle": true
 }
