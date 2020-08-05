@@ -55,6 +55,12 @@ Plug 'markgandolfo/nerdtree-fetch.vim', {
 Plug 'liuchengxu/nerdtree-dash', {
             \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
 " " END: scrooloose/nerdtree
+
+" BEGIN: francoiscabrol/ranger.vim
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+" END:francoiscabrol/ranger.vim
+
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-obsession', {
@@ -1475,6 +1481,14 @@ if has("unix")
         let g:WebDevIconsOS = 'Darwin'
     endif
 endif
+
+" ranger.vim settings
+let g:NERDTreeHijackNetrw = 0 " add this line if you use NERDTree
+let g:ranger_replace_netrw = 1 " open ranger when vim open a directory
+nnoremap <localleader>f :Ranger<CR>
+
+" bclose.vim settings
+let g:bclose_no_plugin_maps = 1
 
 " numbers.vim settings
 " nnoremap <localleader>re :NumbersToggle<CR>
@@ -2943,36 +2957,6 @@ function! ClearUndoHistory()
 endfunction
 
 command! ClearUndo call ClearUndoHistory()
-
-" Open Ranger inside Vim
-function! RangeChooser()
-    let temp = tempname()
-    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
-    " with ranger 1.4.2 through 1.5.0 instead.
-    "exec 'silent !ranger --choosefile=' . shellescape(temp)
-    exec 'silent !ranger --choosefiles=' . shellescape(temp)
-    if !filereadable(temp)
-        redraw!
-        " Nothing to read.
-        return
-    endif
-    let names = readfile(temp)
-    if empty(names)
-        redraw!
-        " Nothing to open.
-        return
-    endif
-    " Edit the first item.
-    exec 'edit ' . fnameescape(names[0])
-    " Add any remaning items to the arg list/buffer list.
-    for name in names[1:]
-        exec 'argadd ' . fnameescape(name)
-    endfor
-    redraw!
-endfunction
-
-command! -bar RangerChooser call RangeChooser()
-nnoremap <localleader>f :<C-U>RangerChooser<CR>
 
 function! SetOmnifunc()
     if (&filetype ==# 'css')
