@@ -162,6 +162,14 @@ echo "Installing neovim (node.js extension)"
 sudo npm install -g neovim
 
 #
+# Install neovim-remote
+#
+echo
+echo "Installing neovim-remote"
+command sudo python3 -m pip install neovim-remote
+command sudo python2 -m pip install neovim-remote
+
+#
 # Install ansible
 #
 if [ -z "$(command -v ansible)" ]; then
