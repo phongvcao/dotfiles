@@ -113,7 +113,7 @@ if [ -z "$(command -v pip3)" ]; then
     echo "Installing pip3"
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     command sudo python3 get-pip.py
-    command sudo python2 get-pip.py
+    # command sudo python2 get-pip.py
 fi
 
 #
@@ -121,7 +121,7 @@ fi
 #
 echo
 echo "Installing pynvim"
-command python2 -m pip install pynvim
+# command python2 -m pip install pynvim
 command python3 -m pip install pynvim
 
 #
@@ -132,9 +132,9 @@ echo "Installing pdbpp"
 command sudo python3 -m pip install pdbpp
 command sudo python3 -m pip uninstall --yes pdbpp
 command sudo python3 -m pip install git+https://github.com/pdbpp/pdbpp
-command sudo python2 -m pip install pdbpp
-command sudo python2 -m pip uninstall --yes pdbpp
-command sudo python2 -m pip install git+https://github.com/pdbpp/pdbpp
+# command sudo python2 -m pip install pdbpp
+# command sudo python2 -m pip uninstall --yes pdbpp
+# command sudo python2 -m pip install git+https://github.com/pdbpp/pdbpp
 
 #
 # Install jedi
@@ -143,7 +143,7 @@ if [ -z "$(pip list | command grep -i jedi)" ]; then
     echo
     echo "Installing jedi"
     command sudo python3 -m pip install jedi
-    command sudo python2 -m pip install jedi
+    # command sudo python2 -m pip install jedi
 fi
 
 #
@@ -152,7 +152,7 @@ fi
 echo
 echo "Installing pygments"
 command sudo python3 -m pip install pygments
-command sudo python2 -m pip install pygments
+# command sudo python2 -m pip install pygments
 
 #
 # Install neovim (node.js extension)
@@ -167,7 +167,7 @@ sudo npm install -g neovim
 echo
 echo "Installing neovim-remote"
 command sudo python3 -m pip install neovim-remote
-command sudo python2 -m pip install neovim-remote
+# command sudo python2 -m pip install neovim-remote
 
 #
 # Install ansible
