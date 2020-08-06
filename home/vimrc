@@ -781,8 +781,9 @@ vnoremap <right> <nop>
 
 " Movement keys in command-mode mimicking Bash/Zsh
 " We use Bash/Zsh key bindings because we can only use Ctrl key
-cnoremap <C-k> <up>
-cnoremap <C-j> <down>
+cnoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<up>"
+cnoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<down>"
+
 cnoremap <C-h> <left>
 cnoremap <C-l> <right>
 cnoremap <C-r> <C-w>
