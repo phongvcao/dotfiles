@@ -1934,12 +1934,12 @@ function! SetHighlightCtrlSF()
             " syntax match ctrlsfSearchCancelled /Cancelled./            contained
             " syntax match ctrlsfMatchCount      /\d\+\(\s*matched\)\@=/ contained
             " syntax match ctrlsfFileCount       /\d\+\(\s*files\)\@=/   contained
-        " else
-        "     syntax case match
-        "     syntax match qfLineNr    /[^|]*/  contained contains=qfError
-        "     syntax match qfSeparator /|/      contained nextgroup=qfLineNr
-        "     syntax match qfFileName  /^[^|]*/ nextgroup=qfSeparator
-        "     syntax match qfError     /error/  contained
+            " else
+            "     syntax case match
+            "     syntax match qfLineNr    /[^|]*/  contained contains=qfError
+            "     syntax match qfSeparator /|/      contained nextgroup=qfLineNr
+            "     syntax match qfFileName  /^[^|]*/ nextgroup=qfSeparator
+            "     syntax match qfError     /error/  contained
         endif
     endif
 
@@ -2050,10 +2050,10 @@ nnoremap ot :FzfMRUTab<Space>
 nnoremap <leader>o :execute "FzfMRU ./"<CR>
 
 function! StartFzfMRU()
-  if exists('g:fzf_mrufiles_start') && g:fzf_mrufiles_start ==# 1
-    FzfMruFiles
-  endif
-  let g:fzf_mrufiles_start = 0
+    if exists('g:fzf_mrufiles_start') && g:fzf_mrufiles_start ==# 1
+        FzfMruFiles
+    endif
+    let g:fzf_mrufiles_start = 0
 endfunction
 
 function! InvokeFzfMRU(...)
@@ -2249,28 +2249,28 @@ vmap <C-l> <Plug>MoveBlockRight
 
 " vim-mergetool settings
 function! MaybeInvokeMergeTool()
-  if search('^\(<<<<<<<\|>>>>>>>\|=======\||||||||\)') != 0
-    call SetIndentation()
-    MergetoolStart
-  elseif search('^\(<<<<\|>>>>\|====\)') != 0
-    call SetIndentation()
-    PFShowConflicts
-    exe 'vsplit ' . substitute(expand('%:p'), '\.Yours$', '', 'g')
-    diffthis
-  endif
+    if search('^\(<<<<<<<\|>>>>>>>\|=======\||||||||\)') != 0
+        call SetIndentation()
+        MergetoolStart
+    elseif search('^\(<<<<\|>>>>\|====\)') != 0
+        call SetIndentation()
+        PFShowConflicts
+        exe 'vsplit ' . substitute(expand('%:p'), '\.Yours$', '', 'g')
+        diffthis
+    endif
 endfunction
 
 function QuitMergetool()
-  " If we're in merge mode, exit
-  if get(g:, 'mergetool_in_merge_mode', 0)
-    call mergetool#stop()
-    return
-  endif
+    " If we're in merge mode, exit
+    if get(g:, 'mergetool_in_merge_mode', 0)
+        call mergetool#stop()
+        return
+    endif
 
-  if &diff
-    " Quit diff mode intelligently...
-  endif
-  call WriteQuitAll()
+    if &diff
+        " Quit diff mode intelligently...
+    endif
+    call WriteQuitAll()
 endfunction
 command MergetoolQuit call QuitMergetool()
 
@@ -2467,13 +2467,15 @@ let g:lightline = {
             \   'diffmode': 'CustomLightlineDiffMode'
             \ },
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ], [ 'method', 'modified' ] ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
+            \             [ 'method', 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'diffmode', 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ], [ 'modified' ] ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
+            \             [ 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'diffmode', 'fileformat', 'fileencoding', 'filetype' ] ]
@@ -2522,7 +2524,7 @@ let g:lightline_filename_pattern = {
 function! CustomLightlineFilename()
     let l:filename = system('readlink -f ' . expand('%:p'))
     if l:filename !~ '^/.*'
-      return WebDevIconsGetFileTypeSymbol() . ' '
+        return WebDevIconsGetFileTypeSymbol() . ' '
     endif
     let l:filename = substitute(l:filename, '\n', '', 'g')
     for pattern in keys(g:lightline_filename_pattern)
@@ -3049,7 +3051,7 @@ augroup CustomAutoCmd
     autocmd BufEnter *.shell_* set filetype=zsh
     autocmd BufEnter *.jsp set filetype=html
     autocmd FileType vifm set filetype=vim
-    
+
     " ctrlsf.vim settings
     autocmd VimEnter,BufEnter,BufWinEnter * :call SetHighlightCtrlSF()
     autocmd FileType ctrlsf :call SetHighlightCtrlSF()
@@ -3192,7 +3194,7 @@ augroup CustomAutoCmd
     autocmd VimEnter * call SetFzfPreviewBufferLinesPath()
 
     if has('nvim')
-      autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber | endif
+        autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber | endif
         autocmd TermOpen * setlocal nonumber norelativenumber
         autocmd TermLeave * set shell=bash\ --login
     endif
