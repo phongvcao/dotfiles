@@ -11,8 +11,9 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             zsh git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
             cmake xclip docker curl gpatch htop llvm yarn man-db ripgrep \
-            tavianator/tap/bfs atool unrar zip p7zip glances bat ranger flake8 \
+            tavianator/tap/bfs atool unrar zip p7zip glances ranger flake8 \
             fzf fd neovim
+        # brew install bat
         brew install --HEAD universal-ctags/universal-ctags/universal-ctags
         $(brew --prefix)/opt/fzf/install
         brew cask install vagrant
@@ -31,8 +32,9 @@ else
             wget bash emacs gdb patch m4 make nano python unzip cmake snapd \
             ibus-unikey feh xclip vagrant shutter docker bleachbit gparted bleachbit \
 	        curl htop g++ python-pip python3-pip lldb clang yarn ripgrep bfs \
-	        atool unrar zip libarchive-tools p7zip-full glances bat ranger flake8 \
+	        atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
 	        fzf fd-find neovim
+        # sudo apt-get install -y bat
 	    # NOTE: Also install ungoogled-chromium
         sudo snap install ccls go --classic
         sudo snap install universal-ctags*.snap --dangerous
