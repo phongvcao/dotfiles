@@ -590,7 +590,7 @@ set nojoinspaces
 set fillchars+=vert:│
 set selection=inclusive
 nnoremap <Space>t %
-" nnoremap <leader>P :hardcopy ><Space>
+nnoremap <leader>P :hardcopy ><Space>
 " nnoremap <localleader>ff :set filetype=
 " inoremap <Esc> <nop>
 " vnoremap <Esc> <nop>
@@ -734,7 +734,7 @@ set nolist
 set wrapmargin=0
 set formatoptions+=t
 set pastetoggle=<F12>
-nnoremap <leader>P :set paste<CR>i
+nnoremap P :set paste<CR>i
 set ttyfast
 set undofile
 set undolevels=10000
