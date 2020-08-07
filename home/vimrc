@@ -511,7 +511,6 @@ set hidden
 set ignorecase
 set number
 set re=1
-" set signcolumn=yes
 set hlsearch
 set shellslash
 set autochdir
@@ -2026,8 +2025,12 @@ function! InvokeFzfPreviewBufferLines()
 endfunction
 
 function! SetFzfPreviewBufferLinesPath()
-    if !exists('g:fzf_preview_bufferlines_path') || g:fzf_preview_bufferlines_path ==# ''
-        let g:fzf_preview_bufferlines_path = expand('%:p:h')
+    if (!exists('g:fzf_preview_bufferlines_path') || g:fzf_preview_bufferlines_path ==# '')
+        if expand('%:p') !=# resolve(expand('%:p'))
+            let g:fzf_preview_bufferlines_path = fnamemodify(resolve(expand('%:p')), ':h')
+        else
+            let g:fzf_preview_bufferlines_path = expand('%:p:h')
+        endif
     endif
 endfunction
 nnoremap <leader>g :FZFRg<Space>
