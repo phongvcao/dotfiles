@@ -3192,6 +3192,7 @@ augroup CustomAutoCmd
     autocmd VimEnter * call SetFzfPreviewBufferLinesPath()
 
     if has('nvim')
+      autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber | endif
         autocmd TermOpen * setlocal nonumber norelativenumber
         autocmd TermLeave * set shell=bash\ --login
     endif
