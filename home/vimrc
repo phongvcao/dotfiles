@@ -2045,7 +2045,7 @@ nnoremap ov :FzfMRUSplit<Space>
 nnoremap oh :FzfMRUVSplit<Space>
 nnoremap OV :FzfMRUTopSplit<Space>
 nnoremap OH :FzfMRULeftVSplit<Space>
-nnoremap T :FzfMRUTab<Space>
+nnoremap ot :FzfMRUTab<Space>
 " nnoremap O :FzfMRU<CR>
 nnoremap <leader>o :execute "FzfMRU ./"<CR>
 
