@@ -602,6 +602,11 @@ xnoremap <Esc> <Esc>
 snoremap <Backspace> di
 vnoremap <Backspace> di
 
+nnoremap jk :set nopaste<CR>
+nnoremap Jk :set nopaste<CR> 
+nnoremap jK :set nopaste<CR> 
+nnoremap JK :set nopaste<CR> 
+
 inoremap jk <Esc>l
 inoremap Jk <Esc>l
 inoremap jK <Esc>l
@@ -728,7 +733,8 @@ set linebreak
 set nolist
 set wrapmargin=0
 set formatoptions+=t
-set pastetoggle=,P
+set pastetoggle=<F12>
+nnoremap <leader>P :set paste<CR>i
 set ttyfast
 set undofile
 set undolevels=10000
@@ -2222,11 +2228,11 @@ function! CloseQuickfixWindow()
     endif
 endfunction
 
-nnoremap <C-c> :call CloseQuickfixWindow()<CR>
-inoremap <C-c> <C-c>:call CloseQuickfixWindow()<CR>
-vnoremap <C-c> <C-c>
-snoremap <C-c> <C-c>
-xnoremap <C-c> <C-c>
+nnoremap <C-c> :set nopaste<CR>:call CloseQuickfixWindow()<CR>
+inoremap <C-c> <C-c>:set nopaste<CR>:call CloseQuickfixWindow()<CR>
+vnoremap <C-c> <C-c>:set nopaste<CR>
+snoremap <C-c> <C-c>:set nopaste<CR>
+xnoremap <C-c> <C-c>:set nopaste<CR>
 
 " vim-move settings
 let g:move_map_keys = 0
