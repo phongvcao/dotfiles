@@ -113,6 +113,8 @@ endif
 Plug 'junegunn/vim-peekaboo'
 Plug 'vimlab/split-term.vim', {
             \ 'on' : [ 'Term', 'TTerm', 'VTerm' ] }
+Plug 'voldikss/vim-floaterm', {
+            \ 'on' : [ 'FloatermNew' ] }
 
 if executable('p4')
     " BEGIN: pcaneill/vim-perforce
@@ -128,8 +130,6 @@ if has( 'unix' )
     Plug 'wellle/tmux-complete.vim'
 endif
 " END: neoclide/coc.nvim
-Plug 'voldikss/vim-floaterm', {
-            \ 'on' : [ 'FloatermNew' ] }
 
 if has( 'unix' )
     Plug 'chrisbra/SudoEdit.vim'
@@ -833,7 +833,8 @@ nnoremap <leader>su :sort ui<CR>
 if !has('nvim')
     nnoremap S :set shell=$SHELL<CR>:shell<CR>
 else
-    tnoremap <C-o> <C-\><C-n>:buffer #<CR>
+    tnoremap <C-o> <C-\><C-n>:buffer #<CR>:setlocal nonumber norelativenumber<CR>
+    tnoremap <Esc> <C-\><C-n>:buffer #<CR>:setlocal nonumber norelativenumber<CR>
     nnoremap th :set shell=zsh<CR>:VTerm<CR>
     nnoremap tv :set shell=zsh<CR>:Term<CR>
     nnoremap tt :set shell=zsh<CR>:TTerm<CR>
