@@ -1869,7 +1869,7 @@ let g:yankring_paste_n_bkey =''
 let g:yankring_paste_n_akey =''
 " History larger than 1000 slows YankRing down significantly, and probably
 " isn't needed for vast majority of case. At 10000 history, YankRing is
-" super slow
+" super slow.
 let g:yankring_max_history = 1000
 let g:yankring_max_element_length = 10000000
 let g:yankring_buffer_name = "Yank History"
