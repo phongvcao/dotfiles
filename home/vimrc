@@ -111,7 +111,8 @@ endif
 " END: junegunn/fzf.vim
 
 Plug 'junegunn/vim-peekaboo'
-Plug 'vimlab/split-term.vim'
+Plug 'vimlab/split-term.vim', {
+            \ 'on' : [ 'Term', 'TTerm', 'VTerm' ] }
 
 if executable('p4')
     " BEGIN: pcaneill/vim-perforce
@@ -127,7 +128,8 @@ if has( 'unix' )
     Plug 'wellle/tmux-complete.vim'
 endif
 " END: neoclide/coc.nvim
-Plug 'voldikss/vim-floaterm'
+Plug 'voldikss/vim-floaterm', {
+            \ 'on' : [ 'FloatermNew' ] }
 
 if has( 'unix' )
     Plug 'chrisbra/SudoEdit.vim'
