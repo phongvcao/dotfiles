@@ -63,6 +63,20 @@ cmd Link %{{
     fi
 }}
 map P :Link
+map ; read
+cmap <c-h>
+cmap <c-l>
+cmap <c-j> cmd-history-next
+cmap <c-k> cmd-history-prev
+cmap <c-b> cmd-home
+cmap <c-h> cmd-left
+cmap <c-l> cmd-right
+cmap <c-r> cmd-delete-unix-word
+cmap <c-q> cmd-word-back
+cmap <c-w> cmd-word
+cmap <c-x> cmd-delete
+cmap <c-o> cmd-delete-end
+cmap <c-p> cmd-yank
 
 # define a custom 'open' command
 # This command is called when current file is not a directory. You may want to
