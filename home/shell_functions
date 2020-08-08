@@ -213,7 +213,7 @@ function gitstatus() {
     fi
     command git fetch --all
     if [[ $( command git rev-parse --git-dir ) =~ .git$ ]]; then
-        command nvim -c "MagitFullscreen"
+        command nvim -c "let g:magit_stage_file_mapping = 'sf'" -c "MagitFullscreen"
     else
         command git status -uno 
     fi

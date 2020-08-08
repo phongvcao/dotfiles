@@ -672,7 +672,7 @@ vnoremap e $h
 vnoremap b ^
 vnoremap W b
 vnoremap E e
-nnoremap A I
+nnoremap A :set paste<CR>A
 nnoremap a A
 nnoremap I :set paste<CR>i
 nnoremap i :set nopaste<CR>i
@@ -1671,7 +1671,14 @@ let g:floaterm_shell = $SHELL
 let g:floaterm_wintitle = v:false
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
-nnoremap F :FloatermNew lf<CR>
+nnoremap F :call InvokeTermLF()<CR>
+function! InvokeTermLF()
+    if &filetype ==# 'magit'
+        TTerm lf
+    else
+        FloatermNew lf
+    endif
+endfunction
 
 " ale settings
 if exists('g:custom_ale_linters')
@@ -2580,7 +2587,8 @@ let g:magit_default_show_all_files = 2
 let g:magit_default_fold_level = 1
 let g:magit_show_magit_mapping = '<nop>'
 let g:magit_default_sections = [ 'unstaged', 'staged', 'commit', 'info', 'global_help' ]
-let g:magit_stage_hunk_mapping = '<nop>'
+let g:magit_stage_hunk_mapping = 'sh'
+let g:magit_stage_file_mapping = 'sf'
 
 function! FoldLevelToggle()
     :set foldmethod=indent
