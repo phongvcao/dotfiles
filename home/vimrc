@@ -2580,6 +2580,7 @@ let g:magit_default_show_all_files = 2
 let g:magit_default_fold_level = 1
 let g:magit_show_magit_mapping = '<nop>'
 let g:magit_default_sections = [ 'unstaged', 'staged', 'commit', 'info', 'global_help' ]
+let g:magit_stage_hunk_mapping = '<nop>'
 
 function! FoldLevelToggle()
     :set foldmethod=indent
