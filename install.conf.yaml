@@ -37,6 +37,7 @@
     ~/.config/octave: home/config/octave
     ~/.config/powerline: home/config/powerline
     ~/.config/ranger: home/config/ranger
+    ~/.config/lf: home/config/lf
     ~/.config/selfcontrol: home/config/selfcontrol
     ~/.config/shell: home/config/shell
     ~/.config/Skype: home/config/Skype
