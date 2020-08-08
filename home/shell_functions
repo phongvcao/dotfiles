@@ -1330,27 +1330,27 @@ function vim() {
         FZF_DEFAULT_COMMAND="\
             command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
             -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null"
-                    cd "$1"
-                    fzfResult="$(command_fzf --prompt="(Vim) ${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command_nvim "${fzfResult}"
-                    FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND_DEFAULT}"
-                    cd "${CURDIR}"
-                else
-                    if [[ -n "$1" ]]; then
-                        if [[ -d "$1" ]]; then
-                            CURDIR="${PWD}"
-                            cd "$1"
-                            fzfResult="$(command_fzf --prompt="(Vim) ${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command_nvim "${fzfResult}"
-                            cd "${CURDIR}"
-                            # command_nvim -c "FzfMRURec $@"
-                            # command_nvim
-                        else
-                            command_nvim $@
-                        fi
-                    else
-                        # command_nvim -c "FzfMRU"
-                        # command_nvim -c 'let g:fzf_mrufiles_start = 1'
-                        command_nvim
-                    fi
+        cd "$1"
+        fzfResult="$(command_fzf --prompt="(Vim) ${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command_nvim "${fzfResult}"
+        FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND_DEFAULT}"
+        cd "${CURDIR}"
+    else
+        if [[ -n "$1" ]]; then
+            if [[ -d "$1" ]]; then
+                CURDIR="${PWD}"
+                cd "$1"
+                fzfResult="$(command_fzf --prompt="(Vim) ${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command_nvim "${fzfResult}"
+                cd "${CURDIR}"
+                # command_nvim -c "FzfMRURec $@"
+                # command_nvim
+            else
+                command_nvim $@
+            fi
+        else
+            # command_nvim -c "FzfMRU"
+            # command_nvim -c 'let g:fzf_mrufiles_start = 1'
+            command_nvim
+        fi
     fi
 }
 
