@@ -77,3 +77,4 @@ esac
 export GOPATH="${HOME}/.go"
 export GOPATHORG="${HOME}/.go"
 export GO111MODULE="auto"
+export PATH="${GOPATH}:${PATH}"

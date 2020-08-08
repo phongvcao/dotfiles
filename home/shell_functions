@@ -2141,16 +2141,17 @@ function alarm() {
 
 # Automatically cd into the current ranger directory
 function ranger() {
-    local tempfile='/tmp/chosendir'
-
-    EDITOR=nvim command ranger --choosedir="$tempfile" "${@:-$(pwd)}" --cmd="set preview_images false"
-
-    test -f "$tempfile" &&
-        if [ "$(command cat -- "$tempfile")" != "$(echo -n "$(pwd)")" ]; then
-            cd -- "$(command cat "$tempfile")"
-        fi
-        rm -f -- "$tempfile"
-    }
+    lfcd $@
+# local tempfile='/tmp/chosendir'
+#
+# EDITOR=nvim command ranger --choosedir="$tempfile" "${@:-$(pwd)}" --cmd="set preview_images false"
+#
+# test -f "$tempfile" &&
+#     if [ "$(command cat -- "$tempfile")" != "$(echo -n "$(pwd)")" ]; then
+#         cd -- "$(command cat "$tempfile")"
+#     fi
+#     rm -f -- "$tempfile"
+}
 
 function rrdesktop() {
     rdesktop -X "$(xdotool getactivewindow)" -g 1366x768 "$1"

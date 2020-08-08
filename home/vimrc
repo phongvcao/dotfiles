@@ -56,11 +56,6 @@ Plug 'liuchengxu/nerdtree-dash', {
             \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
 " " END: scrooloose/nerdtree
 
-" BEGIN: francoiscabrol/ranger.vim
-Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim'
-" END:francoiscabrol/ranger.vim
-
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-obsession', {
@@ -78,6 +73,8 @@ Plug 'ryanoasis/vim-devicons'
 " END: ryanoasis/vim-devicons
 Plug 'vim-scripts/YankRing.vim'
 Plug 'pelodelfuego/vim-swoop'
+Plug 'hwrod/interactive-replace', {
+            \ 'on' : [ 'InteractiveReplace' ] }
 Plug 'matze/vim-move'
 Plug 'samoshkin/vim-mergetool', {
             \ 'on' : [ 'MergetoolToggle', 'MergetoolStart' ] }
@@ -1489,13 +1486,6 @@ if has("unix")
     endif
 endif
 
-" ranger.vim settings
-let g:NERDTreeHijackNetrw = 0 " add this line if you use NERDTree
-let g:ranger_replace_netrw = 1 " open ranger when vim open a directory
-let g:ranger_map_keys = 0
-nnoremap <localleader>f :Ranger<CR>
-nnoremap F :FloatermNew ranger<CR>
-
 " bclose.vim settings
 let g:bclose_no_plugin_maps = 1
 
@@ -1681,6 +1671,7 @@ let g:floaterm_shell = $SHELL
 let g:floaterm_wintitle = v:false
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
+nnoremap F :FloatermNew lf<CR>
 
 " ale settings
 if exists('g:custom_ale_linters')
@@ -1770,7 +1761,7 @@ endif
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_default_mapping = 0
-let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar', 'fzf' ]
+let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar', 'fzf', 'floaterm' ]
 
 " Solarized Dark settings
 syntax enable
@@ -2185,7 +2176,7 @@ let g:peekaboo_ins_prefix = '<Insert>'
 
 " vim-swoop settings
 let g:swoopUseDefaultKeyMap = 0
-nnoremap <leader>R :silent! call SwoopMulti()<CR>
+nnoremap R :silent! call SwoopMulti()<CR>
 let g:swoopHighlight = ["hi! SwoopBufferLineHi ctermfg=4 ctermbg=8", "hi! SwoopPatternHi ctermfg=8 ctermbg=3"]
 let g:defaultWinSwoopHeight = 20
 function! FreezeSwoopContext()
@@ -2242,6 +2233,16 @@ inoremap <C-c> <C-c>:set nopaste<CR>:call CloseQuickfixWindow()<CR>
 vnoremap <C-c> <C-c>:set nopaste<CR>
 snoremap <C-c> <C-c>:set nopaste<CR>
 xnoremap <C-c> <C-c>:set nopaste<CR>
+
+" interactive-replace settings
+function! ReplaceInteractively(...)
+    let l:arg = join( a:000, ' ' )
+    let @/ = l:arg
+    setlocal hlsearch
+    InteractiveReplace
+endfunction
+command! -nargs=* ReplaceInteractive call ReplaceInteractively( <f-args> )
+nnoremap <localleader>R :ReplaceInteractive<Space>
 
 " vim-move settings
 let g:move_map_keys = 0
@@ -2943,6 +2944,9 @@ function! SetHighlight()
     highlight MatchTag ctermfg=234 ctermbg=lightblue guifg=#002b36 guibg=lightblue
     highlight SignColumn guibg=#002b36
     highlight SignColumn ctermbg=8
+
+    " interactive-replace settings
+    highlight IntSearchHL ctermfg=8 ctermbg=3
 
     " ShowMotion's highlights
     let s:uname = system("uname -s")

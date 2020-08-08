@@ -234,6 +234,17 @@
 " "             \ 'on' : [ 'BufTimer', 'BufTimerReport' ] }
 " " END: Shougo/unite.vim
 " Plug 'airblade/vim-rooter'
+" " BEGIN: francoiscabrol/ranger.vim
+" Plug 'francoiscabrol/ranger.vim'
+" Plug 'rbgrouleff/bclose.vim'
+" " END:francoiscabrol/ranger.vim
+
+" " ranger.vim settings
+" let g:NERDTreeHijackNetrw = 0 " add this line if you use NERDTree
+" let g:ranger_replace_netrw = 1 " open ranger when vim open a directory
+" let g:ranger_map_keys = 0
+" nnoremap <localleader>f :Ranger<CR>
+" nnoremap F :FloatermNew ranger<CR>
 
 " " vim-rooter settings
 " if exists('g:custom_rooter_targets')
