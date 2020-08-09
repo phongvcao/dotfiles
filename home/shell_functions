@@ -223,22 +223,19 @@ function gitstatus() {
 function dfs() {
     local filename=""
     if [[ -n $3 ]]; then
-        filename=$(fd ".*$1.*" "$2" --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-            --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
-                else
-                    if [[ -n $2 ]]; then
-                        filename=$(fd ".*$1.*" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                            --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
-                                                else
-                                                    if [[ -n $1 ]]; then
-                                                        filename=$(fd ".*$1.*" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                                                            --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
-                                                                                                                else
-                                                                                                                    filename=$(fd -HI --exclude='*.git/' \
-                                                                                                                        --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                                                                                                                        --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
-                                                    fi
-                    fi
+        filename=$(fd ".*$1.*" "$2" --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
+    else
+        if [[ -n $2 ]]; then
+            filename=$(fd ".*$1.*" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
+        else
+            if [[ -n $1 ]]; then
+                filename=$(fd ".*$1.*" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
+            else
+                filename=$(fd -HI --exclude='*.git/' \
+                    --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                    --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
+            fi
+        fi
     fi
     if [[ -n "${filename}" ]]; then
         if [[ -d "${filename}" ]]; then
@@ -254,25 +251,19 @@ function dfs() {
 function bfs() {
     local filename=""
     if [[ -n $3 ]]; then
-        filename=$(command bfs "$2" -maxdepth "$3" -mount -iname "*$1*" -not -iwholename '*.git/*' \
-            -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-            --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
-                else
-                    if [[ -n $2 ]]; then
-                        filename=$(command bfs "$2" -mount -iname "*$1*" -not -iwholename '*.git/*' \
-                            -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                            --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
-                                                else
-                                                    if [[ -n $1 ]]; then
-                                                        filename=$(command bfs . -mount -iname "*$1*" -not -iwholename '*.git/*' \
-                                                            -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                                                            --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
-                                                                                                                else
-                                                                                                                    filename=$(command bfs . -mount -not -iwholename '*.git/*' \
-                                                                                                                        -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                                                                                                                        --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
-                                                    fi
-                    fi
+        filename=$(command bfs "$2" -maxdepth "$3" -mount -iname "*$1*" -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
+    else
+        if [[ -n $2 ]]; then
+            filename=$(command bfs "$2" -mount -iname "*$1*" -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
+        else
+            if [[ -n $1 ]]; then
+                filename=$(command bfs . -mount -iname "*$1*" -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
+            else
+                filename=$(command bfs . -mount -not -iwholename '*.git/*' \
+                    -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                    --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
+            fi
+        fi
     fi
     if [[ -n "${filename}" ]]; then
         if [[ -d "${filename}" ]]; then

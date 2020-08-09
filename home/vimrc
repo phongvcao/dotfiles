@@ -1695,6 +1695,11 @@ let g:floatLf_botleft_border = '└'
 let g:floatLf_botright_border = '┘' 
 let g:floatLf_vertical_border = '│' 
 let g:floatLf_horizontal_border = '─' 
+let g:floatLf_lf_close = 'q'
+let g:floatLf_lf_open = 'oo'
+let g:floatLf_lf_split = 'ov'
+let g:floatLf_lf_vsplit = 'oh'
+let g:floatLf_lf_tab = 'ot'
 
 " ale settings
 if exists('g:custom_ale_linters')
@@ -2794,7 +2799,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " goyo.vim settings
-nnoremap <C-f> :Goyo<CR>
+nnoremap <localleader>F :Goyo<CR>
 let g:goyo_linenr = 1
 let g:goyo_width = '30%'
 let g:goyo_height = '100%'
