@@ -78,6 +78,7 @@ cmap <c-x> cmd-delete
 cmap <c-o> cmd-delete-end
 cmap <c-p> cmd-yank
 map S $$SHELL
+map l $$EDITOR $f
 
 # define a custom 'open' command
 # This command is called when current file is not a directory. You may want to
