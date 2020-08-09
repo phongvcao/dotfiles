@@ -1680,7 +1680,7 @@ function! InvokeTermLF()
     if &filetype ==# 'magit'
         TTerm lf
     else
-        FloatermNew lf
+        exec 'FloatermNew! cd ' . fnamemodify(resolve(expand('%:p')), ':h') . ' ; clear ; lf'
     endif
 endfunction
 
