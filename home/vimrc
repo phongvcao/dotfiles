@@ -833,7 +833,11 @@ else
     nnoremap th :set shell=zsh<CR>:VTerm<CR>
     nnoremap tv :set shell=zsh<CR>:Term<CR>
     nnoremap tt :set shell=zsh<CR>:TTerm<CR>
-    nnoremap S :FloatermNew<CR>
+
+    function InvokeFloatermNew()
+        exec 'FloatermNew! cd ' . fnamemodify(resolve(expand('%:p')), ':h') . ' ; clear'
+    endfunction
+    nnoremap S :call InvokeFloatermNew()<CR>
 endif
 " Scroll both splits in Vim
 nnoremap <localleader>sb :set scrollbind!<CR>
