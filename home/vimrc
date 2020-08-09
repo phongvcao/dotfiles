@@ -54,7 +54,7 @@ Plug 'markgandolfo/nerdtree-fetch.vim', {
             \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
 Plug 'liuchengxu/nerdtree-dash', {
             \ 'on' : [ 'NERDTreeToggle', 'NERDTreeClose', 'NERDTree' ] }
-" " END: scrooloose/nerdtree
+" END: scrooloose/nerdtree
 
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
@@ -1979,7 +1979,7 @@ let g:fzf_preview_quit_map = 1
 " The file name selected by fzf becomes {}
 " let g:fzf_preview_command = 'head -100 {-1}'                       " Not installed bat
 " let g:fzf_preview_command = 'bat --color=never {-1} --plain --number' " Installed bat
-let g:fzf_preview_command = 'cat'
+let g:fzf_preview_command = 'cat --number'
 " Commands used for current file lines
 " let g:fzf_preview_lines_command = 'head -100 {-1}'
 " let g:fzf_preview_lines_command = 'bat --color=never --plain --number'
@@ -3061,7 +3061,7 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight ParenMatch term=bold cterm=bold ctermfg=8 ctermbg=5 guibg=DarkCyan
     autocmd BufEnter * :syntax sync fromstart
 
-    " " vim-searchhi settings
+    " vim-searchhi settings
     autocmd User SearchHiOn AnzuUpdateSearchStatusOutput
     autocmd User SearchHiOff echo g:anzu_no_match_word
 
@@ -3130,7 +3130,7 @@ augroup CustomAutoCmd
     " vim-textobj-sentence settings
     autocmd FileType markdown,html,help :call textobj#sentence#init()
 
-    " " csv.vim settings
+    " csv.vim settings
     " autocmd BufRead,BufNewFile *.csv,*.tsv set filetype=csv
     autocmd BufRead,BufWritePost *.csv,*.tsv :silent! %ArrangeColumn
     autocmd BufWritePre *.csv,*.tsv :silent! %UnArrangeColumn
