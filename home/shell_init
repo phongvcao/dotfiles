@@ -54,10 +54,10 @@ case "${PATH}" in
         ;;
 esac
 
-#
-# Modify $PYTHONPATH
-#
-export PYTHONPATH=${PYTHONPATH}:${PATH}
+# #
+# # Modify $PYTHONPATH
+# #
+# export PYTHONPATH=${PYTHONPATH}:${PATH}
 
 #
 # Modify $MANPATH

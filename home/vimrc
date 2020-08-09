@@ -3230,6 +3230,7 @@ augroup CustomAutoCmd
     " fzf-preview.vim settings
     autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
     autocmd VimEnter * call SetFzfPreviewBufferLinesPath()
+    autocmd FileType fzf setlocal nonumber norelativenumber
 
     if has('nvim')
         autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber | endif
@@ -3239,4 +3240,9 @@ augroup CustomAutoCmd
         autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
         autocmd TermLeave * set shell=bash\ --login
     endif
+
+    " fzf.vim settings
+    " Replace netrw with FZF
+    autocmd VimEnter * silent! autocmd! FileExplorer
+    autocmd VimEnter * if isdirectory(expand("%")) | setlocal nonumber norelativenumber | exec 'FZF' | endif
 augroup END
