@@ -112,6 +112,8 @@ Plug 'vimlab/split-term.vim', {
             \ 'on' : [ 'Term', 'TTerm', 'VTerm' ] }
 Plug 'voldikss/vim-floaterm', {
             \ 'on' : [ 'FloatermNew' ] }
+Plug 'haorenW1025/floatLf-nvim', {
+            \ 'on' : [ 'LfToggle', 'LfToggleCurrentBuf' ] }
 
 if executable('p4')
     " BEGIN: pcaneill/vim-perforce
@@ -1680,9 +1682,19 @@ function! InvokeTermLF()
     if &filetype ==# 'magit'
         TTerm lf
     else
-        exec 'FloatermNew! cd ' . fnamemodify(resolve(expand('%:p')), ':h') . ' ; clear ; lf'
+        LfToggle
     endif
 endfunction
+
+" floatLf-nvim settinngs
+let g:floatLf_autoclose = 1
+let g:floatLf_border = 1
+let g:floatLf_topleft_border = '┌'
+let g:floatLf_topright_border = '┐' 
+let g:floatLf_botleft_border = '└' 
+let g:floatLf_botright_border = '┘' 
+let g:floatLf_vertical_border = '│' 
+let g:floatLf_horizontal_border = '─' 
 
 " ale settings
 if exists('g:custom_ale_linters')
@@ -1772,7 +1784,7 @@ endif
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_default_mapping = 0
-let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar', 'fzf', 'floaterm' ]
+let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar', 'fzf', 'floaterm', 'terminal' ]
 
 " Solarized Dark settings
 syntax enable
@@ -3216,7 +3228,10 @@ augroup CustomAutoCmd
 
     if has('nvim')
         autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber | endif
-        autocmd TermOpen * setlocal nonumber norelativenumber
+
+        " floatLf-nvim settings
+        " fzf-preview.vim settings
+        autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
         autocmd TermLeave * set shell=bash\ --login
     endif
 augroup END
