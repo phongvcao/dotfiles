@@ -249,7 +249,7 @@ bindkey "\v" "" # <Tab> - menu-complete
 bindkey -s "jk" ""
 
 # bindkey '^[[Z' reverse-menu-complete
-export KEYTIMEOUT=10
+export KEYTIMEOUT=30
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins '^?' backward-delete-char 
 bindkey -M viins "^v" yank

@@ -1350,7 +1350,6 @@ function cmd() {
         eval "command $@"
     else
         local cmd_chosen="$(tac ${HOME}/.shell_history | fzf --prompt='Hist($_)> ')"
-        echo "${cmd_chosen}"
         print -z "${cmd_chosen}"
     fi
 }
@@ -1380,7 +1379,6 @@ function tee() {
         printf "===============\n\n\n"
     else
         local cmd_chosen="$(tac ${HOME}/.shell_history | fzf --prompt='Hist($_)> ')"
-        echo "${cmd_chosen}"
         print -z "${cmd_chosen}"
     fi
 }
