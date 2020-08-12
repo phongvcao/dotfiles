@@ -549,7 +549,7 @@ if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
     set clipboard=unnamedplus,unnamed
 else
     if has('$DISPLAY')
-        set clipboard=
+        set clipboard=unnamedplus
     endif
 endif
 set backspace=2
