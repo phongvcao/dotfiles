@@ -474,6 +474,9 @@ call plug#end()
 
 " END: vim-plug
 
+filetype plugin on
+filetype plugin indent on
+
 if filereadable( expand( '$HOME/.custom_vimrc' ) )
     source $HOME/.custom_vimrc
 endif
@@ -539,8 +542,6 @@ set foldmethod=manual
 set foldnestmax=10
 set foldlevel=99
 set foldcolumn=0
-" Only search opening folds
-set modelines=1
 set noswapfile
 
 " +clipboard doesn't work on ssh / mosh connection
@@ -549,7 +550,7 @@ if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
     set clipboard=unnamedplus,unnamed
 else
     if has('$DISPLAY')
-        set clipboard=unnamedplus
+        set clipboard=
     endif
 endif
 set backspace=2
@@ -3132,6 +3133,9 @@ augroup CustomAutoCmd
     " autocmd InsertLeave * :.StripWhitespace
 
     autocmd Syntax * :call SetIndentation()
+
+    " Make sure Vim picks up the vim:filetype= comment on top of file
+    autocmd Syntax * set modeline modelines=5
 
     autocmd BufRead,BufEnter * setlocal colorcolumn=80 textwidth=0
     autocmd FileType,BufEnter * :call SetOmnifunc()
