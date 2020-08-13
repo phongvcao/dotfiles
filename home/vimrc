@@ -2045,13 +2045,16 @@ function! InvokeFzfPreviewBufferLines()
 endfunction
 
 function! SetFzfPreviewBufferLinesPath()
-    if (!exists('g:fzf_preview_bufferlines_path') || g:fzf_preview_bufferlines_path ==# '')
-        if expand('%:p') !=# resolve(expand('%:p'))
-            let g:fzf_preview_bufferlines_path = fnamemodify(resolve(expand('%:p')), ':h')
-        else
-            let g:fzf_preview_bufferlines_path = expand('%:p:h')
-        endif
+    if expand('%:p') !=# resolve(expand('%:p'))
+        let g:fzf_preview_bufferlines_path = fnamemodify(resolve(expand('%:p')), ':h')
     endif
+    " if (!exists('g:fzf_preview_bufferlines_path') || g:fzf_preview_bufferlines_path ==# '')
+    "     if expand('%:p') !=# resolve(expand('%:p'))
+    "         let g:fzf_preview_bufferlines_path = fnamemodify(resolve(expand('%:p')), ':h')
+    "     else
+    "         let g:fzf_preview_bufferlines_path = expand('%:p:h')
+    "     endif
+    " endif
 endfunction
 nnoremap <leader>g :FZFRg<Space>
 nnoremap <leader>S :call fzf#run(fzf#wrap({ 'source': 'tac $HOME/.shell_history', 'options': '--prompt "Hist(\$_)> "' }))<CR>
