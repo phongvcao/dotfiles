@@ -49,6 +49,14 @@ function ping() {
     fi
 }
 
+function path() {
+    if [[ -n "$1" ]]; then
+        command readlink -m "$1"
+    else
+        echo "${PWD}"
+    fi
+}
+
 function settitle() {
     local true_filename="$(command ls | command grep -i $1)"
     ffmpeg -i "${true_filename}" -metadata title="$2" -acodec copy -vcodec copy ".temp_${true_filename}"
