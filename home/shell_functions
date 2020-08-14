@@ -237,7 +237,11 @@ function dfs() {
             filename=$(fd ".*$1.*" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
         else
             if [[ -n $1 ]]; then
-                filename=$(fd ".*$1.*" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
+                if [[ -d "$(readlink -m $1)" ]]; then
+                    filename=$(fd . "$(readlink -m $1)" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> "$(readlink -m $1)"/")
+                else
+                    filename=$(fd ".*$1.*" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
+                fi
             else
                 filename=$(fd -HI --exclude='*.git/' \
                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
@@ -246,7 +250,7 @@ function dfs() {
         fi
     fi
     if [[ -n "${filename}" ]]; then
-        if [[ -d "${filename}" ]]; then
+        if [[ -d "$(readlink -m ${filename})" ]]; then
             echo "cd ${filename}"
             cd "${filename}"
         else
@@ -265,7 +269,11 @@ function bfs() {
             filename=$(command bfs "$2" -mount -iname "*$1*" -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
         else
             if [[ -n $1 ]]; then
-                filename=$(command bfs . -mount -iname "*$1*" -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
+                if [[ -d "$(readlink -m $1)" ]]; then
+                    filename=$(command bfs "$(readlink -m $1)" -mount -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> "$(readlink -m $1)"/")
+                else
+                    filename=$(command bfs . -mount -iname "*$1*" -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
+                fi
             else
                 filename=$(command bfs . -mount -not -iwholename '*.git/*' \
                     -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
