@@ -2501,7 +2501,8 @@ let g:lightline = {
             \   'filename': 'CustomLightlineFilename',
             \   'percent': 'CustomLightlinePercent',
             \   'mode': 'CustomLightlinePercent',
-            \   'diffmode': 'CustomLightlineDiffMode'
+            \   'diffmode': 'CustomLightlineDiffMode',
+            \   'paste': 'CustomLightlinePasteMode',
             \ },
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
@@ -2525,6 +2526,14 @@ let g:lightline = {
             \ }
 
 let g:unite_force_overwrite_statusline = 0
+
+function! CustomLightlinePasteMode()
+    if &paste
+        return ''
+    else
+        return ''
+    endif
+endfunction
 
 function! CustomLightlineDiffMode()
     if get(g:, 'mergetool_in_merge_mode', 0)
