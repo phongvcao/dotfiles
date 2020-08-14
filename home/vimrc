@@ -831,8 +831,8 @@ nnoremap <leader>su :sort ui<CR>
 if !has('nvim')
     nnoremap S :set shell=$SHELL<CR>:shell<CR>
 else
-    tnoremap <C-o> <C-\><C-n>:buffer #<CR>:setlocal nonumber norelativenumber<CR>
-    tnoremap <Esc> <C-\><C-n>:buffer #<CR>:setlocal nonumber norelativenumber<CR>
+    tnoremap <C-o> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
+    tnoremap <Esc> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
     nnoremap th :set shell=zsh<CR>:VTerm<CR>
     nnoremap tv :set shell=zsh<CR>:Term<CR>
     nnoremap tt :set shell=zsh<CR>:TTerm<CR>
