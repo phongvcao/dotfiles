@@ -107,6 +107,7 @@ else
 endif
 " END: junegunn/fzf.vim
 
+Plug 'aymericbeaumet/vim-symlink'
 Plug 'junegunn/vim-peekaboo'
 Plug 'vimlab/split-term.vim', {
             \ 'on' : [ 'Term', 'TTerm', 'VTerm' ] }
@@ -2587,6 +2588,7 @@ endfunction
 function! CustomLightlineFugitive()
     if exists('*FugitiveHead') && &filetype !=# 'ctrlsf'
         set shell=bash
+        let old_pwd = expand('%:p:h')
         let branch = FugitiveHead()
         return branch !=# '' ? '  '.branch : ''
     endif
