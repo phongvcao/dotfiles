@@ -835,6 +835,7 @@ nnoremap _ :silent! q<CR>
 " nnoremap C :silent! w!<CR>:bd<CR>
 nnoremap <leader>su :sort ui<CR>
 
+nnoremap S <nop>
 if !has('nvim')
     nnoremap ss :set shell=$SHELL<CR>:shell<CR>
 else
