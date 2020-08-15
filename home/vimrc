@@ -836,18 +836,18 @@ nnoremap _ :silent! q<CR>
 nnoremap <leader>su :sort ui<CR>
 
 if !has('nvim')
-    nnoremap S :set shell=$SHELL<CR>:shell<CR>
+    nnoremap ss :set shell=$SHELL<CR>:shell<CR>
 else
     tnoremap <C-o> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
     tnoremap <Esc> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
-    nnoremap th :set shell=zsh<CR>:VTerm<CR>
-    nnoremap tv :set shell=zsh<CR>:Term<CR>
-    nnoremap tt :set shell=zsh<CR>:TTerm<CR>
+    nnoremap sh :set shell=zsh<CR>:VTerm<CR>
+    nnoremap sv :set shell=zsh<CR>:Term<CR>
+    nnoremap st :set shell=zsh<CR>:TTerm<CR>
 
     function InvokeFloatermNew()
         exec 'FloatermNew! cd ' . fnamemodify(resolve(expand('%:p')), ':h') . ' ; clear'
     endfunction
-    nnoremap S :call InvokeFloatermNew()<CR>
+    nnoremap ss :call InvokeFloatermNew()<CR>
 endif
 " Scroll both splits in Vim
 nnoremap <localleader>sb :set scrollbind!<CR>
