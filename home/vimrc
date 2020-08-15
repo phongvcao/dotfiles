@@ -2592,9 +2592,13 @@ function! CustomLightlineFugitive()
         set shell=bash
         let branch = FugitiveHead()
         if branch !=# ''
-            let gitdiff = lightline_gitdiff#get_status()
-            if gitdiff !=# ''
-                return '  ' . branch . ' ' . substitute(gitdiff, '\([+-\!]\) \(\d\+\)', '\1\2', 'g') 
+            if exists('*lightline_gitdiff#get_status')
+                let gitdiff = lightline_gitdiff#get_status()
+                if gitdiff !=# ''
+                    return '  ' . branch . ' ' . substitute(gitdiff, '\([+-\!]\) \(\d\+\)', '\1\2', 'g') 
+                else
+                    return '  ' . branch
+                endif
             else
                 return '  ' . branch
             endif
