@@ -458,6 +458,7 @@ Plug 'haya14busa/incsearch-fuzzy.vim'
 
 " BEGIN: itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
+Plug 'macthecadillac/lightline-gitdiff'
 " " Uncomment for generating promptline & tmuxline themes
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
@@ -2589,9 +2590,17 @@ endfunction
 function! CustomLightlineFugitive()
     if exists('*FugitiveHead') && &filetype !=# 'ctrlsf'
         set shell=bash
-        let old_pwd = expand('%:p:h')
         let branch = FugitiveHead()
-        return branch !=# '' ? '  '.branch : ''
+        if branch !=# ''
+            let gitdiff = lightline_gitdiff#get_status()
+            if gitdiff !=# ''
+                return '  ' . branch . ' ' . substitute(gitdiff, '\([+-\!]\) \(\d\+\)', '\1\2', 'g') 
+            else
+                return '  ' . branch
+            endif
+        else
+            return ''
+        endif
     endif
     return ''
 endfunction
