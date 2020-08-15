@@ -107,8 +107,12 @@ else
 endif
 " END: junegunn/fzf.vim
 
+" No lazy-loading for mhinz/vim-signify.
+" It must be started by default
 Plug 'mhinz/vim-signify'
 Plug 'aymericbeaumet/vim-symlink'
+" No lazy-loading for junegunn/vim-peekaboo.
+" It must be enabled by default
 Plug 'junegunn/vim-peekaboo'
 Plug 'vimlab/split-term.vim', {
             \ 'on' : [ 'Term', 'TTerm', 'VTerm' ] }

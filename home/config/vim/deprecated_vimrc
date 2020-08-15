@@ -74,9 +74,6 @@
 "             \ 'on' : [ 'GHActivity', GHDashboard' ] }
 " Plug 'junegunn/limelight.vim', {
 "             \ 'on' : [ 'Limelight' ] }
-" " No lazy-loading for junegunn/vim-peekaboo.
-" " It must be enabled by default
-" Plug 'junegunn/vim-peekaboo'
 " Plug 'junegunn/fzf', {
 "             \ 'do' : g:vimPath . '/bundle/fzf/install --no-key-bindings --no-completion' }
 " Plug 'junegunn/fzf.vim' , {
@@ -113,9 +110,6 @@
 " Plug 'embear/vim-localvimrc', {
 "             \ 'on' : [ 'LocalVimRC', 'LocalVimRCClear' ] }
 " Plug 'Floobits/floobits-vim'
-" No lazy-loading for mhinz/vim-signify.
-" It must be started by default
-" Plug 'mhinz/vim-signify'
 " Plug 'gregsexton/gitv', {
 "             \ 'on_cmd' : 'Gitv',
 "             \ 'depends' : 'vim-fugitive' }
@@ -973,10 +967,6 @@ let g:smartpairs_nextpairs_key = 'q'
 " vim-togglecursor settings
 let g:togglecursor_force = 'xterm'
 let g:togglecursor_default = 'blinking_block'
-
-" vim-signify settings
-let g:signify_vcs_list = [ 'git' ]
-" Change the following color to suit your theme
 
 " Gundo settings
 let g:gundo_width = 30
