@@ -3035,6 +3035,11 @@ function! SetHighlight()
 
     " vim-floaterm settings
     highlight FloatermBorder ctermfg=10 ctermbg=8
+
+    " vim-signify settings
+    highlight SignifySignAdd    ctermfg=2 ctermbg=8 cterm=NONE
+    highlight SignifySignDelete ctermfg=1 ctermbg=8 cterm=NONE 
+    highlight SignifySignChange ctermfg=3 ctermbg=8 cterm=NONE  
 endfunction
 
 function! IsI3Running()
