@@ -111,6 +111,7 @@
     ~/.hushlogin: home/hushlogin
     ~/.local/share/Trash/files: ~/.Trash
     ~/.pdbrc.py: home/pdbrc.py
+    ~/.p10k.zsh: home/p10k.zsh
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
