@@ -25,20 +25,16 @@ else
     sudo iptables-save
 
     # if [ -z "$(command -v ccls)" ]; then
-	    sudo apt-get update -y; sudo apt-get upgrade -y; sudo apt-get dist-upgrade -y
-        sudo apt-get install -y zsh git mosh neofetch ctags nodejs npm \
+	    sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get install -y zsh git mosh neofetch ctags nodejs npm \
             vim-gtk3 tmux llvm less openssh-server coreutils binutils diffutils ed \
             findutils gawk watch patch wdiff rsync indent sed tar grep gzip screen \
             wget bash emacs gdb patch m4 make nano python unzip cmake snapd \
             ibus-unikey feh xclip vagrant shutter docker bleachbit gparted bleachbit \
 	        curl htop g++ python-pip python3-pip lldb clang yarn ripgrep bfs \
 	        atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
-	        fzf fd-find neovim
+	        fzf fd-find neovim && sudo snap install ccls go --classic && sudo snap install universal-ctags*.snap --dangerous && go get -u github.com/gokcehan/lf
         # sudo apt-get install -y bat
 	    # NOTE: Also install ungoogled-chromium
-        sudo snap install ccls go --classic
-        sudo snap install universal-ctags*.snap --dangerous
-        go get -u github.com/gokcehan/lf
     # fi
 
     if [[ -n "${SSH_CLIENT}" ]]; then
