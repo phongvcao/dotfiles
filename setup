@@ -3,7 +3,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
     if [ -z "$(command -v brew)" ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
-    if [ -z "$(command -v ccls)" ]; then
+    # if [ -z "$(command -v ccls)" ]; then
         command sudo chown -R "${whoami}":admin /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
         command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
         brew install ccls mosh coreutils binutils diffutils ed findutils gcc \
@@ -19,12 +19,12 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew cask install vagrant
         brew cask fetch eloston-chromium
         brew cask install eloston-chromium
-    fi
+    # fi
 else
     sudo iptables -I INPUT 1 -p udp --dport 60000:61000 -j ACCEPT
     sudo iptables-save
 
-    if [ -z "$(command -v ccls)" ]; then
+    # if [ -z "$(command -v ccls)" ]; then
 	    sudo apt-get update -y; sudo apt-get upgrade -y; sudo apt-get dist-upgrade -y
         sudo apt-get install -y zsh git mosh neofetch ctags nodejs npm \
             vim-gtk3 tmux llvm less openssh-server coreutils binutils diffutils ed \
@@ -39,7 +39,7 @@ else
         sudo snap install ccls go --classic
         sudo snap install universal-ctags*.snap --dangerous
         go get -u github.com/gokcehan/lf
-    fi
+    # fi
 
     if [[ -n "${SSH_CLIENT}" ]]; then
         sudo apt-get remove -y xsel xclip
