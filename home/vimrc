@@ -646,7 +646,7 @@ onoremap jK <C-c>
 onoremap JK <C-c>
 
 " Yank the whole file
-" nnoremap ggyG ggyG
+nnoremap Y ggyG
 nnoremap GG G
 vnoremap GG G
 xnoremap GG G
@@ -1906,6 +1906,7 @@ let g:yankring_max_history = 1000
 let g:yankring_max_element_length = 10000000
 let g:yankring_buffer_name = "Yank History"
 let g:yankring_manual_clipboard_check = 1
+let g:yankring_n_keys = ''
 nnoremap <leader>p :silent! YRShow<CR>:setlocal wrap relativenumber number<CR>
 nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR>
 xnoremap <silent> p :<C-u>YRPaste '"_dP', 'v'<CR>
