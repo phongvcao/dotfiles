@@ -33,9 +33,9 @@ else
 	        findutils gawk watch patch wdiff rsync indent sed tar grep gzip screen \
 	        wget bash emacs gdb patch m4 make nano python unzip cmake snapd \
 	        ibus-unikey feh xclip vagrant docker bleachbit gparted bleachbit \
-            curl htop g++ python3-pip lldb clang yarn ripgrep bfs \
-            atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
-            fzf fd-find neovim && \
+	        curl htop g++ python3-pip lldb clang yarn ripgrep bfs \
+	        atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
+	        fzf fd-find neovim && \
 	    sudo snap install ccls go --classic && \
 	    sudo snap install universal-ctags*.snap --dangerous && \
 	    go get -u github.com/gokcehan/lf && \
