@@ -246,10 +246,6 @@ bindkey "^y" "" # copy-region-as-kill
 bindkey "^p" "" # yank
 bindkey "\t" "" # <Tab> - menu-complete
 bindkey "\v" "" # <Tab> - menu-complete
-bindkey "^[k" "" # Alt-k
-bindkey "^[j" "" # Alt-j
-bindkey "^[h" "" # Alt-h
-bindkey "^[l" "" # Alt-l
 bindkey -s "jk" ""
 
 # bindkey '^[[Z' reverse-menu-complete
