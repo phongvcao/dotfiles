@@ -850,6 +850,7 @@ else
         exec 'FloatermNew! cd ' . fnamemodify(resolve(expand('%:p')), ':h') . ' ; clear'
     endfunction
     nnoremap ss :call InvokeFloatermNew()<CR>
+    nnoremap <M-s> :FloatermNext<CR>
 endif
 " Scroll both splits in Vim
 nnoremap <localleader>sb :set scrollbind!<CR>
@@ -1897,6 +1898,11 @@ nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
+tnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+tnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+tnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+tnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+tnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 
 " YankRing.vim settings
 let g:yankring_window_height = 30
