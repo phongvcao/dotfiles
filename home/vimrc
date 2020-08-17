@@ -647,7 +647,8 @@ onoremap jK <C-c>
 onoremap JK <C-c>
 
 " Yank the whole file
-nnoremap Y ggyG
+nnoremap Y 100000yy
+nnoremap D 100000dd
 nnoremap GG G
 vnoremap GG G
 xnoremap GG G
