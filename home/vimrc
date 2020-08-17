@@ -291,6 +291,7 @@ Plug 'simeji/winresizer'
 " No lazy-loading for tmux-plugins/vim-tmux-focus-events.
 " It must be started by default
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'christoomey/vim-tmux-navigator'
 " No lazy-loading for Valloric/vim-operator-highlight.
 " It must be started by default
 Plug 'Valloric/vim-operator-highlight'
