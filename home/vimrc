@@ -813,10 +813,10 @@ xnoremap <localleader>p/ "/p
 " nnoremap <leader>X <C-w><C-x>
 nnoremap ye y$
 nnoremap yl ^vg_y$
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 " nnoremap <C-w> <C-w>w
 function WriteQuitAll()
     if expand('%p') != ''
@@ -1890,6 +1890,13 @@ command! -nargs=* ProfilerStop call StopProfileVim()
 
 " vim-dict settings
 nnoremap <leader>d :Dict<Space>
+
+" vim-tmux-navigator settings
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 
 " YankRing.vim settings
 let g:yankring_window_height = 30
