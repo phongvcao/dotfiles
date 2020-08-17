@@ -813,6 +813,11 @@ xnoremap <localleader>p/ "/p
 " nnoremap <leader>X <C-w><C-x>
 nnoremap ye y$
 nnoremap yl ^vg_y$
+nnoremap <C-h> <nop>
+nnoremap <C-j> <nop>
+nnoremap <C-k> <nop>
+nnoremap <C-l> <nop>
+nnoremap <C-w> <nop>
 " nnoremap <C-h> <C-w>h
 " nnoremap <C-j> <C-w>j
 " nnoremap <C-k> <C-w>k
@@ -841,7 +846,8 @@ if !has('nvim')
     nnoremap ss :set shell=$SHELL<CR>:shell<CR>
 else
     tnoremap <C-o> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
-    tnoremap <Esc> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
+    " tnoremap <Esc> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
+    tnoremap <M-c> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
     nnoremap sh :set shell=zsh<CR>:VTerm<CR>
     nnoremap sv :set shell=zsh<CR>:Term<CR>
     nnoremap st :set shell=zsh<CR>:TTerm<CR>
@@ -1683,6 +1689,9 @@ nnoremap <silent> <leader>D  :<C-u>CocList diagnostics<CR>
 " " Resume latest coc list
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+" split-term.vim settings
+let g:disable_key_mappings = 1
+
 " vim-floaterm settings
 let g:floaterm_shell = $SHELL
 let g:floaterm_wintitle = v:false
@@ -1893,16 +1902,31 @@ command! -nargs=* ProfilerStop call StopProfileVim()
 nnoremap <leader>d :Dict<Space>
 
 " vim-tmux-navigator settings
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
-tnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-tnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-tnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-tnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-tnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_disable_when_zoomed = 1 
+nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <M-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <M-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <M-l> :TmuxNavigateRight<CR>
+nnoremap <silent> <M-\> :TmuxNavigatePrevious<CR>
+
+inoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>
+inoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>
+inoremap <silent> <M-k> <Esc>:TmuxNavigateUp<CR>
+inoremap <silent> <M-l> <Esc>:TmuxNavigateRight<CR>
+inoremap <silent> <M-\> <Esc>:TmuxNavigatePrevious<CR>
+
+cnoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>
+cnoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>
+cnoremap <silent> <M-k> <Esc>:TmuxNavigateUp<CR>
+cnoremap <silent> <M-l> <Esc>:TmuxNavigateRight<CR>
+cnoremap <silent> <M-\> <Esc>:TmuxNavigatePrevious<CR>
+
+tnoremap <silent> <M-h> <C-\><C-n>:TmuxNavigateLeft<CR>
+tnoremap <silent> <M-j> <C-\><C-n>:TmuxNavigateDown<CR>
+tnoremap <silent> <M-k> <C-\><C-n>:TmuxNavigateUp<CR>
+tnoremap <silent> <M-l> <C-\><C-n>:TmuxNavigateRight<CR>
+tnoremap <silent> <M-\> <C-\><C-n>:TmuxNavigatePrevious<CR>
 
 " YankRing.vim settings
 let g:yankring_window_height = 30
@@ -3294,6 +3318,7 @@ augroup CustomAutoCmd
 
     if has('nvim')
         autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber | endif
+        autocmd BufEnter * if &buftype ==# 'terminal' | startinsert | endif
 
         " floatLf-nvim settings
         " fzf-preview.vim settings
