@@ -1905,11 +1905,11 @@ nnoremap <leader>d :Dict<Space>
 " vim-tmux-navigator settings
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_disable_when_zoomed = 1 
-nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
-nnoremap <silent> <M-j> :TmuxNavigateDown<CR>
-nnoremap <silent> <M-k> :TmuxNavigateUp<CR>
-nnoremap <silent> <M-l> :TmuxNavigateRight<CR>
-nnoremap <silent> <M-\> :TmuxNavigatePrevious<CR>
+nnoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>
+nnoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>
+nnoremap <silent> <M-k> <Esc>:TmuxNavigateUp<CR>
+nnoremap <silent> <M-l> <Esc>:TmuxNavigateRight<CR>
+nnoremap <silent> <M-\> <Esc>:TmuxNavigatePrevious<CR>
 
 inoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>
 inoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>
