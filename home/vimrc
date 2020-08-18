@@ -843,6 +843,7 @@ nnoremap _ :silent! q<CR>
 nnoremap <leader>su :sort ui<CR>
 
 nnoremap S <nop>
+
 if !has('nvim')
     nnoremap ss :set shell=$SHELL<CR>:shell<CR>
 else
@@ -852,7 +853,6 @@ else
     nnoremap sh :set shell=zsh<CR>:VTerm<CR>
     nnoremap sv :set shell=zsh<CR>:Term<CR>
     nnoremap st :set shell=zsh<CR>:TTerm<CR>
-
     function InvokeFloatermNew()
         exec 'FloatermNew! cd ' . fnamemodify(resolve(expand('%:p')), ':h') . ' ; clear'
     endfunction
@@ -1923,11 +1923,13 @@ cnoremap <silent> <M-k> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateUp<CR>
 cnoremap <silent> <M-l> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateRight<CR>
 cnoremap <silent> <M-\> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigatePrevious<CR>
 
-tnoremap <silent> <M-h> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateLeft<CR>
-tnoremap <silent> <M-j> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateDown<CR>
-tnoremap <silent> <M-k> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateUp<CR>
-tnoremap <silent> <M-l> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateRight<CR>
-tnoremap <silent> <M-\> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigatePrevious<CR>
+if has('nvim')
+    tnoremap <silent> <M-h> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateLeft<CR>
+    tnoremap <silent> <M-j> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateDown<CR>
+    tnoremap <silent> <M-k> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateUp<CR>
+    tnoremap <silent> <M-l> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateRight<CR>
+    tnoremap <silent> <M-\> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigatePrevious<CR>
+endif
 
 " YankRing.vim settings
 let g:yankring_window_height = 30
@@ -3320,6 +3322,7 @@ augroup CustomAutoCmd
     if has('nvim')
         autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber | endif
         autocmd BufEnter,FocusGained * if &buftype ==# 'terminal' && (!exists('b:terminal_insert') || b:terminal_insert ==# 1) | startinsert | endif
+        autocmd TermEnter * if &buftype ==# 'terminal' | nnoremap <buffer> <CR> i<CR> | endif
 
         " floatLf-nvim settings
         " fzf-preview.vim settings
