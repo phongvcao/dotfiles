@@ -2095,9 +2095,9 @@ endfunction
 function! SetFzfPreviewBufferLinesPath()
     if expand('%:p') !=# resolve(expand('%:p'))
         let g:fzf_preview_bufferlines_path = fnamemodify(resolve(expand('%:p')), ':h')
-    " else
-    "     " This may not play well with symlinks, but otherwise things would break
-    "     let g:fzf_preview_bufferlines_path = expand('%:p:h')
+    else
+        " This may not play well with symlinks, but otherwise things would break
+        let g:fzf_preview_bufferlines_path = expand('%:p:h')
     endif
     " if (!exists('g:fzf_preview_bufferlines_path') || g:fzf_preview_bufferlines_path ==# '')
     "     if expand('%:p') !=# resolve(expand('%:p'))
