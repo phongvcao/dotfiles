@@ -1905,29 +1905,29 @@ nnoremap <leader>d :Dict<Space>
 " vim-tmux-navigator settings
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_disable_when_zoomed = 1 
-nnoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>
-nnoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>
-nnoremap <silent> <M-k> <Esc>:TmuxNavigateUp<CR>
-nnoremap <silent> <M-l> <Esc>:TmuxNavigateRight<CR>
-nnoremap <silent> <M-\> <Esc>:TmuxNavigatePrevious<CR>
+nnoremap <silent> <M-h> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateLeft<CR>
+nnoremap <silent> <M-j> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateDown<CR>
+nnoremap <silent> <M-k> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateUp<CR>
+nnoremap <silent> <M-l> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateRight<CR>
+nnoremap <silent> <M-\> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigatePrevious<CR>
 
-inoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>
-inoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>
-inoremap <silent> <M-k> <Esc>:TmuxNavigateUp<CR>
-inoremap <silent> <M-l> <Esc>:TmuxNavigateRight<CR>
-inoremap <silent> <M-\> <Esc>:TmuxNavigatePrevious<CR>
+inoremap <silent> <M-h> <Esc>:let b:terminal_insert = 1<CR>:TmuxNavigateLeft<CR>
+inoremap <silent> <M-j> <Esc>:let b:terminal_insert = 1<CR>:TmuxNavigateDown<CR>
+inoremap <silent> <M-k> <Esc>:let b:terminal_insert = 1<CR>:TmuxNavigateUp<CR>
+inoremap <silent> <M-l> <Esc>:let b:terminal_insert = 1<CR>:TmuxNavigateRight<CR>
+inoremap <silent> <M-\> <Esc>:let b:terminal_insert = 1<CR>:TmuxNavigatePrevious<CR>
 
-cnoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>
-cnoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>
-cnoremap <silent> <M-k> <Esc>:TmuxNavigateUp<CR>
-cnoremap <silent> <M-l> <Esc>:TmuxNavigateRight<CR>
-cnoremap <silent> <M-\> <Esc>:TmuxNavigatePrevious<CR>
+cnoremap <silent> <M-h> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateLeft<CR>
+cnoremap <silent> <M-j> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateDown<CR>
+cnoremap <silent> <M-k> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateUp<CR>
+cnoremap <silent> <M-l> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateRight<CR>
+cnoremap <silent> <M-\> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigatePrevious<CR>
 
-tnoremap <silent> <M-h> <C-\><C-n>:TmuxNavigateLeft<CR>
-tnoremap <silent> <M-j> <C-\><C-n>:TmuxNavigateDown<CR>
-tnoremap <silent> <M-k> <C-\><C-n>:TmuxNavigateUp<CR>
-tnoremap <silent> <M-l> <C-\><C-n>:TmuxNavigateRight<CR>
-tnoremap <silent> <M-\> <C-\><C-n>:TmuxNavigatePrevious<CR>
+tnoremap <silent> <M-h> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateLeft<CR>
+tnoremap <silent> <M-j> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateDown<CR>
+tnoremap <silent> <M-k> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateUp<CR>
+tnoremap <silent> <M-l> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateRight<CR>
+tnoremap <silent> <M-\> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigatePrevious<CR>
 
 " YankRing.vim settings
 let g:yankring_window_height = 30
@@ -3319,7 +3319,7 @@ augroup CustomAutoCmd
 
     if has('nvim')
         autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber | endif
-        " autocmd BufEnter,BufWinEnter * if &buftype ==# 'terminal' | startinsert | endif
+        autocmd BufEnter,FocusGained * if &buftype ==# 'terminal' && (!exists('b:terminal_insert') || b:terminal_insert ==# 1) | startinsert | endif
 
         " floatLf-nvim settings
         " fzf-preview.vim settings
