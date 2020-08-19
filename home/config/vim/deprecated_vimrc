@@ -230,8 +230,10 @@
 " Plug 'airblade/vim-rooter'
 " " BEGIN: francoiscabrol/ranger.vim
 " Plug 'francoiscabrol/ranger.vim'
-" Plug 'rbgrouleff/bclose.vim'
 " " END:francoiscabrol/ranger.vim
+
+" bclose.vim settings
+let g:bclose_no_plugin_maps = 1
 
 " " ranger.vim settings
 " let g:NERDTreeHijackNetrw = 0 " add this line if you use NERDTree

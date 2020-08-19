@@ -1512,9 +1512,6 @@ if has("unix")
     endif
 endif
 
-" bclose.vim settings
-let g:bclose_no_plugin_maps = 1
-
 " numbers.vim settings
 " nnoremap <localleader>re :NumbersToggle<CR>
 let g:numbers_exclude = [ 'tagbar', 'gundo', 'vimshell', 'w3m',
@@ -1635,13 +1632,14 @@ else
 endif
 let g:coc_global_extensions = [
             \ 'coc-json', 'coc-html', 'coc-css', 'coc-ember', 'coc-java',
-            \ 'coc-python', 'coc-highlight', 'coc-angular', 'coc-vimlsp',
-            \ 'coc-markdownlint', 'coc-calc', 'coc-tsserver', 'coc-yaml',
-            \ 'coc-snippets', 'coc-fzf-preview', 'coc-go', 'coc-emmet',
-            \ 'coc-cmake', 'coc-xml', 'coc-sql', 'coc-sourcekit', 'coc-sh',
-            \ 'coc-floaterm', 'coc-calc', 'coc-eslint', 'coc-flutter',
-            \ 'coc-stylelint', 'coc-stylelintplus', 'coc-cssmodules',
-            \ 'coc-texlab', 'coc-vetur', 'coc-ecdict' ]
+            \ 'coc-python', 'coc-angular', 'coc-vimlsp', 'coc-markdownlint',
+            \ 'coc-tsserver', 'coc-yaml', 'coc-snippets', 'coc-fzf-preview',
+            \ 'coc-go', 'coc-emmet', 'coc-cmake', 'coc-xml', 'coc-sql',
+            \ 'coc-sourcekit', 'coc-sh', 'coc-floaterm', 'coc-eslint',
+            \ 'coc-flutter', 'coc-stylelint', 'coc-stylelintplus',
+            \ 'coc-cssmodules', 'coc-texlab', 'coc-vetur' ]
+" let g:coc_global_extensions = [
+"             \ 'coc-highlight', 'coc-calc', 'coc-ecdict',  ]
 
 " " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 " xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -1966,7 +1964,29 @@ let g:committia_min_window_width = 0
 nnoremap <leader>C :Twiggy<CR>
 
 " ctrlsf.vim settings
-nnoremap <localleader>g :CtrlSF<Space>
+function! InvokeCtrlSF(...)
+    if a:0 >= 3
+        let l:file_extensions = a:3
+    endif
+
+    if a:0 >= 2
+        let l:path = resolve(fnamemodify(resolve(expand('%:p')), ':h') . '/' . a:2)
+        if isdirectory(l:path)
+            if exists('l:file_extensions')
+                execute "CtrlSF -G *{" . l:file_extensions . "} '" . a:1 . "' " . a:2
+            else
+                execute "CtrlSF '" . a:1 . "' " . a:2
+            endif
+        elseif !filereadable(l:path)
+            let l:file_extensions = a:2
+            execute "CtrlSF -G *{" . l:file_extensions . "} '" . a:1 . "'"
+        endif
+    elseif a:0 >= 1
+        execute "CtrlSF '" . a:1 . "'"
+    endif
+endfunction
+command! -nargs=* -complete=file CtrlSFRg call InvokeCtrlSF( <f-args> )
+nnoremap <localleader>g :CtrlSFRg<Space>
 nnoremap <localleader>rg :CtrlSFToggle<CR>
 nnoremap <localleader>sg :CtrlSFStop<CR>
 command! -nargs=1 Search :let @/='\V' . escape(<q-args>, '\\')| normal! n
@@ -2112,7 +2132,46 @@ function! SetFzfPreviewBufferLinesPath()
     "     endif
     " endif
 endfunction
-nnoremap <leader>g :FZFRg<Space>
+
+function! GetFzfRgCommand(...)
+    let l:type_adds = ""
+    let l:types = ""
+    let l:globs = ""
+    if a:0 >= 3
+        let l:file_extensions = split(a:3, ",")
+        for file_extension in l:file_extensions
+            let l:type_adds = " --type-add '" . file_extension . ":*." . file_extension . "'" . l:type_adds
+            let l:types = " --type " . file_extension . l:types
+            let l:globs = "\\*{" . a:3 . "}"
+        endfor
+    endif
+
+    if a:0 >= 2
+        let l:path = resolve(fnamemodify(resolve(expand('%:p')), ':h') . '/' . a:2)
+        if isdirectory(l:path)
+            return "rg --column --line-number --no-heading --color=always --smart-case " . l:type_adds . " " . l:types . " -g " . l:globs . " -- " . a:1 . " " . a:2
+        elseif !filereadable(l:path)
+            let l:file_extensions = split(a:2, ",")
+            for file_extension in l:file_extensions
+                let l:type_adds = " --type-add '" . file_extension . ":*." . file_extension . "'" . l:type_adds
+                let l:types = " --type " . file_extension . l:types
+                let l:globs = "\\*{" . a:3 . "}"
+            endfor
+            return "rg --column --line-number --no-heading --color=always --smart-case " . l:type_adds . " " . l:types . " -g " . l:globs . " -- " . a:1 . " " . a:2
+        endif
+    elseif a:0 >= 1
+        return "rg --column --line-number --no-heading --color=always --smart-case -- " . a:1
+    endif
+endfunction
+command! -bang -nargs=* FzfRg
+            \ call fzf#vim#grep(GetFzfRgCommand( <f-args> ), 1, fzf#vim#with_preview(), <bang>0)
+" command! -bang -nargs=* FzfRg
+"             \ call fzf#vim#grep(
+"             \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+"             \   fzf#vim#with_preview(), <bang>0)
+
+" nnoremap <leader>g :FZFRg<Space>
+nnoremap <leader>g :FzfRg<Space>
 nnoremap <leader>S :call fzf#run(fzf#wrap({ 'source': 'tac $HOME/.shell_history', 'options': '--prompt "Hist(\$_)> "' }))<CR>
 
 " fzf.vim settings
@@ -2624,9 +2683,18 @@ let g:lightline_filename_pattern = {
             \ '^' . $HOME: '~',
             \ }
 function! CustomLightlineFilename()
+    if exists('b:custom_lightline_filename')
+        return b:custom_lightline_filename
+    endif
+
+    if !exists('b:webdev_filetype_symbol')
+        let b:webdev_filetype_symbol = WebDevIconsGetFileTypeSymbol()
+    endif
+
     let l:filename = system('readlink -f ' . expand('%:p'))
     if l:filename !~ '^/.*'
-        return WebDevIconsGetFileTypeSymbol() . ' '
+        let b:custom_lightline_filename = b:webdev_filetype_symbol . ' ' 
+        return b:custom_lightline_filename
     endif
     let l:filename = substitute(l:filename, '\n', '', 'g')
     for pattern in keys(g:lightline_filename_pattern)
@@ -2637,37 +2705,50 @@ function! CustomLightlineFilename()
             let l:filename = substitute(l:filename, pattern, g:custom_lightline_filename_pattern[pattern], 'g')
         endfor
     endif
-    return WebDevIconsGetFileTypeSymbol() . ' ' . l:filename
+    let b:custom_lightline_filename = b:webdev_filetype_symbol . ' ' . l:filename
+    return b:custom_lightline_filename
 endfunction
 
 function! CustomLightlineFugitive()
-    if exists('*FugitiveHead') && &filetype !=# 'ctrlsf'
-        set shell=bash
-        let branch = FugitiveHead()
-        if branch !=# ''
-            if exists('*lightline_gitdiff#get_status')
-                let gitdiff = lightline_gitdiff#get_status()
-                if gitdiff !=# ''
-                    return '  ' . branch . ' ' . substitute(gitdiff, '\([+-\!]\) \(\d\+\)', '\1\2', 'g') 
-                else
-                    return '  ' . branch
-                endif
+    if !exists('b:custom_lightline_fugitive_branch')
+        if exists('*FugitiveHead') && &filetype !=# 'ctrlsf'
+            let b:custom_lightline_fugitive_branch = FugitiveHead()
+        else
+            let b:custom_lightline_fugitive_branch = ''
+        end
+    endif
+
+    set shell=bash
+    if b:custom_lightline_fugitive_branch !=# ''
+        if exists('*lightline_gitdiff#get_status')
+            let gitdiff = lightline_gitdiff#get_status()
+            if gitdiff !=# ''
+                let b:custom_lightline_fugitive = '  ' . b:custom_lightline_fugitive_branch . ' ' . substitute(gitdiff, '\([+-\!]\) \(\d\+\)', '\1\2', 'g') 
             else
-                return '  ' . branch
+                let b:custom_lightline_fugitive = '  ' . b:custom_lightline_fugitive_branch 
             endif
         else
-            return ''
+            let b:custom_lightline_fugitive = '  ' . b:custom_lightline_fugitive_branch 
         endif
+    else
+        let b:custom_lightline_fugitive = ''
     endif
-    return ''
+
+    return b:custom_lightline_fugitive
 endfunction
 
 function! CustomLightlineFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+    if !exists('b:webdev_filetype_symbol')
+        let b:webdev_filetype_symbol = WebDevIconsGetFileTypeSymbol()
+    endif
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . b:webdev_filetype_symbol : 'no ft') : ''
 endfunction
 
 function! CustomLightlineFileformat()
-    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+    if !exists('b:webdev_fileformat_symbol')
+        let b:webdev_fileformat_symbol = WebDevIconsGetFileFormatSymbol()
+    endif
+    return winwidth(0) > 70 ? (&fileformat . ' ' . b:webdev_fileformat_symbol) : ''
 endfunction
 
 " vim-fugitive settings
@@ -3333,7 +3414,7 @@ augroup CustomAutoCmd
         " autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
         autocmd TermOpen * setlocal filetype=terminal
         autocmd TermLeave * set shell=bash\ --login
-        autocmd TermClose * if &filetype !=# 'floaterm' | bd! | endif
+        autocmd TermClose * if &filetype !=# 'floaterm' && &filetype !=# 'fzf' | bd! | endif
     endif
 
     " vim-floaterm settings
