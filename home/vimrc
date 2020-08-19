@@ -3334,6 +3334,9 @@ augroup CustomAutoCmd
         autocmd TermLeave * set shell=bash\ --login
     endif
 
+    " vim-floaterm settings
+    autocmd FileType floaterm setlocal number relativenumber scrollback=100000
+
     " fzf.vim settings
     " Replace netrw with FZF
     autocmd VimEnter * silent! autocmd! FileExplorer
