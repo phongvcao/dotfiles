@@ -1973,9 +1973,9 @@ function! InvokeCtrlSF(...)
         let l:path = resolve(fnamemodify(resolve(expand('%:p')), ':h') . '/' . a:2)
         if isdirectory(l:path)
             if exists('l:file_extensions')
-                execute "CtrlSF -G *{" . l:file_extensions . "} '" . a:1 . "' " . a:2
+                execute "CtrlSF -G *{" . l:file_extensions . "} '" . a:1 . "' " . l:path
             else
-                execute "CtrlSF '" . a:1 . "' " . a:2
+                execute "CtrlSF '" . a:1 . "' " . l:path
             endif
         elseif !filereadable(l:path)
             let l:file_extensions = a:2
@@ -2142,22 +2142,22 @@ function! GetFzfRgCommand(...)
         for file_extension in l:file_extensions
             let l:type_adds = " --type-add '" . file_extension . ":*." . file_extension . "'" . l:type_adds
             let l:types = " --type " . file_extension . l:types
-            let l:globs = "\\*{" . a:3 . "}"
+            let l:globs = " -g \\*{" . a:3 . "}"
         endfor
     endif
 
     if a:0 >= 2
         let l:path = resolve(fnamemodify(resolve(expand('%:p')), ':h') . '/' . a:2)
         if isdirectory(l:path)
-            return "rg --column --line-number --no-heading --color=always --smart-case " . l:type_adds . " " . l:types . " -g " . l:globs . " -- " . a:1 . " " . a:2
+            return "rg --column --line-number --no-heading --color=always --smart-case " . l:type_adds . " " . l:types . l:globs . " -- " . a:1 . " " . l:path
         elseif !filereadable(l:path)
             let l:file_extensions = split(a:2, ",")
             for file_extension in l:file_extensions
                 let l:type_adds = " --type-add '" . file_extension . ":*." . file_extension . "'" . l:type_adds
                 let l:types = " --type " . file_extension . l:types
-                let l:globs = "\\*{" . a:3 . "}"
+                let l:globs = " -g \\*{" . a:2 . "}"
             endfor
-            return "rg --column --line-number --no-heading --color=always --smart-case " . l:type_adds . " " . l:types . " -g " . l:globs . " -- " . a:1 . " " . a:2
+            return "rg --column --line-number --no-heading --color=always --smart-case " . l:type_adds . " " . l:types . l:globs . " -- " . a:1
         endif
     elseif a:0 >= 1
         return "rg --column --line-number --no-heading --color=always --smart-case -- " . a:1
