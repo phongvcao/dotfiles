@@ -851,7 +851,7 @@ else
     " tnoremap <C-o> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
     " tnoremap <Esc> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
     " tnoremap <M-c> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
-    tnoremap <M-c> <C-\><C-n>
+    tnoremap <M-c> <C-\><C-n>:let b:terminal_insert = 0<CR>
     nnoremap sh :set shell=zsh<CR>:VTerm<CR>
     nnoremap sv :set shell=zsh<CR>:Term<CR>
     nnoremap st :set shell=zsh<CR>:TTerm<CR>
