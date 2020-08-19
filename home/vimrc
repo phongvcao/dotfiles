@@ -847,7 +847,7 @@ nnoremap S <nop>
 if !has('nvim')
     nnoremap ss :set shell=$SHELL<CR>:shell<CR>
 else
-    tnoremap <C-o> <C-\><C-n>
+    " tnoremap <C-o> <C-\><C-n>
     " tnoremap <C-o> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
     " tnoremap <Esc> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
     " tnoremap <M-c> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
