@@ -3262,7 +3262,7 @@ augroup CustomAutoCmd
     autocmd VimEnter,BufEnter,BufWinEnter * :call SetHighlightCtrlSF()
     autocmd FileType ctrlsf :call SetHighlightCtrlSF()
 
-    " coc.nvim
+    " coc.nvim settings
     autocmd BufEnter * :highlight CocErrorFloat ctermbg=9 ctermfg=0 term=underline gui=underline
     autocmd BufEnter * :highlight CocErrorSign ctermbg=0 ctermfg=9 term=underline gui=underline
     autocmd BufEnter * :highlight CocWarningFloat ctermbg=3 ctermfg=0 term=underline gui=underline
