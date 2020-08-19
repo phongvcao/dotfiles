@@ -3332,6 +3332,7 @@ augroup CustomAutoCmd
         " autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
         autocmd TermOpen * setlocal filetype=terminal
         autocmd TermLeave * set shell=bash\ --login
+        autocmd TermClose * q!
     endif
 
     " vim-floaterm settings
