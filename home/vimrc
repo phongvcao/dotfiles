@@ -1700,6 +1700,7 @@ let g:floaterm_shell = $SHELL
 let g:floaterm_wintitle = v:false
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
+let g:floaterm_autoclose = 2
 nnoremap F :call InvokeTermLF()<CR>
 function! InvokeTermLF()
     if &filetype ==# 'magit'
@@ -3332,7 +3333,7 @@ augroup CustomAutoCmd
         " autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
         autocmd TermOpen * setlocal filetype=terminal
         autocmd TermLeave * set shell=bash\ --login
-        autocmd TermClose * q!
+        autocmd TermClose * if &filetype !=# 'floaterm' | bd! | endif
     endif
 
     " vim-floaterm settings
