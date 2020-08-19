@@ -3320,7 +3320,7 @@ augroup CustomAutoCmd
     autocmd FileType fzf setlocal nonumber norelativenumber
 
     if has('nvim')
-        autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber | endif
+        autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber scrollback=1 | endif
         autocmd BufEnter,FocusGained * if &buftype ==# 'terminal' && (!exists('b:terminal_insert') || b:terminal_insert ==# 1) | startinsert | endif
         autocmd TermEnter * if &buftype ==# 'terminal' | nnoremap <buffer> <CR> i<CR> | endif
 
