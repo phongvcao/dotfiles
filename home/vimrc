@@ -847,9 +847,11 @@ nnoremap S <nop>
 if !has('nvim')
     nnoremap ss :set shell=$SHELL<CR>:shell<CR>
 else
-    tnoremap <C-o> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
+    tnoremap <C-o> <C-\><C-n>
+    " tnoremap <C-o> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
     " tnoremap <Esc> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
-    tnoremap <M-c> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
+    " tnoremap <M-c> <C-\><C-n>:setlocal nonumber norelativenumber<CR>
+    tnoremap <M-c> <C-\><C-n>
     nnoremap sh :set shell=zsh<CR>:VTerm<CR>
     nnoremap sv :set shell=zsh<CR>:Term<CR>
     nnoremap st :set shell=zsh<CR>:TTerm<CR>
@@ -3320,13 +3322,15 @@ augroup CustomAutoCmd
     autocmd FileType fzf setlocal nonumber norelativenumber
 
     if has('nvim')
-        autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber scrollback=100000 | endif
+        " autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber scrollback=100000 | endif
+        autocmd BufEnter * if &buftype ==# 'terminal' | setlocal scrollback=100000 | endif
         autocmd BufEnter,FocusGained * if &buftype ==# 'terminal' && (!exists('b:terminal_insert') || b:terminal_insert ==# 1) | startinsert | endif
         autocmd TermEnter * if &buftype ==# 'terminal' | nnoremap <buffer> <CR> i<CR> | endif
 
         " floatLf-nvim settings
         " fzf-preview.vim settings
-        autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
+        " autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
+        autocmd TermOpen * setlocal filetype=terminal
         autocmd TermLeave * set shell=bash\ --login
     endif
 
