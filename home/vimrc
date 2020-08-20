@@ -1397,7 +1397,7 @@ nmap <Space>;y <Plug>(easyoperator-line-yank)
 nnoremap <leader>R :let g:far#window_layout="tab"<CR>:Farp<CR>
 let g:far#source = 'rg'
 let g:far#limit = 100000
-let g:far#preview_window_height = 40
+let g:far#preview_window_height = 30
 let g:far#window_layout = 'tab'
 let g:far#status_line = 1
 let g:far#auto_preview = 0
