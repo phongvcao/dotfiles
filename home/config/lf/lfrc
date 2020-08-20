@@ -69,7 +69,7 @@ cmap <c-l>
 cmap <c-j> cmd-history-next
 cmap <c-k> cmd-history-prev
 cmap <c-b> cmd-home
-cmap <c-h> cmd-left
+cmap <bs> cmd-left
 cmap <c-l> cmd-right
 cmap <c-r> cmd-delete-unix-word
 cmap <c-q> cmd-word-back
