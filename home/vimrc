@@ -1977,7 +1977,7 @@ function! InvokeCtrlSF(...)
             let g:ctrlsf_extra_backend_args = {
                         \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
                         \ }
-            execute "CtrlSF '" . a:1 . "' " . l:path
+            execute "CtrlSF " . a:1 . " " . l:path
         elseif !filereadable(l:path)
             let l:globs_args = split(a:2, ":")
             if a:2 !~ '^!.*'
@@ -1991,10 +1991,10 @@ function! InvokeCtrlSF(...)
             let g:ctrlsf_extra_backend_args = {
                         \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
                         \ }
-            execute "CtrlSF '" . a:1 . "'"
+            execute "CtrlSF " . a:1
         endif
     elseif a:0 >= 1
-        execute "CtrlSF '" . a:1 . "'"
+        execute "CtrlSF " . a:1
     endif
 endfunction
 command! -nargs=* -complete=file CtrlSFRg call InvokeCtrlSF( <f-args> )
