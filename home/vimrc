@@ -2016,11 +2016,11 @@ let g:ctrlsf_context = '-C 5'
 let g:ctrlsf_default_root = 'cwd'
 let g:ctrlsf_default_view_mode = 'normal'
 let g:ctrlsf_regex_pattern = 1
-let g:ctrlsf_position = 'right'
+let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_selected_line_hl = 'op'
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_absolute_file_path = 0
-let g:ctrlsf_winsize = '120'
+let g:ctrlsf_winsize = '30'
 let g:ctrlsf_mapping = {
             \ 'quit': '',
             \ 'pquit': '', }
