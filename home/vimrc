@@ -2342,7 +2342,7 @@ let g:peekaboo_ins_prefix = '<Insert>'
 let g:swoopUseDefaultKeyMap = 0
 nnoremap R :silent! call SwoopMulti()<CR>
 let g:swoopHighlight = ["hi! SwoopBufferLineHi ctermfg=4 ctermbg=8", "hi! SwoopPatternHi ctermfg=8 ctermbg=3"]
-let g:defaultWinSwoopHeight = 20
+let g:defaultWinSwoopHeight = 30
 function! FreezeSwoopContext()
     if expand('%f') =~? 'swoopBuf'
         silent! nunmap <buffer> gg
