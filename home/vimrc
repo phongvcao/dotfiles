@@ -3426,7 +3426,6 @@ augroup CustomAutoCmd
         autocmd BufEnter,FocusGained * if &buftype ==# 'terminal' && (!exists('b:terminal_insert') || b:terminal_insert ==# 1) | startinsert | endif
         autocmd TermEnter * if &buftype ==# 'terminal' | nnoremap <buffer> <CR> i<CR> | endif
 
-        " floatLf-nvim settings
         " fzf-preview.vim settings
         " autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
         autocmd TermOpen * setlocal filetype=terminal

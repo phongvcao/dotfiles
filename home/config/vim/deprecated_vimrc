@@ -249,6 +249,13 @@ let g:floatLf_lf_split = 'ov'
 let g:floatLf_lf_vsplit = 'oh'
 let g:floatLf_lf_tab = 'ot'
 
+" floatLf-nvim settings
+" fzf-preview.vim settings
+" autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
+autocmd TermOpen * setlocal filetype=terminal
+autocmd TermLeave * set shell=bash\ --login
+autocmd TermClose * if &filetype !=# 'floaterm' && &filetype !=# 'fzf' | bd! | endif
+
 " bclose.vim settings
 let g:bclose_no_plugin_maps = 1
 
