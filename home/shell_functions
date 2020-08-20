@@ -331,20 +331,20 @@ function g() {
         if [[ -n "$2" ]]; then
             if [[ -d "$2" ]]; then
                 if [[ -n "$3" ]]; then
-                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg $1 $2 $3"
+                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2 $3"
                 else
-                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg $1 $2"
+                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2"
                 fi
             elif [[ -f "$2" ]]; then
                 command_nvim -c "silent! call SwoopPattern('\V$1')" "$2"
             elif [[ -p "$2" ]]; then
                 command_nvim -c "silent! call SwoopPattern('\V$1')" "$2"
             else
-                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg $1 $2"
+                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2"
             fi
         elif [[ -n "$1" ]]; then
             if [[ -t 0 ]]; then
-                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg $1"
+                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1'"
             else
                 command_frg_stream "$1"
             fi
@@ -409,20 +409,20 @@ function gs() {
         if [[ -n "$2" ]]; then
             if [[ -d "$2" ]]; then
                 if [[ -n "$3" ]]; then
-                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg $1 $2 $3"
+                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2 $3"
                 else
-                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg $1 $2"
+                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2"
                 fi
             elif [[ -f "$2" ]]; then
                 command_nvim -c "silent! call SwoopPattern('$1\C')" "$2"
             elif [[ -p "$2" ]]; then
                 command_nvim -c "silent! call SwoopPattern('$1\C')" "$2"
             else
-                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg $1 $2"
+                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2"
             fi
         elif [[ -n "$1" ]]; then
             if [[ -t 0 ]]; then
-                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg $1"
+                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1'"
             else
                 command_frg_stream "$1"
             fi
@@ -751,20 +751,20 @@ function gr() {
         if [[ -n "$2" ]]; then
             if [[ -d "$2" ]]; then
                 if [[ -n "$3" ]]; then
-                    command_nvim -c "CtrlSFRg $1 $2 $3"
+                    command_nvim -c "CtrlSFRg '$1' $2 $3"
                 else
-                    command_nvim -c "CtrlSFRg $1 $2"
+                    command_nvim -c "CtrlSFRg '$1' $2"
                 fi
             elif [[ -f "$2" ]]; then
                 command_nvim -c "silent! call SwoopPattern('$1')" "$2"
             elif [[ -p "$2" ]]; then
                 command_nvim -c "silent! call SwoopPattern('$1')" "$2"
             else
-                command_nvim -c "CtrlSFRg $1 $2"
+                command_nvim -c "CtrlSFRg '$1' $2"
             fi
         elif [[ -n "$1" ]]; then
             if [[ -t 0 ]]; then
-                command_nvim -c "CtrlSFRg $1"
+                command_nvim -c "CtrlSFRg '$1'"
             else
                 command_frg_stream "$1"
             fi
