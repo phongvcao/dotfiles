@@ -1983,8 +1983,8 @@ function! InvokeCtrlSF(...)
         let l:path = resolve(fnamemodify(resolve(expand('%:p')), ':h') . '/' . a:2)
         if isdirectory(l:path)
             let g:ctrlsf_extra_backend_args = {
-                  \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
-                  \ }
+                        \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
+                        \ }
             execute "CtrlSF '" . a:1 . "' " . l:path
         elseif !filereadable(l:path)
             let l:globs_args = split(a:2, ":")
@@ -1997,8 +1997,8 @@ function! InvokeCtrlSF(...)
                 let l:exclude_globs = " -g !\\*{" . l:globs_args[1] . "}\\*"
             endif
             let g:ctrlsf_extra_backend_args = {
-                  \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
-                  \ }
+                        \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
+                        \ }
             execute "CtrlSF '" . a:1 . "'"
         endif
     elseif a:0 >= 1
@@ -2029,6 +2029,10 @@ let g:ctrlsf_selected_line_hl = 'op'
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_absolute_file_path = 0
 let g:ctrlsf_winsize = '50%'
+let g:ctrlsf_mapping = {
+            \ 'quit': '',
+            \ 'pquit': '', }
+
 function! SetHighlightCtrlSF()
     if &filetype ==# 'ctrlsf'
         if g:ctrlsf_default_view_mode ==# 'normal'
