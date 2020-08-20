@@ -1995,6 +1995,10 @@ function! InvokeCtrlSF(...)
         endif
     elseif a:0 >= 1
         execute "CtrlSF " . a:1
+    else
+        CtrlSFClose
+        CtrlSFOpen
+        execute "resize " . g:ctrlsf_winsize
     endif
 endfunction
 command! -nargs=* -complete=file CtrlSFRg call InvokeCtrlSF( <f-args> )
