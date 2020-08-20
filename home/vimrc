@@ -1699,14 +1699,23 @@ let g:floaterm_wintitle = v:false
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
 let g:floaterm_autoclose = 2
-nnoremap F :call InvokeTermLF()<CR>
-function! InvokeTermLF()
+function! InvokeTermLF(...)
+    let l:arg = join( a:000, ' ' )
+    let l:lf_command = ''
     if &filetype ==# 'magit'
-        TTerm lf
+        let l:lf_command = 'TTerm lf'
     else
-        LfToggle
+        let l:lf_command = 'FloatermNew lf'
+    endif
+
+    if l:arg !=# ''
+        execute l:lf_command . " -command 'cd " . l:arg . "'"
+    else
+        execute l:lf_command . " -command 'cd " . expand('%:p:h') . "'"
     endif
 endfunction
+nnoremap F :TermLF<Space>
+command! -nargs=* -complete=file TermLF call InvokeTermLF( <f-args> )
 
 " floatLf-nvim settinngs
 let g:floatLf_autoclose = 1
