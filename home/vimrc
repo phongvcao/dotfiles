@@ -1965,21 +1965,41 @@ nnoremap <leader>C :Twiggy<CR>
 
 " ctrlsf.vim settings
 function! InvokeCtrlSF(...)
+    let l:globs = ""
+    let l:exclude_globs = ""
     if a:0 >= 3
-        let l:file_extensions = a:3
+        let l:globs_args = split(a:3, ":")
+        if a:3 !~ '^!.*'
+            let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
+        else
+            let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
+        endif
+        if len(l:globs_args) >= 2
+            let l:exclude_globs = " -g !\\*{" . l:globs_args[1] . "}\\*"
+        endif
     endif
 
     if a:0 >= 2
         let l:path = resolve(fnamemodify(resolve(expand('%:p')), ':h') . '/' . a:2)
         if isdirectory(l:path)
-            if exists('l:file_extensions')
-                execute "CtrlSF -G *{" . l:file_extensions . "} '" . a:1 . "' " . l:path
-            else
-                execute "CtrlSF '" . a:1 . "' " . l:path
-            endif
+            let g:ctrlsf_extra_backend_args = {
+                  \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
+                  \ }
+            execute "CtrlSF '" . a:1 . "' " . l:path
         elseif !filereadable(l:path)
-            let l:file_extensions = a:2
-            execute "CtrlSF -G *{" . l:file_extensions . "} '" . a:1 . "'"
+            let l:globs_args = split(a:2, ":")
+            if a:2 !~ '^!.*'
+                let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
+            else
+                let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
+            endif
+            if len(l:globs_args) >= 2
+                let l:exclude_globs = " -g !\\*{" . l:globs_args[1] . "}\\*"
+            endif
+            let g:ctrlsf_extra_backend_args = {
+                  \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
+                  \ }
+            execute "CtrlSF '" . a:1 . "'"
         endif
     elseif a:0 >= 1
         execute "CtrlSF '" . a:1 . "'"
@@ -2003,7 +2023,7 @@ let g:ctrlsf_case_sensitive = 'smart'
 let g:ctrlsf_context = '-C 5'
 let g:ctrlsf_default_root = 'cwd'
 let g:ctrlsf_default_view_mode = 'normal'
-let g:ctrlsf_regex_pattern = 0
+let g:ctrlsf_regex_pattern = 1
 let g:ctrlsf_position = 'right'
 let g:ctrlsf_selected_line_hl = 'op'
 let g:ctrlsf_confirm_save = 0
@@ -2134,30 +2154,35 @@ function! SetFzfPreviewBufferLinesPath()
 endfunction
 
 function! GetFzfRgCommand(...)
-    let l:type_adds = ""
-    let l:types = ""
     let l:globs = ""
+    let l:exclude_globs = ""
     if a:0 >= 3
-        let l:file_extensions = split(a:3, ",")
-        for file_extension in l:file_extensions
-            let l:type_adds = " --type-add '" . file_extension . ":*." . file_extension . "'" . l:type_adds
-            let l:types = " --type " . file_extension . l:types
-            let l:globs = " -g \\*{" . a:3 . "}"
-        endfor
+        let l:globs_args = split(a:3, ":")
+        if a:3 !~ '^!.*'
+            let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
+        else
+            let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
+        endif
+        if len(l:globs_args) >= 2
+            let l:exclude_globs = " -g !\\*{" . l:globs_args[1] . "}\\*"
+        endif
     endif
 
     if a:0 >= 2
         let l:path = resolve(fnamemodify(resolve(expand('%:p')), ':h') . '/' . a:2)
         if isdirectory(l:path)
-            return "rg --column --line-number --no-heading --color=always --smart-case " . l:type_adds . " " . l:types . l:globs . " -- " . a:1 . " " . l:path
+            return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1 . " " . l:path
         elseif !filereadable(l:path)
-            let l:file_extensions = split(a:2, ",")
-            for file_extension in l:file_extensions
-                let l:type_adds = " --type-add '" . file_extension . ":*." . file_extension . "'" . l:type_adds
-                let l:types = " --type " . file_extension . l:types
-                let l:globs = " -g \\*{" . a:2 . "}"
-            endfor
-            return "rg --column --line-number --no-heading --color=always --smart-case " . l:type_adds . " " . l:types . l:globs . " -- " . a:1
+            let l:globs_args = split(a:2, ":")
+            if a:2 !~ '^!.*'
+                let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
+            else
+                let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
+            endif
+            if len(l:globs_args) >= 2
+                let l:exclude_globs = " -g !\\*{" . l:globs_args[1] . "}\\*"
+            endif
+            return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1
         endif
     elseif a:0 >= 1
         return "rg --column --line-number --no-heading --color=always --smart-case -- " . a:1
@@ -2165,10 +2190,6 @@ function! GetFzfRgCommand(...)
 endfunction
 command! -bang -nargs=* FzfRg
             \ call fzf#vim#grep(GetFzfRgCommand( <f-args> ), 1, fzf#vim#with_preview(), <bang>0)
-" command! -bang -nargs=* FzfRg
-"             \ call fzf#vim#grep(
-"             \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
-"             \   fzf#vim#with_preview(), <bang>0)
 
 " nnoremap <leader>g :FZFRg<Space>
 nnoremap <leader>g :FzfRg<Space>
