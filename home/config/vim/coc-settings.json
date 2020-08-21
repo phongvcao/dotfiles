@@ -35,6 +35,6 @@
       "level": ["hint", "information", "warning", "error"],
       "messageDelay": 300,
       "refreshAfterSave": true,
-      "refreshOnInsertMode": false,
-    },
+      "refreshOnInsertMode": false
+    }
 }
