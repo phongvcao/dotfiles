@@ -1897,31 +1897,62 @@ nnoremap <leader>d :Dict<Space>
 
 " vim-tmux-navigator settings
 let g:tmux_navigator_no_mappings = 1
-let g:tmux_navigator_disable_when_zoomed = 1 
-nnoremap <silent> <M-h> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateLeft<CR>
-nnoremap <silent> <M-j> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateDown<CR>
-nnoremap <silent> <M-k> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateUp<CR>
-nnoremap <silent> <M-l> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateRight<CR>
-nnoremap <silent> <M-\> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigatePrevious<CR>
+let g:tmux_navigator_disable_when_zoomed = 1
+function! NavigateLeft(term_insert)
+  let b:terminal_insert = a:term_insert
+  if &filetype != 'fzf' && &filetype != 'floaterm'
+      TmuxNavigateLeft
+  endif
+endfunction
+function! NavigateRight(term_insert)
+  let b:terminal_insert = a:term_insert
+  if &filetype != 'fzf' && &filetype != 'floaterm'
+      TmuxNavigateRight
+  endif
+endfunction
+function! NavigateUp(term_insert)
+  let b:terminal_insert = a:term_insert
+  if &filetype != 'fzf' && &filetype != 'floaterm'
+      TmuxNavigateUp
+  endif
+endfunction
+function! NavigateDown(term_insert)
+  let b:terminal_insert = a:term_insert
+  if &filetype != 'fzf' && &filetype != 'floaterm'
+      TmuxNavigateDown
+  endif
+endfunction
+function! NavigatePrevious(term_insert)
+  let b:terminal_insert = a:term_insert
+  if &filetype != 'fzf' && &filetype != 'floaterm'
+      TmuxNavigatePrevious
+  endif
+endfunction
 
-inoremap <silent> <M-h> <Esc>:let b:terminal_insert = 1<CR>:TmuxNavigateLeft<CR>
-inoremap <silent> <M-j> <Esc>:let b:terminal_insert = 1<CR>:TmuxNavigateDown<CR>
-inoremap <silent> <M-k> <Esc>:let b:terminal_insert = 1<CR>:TmuxNavigateUp<CR>
-inoremap <silent> <M-l> <Esc>:let b:terminal_insert = 1<CR>:TmuxNavigateRight<CR>
-inoremap <silent> <M-\> <Esc>:let b:terminal_insert = 1<CR>:TmuxNavigatePrevious<CR>
+nnoremap <silent> <M-h> <Esc>:call NavigateLeft(0)<CR>
+nnoremap <silent> <M-j> <Esc>:call NavigateDown(0)<CR>
+nnoremap <silent> <M-k> <Esc>:call NavigateUp(0)<CR>
+nnoremap <silent> <M-l> <Esc>:call NavigateRight(0)<CR>
+nnoremap <silent> <M-\> <Esc>:call NavigatePrevious(0)<CR>
 
-cnoremap <silent> <M-h> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateLeft<CR>
-cnoremap <silent> <M-j> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateDown<CR>
-cnoremap <silent> <M-k> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateUp<CR>
-cnoremap <silent> <M-l> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigateRight<CR>
-cnoremap <silent> <M-\> <Esc>:let b:terminal_insert = 0<CR>:TmuxNavigatePrevious<CR>
+inoremap <silent> <M-h> <Esc>:call NavigateLeft(1)<CR>
+inoremap <silent> <M-j> <Esc>:call NavigateDown(1)<CR>
+inoremap <silent> <M-k> <Esc>:call NavigateUp(1)<CR>
+inoremap <silent> <M-l> <Esc>:call NavigateRight(1)<CR>
+inoremap <silent> <M-\> <Esc>:call NavigatePrevious(1)<CR>
+
+cnoremap <silent> <M-h> <Esc>:call NavigateLeft(0)<CR>
+cnoremap <silent> <M-j> <Esc>:call NavigateDown(0)<CR>
+cnoremap <silent> <M-k> <Esc>:call NavigateUp(0)<CR>
+cnoremap <silent> <M-l> <Esc>:call NavigateRight(0)<CR>
+cnoremap <silent> <M-\> <Esc>:call NavigatePrevious(0)<CR>
 
 if has('nvim')
-    tnoremap <silent> <M-h> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateLeft<CR>
-    tnoremap <silent> <M-j> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateDown<CR>
-    tnoremap <silent> <M-k> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateUp<CR>
-    tnoremap <silent> <M-l> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigateRight<CR>
-    tnoremap <silent> <M-\> <C-\><C-n>:let b:terminal_insert = 1<CR>:TmuxNavigatePrevious<CR>
+    tnoremap <silent> <M-h> <C-\><C-n>:call NavigateLeft(1)<CR>
+    tnoremap <silent> <M-j> <C-\><C-n>:call NavigateDown(1)<CR>
+    tnoremap <silent> <M-k> <C-\><C-n>:call NavigateUp(1)<CR>
+    tnoremap <silent> <M-l> <C-\><C-n>:call NavigateRight(1)<CR>
+    tnoremap <silent> <M-\> <C-\><C-n>:call NavigatePrevious(1)<CR>
 endif
 
 " YankRing.vim settings
