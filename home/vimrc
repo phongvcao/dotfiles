@@ -1992,7 +1992,7 @@ function! InvokeCtrlSF(...)
     let l:exclude_globs = ""
     if a:0 >= 3
         let l:globs_args = split(a:3, ":")
-        if a:3 !~ '^!.*'
+        if a:3 !~ '^:.*'
             let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
         else
             let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
@@ -2011,7 +2011,7 @@ function! InvokeCtrlSF(...)
             execute "CtrlSF " . a:1 . " " . l:path
         elseif !filereadable(l:path)
             let l:globs_args = split(a:2, ":")
-            if a:2 !~ '^!.*'
+            if a:2 !~ '^:.*'
                 let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
             else
                 let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
@@ -2189,7 +2189,7 @@ function! GetFzfRgCommand(...)
     let l:exclude_globs = ""
     if a:0 >= 3
         let l:globs_args = split(a:3, ":")
-        if a:3 !~ '^!.*'
+        if a:3 !~ '^:.*'
             let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
         else
             let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
@@ -2205,7 +2205,7 @@ function! GetFzfRgCommand(...)
             return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1 . " " . l:path
         elseif !filereadable(l:path)
             let l:globs_args = split(a:2, ":")
-            if a:2 !~ '^!.*'
+            if a:2 !~ '^:.*'
                 let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
             else
                 let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
