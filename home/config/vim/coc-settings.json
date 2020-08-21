@@ -26,5 +26,15 @@
             }
         }
     },
-    "diagnostic.displayByAle": true
+    "diagnostic": {
+      "enable": true,
+      "displayByAle": true,
+      "enableSign": true,
+      "enableMessage": "always",
+      "enableHighlightLineNumber": true,
+      "level": ["hint", "information", "warning", "error"],
+      "messageDelay": 300,
+      "refreshAfterSave": true,
+      "refreshOnInsertMode": false,
+    },
 }
