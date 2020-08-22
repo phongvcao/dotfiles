@@ -94,9 +94,6 @@ cmd open ${{
 # define a custom 'rename' command without prompt for overwrite
 # cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
 # map r push :rename<space>
-push mw
-map q push 'w:quit<enter>
-map Q push :quit<enter>
 # push m-
 # map Q push '-q
 
