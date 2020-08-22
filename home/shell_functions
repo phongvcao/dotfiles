@@ -1188,7 +1188,7 @@ function _cat() {
     fi
 }
 
-function cat() {
+function ct() {
     if [[ -n "$3" ]]; then
         _cat "$3" | sed "$1,$2!d" | gr "^|$1.*|$2.*"
     elif [[ -n "$2" ]]; then
