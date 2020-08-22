@@ -16,8 +16,6 @@
 
 lfcd () {
     tmp="${LF_LASTDIRPATH}"
-    echo $tmp
-    touch "$tmp"
     lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
         dir="$(command cat "$tmp")"
