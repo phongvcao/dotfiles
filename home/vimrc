@@ -1697,19 +1697,20 @@ let g:floaterm_wintitle = v:false
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
 let g:floaterm_autoclose = 2
+
 function! InvokeTermLF(...)
     let l:arg = join( a:000, ' ' )
     let l:lf_command = ''
     if &filetype ==# 'magit'
-        let l:lf_command = 'TTerm lf'
+        let l:lf_command = 'TTerm lfcd'
     else
-        let l:lf_command = 'FloatermNew lf'
+        let l:lf_command = 'FloatermNew lfcd'
     endif
 
     if l:arg !=# ''
         execute l:lf_command . " -command 'cd " . l:arg . "'"
     else
-        execute l:lf_command . " -command 'cd " . expand('%:p:h') . "'"
+        execute l:lf_command
     endif
 endfunction
 nnoremap F :TermLF<Space>
