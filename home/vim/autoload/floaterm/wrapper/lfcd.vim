@@ -4,7 +4,7 @@ function! floaterm#wrapper#lfcd#(cmd) abort
   lcd %:p:h
 
   let cmdlist = split(a:cmd)
-  let cmd = 'lf -last-dir-path ' . '/tmp/lfcd.tmp' . ' -selection-path="' . s:lf_tmpfile . '"'
+  let cmd = 'lf -last-dir-path ' . $LF_LASTDIRPATH . ' -selection-path="' . s:lf_tmpfile . '"'
   if len(cmdlist) > 1
     let cmd .= ' ' . join(cmdlist[1:], ' ')
   else
