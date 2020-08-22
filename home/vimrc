@@ -854,7 +854,12 @@ else
     nnoremap sv :set shell=zsh<CR>:Term<CR>
     nnoremap st :set shell=zsh<CR>:TTerm<CR>
     function InvokeFloatermNew()
-        let l:cur_dir = fnamemodify(resolve(expand('%:p')), ':h')
+        let l:cur_dir = ""
+        if &filetype == 'magit'
+            let l:cur_dir = substitute(resolve(expand('%:p')), '^magit:', '', 'g')
+        else
+            let l:cur_dir = fnamemodify(resolve(expand('%:p')), ':h')
+        endif
         if isdirectory(l:cur_dir)
             exec 'FloatermNew! cd ' . fnamemodify(resolve(expand('%:p')), ':h') . ' ; clear'
         else
@@ -1718,7 +1723,7 @@ function! InvokeTermLF(...)
         execute l:lf_command
     endif
 endfunction
-nnoremap F :TermLF<Space>
+nnoremap F :TermLF<CR>
 command! -nargs=* -complete=file TermLF call InvokeTermLF( <f-args> )
 
 " ale settings
