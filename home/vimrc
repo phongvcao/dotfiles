@@ -854,7 +854,12 @@ else
     nnoremap sv :set shell=zsh<CR>:Term<CR>
     nnoremap st :set shell=zsh<CR>:TTerm<CR>
     function InvokeFloatermNew()
-        exec 'FloatermNew! cd ' . fnamemodify(resolve(expand('%:p')), ':h') . ' ; clear'
+        let l:cur_dir = fnamemodify(resolve(expand('%:p')), ':h')
+        if isdirectory(l:cur_dir)
+            exec 'FloatermNew! cd ' . fnamemodify(resolve(expand('%:p')), ':h') . ' ; clear'
+        else
+            exec 'FloatermNew! cd ~ ; clear'
+        endif
     endfunction
     nnoremap ss :call InvokeFloatermNew()<CR>
     nnoremap <M-s> :FloatermNext<CR>
