@@ -2226,7 +2226,9 @@ function! GetFzfRgCommand(...)
     if a:0 >= 2
         let l:path = resolve(expand(a:2))
         if isdirectory(l:path)
+            let b:fzf_rg_org_path = expand('%:p:h')
             execute "cd " . l:path
+            pwd
             return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1
         elseif !filereadable(l:path)
             let l:globs_args = split(a:2, ":")
@@ -2244,6 +2246,14 @@ function! GetFzfRgCommand(...)
         return "rg --column --line-number --no-heading --color=always --smart-case -- " . a:1
     endif
 endfunction
+
+function! OnFzfRgCommandExit()
+  if exists('b:fzf_rg_org_path') && b:fzf_rg_org_path !=# ''
+    execute "cd " . b:fzf_rg_org_path
+    let b:fzf_rg_org_path = ''
+  endif
+endfunction
+
 command! -bang -nargs=* FzfRg
             \ call fzf#vim#grep(GetFzfRgCommand( <f-args> ), 1, fzf#vim#with_preview(), <bang>0)
 
@@ -3500,4 +3510,5 @@ augroup CustomAutoCmd
     " Replace netrw with FZF
     autocmd VimEnter * silent! autocmd! FileExplorer
     autocmd VimEnter * if isdirectory(expand("%")) | setlocal nonumber norelativenumber | exec 'FZF' | endif
+    autocmd WinEnter * call OnFzfRgCommandExit()
 augroup END
