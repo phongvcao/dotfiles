@@ -1922,34 +1922,34 @@ nnoremap <leader>d :Dict<Space>
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_disable_when_zoomed = 1
 function! NavigateLeft(term_insert)
-  let b:terminal_insert = a:term_insert
-  if &filetype != 'fzf' && &filetype != 'floaterm'
-      TmuxNavigateLeft
-  endif
+    let b:terminal_insert = a:term_insert
+    if &filetype != 'fzf' && &filetype != 'floaterm'
+        TmuxNavigateLeft
+    endif
 endfunction
 function! NavigateRight(term_insert)
-  let b:terminal_insert = a:term_insert
-  if &filetype != 'fzf' && &filetype != 'floaterm'
-      TmuxNavigateRight
-  endif
+    let b:terminal_insert = a:term_insert
+    if &filetype != 'fzf' && &filetype != 'floaterm'
+        TmuxNavigateRight
+    endif
 endfunction
 function! NavigateUp(term_insert)
-  let b:terminal_insert = a:term_insert
-  if &filetype != 'fzf' && &filetype != 'floaterm'
-      TmuxNavigateUp
-  endif
+    let b:terminal_insert = a:term_insert
+    if &filetype != 'fzf' && &filetype != 'floaterm'
+        TmuxNavigateUp
+    endif
 endfunction
 function! NavigateDown(term_insert)
-  let b:terminal_insert = a:term_insert
-  if &filetype != 'fzf' && &filetype != 'floaterm'
-      TmuxNavigateDown
-  endif
+    let b:terminal_insert = a:term_insert
+    if &filetype != 'fzf' && &filetype != 'floaterm'
+        TmuxNavigateDown
+    endif
 endfunction
 function! NavigatePrevious(term_insert)
-  let b:terminal_insert = a:term_insert
-  if &filetype != 'fzf' && &filetype != 'floaterm'
-      TmuxNavigatePrevious
-  endif
+    let b:terminal_insert = a:term_insert
+    if &filetype != 'fzf' && &filetype != 'floaterm'
+        TmuxNavigatePrevious
+    endif
 endfunction
 
 nnoremap <silent> <M-h> <Esc>:call NavigateLeft(0)<CR>
@@ -2026,12 +2026,26 @@ function! InvokeCtrlSF(...)
     endif
 
     if a:0 >= 2
-        let l:path = resolve(expand(a:2))
+        let l:path = fnamemodify(resolve(expand(a:2)), ':p')
+        if !isdirectory(l:path) && !filereadable(l:path)
+            let l:path = resolve(getcwd() . '/' . a:2)
+        endif
+
         if isdirectory(l:path)
             let g:ctrlsf_extra_backend_args = {
                         \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
                         \ }
             execute "cd " . l:path
+            " echom l:path
+            execute "CtrlSF " . a:1
+        elseif filereadable(l:path)
+            let l:path = fnamemodify(l:path, ':h')
+            let l:globs = " -g \\*\\{" . substitute(resolve(expand(a:2)), l:path . '/', '', 'g') . "\\}\\*"
+            let g:ctrlsf_extra_backend_args = {
+                        \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
+                        \ }
+            execute "cd " . l:path
+            " echom l:path
             execute "CtrlSF " . a:1
         elseif !filereadable(l:path)
             let l:globs_args = split(a:2, ":")
@@ -2081,6 +2095,7 @@ let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_absolute_file_path = 0
 let g:ctrlsf_winsize = '30'
 let g:ctrlsf_mapping = {
+            \ 'stop': '<M-c>',
             \ 'quit': '',
             \ 'pquit': '', }
 
@@ -2224,13 +2239,22 @@ function! GetFzfRgCommand(...)
     endif
 
     if a:0 >= 2
-        let l:path = resolve(expand(a:2))
+        let l:path = fnamemodify(resolve(expand(a:2)), ':p')
+        if !isdirectory(l:path) && !filereadable(l:path)
+            let l:path = resolve(getcwd() . '/' . a:2)
+        endif
+
         if isdirectory(l:path)
-            let b:fzf_rg_org_path = expand('%:p:h')
             execute "cd " . l:path
-            pwd
+            echom l:path
             return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1
-        elseif !filereadable(l:path)
+        elseif filereadable(l:path)
+            let l:path = fnamemodify(l:path, ':h')
+            let l:globs = " -g \\*\\{" . substitute(resolve(expand(a:2)), l:path . '/', '', 'g') . "\\}\\*"
+            execute "cd " . l:path
+            echom l:path
+            return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1
+        else
             let l:globs_args = split(a:2, ":")
             if a:2 !~ '^:.*'
                 let l:globs = " -g \\*\\{" . l:globs_args[0] . "\\}\\*"
@@ -2240,18 +2264,20 @@ function! GetFzfRgCommand(...)
             if len(l:globs_args) >= 2
                 let l:exclude_globs = " -g !\\*\\{" . l:globs_args[1] . "\\}\\*"
             endif
+            pwd
             return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1
         endif
     elseif a:0 >= 1
+        pwd
         return "rg --column --line-number --no-heading --color=always --smart-case -- " . a:1
     endif
 endfunction
 
 function! OnFzfRgCommandExit()
-  if exists('b:fzf_rg_org_path') && b:fzf_rg_org_path !=# ''
-    execute "cd " . b:fzf_rg_org_path
-    let b:fzf_rg_org_path = ''
-  endif
+    if exists('b:fzf_rg_org_path') && b:fzf_rg_org_path !=# ''
+        execute "cd " . b:fzf_rg_org_path
+        let b:fzf_rg_org_path = ''
+    endif
 endfunction
 
 command! -bang -nargs=* FzfRg
@@ -2459,6 +2485,8 @@ function! CloseQuickfixWindow()
         endif
     elseif ( expand( '%:p' ) =~ '.*Yank.*' )
         execute 'silent! YRShow'
+    elseif ( &filetype ==# 'ctrlsf' )
+        execute 'silent! q!'
     endif
 endfunction
 
