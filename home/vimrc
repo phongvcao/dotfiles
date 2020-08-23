@@ -2031,7 +2031,8 @@ function! InvokeCtrlSF(...)
             let g:ctrlsf_extra_backend_args = {
                         \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
                         \ }
-            execute "CtrlSF " . a:1 . " " . l:path
+            execute "cd " . l:path
+            execute "CtrlSF " . a:1
         elseif !filereadable(l:path)
             let l:globs_args = split(a:2, ":")
             if a:2 !~ '^:.*'
@@ -2213,28 +2214,29 @@ function! GetFzfRgCommand(...)
     if a:0 >= 3
         let l:globs_args = split(a:3, ":")
         if a:3 !~ '^:.*'
-            let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
+            let l:globs = " -g \\*\\{" . l:globs_args[0] . "\\}\\*"
         else
-            let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
+            let l:exclude_globs = " -g !\\*\\{" . l:globs_args[0] . "\\}\\*"
         endif
         if len(l:globs_args) >= 2
-            let l:exclude_globs = " -g !\\*{" . l:globs_args[1] . "}\\*"
+            let l:exclude_globs = " -g !\\*\\{" . l:globs_args[1] . "\\}\\*"
         endif
     endif
 
     if a:0 >= 2
         let l:path = resolve(expand(a:2))
         if isdirectory(l:path)
-            return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1 . " " . l:path
+            execute "cd " . l:path
+            return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1
         elseif !filereadable(l:path)
             let l:globs_args = split(a:2, ":")
             if a:2 !~ '^:.*'
-                let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
+                let l:globs = " -g \\*\\{" . l:globs_args[0] . "\\}\\*"
             else
-                let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
+                let l:exclude_globs = " -g !\\*\\{" . l:globs_args[0] . "\\}\\*"
             endif
             if len(l:globs_args) >= 2
-                let l:exclude_globs = " -g !\\*{" . l:globs_args[1] . "}\\*"
+                let l:exclude_globs = " -g !\\*\\{" . l:globs_args[1] . "\\}\\*"
             endif
             return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1
         endif
