@@ -2026,7 +2026,7 @@ function! InvokeCtrlSF(...)
     endif
 
     if a:0 >= 2
-        let l:path = resolve(fnamemodify(resolve(expand('%:p')), ':h') . '/' . a:2)
+        let l:path = resolve(expand(a:2))
         if isdirectory(l:path)
             let g:ctrlsf_extra_backend_args = {
                         \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
@@ -2223,7 +2223,7 @@ function! GetFzfRgCommand(...)
     endif
 
     if a:0 >= 2
-        let l:path = resolve(fnamemodify(resolve(expand('%:p')), ':h') . '/' . a:2)
+        let l:path = resolve(expand(a:2))
         if isdirectory(l:path)
             return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1 . " " . l:path
         elseif !filereadable(l:path)
