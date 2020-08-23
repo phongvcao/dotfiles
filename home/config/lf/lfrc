@@ -30,7 +30,7 @@ set preview
 set smartcase
 
 # use enter for shell commands
-map <enter> shell
+# map <enter> shell
 
 # execute current file (must be executable)
 map x $$f
@@ -76,7 +76,10 @@ cmap <c-q> cmd-word-back
 cmap <c-w> cmd-word
 cmap <c-x> cmd-delete
 cmap <c-o> cmd-delete-end
-cmap <c-p> cmd-yank
+cmap <c-y> cmd-yank
+map <enter> open
+map <c-n> down
+map <c-p> up
 map S $$SHELL
 map e $$EDITOR $f
 

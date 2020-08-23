@@ -2299,7 +2299,7 @@ function! InvokeFzfMRUVSplit(...)
         endif
     else
         execute "vsplit"
-        execute "FzfMruFiles"
+        execute "TermLF"
     endif
 endfunction
 command! -nargs=* -complete=file FzfMRUVSplit call InvokeFzfMRUVSplit( <f-args> )
@@ -2315,7 +2315,7 @@ function! InvokeFzfMRUSplit(...)
         endif
     else
         execute "split"
-        execute "FzfMruFiles"
+        execute "TermLF"
     endif
 endfunction
 command! -nargs=* -complete=file FzfMRUSplit call InvokeFzfMRUSplit( <f-args> )
@@ -2332,7 +2332,7 @@ function! InvokeFzfMRULeftVSplit(...)
         endif
     else
         execute "vsplit"
-        execute "FzfMruFiles"
+        execute "TermLF"
     endif
     set splitright
 endfunction
@@ -2350,7 +2350,7 @@ function! InvokeFzfMRUTopSplit(...)
         endif
     else
         execute "split"
-        execute "FzfMruFiles"
+        execute "TermLF"
     endif
     set splitbelow
 endfunction
@@ -2367,7 +2367,7 @@ function! InvokeFzfMRUTab(...)
         endif
     else
         execute "tabnew"
-        execute "FzfMruFiles"
+        execute "TermLF"
     endif
 endfunction
 command! -nargs=* -complete=file FzfMRUTab call InvokeFzfMRUTab( <f-args> )
@@ -2381,7 +2381,7 @@ function! InvokeFzfMRURec(...)
             execute "FZFFiles " . l:arg
         endif
     else
-        execute "FzfMruFiles"
+        execute "TermLF"
     endif
 endfunction
 command! -nargs=* -complete=file FzfMRURec call InvokeFzfMRURec( <f-args> )
