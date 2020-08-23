@@ -85,6 +85,25 @@ function pipreview() {
     done
 }
 
+function p4diff() {
+  if [[ -n "$1" ]]; then
+    if [[ "$1" == *.diff ]]; then
+      p4 pack 2>&1 > ./"$(basename $1)"
+      cp -rf ./"$(basename $1)" ~
+      rm -rf ./"$(basename $1)"
+    else
+      p4 pack "$1" 2>&1 | vim -
+    fi
+  else
+    p4 pack 2>&1 | vim -
+  fi
+}
+
+function p4revert() {
+  local file=$(p4 opened | fzf)
+  g4 revert "$(echo ${file} | command sed -e 's/#.\+//g')"
+}
+
 function setinfo() {
     local true_filename="$(command ls | command grep -i $1)"
     local regex="(.*)\\s+[-]\\s+(.*?)[.][^.]+"
