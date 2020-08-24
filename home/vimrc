@@ -2026,7 +2026,7 @@ function! InvokeCtrlSF(...)
     endif
 
     if a:0 >= 2
-        let l:path = fnamemodify(resolve(expand(a:2)), ':p')
+        let l:path = resolve(fnamemodify(resolve(expand(a:2)), ':p'))
         if !isdirectory(l:path) && !filereadable(l:path)
             let l:path = resolve(getcwd() . '/' . a:2)
         endif
@@ -2239,7 +2239,7 @@ function! GetFzfRgCommand(...)
     endif
 
     if a:0 >= 2
-        let l:path = fnamemodify(resolve(expand(a:2)), ':p')
+        let l:path = resolve(fnamemodify(resolve(expand(a:2)), ':p'))
         if !isdirectory(l:path) && !filereadable(l:path)
             let l:path = resolve(getcwd() . '/' . a:2)
         endif
