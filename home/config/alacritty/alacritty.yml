@@ -686,6 +686,7 @@ key_bindings:
   - { key: Comma, mods: Alt|Shift, chars: "\x1b<"}
   - { key: Period, mods: Alt|Shift, chars: "\x1b>"}
   - { key: Semicolon, mods: Alt, chars: "\x1b;"}
+  - { key: Tab, mods: Alt, chars: "\x1b\t"}
 
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
