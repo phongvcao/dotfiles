@@ -2926,6 +2926,12 @@ nnoremap za :call FoldLevelToggle()<CR>
 " " tmuxline.vim settings
 " " Modify the function with this same name in
 " " ~/.vim/plugged/tmuxline.vim/blob/master/autoload/tmuxline/presets/powerline.vim
+" " 
+" " Then invoke:
+" " Tmuxline lightline powerline
+" "
+" " Finally invoke:
+" " TmuxlineSnapshot! ~/.dotfiles/home/tmuxline.conf
 " fun! tmuxline#presets#powerline#get()
 "   let bar = tmuxline#new()
 "
@@ -2938,7 +2944,7 @@ nnoremap za :call FoldLevelToggle()<CR>
 "   call bar.right.add('y', '%I:%M:%S %p ')
 "   call bar.right.add_right_sep()
 "
-"   call bar.right.add('z', '#h')
+"   call bar.right.add('z', '#h ')
 "
 "   call bar.win.add('win.dim', '#I')
 "   call bar.win.add_left_alt_sep()
