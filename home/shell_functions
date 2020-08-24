@@ -156,6 +156,9 @@ function promptlineVcsBranch() {
 function br() {
     command sudo chown -R $(whoami) /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
     command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
+    eval "brew update"
+    eval "brew upgrade"
+    eval "brew cask upgrade --greedy"
     eval "brew $@"
 }
 

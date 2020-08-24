@@ -42,8 +42,9 @@ else
 	    go get -u github.com/gokcehan/lf && \
 	    mv ~/go ~/.go
         if [[ -z "${SSH_CLIENT}" ]]; then
-            sudo apt-get install -y bat shutter python-pip
-            sudo snap install alacritty --classic
+            sudo apt-get install -y shutter python-pip
+            sudo snap install -y alacritty --classic
+            # sudo apt-get install -y bat 
             # NOTE: Also install ungoogled-chromium
 	    fi
     fi
