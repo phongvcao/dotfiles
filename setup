@@ -37,12 +37,15 @@ else
 	        curl htop g++ python3-pip lldb clang yarn ripgrep bfs \
 	        atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
 	        fzf fd-find neovim && \
-	    sudo snap install ccls go alacritty --classic && \
+	    sudo snap install ccls go --classic && \
 	    sudo snap install universal-ctags*.snap --dangerous && \
 	    go get -u github.com/gokcehan/lf && \
 	    mv ~/go ~/.go
-	    # sudo apt-get install -y bat shutter python-pip
-	    # NOTE: Also install ungoogled-chromium
+        if [[ -z "${SSH_CLIENT}" ]]; then
+            sudo apt-get install -y bat shutter python-pip
+            sudo snap install alacritty --classic
+            # NOTE: Also install ungoogled-chromium
+	    fi
     fi
 
     if [[ -n "${SSH_CLIENT}" ]]; then
