@@ -67,6 +67,7 @@
         if: '[ `uname` = Darwin ]'
         path: home/config/glances
     ~/.config/glances: home/config/glances
+    ~/.config/alacritty: home/config/alacritty
     ~/.vim/autoload/floaterm: home/vim/autoload/floaterm
 
     ~/.gdbinit.d: home/gdbinit.d

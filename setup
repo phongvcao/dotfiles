@@ -18,6 +18,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew cask install vagrant && \
         brew cask fetch eloston-chromium && \
         brew cask install eloston-chromium
+        brew cask install alacritty
         # brew install bat
     fi
 else
@@ -36,7 +37,7 @@ else
 	        curl htop g++ python3-pip lldb clang yarn ripgrep bfs \
 	        atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
 	        fzf fd-find neovim && \
-	    sudo snap install ccls go --classic && \
+	    sudo snap install ccls go alacritty --classic && \
 	    sudo snap install universal-ctags*.snap --dangerous && \
 	    go get -u github.com/gokcehan/lf && \
 	    mv ~/go ~/.go

@@ -60,6 +60,14 @@ uninstall ~/.config/tagged
 uninstall ~/.config/Trolltech.conf
 uninstall ~/.config/user-dirs.dirs
 uninstall ~/.config/user-dirs.locale
+uninstall ~/.config/gdb
+uninstall ~/.config/pudb/pudb.cfg
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    uninstall~/Library/Application Support/glances:
+else
+uninstall ~/.config/glances
+uninstall ~/.config/alacritty
+uninstall ~/.vim/autoload/floaterm
 
 uninstall ~/.gdbinit.d
 uninstall ~/.grc
@@ -103,6 +111,7 @@ uninstall ~/.p10k.zsh
 uninstall ~/.zshrc
 uninstall ~/.hushlogin
 uninstall ~/.gitignore_global
+uninstall ~/.pdbrc.py
 
 echo "$(tput setaf 10)All links have been removed$(tput sgr 0)"
 # echo "$(tput setaf 10)All paths have been removed$(tput sgr 0)"
