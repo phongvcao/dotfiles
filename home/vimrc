@@ -2759,7 +2759,7 @@ let g:lightline = {
 let g:unite_force_overwrite_statusline = 0
 
 function! CustomLightlineZoomed()
-    if zoom#statusline() == 'zoomed'
+    if exists('*zoom#statusline') && zoom#statusline() == 'zoomed'
         return ''
     else
         return ''
