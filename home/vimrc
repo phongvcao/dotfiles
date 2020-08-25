@@ -645,8 +645,9 @@ onoremap jK <C-c>
 onoremap JK <C-c>
 
 " Yank the whole file
-nnoremap Y zR100000yy
-nnoremap D 100000dd
+" Use nmap instead of nnoremap so content would be copied to YankRing
+nmap Y zR100000yy
+nmap D 100000dd
 nnoremap GG G
 vnoremap GG G
 xnoremap GG G
