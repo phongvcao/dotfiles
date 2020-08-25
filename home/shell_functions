@@ -1482,19 +1482,21 @@ fi
 }
 
 function tmuxattach() {
-    killall -10 tmux >/dev/null 2>&1
+    if [[ -n "${SSH_CLIENT}" ]]; then
+        killall -10 tmux >/dev/null 2>&1
+    fi
 
     if [[ -n "$1" ]]; then
         if [[ -f /usr/local/bin/tmux ]]; then
-            exec /usr/local/bin/tmux -2 attach -d -t "$1"
+            /usr/local/bin/tmux -2 attach -d -t "$1"
         elif [[ -f /usr/bin/tmux ]]; then
-            exec /usr/bin/tmux -2 attach -d -t "$1"
+            /usr/bin/tmux -2 attach -d -t "$1"
         fi
     else
         if [[ -f /usr/local/bin/tmux ]]; then
-            exec /usr/local/bin/tmux -2 attach -d
+            /usr/local/bin/tmux -2 attach -d
         elif [[ -f /usr/bin/tmux ]]; then
-            exec /usr/bin/tmux -2 attach -d
+            /usr/bin/tmux -2 attach -d
         fi
     fi
 }
