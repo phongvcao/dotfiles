@@ -300,8 +300,7 @@ Plug 'arecarn/vim-crunch', {
 Plug 'arecarn/selection.vim'
 " END: arecarn/vim-crunch
 
-Plug 'KabbAmine/vZoom.vim', {
-            \ 'on' : 'VZoomAutoToggle' }
+Plug 'dhruvasagar/vim-zoom'
 
 Plug 'wesQ3/vim-windowswap'
 " No lazy-loading for myusuf3/numbers.vim.
@@ -2725,6 +2724,7 @@ let g:lightline = {
             \ 'filename': '%F',
             \ },
             \ 'component_function': {
+            \   'zoomed': 'CustomLightlineZoomed',
             \   'readonly': 'CustomLightlineReadonly',
             \   'filetype': 'CustomLightlineFiletype',
             \   'fileformat': 'CustomLightlineFileformat',
@@ -2736,14 +2736,14 @@ let g:lightline = {
             \   'paste': 'CustomLightlinePasteMode',
             \ },
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
+            \   'left': [ [ 'mode', 'zoomed', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
             \             [ 'method', 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'diffmode', 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
+            \   'left': [ [ 'mode', 'zoomed', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
             \             [ 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
@@ -2757,6 +2757,14 @@ let g:lightline = {
             \ }
 
 let g:unite_force_overwrite_statusline = 0
+
+function! CustomLightlineZoomed()
+    if zoom#statusline() == 'zoomed'
+        return ''
+    else
+        return ''
+    endif
+endfunction
 
 function! CustomLightlinePasteMode()
     if &paste
@@ -3067,11 +3075,8 @@ let g:ophigh_filetypes_to_ignore = {
             \ 'perl' : 1, 'stardict' : 1, 'octave' : 1, 'matlab' : 1,
             \ 'php' : 1, 'yaml' : 1 }
 
-
-" vZoom.vim settings
-nnoremap f :silent! VZoomAutoToggle<CR>
-let g:vzoom = {}
-let g:vzoom.equalise_windows = 1
+" vim-zoom settings
+nmap f <Plug>(zoom-toggle)=
 
 " vim-colortuner settings
 let g:colortuner_filepath = $HOME . '/.vim/.vim-colortuner'

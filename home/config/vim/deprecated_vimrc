@@ -233,6 +233,13 @@
 " " END:francoiscabrol/ranger.vim
 " Plug 'haorenW1025/floatLf-nvim', {
 "             \ 'on' : [ 'LfToggle', 'LfToggleCurrentBuf' ] }
+" Plug 'KabbAmine/vZoom.vim', {
+"             \ 'on' : 'VZoomAutoToggle' }
+
+" vZoom.vim settings
+nnoremap f :silent! VZoomAutoToggle<CR>
+let g:vzoom = {}
+let g:vzoom.equalise_windows = 1
 
 " floatLf-nvim settinngs
 let g:floatLf_autoclose = 1
