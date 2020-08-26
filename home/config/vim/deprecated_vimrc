@@ -233,13 +233,20 @@
 " " END:francoiscabrol/ranger.vim
 " Plug 'haorenW1025/floatLf-nvim', {
 "             \ 'on' : [ 'LfToggle', 'LfToggleCurrentBuf' ] }
-" Plug 'KabbAmine/vZoom.vim', {
-"             \ 'on' : 'VZoomAutoToggle' }
 
+" Plug 'dhruvasagar/vim-zoom'
+
+" " vim-zoom settings
+" nmap f <Plug>(zoom-toggle)=
 " vZoom.vim settings
-nnoremap f :silent! VZoomAutoToggle<CR>
-let g:vzoom = {}
-let g:vzoom.equalise_windows = 1
+
+function! CustomLightlineZoomed()
+    if exists('*zoom#statusline') && zoom#statusline() == 'zoomed'
+        return ''
+    else
+        return ''
+    endif
+endfunction
 
 " floatLf-nvim settinngs
 let g:floatLf_autoclose = 1
