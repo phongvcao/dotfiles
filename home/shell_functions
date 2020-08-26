@@ -250,6 +250,78 @@ function gitstatus() {
     cd "${CURDIR}"
 }
 
+function removeLsSuffix() {
+    if [[ -n "${BASH_VERSION}" ]]; then
+        local var="${1:0:-2}"
+    elif [[ -n "${ZSH_VERSION}" ]]; then
+        local var="${1[1,-2]}"
+    fi
+    if [[ -e "$1" ]]; then
+        echo "$1"
+    elif [[ -e "${var}" ]]; then
+        echo "${var}"
+    else
+        echo "$1"
+    fi
+}
+
+function vim() {
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        killall fd >/dev/null 2>&1
+    else
+        killall fdfind >/dev/null 2>&1
+    fi
+
+    if [[ -n "$2" ]]; then
+        CURDIR="${PWD}"
+        cd "$1"
+        fzfResult=$(FZF_DEFAULT_COMMAND="\
+            fd -HI --exclude='*.git/' --max-depth '$2' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" command_fzf --prompt="(Vim) ${PWD}/")
+        fzfResult="$(removeLsSuffix ${fzfResult})"
+
+        if [[ "$(uname)" =~ "Darwin" ]]; then
+            killall fd >/dev/null 2>&1
+        else
+            killall fdfind >/dev/null 2>&1
+        fi
+
+        fzfResult="$(echo ${fzfResult} | command sed -e 's/@$//g')"
+        command_nvim "${fzfResult}"
+        cd "${CURDIR}"
+    else
+        if [[ -n "$1" ]]; then
+            if [[ -d "$1" ]]; then
+                CURDIR="${PWD}"
+                cd "$1"
+                fzfResult=$(FZF_DEFAULT_COMMAND="fd -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" command_fzf --prompt="(Vim) ${PWD}/")
+                fzfResult="$(removeLsSuffix ${fzfResult})"
+
+                if [[ "$(uname)" =~ "Darwin" ]]; then
+                    killall fd >/dev/null 2>&1
+                else
+                    killall fdfind >/dev/null 2>&1
+                fi
+
+                fzfResult="$(echo ${fzfResult} | command sed -e 's/@$//g')"
+                command_nvim "${fzfResult}"
+                cd "${CURDIR}"
+                # command_nvim -c "FzfMRURec $@"
+                # command_nvim
+            else
+                CURDIR="${PWD}"
+                DESTDIR="$(readlink -m $1)"
+                cd "$(dirname ${DESTDIR})"
+                command_nvim $@
+                cd "${CURDIR}"
+            fi
+        else
+            # command_nvim -c "FzfMRU"
+            # command_nvim -c 'let g:fzf_mrufiles_start = 1'
+            command_nvim
+        fi
+    fi
+}
+
 function dfs() {
     local filename=""
     if [[ "$(uname)" =~ "Darwin" ]]; then
@@ -1350,81 +1422,6 @@ function ps() {
 #     #     fi
 #     # fi
 # }
-
-function removeLsSuffix() {
-    if [[ -n "${BASH_VERSION}" ]]; then
-        local var="${1:0:-2}"
-    elif [[ -n "${ZSH_VERSION}" ]]; then
-        local var="${1[1,-2]}"
-    fi
-    if [[ -e "$1" ]]; then
-        echo "$1"
-    elif [[ -e "${var}" ]]; then
-        echo "${var}"
-    else
-        echo "$1"
-    fi
-}
-
-function vim() {
-    if [[ "$(uname)" =~ "Darwin" ]]; then
-        killall fd >/dev/null 2>&1
-    else
-        killall fdfind >/dev/null 2>&1
-    fi
-
-    if [[ -n "$2" ]]; then
-        CURDIR="${PWD}"
-        cd "$1"
-        fzfResult=$(FZF_DEFAULT_COMMAND="\
-            command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
-            -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null" command_fzf --prompt="(Vim) ${PWD}/")
-        fzfResult="$(removeLsSuffix ${fzfResult})"
-
-        if [[ "$(uname)" =~ "Darwin" ]]; then
-            killall fd >/dev/null 2>&1
-        else
-            killall fdfind >/dev/null 2>&1
-        fi
-
-        fzfResult="$(echo ${fzfResult} | command sed -e 's/@$//g')"
-        command_nvim "${fzfResult}"
-        cd "${CURDIR}"
-    else
-        if [[ -n "$1" ]]; then
-            if [[ -d "$1" ]]; then
-                CURDIR="${PWD}"
-                cd "$1"
-                fzfResult=$(FZF_DEFAULT_COMMAND="\
-                    command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
-                    -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null" command_fzf --prompt="(Vim) ${PWD}/")
-                fzfResult="$(removeLsSuffix ${fzfResult})"
-
-                if [[ "$(uname)" =~ "Darwin" ]]; then
-                    killall fd >/dev/null 2>&1
-                else
-                    killall fdfind >/dev/null 2>&1
-                fi
-
-                fzfResult="$(echo ${fzfResult} | command sed -e 's/@$//g')"
-                command_nvim "${fzfResult}"
-                cd "${CURDIR}"
-                # command_nvim -c "FzfMRURec $@"
-                # command_nvim
-            else
-                CURDIR="${PWD}"
-                DESTDIR="$(readlink -m $1)"
-                cd "$(dirname ${DESTDIR})"
-                command_nvim $@
-                cd "${CURDIR}"
-            fi
-        else
-            # command_nvim -c "FzfMRU"
-            # command_nvim -c 'let g:fzf_mrufiles_start = 1'
-            command_nvim
-        fi
-    fi
-}
 
 function cmd() {
     if [[ -n "$1" ]]; then
