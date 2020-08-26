@@ -2799,7 +2799,7 @@ let g:lightline_filename_pattern = {
             \ '^' . $HOME: '~',
             \ }
 function! CustomLightlineFilename()
-    if exists('b:custom_lightline_filename') && b:custom_lightline_filename !=# ''
+    if exists('b:custom_lightline_filename') && b:custom_lightline_filename !=# '' && &filetype !=# 'ctrlsf'
         return b:custom_lightline_filename
     endif
 
