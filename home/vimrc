@@ -2017,12 +2017,12 @@ function! InvokeCtrlSF(...)
     if a:0 >= 3
         let l:globs_args = split(a:3, ":")
         if a:3 !~ '^:.*'
-            let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
+            let l:globs = " --iglob \\*{" . l:globs_args[0] . "}\\*"
         else
-            let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
+            let l:exclude_globs = " --iglob !\\*{" . l:globs_args[0] . "}\\*"
         endif
         if len(l:globs_args) >= 2
-            let l:exclude_globs = " -g !\\*{" . l:globs_args[1] . "}\\*"
+            let l:exclude_globs = " --iglob !\\*{" . l:globs_args[1] . "}\\*"
         endif
     endif
 
@@ -2041,7 +2041,7 @@ function! InvokeCtrlSF(...)
             execute "CtrlSF " . a:1
         elseif filereadable(l:path)
             let l:path = fnamemodify(l:path, ':h')
-            let l:globs = " -g \\*\\{" . substitute(resolve(expand(a:2)), l:path . '/', '', 'g') . "\\}\\*"
+            let l:globs = " --iglob \\*\\{" . substitute(resolve(expand(a:2)), l:path . '/', '', 'g') . "\\}\\*"
             let g:ctrlsf_extra_backend_args = {
                         \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
                         \ }
@@ -2051,12 +2051,12 @@ function! InvokeCtrlSF(...)
         elseif !filereadable(l:path)
             let l:globs_args = split(a:2, ":")
             if a:2 !~ '^:.*'
-                let l:globs = " -g \\*{" . l:globs_args[0] . "}\\*"
+                let l:globs = " --iglob \\*{" . l:globs_args[0] . "}\\*"
             else
-                let l:exclude_globs = " -g !\\*{" . l:globs_args[0] . "}\\*"
+                let l:exclude_globs = " --iglob !\\*{" . l:globs_args[0] . "}\\*"
             endif
             if len(l:globs_args) >= 2
-                let l:exclude_globs = " -g !\\*{" . l:globs_args[1] . "}\\*"
+                let l:exclude_globs = " --iglob !\\*{" . l:globs_args[1] . "}\\*"
             endif
             let g:ctrlsf_extra_backend_args = {
                         \ 'rg': "--no-heading " . l:globs . l:exclude_globs,
@@ -2230,12 +2230,12 @@ function! GetFzfRgCommand(...)
     if a:0 >= 3
         let l:globs_args = split(a:3, ":")
         if a:3 !~ '^:.*'
-            let l:globs = " -g \\*\\{" . l:globs_args[0] . "\\}\\*"
+            let l:globs = " --iglob \\*\\{" . l:globs_args[0] . "\\}\\*"
         else
-            let l:exclude_globs = " -g !\\*\\{" . l:globs_args[0] . "\\}\\*"
+            let l:exclude_globs = " --iglob !\\*\\{" . l:globs_args[0] . "\\}\\*"
         endif
         if len(l:globs_args) >= 2
-            let l:exclude_globs = " -g !\\*\\{" . l:globs_args[1] . "\\}\\*"
+            let l:exclude_globs = " --iglob !\\*\\{" . l:globs_args[1] . "\\}\\*"
         endif
     endif
 
@@ -2251,19 +2251,19 @@ function! GetFzfRgCommand(...)
             return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1
         elseif filereadable(l:path)
             let l:path = fnamemodify(l:path, ':h')
-            let l:globs = " -g \\*\\{" . substitute(resolve(expand(a:2)), l:path . '/', '', 'g') . "\\}\\*"
+            let l:globs = " --iglob \\*\\{" . substitute(resolve(expand(a:2)), l:path . '/', '', 'g') . "\\}\\*"
             execute "cd " . l:path
             echom l:path
             return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1
         else
             let l:globs_args = split(a:2, ":")
             if a:2 !~ '^:.*'
-                let l:globs = " -g \\*\\{" . l:globs_args[0] . "\\}\\*"
+                let l:globs = " --iglob \\*\\{" . l:globs_args[0] . "\\}\\*"
             else
-                let l:exclude_globs = " -g !\\*\\{" . l:globs_args[0] . "\\}\\*"
+                let l:exclude_globs = " --iglob !\\*\\{" . l:globs_args[0] . "\\}\\*"
             endif
             if len(l:globs_args) >= 2
-                let l:exclude_globs = " -g !\\*\\{" . l:globs_args[1] . "\\}\\*"
+                let l:exclude_globs = " --iglob !\\*\\{" . l:globs_args[1] . "\\}\\*"
             endif
             pwd
             return "rg --column --line-number --no-heading --color=always --smart-case " . l:globs . l:exclude_globs . " -- " . a:1
