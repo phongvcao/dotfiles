@@ -268,15 +268,17 @@ function removeLsSuffix() {
 function vim() {
     if [[ "$(uname)" =~ "Darwin" ]]; then
         killall fd >/dev/null 2>&1
+        fdBin="fd"
     else
         killall fdfind >/dev/null 2>&1
+        fdBin="fdfind"
     fi
 
     if [[ -n "$2" ]]; then
         CURDIR="${PWD}"
         cd "$1"
         fzfResult=$(FZF_DEFAULT_COMMAND="\
-            fd -HI --exclude='*.git/' --max-depth '$2' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" command_fzf --prompt="(Vim) ${PWD}/")
+            ${fdBin} -HI --exclude='*.git/' --max-depth '$2' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" command_fzf --prompt="(Vim) ${PWD}/")
         fzfResult="$(removeLsSuffix ${fzfResult})"
 
         if [[ "$(uname)" =~ "Darwin" ]]; then
@@ -293,7 +295,7 @@ function vim() {
             if [[ -d "$1" ]]; then
                 CURDIR="${PWD}"
                 cd "$1"
-                fzfResult=$(FZF_DEFAULT_COMMAND="fd -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" command_fzf --prompt="(Vim) ${PWD}/")
+                fzfResult=$(FZF_DEFAULT_COMMAND="${fdBin} -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" command_fzf --prompt="(Vim) ${PWD}/")
                 fzfResult="$(removeLsSuffix ${fzfResult})"
 
                 if [[ "$(uname)" =~ "Darwin" ]]; then
@@ -324,26 +326,29 @@ function vim() {
 
 function dfs() {
     local filename=""
+    local fdBin=""
     if [[ "$(uname)" =~ "Darwin" ]]; then
         killall fd >/dev/null 2>&1
+        fdBin="fd"
     else
         killall fdfind >/dev/null 2>&1
+        fdBin="fdfind"
     fi
 
     if [[ -n $3 ]]; then
-        filename=$(FZF_DEFAULT_COMMAND="fd '.*$1.*' '$2' --exclude='*.git/' --max-depth '$3' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
+        filename=$(FZF_DEFAULT_COMMAND="${fdBin} '.*$1.*' '$2' --exclude='*.git/' --max-depth '$3' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
     else
         if [[ -n $2 ]]; then
-            filename=$(FZF_DEFAULT_COMMAND="fd '.*$1.*' '$2' -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/" fzf --prompt="(DFS)> ${PWD}/")
+            filename=$(FZF_DEFAULT_COMMAND="${fdBin} '.*$1.*' '$2' -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
         else
             if [[ -n $1 ]]; then
                 if [[ -d "$(readlink -m $1)" ]]; then
-                    filename=$(FZF_DEFAULT_COMMAND="fd . '$(readlink -m $1)' -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> "$(readlink -m $1)"/")
+                    filename=$(FZF_DEFAULT_COMMAND="${fdBin} . '$(readlink -m $1)' -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> "$(readlink -m $1)"/")
                 else
-                    filename=$(FZF_DEFAULT_COMMAND="fd '.*$1.*' . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
+                    filename=$(FZF_DEFAULT_COMMAND="${fdBin} '.*$1.*' . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
                 fi
             else
-                filename=$(FZF_DEFAULT_COMMAND="fd -HI --exclude='*.git/' \
+                filename=$(FZF_DEFAULT_COMMAND="${fdBin} -HI --exclude='*.git/' \
                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                     --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
             fi
@@ -417,9 +422,9 @@ function _rm() {
         fi
             
         if [[ -n $1 ]]; then
-            filename=$(FZF_DEFAULT_COMMAND="fd '.*$1.*' . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(Remove)> ${PWD}/")
+            filename=$(FZF_DEFAULT_COMMAND="${fdBin} '.*$1.*' . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(Remove)> ${PWD}/")
         else
-            filename=$(FZF_DEFAULT_COMMAND="fd -HI --exclude='*.git/' \
+            filename=$(FZF_DEFAULT_COMMAND="${fdBin} -HI --exclude='*.git/' \
                 --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
                 --group-directories-first --color -A -d {} \;" fzf --prompt="(Remove)> ${PWD}/")
         fi
