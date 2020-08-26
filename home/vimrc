@@ -3,6 +3,10 @@
 " Configuration file for Vim 9.4 Compatible with both Linux & Windows
 "
 
+if filereadable( expand( '$HOME/.custom_vimrc' ) )
+    source $HOME/.custom_vimrc
+endif
+
 if has('win32') || has('win64')
     let g:vimPath='C:/Users/pcao/vimfiles'
 elseif has('unix')
@@ -482,10 +486,6 @@ call plug#end()
 
 filetype plugin on
 filetype plugin indent on
-
-if filereadable( expand( '$HOME/.custom_vimrc' ) )
-    source $HOME/.custom_vimrc
-endif
 
 let g:vimBackupDir = g:vimPath . '/backup'
 let g:vimSwapDir = g:vimPath . '/swap'
