@@ -252,25 +252,39 @@ function gitstatus() {
 
 function dfs() {
     local filename=""
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        killall fd >/dev/null 2>&1
+    else
+        killall fdfind >/dev/null 2>&1
+    fi
+
     if [[ -n $3 ]]; then
-        filename=$(fd ".*$1.*" "$2" --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
+        filename=$(FZF_DEFAULT_COMMAND="fd '.*$1.*' '$2' --exclude='*.git/' --max-depth '$3' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
     else
         if [[ -n $2 ]]; then
-            filename=$(fd ".*$1.*" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
+            filename=$(FZF_DEFAULT_COMMAND="fd '.*$1.*' '$2' -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/" fzf --prompt="(DFS)> ${PWD}/")
         else
             if [[ -n $1 ]]; then
                 if [[ -d "$(readlink -m $1)" ]]; then
-                    filename=$(fd . "$(readlink -m $1)" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> "$(readlink -m $1)"/")
+                    filename=$(FZF_DEFAULT_COMMAND="fd . '$(readlink -m $1)' -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> "$(readlink -m $1)"/")
                 else
-                    filename=$(fd ".*$1.*" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
+                    filename=$(FZF_DEFAULT_COMMAND="fd '.*$1.*' . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
                 fi
             else
-                filename=$(fd -HI --exclude='*.git/' \
+                filename=$(FZF_DEFAULT_COMMAND="fd -HI --exclude='*.git/' \
                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                    --group-directories-first --color -A -d {} \; | fzf --prompt="(DFS)> ${PWD}/")
+                    --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
             fi
         fi
     fi
+
+    filename="$(echo ${filename} | command sed -e 's/@$//g')"
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        killall fd >/dev/null 2>&1
+    else
+        killall fdfind >/dev/null 2>&1
+    fi
+
     if [[ -n "${filename}" ]]; then
         if [[ -d "$(readlink -m ${filename})" ]]; then
             echo "cd ${filename}"
@@ -284,25 +298,31 @@ function dfs() {
 
 function bfs() {
     local filename=""
+    killall bfs >/dev/null 2>&1
+
     if [[ -n $3 ]]; then
-        filename=$(command bfs "$2" -maxdepth "$3" -mount -iname "*$1*" -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
+        filename=$(FZF_DEFAULT_COMMAND="command bfs '$2' -maxdepth '$3' -mount -iname '*$1*' -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null" fzf --prompt="(BFS)> ${PWD}/")
     else
         if [[ -n $2 ]]; then
-            filename=$(command bfs "$2" -mount -iname "*$1*" -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
+            filename=$(FZF_DEFAULT_COMMAND="command bfs '$2' -mount -iname '*$1*' -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null" fzf --prompt="(BFS)> ${PWD}/")
         else
             if [[ -n $1 ]]; then
                 if [[ -d "$(readlink -m $1)" ]]; then
-                    filename=$(command bfs "$(readlink -m $1)" -mount -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> "$(readlink -m $1)"/")
+                    filename=$(FZF_DEFAULT_COMMAND="command bfs '$(readlink -m $1)' -mount -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null" fzf --prompt="(BFS)> "$(readlink -m $1)"/")
                 else
-                    filename=$(command bfs . -mount -iname "*$1*" -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
+                    filename=$(FZF_DEFAULT_COMMAND="command bfs . -mount -iname '*$1*' -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null" fzf --prompt="(BFS)> ${PWD}/")
                 fi
             else
-                filename=$(command bfs . -mount -not -iwholename '*.git/*' \
+                filename=$(FZF_DEFAULT_COMMAND="command bfs . -mount -not -iwholename '*.git/*' \
                     -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-                    --group-directories-first --color -A -d {} \; 2>/dev/null | fzf --prompt="(BFS)> ${PWD}/")
+                    --group-directories-first --color -A -d {} \; 2>/dev/null" fzf --prompt="(BFS)> ${PWD}/")
             fi
         fi
     fi
+
+    filename="$(echo ${filename} | command sed -e 's/@$//g')"
+    killall bfs >/dev/null 2>&1
+
     if [[ -n "${filename}" ]]; then
         if [[ -d "${filename}" ]]; then
             echo "cd ${filename}"
@@ -315,15 +335,33 @@ function bfs() {
 }
 
 function _rm() {
-    if [[ -n $1 ]]; then
+    if [[ ( -n $1 ) && ( -d "$(readlink -m $1)" || -f "$(readlink -m $1)" ) ]]; then
         command rm -rf "$1"
     else
-        filename=$(fd -HI --exclude='*.git/' \
-            --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-            --group-directories-first --color -A -d {} \; | fzf --prompt="(Remove)> ${PWD}/")
-                    if [[ -n "${filename}" ]]; then
-                        command rm -rf "${filename}"
-                    fi
+        if [[ "$(uname)" =~ "Darwin" ]]; then
+            killall fd >/dev/null 2>&1
+        else
+            killall fdfind >/dev/null 2>&1
+        fi
+            
+        if [[ -n $1 ]]; then
+            filename=$(FZF_DEFAULT_COMMAND="fd '.*$1.*' . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(Remove)> ${PWD}/")
+        else
+            filename=$(FZF_DEFAULT_COMMAND="fd -HI --exclude='*.git/' \
+                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d {} \;" fzf --prompt="(Remove)> ${PWD}/")
+        fi
+
+        if [[ "$(uname)" =~ "Darwin" ]]; then
+            killall fd >/dev/null 2>&1
+        else
+            killall fdfind >/dev/null 2>&1
+        fi
+
+        if [[ -n "${filename}" ]]; then
+            echo "rm -rf ${filename}"
+            command rm -rf "${filename}"
+        fi
     fi
 }
 
@@ -1329,27 +1367,56 @@ function removeLsSuffix() {
 }
 
 function vim() {
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        killall fd >/dev/null 2>&1
+    else
+        killall fdfind >/dev/null 2>&1
+    fi
+
     if [[ -n "$2" ]]; then
         CURDIR="${PWD}"
-        FZF_DEFAULT_COMMAND_DEFAULT="${FZF_DEFAULT_COMMAND}"
-        FZF_DEFAULT_COMMAND="\
-            command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
-            -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null"
         cd "$1"
-        fzfResult="$(command_fzf --prompt="(Vim) ${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command_nvim "${fzfResult}"
-        FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND_DEFAULT}"
+        fzfResult=$(FZF_DEFAULT_COMMAND="\
+            command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+            -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null" command_fzf --prompt="(Vim) ${PWD}/")
+        fzfResult="$(removeLsSuffix ${fzfResult})"
+
+        if [[ "$(uname)" =~ "Darwin" ]]; then
+            killall fd >/dev/null 2>&1
+        else
+            killall fdfind >/dev/null 2>&1
+        fi
+
+        fzfResult="$(echo ${fzfResult} | command sed -e 's/@$//g')"
+        command_nvim "${fzfResult}"
         cd "${CURDIR}"
     else
         if [[ -n "$1" ]]; then
             if [[ -d "$1" ]]; then
                 CURDIR="${PWD}"
                 cd "$1"
-                fzfResult="$(command_fzf --prompt="(Vim) ${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && command_nvim "${fzfResult}"
+                fzfResult=$(FZF_DEFAULT_COMMAND="\
+                    command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+                    -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null" command_fzf --prompt="(Vim) ${PWD}/")
+                fzfResult="$(removeLsSuffix ${fzfResult})"
+
+                if [[ "$(uname)" =~ "Darwin" ]]; then
+                    killall fd >/dev/null 2>&1
+                else
+                    killall fdfind >/dev/null 2>&1
+                fi
+
+                fzfResult="$(echo ${fzfResult} | command sed -e 's/@$//g')"
+                command_nvim "${fzfResult}"
                 cd "${CURDIR}"
                 # command_nvim -c "FzfMRURec $@"
                 # command_nvim
             else
+                CURDIR="${PWD}"
+                DESTDIR="$(readlink -m $1)"
+                cd "$(dirname ${DESTDIR})"
                 command_nvim $@
+                cd "${CURDIR}"
             fi
         else
             # command_nvim -c "FzfMRU"

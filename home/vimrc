@@ -2799,7 +2799,7 @@ let g:lightline_filename_pattern = {
             \ '^' . $HOME: '~',
             \ }
 function! CustomLightlineFilename()
-    if exists('b:custom_lightline_filename')
+    if exists('b:custom_lightline_filename') && b:custom_lightline_filename !=# ''
         return b:custom_lightline_filename
     endif
 
@@ -2809,8 +2809,7 @@ function! CustomLightlineFilename()
 
     let l:filename = system('readlink -f ' . expand('%:p'))
     if l:filename !~ '^/.*'
-        let b:custom_lightline_filename = b:webdev_filetype_symbol . ' ' 
-        return b:custom_lightline_filename
+        return b:webdev_filetype_symbol . ' '  
     endif
     let l:filename = substitute(l:filename, '\n', '', 'g')
     for pattern in keys(g:lightline_filename_pattern)
