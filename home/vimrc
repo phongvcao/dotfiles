@@ -2200,7 +2200,7 @@ nnoremap <leader>b :CocCommand fzf-preview.Buffers<CR>
 nnoremap <leader>w :FZFWindows<CR>
 nnoremap <leader>q :CocCommand fzf-preview.Quickfix<CR>
 nnoremap <leader>f :FzfMruFiles<CR> 
-nnoremap <leader>F :FZFFiles<CR> 
+nnoremap <leader>F :FZFFiles $PWD<CR>
 nnoremap <leader>M :FZFMaps<CR>
 nnoremap <leader>m :CocCommand fzf-preview.Bookmarks<CR>
 nnoremap <leader>j :CocCommand fzf-preview.Jumps<CR>
@@ -2315,6 +2315,7 @@ nnoremap <leader>S :call fzf#run(fzf#wrap({ 'source': 'tac $HOME/.shell_history'
 let g:fzf_command_prefix = 'FZF'
 let g:fzf_preview_window = 'right:50%'
 let g:fzf_layout = { 'window': { 'width': g:fzf_preview_floating_window_rate, 'height': g:fzf_preview_floating_window_rate } }
+let g:fzf_files_options = '--prompt="(DFS)> $PWD/"'
 nnoremap oo :FzfMRU<Space>
 nnoremap <localleader>v :split<CR>:FzfMRU<CR>
 nnoremap <localleader>h :vsplit<CR>:FzfMRU<CR>
@@ -3581,6 +3582,6 @@ augroup CustomAutoCmd
     " fzf.vim settings
     " Replace netrw with FZF
     autocmd VimEnter * silent! autocmd! FileExplorer
-    autocmd VimEnter * if isdirectory(expand("%")) | setlocal nonumber norelativenumber | exec 'FZF' | endif
+    autocmd VimEnter * if isdirectory(expand("%")) | setlocal nonumber norelativenumber | exec 'FZFFiles $PWD' | endif
     autocmd WinEnter * call OnFzfRgCommandExit()
 augroup END
