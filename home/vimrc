@@ -1724,6 +1724,7 @@ nnoremap <silent> <leader>D  :<C-u>CocList diagnostics<CR>
 
 " split-term.vim settings
 let g:disable_key_mappings = 1
+let g:split_term_default_shell = "zsh"
 
 " vim-floaterm settings
 let g:floaterm_shell = $SHELL
