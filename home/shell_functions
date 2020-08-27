@@ -1438,6 +1438,18 @@ function cmd() {
 }
 
 function tee() {
+    if [[ -z "$1" ]]; then
+        if [[ -z "${VIMRUNTIME}" ]]; then
+            term -c 'call jobsend(b:terminal_job_id, "_tee\n")'
+        else
+            _tee "$@"
+        fi
+    else
+        _tee "$@"
+    fi
+}
+
+function _tee() {
     if [[ -n "$1" ]]; then
         fileName="$2"
         commandArgs="$1 2>&1"
