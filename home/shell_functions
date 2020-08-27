@@ -1445,7 +1445,14 @@ function tee() {
             _tee "$@"
         fi
     else
-        _tee "$@"
+        if [[ -z "${VIMRUNTIME}" ]]; then
+            echo "'$1'"
+            echo "${@: -1}"
+            term -c "call jobsend(b:terminal_job_id, \"_tee '$1' '${@: -1}'\n\")"
+        else
+            _tee "$@"
+        fi
+        
     fi
 }
 
