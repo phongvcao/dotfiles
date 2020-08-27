@@ -3560,7 +3560,7 @@ augroup CustomAutoCmd
     autocmd SourcePost * call StartFzfMRU()
 
     " fzf-preview.vim settings
-    autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+    autocmd VimEnter * if exists("*vista#RunForNearestMethodOrFunction") | call vista#RunForNearestMethodOrFunction() | endif
     autocmd VimEnter * call SetFzfPreviewBufferLinesPath()
     autocmd FileType fzf setlocal nonumber norelativenumber
 
