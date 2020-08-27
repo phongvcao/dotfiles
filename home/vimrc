@@ -306,6 +306,7 @@ Plug 'arecarn/selection.vim'
 
 Plug 'KabbAmine/vZoom.vim', {
             \ 'on' : 'VZoomAutoToggle' }
+Plug 'dhruvasagar/vim-zoom'
 
 Plug 'wesQ3/vim-windowswap'
 " No lazy-loading for myusuf3/numbers.vim.
@@ -894,6 +895,28 @@ endfunction
 
 nnoremap <localleader>/ :set hlsearch!<CR>:call MaybeEmptySearchReg()<CR>
 vnoremap <localleader>/ :<C-u>set hlsearch!<CR>:call MaybeEmptySearchReg()<CR>
+
+function! SignColumnNumberToggle()
+  if &signcolumn == 'yes'
+    setlocal signcolumn=no
+  else
+    setlocal signcolumn=yes
+  endif
+
+  if &relativenumber == 1
+    setlocal norelativenumber
+  else
+    setlocal relativenumber
+  endif
+  
+  if &number == 1
+    set nonumber
+  else
+    set number
+  endif
+endfunction
+" nnoremap <C-f> :call SignColumnNumberToggle()<CR>
+
 " Page Scroll keymappings
 " nnoremap <leader>j <PageDown>
 " nnoremap <leader>k <PageUp>
@@ -2725,6 +2748,7 @@ let g:lightline = {
             \ 'filename': '%F',
             \ },
             \ 'component_function': {
+            \   'zoomed': 'CustomLightlineZoomed',
             \   'readonly': 'CustomLightlineReadonly',
             \   'filetype': 'CustomLightlineFiletype',
             \   'fileformat': 'CustomLightlineFileformat',
@@ -2736,14 +2760,14 @@ let g:lightline = {
             \   'paste': 'CustomLightlinePasteMode',
             \ },
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
+            \   'left': [ [ 'mode', 'zoomed', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
             \             [ 'method', 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'diffmode', 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
+            \   'left': [ [ 'mode', 'zoomed', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
             \             [ 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
@@ -2757,6 +2781,14 @@ let g:lightline = {
             \ }
 
 let g:unite_force_overwrite_statusline = 0
+
+function! CustomLightlineZoomed()
+    if exists('*zoom#statusline') && zoom#statusline() == 'zoomed'
+        return ''
+    else
+        return ''
+    endif
+endfunction
 
 function! CustomLightlinePasteMode()
     if &paste
@@ -3070,6 +3102,10 @@ let g:ophigh_filetypes_to_ignore = {
 nnoremap f :silent! VZoomAutoToggle<CR>
 let g:vzoom = {}
 let g:vzoom.equalise_windows = 1
+
+" vim-zoom settings
+nnoremap <silent><expr> <Plug>(ToggleSignColumnNumber) SignColumnNumberToggle()
+nmap <C-f> <Plug>(ToggleSignColumnNumber)<Plug>(zoom-toggle)=
 
 " vim-colortuner settings
 let g:colortuner_filepath = $HOME . '/.vim/.vim-colortuner'
@@ -3415,6 +3451,9 @@ augroup CustomAutoCmd
     " autocmd BufLeave * silent! mkview
     " autocmd BufEnter * silent! loadview
     " autocmd WinEnter,BufWinEnter * :call ShowSignColumn()
+
+    " numbers.vim settings
+    autocmd WinEnter * :set signcolumn=yes
 
     " vim-better-whitespace settings
     " autocmd InsertLeave * :.StripWhitespace
