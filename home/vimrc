@@ -3027,6 +3027,29 @@ nnoremap za :call FoldLevelToggle()<CR>
 let g:SignatureMap = { 'Leader' : 'm', 'ToggleMarkAtLine' : '\\', }
 let g:SignatureIncludeMarks = 'abcdefgikmnopqrstuwxyABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:SignatureForceRemoveGlobal = 1
+let g:SignatureMap = {
+            \ 'Leader'             :  "m",
+            \ 'PlaceNextMark'      :  "m,",
+            \ 'ToggleMarkAtLine'   :  "m.",
+            \ 'PurgeMarksAtLine'   :  "m-",
+            \ 'DeleteMark'         :  "dm",
+            \ 'PurgeMarks'         :  "m<BS>",
+            \ 'PurgeMarkers'       :  "m<Space>",
+            \ 'GotoNextLineAlpha'  :  "']",
+            \ 'GotoPrevLineAlpha'  :  "'[",
+            \ 'GotoNextSpotAlpha'  :  "`]",
+            \ 'GotoPrevSpotAlpha'  :  "`[",
+            \ 'GotoNextLineByPos'  :  "]'",
+            \ 'GotoPrevLineByPos'  :  "['",
+            \ 'GotoNextSpotByPos'  :  "]`",
+            \ 'GotoPrevSpotByPos'  :  "[`",
+            \ 'GotoNextMarker'     :  "]-",
+            \ 'GotoPrevMarker'     :  "[-",
+            \ 'GotoNextMarkerAny'  :  "]=",
+            \ 'GotoPrevMarkerAny'  :  "[=",
+            \ 'ListBufferMarks'    :  "m/",
+            \ 'ListBufferMarkers'  :  "m?"
+            \ }
 
 " vim-bookmarks settings
 if filereadable( $HOME . "/.vim-bookmarks" )
