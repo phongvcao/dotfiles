@@ -101,6 +101,7 @@ Plug 'junegunn/fzf', {
             \ 'do': { -> fzf#install() } }
 Plug 'liuchengxu/vista.vim'
 Plug 'MattesGroeger/vim-bookmarks'
+Plug 'kshenoy/vim-signature'
 Plug 'markwu/vim-mrufiles'
 if !has('nvim')
     Plug 'yuki-ycino/fzf-preview.vim', {
@@ -2208,9 +2209,10 @@ nnoremap <leader>w :FZFWindows<CR>
 nnoremap <leader>q :CocCommand fzf-preview.Quickfix<CR>
 nnoremap <leader>f :FzfMruFiles<CR> 
 nnoremap <leader>F :FZFFiles $PWD<CR>
-nnoremap <leader>M :FZFMaps<CR>
-nnoremap <leader>m :CocCommand fzf-preview.Bookmarks<CR>
-nnoremap <leader>j :CocCommand fzf-preview.Jumps<CR>
+nnoremap <leader>k :FZFMaps<CR>
+nnoremap <leader>M :CocCommand fzf-preview.Bookmarks<CR>
+nnoremap <leader>m :CocCommand fzf-preview.Marks<CR>
+" nnoremap <leader>j :CocCommand fzf-preview.Jumps<CR>
 nnoremap <leader>/ :FZFHistory/<CR>
 nnoremap <leader>c :CocCommand fzf-preview.Changes<CR>
 nnoremap <leader>t :FZFBTags<CR>
@@ -3017,6 +3019,10 @@ nnoremap za :call FoldLevelToggle()<CR>
 "   return bar
 " endfun
 
+" vim-signature settings
+let g:SignatureMap = { 'Leader' : 'm', 'ToggleMarkAtLine' : '\\', }
+let g:SignatureIncludeMarks = 'abcdefgikmnopqrstuwxyABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
 " vim-bookmarks settings
 if filereadable( $HOME . "/.vim-bookmarks" )
     call delete( fnameescape( $HOME . "/.vim-bookmarks" ) )
@@ -3028,16 +3034,16 @@ let g:bookmark_no_default_key_mappings = 1
 let g:bookmark_location_list = 1
 let g:bookmark_sign = ">>"
 let g:bookmark_annotation_sign = ">>"
-nnoremap mm :BookmarkToggle<CR>
-nnoremap mi :BookmarkAnnotate<CR>
-nnoremap ma :BookmarkShowAll<CR>
-nnoremap mn :BookmarkNext<CR>zz
-nnoremap mp :BookmarkPrev<CR>zz
-nnoremap mc :BookmarkClear<CR>
-nnoremap mC :BookmarkClearAll<CR>
-nnoremap mk :BookmarkMoveUp<CR>
-nnoremap mj :BookmarkMoveDown<CR>
-nnoremap m; :BookmarkMoveToLine<CR>
+nnoremap MM :BookmarkToggle<CR>
+nnoremap MI :BookmarkAnnotate<CR>
+nnoremap MA :BookmarkShowAll<CR>
+nnoremap MN :BookmarkNext<CR>zz
+nnoremap MP :BookmarkPrev<CR>zz
+nnoremap Mc :BookmarkClear<CR>
+nnoremap MC :BookmarkClearAll<CR>
+nnoremap MK :BookmarkMoveUp<CR>
+nnoremap MJ :BookmarkMoveDown<CR>
+nnoremap M; :BookmarkMoveToLine<CR>
 
 " vim-mrufiles settings
 let g:mrufiles_cache_directory = $HOME . '/.vim/cache'

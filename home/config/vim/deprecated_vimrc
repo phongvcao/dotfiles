@@ -143,7 +143,6 @@
 "     Plug 'vim-airline/vim-airline'
 " endif
 " " Plugins (conflicting)
-" Plug 'kshenoy/vim-signature'
 " Plug 'tpope/vim-scriptease'
 " Plug 'Rykka/clickable.vim'
 " Plug 'Rykka/clickable-things'
@@ -1062,9 +1061,6 @@ if has("python3")
 elseif has("python")
 endif
 
-" vim-signature settings
-let g:SignatureMap = { 'Leader' : 'm', 'ToggleMarkAtLine' : '\\', }
-let g:SignatureIncludeMarks = 'abcdefgikmnopqrstuwxyABCDEFGHIJKLMNOPQRSTUVWXYZ'
 " Enable omni completion.
 " if has('lua')
 "     autocmd FileType java :let g:loaded_neocomplete = 1
