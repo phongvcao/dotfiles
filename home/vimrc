@@ -17,7 +17,6 @@ endif
 set shell=bash\ --login
 
 " BEGIN: vim-plug
-
 set nocompatible
 
 " Install vim-colors-solarized manually to make vim-plug beautiful
@@ -827,9 +826,6 @@ nnoremap <C-w> <nop>
 " nnoremap <C-l> <C-w>l
 " nnoremap <C-w> <C-w>w
 function WriteQuitAll()
-    if has('nvim')
-        wshada!
-    endif
     if expand('%p') != ''
         silent! wqa!
     else
@@ -3589,6 +3585,9 @@ augroup CustomAutoCmd
         endif
     endif
     autocmd BufEnter * call HighlightEasyMotion()
+
+    " vim-signature settings
+    autocmd VimLeavePre,BufWritePre * if has('nvim') | wshada! | endif
 
     " vim-over settings
     if exists( ':EMCommandLineNoreMap' ) == 2
