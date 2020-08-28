@@ -860,7 +860,11 @@ else
         if &filetype == 'magit'
             let l:cur_dir = substitute(resolve(expand('%:p')), '^magit:', '', 'g')
         else
-            let l:cur_dir = fnamemodify(resolve(expand('%:p')), ':h')
+            if expand('%:p') !=# resolve(expand('%:p')) && expand('%:p') !~ '^term.*'
+                let l:cur_dir = fnamemodify(resolve(expand('%:p')), ':h')
+            else
+                let l:cur_dir = $PWD
+            endif
         endif
         if isdirectory(l:cur_dir)
             exec 'FloatermNew! cd ' . fnamemodify(resolve(expand('%:p')), ':h') . ' ; clear'
@@ -1729,6 +1733,7 @@ let g:split_term_default_shell = "zsh"
 " vim-floaterm settings
 let g:floaterm_shell = $SHELL
 let g:floaterm_wintitle = v:false
+let g:floaterm_title = ''
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
 let g:floaterm_autoclose = 2
@@ -3579,6 +3584,7 @@ augroup CustomAutoCmd
 
     " vim-floaterm settings
     autocmd FileType floaterm setlocal number relativenumber scrollback=100000
+    autocmd WinEnter * if &filetype == 'terminal' | cd $PWD | endif
 
     " fzf.vim settings
     " Replace netrw with FZF
