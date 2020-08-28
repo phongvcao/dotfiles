@@ -80,6 +80,7 @@ Plug 'pelodelfuego/vim-swoop'
 Plug 'hwrod/interactive-replace', {
             \ 'on' : [ 'InteractiveReplace' ] }
 Plug 'matze/vim-move'
+Plug 'anschnapp/move-less'
 Plug 'samoshkin/vim-mergetool', {
             \ 'on' : [ 'MergetoolToggle', 'MergetoolStart' ] }
 Plug 'wellle/targets.vim'
@@ -2544,6 +2545,21 @@ vmap <C-j> <Plug>MoveBlockDown
 vmap <C-k> <Plug>MoveBlockUp
 vmap <C-h> <Plug>MoveBlockLeft
 vmap <C-l> <Plug>MoveBlockRight
+
+" vim-moveless settings
+nnoremap ZZ :call MoveLessMode()<CR>
+let g:MoveLess#Mappings = {
+            \ 'FoldBelow': 'j',
+            \ 'FoldAbove': 'k',
+            \ 'UnfoldBelow': 'J',
+            \ 'UnfoldAbove': 'K',
+            \ 'FoldAboveAndBelowK1': 'l',
+            \ 'FoldAboveAndBelowK2': 'H',
+            \ 'UnfoldAboveAndBelowK1': 'h',
+            \ 'UnfoldAboveAndBelowK2': 'L',
+            \ 'StopMoveLess': "\<C-p>",
+            \ 'AbortMoveLess': "\<C-c>",
+            \ }
 
 " vim-mergetool settings
 function! MaybeInvokeMergeTool()
