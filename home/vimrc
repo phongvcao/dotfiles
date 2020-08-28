@@ -2204,6 +2204,7 @@ let g:fzf_preview_use_dev_icons = 0
 " " Devicons can make fzf-preview slow when the number of results is high
 " " By default icons are disable when number of results is higher that 5000
 let g:fzf_preview_dev_icons_limit = 5000
+let g:fzf_preview_preview_key_bindings = 'ctrl-k:preview-up,ctrl-j:preview-down'
 nnoremap <leader>b :CocCommand fzf-preview.Buffers<CR>
 nnoremap <leader>w :FZFWindows<CR>
 nnoremap <leader>q :CocCommand fzf-preview.Quickfix<CR>
