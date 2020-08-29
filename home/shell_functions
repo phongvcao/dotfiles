@@ -311,9 +311,9 @@ function vim() {
                 # command_nvim
             else
                 CURDIR="${PWD}"
-                DESTDIR="$(readlink -m $1)"
-                cd "$(dirname ${DESTDIR})"
-                command_nvim $@
+                DESTFILE="$(readlink -m $1)"
+                cd "$(dirname ${DESTFILE})"
+                command_nvim "${DESTFILE}"
                 cd "${CURDIR}"
             fi
         else
