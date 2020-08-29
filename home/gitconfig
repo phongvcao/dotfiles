@@ -11,10 +11,11 @@
     ui = true
 
 [merge]
-    tool = command nvim -d
+    tool = vim_mergetool
     conflictstyle = diff3
 
 [mergetool "vim_mergetool"]
-    cmd = command nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+    cmd = command nvim -f -d "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+    # cmd = command nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
     trustExitCode = true
     keepBackup = true
