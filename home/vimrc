@@ -3635,6 +3635,9 @@ augroup CustomAutoCmd
     autocmd FileType floaterm setlocal number relativenumber scrollback=100000
     autocmd WinEnter * if &filetype == 'terminal' | cd $PWD | endif
 
+    " split-term.vim settings
+    autocmd! BufReadCmd term://*
+
     " fzf.vim settings
     " Replace netrw with FZF
     autocmd VimEnter * silent! autocmd! FileExplorer
