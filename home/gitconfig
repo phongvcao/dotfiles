@@ -15,7 +15,7 @@
     conflictstyle = diff3
 
 [mergetool "vim_mergetool"]
-    cmd = command nvim -f -d "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+    cmd = command nvim -f -d "$MERGED" "$BASE" "$REMOTE" "$LOCAL"
     # cmd = command nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
-    trustExitCode = true
+    trustExitCode = false
     keepBackup = true
