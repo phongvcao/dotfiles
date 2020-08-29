@@ -15,7 +15,7 @@
     conflictstyle = diff3
 
 [mergetool "vim_mergetool"]
-    cmd = ~/.dotfiles/home/config/shell/p4merge.sh "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+    cmd = ${HOME}/.dotfiles/home/config/shell/p4merge.sh "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
     # cmd = command nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
     trustExitCode = false
     keepBackup = true
