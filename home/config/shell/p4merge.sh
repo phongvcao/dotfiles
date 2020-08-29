@@ -5,4 +5,4 @@
 # MERGED=$4
 # command nvim -d $1 $2 $3 $4
 # command nvim -f -c "4wincmd w | normal! 'gg100000dd' | diffoff" -d "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
-command nvim -f -c "4wincmd w | normal! 'gg100000dd' | diffoff" -d "$1" "$2" "$3" "$4"
+command nvim -f -c "4wincmd w | normal! gg100000dd | diffoff" -d "$1" "$2" "$3" "$4"
