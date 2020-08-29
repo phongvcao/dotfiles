@@ -826,6 +826,9 @@ nnoremap <C-w> <nop>
 " nnoremap <C-l> <C-w>l
 " nnoremap <C-w> <C-w>w
 function WriteQuitAll()
+    if &buftype == 'terminal'
+        return
+    endif
     if expand('%p') != ''
         silent! wqa!
     else
@@ -1879,7 +1882,16 @@ let g:reanimate_save_dir = g:vimPath . '/reanimate/save_dir'
 nnoremap <leader>ss :ReanimateSaveSession<Space>
 nnoremap <leader>sl :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateLoadSession', 'options': '--prompt="SessionLoad> "' }))<CR>
 nnoremap <leader>sd :silent! call fzf#run(fzf#wrap({'source': 'ls -t ~/.vim/reanimate/save_dir/default_category', 'sink': 'ReanimateDeleteSession', 'options': '--prompt="SessionDel> "' }))<CR>
-nnoremap Q :w<CR>:ReanimateSaveSession<CR>:call WriteQuitAll()<CR>
+function! SaveSessionWriteQuitAll()
+    if &buftype == 'terminal'
+        return
+    endif
+
+    w!
+    ReanimateSaveSession
+    call WriteQuitAll()
+endfunction
+nnoremap Q :call SaveSessionWriteQuitAll()<CR>
 function! SaveSessionReanimate(...)
     let l:arg = join( a:000, '_' )
     if ( l:arg != '' )
@@ -2577,6 +2589,9 @@ function! MaybeInvokeMergeTool()
 endfunction
 
 function QuitMergetool()
+    if &buftype == 'terminal'
+        return
+    endif
     " If we're in merge mode, exit
     if get(g:, 'mergetool_in_merge_mode', 0)
         call mergetool#stop()
