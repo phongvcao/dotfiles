@@ -704,7 +704,16 @@ nnoremap ze zE:set foldmethod=indent<CR>
 nnoremap zR zR
 " Close all folds
 nnoremap zM zM
-nnoremap C :silent! tabclose<CR>
+function! MaybeCloseTab()
+    let l:tab_buffers = tabpagebuflist()
+    for buf_number in l:tab_buffers
+        if bufname(buf_number) =~ 'term://'
+            return
+        endif
+    endfor
+    silent! tabclose
+endfunction
+nnoremap C :call MaybeCloseTab()<CR>
 nnoremap cd :cd<Space>
 nnoremap <leader>M :tabmove<Space>
 " nnoremap <localleader>rw :call RefreshFoldsAllWindows()<CR>
@@ -853,8 +862,9 @@ let g:lasttab = 1
 " Go to previously accessed buffer
 " nnoremap <C-u><C-b> :b#<CR>
 function! MaybeCloseBuffer()
-    if &buftype == 'terminal' && exists(':Bdelete')
-        Bdelete!
+    if &buftype == 'terminal' && exists(':Bwipeout')
+        silent! Bwipeout!
+        " silent! Bdelete!
     else
         silent! q
     endif
