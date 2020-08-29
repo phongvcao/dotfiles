@@ -1,6 +1,6 @@
 " vim:filetype=vim
 "
-" Configuration file for Vim 9.4 Compatible with both Linux & Windows
+" Configuration file for Vim 9.4 Compatible with both Linux & Windows (not mine)
 "
 
 if filereadable( expand( '$HOME/.custom_vimrc' ) )
