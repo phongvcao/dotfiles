@@ -826,7 +826,7 @@ nnoremap <C-w> <nop>
 " nnoremap <C-l> <C-w>l
 " nnoremap <C-w> <C-w>w
 function! IsTermRunning()
-    let l:buffers = map(copy(getbufinfo()), 'v:val.name')
+    let l:buffers = map(filter(copy(getbufinfo()), 'v:val.listed'), 'v:val.name') 
     for buf_name in l:buffers
         if buf_name =~ 'term://'
             return 1
@@ -834,6 +834,7 @@ function! IsTermRunning()
     endfor
     return 0
 endfunction
+
 function WriteQuitAll()
     if IsTermRunning() ==# 1
         return
