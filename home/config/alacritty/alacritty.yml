@@ -749,6 +749,7 @@ key_bindings:
   #- { key: V,        mods: Control|Shift,           action: Paste            }
   #- { key: C,        mods: Control|Shift,           action: Copy             }
   #- { key: F,        mods: Control|Shift,           action: SearchForward    }
+  - { key: F,        mods: Control|Shift,           action: None    }
   #- { key: B,        mods: Control|Shift,           action: SearchBackward   }
   #- { key: C,        mods: Control|Shift, mode: Vi, action: ClearSelection   }
   #- { key: Insert,   mods: Shift,                   action: PasteSelection   }
@@ -780,6 +781,7 @@ key_bindings:
   #- { key: N,      mods: Command,            action: SpawnNewInstance }
   #- { key: F,      mods: Command|Control,    action: ToggleFullscreen }
   #- { key: F,      mods: Command,            action: SearchForward    }
+  - { key: F,      mods: Command,            action: None    }
   #- { key: B,      mods: Command,            action: SearchBackward   }
 
 #debug:
