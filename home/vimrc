@@ -2351,7 +2351,7 @@ function! OnFzfRgCommandExit()
     endif
 endfunction
 
-command! -bang -nargs=* FzfRg
+command! -bang -nargs=* -complete=file FzfRg
             \ call fzf#vim#grep(GetFzfRgCommand( <f-args> ), 1, fzf#vim#with_preview(), <bang>0)
 
 " nnoremap <leader>g :FZFRg<Space>
