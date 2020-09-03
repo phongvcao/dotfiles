@@ -50,7 +50,7 @@ else
     fi
 
     if [[ -n "${SSH_CLIENT}" ]]; then
-        sudo apt-get remove -y xsel xclip
+        sudo apt-get remove -y xsel xclip qemu\*
     fi
 fi
 
