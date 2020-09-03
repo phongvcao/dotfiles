@@ -12,26 +12,26 @@
 
 - link:
     ~/.config/iTerm2: home/config/iTerm2
-    ~/.config/autostart: home/config/autostart
+    # ~/.config/autostart: home/config/autostart
     ~/.config/bleachbit: home/config/bleachbit
     ~/.config/brasero: home/config/brasero
     ~/.config/calibre: home/config/calibre
     ~/.config/cmus: home/config/cmus
     ~/.config/Cryptomator: home/config/Cryptomator
-    ~/.config/dconf: home/config/dconf
-    ~/.config/dunst: home/config/dunst
+    # ~/.config/dconf: home/config/dconf
+    # ~/.config/dunst: home/config/dunst
     ~/.config/feh: home/config/feh
-    ~/.config/gconf: home/config/gconf
+    # ~/.config/gconf: home/config/gconf
     ~/.config/gedit: home/config/gedit
-    ~/.config/gtk-2.0: home/config/gtk-2.0
-    ~/.config/gtk-3.0: home/config/gtk-3.0
+    # ~/.config/gtk-2.0: home/config/gtk-2.0
+    # ~/.config/gtk-3.0: home/config/gtk-3.0
     ~/.config/htop: home/config/htop
     ~/.config/i3: home/config/i3
     ~/.config/karabiner: home/config/karabiner
     ~/.config/keepassxc: home/config/keepassxc
     ~/.config/lxterminal: home/config/lxterminal
     ~/.config/mpv: home/config/mpv
-    ~/.config/nautilus: home/config/nautilus
+    # ~/.config/nautilus: home/config/nautilus
     ~/.config/neofetch: home/config/neofetch
     ~/.config/nitrogen: home/config/nitrogen
     ~/.config/octave: home/config/octave
@@ -49,18 +49,18 @@
     ~/.config/vlc: home/config/vlc
     ~/.config/zathura: home/config/zathura
     ~/.config/bookmarks: home/config/bookmarks
-    ~/.config/dleyna-renderer-service.conf: home/config/dleyna-renderer-service.conf
-    ~/.config/dleyna-server-service.conf: home/config/dleyna-server-service.conf
+    # ~/.config/dleyna-renderer-service.conf: home/config/dleyna-renderer-service.conf
+    # ~/.config/dleyna-server-service.conf: home/config/dleyna-server-service.conf
     ~/.config/kglobalshortcutsrc: home/config/kglobalshortcutsrc
     ~/.config/konsolerc: home/config/konsolerc
     ~/.config/llpp.conf: home/config/llpp.conf
-    ~/.config/mimeapps.list: home/config/mimeapps.list
-    ~/.config/monitors.xml: home/config/monitors.xml
+    # ~/.config/mimeapps.list: home/config/mimeapps.list
+    # ~/.config/monitors.xml: home/config/monitors.xml
     ~/.config/QtProject.conf: home/config/QtProject.conf
-    ~/.config/tagged: home/config/tagged
+    # ~/.config/tagged: home/config/tagged
     ~/.config/Trolltech.conf: home/config/Trolltech.conf
-    ~/.config/user-dirs.dirs: home/config/user-dirs.dirs
-    ~/.config/user-dirs.locale: home/config/user-dirs.locale
+    # ~/.config/user-dirs.dirs: home/config/user-dirs.dirs
+    # ~/.config/user-dirs.locale: home/config/user-dirs.locale
     ~/.config/gdb: home/config/gdb
     ~/.config/pudb/pudb.cfg: home/config/pudb/pudb.cfg
     ~/Library/Application Support/glances:
@@ -71,7 +71,7 @@
     ~/.vim/autoload/floaterm: home/vim/autoload/floaterm
 
     ~/.gdbinit.d: home/gdbinit.d
-    ~/.grc: home/grc
+    # ~/.grc: home/grc
     ~/.IdeaIC13: home/IdeaIC13
     ~/.shutter: home/shutter
     ~/.vnc: home/vnc
@@ -98,7 +98,7 @@
     ~/.shell_variables: home/shell_variables
     ~/.tigrc: home/tigrc
     ~/.tmux.conf: home/tmux.conf
-    # ~/.tmux_old.conf: home/tmux_old.conf
+    ~/.tmux_old.conf: home/tmux_old.conf
     ~/.tmuxline.conf: home/tmuxline.conf
     ~/.tmuxline_custom.conf: home/tmuxline_custom.conf
     ~/.vimperatorrc: home/vimperatorrc
@@ -107,10 +107,10 @@
     ~/.vrapperrc: home/vrapperrc
     ~/.weatherrc: home/weatherrc
     ~/.wegorc: home/wegorc
-    ~/.xinitrc: home/xinitrc
-    ~/.Xresources: home/Xresources
+    # ~/.xinitrc: home/xinitrc
+    # ~/.Xresources: home/Xresources
     ~/.zshrc: home/zshrc
-    ~/.hushlogin: home/hushlogin
+    # ~/.hushlogin: home/hushlogin
     ~/.local/share/Trash/files: ~/.Trash
     ~/.pdbrc.py: home/pdbrc.py
     ~/.p10k.zsh: home/p10k.zsh
