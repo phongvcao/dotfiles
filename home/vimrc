@@ -3667,7 +3667,7 @@ augroup CustomAutoCmd
 
         " fzf-preview.vim settings
         " autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
-        autocmd TermOpen * setlocal filetype=terminal
+        autocmd TermOpen * if &filetype ==# '' | setlocal filetype=terminal | endif
         autocmd TermLeave * set shell=bash\ --login
         autocmd TermClose * if &filetype !=# 'floaterm' && &filetype !=# 'fzf' | bd! | endif
     endif
