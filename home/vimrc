@@ -17,7 +17,10 @@ endif
 set shell=bash\ --login
 
 " BEGIN: vim-plug
+" vim-plug settings
 set nocompatible
+" let g:plug_threads = 1
+let g:plug_timeout = 120
 
 " Install vim-colors-solarized manually to make vim-plug beautiful
 if ! filereadable( expand( '$HOME/.vim/colors/solarized.vim' ) )
