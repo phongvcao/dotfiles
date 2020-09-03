@@ -88,7 +88,7 @@
     ~/.inputrc: home/inputrc
     ~/.lldbinit: home/lldbinit
     ~/.megasync.sh: home/megasync.sh
-    # ~/.NERDTreeBookmarks: home/NERDTreeBookmarks
+    ~/.NERDTreeBookmarks: home/NERDTreeBookmarks
     ~/.octaverc: home/octaverc
     ~/.promptline.sh: home/promptline.sh
     ~/.shell_aliases: home/shell_aliases
