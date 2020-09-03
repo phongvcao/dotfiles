@@ -3658,9 +3658,9 @@ augroup CustomAutoCmd
 
     if has('nvim')
         " autocmd BufEnter * if &buftype ==# 'terminal' | setlocal nonumber norelativenumber scrollback=100000 | endif
-        autocmd BufEnter * if &buftype ==# 'terminal' | setlocal scrollback=100000 | endif
         autocmd BufEnter,FocusGained * if &buftype ==# 'terminal' && (!exists('b:terminal_insert') || b:terminal_insert ==# 1) | startinsert | endif
         autocmd TermEnter * if &buftype ==# 'terminal' | nnoremap <buffer> <CR> i<CR> | endif
+        autocmd TermEnter * if &buftype ==# 'terminal' | setlocal scrollback=100000 | endif
 
         " fzf-preview.vim settings
         " autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
@@ -3670,7 +3670,7 @@ augroup CustomAutoCmd
     endif
 
     " vim-floaterm settings
-    autocmd FileType floaterm setlocal number relativenumber scrollback=100000
+    autocmd FileType floaterm setlocal number relativenumber
     autocmd WinEnter * if &filetype == 'terminal' | cd $PWD | endif
 
     " split-term.vim settings
