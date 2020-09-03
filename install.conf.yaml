@@ -88,7 +88,7 @@
     ~/.inputrc: home/inputrc
     ~/.lldbinit: home/lldbinit
     ~/.megasync.sh: home/megasync.sh
-    # ~/.NERDTreeBookmarks: home/NERDTreeBookmarks
+    ~/.NERDTreeBookmarks: home/NERDTreeBookmarks
     ~/.octaverc: home/octaverc
     ~/.promptline.sh: home/promptline.sh
     ~/.shell_aliases: home/shell_aliases
@@ -98,7 +98,7 @@
     ~/.shell_variables: home/shell_variables
     ~/.tigrc: home/tigrc
     ~/.tmux.conf: home/tmux.conf
-    # ~/.tmux_old.conf: home/tmux_old.conf
+    ~/.tmux_old.conf: home/tmux_old.conf
     ~/.tmuxline.conf: home/tmuxline.conf
     ~/.tmuxline_custom.conf: home/tmuxline_custom.conf
     ~/.vimperatorrc: home/vimperatorrc
