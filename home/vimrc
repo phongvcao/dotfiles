@@ -1783,7 +1783,7 @@ function! InvokeTermLF(...)
     if &filetype ==# 'magit'
         let l:lf_command = 'TTerm lfcd'
     else
-        let l:lf_command = 'FloatermNew lfcd'
+        let l:lf_command = 'FloatermNew lfcd -command "map <c-c> quit"'
     endif
 
     if l:arg !=# ''
