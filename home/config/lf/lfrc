@@ -21,7 +21,7 @@ set ifs "\n"
 set scrolloff 10
 
 set hidden
-set color256
+# set color256
 set globsearch
 set incsearch
 set number

@@ -39,7 +39,7 @@ else
 	        fzf fd-find neovim highlight && \
 	    sudo snap install ccls go --classic && \
 	    sudo snap install universal-ctags*.snap --dangerous && \
-	    go get -u github.com/gokcehan/lf && \
+	    GO11MODULE="on" go get -u github.com/gokcehan/lf && \
 	    mv ~/go ~/.go
         if [[ -z "${SSH_CLIENT}" ]]; then
             sudo apt-get install -y shutter python-pip
