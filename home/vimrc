@@ -127,6 +127,11 @@ Plug 'vimlab/split-term.vim', {
 Plug 'voldikss/vim-floaterm', {
             \ 'on' : [ 'FloatermNew' ] }
 
+" BEGIN: ptzz/lf.vim
+Plug 'ptzz/lf.vim'
+Plug 'rbgrouleff/bclose.vim'
+" END: ptzz/lf.vim
+
 if executable('p4')
     " BEGIN: pcaneill/vim-perforce
     Plug 'pcaneill/vim-perforce'
@@ -1787,7 +1792,11 @@ function! InvokeTermLF(...)
         execute l:lf_command
     endif
 endfunction
-nnoremap F :TermLF<CR>
+nnoremap ff :TermLF<CR>
+nnoremap fo :Lf<CR>
+nnoremap fv :FzfMRUSplit<CR>
+nnoremap fh :FzfMRUVSplit<CR>
+nnoremap ft :FzfMRUTab<CR>
 command! -nargs=* -complete=file TermLF call InvokeTermLF( <f-args> )
 
 " ale settings
@@ -2412,7 +2421,7 @@ function! InvokeFzfMRUVSplit(...)
         endif
     else
         execute "vsplit"
-        execute "TermLF"
+        execute "Lf"
     endif
 endfunction
 command! -nargs=* -complete=file FzfMRUVSplit call InvokeFzfMRUVSplit( <f-args> )
@@ -2428,7 +2437,7 @@ function! InvokeFzfMRUSplit(...)
         endif
     else
         execute "split"
-        execute "TermLF"
+        execute "Lf"
     endif
 endfunction
 command! -nargs=* -complete=file FzfMRUSplit call InvokeFzfMRUSplit( <f-args> )
@@ -2445,7 +2454,7 @@ function! InvokeFzfMRULeftVSplit(...)
         endif
     else
         execute "vsplit"
-        execute "TermLF"
+        execute "Lf"
     endif
     set splitright
 endfunction
@@ -2463,7 +2472,7 @@ function! InvokeFzfMRUTopSplit(...)
         endif
     else
         execute "split"
-        execute "TermLF"
+        execute "Lf"
     endif
     set splitbelow
 endfunction
@@ -2480,7 +2489,7 @@ function! InvokeFzfMRUTab(...)
         endif
     else
         execute "tabnew"
-        execute "TermLF"
+        execute "Lf"
     endif
 endfunction
 command! -nargs=* -complete=file FzfMRUTab call InvokeFzfMRUTab( <f-args> )
@@ -2494,7 +2503,7 @@ function! InvokeFzfMRURec(...)
             execute "FZFFiles " . l:arg
         endif
     else
-        execute "TermLF"
+        execute "Lf"
     endif
 endfunction
 command! -nargs=* -complete=file FzfMRURec call InvokeFzfMRURec( <f-args> )
@@ -3193,7 +3202,7 @@ let g:ophigh_filetypes_to_ignore = {
             \ 'php' : 1, 'yaml' : 1 }
 
 " vZoom.vim settings
-nnoremap f :silent! VZoomAutoToggle<CR>
+nnoremap F :silent! VZoomAutoToggle<CR>
 let g:vzoom = {}
 let g:vzoom.equalise_windows = 1
 
@@ -3669,7 +3678,9 @@ augroup CustomAutoCmd
         " autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
         autocmd TermOpen * if &filetype ==# '' | setlocal filetype=terminal | endif
         autocmd TermLeave * set shell=bash\ --login
-        autocmd TermClose * if &filetype !=# 'floaterm' && &filetype !=# 'fzf' | bd! | endif
+        " fzf-preview.vim settings
+        " lf.vim settings
+        autocmd TermClose * if &filetype !=# 'floaterm' && &filetype !=# 'fzf' && bufname() !~ '^term://.*:lf ' | bd! | endif
     endif
 
     " vim-floaterm settings
