@@ -3207,13 +3207,13 @@ let g:ophigh_filetypes_to_ignore = {
             \ 'php' : 1, 'yaml' : 1 }
 
 " vZoom.vim settings
-nnoremap F :silent! VZoomAutoToggle<CR>
+nnoremap <C-f> :silent! VZoomAutoToggle<CR>
 let g:vzoom = {}
 let g:vzoom.equalise_windows = 1
 
 " vim-zoom settings
 nnoremap <silent><expr> <Plug>(ToggleSignColumnNumber) SignColumnNumberToggle()
-nmap <C-f> <Plug>(ToggleSignColumnNumber)<Plug>(zoom-toggle)=
+nmap F <Plug>(ToggleSignColumnNumber)<Plug>(zoom-toggle)=
 
 " vim-colortuner settings
 let g:colortuner_filepath = $HOME . '/.vim/.vim-colortuner'
