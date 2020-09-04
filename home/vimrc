@@ -1899,7 +1899,7 @@ endif
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_default_mapping = 0
-let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar', 'fzf', 'floaterm', 'terminal' ]
+let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar', 'fzf', 'floaterm', 'terminal', 'lf' ]
 
 " Solarized Dark settings
 syntax enable
@@ -2513,6 +2513,11 @@ let g:fzf_mru_relative = 0
 let g:fzf_mru_case_sensitive = 0
 let g:fzf_mru_max = 1000
 let g:fzf_mru_exclude = ".*unite.*"
+
+" lf.vim settings
+let g:lf_command_override = 'lf -command "map _ quit"'
+let g:NERDTreeHijackNetrw = 0
+let g:lf_replace_netrw = 1
 
 " vim-peekaboo settings
 let g:peekaboo_window = 'bot 30 new'
@@ -3677,6 +3682,7 @@ augroup CustomAutoCmd
         " fzf-preview.vim settings
         " autocmd TermOpen * setlocal nonumber norelativenumber filetype=terminal
         autocmd TermOpen * if &filetype ==# '' | setlocal filetype=terminal | endif
+        autocmd TermEnter * if bufname() =~ '^term://.*:lf ' | set filetype=floaterm | endif
         autocmd TermLeave * set shell=bash\ --login
         " fzf-preview.vim settings
         " lf.vim settings

@@ -82,7 +82,6 @@ map <c-n> down
 map <c-p> up
 map S $$SHELL
 map e $$EDITOR $f
-map _ quit
 
 # define a custom 'open' command
 # This command is called when current file is not a directory. You may want to
