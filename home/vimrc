@@ -371,9 +371,11 @@ Plug 'hotchpotch/perldoc-vim', {
             \ 'on' : 'Perldoc' }
 
 " Plugins (Golang)
-Plug 'fatih/vim-go', {
-            \ 'for' : [ 'go' ],
-            \ 'do' : ':GoUpdateBinaries' }
+if !exists('g:custom_vim_go_loaded') || g:custom_vim_go_loaded ==# 0
+    Plug 'fatih/vim-go', {
+                \ 'for' : [ 'go' ],
+                \ 'do' : ':GoUpdateBinaries' }
+endif
 
 " Plugins (TypeScript, JavaScript, XML, HTML, CSS)
 Plug 'hotoo/jsgf.vim', {
