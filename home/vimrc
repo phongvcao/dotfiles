@@ -2226,6 +2226,9 @@ endfunction
 let g:vista_fzf_preview = ['right:50%']
 let g:vista_keep_fzf_colors = 1
 
+" vim-mrufiles settings
+command! -bar -bang FzfMruFiles call mrufiles#finder#fzf#open()
+
 " fzf settings
 
 " fzf-preview.vim settings
