@@ -2264,7 +2264,7 @@ nnoremap <leader>w :FZFWindows<CR>
 nnoremap <leader>q :CocCommand fzf-preview.Quickfix<CR>
 nnoremap <leader>f :FzfMruFiles<CR> 
 nnoremap <leader>F :FZFFiles $PWD<CR>
-nnoremap <leader>k :FZFMaps<CR>
+nnoremap <leader><leader>m :FZFMaps<CR>
 nnoremap <leader>M :CocCommand fzf-preview.Bookmarks<CR>
 nnoremap <leader>m :CocCommand fzf-preview.Marks<CR>
 " nnoremap <leader>j :CocCommand fzf-preview.Jumps<CR>
