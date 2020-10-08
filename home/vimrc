@@ -3581,7 +3581,7 @@ augroup CustomAutoCmd
     " vim-better-whitespace settings
     " autocmd InsertLeave * :.StripWhitespace
 
-    autocmd Syntax * :call SetIndentation()
+    autocmd Syntax,SourcePost * :call SetIndentation()
 
     " Make sure Vim picks up the vim:filetype= comment on top of file
     autocmd Syntax * set modeline modelines=5
