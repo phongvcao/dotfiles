@@ -1825,11 +1825,21 @@ let g:ale_update_tagstack = 0
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 let g:ale_open_list = 0
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '>>'
-let g:ale_sign_info = '>>'
-let g:ale_sign_style_error = '>>'
-let g:ale_sign_style_warning = '>>'
+if exists('g:custom_ale_sign_error')
+  let g:ale_sign_error = g:custom_ale_sign_error
+endif
+if exists('g:custom_ale_sign_warning')
+  let g:ale_sign_warning = g:custom_ale_sign_warning
+endif
+if exists('g:custom_ale_sign_info')
+  let g:ale_sign_info = g:custom_ale_sign_info
+endif
+if exists('g:custom_ale_sign_style_error')
+  let g:ale_sign_style_error = g:custom_ale_sign_style_error
+endif
+if exists('g:custom_ale_sign_style_warning')
+  let g:ale_sign_style_warning = g:custom_ale_sign_style_warning
+endif
 " Set this if you want to.
 " This can be useful if you are combining ALE with
 " some other plugin which sets quickfix errors, etc.
