@@ -213,6 +213,7 @@ Plug 'vim-scripts/diffchar.vim', {
 Plug 'phongvcao/vim-stardict', {
             \ 'on' : [ 'StarDict', 'StarDictCursor' ] }
 Plug 'lfv89/vim-interestingwords'
+
 if has( 'gui_running' )
     Plug 'zefei/vim-colortuner', {
                 \ 'on' : 'Colortuner' }
@@ -3426,6 +3427,10 @@ function! SetHighlight()
     highlight MatchTag ctermfg=234 ctermbg=lightblue guifg=#002b36 guibg=lightblue
     highlight SignColumn guibg=#002b36
     highlight SignColumn ctermbg=8
+    
+    " vim-signature settings
+    highlight SignatureMarkText ctermfg=9 ctermbg=8
+    highlight SignatureMarkerText ctermfg=9 ctermbg=8
 
     " interactive-replace settings
     highlight IntSearchHL ctermfg=8 ctermbg=3
