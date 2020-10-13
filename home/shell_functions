@@ -101,7 +101,7 @@ function p4diff() {
 
 function p4revert() {
   local file=$(p4 opened | fzf)
-  g4 revert "$(echo ${file} | command sed -e 's/#.\+//g')"
+  p4 revert "$(echo ${file} | command sed -e 's/#.\+//g')"
 }
 
 function setinfo() {
