@@ -89,13 +89,13 @@ function p4diff() {
   if [[ -n "$1" ]]; then
     if [[ "$1" == *.diff ]]; then
       p4 pack 2>&1 > ./"$(basename $1)"
-      cp -rf ./"$(basename $1)" ~
-      rm -rf ./"$(basename $1)"
+      command cp -rf ./"$(basename $1)" ~
+      command rm -rf ./"$(basename $1)"
     else
-      p4 pack "$1" 2>&1 | vim -
+      p4 pack "$1" 2>&1 | command nvim -
     fi
   else
-    p4 pack 2>&1 | vim -
+    p4 pack 2>&1 | command nvim -
   fi
 }
 
