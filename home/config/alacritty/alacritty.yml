@@ -712,6 +712,10 @@ key_bindings:
   #- { key: F,      mods: Control,       mode: Vi, action: ScrollPageDown          }
   #- { key: U,      mods: Control,       mode: Vi, action: ScrollHalfPageUp        }
   #- { key: D,      mods: Control,       mode: Vi, action: ScrollHalfPageDown      }
+  - { key: K,      mods: Command,       action: ScrollHalfPageUp        }
+  - { key: J,      mods: Command,       action: ScrollHalfPageDown      }
+  - { key: K,      mods: Command|Shift,       action: ScrollLineUp        }
+  - { key: J,      mods: Command|Shift,       action: ScrollLineDown      }
   #- { key: Y,                           mode: Vi, action: Copy                    }
   #- { key: Y,                           mode: Vi, action: ClearSelection          }
   #- { key: Copy,                        mode: Vi, action: ClearSelection          }
