@@ -1255,7 +1255,7 @@ function lsl() {
     else
         fd --max-depth 1 -HI --exclude='*.git/' \
             --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
-            --group-directories-first --color -A -d -h -1 -l {} +
+            --group-directories-first --color -A -d -h -1 -l {}
     fi
 }
 
