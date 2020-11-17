@@ -3024,7 +3024,7 @@ nnoremap <localleader>G :GVAndMagit<CR>
 let g:git_messenger_no_default_mappings = v:true
 let g:git_messenger_include_diff = "current"
 let g:git_messenger_always_into_popup = v:true
-nnoremap <CR> :GitMessenger<CR>
+nnoremap <CR> :silent! GitMessenger<CR>
 
 " vimagit settings
 command! -bang -nargs=* MagitFullscreen silent! call magit#show_magit('c') 
