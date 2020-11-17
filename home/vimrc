@@ -349,6 +349,8 @@ Plug 'moll/vim-bbye'
 Plug 'jreybert/vimagit'
 " END: junegunn/gv.vim
 
+Plug 'rhysd/git-messenger.vim'
+
 " Plugins (C, C++, ObjC, C#)
 Plug 'nacitar/a.vim', {
             \ 'on' : [ 'A', 'AS', 'AV', 'AT', 'AN', 'IH', 'IHS', 'IHV',
@@ -3017,6 +3019,12 @@ function! InvokeGVAndMagit()
 endfunction
 command! -bang -nargs=* GVAndMagit silent! call InvokeGVAndMagit()
 nnoremap <localleader>G :GVAndMagit<CR>
+
+" git-messenger.vim settings
+let g:git_messenger_no_default_mappings = v:true
+let g:git_messenger_include_diff = "current"
+let g:git_messenger_always_into_popup = v:true
+nnoremap <CR> :GitMessenger<CR>
 
 " vimagit settings
 command! -bang -nargs=* MagitFullscreen silent! call magit#show_magit('c') 
