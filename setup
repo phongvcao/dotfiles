@@ -17,7 +17,8 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         $(brew --prefix)/opt/fzf/install && \
         brew cask install vagrant && \
         brew cask fetch eloston-chromium && \
-        brew cask install eloston-chromium
+        brew cask install eloston-chromium && \
+        brew cask install mirrordisplays && \
         brew cask install alacritty
         # brew install bat
     fi
