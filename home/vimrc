@@ -314,6 +314,11 @@ Plug 'arecarn/vim-crunch', {
 Plug 'arecarn/selection.vim'
 " END: arecarn/vim-crunch
 
+" BEGIN: glts/vim-radical
+Plug 'glts/vim-radical'
+Plug 'glts/vim-magnum'
+" END: glts/vim-radical
+
 Plug 'KabbAmine/vZoom.vim', {
             \ 'on' : 'VZoomAutoToggle' }
 Plug 'dhruvasagar/vim-zoom'
