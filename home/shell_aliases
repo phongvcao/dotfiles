@@ -166,6 +166,7 @@ alias "chmod"="chmod +x"
 # upload [source directory] [user]@[instance ip]:[destination directory on instance]
 alias "upload"="rsync -avz -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
 alias "scp"="scp -rp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+alias "_scp"="command scp -rp"
 
 # Download format:
 # download [user]@[instance ip]:[source directory on instance] [path to local storage]
