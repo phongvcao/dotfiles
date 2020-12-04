@@ -57,7 +57,21 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew cask fetch eloston-chromium && \
         brew cask install eloston-chromium && \
         brew cask install mirrordisplays && \
-        brew cask install alacritty
+        brew cask install alacritty && \
+        brew cask install firefox && \
+        brew cask install mullvadvpn && \
+        brew cask install vlc && \
+        brew cask install cryptomator && \
+        brew cask install keepassxc && \
+        brew cask install karabiner-elements && \
+        brew cask install ccleaner && \
+        brew cask install teamviewer && \
+        brew cask install signal && \
+        brew cask install virtualbox && \
+        brew cask install scribus && \
+        brew cask install inkscape && \
+        brew cask install gimp && \
+        brew cask install libreoffice
         # brew install bat
     fi
 else
