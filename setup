@@ -4,8 +4,17 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
     if [ -z "$(command -v ccls)" ]; then
-        command sudo chown -R "${whoami}":admin /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc && \
-        command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc && \
+        command sudo chown -R "${whoami}":admin; \
+            command sudo chown -R /usr/local/bin; \
+            command sudo chown -R /usr/local/etc; \
+            command sudo chown -R /usr/local/sbin; \
+            command sudo chown -R /usr/local/share; \
+            command sudo chown -R /usr/local/share/doc; \
+        command chmod u+w /usr/local/bin; \
+            command chmod u+w /usr/local/etc; \
+            command chmod u+w /usr/local/sbin; \
+            command chmod u+w /usr/local/share; \
+            command chmod u+w /usr/local/share/doc; \
         brew install ccls mosh coreutils binutils diffutils ed findutils gcc \
             gawk watch wdiff patch rsync less openssh go node llvm neofetch \
             zsh git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
