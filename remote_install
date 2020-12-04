@@ -15,8 +15,12 @@
 # exit
 #
 
-sudo apt-get update -y; sudo apt-get upgrade -y; sudo apt-get dist-upgrade -y
-sudo apt-get install -y git
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    echo "Running on Mac OS X"
+else
+    sudo apt-get update -y; sudo apt-get upgrade -y; sudo apt-get dist-upgrade -y
+    sudo apt-get install -y git
+fi
 cd ${HOME}
 rm -rf ${HOME}/.dotfiles
 git clone https://github.com/phongvcao/dotfiles.git ${HOME}/.dotfiles
