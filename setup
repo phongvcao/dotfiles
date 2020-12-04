@@ -4,21 +4,21 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
     if [ -z "$(command -v ccls)" ]; then
-        command sudo chown -R "${whoami}":admin /usr/local/bin; \
-            command sudo chown -R "${whoami}":admin /usr/local/etc; \
-            command sudo chown -R "${whoami}":admin /usr/local/sbin; \
-            command sudo chown -R "${whoami}":admin /usr/local/share; \
-            command sudo chown -R "${whoami}":admin /usr/local/share/doc; \
-            command sudo chown -R "${whoami}":admin /usr/local/share/zsh; \
-            command sudo chown -R "${whoami}":admin /usr/local/share/zsh/site-functions; \
+        command sudo chown -R "$(whoami)":admin /usr/local/bin; \
+            command sudo chown -R "$(whoami)":admin /usr/local/etc; \
+            command sudo chown -R "$(whoami)":admin /usr/local/sbin; \
+            command sudo chown -R "$(whoami)":admin /usr/local/share; \
+            command sudo chown -R "$(whoami)":admin /usr/local/share/doc; \
+            command sudo chown -R "$(whoami)":admin /usr/local/share/zsh; \
+            command sudo chown -R "$(whoami)":admin /usr/local/share/zsh/site-functions; \
 
-        command sudo chown -R "${whoami}" /usr/local/bin; \
-            command sudo chown -R "${whoami}" /usr/local/etc; \
-            command sudo chown -R "${whoami}" /usr/local/sbin; \
-            command sudo chown -R "${whoami}" /usr/local/share; \
-            command sudo chown -R "${whoami}" /usr/local/share/doc; \
-            command sudo chown -R "${whoami}" /usr/local/share/zsh; \
-            command sudo chown -R "${whoami}" /usr/local/share/zsh/site-functions; \
+        command sudo chown -R "$(whoami)" /usr/local/bin; \
+            command sudo chown -R "$(whoami)" /usr/local/etc; \
+            command sudo chown -R "$(whoami)" /usr/local/sbin; \
+            command sudo chown -R "$(whoami)" /usr/local/share; \
+            command sudo chown -R "$(whoami)" /usr/local/share/doc; \
+            command sudo chown -R "$(whoami)" /usr/local/share/zsh; \
+            command sudo chown -R "$(whoami)" /usr/local/share/zsh/site-functions; \
 
         command chmod u+w /usr/local/bin; \
             command chmod u+w /usr/local/etc; \
