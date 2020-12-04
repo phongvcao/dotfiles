@@ -9,11 +9,15 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             command sudo chown -R "${whoami}":admin /usr/local/sbin; \
             command sudo chown -R "${whoami}":admin /usr/local/share; \
             command sudo chown -R "${whoami}":admin /usr/local/share/doc; \
+            command sudo chown -R "${whoami}":admin /usr/local/share/zsh; \
+            command sudo chown -R "${whoami}":admin /usr/local/share/zsh/site-functions; \
         command chmod u+w /usr/local/bin; \
             command chmod u+w /usr/local/etc; \
             command chmod u+w /usr/local/sbin; \
             command chmod u+w /usr/local/share; \
             command chmod u+w /usr/local/share/doc; \
+            command chmod u+w /usr/local/share/zsh; \
+            command chmod u+w /usr/local/share/zsh/site-functions; \
         brew install ccls; \
         brew install mosh coreutils; \
         brew install binutils; \
