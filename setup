@@ -14,9 +14,26 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             command chmod u+w /usr/local/sbin; \
             command chmod u+w /usr/local/share; \
             command chmod u+w /usr/local/share/doc; \
-        brew install ccls mosh coreutils binutils diffutils ed findutils gcc \
-            gawk watch wdiff patch rsync less openssh go node llvm neofetch \
-            zsh git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
+        brew install ccls; \
+        brew install mosh coreutils; \
+        brew install binutils; \
+        brew install diffutils; \
+        brew install ed; \
+        brew install findutils; \
+        brew install gcc; \
+        brew install gawk; \
+        brew install watch; \
+        brew install wdiff; \
+        brew install patch; \
+        brew install rsync; \
+        brew install less; \
+        brew install openssh; \
+        brew install go; \
+        brew install node; \
+        brew install llvm; \
+        brew install neofetch; \
+        brew install zsh; \
+        brew install git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
             cmake xclip docker curl gpatch htop llvm yarn man-db ripgrep \
             tavianator/tap/bfs atool unrar zip p7zip glances ranger flake8 \
