@@ -53,25 +53,26 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             fzf fd neovim lf highlight && \
         brew install --HEAD universal-ctags/universal-ctags/universal-ctags && \
         $(brew --prefix)/opt/fzf/install && \
-        brew cask install vagrant && \
+        brew install --cask vagrant && \
+        brew install --cask docker && \
         brew cask fetch eloston-chromium && \
-        brew cask install eloston-chromium && \
-        brew cask install mirrordisplays && \
-        brew cask install alacritty && \
-        brew cask install firefox && \
-        brew cask install mullvadvpn && \
-        brew cask install vlc && \
-        brew cask install cryptomator && \
-        brew cask install keepassxc && \
-        brew cask install karabiner-elements && \
-        brew cask install ccleaner && \
-        brew cask install teamviewer && \
-        brew cask install signal && \
-        brew cask install virtualbox && \
-        brew cask install scribus && \
-        brew cask install inkscape && \
-        brew cask install gimp && \
-        brew cask install libreoffice
+        brew install --cask eloston-chromium && \
+        brew install --cask mirrordisplays && \
+        brew install --cask alacritty && \
+        brew install --cask firefox && \
+        brew install --cask mullvadvpn && \
+        brew install --cask vlc && \
+        brew install --cask cryptomator && \
+        brew install --cask keepassxc && \
+        brew install --cask karabiner-elements && \
+        brew install --cask ccleaner && \
+        brew install --cask teamviewer && \
+        brew install --cask signal && \
+        brew install --cask virtualbox && \
+        brew install --cask scribus && \
+        brew install --cask inkscape && \
+        brew install --cask gimp && \
+        brew install --cask libreoffice
         # brew install bat
     fi
 else
