@@ -114,6 +114,7 @@ alias "mon"="monitor"
 alias "command_nvim"="command nvim"
 alias "term"="command_nvim -c 'TTerm' -c 'bd! 1'"
 alias "rm"="_rm"
+alias "watch"="command watch -n 1"
 
 # Force removal of a package
 alias "purge"="sudo dpkg --purge --force-all"
