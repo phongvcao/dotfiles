@@ -238,6 +238,17 @@
 " " vim-zoom settings
 " nmap f <Plug>(zoom-toggle)=
 " vZoom.vim settings
+" Plug 'Valloric/MatchTagAlways', {
+"             \ 'for' : [ 'html', 'xhtml', 'xml', 'jinja', 'php', 'jsp',
+"             \           'htmldjango' ] }
+
+" MatchTagAlways settings
+let g:mta_filetypes = { 'html' : 1, 'xhtml' : 1, 'xml' : 1, 'jinja' : 1, 'php' : 1, 'jsp' : 1, }
+let g:mta_use_matchparen_group=0
+let g:mta_set_default_matchtag_color=1
+nnoremap <Space>t :MtaJumpToOtherTag<CR>
+
+autocmd BufEnter * :highlight MatchTag ctermfg=8 ctermbg=lightblue guifg=#002b36 guibg=lightblue
 
 function! CustomLightlineZoomed()
     if exists('*zoom#statusline') && zoom#statusline() == 'zoomed'
