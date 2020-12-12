@@ -2743,6 +2743,7 @@ vnoremap <leader>rv :<C-u>set gdefault<CR>:<C-u>OverCommandLine<CR>'<,'>s/
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
+nnoremap ob :silent! execute 'OpenBrowser ' . expand('%:p')<CR>
 
 " emmet-vim settings
 let g:user_emmet_leader_key = '<c-e>'
