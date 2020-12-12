@@ -714,7 +714,7 @@ vnoremap E e
 nnoremap A :set paste<CR>A
 nnoremap a A
 nnoremap I :set paste<CR>i
-nnoremap i :set nopaste<CR>i
+" nnoremap i :set nopaste<CR>i
 nnoremap <localleader>ss :call IndentCurrentFile()<CR>
 " Bring current line to top of the window
 nnoremap zt zt
