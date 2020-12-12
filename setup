@@ -172,14 +172,14 @@ if [ -z "$(command -v autojump)" ]; then
 fi
 
 #
-# Install pip3
+# Install pip3 and pip2
 #
 if [ -z "$(command -v pip3)" ]; then
     echo
     echo "Installing pip3"
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     command sudo python3 get-pip.py
-    # command sudo python2 get-pip.py
+    command sudo python2 get-pip.py
 fi
 
 #
@@ -187,7 +187,7 @@ fi
 #
 echo
 echo "Installing pynvim"
-# command python2 -m pip install pynvim
+command python2 -m pip install pynvim
 command python3 -m pip install pynvim
 
 #
