@@ -417,18 +417,6 @@ Plug 'mattn/emmet-vim', {
             \           'htmldjango' ] }
 Plug 'AndrewRadev/tagalong.vim', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php', 'xml' ] }
-" " BEGIN: sukima/xmledit
-" let g:xmleditPath = g:vimPath . '/plugged/xmledit/ftplugin/'
-" Plug 'sukima/xmledit', {
-"             \ 'do' : 'ln -s -f ' . g:xmleditPath . 'xml.vim ' . g:xmleditPath . 'html.vim; ' .
-"             \        'ln -s -f ' . g:xmleditPath . 'xml.vim ' . g:xmleditPath . 'xhtml.vim; ' .
-"             \        'ln -s -f ' . g:xmleditPath . 'xml.vim ' . g:xmleditPath . 'jinja.vim; ' .
-"             \        'ln -s -f ' . g:xmleditPath . 'xml.vim ' . g:xmleditPath . 'php.vim; ' .
-"             \        'ln -s -f ' . g:xmleditPath . 'xml.vim ' . g:xmleditPath . 'jsp.vim; ' .
-"             \        'ln -s -f ' . g:xmleditPath . 'xml.vim ' . g:xmleditPath . 'htmldjango.vim; ',
-"             \ 'for' : [ 'html', 'xhtml', 'xml', 'jinja', 'php', 'jsp',
-"             \           'htmldjango' ] }
-" " END: sukima/xmledit
 " BEGIN: plasticboy/vim-markdown
 Plug 'plasticboy/vim-markdown', {
             \ 'for' : 'markdown' }
