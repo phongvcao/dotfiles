@@ -73,6 +73,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew install --cask inkscape && \
         brew install --cask gimp && \
         brew install --cask syncthing && \
+        brew install --cask brave-browser && \
         brew install --cask libreoffice
         # brew install bat
     fi
