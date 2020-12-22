@@ -115,7 +115,7 @@ alias "command_nvim"="command nvim"
 alias "term"="command_nvim -c 'TTerm' -c 'bd! 1'"
 alias "rm"="_rm"
 alias "watch"="command watch -n 1"
-alias "reloadaudio"="sudo killall coreaudiod"
+alias "reloadaudio"="sudo launchctl stop com.apple.audio.coreaudiod && sudo launchctl start com.apple.audio.coreaudiod"
 
 # Force removal of a package
 alias "purge"="sudo dpkg --purge --force-all"
