@@ -417,8 +417,13 @@ Plug 'mattn/emmet-vim', {
             \           'htmldjango' ] }
 Plug 'AndrewRadev/tagalong.vim', {
             \ 'for' : [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php', 'xml' ] }
+
+" BEGIN: AndrewRadev/splitjoin.vim
 Plug 'AndrewRadev/splitjoin.vim', {
             \ 'on' : [ 'SplitjoinJoin', 'SplitjoinSplit' ] }
+Plug 'godlygeek/tabular'
+" END: AndrewRadev/splitjoin.vim
+
 " BEGIN: plasticboy/vim-markdown
 Plug 'plasticboy/vim-markdown', {
             \ 'for' : 'markdown' }
@@ -2741,6 +2746,8 @@ let g:user_emmet_leader_key = '<c-e>'
 " splitjoin.vim settings
 let g:splitjoin_split_mapping = ''
 let g:splitjoin_join_mapping = ''
+let g:splitjoin_curly_brace_padding = 0
+let g:splitjoin_align = 1
 nnoremap gj :SplitjoinJoin<CR>
 nnoremap gs :SplitjoinSplit<CR>
 
