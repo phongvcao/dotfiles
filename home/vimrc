@@ -2751,6 +2751,10 @@ let g:splitjoin_align = 1
 nnoremap gj :SplitjoinJoin<CR>
 nnoremap gs :SplitjoinSplit<CR>
 
+" tabular settings
+nnoremap ta :Tab /
+vnoremap ta :Tab /
+
 " vim-markdown settings
 let g:vim_markdown_folding_disabled = 1
 
