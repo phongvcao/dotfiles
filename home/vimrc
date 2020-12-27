@@ -2741,8 +2741,8 @@ let g:user_emmet_leader_key = '<c-e>'
 " splitjoin.vim settings
 let g:splitjoin_split_mapping = ''
 let g:splitjoin_join_mapping = ''
-nmap gj :SplitjoinJoin<CR>
-nmap gs :SplitjoinSplit<CR>
+nnoremap gj :SplitjoinJoin<CR>
+nnoremap gs :SplitjoinSplit<CR>
 
 " vim-markdown settings
 let g:vim_markdown_folding_disabled = 1
