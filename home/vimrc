@@ -3546,6 +3546,23 @@ function! HighlightEasyMotion()
     highlight EasyMotionShade ctermfg=10 ctermbg=none
 endfunction
 
+let g:easymotion#is_active = 0
+function! EasyMotionCoc() abort
+    if &filetype !=# 'typescript'
+        return
+    endif
+    if EasyMotion#is_active()
+        let g:easymotion#is_active = 1
+        " CocDisable
+    else
+        if g:easymotion#is_active == 1
+            let g:easymotion#is_active = 0
+            execute 'set ft=' . &ft
+            " CocEnable
+        endif
+    endif
+endfunction
+
 command! PythonVersion call PythonVersion()
 
 augroup CustomAutoCmd
@@ -3688,6 +3705,7 @@ augroup CustomAutoCmd
         endif
     endif
     autocmd BufEnter * call HighlightEasyMotion()
+    autocmd TextChanged,CursorMoved * call EasyMotionCoc()
 
     " vim-signature settings
     autocmd VimLeavePre,BufWritePre * if has('nvim') | wshada! | endif
