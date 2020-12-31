@@ -74,11 +74,10 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew install --cask gimp && \
         brew install --cask syncthing && \
         brew install --cask brave-browser && \
-        brew install --cask libreoffice
-
-        # Need to manually download osxfuse 4.x versions on Github:
-        # https://osxfuse.github.io/
-        # brew install --cask osxfuse
+        brew install --cask libreoffice && \
+        # If this doesn't work for Cryptomator, we probably need to manually
+        # download osxfuse 4.x versions on Github: https://osxfuse.github.io/
+        brew install --cask osxfuse
 
         # brew install bat
     fi
