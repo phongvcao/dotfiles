@@ -2439,7 +2439,7 @@ function! InvokeFzfMRU(...)
     endif
 endfunction
 command! -nargs=* -complete=file FzfMRU call InvokeFzfMRU( <f-args> )
-nnoremap <localleader>o :FzfMRU<CR>
+nnoremap <localleader>o :FzfMruFiles<CR>
 
 function! InvokeFzfMRUVSplit(...)
     let l:arg = join( a:000, '\\ ' )
