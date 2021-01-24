@@ -2434,7 +2434,8 @@ function! InvokeFzfMRU(...)
             execute "FZFFiles " . l:arg
         endif
     else
-        execute "FzfMruFiles"
+        " execute "FzfMruFiles"
+        execute "TermLF"
     endif
 endfunction
 command! -nargs=* -complete=file FzfMRU call InvokeFzfMRU( <f-args> )
