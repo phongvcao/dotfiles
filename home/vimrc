@@ -2792,8 +2792,9 @@ let g:closetag_shortcut = '>'
 
 function! VimCloseTagInit()
     if index( [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php', 'xml' ] , &filetype ) >= 0
-        inoremap <buffer> <> <></><left><left><left>
+        " inoremap <buffer> <> <></><left><left><left>
         " inoremap <buffer> <>> <></><left><left><left><CR><CR><up>
+        inoremap <buffer> <> <></><left><left><left><CR><CR><C-d><up>
     else
         inoremap <buffer> <> <<Space><Space>><left><left>
     endif
