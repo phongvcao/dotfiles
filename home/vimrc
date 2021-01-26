@@ -2795,7 +2795,7 @@ function! VimCloseTagInit()
         " inoremap <buffer> <> <></><left><left><left>
         " inoremap <buffer> <>> <></><left><left><left><CR><CR><up>
         " inoremap <buffer> <> <></><left><left><left><CR><CR><C-d><up>
-        inoremap <buffer> <> <></><left><left><left><CR><up><CR>
+        inoremap <buffer> <> <></><left><left><left><CR><up><C-o>$<CR>
     else
         inoremap <buffer> <> <<Space><Space>><left><left>
     endif
