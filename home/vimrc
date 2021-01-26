@@ -2718,7 +2718,6 @@ inoremap { {}<left>
 inoremap () ()
 inoremap [] []
 inoremap {} {}
-inoremap <> <<Space><Space>><left><left>
 inoremap (<Space> (  )<C-c><left>i
 inoremap [<Space> [  ]<C-c><left>i
 inoremap {<Space> {  }<C-c><left>i
@@ -2790,6 +2789,15 @@ let g:closetag_shortcut = '>'
 " " Add > at current position without closing the current tag, default is ''
 " "
 " let g:closetag_close_shortcut = '<leader>>'
+
+function! VimCloseTagInit()
+    if index( [ 'javascript', 'json', 'jsx', 'typescript', 'html', 'css', 'php', 'xml' ] , &filetype ) >= 0
+        inoremap <buffer> <> <></><left><left><left>
+        " inoremap <buffer> <>> <></><left><left><left><CR><CR><up>
+    else
+        inoremap <buffer> <> <<Space><Space>><left><left>
+    endif
+endfunction
 
 " splitjoin.vim settings
 let g:splitjoin_split_mapping = ''
@@ -3731,6 +3739,9 @@ augroup CustomAutoCmd
 
     " vim-swoop settings
     autocmd! FileType * :call FreezeSwoopContext()
+
+    " vim-closetag settings
+    autocmd! FileType * :call VimCloseTagInit()
 
     " vim-easymotion settings
     if exists( ':EMCommandLineNoreMap' ) == 2
