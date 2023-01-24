@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <component name="UISettings">
+    <option name="FONT_FACE" value="DejaVu Sans Mono Bold" />
+    <option name="FONT_SIZE" value="13" />
+    <option name="OVERRIDE_NONIDEA_LAF_FONTS" value="true" />
+  </component>
+</application>
+

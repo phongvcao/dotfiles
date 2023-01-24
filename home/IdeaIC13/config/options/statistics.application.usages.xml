@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <component name="StatisticsApplicationUsages">
+    <group name="language-level">
+      <project id="RobberRush" values="JDK_1_6" />
+      <project id="KiltPatternGenerator" values="JDK_1_6" />
+    </group>
+    <group name="vcs">
+      <project id="RobberRush" values="Git" />
+    </group>
+    <group name="module type">
+      <project id="RobberRush" values="JAVA_MODULE" />
+      <project id="KiltPatternGenerator" values="JAVA_MODULE" />
+    </group>
+    <group name="file-type">
+      <project id="RobberRush" values="Eclipse,PLAIN_TEXT,Manifest,Images,IDEA_MODULE,XML,Native,HTML,Properties,UNKNOWN,JAVA,CLASS,ARCHIVE" />
+      <project id="KiltPatternGenerator" values="HTML,PLAIN_TEXT,IDEA_MODULE,UNKNOWN,JavaScript files (syntax highlighting only),CSS files (syntax highlighting only),Eclipse,XML" />
+    </group>
+  </component>
+  <component name="UsageTrigger">
+    <counts>
+      <entry feature="ide.settings.Android_Logcat" count="2" />
+      <entry feature="ide.settings.Appearance" count="14" />
+      <entry feature="ide.settings.Colors_&amp;_Fonts" count="2" />
+      <entry feature="ide.settings.Console_Colors" count="2" />
+      <entry feature="ide.settings.Custom" count="2" />
+      <entry feature="ide.settings.Debugger" count="2" />
+      <entry feature="ide.settings.Font" count="4" />
+      <entry feature="ide.settings.General" count="2" />
+      <entry feature="ide.settings.Groovy" count="1" />
+      <entry feature="ide.settings.HTML" count="1" />
+      <entry feature="ide.settings.Java" count="2" />
+      <entry feature="ide.settings.Keymap" count="2" />
+      <entry feature="ide.settings.Language_Defaults" count="2" />
+      <entry feature="ide.settings.Properties" count="2" />
+      <entry feature="ide.settings.RegExp" count="2" />
+      <entry feature="ide.settings.Scope_Based" count="2" />
+      <entry feature="ide.settings.Vim_Emulation" count="4" />
+      <entry feature="ide.settings.XML" count="1" />
+      <entry feature="ide.settings.XPath" count="1" />
+      <entry feature="tips.of.the.day.next" count="3" />
+    </counts>
+  </component>
+</application>
+

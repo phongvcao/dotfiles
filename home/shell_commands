@@ -1,0 +1,39 @@
+# vim:filetype=zsh
+if [[ -f $HOME/.dircolors/dircolors.ansi-dark ]]; then
+    eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
+fi
+
+if [[ -n "$DISPLAY" && "$TERM" == "xterm" ]]; then
+    export TERM=xterm-256color
+fi
+
+# if [[ ! "$TERM" =~ screen ]]; then
+#     if [[ -f /usr/local/bin/tmux ]]; then
+#         # echo "tmux must be attached/started manually using tmuxattach or tmux start command"
+#         :
+#     elif [[ -f /usr/bin/tmux ]]; then
+#         :
+#     fi
+# fi
+
+if [[ -t 0 ]]; then
+    stty -ixon
+
+    if [[ ( -f /usr/bin/fortune ) && ( -f /usr/bin/cowsay ) ]]; then
+        fortune | cowsay
+    fi
+fi
+
+if [[ -n "$DISPLAY" && -n "$(command which xrdb)" && ! -n "${SSH_CLIENT}" ]]; then
+    xrdb "${HOME}"/.Xresources
+fi
+
+# exec >/dev/tty 2>/dev/tty </dev/tty
+
+# PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+#
+# if [[ -f ${HOME}/.custom_promptline.sh ]]; then
+#     source ${HOME}/.custom_promptline.sh
+# elif [[ -f ${HOME}/.promptline.sh ]]; then
+#     source ${HOME}/.promptline.sh
+# fi

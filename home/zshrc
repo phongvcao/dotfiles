@@ -1,0 +1,333 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#!/usr/bin/env zsh
+# Source all functions definition
+if [[ -f ${HOME}/.shell_init ]]; then
+    source "${HOME}/.shell_init"
+fi
+
+# Path to your oh-my-zsh installation.
+export ZSH="${HOME}"/.oh-my-zsh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=()
+
+# User configuration
+# export PATH="/usr/bin/vendor_perl:/usr/bin/core_perl:$PATH"
+# export PATH="/usr/lib/jvm/default/bin:/usr/bin/site_perl:$PATH"
+# export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:$PATH"
+# export MANPATH="/usr/local/man:$MANPATH"
+
+source $ZSH/oh-my-zsh.sh >/tmp/error 2>/dev/null
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+setopt shwordsplit
+setopt histreduceblanks
+setopt histignorespace
+setopt histignorealldups
+setopt histignoredups
+setopt histnostore
+setopt histnofunctions
+setopt histverify
+setopt histsavenodups
+unsetopt extendedhistory
+setopt incappendhistory
+unsetopt sharehistory
+setopt autopushd pushdminus pushdsilent pushdtohome pushdignoredups
+setopt autocd
+setopt markdirs
+setopt interactivecomments
+setopt promptsubst
+setopt completeinword
+setopt ignoreeof
+setopt nohup
+unsetopt extendedglob
+setopt globdots
+setopt vi
+setopt automenu
+setopt cdablevars
+setopt listpacked
+setopt alwaystoend
+setopt correct
+setopt rmstarwait
+setopt globcomplete
+setopt menucomplete
+setopt zle
+setopt clobber
+
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    # USRLIB_DIR="/usr/local/lib"
+    USRLIB_DIR="/usr/local/lib"
+else
+    USRLIB_DIR="/usr/lib"
+fi
+
+PYTHON3_DIR="${USRLIB_DIR}/$(ls ${USRLIB_DIR} | grep python3 | tail -n 1)"
+PYTHON3_MAC_DIR="${USRLIB_DIR}/$(command ls ${USRLIB_DIR} | command grep 3. | tail -n 1)"
+
+# if [[ -f /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
+#     source /usr/share/powerline/bindings/zsh/powerline.zsh
+# elif [[ -f "${PYTHON3_DIR}"/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+#     source "${PYTHON3_DIR}"/site-packages/powerline/bindings/zsh/powerline.zsh
+# elif [[ -f "${PYTHON3_MAC_DIR}"/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+#     source "${PYTHON3_MAC_DIR}"/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+# fi
+
+export SHELL_NAME="zsh"
+
+if [[ -f ${HOME}/.shell_commands ]]; then
+    source "${HOME}/.shell_commands"
+fi
+
+# This must be sourced after .shell_commands. In other words, after tmux has already started
+# if [[ -n "${TMUX}" ]]; then
+#     if [[ -f /usr/share/powerline/bindings/tmux/powerline.conf ]]; then
+#         tmux source /usr/share/powerline/bindings/tmux/powerline.conf
+#     elif [[ -f "${PYTHON3_DIR}"/site-packages/powerline/bindings/tmux/powerline.conf ]]; then
+#         tmux source "${PYTHON3_DIR}/site-packages/powerline/bindings/tmux/powerline.conf"
+#     elif [[ -f "${PYTHON3_MAC_DIR}"/lib/python/site-packages/powerline/bindings/tmux/powerline.conf ]]; then
+#         tmux source "${PYTHON3_MAC_DIR}"/lib/python/site-packages/powerline/bindings/tmux/powerline.conf
+#     fi
+# fi
+
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    if [[ -d /usr/local/Cellar/ruby ]]; then
+        gems_version="$(ls /usr/local/lib/ruby/gems | tail -n 1)"
+        gems_install_dir=/usr/local/lib/ruby/gems/${gems_version}/gems
+        tmuxinator_dir="${HOME}/.config/tmuxinator"
+        source ${tmuxinator_dir}/completion/tmuxinator.zsh
+    elif [[ -d /opt/homebrew/Cellar/ruby ]]; then
+        gems_version="$(ls /opt/homebrew/lib/ruby/gems | tail -n 1)"
+        gems_install_dir=/opt/homebrew/lib/ruby/gems/${gems_version}/gems
+        tmuxinator_dir="${HOME}/.config/tmuxinator"
+        source ${tmuxinator_dir}/completion/tmuxinator.zsh
+    fi
+fi
+
+if [[ -f /usr/share/autojump/autojump.zsh ]]; then
+    source /usr/share/autojump/autojump.zsh
+elif [[ -f /usr/local/share/autojump/autojump.zsh ]]; then
+    source /usr/local/share/autojump/autojump.zsh
+elif [[ -f "${HOME}"/.autojump/share/autojump/autojump.zsh ]]; then
+    source "${HOME}"/.autojump/share/autojump/autojump.zsh
+fi
+
+# Source all variables definition
+if [[ -f ${HOME}/.shell_install ]]; then
+    source "${HOME}/.shell_install"
+fi
+
+# grc (Generic Colorizer) configuration.
+if [[ -f "${HOME}/.grc/grc.zsh" ]]; then
+    source "${HOME}/.grc/grc.zsh"
+fi
+
+# Source all variables definition
+if [[ -f ${HOME}/.shell_variables ]]; then
+    source "${HOME}/.shell_variables"
+fi
+
+# Source all aliases definition
+if [[ -f ${HOME}/.shell_aliases ]]; then
+    source "${HOME}/.shell_aliases"
+fi
+
+# Source all functions definition
+if [[ -f ${HOME}/.shell_functions ]]; then
+    source "${HOME}/.shell_functions"
+fi
+
+# vim-stardict configuration
+if [[ -f "${HOME}/.vim/bundle/vim-stardict/bindings/zsh/stardict.zsh" ]]; then
+    source "${HOME}/.vim/bundle/vim-stardict/bindings/zsh/stardict.zsh"
+fi
+
+# Source custom bash definitions
+if [[ -f ${HOME}/.custom_zshrc ]]; then
+    source "${HOME}/.custom_zshrc"
+fi
+
+# Key bindings
+# Never touch ^i because it is built-in <Tab> key
+# Learning vi-mode - disable emacs keybindings
+bindkey '^[[A' "" # up arrow
+bindkey '^[[B' "" # down arrow
+bindkey '^[[D' "" # left arrow
+bindkey '^[[C' "" # right arrow
+bindkey '^[[Z' "" # reverse-menu-complete
+bindkey "^j" "" # history-search-forward
+bindkey "^k" "" # history-search-backward
+bindkey "^l" "" # forward-char
+bindkey "^h" "" # backward-char
+bindkey "^w" "" # forward-word
+bindkey "^q" "" # backward-word
+bindkey "^b" "" # beginning-of-line
+bindkey "^e" "" # end-of-line
+bindkey "^o" "" # kill-line
+bindkey "^u" "" # backward-kill-line
+bindkey "^t" "" # kill-word
+bindkey "^r" "" # backward-kill-word
+bindkey "^d" "" # delete-char
+bindkey "^s" "" # backward-delete-char
+bindkey "^a" "" # kill-whole-line
+bindkey "^z" "" # kill-region
+bindkey "^v" "" # edit-command-line
+bindkey "^y" "" # copy-region-as-kill
+bindkey "^p" "" # yank
+bindkey "\t" "" # <Tab> - menu-complete
+bindkey "\v" "" # <Tab> - menu-complete
+bindkey -s "jk" ""
+
+# bindkey '^[[Z' reverse-menu-complete
+export KEYTIMEOUT=30
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M viins '^?' backward-delete-char 
+bindkey -M viins "^v" yank
+bindkey -M viins "^e" edit-command-line
+bindkey -M viins "^u" backward-kill-line
+bindkey -M viins "^r" backward-kill-word
+bindkey -M viins "^n" expand-or-complete
+bindkey -M viins "^p" reverse-menu-complete
+
+bindkey -M vicmd "a" vi-add-eol
+bindkey -M vicmd "j" history-search-forward
+bindkey -M vicmd "k" history-search-backward
+bindkey -M vicmd "l" forward-char
+bindkey -M vicmd "h" backward-char
+bindkey -M vicmd "w" forward-word
+bindkey -M vicmd "W" backward-word
+bindkey -M vicmd "b" beginning-of-line
+bindkey -M vicmd "e" end-of-line
+bindkey -M vicmd "ud" backward-kill-line
+bindkey -M vicmd "^e" edit-command-line
+bindkey -M vicmd "C" kill-word
+bindkey -M vicmd "c" backward-kill-word
+bindkey -M vicmd "x" delete-char
+bindkey -M vicmd "^x" backward-delete-char
+bindkey -M vicmd "d" kill-whole-line
+bindkey -M vicmd "u" undo
+bindkey -M vicmd "^r" redo
+bindkey -M vicmd "^v" edit-command-line
+bindkey -M vicmd "y" copy-region-as-kill
+bindkey -M vicmd "p" yank
+bindkey -M vicmd '/' history-incremental-search-backward
+bindkey -M vicmd '?' history-incremental-search-forward
+
+bindkey -M visual 'jk' deactivate-region
+bindkey -M visual 'y' copy-region-as-kill
+bindkey -M visual "l" forward-char
+bindkey -M visual "h" backward-char
+bindkey -M visual "w" forward-word
+bindkey -M visual "W" backward-word
+bindkey -M visual "b" beginning-of-line
+bindkey -M visual "e" end-of-line
+bindkey -M visual "d" kill-region
+bindkey -M visual "x" delete-char
+bindkey -M visual "^x" backward-delete-char
+bindkey -M visual "^u" backward-kill-line
+bindkey -M visual "^e" edit-command-line
+bindkey -M visual "y" copy-region-as-kill
+bindkey -M visual "p" yank
+bindkey -M visual "^p" yank
+bindkey -M visual '/' history-incremental-search-backward
+bindkey -M visual '?' history-incremental-search-forward
+
+bindkey -s "jk" '\e'
+
+# Shift-Insert: Paste from Clipboard to gnome-terminal
+# C-y or tmux vi-mode copy: Copy from gnome-terminal to Clipboard
+# C-c: Abort what you're typing
+
+# zsh-syntax-highlighting configuration. Must be put at the end of zshrc
+if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ -f /usr/local/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/local/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Install lfcd
+LFCD="${HOME}/.config/lf/lfcd.sh"
+if [ -f "$LFCD" ]; then
+    source "$LFCD"
+fi
+if [[ ! -f "${LF_LASTDIRPATH}" ]]; then
+    touch ${LF_LASTDIRPATH}
+fi

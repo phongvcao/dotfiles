@@ -1,0 +1,21 @@
+%% Recommended packages:
+%% - octave-miscellaneous
+%% - octave-specfun
+%% - octave-msh
+%% - octave-splines
+
+%% Change default editor
+EDITOR("gnome-terminal -e \"zsh -c 'export TERM=screen-256color && vim %s'\"")
+edit mode "async"
+
+%% Hide octave-workspace
+octave_core_file_name(".octave-workspace")
+
+%% Set display format
+format long
+
+%% Add PATH for octave to search
+addpath("~/.config/octave")
+addpath("~/MEGA/workspace/CSE-353/pgm_hw3")
+addpath("~/MEGA/workspace/CSE-353/pgm_hw3/@Node")
+addpath("~/MEGA/workspace/CSE-353/pgm_hw5")

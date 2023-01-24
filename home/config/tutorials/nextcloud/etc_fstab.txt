@@ -1,0 +1,13 @@
+# If NextCloudPi / NextCloud complains about 0770 read permission on datadir / database file (common with NTFS drives),
+# Add the following to /etc/fstab:
+
+# >>> [openmediavault]
+
+# Add this line here:
+/dev/disk/by-uuid/7D48689607E337771    /srv/dev-disk-by-uuid-7D48689607E337771  ntfs defaults,nofail,big_writes,nls=utf8,uid=www-data,gid=www-data,dmask=007,windows_names  0 2
+
+# These 2 lines already existed:
+/dev/disk/by-uuid/7D48689607E337772    /srv/dev-disk-by-uuid-7D48689607E337772  ntfs defaults,nofail,big_writes  0 2
+/dev/disk/by-uuid/7D48689607E337773    /srv/dev-disk-by-uuid-7D48689607E337773  ntfs defaults,nofail,big_writes  0 2
+
+# <<< [openmediavault]

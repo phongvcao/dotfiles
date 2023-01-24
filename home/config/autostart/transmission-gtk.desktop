@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=transmission-gtk
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=false
+Name[en_US]=Transmission
+Name=Transmission
+Comment[en_US]=
+Comment=

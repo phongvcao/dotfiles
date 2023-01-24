@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <component name="VimSettings">
+    <state version="4" enabled="true" />
+    <globalmarks />
+    <filemarks>
+      <file name="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushAudioManager.java" timestamp="1404805899154">
+        <mark key="]" line="12" column="26" />
+        <mark key="^" line="12" column="26" />
+        <mark key="." line="12" column="26" />
+        <mark key="[" line="12" column="27" />
+      </file>
+      <file name="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGameEventRelayer.java" timestamp="1405215689040">
+        <mark key="'" line="53" column="54" />
+        <mark key="]" line="64" column="30" />
+        <mark key="^" line="64" column="30" />
+        <mark key="." line="64" column="30" />
+        <mark key="[" line="64" column="31" />
+      </file>
+      <file name="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushErrorHandler.java" timestamp="1404807477927">
+        <mark key="'" line="18" column="3" />
+        <mark key="]" line="20" column="5" />
+        <mark key="^" line="20" column="5" />
+        <mark key="." line="20" column="5" />
+        <mark key="[" line="20" column="6" />
+      </file>
+      <file name="$USER_HOME$/phongvcao/workspace/RobberRush/lib/XMLUtilities/src/xml_utilities/XMLUtilities.java" timestamp="1407510238224">
+        <mark key="'" line="82" column="44" />
+      </file>
+      <file name="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" timestamp="1404868016371">
+        <mark key="'" line="63" column="0" />
+        <mark key="]" line="64" column="2" />
+        <mark key="^" line="64" column="2" />
+        <mark key="." line="64" column="2" />
+        <mark key="[" line="64" column="0" />
+      </file>
+    </filemarks>
+    <jumps>
+      <jump line="1000" column="46" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="1046" column="4" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="1028" column="4" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="1054" column="7" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="1064" column="7" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="1053" column="35" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="1090" column="0" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="1092" column="56" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="84" column="47" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="53" column="54" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGameEventRelayer.java" />
+      <jump line="18" column="3" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushErrorHandler.java" />
+      <jump line="302" column="39" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="73" column="0" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="64" column="6" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="63" column="0" filename="$USER_HOME$/phongvcao/workspace/RobberRush/src/robberrush/ui/RobberRushMiniGame.java" />
+      <jump line="82" column="44" filename="$USER_HOME$/phongvcao/workspace/RobberRush/lib/XMLUtilities/src/xml_utilities/XMLUtilities.java" />
+    </jumps>
+    <registers>
+      <register name="&quot;" type="4">
+        <text>e</text>
+      </register>
+      <register name="3" type="4">
+        <text encoding="base64">CgkJCgkJU3RyaW5nIGNvbG9yID0gI2ZmZjsg</text>
+      </register>
+      <register name="2" type="4">
+        <text>}
+
+		    String color = #000000#000000;</text>
+      </register>
+      <register name="1" type="4">
+        <text>e</text>
+      </register>
+      <register name="4" type="2">
+        <text encoding="base64">ICAgICAgICAK</text>
+      </register>
+      <register name=":" type="4">
+        <text>exit</text>
+      </register>
+      <register name="/" type="4">
+        <text>enable</text>
+      </register>
+      <register name="-" type="4">
+        <text>e</text>
+      </register>
+    </registers>
+    <search>
+      <last-search>enable</last-search>
+      <last-offset />
+      <last-pattern>enable</last-pattern>
+      <last-dir>1</last-dir>
+      <show-last>true</show-last>
+    </search>
+    <history>
+      <history-search>
+        <entry>enable</entry>
+      </history-search>
+      <history-cmd>
+        <entry>source ~/.vimrc</entry>
+        <entry>nohlsearch</entry>
+        <entry>earlier 1</entry>
+        <entry>GundoToggle</entry>
+        <entry>help virtualedit</entry>
+        <entry>g$</entry>
+        <entry>q</entry>
+        <entry>new</entry>
+        <entry>vnew</entry>
+        <entry>split</entry>
+        <entry>earlier</entry>
+        <entry encoding="base64">bm5vcmVtYXAgamsgPEVzYz4=</entry>
+        <entry encoding="base64">aW5vcmVtYXAgamsgPEVzYz4=</entry>
+        <entry>undo</entry>
+        <entry>u</entry>
+        <entry>w</entry>
+        <entry>qa</entry>
+        <entry>help fold</entry>
+        <entry>exit</entry>
+      </history-cmd>
+      <history-expr />
+      <history-input />
+    </history>
+    <shortcut-conflicts>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed U</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed W</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed X</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed V</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>pressed F9</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed D</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed Y</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed A</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>pressed F3</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed F</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed M</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed OPEN_BRACKET</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed O</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed L</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed CLOSE_BRACKET</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed G</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed R</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>shift ctrl pressed 6</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed E</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed B</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed 2</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed H</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed K</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed P</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed I</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed T</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed J</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>pressed F2</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed N</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed Q</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>ctrl pressed C</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="ide">
+        <text>shift ctrl pressed 2</text>
+      </shortcut-conflict>
+    </shortcut-conflicts>
+  </component>
+</application>
+

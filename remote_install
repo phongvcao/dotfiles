@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+#
+# Pre-requisites:
+#
+# su -
+# passwd
+# passwd ${USER}
+# chmod 0440 /etc/sudoers
+# adduser phongvcao sudo
+#`adduser phongvcao admin
+#
+# vi /etc/ssh/sshd_config
+#     => Change PasswordAuthentication to yes
+# exit
+#
+
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    echo "Running on Mac OS X"
+else
+    sudo apt-get update -y; sudo apt-get upgrade -y; sudo apt-get dist-upgrade -y
+    sudo apt-get install -y git
+fi
+cd ${HOME}
+rm -rf ${HOME}/.dotfiles
+git clone https://github.com/phongvcao/dotfiles.git ${HOME}/.dotfiles
+
+cd ${HOME}/.dotfiles
+./setup && ./install && vim

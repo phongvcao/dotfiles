@@ -1,0 +1,62 @@
+1. Follow the official gitea setup instruction
+   - Install Smartmontools:
+     $ sudo apt install smartmontools
+
+
+2. To log-in as user 'git':
+   $ su --login
+   Password:
+   
+   root:~$ su - git
+
+
+3. To generate a self-signed SSL HTTPS certificate for Gitea:
+   root:~$ su - git
+
+   git:~$ gitea cert --host 123.456.7.89:3000
+
+   git:~$ cp ./cert.perm /PATH/TO/etc/gitea/
+   
+   git:~$ cp ./key.perm /PATH/TO/etc/gitea/
+
+   git:~$ vim /PATH/TO/etc/gitea/app.ini
+
+   # After opening app.ini with the command above, add the following lines to
+   # app.ini:
+   HTTP_PORT = 8080
+   PROTOCOL = https
+   CERT_FILE = /PATH/TO/etc/gitea/cert.pem
+   KEY_FILE = /PATH/TO/etc/gitea/key.pem
+   ROOT_URL = https://123.456.7.89:8080/
+
+   Reference: https://docs.gitea.io/en-us/https-setup/
+
+
+4. IMPORTANT: Gitea MUST BE RUN AS gitea.service. The following is for backup/testing:
+
+   $ # MOUNT ALL DISKS
+
+   $ su --login
+   Password:
+
+   root:~$ systemctl status mariadb
+
+   root:~$ systemctl restart mariadb
+
+   root:~$ systemctl status mariadb
+   
+   root:~$ su - git
+
+   git:~$ GITEA_WORK_DIR=/PATH/TO/var/lib/gitea/ nohup /usr/local/bin/gitea web -c /PATH/TO/etc/gitea/app.ini &
+
+   git:~$ top | grep -i gitea  # Double-checking
+
+5. To change default MySQL/MariaDB Data Directory in Ubuntu, Google
+"How to Change MySQL/MariaDB Data Directory on Ubuntu linuxhint"
+
+6. After each reboot, mount the database drive path again and issue:
+   $ sudo systemctl restart mariadb
+   
+   root:~$ su - git
+
+   git:~$ GITEA_WORK_DIR=/PATH/TO/var/lib/gitea/ nohup /usr/local/bin/gitea web -c /PATH/TO/etc/gitea/app.ini &

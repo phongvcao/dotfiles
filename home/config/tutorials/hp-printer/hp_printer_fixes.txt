@@ -1,0 +1,24 @@
+1. Paper Setup for HP Printer (to fix Cleaning while Printing issue)
+
+Go to system setup
+
+Go to Paper setup, then paper type (tray 1 and 2)
+
+Switch paper type for both to heavy
+
+ 
+
+ 
+
+Go back to paper setup - then go into Paper out action
+
+Change this setting to Overide
+
+ 
+
+The pages may print out a little slower, but they'll print out without having to worry about that cleaning issue constantly.
+
+
+
+
+

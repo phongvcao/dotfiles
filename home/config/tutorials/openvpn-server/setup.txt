@@ -1,0 +1,17 @@
+1. Setup OpeNVPN Server for Dynamic DNS on TP-Link Routers:
+
+- NOTE: We should keep 2 x separate OpenVPN Certificate: 1 with Direct IP Address access & the other
+with No-IP Domain Indirect Access. For privacy purposes, we should mainly use Direct IP Address access.
+However, when that fails, we fall back to using the No-IP Domain Indirect Access to export a Direct-IP
+OpenVPN client-to-server certificate again to replace the old Direct-IP certificate OUTDATED by ISP
+provider.
+
+- For TP-Link router, first we have to register No-IP account. Then we have to register our own domain.
+
+- After this, enter the credentials of No-IP Domain into the Dynamic DNS section of TP-Link Router configuration.
+
+- Then we export the OpenVPN certificate, open the certificate with a text editor (Vim, TextEdit, etc.),
+replacing the Public IP Address (e.g. 123.456.78.9) of the TP-Link router with the No-IP Domain Name
+(e.g. my_no_ip_domain.ddns.net).
+
+- Now the certificate is ready to be used and should never be OUTDATED/DYNAMICALLY CHANGED by ISP provider.

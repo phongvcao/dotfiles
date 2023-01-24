@@ -1,0 +1,1 @@
+https://www.duckdns.org/install.jsp?tab=linux-cron

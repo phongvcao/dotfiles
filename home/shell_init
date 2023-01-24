@@ -1,0 +1,119 @@
+# vim:filetype=zsh
+#
+# Modify $PATH
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}"
+
+PATH_PREFIX="/usr/bin/vendor_perl:/usr/bin/core_perl:${HOME}/Library/Python/3.7/bin"
+PATH_PREFIX="/usr/lib/jvm/default/bin:/usr/bin/site_perl:${PATH_PREFIX}"
+PATH_PREFIX="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:${PATH_PREFIX}"
+PATH_PREFIX="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/grep/libexec/gnubin:${PATH_PREFIX}"
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    if [[ "$(uname -m)" =~ "arm" ]]; then
+        coreutils_version="$(ls /opt/homebrew/Cellar/coreutils | tail -n 1)"
+        PATH_PREFIX="/opt/homebrew/Cellar/coreutils/${coreutils_version}/libexec/gnubin:${PATH_PREFIX}"
+    else
+        coreutils_version="$(ls /usr/local/Cellar/coreutils | tail -n 1)"
+        PATH_PREFIX="/usr/local/Cellar/coreutils/${coreutils_version}/libexec/gnubin:${PATH_PREFIX}"
+    fi
+fi
+
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    if [[ "$(uname -m)" =~ "arm" ]]; then
+        coreutils_version="$(ls /opt/homebrew/Cellar/coreutils | tail -n 1)"
+        PATH_PREFIX="/opt/homebrew/Cellar/coreutils/${coreutils_version}/libexec/gnubin:${PATH_PREFIX}"
+
+        if [[ -d /opt/homebrew/Cellar/ruby ]]; then
+            ruby_version="$(ls /opt/homebrew/Cellar/ruby | tail -n 1)"
+            MDL_PATH="/opt/homebrew/Cellar/ruby/${ruby_version}/bin"
+            if [[ -f ${MDL_PATH}/gem ]]; then
+                RUBYGEM_PATH="/opt/homebrew/Cellar/ruby/${ruby_version}/bin"
+
+                if [[ ":${PATH}" != *":${RUBYGEM_PATH}"* ]]; then
+                    PATH_PREFIX="${RUBYGEM_PATH}:${PATH_PREFIX}"
+                fi
+
+                gems_version="$(ls /opt/homebrew/lib/ruby/gems | tail -n 1)"
+                gems_install_dir=/opt/homebrew/lib/ruby/gems/${gems_version}/gems
+                if [[ -d "${gems_install_dir}" ]]; then
+                    tmuxinator_dir="$(ls ${gems_install_dir} | command grep -i tmuxinator | tail -n 1)"
+                    PATH_PREFIX=${gems_install_dir}/${tmuxinator_dir}/bin:${PATH_PREFIX}
+                fi
+            fi
+        fi
+    else
+        if [[ -d /usr/local/Cellar/ruby ]]; then
+            ruby_version="$(ls /usr/local/Cellar/ruby | tail -n 1)"
+            MDL_PATH="/usr/local/Cellar/ruby/${ruby_version}/bin"
+            if [[ -f ${MDL_PATH}/gem ]]; then
+                RUBYGEM_PATH="/usr/local/Cellar/ruby/${ruby_version}/bin"
+
+                if [[ ":${PATH}" != *":${RUBYGEM_PATH}"* ]]; then
+                    PATH_PREFIX="${RUBYGEM_PATH}:${PATH_PREFIX}"
+                fi
+
+                gems_version="$(ls /usr/local/lib/ruby/gems | tail -n 1)"
+                gems_install_dir=/usr/local/lib/ruby/gems/${gems_version}/gems
+                if [[ -d "${gems_install_dir}" ]]; then
+                    tmuxinator_dir="$(ls ${gems_install_dir} | command grep -i tmuxinator | tail -n 1)"
+                    PATH_PREFIX=${gems_install_dir}/${tmuxinator_dir}/bin:${PATH_PREFIX}
+                fi
+            fi
+        fi
+    fi
+
+    PATH_PREFIX="$(brew --prefix)/opt/man-db/libexec/bin:${PATH_PREFIX}"
+else
+    if [[ -d "${HOME}"/.gem/ruby ]]; then
+        ruby_version="$(ls ${HOME}/.gem/ruby | tail -n 1)"
+        MDL_PATH="${HOME}/.gem/ruby/${ruby_version}/bin"
+        if [[ -f ${MDL_PATH}/gem ]]; then
+            RUBYGEM_PATH="${HOME}/.gem/ruby/${ruby_version}/bin"
+
+            if [[ ":${PATH}" != *":${RUBYGEM_PATH}"* ]]; then
+                PATH_PREFIX="${HOME}/.gem/ruby/${ruby_version}/bin:${PATH_PREFIX}"
+            fi
+        else
+            gem install mdl
+        fi
+    fi
+fi
+
+PATH_PREFIX="${HOME}/.cargo/bin:${PATH_PREFIX}"
+
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    PATH_PREFIX="/Applications/Postgres.app/Contents/Versions/latest/bin:${PATH_PREFIX}"
+fi
+
+case "${PATH}" in
+    "${PATH_PREFIX}"* )
+        ;;
+    * )
+        export PATH="${PATH_PREFIX}:${PATH}"
+        ;;
+esac
+
+# #
+# # Modify $PYTHONPATH
+# #
+# export PYTHONPATH=${PYTHONPATH}:${PATH}
+
+#
+# Modify $MANPATH
+#
+MANPATH_PREFIX="/usr/local/man"
+case "${MANPATH}" in
+    "${MANPATH_PREFIX}"* )
+        ;;
+    * )
+        export MANPATH="${MANPATH_PREFIX}:${MANPATH}"
+        ;;
+esac
+
+#
+# Modify $GOPATH
+#
+export GOPATH="${HOME}/.go"
+export GOPATHORG="${HOME}/.go"
+export GO111MODULE="auto"
+export PATH="${GOPATH}/bin:${PATH}"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}" 

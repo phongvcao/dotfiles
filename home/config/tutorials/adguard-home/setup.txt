@@ -1,0 +1,18 @@
+1. sudo snap install adguard-home
+
+2. After Restart:
+
+# Mount ALL Hard Drives
+
+# Log-in as root
+$ su --login
+Password:
+
+# Confirm that adguard-home snap is indeed being disabled
+$ systemctl status --type=service
+
+# Restart AdGuard Home snap service
+$ snap restart adguard-home
+
+# Confirm that adguard-home snap is re-enabled again
+$ systemctl status --type=service

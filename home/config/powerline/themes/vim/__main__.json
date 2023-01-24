@@ -1,0 +1,15 @@
+{
+	"segment_data": {
+		"line_percent": {
+			"args": {
+				"gradient": true
+			},
+			"after": "%"
+		},
+		"powerline.segments.vim.file_directory" : {
+		    "args": {
+		        "shorten_cwd": false
+		    }
+		}
+	}
+}

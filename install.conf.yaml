@@ -1,0 +1,127 @@
+- defaults:
+    link:
+        create: true
+        relink: true
+        force: true
+        glob: true
+
+- clean: ['~']
+
+- create:
+    - ~/.local/share/Trash/files
+    - ~/.config/chrome-remote-desktop
+
+- link:
+    ~/.config/iTerm2: home/config/iTerm2
+    ~/.config/autostart: home/config/autostart
+    ~/.config/bleachbit: home/config/bleachbit
+    ~/.config/brasero: home/config/brasero
+    ~/.config/calibre: home/config/calibre
+    ~/.config/cmus: home/config/cmus
+    ~/.config/Cryptomator: home/config/Cryptomator
+    ~/.config/dconf: home/config/dconf
+    ~/.config/dunst: home/config/dunst
+    ~/.config/feh: home/config/feh
+    ~/.config/gconf: home/config/gconf
+    ~/.config/gedit: home/config/gedit
+    ~/.config/gtk-2.0: home/config/gtk-2.0
+    ~/.config/gtk-3.0: home/config/gtk-3.0
+    ~/.config/htop: home/config/htop
+    ~/.config/i3: home/config/i3
+    ~/.config/karabiner: home/config/karabiner
+    ~/.config/keepassxc: home/config/keepassxc
+    ~/.config/lxterminal: home/config/lxterminal
+    ~/.config/mpv: home/config/mpv
+    ~/.config/nautilus: home/config/nautilus
+    ~/.config/neofetch: home/config/neofetch
+    ~/.config/nitrogen: home/config/nitrogen
+    ~/.config/octave: home/config/octave
+    ~/.config/powerline: home/config/powerline
+    ~/.config/ranger: home/config/ranger
+    ~/.config/lf: home/config/lf
+    ~/.config/selfcontrol: home/config/selfcontrol
+    ~/.config/shell: home/config/shell
+    ~/.config/Skype: home/config/Skype
+    ~/.config/sxiv: home/config/sxiv
+    ~/.config/tmuxinator: home/config/tmuxinator
+    ~/.config/totem: home/config/totem
+    ~/.config/transmission: home/config/transmission
+    ~/.config/vim: home/config/vim
+    ~/.config/vlc: home/config/vlc
+    ~/.config/zathura: home/config/zathura
+    ~/.config/bookmarks: home/config/bookmarks
+    ~/.config/dleyna-renderer-service.conf: home/config/dleyna-renderer-service.conf
+    ~/.config/dleyna-server-service.conf: home/config/dleyna-server-service.conf
+    ~/.config/kglobalshortcutsrc: home/config/kglobalshortcutsrc
+    ~/.config/konsolerc: home/config/konsolerc
+    ~/.config/llpp.conf: home/config/llpp.conf
+    ~/.config/mimeapps.list: home/config/mimeapps.list
+    ~/.config/monitors.xml: home/config/monitors.xml
+    ~/.config/QtProject.conf: home/config/QtProject.conf
+    ~/.config/tagged: home/config/tagged
+    ~/.config/Trolltech.conf: home/config/Trolltech.conf
+    ~/.config/user-dirs.dirs: home/config/user-dirs.dirs
+    ~/.config/user-dirs.locale: home/config/user-dirs.locale
+    ~/.config/gdb: home/config/gdb
+    ~/.config/tutorials: home/config/tutorials
+    ~/.config/pudb/pudb.cfg: home/config/pudb/pudb.cfg
+    ~/Library/Application Support/glances:
+        if: '[ `uname` = Darwin ]'
+        path: home/config/glances
+    ~/.config/glances: home/config/glances
+    ~/.config/alacritty: home/config/alacritty
+    ~/.vim/ftplugin: home/vim/ftplugin
+    ~/.vim/autoload/floaterm: home/vim/autoload/floaterm
+
+    ~/.gdbinit.d: home/gdbinit.d
+    ~/.grc: home/grc
+    ~/.IdeaIC13: home/IdeaIC13
+    ~/.shutter: home/shutter
+    ~/.vnc: home/vnc
+    ~/.voltron: home/voltron
+    ~/.wireshark: home/wireshark
+    ~/.agignore: home/agignore
+    ~/.gitignore_global: home/gitignore_global
+    ~/.bash_profile: home/bash_profile
+    ~/.bashrc_disabled: home/bashrc
+    ~/.fehbg: home/fehbg
+    ~/.gdbinit: home/gdbinit
+    ~/.gitconfig: home/gitconfig
+    ~/.ideavimrc: home/ideavimrc
+    ~/.xvimrc: home/xvimrc
+    ~/.gvimrc: home/gvimrc
+    ~/.inputrc: home/inputrc
+    ~/.lldbinit-lldb: home/lldbinit-lldb
+    ~/.lldbinit-Xcode: home/lldbinit-Xcode
+    ~/.megasync.sh: home/megasync.sh
+    ~/.NERDTreeBookmarks: home/NERDTreeBookmarks
+    ~/.octaverc: home/octaverc
+    ~/.promptline.sh: home/promptline.sh
+    ~/.shell_aliases: home/shell_aliases
+    ~/.shell_commands: home/shell_commands
+    ~/.shell_functions: home/shell_functions
+    ~/.shell_init: home/shell_init
+    ~/.shell_variables: home/shell_variables
+    ~/.tigrc: home/tigrc
+    ~/.tmux.conf: home/tmux.conf
+    ~/.tmux_old.conf: home/tmux_old.conf
+    ~/.tmuxline.conf: home/tmuxline.conf
+    ~/.tmuxline_custom.conf: home/tmuxline_custom.conf
+    ~/.vimperatorrc: home/vimperatorrc
+    ~/.vimrc: home/vimrc
+    ~/.config/nvim/init.vim: home/config/nvim/init.vim
+    ~/.vrapperrc: home/vrapperrc
+    ~/.weatherrc: home/weatherrc
+    ~/.wegorc: home/wegorc
+    ~/.xinitrc: home/xinitrc
+    ~/.Xresources: home/Xresources
+    ~/.zshrc: home/zshrc
+    ~/.hushlogin:
+        if: '[ `uname` = Darwin ]'
+        path: home/hushlogin
+    ~/.local/share/Trash/files: ~/.Trash
+    ~/.pdbrc.py: home/pdbrc.py
+    ~/.p10k.zsh: home/p10k.zsh
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]

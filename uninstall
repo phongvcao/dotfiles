@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+
+function uninstall() {
+    local symlink="$1"
+    if [[ -L "${symlink}" ]]; then
+        echo "Removing link ${symlink/#$HOME/\~} -> $(readlink -f symlink)"
+        rm -rf "${symlink}"
+    else
+        echo "Symlink ${symlink} does not exist!"
+    fi
+
+}
+
+uninstall ~/.config/iTerm2
+uninstall ~/.config/autostart
+uninstall ~/.config/bleachbit
+uninstall ~/.config/brasero
+uninstall ~/.config/calibre
+uninstall ~/.config/cmus
+uninstall ~/.config/Cryptomator
+uninstall ~/.config/dconf
+uninstall ~/.config/dunst
+uninstall ~/.config/feh
+uninstall ~/.config/gconf
+uninstall ~/.config/gedit
+uninstall ~/.config/gtk-2.0
+uninstall ~/.config/gtk-3.0
+uninstall ~/.config/htop
+uninstall ~/.config/i3
+uninstall ~/.config/karabiner
+uninstall ~/.config/keepassxc
+uninstall ~/.config/lxterminal
+uninstall ~/.config/mpv
+uninstall ~/.config/nautilus
+uninstall ~/.config/neofetch
+uninstall ~/.config/nitrogen
+uninstall ~/.config/octave
+uninstall ~/.config/powerline
+uninstall ~/.config/ranger
+uninstall ~/.config/selfcontrol
+uninstall ~/.config/shell
+uninstall ~/.config/Skype
+uninstall ~/.config/sxiv
+uninstall ~/.config/tmuxinator
+uninstall ~/.config/totem
+uninstall ~/.config/transmission
+uninstall ~/.config/vim
+uninstall ~/.config/vlc
+uninstall ~/.config/zathura
+uninstall ~/.config/bookmarks
+uninstall ~/.config/dleyna-renderer-service.conf
+uninstall ~/.config/dleyna-server-service.conf
+uninstall ~/.config/kglobalshortcutsrc
+uninstall ~/.config/konsolerc
+uninstall ~/.config/llpp.conf
+uninstall ~/.config/mimeapps.list
+uninstall ~/.config/monitors.xml
+uninstall ~/.config/QtProject.conf
+uninstall ~/.config/tagged
+uninstall ~/.config/Trolltech.conf
+uninstall ~/.config/user-dirs.dirs
+uninstall ~/.config/user-dirs.locale
+uninstall ~/.config/gdb
+uninstall ~/.config/tutorials
+uninstall ~/.config/pudb/pudb.cfg
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    uninstall~/Library/Application Support/glances:
+else
+uninstall ~/.config/glances
+uninstall ~/.config/alacritty
+uninstall ~/.vim/autoload/floaterm
+
+uninstall ~/.gdbinit.d
+uninstall ~/.grc
+uninstall ~/.IdeaIC13
+uninstall ~/.shutter
+uninstall ~/.vnc
+uninstall ~/.voltron
+uninstall ~/.wireshark
+uninstall ~/.agignore
+uninstall ~/.bash_profile
+uninstall ~/.bashrc_disabled
+uninstall ~/.fehbg
+uninstall ~/.gdbinit
+uninstall ~/.gitconfig
+uninstall ~/.ideavimrc
+uninstall ~/.inputrc
+uninstall ~/.lldbinit
+uninstall ~/.megasync.sh
+# uninstall ~/.NERDTreeBookmarks
+uninstall ~/.octaverc
+uninstall ~/.promptline.sh
+uninstall ~/.shell_aliases
+uninstall ~/.shell_commands
+uninstall ~/.shell_functions
+uninstall ~/.shell_init
+uninstall ~/.shell_variables
+uninstall ~/.tigrc
+uninstall ~/.tmux.conf
+# uninstall ~/.tmux_old.conf
+uninstall ~/.tmuxline.conf
+uninstall ~/.tmuxline_custom.conf
+uninstall ~/.vimperatorrc
+uninstall ~/.vimrc
+uninstall ~/.config/nvim/init.vim
+uninstall ~/.vrapperrc
+uninstall ~/.weatherrc
+uninstall ~/.wegorc
+uninstall ~/.xinitrc
+uninstall ~/.Xresources
+uninstall ~/.p10k.zsh
+uninstall ~/.zshrc
+uninstall ~/.hushlogin
+uninstall ~/.gitignore_global
+uninstall ~/.pdbrc.py
+
+echo "$(tput setaf 10)All links have been removed$(tput sgr 0)"
+# echo "$(tput setaf 10)All paths have been removed$(tput sgr 0)"
+
+echo "Installing submodules [git submodule update --init --recursive]"
+command git submodule update --init --recursive 
+echo "$(tput setaf 10)All commands have been executed$(tput sgr 0)"
+
+echo
+echo "$(tput setaf 10)==> All tasks executed successfully$(tput sgr 0)"

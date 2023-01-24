@@ -1,0 +1,20 @@
+dashboard -layout history source stack variables threads breakpoints
+dashboard source -style height 30
+dashboard variables -style compact False
+dashboard variables -style align True
+dashboard stack -style compact False
+dashboard stack -style align True
+dashboard -style max_value_length 100
+dashboard -style value_truncation_string '...'
+dashboard -style syntax_highlighting 'solarized-dark'
+
+# Solarized Dark
+dashboard -style divider_fill_style_primary '0;34'
+dashboard -style divider_label_style_on_primary '0;33'
+dashboard -style divider_label_style_off_primary '0;33'
+dashboard -style style_selected_1 '0;32'
+dashboard -style style_low '1;32'
+dashboard -style style_high '0;35'
+dashboard -style prompt '\\[\\e[0;34m\\](Gdb) \\[\\e[0m\\]'
+dashboard -style prompt_running '\\[\\e[0;34m\\](Gdb) \\[\\e[0m\\]'
+dashboard -style prompt_not_running '\\[\\e[0;34m\\](Gdb) \\[\\e[0m\\]'

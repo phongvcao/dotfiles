@@ -1,0 +1,169 @@
+#!/usr/bin/env bash
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    source /etc/bashrc
+fi
+
+if [[ -f ${HOME}/.shell_init ]]; then
+    source "${HOME}/.shell_init"
+fi
+
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+    source /usr/share/bash-completion/bash_completion
+fi
+
+# Remove the last ";" from PROMPT_COMMAND
+# PROMPT_COMMAND=`echo ${PROMPT_COMMAND}|sed 's/;$//'`
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+# alias g="grep"
+# alias ls="ls --color=auto"
+
+# ...other stuff...
+
+# why would you type 'cd dir' if you could just type 'dir'?
+shopt -s autocd
+shopt -s histappend
+shopt -s cmdhist
+shopt -s extglob
+shopt -s cdable_vars
+shopt -s cdspell
+shopt -s checkwinsize
+
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    USRLIB_DIR="/usr/local/lib"
+else
+    USRLIB_DIR="/usr/lib"
+fi
+
+PYTHON3_DIR="${USRLIB_DIR}/$(ls ${USRLIB_DIR} | grep python3 | tail -n 1)"
+
+if [[ -f "${PYTHON3_DIR}"/site-packages/powerline/bindings/bash/powerline.sh ]]; then
+    source "${PYTHON3_DIR}"/site-packages/powerline/bindings/bash/powerline.sh
+fi
+
+export SHELL_NAME="bash"
+
+if [[ -f ${HOME}/.shell_commands ]]; then
+    source "${HOME}/.shell_commands"
+fi
+
+# This must be sourced after .shell_commands. In other words, after tmux has already started
+if [[ -f "${PYTHON3_DIR}"/site-packages/powerline/bindings/tmux/powerline.conf ]]; then
+    tmux source "${PYTHON3_DIR}/site-packages/powerline/bindings/tmux/powerline.conf"
+fi
+
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    if [[ -d /usr/local/Cellar/ruby ]]; then
+        gems_version="$(ls /usr/local/lib/ruby/gems | tail -n 1)"
+        gems_install_dir=/usr/local/lib/ruby/gems/${gems_version}/gems
+        tmuxinator_dir="$(ls ${gems_install_dir} | command grep -i tmuxinator | tail -n 1)"
+        source ${gems_install_dir}/${tmuxinator_dir}/completion/tmuxinator.bash
+    elif [[ -d /opt/homebrew/Cellar/ruby ]]; then
+        gems_version="$(ls /opt/homebrew/lib/ruby/gems | tail -n 1)"
+        gems_install_dir=/opt/homebrew/lib/ruby/gems/${gems_version}/gems
+        tmuxinator_dir="$(ls ${gems_install_dir} | command grep -i tmuxinator | tail -n 1)"
+        source ${gems_install_dir}/${tmuxinator_dir}/completion/tmuxinator.bash
+    fi
+fi
+
+if [[ -f /usr/share/autojump/autojump.bash ]]; then
+    source /usr/share/autojump/autojump.bash
+elif [[ -f /usr/local/share/autojump/autojump.bash ]]; then
+    source /usr/local/share/autojump/autojump.bash
+elif [[ -f "${HOME}"/.autojump/share/autojump/autojump.bash ]]; then
+    source "${HOME}"/.autojump/share/autojump/autojump.bash
+fi
+
+if [ -z "$(command -v autojump)" ]; then
+   cd "${HOME}"
+   command git clone git://github.com/wting/autojump.git
+   cd autojump
+   ./install.py
+fi
+
+# grc (Generic Colorizer) configuration.
+if [[ -f "${HOME}/.grc/grc.bashrc" ]]; then
+    source "${HOME}/.grc/grc.bashrc"
+fi
+
+# Source all variables definition
+if [[ -f ${HOME}/.shell_variables ]]; then
+    source "${HOME}/.shell_variables"
+fi
+
+# Source all aliases definition
+if [[ -f ${HOME}/.shell_aliases ]]; then
+    source "${HOME}/.shell_aliases"
+fi
+
+# Source all functions definition
+if [[ -f ${HOME}/.shell_functions ]]; then
+    source "${HOME}/.shell_functions"
+fi
+
+# vim-stardict configuration
+if [[ -f "${HOME}/.vim/bundle/vim-stardict/bindings/bash/stardict.sh" ]]; then
+    source "${HOME}/.vim/bundle/vim-stardict/bindings/bash/stardict.sh"
+fi
+
+# If we are running a non-interactive shell (gnome-terminal -e "", for
+# example), don't bother enabling these settings
+if [[ $(expr index "$-" i) -gt 0 ]]; then
+
+# Key bindings, up/down arrow searches through history
+bind '"\033[A": ""'
+bind '"\033[B": ""'
+bind '"\033[C": ""'
+bind '"\033[D": ""'
+bind '"\C-x": ""'
+bind '"\C-r": ""'
+bind '"\C-t": ""'
+bind '"PgUp": "\S-PgUp"'
+
+# Utilities function
+# Use stty -a to list all stty key bindings
+stty lnext undef # unbind C-v
+stty start undef # unbind C-q
+stty werase undef # unbind C-w
+stty susp undef # unbind C-z
+stty eof undef # unbind C-d
+stty kill undef # unbind C-d
+# Never touch \C-i because it is built-in <Tab> key
+bind '"^[[Z": reverse-menu-complete'
+bind '"\C-j": history-search-forward'
+bind '"\C-k": history-search-backward'
+bind '"\C-l": forward-char'
+bind '"\C-h": backward-char'
+bind '"\C-w": forward-word'
+bind '"\C-q": backward-word'
+bind '"\C-b": beginning-of-line'
+bind '"\C-e": end-of-line'
+bind '"\C-o": kill-line'
+bind '"\C-u": backward-kill-line'
+bind '"\C-t": kill-word'
+bind '"\C-r": backward-kill-word'
+bind '"\C-d": delete-char'
+bind '"\C-s": backward-delete-char'
+bind '"\C-a": kill-whole-line'
+bind '"\C-z": kill-region'
+bind '"\C-v": edit-and-execute-command'
+bind '"\C-y": copy-region-as-kill'
+bind '"\C-p": yank'
+bind '"jk": ""'
+# Shift-Insert: Paste from Clipboard to gnome-terminal
+# C-y or tmux vi-mode copy: Copy from gnome-terminal to Clipboard
+# C-c: Abort what you're typing
+fi
+
+# Bash completion
+set completion-ignore-case on
+set show-all-if-ambiguous on
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

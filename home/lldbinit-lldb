@@ -1,0 +1,8 @@
+settings set target.inherit-env true
+settings set stop-line-count-before 15
+settings set stop-line-count-after 15
+command script import /Library/Python/2.7/site-packages/voltron/entry.py
+command script import ~/.voltron/lldb_voltron.py
+command alias v voltron update
+command alias V voltron update
+voltron init

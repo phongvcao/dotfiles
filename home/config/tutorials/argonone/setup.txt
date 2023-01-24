@@ -1,0 +1,5 @@
+1. ArgonOne Fan Speeds:
+
+50C => 33%
+55C => 66%
+60C => 100%

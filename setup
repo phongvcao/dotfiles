@@ -1,0 +1,324 @@
+#!/usr/bin/env bash
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    if [ -z "$(command -v brew)" ]; then
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+    if [ -z "$(command -v ccls)" ]; then
+        command sudo chown -R "$(whoami)":admin /usr/local/bin; \
+            command sudo chown -R "$(whoami)":admin /usr/local/etc; \
+            command sudo chown -R "$(whoami)":admin /usr/local/sbin; \
+            command sudo chown -R "$(whoami)":admin /usr/local/share; \
+            command sudo chown -R "$(whoami)":admin /usr/local/share/doc; \
+            command sudo chown -R "$(whoami)":admin /usr/local/share/zsh; \
+            command sudo chown -R "$(whoami)":admin /usr/local/share/zsh/site-functions; \
+
+        command sudo chown -R "$(whoami)" /usr/local/bin; \
+            command sudo chown -R "$(whoami)" /usr/local/etc; \
+            command sudo chown -R "$(whoami)" /usr/local/sbin; \
+            command sudo chown -R "$(whoami)" /usr/local/share; \
+            command sudo chown -R "$(whoami)" /usr/local/share/doc; \
+            command sudo chown -R "$(whoami)" /usr/local/share/zsh; \
+            command sudo chown -R "$(whoami)" /usr/local/share/zsh/site-functions; \
+
+        command chmod u+w /usr/local/bin; \
+            command chmod u+w /usr/local/etc; \
+            command chmod u+w /usr/local/sbin; \
+            command chmod u+w /usr/local/share; \
+            command chmod u+w /usr/local/share/doc; \
+            command chmod u+w /usr/local/share/zsh; \
+            command chmod u+w /usr/local/share/zsh/site-functions; \
+        brew install ccls; \
+        brew install mosh autossh coreutils; \
+        brew install binutils; \
+        brew install diffutils; \
+        brew install ed; \
+        brew install findutils; \
+        brew install gcc; \
+        brew install gawk; \
+        brew install watch; \
+        brew install wdiff; \
+        brew install gpatch; \
+        brew install rsync; \
+        brew install less; \
+        brew install openssh; \
+        brew install go; \
+        brew install node; \
+        brew install llvm; \
+        brew install neofetch; \
+        brew install zsh; \
+        brew install xmlstarlet; \
+        brew install git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
+            screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
+            cmake xclip docker curl gpatch htop llvm yarn man-db rustup-init \
+            tavianator/tap/bfs atool rar zip p7zip glances ranger flake8 \
+            fzf fd neovim lf highlight ddclient && \
+        brew install --HEAD universal-ctags/universal-ctags/universal-ctags && \
+        $(brew --prefix)/opt/fzf/install && \
+        brew install --cask postgres-unofficial && \
+        brew install --cask nextcloud && \
+        brew install --cask transmission && \
+        brew install --cask calibre && \
+        brew install --cask vagrant && \
+        brew install --cask macvim && \
+        brew install --cask vimr && \
+        brew install --cask docker && \
+        brew install --cask mirrordisplays && \
+        brew install --cask sf-symbols && \
+        brew install --cask veracrypt && \
+        brew install --cask balenaetcher && \
+        brew install --cask raspberry-pi-imager && \
+        brew install --cask alacritty && \
+        brew install --cask iterm2 && \
+        brew install --cask firefox && \
+        brew install --cask mullvadvpn && \
+        brew install --cask vlc && \
+        brew install --cask qbittorrent && \
+        brew install --cask cryptomator && \
+        brew install --cask keepassxc && \
+        brew install --cask karabiner-elements && \
+        brew install --cask ccleaner && \
+        brew install --cask teamviewer && \
+        brew install --cask signal && \
+        brew install --cask virtualbox && \
+        brew install --cask scribus && \
+        brew install --cask inkscape && \
+        brew install --cask gimp && \
+        brew install --cask syncthing && \
+        brew install --cask brave-browser && \
+        brew install --cask libreoffice && \
+        brew install --cask visual-studio-code && \
+        # If this doesn't work for Cryptomator, we probably need to manually
+        # download osxfuse 4.x versions on Github: https://osxfuse.github.io/
+        brew install --cask macfuse && \
+        rustup-init --no-modify-path -y
+
+        brew install bat
+    fi
+else
+    sudo iptables -I INPUT 1 -p udp --dport 60000:61000 -j ACCEPT && \
+    sudo iptables-save
+
+    if [ -z "$(command -v ccls)" ]; then
+	    sudo apt-get update -y && \
+	    sudo apt-get upgrade -y && \
+	    sudo apt-get dist-upgrade -y && \
+	    sudo apt-get install -y zsh git mosh autossh neofetch ctags nodejs npm \
+	        vim-gtk3 tmux llvm less openssh-server coreutils binutils diffutils ed \
+	        findutils gawk watch patch wdiff rsync indent sed tar grep gzip screen \
+	        wget bash emacs gdb patch m4 make nano python unzip cmake snapd \
+	        ibus-unikey feh xclip vagrant docker bleachbit gparted bleachbit \
+	        curl htop g++ python3-pip lldb clang yarn cargo rustc bfs \
+	        atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
+	        fzf fd-find neovim highlight ddclient qbittorrent postgresql \
+	        postgresql-contrib xmlstarlet && \
+	    sudo snap install --classic code && \
+	    sudo snap install ccls go --classic && \
+	    sudo snap install universal-ctags*.snap --dangerous && \
+	    GO11MODULE="on" go get -u github.com/gokcehan/lf && \
+	    mv ~/go ~/.go
+        if [[ -z "${SSH_CLIENT}" ]]; then
+            sudo apt-get install -y shutter python-pip
+            sudo snap install -y alacritty --classic
+            # sudo apt-get install -y bat 
+            # NOTE: Also install ungoogled-chromium
+	    fi
+    fi
+
+    if [[ -n "${SSH_CLIENT}" ]]; then
+        sudo apt-get remove -y xsel xclip qemu\*
+    fi
+fi
+
+cd "${HOME}"
+chsh -s $(which zsh)
+
+#
+# Install ripgrep
+#
+cargo install ripgrep --features pcre2
+
+#
+# Install dircolors-solarized
+#
+if [[ ! -d "${HOME}/.dircolors/" ]]; then
+    echo
+    echo "Installing dircolors-solarized"
+    curl -fLo ${HOME}/.dircolors/dircolors.ansi-dark --create-dirs \
+        https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark
+    if [[ -f $HOME/.dircolors/dircolors.ansi-dark ]]; then
+        eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
+    fi
+fi
+
+#
+# Install nerd-fonts
+#
+FONT_DIR="${HOME}/.local/share/fonts"
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    FONT_DIR="${HOME}/Library/Fonts"
+fi
+if [[ -d "${FONT_DIR}" ]]; then
+    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Nerd_Font_Complete_Mono.ttf --create-dirs \
+        https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
+    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Oblique_Nerd_Font_Complete_Mono.ttf --create-dirs \
+        https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Italic/complete/DejaVu%20Sans%20Mono%20Oblique%20Nerd%20Font%20Complete%20Mono.ttf 
+    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Nerd_Font_Complete_Mono.ttf --create-dirs \
+        https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf 
+    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Oblique_Nerd_Font_Complete_Mono.ttf --create-dirs \
+        https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Bold-Italic/complete/DejaVu%20Sans%20Mono%20Bold%20Oblique%20Nerd%20Font%20Complete%20Mono.ttf 
+    fc-cache -f -v
+fi
+
+#
+# Install oh-my-zsh
+#
+if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
+    echo
+    echo "Installing oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+#
+# Install powerlevel10k
+#
+if [[ ! -d "${HOME}/.oh-my-zsh/custom/themes/powerlevel10k" ]]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+fi
+
+#
+# Install autojump
+#
+if [ -z "$(command -v autojump)" ]; then
+    echo
+    echo "Installing autojump"
+    command git clone git://github.com/wting/autojump.git
+    cd autojump
+    ./install.py
+fi
+
+#
+# Install pip3 and pip2
+#
+if [ -z "$(command -v pip3)" ]; then
+    echo
+    echo "Installing pip3"
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    command sudo python3 get-pip.py
+    command sudo python2 get-pip.py
+fi
+
+#
+# Install pynvim
+#
+echo
+echo "Installing pynvim"
+command python2 -m pip install pynvim
+command python3 -m pip install pynvim
+
+#
+# Install neovim using pip
+#
+echo
+echo "Installing neovim"
+command python2 -m pip install neovim
+command python3 -m pip install neovim
+
+#
+# Install pdbpp
+#
+echo
+echo "Installing pdbpp"
+command sudo python3 -m pip install pdbpp
+command sudo python3 -m pip uninstall --yes pdbpp
+command sudo python3 -m pip install git+https://github.com/pdbpp/pdbpp
+# command sudo python2 -m pip install pdbpp
+# command sudo python2 -m pip uninstall --yes pdbpp
+# command sudo python2 -m pip install git+https://github.com/pdbpp/pdbpp
+
+#
+# Install jedi
+#
+if [ -z "$(pip list | command grep -i jedi)" ]; then
+    echo
+    echo "Installing jedi"
+    command sudo python3 -m pip install jedi
+    # command sudo python2 -m pip install jedi
+fi
+
+#
+# Install pygments
+#
+echo
+echo "Installing pygments"
+command sudo python3 -m pip install pygments
+# command sudo python2 -m pip install pygments
+
+#
+# Install neovim (node.js extension)
+#
+echo
+echo "Installing neovim (node.js extension)"
+sudo npm install -g neovim
+
+#
+# Install neovim-remote
+#
+echo
+echo "Installing neovim-remote"
+command sudo python3 -m pip install neovim-remote
+# command sudo python2 -m pip install neovim-remote
+
+#
+# Install ansible
+#
+if [ -z "$(command -v ansible)" ]; then
+    echo
+    echo "Installing ansible"
+    sudo yarn global add ansible
+fi
+
+#
+# Install nds
+#
+if [ -z "$(command -v nds)" ]; then
+    echo
+    echo "Installing nds"
+    sudo yarn global add nds
+fi
+
+#
+# Install eslint
+#
+if [ -z "$(command -v eslint)" ]; then
+    echo
+    echo "Installing eslint"
+    sudo yarn global add eslint
+    # /usr/local/lib/node_modules/npm/bin/eslint --init
+fi
+
+#
+# Install typescript / tsserver
+#
+if [ -z "$(command -v tsserver)" ]; then
+    echo
+    echo "Installing typescript / tsserver"
+    sudo yarn global add typescript
+fi
+
+#
+# Clean up
+#
+echo
+echo "Cleaning up autojump"
+if [[ -d "${HOME}/autojump" ]]; then
+    command rm -rf "${HOME}/autojump"
+fi
+
+echo
+echo "Cleaning up get-pip.py"
+if [[ -f "${HOME}/get-pip.py" ]]; then
+    command rm -rf "${HOME}/get-pip.py"
+fi
+
+echo
+echo "==> Successfully executed all tasks"

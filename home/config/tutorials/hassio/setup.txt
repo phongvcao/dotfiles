@@ -1,0 +1,22 @@
+1. Move /config/home-assistant_v2.db to separate folder to reduce Google Drive Backup Snapshot size:
+   # First, Enable SSH to HASS.IO RPi 4B Server
+
+   $ ssh root@hassio.local
+
+   ~$ mkdir /media/database/
+
+   # Now, STOP HASS Server under Configuration -> Server Controls
+
+   ~$ mv /config/home-assistant_v2.db /media/database/
+
+   ~$ ln -s /media/database/home-assistant_v2.db /config/home-assistant_v2.db
+
+   ~$ sudo reboot
+
+   # Finally, Disable SSH to HASS.IO RPi 4B Server
+
+2. Install ArgonOne Active Cooling Add-on and HassOS I2C Configurator Add-on.
+
+3. When there's issues with custom_components, just delete the /config/custom_components/
+folder entirely (since originally it was not there), and HASS would probably work
+just fine without custom_components.

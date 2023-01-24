@@ -1,0 +1,24 @@
+[user]
+    name = Phong V. Cao
+    email = phongvcao@phongvcao.com
+
+[core]
+    editor = command nvim
+    pager = command nvim -c 'let g:fzf_mru_disable_at_vimenter = 1 | PAGER' - 
+    excludesfile = ~/.gitignore_global
+
+[color]
+    ui = true
+
+[merge]
+    tool = vim_mergetool
+    conflictstyle = diff3
+
+[mergetool "vim_mergetool"]
+    cmd = ${HOME}/.dotfiles/home/config/shell/p4merge.sh "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+    # cmd = command nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+    trustExitCode = false
+    keepBackup = true
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/

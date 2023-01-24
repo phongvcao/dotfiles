@@ -1,0 +1,7 @@
+set selection-clipboard clipboard
+map [normal] f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+map [visual] f toggle_fullscreen
+map [index] f toggle_fullscreen
+
+set font "DejaVu Sans Mono for Powerline Bold 7"

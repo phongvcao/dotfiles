@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/phongvcao/.cryptomator/bin/cryptomator-1.4.15-x86_64.AppImage
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Cryptomator
+Name=Cryptomator
+Comment[en_US]=
+Comment=

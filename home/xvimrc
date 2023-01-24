@@ -1,0 +1,72 @@
+inoremap jk <Esc>l
+inoremap Jk <Esc>l
+inoremap jK <Esc>l
+inoremap JK <Esc>l
+inoremap <C-r> <C-w>
+inoremap <C-u> <C-c>0Di
+" inoremap jj j
+" inoremap jJ j
+" inoremap Jj J
+" inoremap JJ J
+" nnoremap gcc :action CommentByLineComment<CR>
+" nnoremap gcj :action CommentByLineComment<CR>
+" nnoremap gck :action CommentByLineComment<CR>k
+" vnoremap gc :action CommentByLineComment<CR>
+vnoremap jk <Esc>l
+vnoremap Jk <Esc>l
+vnoremap jK <Esc>l
+vnoremap JK <Esc>l
+cnoremap jk <C-c>
+cnoremap Jk <C-c>
+cnoremap jK <C-c>
+cnoremap JK <C-c>
+nnoremap ; :
+nnoremap : ;
+nnoremap <> ==
+vnoremap <> ==
+nnoremap e $
+nnoremap b ^
+nnoremap W b
+nnoremap E e
+vnoremap e $
+vnoremap b ^
+vnoremap W b
+vnoremap E e
+nnoremap A I
+nnoremap a A
+nnoremap I li
+cnoremap Jk <Esc>
+" nnoremap <Space>s :action KJumpAction<CR>
+nnoremap ,j <PageDown>
+nnoremap ,k <PageUp>
+nnoremap .j <C-d>
+nnoremap .k <C-u>
+nnoremap .. <nop>
+nnoremap J <C-e>
+nnoremap K <C-y>
+nnoremap ,h :vsplit<CR>
+nnoremap ,v :split<CR>
+" nnoremap _ :q<CR>
+nnoremap oh :vsplit<CR>
+nnoremap ov :split<CR>
+" nnoremap <C-l> <C-w>w
+" nnoremap <C-j> <C-w>w
+" nnoremap <C-h> <C-w>W
+" nnoremap <C-k> <C-w>W
+nnoremap <M-l> <C-w>l
+nnoremap <M-j> <C-w>j
+nnoremap <M-h> <C-w>h
+nnoremap <M-k> <C-w>k
+nnoremap <M-w> <C-w>w
+nnoremap <M-W> <C-w>W
+nnoremap ,/ :set hlsearch!<CR>/<CR><C-o>
+nnoremap ZO zR
+nnoremap ZC zM
+nnoremap zo zo
+nnoremap zc zc
+set hlsearch
+set ignorecase
+set smartcase
+set clipboard=unnamed
+set number
+set relativenumber

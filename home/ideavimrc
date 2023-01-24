@@ -1,0 +1,120 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" I. Installation Instructions (Linux):
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" 1. Install intellij-colors-solarized for Intellij IDEA:
+"    https://github.com/jkaving/intellij-colors-solarized
+"
+" 2. Install IdeaVim for Intellij IDEA:
+"    File -> Settings -> Search for 'plugins' -> Plugins -> Browse repositories
+"    -> Search for 'ideavim' -> Install -> Close (Auto-restart)
+"
+" 3. Install Relative Line Numbers for Intellij IDEA:
+"    File -> Settings -> Search for 'plugins' -> Plugins -> Browse repositories
+"    -> Search for 'relative line numbers' -> Install -> Close (Auto-restart)
+"
+" 4. Import intellij-settings.jar by going through File -> Import Settings
+"    -> Browse to 'intellij-settings.jar' and click 'Import'
+"
+" 5. Copy & Paste this file and vimrc into ~/.ideavimrc and ~/.vimrc,
+"    respectively
+"
+" 6. ENJOY!
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" II. Installation Instructions (Windows):
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" 1. Install intellij-colors-solarized for Intellij IDEA:
+"    https://github.com/jkaving/intellij-colors-solarized
+"
+" 2. Install IdeaVim for Intellij IDEA:
+"    File -> Settings -> Search for 'plugins' -> Plugins -> Browse repositories
+"    -> Search for 'ideavim' -> Install -> Close (Auto-restart)
+"
+" 3. Install Relative Line Numbers for Intellij IDEA:
+"    File -> Settings -> Search for 'plugins' -> Plugins -> Browse repositories
+"    -> Search for 'relative line numbers' -> Install -> Close (Auto-restart)
+"
+" 4. Import intellij-settings.jar by going through File -> Import Settings
+"    -> Browse to 'intellij-settings.jar' and click 'Import'
+"
+" 5. Copy & Paste this file and vimrc into C:\Users\<your_username>\_ideavimrc
+"    and C:\Users\<your_username>\_vimrc, respectively
+"
+" 6. Change all instances of 'C:\Users\pcao' in C:\Users\<your_username>\_vimrc
+"    and in this file to 'C:\Users\<your_username>'
+"
+" 7. ENJOY!
+"
+
+
+" if has('win32') || has('win64')
+"     source ~\\_vimrc
+" elseif has('unix')
+"     source ~/.vimrc
+" endif
+"
+inoremap jk <Esc>l
+inoremap Jk <Esc>l
+inoremap jK <Esc>l
+inoremap JK <Esc>l
+" inoremap jj j
+" inoremap jJ j
+" inoremap Jj J
+" inoremap JJ J
+nnoremap gcc :action CommentByLineComment<CR>
+nnoremap gcj :action CommentByLineComment<CR>
+nnoremap gck :action CommentByLineComment<CR>k
+vnoremap gc :action CommentByLineComment<CR>
+vnoremap jk <Esc>l
+vnoremap Jk <Esc>l
+vnoremap jK <Esc>l
+vnoremap JK <Esc>l
+cnoremap jk <C-c>
+cnoremap Jk <C-c>
+cnoremap jK <C-c>
+cnoremap JK <C-c>
+nnoremap ; :
+nnoremap : ;
+nnoremap <> ==
+vnoremap <> ==
+nnoremap e $
+nnoremap b ^
+nnoremap W b
+nnoremap E e
+vnoremap e $h
+vnoremap b ^
+vnoremap W b
+vnoremap E e
+nnoremap A I
+nnoremap a A
+nnoremap I li
+cnoremap Jk <Esc>
+nnoremap <Space>s :action KJumpAction<CR>
+nnoremap ,j <PageDown>
+nnoremap ,k <PageUp>
+nnoremap .j <C-d>
+nnoremap .k <C-u>
+nnoremap .. <nop>
+nnoremap J <C-e>
+nnoremap K <C-y>
+nnoremap ,h :vsplit<CR>
+nnoremap ,v :split<CR>
+nnoremap _ :q<CR>
+nnoremap oh :vsplit<CR>
+nnoremap ov :split<CR>
+nnoremap <C-l> <C-w>w
+nnoremap <C-j> <C-w>w
+nnoremap <C-h> <C-w>W
+nnoremap <C-k> <C-w>W
+nnoremap ,/ :set hlsearch!<CR>/<CR><C-o>
+nnoremap ZO zR
+nnoremap ZC zM
+nnoremap zo zo
+nnoremap zc zc
+set hlsearch
+set ignorecase
+set smartcase
+set clipboard+=unnamed

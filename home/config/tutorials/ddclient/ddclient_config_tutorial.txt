@@ -1,0 +1,26 @@
+The following tutorial is on how to keep DuckDNS domain entry updated when using
+a Dynamic IP ISP provider (e.g. Comcast):
+
+1. Step 1: Edit /etc/ddclient.conf file:
+# /etc/ddclient.conf
+protocol=duckdns, \
+password='token-content' \
+ip='your ip as detected by `what is my ip`' \
+duckdns_domain_name (e.g. as in duckdns_domain_name.duckdns.org)
+
+2. Step 2: Edit /etc/default/ddclient file:
+# /etc/default/ddclient
+run_dhclient="false"
+run_ipup="false"
+run_daemon="true"
+daemon_interval="300"
+
+3. Step 3: Try running sudo ddclient to see if it succeeds:
+$ sudo ddclient
+SUCCESS:  updating @: good: IP address set to 45.123.789.13
+
+4. Step 4: Run ddclient as a service:
+sudo service ddclient restart
+
+5. Step 5: Check if ddclient is already active as a service:
+sudo service ddclient status

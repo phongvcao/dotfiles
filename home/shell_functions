@@ -1,0 +1,2362 @@
+# vim:filetype=zsh
+# Frequently-used commands/functions
+
+# Source extract.sh
+if [[ -f "${HOME}/.dotfiles/home/config/shell/extract.sh" ]]; then
+    source "${HOME}/.dotfiles/home/config/shell/extract.sh"
+fi
+
+function xtract() {
+    local fileName=$(basename -- "$1")
+    local nameNoExt="${fileName%%.*}"
+    if [[ -e "./${nameNoExt}" ]]; then
+        local val=0
+        while [[ -e "./${nameNoExt}_${val}" ]]; do
+            val=$((val + 1 ))
+        done
+        nameNoExt="${nameNoExt}_${val}"
+    fi
+    mkdir "${nameNoExt}"
+    cd "${nameNoExt}"
+    extract "../$1"
+    cd ../
+}
+
+function stopwatch() {
+    BEGIN=$(date +%s)
+
+    echo Starting Stopwatch...
+
+    while true; do
+        NOW=$(date +%s)
+        let DIFF=$(($NOW - $BEGIN))
+        let MINS=$(($DIFF / 60))
+        let SECS=$(($DIFF % 60))
+        let HOURS=$(($DIFF / 3600))
+        let DAYS=$(($DIFF / 86400))
+
+    # \r  is a "carriage return" - returns cursor to start of line
+    printf "\r%3d Days, %02d:%02d:%02d" $DAYS $HOURS $MINS $SECS
+    sleep 0.25
+done
+}
+
+function ping() {
+    if [[ -n "$2" ]]; then
+        command ping "$1" -c "$2"
+    else
+        command ping "$*"
+    fi
+}
+
+function path() {
+    if [[ -n "$1" ]]; then
+        command readlink -m "$1"
+    else
+        echo "${PWD}"
+    fi
+}
+
+function persist() {
+    eval "nohup $@ &"
+}
+
+function _vboxstopvm() {
+    eval "VBoxManage controlvm $@ acpipowerbutton"
+}
+
+function _vboxstartvm() {
+    eval "persistent VBoxManage startvm $@ --type headless"
+}
+
+function settitle() {
+    local true_filename="$(command ls | command grep -i $1)"
+    ffmpeg -i "${true_filename}" -metadata title="$2" -acodec copy -vcodec copy ".temp_${true_filename}"
+    rm -rf "${true_filename}"
+    mv ".temp_${true_filename}" "${true_filename}"
+}
+
+
+function setartist() {
+    local true_filename="$(command ls | command grep -i $1)"
+    ffmpeg -i "${true_filename}" -metadata artist="$2" -acodec copy -vcodec copy ".temp_${true_filename}"
+    rm -rf "${true_filename}"
+    mv ".temp_${true_filename}" "${true_filename}"
+}
+
+function pipreview() {
+    python3 -m pip install --upgrade pip
+    python2 -m pip install --upgrade pip
+
+    for pkg in $( python3 -m pip list | cut -d' ' -f 1 ); do
+        sudo -H python3 -m pip install -U "${pkg}"
+    done
+
+    for pkg in $( python2 -m pip list | cut -d' ' -f 1 ); do
+        sudo -H python2 -m pip install -U "${pkg}"
+    done
+}
+
+function p4diff() {
+  if [[ -n "$1" ]]; then
+    if [[ "$1" == *.diff ]]; then
+      p4 pack 2>&1 > ./"$(basename $1)"
+      command cp -rf ./"$(basename $1)" ~
+      command rm -rf ./"$(basename $1)"
+    else
+      p4 pack "$1" 2>&1 | command_nvim -
+    fi
+  else
+    p4 pack 2>&1 | command_nvim -
+  fi
+}
+
+function p4revert() {
+  local file=$(p4 opened | fzf)
+  p4 revert "$(echo ${file} | command sed -e 's/#.\+//g')"
+}
+
+function _wipedisk() {
+    sudo dd if=/dev/urandom bs=1M count=8 of=$1
+}
+
+function _luksformat() {
+    sudo dd if=/dev/urandom bs=1M count=8 of=$1
+    sudo cryptsetup luksFormat -c aes-xts-plain64 -s 512 -h sha512 -y $1 --label $2
+}
+
+function _lukslabel() {
+    sudo cryptsetup config $1 --label $2
+}
+
+function _lukschangekey() {
+    sudo cryptsetup luksChangeKey $1 -S 0
+}
+
+function _zfscreate() {
+    sudo zfs create $1/data
+    sudo chown -R ${USER}:${USER} /$1/data
+}
+
+function _zpoolimportluks() {
+    sudo cryptsetup luksOpen --allow-discards $1 $2
+    sudo zpool import -d /dev/mapper/$2 $3
+}
+
+function _zpoolexportluks() {
+    sudo zpool export $2
+    sudo cryptsetup luksClose $1
+}
+
+function _zfssnapshot() {
+    sudo zfs snapshot $1/data@$2
+}
+
+function _zfsdestroy() {
+    sudo zfs destroy -r $1/data
+}
+
+function _zfsbackupinit() {
+    sudo zfs send $1/data@$2 | sudo zfs receive $3/$1
+}
+
+function _zfsbackupinc() {
+    sudo zfs send -i $1/data@$2 $1/data@$3 | sudo zfs receive $4/$1
+}
+
+function _zfsbackupreplica() {
+    sudo zfs send -I $1/data@$2 $1/data@$3 | sudo zfs receive $4/$1
+}
+
+function setinfo() {
+    local true_filename="$(command ls | command grep -i $1)"
+    local regex="(.*)\\s+[-]\\s+(.*?)[.][^.]+"
+    local title=""
+    local artist=""
+
+    if [[ "${true_filename}" =~ "${regex}" ]]; then
+        if [[ "${SHELL_NAME}" == "zsh" ]]; then
+            title="${match[1]}"
+            artist="${match[2]}"
+        elif [[ "${SHELL_NAME}" == "bash" ]]; then
+            title="${BASH_REMATCH[1]}"
+            artist="${BASH_REMATCH[2]}"
+        fi
+
+        ffmpeg -i "${true_filename}" -metadata title="${title}" -metadata artist="${artist}" -acodec copy -vcodec copy ".temp_${true_filename}"
+        rm -rf "${true_filename}"
+        mv ".temp_${true_filename}" "${true_filename}"
+
+    else
+        echo "File Not Found!"
+    fi
+}
+
+function promptlineVcsDirName() {
+    local cur_git_dir=$(command git rev-parse --show-toplevel 2> /dev/null)
+    if [[ $? -eq 0 && -n "${cur_git_dir}" ]]; then
+        echo $(basename ${cur_git_dir} 2> /dev/null)
+    fi
+}
+
+function promptlineVcs() {
+    local cur_git_dir=$(command git rev-parse --show-toplevel 2> /dev/null)
+    if [[ $? -eq 0 && -n "${cur_git_dir}" ]]; then
+        echo " git"
+    else
+        echo ""
+    fi
+}
+
+function promptlineVcsBranch() {
+    local cur_git_branch=$(command git --no-pager branch 2> /dev/null | command sed 's/[*] //')
+    if [[ $? -eq 0 && -n "${cur_git_branch}" ]]; then
+        echo " ${cur_git_branch}"
+    else
+        echo ""
+    fi
+}
+
+function br() {
+    command git -C /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask fetch --unshallow
+    command sudo chown -R $(whoami) /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
+    command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
+    eval "brew update"
+    eval "brew upgrade"
+    eval "brew cask upgrade --greedy"
+    eval "brew $@"
+}
+
+function gbgui() {
+    cd "${HOME}/GunBot"
+    chmod "${HOME}/GunBot/gunthy-gui-linux-x64"
+    chmod "${HOME}/GunBot/gunthy-linx64"
+    until ./gunthy-gui-linux-x64; do
+        echo "Gunthy GUI crashed with exit code$?. Respawning..." >&2
+        sleep 1
+    done
+}
+
+function gitlog() {
+    if [[ -n $1 ]]; then
+        CURDIR="${PWD}"
+        cd "$1"
+    fi
+    if [[ $( command git rev-parse --git-dir ) =~ .git$ ]]; then
+        command git fetch --all
+        command_nvim -c "GVAndMagit"
+    else
+        command git log
+    fi
+    cd "${CURDIR}"
+}
+
+function gop() {
+    if [[ $1 == 'back' ]]; then
+        export GOPATH=${GOPATH}:$(readlink -f $2)
+        echo
+        echo "\$GOPATH: ${GOPATH}"
+        echo
+    elif [[ $1 == 'front' ]]; then
+        export GOPATH=$(readlink -f $2):${GOPATH}
+        echo
+        echo "\$GOPATH: ${GOPATH}"
+        echo
+    elif [[ $1 == 'reset' ]]; then
+        export GOPATH=${GOPATHORG}
+        echo
+        echo "\$GOPATH: ${GOPATH}"
+        echo
+    elif [[ -z $1 ]]; then
+        echo
+        echo "\$GOPATH: ${GOPATH}"
+        echo
+        echo "Usage: gop [COMMAND] [PATH]"
+        echo
+        echo
+        echo "gop back [PATH]"
+        echo "    Push path to back of \$GOPATH"
+        echo
+        echo "gop front [PATH]"
+        echo "    Push path to front of \$GOPATH"
+        echo
+        echo "gop reset"
+        echo "    Reset \$GOPATH to original value"
+        echo
+        echo "gop"
+        echo "    Show \$GOPATH and command usage"
+        echo
+    fi
+}
+
+function keystroke() {
+    command cat > /dev/null
+}
+
+function man() {
+    if [[ -n $2 ]]; then
+        command_nvim -c "Tman $1 $2 | tabclose 1"
+    else
+        command_nvim -c "Tman $1 | tabclose 1"
+    fi
+}
+
+function gitstatus() {
+    if [[ -n $1 ]]; then
+        CURDIR="${PWD}"
+        cd "$1"
+    fi
+    command git fetch --all
+    if [[ $( command git rev-parse --git-dir ) =~ .git$ ]]; then
+        command_nvim -c "let g:magit_stage_file_mapping = 'sf'" -c "MagitFullscreen"
+    else
+        command git status -uno 
+    fi
+    cd "${CURDIR}"
+}
+
+function removeLsSuffix() {
+    if [[ -n "${BASH_VERSION}" ]]; then
+        local var="${1:0:-2}"
+    elif [[ -n "${ZSH_VERSION}" ]]; then
+        local var="${1[1,-2]}"
+    fi
+    if [[ -e "$1" ]]; then
+        echo "$1"
+    elif [[ -e "${var}" ]]; then
+        echo "${var}"
+    else
+        echo "$1"
+    fi
+}
+
+function vim() {
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        killall fd >/dev/null 2>&1
+        fdBin="fd"
+    else
+        killall fdfind >/dev/null 2>&1
+        fdBin="fdfind"
+    fi
+
+    if [[ -n "$2" ]]; then
+        CURDIR="${PWD}"
+        cd "$1"
+        fzfResult=$(FZF_DEFAULT_COMMAND="\
+            ${fdBin} -HI --exclude='*.git/' --max-depth '$2' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" command_fzf --prompt="(Vim) ${PWD}/")
+        fzfResult="$(removeLsSuffix ${fzfResult})"
+
+        if [[ "$(uname)" =~ "Darwin" ]]; then
+            killall fd >/dev/null 2>&1
+        else
+            killall fdfind >/dev/null 2>&1
+        fi
+
+        fzfResult="$(echo ${fzfResult} | command sed -e 's/@$//g')"
+        command_nvim "${fzfResult%?}"
+        cd "${CURDIR}"
+    else
+        if [[ -n "$1" ]]; then
+            if [[ -d "$1" ]]; then
+                CURDIR="${PWD}"
+                cd "$1"
+                fzfResult=$(FZF_DEFAULT_COMMAND="${fdBin} -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" command_fzf --prompt="(Vim) ${PWD}/")
+                fzfResult="$(removeLsSuffix ${fzfResult})"
+
+                if [[ "$(uname)" =~ "Darwin" ]]; then
+                    killall fd >/dev/null 2>&1
+                else
+                    killall fdfind >/dev/null 2>&1
+                fi
+
+                fzfResult="$(echo ${fzfResult} | command sed -e 's/@$//g')"
+                command_nvim "${fzfResult%?}"
+                cd "${CURDIR}"
+                # command_nvim -c "FzfMRURec $@"
+                # command_nvim
+            else
+                CURDIR="${PWD}"
+                DESTFILE="$(readlink -m $1)"
+                cd "$(dirname ${DESTFILE})"
+                command_nvim "${DESTFILE%?}"
+                cd "${CURDIR}"
+            fi
+        else
+            # command_nvim -c "FzfMRU"
+            # command_nvim -c 'let g:fzf_mrufiles_start = 1'
+            command_nvim
+        fi
+    fi
+}
+
+function dfs() {
+    local filename=""
+    local fdBin=""
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        killall fd >/dev/null 2>&1
+        fdBin="fd"
+    else
+        killall fdfind >/dev/null 2>&1
+        fdBin="fdfind"
+    fi
+
+    if [[ -n $3 ]]; then
+        filename=$(FZF_DEFAULT_COMMAND="${fdBin} '.*$1.*' '$2' --exclude='*.git/' --max-depth '$3' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
+    else
+        if [[ -n $2 ]]; then
+            filename=$(FZF_DEFAULT_COMMAND="${fdBin} '.*$1.*' '$2' -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
+        else
+            if [[ -n $1 ]]; then
+                if [[ -d "$(readlink -m $1)" ]]; then
+                    filename=$(FZF_DEFAULT_COMMAND="${fdBin} . '$(readlink -m $1)' -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> "$(readlink -m $1)"/")
+                else
+                    filename=$(FZF_DEFAULT_COMMAND="${fdBin} '.*$1.*' . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
+                fi
+            else
+                filename=$(FZF_DEFAULT_COMMAND="${fdBin} -HI --exclude='*.git/' \
+                    --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                    --group-directories-first --color -A -d {} \;" fzf --prompt="(DFS)> ${PWD}/")
+            fi
+        fi
+    fi
+
+    filename="$(echo ${filename} | command sed -e 's/@$//g')"
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        killall fd >/dev/null 2>&1
+    else
+        killall fdfind >/dev/null 2>&1
+    fi
+
+    if [[ -n "${filename}" ]]; then
+        if [[ -d "$(readlink -m ${filename})" ]]; then
+            echo "cd ${filename}"
+            cd "${filename}"
+        else
+            echo "vim ${filename}"
+            command_nvim "${filename%?}"
+        fi
+    fi
+}
+
+function bfs() {
+    local filename=""
+    killall bfs >/dev/null 2>&1
+
+    if [[ -n $3 ]]; then
+        filename=$(FZF_DEFAULT_COMMAND="command bfs '$2' -maxdepth '$3' -mount -iname '*$1*' -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null" fzf --prompt="(BFS)> ${PWD}/")
+    else
+        if [[ -n $2 ]]; then
+            filename=$(FZF_DEFAULT_COMMAND="command bfs '$2' -mount -iname '*$1*' -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null" fzf --prompt="(BFS)> ${PWD}/")
+        else
+            if [[ -n $1 ]]; then
+                if [[ -d "$(readlink -m $1)" ]]; then
+                    filename=$(FZF_DEFAULT_COMMAND="command bfs '$(readlink -m $1)' -mount -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null" fzf --prompt="(BFS)> "$(readlink -m $1)"/")
+                else
+                    filename=$(FZF_DEFAULT_COMMAND="command bfs . -mount -iname '*$1*' -not -iwholename '*.git/*' -exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \; 2>/dev/null" fzf --prompt="(BFS)> ${PWD}/")
+                fi
+            else
+                filename=$(FZF_DEFAULT_COMMAND="command bfs . -mount -not -iwholename '*.git/*' \
+                    -exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                    --group-directories-first --color -A -d {} \; 2>/dev/null" fzf --prompt="(BFS)> ${PWD}/")
+            fi
+        fi
+    fi
+
+    filename="$(echo ${filename} | command sed -e 's/@$//g')"
+    killall bfs >/dev/null 2>&1
+
+    if [[ -n "${filename}" ]]; then
+        if [[ -d "${filename}" ]]; then
+            echo "cd ${filename}"
+            cd "${filename}"
+        else
+            echo "vim ${filename}"
+            command_nvim "${filename%?}"
+        fi
+    fi
+}
+
+function _rm() {
+    if [[ ( -n $1 ) && ( -d "$(readlink -m $1)" || -f "$(readlink -m $1)" ) ]]; then
+        command rm -rf "$1"
+    else
+        if [[ "$(uname)" =~ "Darwin" ]]; then
+            killall fd >/dev/null 2>&1
+        else
+            killall fdfind >/dev/null 2>&1
+        fi
+            
+        if [[ -n $1 ]]; then
+            filename=$(FZF_DEFAULT_COMMAND="${fdBin} '.*$1.*' . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;" fzf --prompt="(Remove)> ${PWD}/")
+        else
+            filename=$(FZF_DEFAULT_COMMAND="${fdBin} -HI --exclude='*.git/' \
+                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d {} \;" fzf --prompt="(Remove)> ${PWD}/")
+        fi
+
+        if [[ "$(uname)" =~ "Darwin" ]]; then
+            killall fd >/dev/null 2>&1
+        else
+            killall fdfind >/dev/null 2>&1
+        fi
+
+        if [[ -n "${filename}" ]]; then
+            echo "rm -rf ${filename}"
+            command rm -rf "${filename}"
+        fi
+    fi
+}
+
+function isAsciiOnly() {
+    if [[ $1 = *[![:ascii:]]* ]]; then
+        echo 0
+    else
+        echo 1
+    fi
+}
+
+function g() {
+    # if [[ ( ( -f "/usr/bin/ag" ) || ( -f "/usr/local/bin/ag" ) ) && ( "$(isAsciiOnly $1)" != 0 ) ]]; then
+    #     ag "$@"
+    # else
+    #     gr "$@"
+    # fi
+    if [[ -z "$(command -v rg)" ]]; then
+        if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+            LC_ALL=C fgr "$@"
+        elif [[ -n "$1" ]]; then
+            fgr "$@"
+        else
+            command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+        fi
+    else
+        if [[ -n "$2" ]]; then
+            if [[ -d "$2" ]]; then
+                if [[ -n "$3" ]]; then
+                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2 $3"
+                else
+                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2"
+                fi
+            elif [[ -f "$2" ]]; then
+                command_nvim -c "silent! call SwoopPattern('\V$1')" "$2"
+            elif [[ -p "$2" ]]; then
+                command_nvim -c "silent! call SwoopPattern('\V$1')" "$2"
+            else
+                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2"
+            fi
+        elif [[ -n "$1" ]]; then
+            if [[ -t 0 ]]; then
+                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1'"
+            else
+                command_frg_stream "$1"
+            fi
+        else
+            command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+        fi
+
+    # if [[ -n "$3" ]]; then
+    #     file_extensions=( $( echo $3 | tr ',' ' ' ) )
+    #
+    #     type_adds=""
+    #     types=""
+    #     for file_extension in "${file_extensions[@]}"; do
+    #         type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+    #         types=" --type ${file_extension}${types}"
+    #     done
+    # fi
+    #
+    # if [[ -n "$2" ]]; then
+    #     if [[ -d "$2" ]]; then
+    #         eval "command_frg '$1' '$2' ${type_adds} ${types}"
+    #     elif [[ -f "$2" ]]; then
+    #         eval "command_frg '$1' '$2'"
+    #     elif [[ -p "$2" ]]; then
+    #         eval "command_frg '$1' '$2'"
+    #     else
+    #         if [[ -n "$2" ]]; then
+    #             file_extensions=( $( echo $2 | tr ',' ' ' ) )
+    #
+    #             type_adds=""
+    #             types=""
+    #             for file_extension in "${file_extensions[@]}"; do
+    #                 type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+    #                 types=" --type ${file_extension}${types}"
+    #             done
+    #         fi
+    #
+    #         eval "command_frg '$1' ${type_adds} ${types}"
+    #     fi
+    # elif [[ -n "$1" ]]; then
+    #     if [[ -t 0 ]]; then
+    #         command_frg "$1" ./
+    #     else
+    #         command_frg_stream "$1"
+    #     fi
+    # else
+    #     command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+    # fi
+fi
+}
+
+function gs() {
+    if [[ -z "$(command -v rg)" ]]; then
+        if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+            LC_ALL=C fgs "$@"
+        elif [[ -n "$1" ]]; then
+            fgs "$@"
+        else
+            command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+        fi
+    else
+        if [[ -n "$2" ]]; then
+            if [[ -d "$2" ]]; then
+                if [[ -n "$3" ]]; then
+                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2 $3"
+                else
+                    command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2"
+                fi
+            elif [[ -f "$2" ]]; then
+                command_nvim -c "silent! call SwoopPattern('$1\C')" "$2"
+            elif [[ -p "$2" ]]; then
+                command_nvim -c "silent! call SwoopPattern('$1\C')" "$2"
+            else
+                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1' $2"
+            fi
+        elif [[ -n "$1" ]]; then
+            if [[ -t 0 ]]; then
+                command_nvim -c "let g:ctrlsf_regex_pattern = 0" -c "CtrlSFRg '$1'"
+            else
+                command_frg_stream "$1"
+            fi
+        else
+            command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+        fi
+
+    # if [[ -n "$3" ]]; then
+    #     file_extensions=( $( echo $3 | tr ',' ' ' ) )
+    #
+    #     type_adds=""
+    #     types=""
+    #     for file_extension in "${file_extensions[@]}"; do
+    #         type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+    #         types=" --type ${file_extension}${types}"
+    #     done
+    # fi
+    #
+    # if [[ -n "$2" ]]; then
+    #     if [[ -d "$2" ]]; then
+    #         eval "command_frg --case-sensitive '$1' '$2' ${type_adds} ${types}"
+    #     elif [[ -f "$2" ]]; then
+    #         eval "command_frg --case-sensitive '$1' '$2'"
+    #     elif [[ -p "$2" ]]; then
+    #         eval "command_frg --case-sensitive '$1' '$2'"
+    #     else
+    #         if [[ -n "$2" ]]; then
+    #             file_extensions=( $( echo $2 | tr ',' ' ' ) )
+    #
+    #             type_adds=""
+    #             types=""
+    #             for file_extension in "${file_extensions[@]}"; do
+    #                 type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+    #                 types=" --type ${file_extension}${types}"
+    #             done
+    #         fi
+    #
+    #         eval "command_frg --case-sensitive '$1' ${type_adds} ${types}"
+    #     fi
+    # elif [[ -n "$1" ]]; then
+    #     if [[ -t 0 ]]; then
+    #         command_frg --case-sensitive "$1" ./
+    #     else
+    #         command_frg_stream --case-sensitive "$1"
+    #     fi
+    # else
+    #     command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+    # fi
+fi
+}
+
+function gv() {
+    if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+        LC_ALL=C fgv "$@"
+    elif [[ -n "$1" ]]; then
+        fgv "$@"
+    else
+        command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+    fi
+}
+
+function fgs() {
+    local iregex_patterns=""
+    if [[ -n "$3" ]]; then
+        if [[ "${SHELL_NAME}" == "zsh" ]]; then
+            file_extensions=("${(s:,:)3}")
+        elif [[ "${SHELL_NAME}" == "bash" ]]; then
+            IFS=',' read -r -a file_extensions <<< "$3"
+        fi
+
+        local include_patterns=""
+        for file_extension in "${file_extensions[@]}"; do
+            include_patterns="${include_patterns}--include=\"*.${file_extension}\" "
+
+            if [[ -n "${iregex_patterns}" ]]; then
+                iregex_patterns="${iregex_patterns}\|${file_extension}"
+            else
+                iregex_patterns="${file_extension}"
+            fi
+        done
+
+        iregex_patterns="\(${iregex_patterns}\)"
+        iregex_patterns="-iregex \".*$2.*.${iregex_patterns}\" "
+    else
+        iregex_patterns="${iregex_patterns}-iregex \".*$2.*\""
+    fi
+
+    if [[ -n "$2" ]]; then
+        if [[ -d "$2" ]]; then
+            eval "command_fgrep -r ${include_patterns} \"$1\" \"$2\""
+        elif [[ -f "$2" ]]; then
+            command_fgrep "$1" "$2"
+        elif [[ -p "$2" ]]; then
+            command_fgrep "$1" "$2"
+        else
+            eval "command find . -mount ${iregex_patterns} -exec grep -F --color=always -T -s -n -H -I -C 2 --exclude-dir={.git,.svn} \"$1\" {} \;"
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ -t 0 ]]; then
+            command_fgrep -r "$1" ./
+        else
+            command_fgrep_stream "$1"
+        fi
+    else
+        command_fgrep
+    fi
+
+}
+
+function fgv() {
+    local iregex_patterns=""
+    if [[ -n "$3" ]]; then
+        if [[ "${SHELL_NAME}" == "zsh" ]]; then
+            file_extensions=("${(s:,:)3}")
+        elif [[ "${SHELL_NAME}" == "bash" ]]; then
+            IFS=',' read -r -a file_extensions <<< "$3"
+        fi
+
+        local include_patterns=""
+        for file_extension in "${file_extensions[@]}"; do
+            include_patterns="${include_patterns}--include=\"*.${file_extension}\" "
+
+            if [[ -n "${iregex_patterns}" ]]; then
+                iregex_patterns="${iregex_patterns}\|${file_extension}"
+            else
+                iregex_patterns="${file_extension}"
+            fi
+        done
+
+        iregex_patterns="\(${iregex_patterns}\)"
+        iregex_patterns="-iregex \".*$2.*.${iregex_patterns}\" "
+    else
+        iregex_patterns="${iregex_patterns}-iregex \".*$2.*\""
+    fi
+
+    if [[ -n "$2" ]]; then
+        if [[ "$1" =~ [[:upper:]] ]]; then
+            if [[ -d "$2" ]]; then
+                eval "command_fgrep -r -v ${include_patterns} \"$1\" \"$2\""
+            elif [[ -f "$2" ]]; then
+                command_fgrep -v "$1" "$2"
+            elif [[ -p "$2" ]]; then
+                command_fgrep -v "$1" "$2"
+            else
+                eval "command find . -mount ${iregex_patterns} -exec grep -F --color=always -T -s -n -H -I -C 2 --exclude-dir={.git,.svn} \"$1\" {} \;"
+            fi
+        else
+            if [[ -d "$2" ]]; then
+                eval "command_fgrep -r -v -i ${include_patterns} \"$1\" \"$2\""
+            elif [[ -f "$2" ]]; then
+                command_fgrep -i -v "$1" "$2"
+            elif [[ -p "$2" ]]; then
+                command_fgrep -i -v "$1" "$2"
+            else
+                eval "command find . -mount ${iregex_patterns} -exec grep -F --color=always -T -s -n -H -I -C 2 --exclude-dir={.git,.svn} -i \"$1\" {} \;"
+            fi
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ "$1" =~ [[:upper:]] ]]; then
+            if [[ -t 0 ]]; then
+                command_fgrep -r -v "$1" ./
+            else
+                command_fgrep_stream -v "$1"
+            fi
+        else
+            if [[ -t 0 ]]; then
+                command_fgrep -r -i -v "$1" ./
+            else
+                command_fgrep_stream -i -v "$1"
+            fi
+        fi
+    else
+        command_fgrep -i -v
+    fi
+
+}
+
+function about() {
+    if [[ -n "$1" ]]; then
+        neofetch | g "$1"
+    else
+        echo
+        echo
+        neofetch
+    fi
+}
+
+function fgr() {
+    local iregex_patterns=""
+    local num_pattern='^[0-9]+$'
+    local max_depth=""
+    if [[ -n "$4" ]]; then
+        if [[ "$4" =~ ${num_pattern} ]]; then
+            max_depth="$4"
+        fi
+    fi
+
+    if [[ -n "$3" ]]; then
+        if [[ "$3" =~ ${num_pattern} ]]; then
+            if [[ -z "${max_depth}" ]]; then
+                max_depth="$3"
+            fi
+        else
+            if [[ "${SHELL_NAME}" == "zsh" ]]; then
+                file_extensions=("${(s:,:)3}")
+            elif [[ "${SHELL_NAME}" == "bash" ]]; then
+                IFS=',' read -r -a file_extensions <<< "$3"
+            fi
+
+            local include_patterns=""
+            for file_extension in "${file_extensions[@]}"; do
+                include_patterns="${include_patterns}--include=\"*.${file_extension}\" "
+
+                if [[ -n "${iregex_patterns}" ]]; then
+                    iregex_patterns="${iregex_patterns}\|${file_extension}"
+                else
+                    iregex_patterns="${file_extension}"
+                fi
+            done
+
+            iregex_patterns="\(${iregex_patterns}\)"
+            iregex_patterns="-iregex \".*$2.*.${iregex_patterns}\" "
+            iregex_patterns="-iregex \".*.${iregex_patterns}\" "
+        fi
+    else
+        iregex_patterns="${iregex_patterns}-iregex \".*$2.*\""
+    fi
+
+    if [[ -n "$2" ]]; then
+        if [[ "$1" =~ [[:upper:]] ]]; then
+            if [[ -d "$2" ]]; then
+                if [[ -n "${max_depth}" ]]; then
+                    local old_dir="${PWD}"
+                    cd "$2"
+                    eval "command find . -maxdepth \"${max_depth}\" \
+                        -mount ${iregex_patterns} \\( -xtype l -o -type f \\) \
+                        -not -iwholename '*.git*' -not -iwholename '*.svn*' \
+                        -exec grep -F --color=always -T -s -n -H -I -C 5 \"$1\" {} \;"
+                                            cd "${old_dir}"
+                                        else
+                                            eval "command_fgrep -r ${include_patterns} \"$1\" \"$2\""
+                fi
+            elif [[ -f "$2" ]]; then
+                command_fgrep "$1" "$2"
+            elif [[ -p "$2" ]]; then
+                command_fgrep "$1" "$2"
+            else
+                if [[ -n "${max_depth}" ]]; then
+                    eval "command find . -maxdepth \"${max_depth}\" \
+                        -mount ${iregex_patterns} \\( -xtype l -o -type f \\) \
+                        -not -iwholename '*.git*' -not -iwholename '*.svn*' \
+                        -exec grep -F --color=always -T -s -n -H -I -C 5 \"$1\" {} \;"
+                                        else
+                                            eval "command find . \
+                                                -mount ${iregex_patterns} \\( -xtype l -o -type f \\) \
+                                                -not -iwholename '*.git*' -not -iwholename '*.svn*' \
+                                                -exec grep -F --color=always -T -s -n -H -I -C 5 \"$1\" {} \;"
+                fi
+            fi
+        else
+            if [[ -d "$2" ]]; then
+                if [[ -n "${max_depth}" ]]; then
+                    local old_dir="${PWD}"
+                    cd "$2"
+                    eval "command find . -maxdepth \"${max_depth}\" \
+                        -mount ${iregex_patterns} \\( -xtype l -o -type f \\) \
+                        -not -iwholename '*.git*' -not -iwholename '*.svn*' \
+                        -exec grep -F --color=always -T -s -n -H -I -C 5 -i \"$1\" {} \;"
+                                            cd "${old_dir}"
+                                        else
+                                            eval "command_fgrep -r -i ${include_patterns} \"$1\" \"$2\""
+                fi
+            elif [[ -f "$2" ]]; then
+                command_fgrep -i "$1" "$2"
+            elif [[ -p "$2" ]]; then
+                command_fgrep -i "$1" "$2"
+            else
+                if [[ -n "${max_depth}" ]]; then
+                    eval "command find . -maxdepth \"${max_depth}\" \
+                        -mount ${iregex_patterns} \\( -xtype l -o -type f \\) \
+                        -not -iwholename '*.git*' -not -iwholename '*.svn*' \
+                        -exec grep -F --color=always -T -s -n -H -I -C 5 -i \"$1\" {} \;"
+                                        else
+                                            eval "command find . \
+                                                -mount ${iregex_patterns} \\( -xtype l -o -type f \\) \
+                                                -not -iwholename '*.git*' -not -iwholename '*.svn*' \
+                                                -exec grep -F --color=always -T -s -n -H -I -C 5 -i \"$1\" {} \;"
+                fi
+            fi
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ "$1" =~ [[:upper:]] ]]; then
+            if [[ -t 0 ]]; then
+                command_fgrep -r "$1" ./
+            else
+                command_fgrep_stream "$1"
+            fi
+        else
+            if [[ -t 0 ]]; then
+                command_fgrep -r -i "$1" ./
+            else
+                command_fgrep_stream -i "$1"
+            fi
+        fi
+    else
+        command_fgrep -i
+    fi
+}
+
+function gr() {
+    # if [[ ( ( -f "/usr/bin/ag" ) || ( -f "/usr/local/bin/ag" ) ) && ( "$(isAsciiOnly $1)" != 0 ) ]]; then
+    #     ag "$@"
+    # else
+    #     gr "$@"
+    # fi
+
+    if [[ -z "$(command -v rg)" ]]; then
+        if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+            LC_ALL=C rgr "$@"
+        elif [[ -n "$1" ]]; then
+            rgr "$@"
+        else
+            command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+        fi
+    else
+        if [[ -n "$2" ]]; then
+            if [[ -d "$2" ]]; then
+                if [[ -n "$3" ]]; then
+                    command_nvim -c "CtrlSFRg '$1' $2 $3"
+                else
+                    command_nvim -c "CtrlSFRg '$1' $2"
+                fi
+            elif [[ -f "$2" ]]; then
+                command_nvim -c "silent! call SwoopPattern('$1')" "$2"
+            elif [[ -p "$2" ]]; then
+                command_nvim -c "silent! call SwoopPattern('$1')" "$2"
+            else
+                command_nvim -c "CtrlSFRg '$1' $2"
+            fi
+        elif [[ -n "$1" ]]; then
+            if [[ -t 0 ]]; then
+                command_nvim -c "CtrlSFRg '$1'"
+            else
+                command_frg_stream "$1"
+            fi
+        else
+            command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+        fi
+    fi
+
+# if [[ -z "$(command -v rg)" ]]; then
+#     if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+#         LC_ALL=C rgr "$@"
+#     elif [[ -n "$1" ]]; then
+#         rgr "$@"
+#     else
+#         command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+#     fi
+# else
+#     if [[ -n "$3" ]]; then
+#         file_extensions=( $( echo $3 | tr ',' ' ' ) )
+#
+#         type_adds=""
+#         types=""
+#         for file_extension in "${file_extensions[@]}"; do
+#             type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+#             types=" --type ${file_extension}${types}"
+#         done
+#     fi
+#
+#     if [[ -n "$2" ]]; then
+#         if [[ -d "$2" ]]; then
+#             eval "command_rg '$1' '$2' ${type_adds} ${types}"
+#         elif [[ -f "$2" ]]; then
+#             eval "command_rg '$1' '$2'"
+#         elif [[ -p "$2" ]]; then
+#             eval "command_rg '$1' '$2'"
+#         else
+#             if [[ -n "$2" ]]; then
+#                 file_extensions=( $( echo $2 | tr ',' ' ' ) )
+#
+#                 type_adds=""
+#                 types=""
+#                 for file_extension in "${file_extensions[@]}"; do
+#                     type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+#                     types=" --type ${file_extension}${types}"
+#                 done
+#             fi
+#
+#             eval "command_rg '$1' ${type_adds} ${types}"
+#         fi
+#     elif [[ -n "$1" ]]; then
+#         if [[ -t 0 ]]; then
+#             command_rg "$1" ./
+#         else
+#             command_rg_stream "$1"
+#         fi
+#     else
+#         command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
+#     fi
+# fi
+}
+
+function grs() {
+    if [[ -z "$(command -v rg)" ]]; then
+        if [[ "$(isAsciiOnly $1)" == 1 ]]; then
+            LC_ALL=C rgrs "$@"
+        else
+            rgrs "$@"
+        fi
+    else
+        if [[ -n "$3" ]]; then
+            file_extensions=( $( echo $3 | tr ',' ' ' ) )
+
+            type_adds=""
+            types=""
+            for file_extension in "${file_extensions[@]}"; do
+                type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+                types=" --type ${file_extension}${types}"
+            done
+        fi
+
+        if [[ -n "$2" ]]; then
+            if [[ -d "$2" ]]; then
+                eval "command_rg --case-sensitive '$1' '$2' ${type_adds} ${types}"
+            elif [[ -f "$2" ]]; then
+                eval "command_rg --case-sensitive '$1' '$2'"
+            elif [[ -p "$2" ]]; then
+                eval "command_rg --case-sensitive '$1' '$2'"
+            else
+                if [[ -n "$2" ]]; then
+                    file_extensions=( $( echo $2 | tr ',' ' ' ) )
+
+                    type_adds=""
+                    types=""
+                    for file_extension in "${file_extensions[@]}"; do
+                        type_adds=" --type-add '${file_extension}:*.${file_extensions}'${type_adds}"
+                        types=" --type ${file_extension}${types}"
+                    done
+                fi
+
+                eval "command_rg --case-sensitive '$1' ${type_adds} ${types}"
+            fi
+        elif [[ -n "$1" ]]; then
+            if [[ -t 0 ]]; then
+                command_rg --case-sensitive "$1" ./
+            else
+                command_rg_stream --case-sensitive "$1"
+            fi
+        else
+            command_rg --case-sensitive "$@"
+        fi
+    fi
+}
+
+function rgrs() {
+    local iregex_patterns=""
+    if [[ -n "$3" ]]; then
+        if [[ "${SHELL_NAME}" == "zsh" ]]; then
+            file_extensions=("${(s:,:)3}")
+        elif [[ "${SHELL_NAME}" == "bash" ]]; then
+            IFS=',' read -r -a file_extensions <<< "$3"
+        fi
+
+        local include_patterns=""
+        for file_extension in "${file_extensions[@]}"; do
+            include_patterns="${include_patterns}--include=\"*.${file_extension}\" "
+
+            if [[ -n "${iregex_patterns}" ]]; then
+                iregex_patterns="${iregex_patterns}\|${file_extension}"
+            else
+                iregex_patterns="${file_extension}"
+            fi
+        done
+
+        iregex_patterns="\(${iregex_patterns}\)"
+        iregex_patterns="-iregex \".*$2.*.${iregex_patterns}\" "
+    else
+        iregex_patterns="${iregex_patterns}-iregex \".*$2.*\""
+    fi
+
+    if [[ -n "$2" ]]; then
+        if [[ -d "$2" ]]; then
+            eval "command_grep -r ${include_patterns} \"$1\" \"$2\""
+        elif [[ -f "$2" ]]; then
+            command_grep "$1" "$2"
+        elif [[ -p "$2" ]]; then
+            command_grep "$1" "$2"
+        else
+            eval "command find . -mount ${iregex_patterns} -exec grep --color=always -T -s -n -H -I -C 2 --exclude-dir={.git,.svn} \"$1\" {} \;"
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ -t 0 ]]; then
+            command_grep -r "$1" ./
+        else
+            command_grep_stream "$1"
+        fi
+    else
+        command_grep
+    fi
+}
+
+function rgr() {
+    local iregex_patterns=""
+    if [[ -n "$3" ]]; then
+        if [[ "${SHELL_NAME}" == "zsh" ]]; then
+            file_extensions=("${(s:,:)3}")
+        elif [[ "${SHELL_NAME}" == "bash" ]]; then
+            IFS=',' read -r -a file_extensions <<< "$3"
+        fi
+
+        local include_patterns=""
+        for file_extension in "${file_extensions[@]}"; do
+            include_patterns="${include_patterns}--include=\"*.${file_extension}\" "
+
+            if [[ -n "${iregex_patterns}" ]]; then
+                iregex_patterns="${iregex_patterns}\|${file_extension}"
+            else
+                iregex_patterns="${file_extension}"
+            fi
+        done
+
+        iregex_patterns="\(${iregex_patterns}\)"
+        iregex_patterns="-iregex \".*$2.*.${iregex_patterns}\" "
+    else
+        iregex_patterns="${iregex_patterns}-iregex \".*$2.*\""
+    fi
+
+    if [[ -n "$2" ]]; then
+        if [[ "$1" =~ [[:upper:]] ]]; then
+            if [[ -d "$2" ]]; then
+                eval "command_grep -r ${include_patterns} \"$1\" \"$2\""
+            elif [[ -f "$2" ]]; then
+                command_grep "$1" "$2"
+            elif [[ -p "$2" ]]; then
+                command_grep "$1" "$2"
+            else
+                eval "command find . -mount ${iregex_patterns} -exec grep --color=always -T -s -n -H -I -C 2 --exclude-dir={.git,.svn} \"$1\" {} \;"
+            fi
+        else
+            if [[ -d "$2" ]]; then
+                eval "command_grep -r -i ${include_patterns} \"$1\" \"$2\""
+            elif [[ -f "$2" ]]; then
+                .         command_grep -i "$1" "$2"
+            elif [[ -p "$2" ]]; then
+                command_grep -i "$1" "$2"
+            else
+                eval "command find . -mount ${iregex_patterns} -exec grep --color=always -T -s -n -H -I -C 2 --exclude-dir={.git,.svn} -i \"$1\" {} \;"
+            fi
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ "$1" =~ [[:upper:]] ]]; then
+            if [[ -t 0 ]]; then
+                command_grep -r "$1" ./
+            else
+                command_grep_stream "$1"
+            fi
+        else
+            if [[ -t 0 ]]; then
+                command_grep -r -i "$1" ./
+            else
+                command_grep_stream -i "$1"
+            fi
+        fi
+    else
+        command_grep -i
+    fi
+}
+
+function ag() {
+    if [[ -n "$3" ]]; then
+        IFS=',' read -r -a file_extensions <<< "$3"
+        local include_patterns=""
+        for file_extension in "${file_extensions[@]}"; do
+            if [[ -n "${include_patterns}" ]]; then
+                include_patterns="${include_patterns}\|${file_extension}"
+            else
+                include_patterns="${file_extension}"
+            fi
+        done
+    fi
+
+    if [[ -t 0 ]]; then
+        if [[ -n "${include_patterns}" ]]; then
+            eval "command_ag --smart-case -C 2 --file-search-regex=\(${include_patterns}\) \"$1\" \"$2\""
+        else
+            command_ag --smart-case -C 2 "$@"
+        fi
+    else
+        command_ag --smart-case "$@"
+    fi
+}
+
+function lsag() {
+    if [[ -n "$2" ]]; then
+        command_ls -A "$2" | ag "$1"
+    elif [[ -n "$1" ]]; then
+        command_ls -A | ag "$1"
+    else
+        command_ls -A
+    fi
+}
+
+function lst() {
+    if [[ -n "$2" ]]; then
+        command_ls -A -ltr "$2" | g "$1"
+    elif [[ -n "$1" ]]; then
+        if [[ -d "$1" ]]; then
+            command_ls -ltr -A "$1"
+        else
+            command_ls -ltr -A | g "$1"
+        fi
+    else
+        command_ls -ltr -A
+    fi
+}
+
+function lsg() {
+    if [[ -n "$2" ]]; then
+        command_ls -A "$2" | g "$1"
+    elif [[ -n "$1" ]]; then
+        if [[ -d "$1" ]]; then
+            command_ls -A "$1"
+        else
+            command_ls -A | g "$1"
+        fi
+    else
+        command_ls -A
+    fi
+}
+
+function lssl() {
+    if [[ -n "$2" ]]; then
+        if [[ "$1" =~ [[:upper:]] ]]; then
+            fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+                --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
+                        else
+                            fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+                                --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
+                                --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ -d "$1" ]]; then
+            fd . "$1" --max-depth 1 -HI --exclude='*.git/' \
+                --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d -h -1 -l {} \;
+                        else
+                            if [[ "$1" =~ [[:upper:]] ]]; then
+                                fd "$1" . --max-depth 1 -HI --exclude='*.git/' \
+                                    --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
+                                    --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
+                                                                else
+                                                                    fd "$1" . --max-depth 1 -HI --exclude='*.git/' \
+                                                                        --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
+                                                                        --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
+                            fi
+        fi
+    else
+        fd --max-depth 1 -HI --exclude='*.git/' \
+            --exec ls -F -X -L -S --dereference-command-line-symlink-to-dir \
+            --group-directories-first --color -A -d -h -1 -l {} \;
+    fi
+}
+
+function lsl() {
+    if [[ -n "$2" ]]; then
+        if [[ "$1" =~ [[:upper:]] ]]; then
+            fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
+                        else
+                            fd "$1" "$2" --max-depth 1 -HI --exclude='*.git/' \
+                                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                                --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ -d "$1" ]]; then
+            fd . "$1" --max-depth 1 -HI --exclude='*.git/' \
+                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d -h -1 -l {} \;
+                        else
+                            if [[ "$1" =~ [[:upper:]] ]]; then
+                                fd "$1" --max-depth 1 -HI --exclude='*.git/' \
+                                    --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                                    --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
+                                                                else
+                                                                    fd "$1" --max-depth 1 -HI --exclude='*.git/' \
+                                                                        --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                                                                        --group-directories-first --color -A -d -h -1 -l {} \; | g "$1"
+                            fi
+        fi
+    else
+        fd --max-depth 1 -HI --exclude='*.git/' \
+            --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+            --group-directories-first --color -A -d -h -1 -l {}
+    fi
+}
+
+function lsr() {
+    if [[ -n "$2" ]]; then
+        if [[ "$1" =~ [[:upper:]] ]]; then
+            fd -L "$1" "$2" -HI --exclude='*.git/' --type d --type l --type f \
+                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor "$1"
+                        else
+                            fd -L "$1" "$2" -HI --exclude='*.git/' --type d --type l --type f \
+                                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                                --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor -i "$1"
+        fi
+    elif [[ -n "$1" ]]; then
+        if [[ -d "$1" ]]; then
+            fd -L . "$1" -HI --exclude='*.git/' --type d --type l --type f \
+                --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                --group-directories-first --color -A -d {} \; 2>/dev/null
+                        else
+                            if [[ "$1" =~ [[:upper:]] ]]; then
+                                fd -L "$1" -HI --exclude='*.git/' --type d --type l --type f \
+                                    --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                                    --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor "$1"
+                                                                else
+                                                                    fd -L "$1" -HI --exclude='*.git/' --type d --type l --type f \
+                                                                        --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+                                                                        --group-directories-first --color -A -d {} \; 2>/dev/null | command_grep_stream_nocolor -i "$1"
+                            fi
+        fi
+    else
+        fd -L -HI --exclude='*.git/' --type d --type l --type f \
+            --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+            --group-directories-first --color -A -d {} \; 2>/dev/null
+    fi
+}
+
+function lsrgr() {
+    if [[ -n "$2" ]]; then
+        command_ls -A "$2" | gr "$1"
+    elif [[ -n "$1" ]]; then
+        if [[ -d "$1" ]]; then
+            command_ls -A "$1"
+        else
+            command_ls -A | gr "$1"
+        fi
+    else
+        command_ls -A
+    fi
+}
+
+function lsgs() {
+    if [[ -n "$2" ]]; then
+        command_ls -A "$2" | gs "$1"
+    elif [[ -n "$1" ]]; then
+        command_ls -A | gs "$1"
+    else
+        command_ls -A
+    fi
+}
+
+function _cat() {
+    if [[ -f /usr/bin/socat ]]; then
+        socat - EXEC:"'vimcat $@'",pty,setsid,ctty | command_nl
+    else
+        command_cat $*
+    fi
+}
+
+function ct() {
+    if [[ -n "$3" ]]; then
+        _cat "$3" | sed "$1,$2!d" | gr "^|$1.*|$2.*"
+    elif [[ -n "$2" ]]; then
+        arg1="$(expr $1 - 10)"
+        arg2="$(expr $1 + 10)"
+        if [[ "$arg1" -lt 0 ]]; then
+            arg2=0
+        fi
+        _cat "$2" | sed "$arg1,$arg2!d" | gr "^|$1.*"
+    elif [[ -n "$1" ]]; then
+        _cat "$1"
+    fi
+}
+
+function gitdiff() {
+    if [[ -f "$1" ]]; then
+        command_nvim -c "Gdiffsplit!" "$1"
+    elif [[ -d "$1" ]]; then
+        command git diff "$1"
+    else
+        local cur_git_dir=$(command git rev-parse --git-dir 2> /dev/null)
+        if [[ -n "${cur_git_dir}" ]]; then
+            command git diff "$(pwd)"
+        else
+            echo "\nError: File / Directory \"$1\" not found\n"
+        fi
+    fi
+}
+
+function _diff() {
+    if [[ -d "$1" ]]; then
+        if [[ -d "$2" ]]; then
+            command_nvim -c "DirDiff "$1" "$2""
+        else
+            echo "\nError: Directory \"$2\" not found\n"
+        fi
+    elif [[ -f "$1" ]]; then
+        if [[ -f "$2" ]]; then
+            command_nvim -d -c "call SetIndentation()" "$1" "$2"
+        else
+            command_nvim -f -c "call MaybeInvokeMergeTool()" "$1"
+        fi
+    else
+        echo "\nError: File / Directory \"$1\" not found\n"
+    fi
+}
+
+function ps() {
+    if [[ -n "$2" ]]; then
+        command ps -u "$2" | g "$1"
+    elif [[ -n "$1" ]]; then
+        command ps aux | g "$1"
+    else
+        command ps aux
+    fi
+}
+
+# function _fzf() {
+#     if [[ -n $3 ]]; then
+#         fd "$1" "$2" -HI --exclude='*.git/' --max-depth "$3" --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+#             --group-directories-first --color -A -d {} \;
+#     else
+#         if [[ -n $2 ]]; then
+#             fd "$1" "$2" -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+#                 --group-directories-first --color -A -d {} \;
+#         else
+#             if [[ -n $1 ]]; then
+#                 fd "$1" . -HI --exclude='*.git/' --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+#                     --group-directories-first --color -A -d {} \;
+#             else
+#                 fd --type d -HI --exclude='*.git/' \
+#                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+#                     --group-directories-first --color -A -d {} \;
+#                 fd --type f -HI --exclude='*.git/' \
+#                     --exec ls -F -X -L --dereference-command-line-symlink-to-dir \
+#                     --group-directories-first --color -A -d {} \;
+#             fi
+#         fi
+#     fi
+#     # if [[ -n "$2" ]]; then
+#     #     CURDIR="${PWD}"
+#     #     FZF_DEFAULT_COMMAND_DEFAULT="${FZF_DEFAULT_COMMAND}"
+#     #     FZF_DEFAULT_COMMAND="\
+#     #         command find -L . -maxdepth $2 -mount \( -xtype l -o -type f \) -not -path '*CMakeFiles*' -not -path '*cmake-build-debug*' -not -path '*.idea*' -not -iwholename '*.git*' -not -iwholename '*.svn*'\
+#     #         -exec ls -X -F --group-directories-first --color -A -d {} \; 2>/dev/null"
+#     #     cd "$1"
+#     #     fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && echo "${fzfResult}"
+#     #     FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND_DEFAULT}"
+#     #     cd "${CURDIR}"
+#     # else
+#     #     if [[ -n "$1" ]]; then
+#     #         CURDIR="${PWD}"
+#     #         cd "$1"
+#     #         fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && echo "${fzfResult}"
+#     #         cd "${CURDIR}"
+#     #     else
+#     #         fzfResult="$(command_fzf --prompt="${PWD}/")" && fzfResult="$(removeLsSuffix ${fzfResult})" && echo "${fzfResult}"
+#     #         cd "${PWD}"
+#     #     fi
+#     # fi
+# }
+
+function cmd() {
+    if [[ -n "$1" ]]; then
+        eval "command $@"
+    else
+        local cmd_chosen="$(tac ${HOME}/.shell_history | fzf --prompt='Hist($_)> ')"
+        print -z "${cmd_chosen}"
+    fi
+}
+
+function tee() {
+    if [[ -z "$1" ]]; then
+        if [[ -z "${VIMRUNTIME}" ]]; then
+            term -c 'call jobsend(b:terminal_job_id, "_tee\n")'
+        else
+            _tee "$@"
+        fi
+    else
+        if [[ -z "${VIMRUNTIME}" ]]; then
+            echo "'$1'"
+            echo "${@: -1}"
+            term -c "call jobsend(b:terminal_job_id, \"_tee '$1' '${@: -1}'\n\")"
+        else
+            _tee "$@"
+        fi
+        
+    fi
+}
+
+function _tee() {
+    if [[ -n "$1" ]]; then
+        fileName="$2"
+        commandArgs="$1 2>&1"
+        separator="echo '=========================================='"
+        separatorNewline="echo '==========================================\n\n'"
+        finalCommand="${separator}; command date; ${separator}; ${commandArgs}; ${separator}; command date; ${separator}"
+
+        eval "${finalCommand}" | command_tee "${fileName}" | command_nl
+
+        local length=${#2}
+
+        printf "\n\n==============="
+        for (( i = 0; i <= length; i++ )); do
+            printf "="
+        done
+
+        echo "\nOutput: ${2}"
+
+        for (( i = 0; i <= length; i++ )); do
+            printf "="
+        done
+        printf "===============\n\n\n"
+    else
+        local cmd_chosen="$(tac ${HOME}/.shell_history | fzf --prompt='Hist($_)> ')"
+        print -z "${cmd_chosen}"
+    fi
+}
+
+function pid() {
+    sudo cat /proc/$1/environ
+    echo "\n"
+}
+
+function _clear() {
+    history -a >/dev/null 2>&1; history -r >/dev/null 2>&1
+    tput sgr0
+    for i in $(seq 1 120); do
+        echo ""
+    done
+    command clear
+
+    if type quiz 2>&1 > /dev/null | command grep -i function 2>&1 > /dev/null; then
+        quiz
+    fi
+}
+
+function reset() {
+    command reset
+}
+
+function clean() {
+    command clear
+
+    if [[ -n "${TMUX}" ]]; then
+        if [[ -f /usr/local/bin/tmux ]]; then
+            /usr/local/bin/tmux clearhist
+        elif [[ -f /usr/bin/tmux ]]; then
+            /usr/bin/tmux clearhist
+        fi
+    elif [[ "${TERM_PROGRAM}" == "iTerm.app" ]]; then
+        printf '\e]50;ClearScrollback\a'
+    else
+        tput reset
+    fi
+}
+
+function color() {
+    for x in 0 1 4 5 7 8; do
+        for i in `seq 30 37`; do
+            for a in `seq 40 47`; do
+                echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m ";
+            done;
+            echo;
+        done;
+    done;
+    echo "";
+
+    if [[ -f "${HOME}/.config/shell/print256colours.sh" ]]; then
+        ${HOME}/.config/shell/print256colours.sh
+        echo "";
+    fi
+    echo "";
+
+    tput sgr0
+}
+
+function sshare() {
+    if [[ -n "$2" ]]; then
+        screen -d -m -S $1; screen -S $1 -X multiuser on; screen -S $1 -X acladd $2
+    elif [[ -n "$1" ]]; then
+        screen -d -m -S $1; screen -S $1 -X multiuser on;
+    else
+        echo "error: command must be of the form share <session_name> <user_name>"
+    fi
+}
+
+function sattach() {
+    screen -x "$1"
+}
+
+function tmuxstart() {
+    unset TMPDIR
+
+# if [[ ! "$TERM" =~ screen ]]; then
+if [[ -f /usr/local/bin/tmux ]]; then
+    exec /usr/local/bin/tmux -2
+elif [[ -f /usr/bin/tmux ]]; then
+    exec /usr/bin/tmux -2
+fi
+# fi
+}
+
+function tmuxattach() {
+    if [[ -n "${SSH_CLIENT}" ]]; then
+        killall -10 tmux >/dev/null 2>&1
+    fi
+
+    if [[ -n "$1" ]]; then
+        if [[ -f /usr/local/bin/tmux ]]; then
+            /usr/local/bin/tmux -2 attach -d -t "$1"
+        elif [[ -f /usr/bin/tmux ]]; then
+            /usr/bin/tmux -2 attach -d -t "$1"
+        fi
+    else
+        if [[ -f /usr/local/bin/tmux ]]; then
+            /usr/local/bin/tmux -2 attach -d
+        elif [[ -f /usr/bin/tmux ]]; then
+            /usr/bin/tmux -2 attach -d
+        fi
+    fi
+}
+
+function support() {
+    set -x
+    mkdir -p ~/support
+    mkdir ~/support/sr$1
+    scp -r tac-sftp:/opt/escalations/$1/* ~/support/sr$1
+    cd ~/support/sr$1
+    ls *zip | xargs -I num unzip num
+    set +x
+}
+
+function lsmodg() {
+    echo "$(lsmod | command grep -i $*)"
+}
+
+function monitor() {
+    if [[ -n "$1" ]]; then
+        command glances --disable-webui --disable-bold --disable-bg --fs-free-space --sparkline -f "$1"
+    else
+        command glances --disable-webui --disable-bold --disable-bg --fs-free-space --sparkline
+    fi
+}
+
+function sshp() {
+    _sshp "$@"
+}
+
+function _sshp() {
+    if [[ -n "$5" ]]; then
+        command_ssh_passwd "$1" "$2" -p "$3" -i "$4" "$5"
+    elif [[ -n "$4" ]]; then
+        command_ssh_passwd "$1" "$2" -p "$3" "$4"
+    elif [[ -n "$3" ]]; then
+        command_ssh_passwd "$1" "$2" "$3"
+    elif [[ -n "$2" ]]; then
+        command_ssh_passwd "$1" "$2"
+    elif [[ -n "$1" ]]; then
+        command_ssh_passwd "${USER}" "$1"
+    else
+        command_ssh_passwd 
+    fi
+}
+
+function ssh() {
+    if [ -f /usr/bin/mosh ] || [ -f /usr/local/bin/mosh ]; then
+        _mosh "$@"
+        if [[ $? -eq 127 ]]; then
+            _ssh "$@"
+        fi
+    else
+        _ssh "$@"
+    fi
+}
+
+function _ssh() {
+    alias command_ssh_final="command_ssh"
+    if [[ -n "${CUSTOM_SSH_CONFIG_FILE}" ]]; then
+        alias command_ssh_final="command_ssh -F '${CUSTOM_SSH_CONFIG_FILE}'"
+    fi
+
+    if [[ -n "$5" ]]; then
+        command_ssh "$1" "$2" -p "$3" -i "$4" "$5"
+    elif [[ -n "$4" ]]; then
+        command_ssh "$1" "$2" -p "$3" "$4"
+    elif [[ -n "$3" ]]; then
+        command_ssh "$1" "$2" "$3"
+    elif [[ -n "$2" ]]; then
+        command_ssh "$1" "$2"
+    elif [[ -n "$1" ]]; then
+        command_ssh "${USER}" "$1"
+    else
+        command_ssh
+    fi
+}
+
+function _mosh() {
+    if [[ -n "$2" ]]; then
+        command_mosh "$1"@"$2"
+    elif [[ -n "$1" ]]; then
+        command_mosh "${USER}"@"$1"
+    else
+        command_mosh
+    fi
+}
+
+function vncconnect() {
+    command ssh -L 5901:127.0.0.1:5901 "$1"@"$2"
+}
+
+function eclim() {
+    local eclimd_query=$(ps ax | command grep -v grep | command grep 'eclimd')
+
+    if [[ -z ${eclimd_query} ]]; then
+        gnome-terminal -e /usr/share/eclipse/eclimd
+    fi
+}
+
+function rr() {
+    local fileName=$(basename "$1")
+    mv "$1" "${HOME}/.local/share/Trash/files/${fileName}"
+}
+
+function isvim() {
+    if [[ ( -n "${MYVIMRC}" ) || ( -n "${VIMRUNTIME}" ) ]]; then
+        echo 1
+    else
+        echo 0
+    fi
+}
+
+function isranger() {
+    if [[ -n ${RANGER_LEVEL} ]]; then
+        echo "${RANGER_LEVEL}"
+    else
+        echo 0
+    fi
+}
+
+function suspend() {
+    if [[ $1 == "" ]]; then
+        sudo pm-suspend
+    elif [[ $1 == "in" ]]; then
+        echo pm-suspend | sudo at now + "${@:2}" min
+    elif [[ $1 == "at" ]]; then
+        echo pm-suspend | sudo at "${@:2}"
+    else
+        echo "suspend(): Unknown Error!"
+        echo "$*"
+    fi
+}
+
+function logout() {
+    if [[ $1 == "" ]]; then
+        sudo i3-msg exit
+    elif [[ $1 == "in" ]]; then
+        echo i3-msg exit | sudo at now + "${@:2}" min
+    elif [[ $1 == "at" ]]; then
+        echo i3-msg exit | sudo at "${@:2}"
+    else
+        echo "logout(): Unknown Error!"
+        echo "$*"
+    fi
+}
+
+function hibernate() {
+    if [[ $1 == "" ]]; then
+        sudo pm-hibernate
+    elif [[ $1 == "in" ]]; then
+        echo pm-hibernate | sudo at now + "${@:2}" min
+    elif [[ $1 == "at" ]]; then
+        echo pm-hibernate | sudo at "${@:2}"
+    else
+        echo "hibernate(): Unknown Error!"
+        echo "$*"
+    fi
+}
+
+function shutdown() {
+    if [[ $1 == "" ]]; then
+        command sudo shutdown -P now
+    elif [[ $1 == "in" ]]; then
+        echo shutdown -P now | command sudo at now + "${@:2}" min
+    elif [[ $1 == "at" ]]; then
+        echo shutdown -P now | command sudo at "${@:2}"
+    else
+        echo "shutdown(): Unknown Error!"
+        echo "$*"
+    fi
+}
+
+function reboot() {
+    if [[ $1 == "" ]]; then
+        command sudo reboot --force
+    elif [[ $1 == "in" ]]; then
+        echo reboot --force | command sudo at now + "${@:2}" min
+    elif [[ $1 == "at" ]]; then
+        echo reboot --force | command sudo at "${@:2}"
+    else
+        echo "reboot(): Unknown Error!"
+        echo "$*"
+    fi
+}
+
+function halt() {
+    if [[ $1 == "" ]]; then
+        command sudo halt --force
+    elif [[ $1 == "in" ]]; then
+        echo halt --force | command sudo at now + "${@:2}" min
+    elif [[ $1 == "at" ]]; then
+        echo halt --force | command sudo at "${@:2}"
+    else
+        echo "halt(): Unknown Error!"
+        echo "$*"
+    fi
+}
+
+function poweroff() {
+    if [[ $1 == "" ]]; then
+        command sudo poweroff --force
+    elif [[ $1 == "in" ]]; then
+        echo poweroff --force | command sudo at now + "${@:2}" min
+    elif [[ $1 == "at" ]]; then
+        echo poweroff --force | command sudo at "${@:2}"
+    else
+        echo "poweroff(): Unknown Error!"
+        echo "$*"
+    fi
+}
+
+function cancel() {
+    for i in $(atq | awk '{print $1}'); do atrm "$i"; done
+    for i in $(sudo atq | awk '{print $1}'); do sudo atrm "$i"; done
+}
+
+function gimport() {
+    for key in "${!dirDict[@]}"; do
+        if [[ -d "${dirDict[$key]}" ]]; then
+            autojump --add "${dirDict[$key]}"
+        fi
+    done
+
+    autojump --purge
+}
+
+
+function gclean() {
+    autojump --purge
+}
+
+
+function count() {
+    if [[ -n "$*" ]]; then
+        command ls -a | command grep -c "$*"
+    else
+        local gross_count=$(command ls -a | wc -l)
+        echo $((gross_count - 2));
+    fi
+}
+
+
+function year() {
+    if [[ -n $1 ]]; then
+        command_nvim -c "Calendar -first_day=monday -view=year $1"
+    else
+        command_nvim -c "Calendar -first_day=monday -view=year"
+    fi
+}
+
+
+function month() {
+    if [[ -n $1 ]]; then
+        command_nvim -c "Calendar -first_day=monday -view=month $1"
+    else
+        command_nvim -c "Calendar -first_day=monday -view=month"
+    fi
+}
+
+function week() {
+    if [[ -n $1 ]]; then
+        command_nvim -c "Calendar -first_day=monday -view=week $1"
+    else
+        command_nvim -c "Calendar -first_day=monday -view=week"
+    fi
+}
+
+function day() {
+    if [[ -n $1 ]]; then
+        command_nvim -c "Calendar -first_day=monday -view=clock $1"
+    else
+        command_nvim -c "Calendar -first_day=monday -view=clock"
+    fi
+}
+
+function calendar() {
+    if [[ -n $1 ]]; then
+        command_nvim -c "Calendar -first_day=monday $1"
+    else
+        command_nvim -c "Calendar -first_day=monday"
+    fi
+}
+
+function unique() {
+    sort "$*" | uniq -i
+}
+
+function run() {
+    local binary_file=""
+    local input_file=""
+    local output_file=""
+    local arg1=$1
+    local arg2=$2
+    local arg3=$3
+
+    if [[ $arg1 == *.java ]]; then
+        if [[ -f ${arg2} ]]; then
+            input_file="../${arg2}"
+        fi
+
+        if [[ -f ${arg3} ]]; then
+            output_file="../${arg3}"
+        fi
+        # First compile the java file
+        javac -d cmake-build-debug/ "$arg1"
+        cd cmake-build-debug
+
+    # Now run the Main class
+    if [[ -n "${output_file}" ]]; then
+        finalCommand="command cat ${input_file} | java Main"
+        time ( eval "${finalCommand}" | command_tee "${output_file}" | command_nl )
+        echo "================================================================="
+        echo "||       RUN WITHOUT stdout TO SEE IF THERE'S ANY ERRORS      ||"
+        echo "================================================================="
+    else
+        if [[ -n "${input_file}" ]]; then
+            time ( command cat ${input_file} | java Main )
+        else
+            time ( java Main )
+        fi
+        fi
+        cd ../
+    else
+        if [[ -f ${arg2} ]]; then
+            input_file="${arg2}"
+        fi
+
+        if [[ -f ${arg3} ]]; then
+            output_file="${arg3}"
+        fi
+        if [[ -f ${arg1} ]]; then
+            binary_file="${arg1}"
+        else
+            if [[ -f "bin/${arg1}" ]]; then
+                binary_file="bin/${arg1}"
+            else
+                if [[ -f "build/${arg1}" ]]; then
+                    binary_file="build/${arg1}"
+                else
+                    if [[ -f "cmake-build-debug/${arg1}" ]]; then
+                        binary_file="cmake-build-debug/${arg1}"
+                    fi
+                fi
+            fi
+        fi
+
+        if [[ -n "${binary_file}" ]]; then
+            if [[ -n "${output_file}" ]]; then
+                finalCommand="command cat ${input_file} | ${binary_file}"
+                time ( eval "${finalCommand}" | command_tee "${output_file}" | command_nl )
+                echo "================================================================="
+                echo "||       RUN WITHOUT stdout TO SEE IF THERE'S ANY ERRORS      ||"
+                echo "================================================================="
+            else
+                if [[ -n "${input_file}" ]]; then
+                    time ( command cat ${input_file} | ${binary_file} )
+                else
+                    time ( ${binary_file} )
+                fi
+                fi
+            else
+                echo "File not found!"
+            fi
+        fi
+    }
+
+function calc() {
+    local calc_args="$*";
+
+# Uncomment the below for (p → +) and (x → *)
+# calc_args="${calc//p/+}"
+# calc_args="${calc//x/*}"
+
+echo -ne "${calc_args}\n quit" | gcalccmd | sed 's:^> ::g'
+}
+
+function buildcmake() {
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        CC="$(which gcc-9)" CXX="$(which g++-9)" cmake -DCMAKE_C_COMPILER="$(which gcc-9)" -DCMAKE_CXX_COMPILER="$(which g++-9)" -DCMAKE_CXX_FLAGS="-fno-inline" -DCMAKE_BUILD_TYPE=debug -G 'CodeBlocks - Unix Makefiles' -B ./cmake-build-debug
+    else
+        CC="$(which gcc)" CXX="$(which g++)" cmake -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_CXX_COMPILER="$(which g++)" -DCMAKE_CXX_FLAGS="-fno-inline" -DCMAKE_CC_FLAGS="-fno-inline" -DCMAKE_BUILD_TYPE=debug -G 'CodeBlocks - Unix Makefiles' -B ./cmake-build-debug
+    fi
+
+    cd ./cmake-build-debug && make
+
+    while [[ "$(pwd)" =~ ".*cmake-build-debug.*" ]]; do
+        cd ..
+    done
+}
+
+function gdb() {
+    local arg1="$1"
+    if [[ -f ${arg1} ]]; then
+        binary_file="${arg1}"
+    else
+        if [[ -f "bin/${arg1}" ]]; then
+            binary_file="bin/${arg1}"
+        else
+            if [[ -f "build/${arg1}" ]]; then
+                binary_file="build/${arg1}"
+            else
+                if [[ -f "cmake-build-debug/${arg1}" ]]; then
+                    binary_file="cmake-build-debug/${arg1}"
+                fi
+            fi
+        fi
+    fi
+
+    if [[ -f "${binary_file}" ]]; then
+        command gdb "${binary_file}"
+    else
+        echo
+        echo "Executable \"${arg1}\" not found!"
+        echo
+    fi
+}
+
+function buildgdb() {
+    if [[ ! -d "${PWD}/bin" ]]; then
+        mkdir "${PWD}/bin"
+    fi
+
+    local source_file=$1
+    local binary_file=$1
+    binary_file=$(basename "${binary_file}")
+    binary_file=${binary_file%%.*}
+
+    if [[ "${source_file##*.}" == cc || "${source_file##*.}" == cpp || "${source_file##*.}" == C ]]; then
+        g++ -g -Wall -pthread -std=c++17 "${source_file}" -o "${PWD}/bin/${binary_file}"
+    else
+        gcc -g -Wall -pthread "${source_file}" -o "${PWD}/bin/${binary_file}"
+    fi
+
+}
+
+function _tstart() {
+    local curDir="$(pwd)"
+    echo ${curDir} > /tmp/tmuxinator-start
+    tmuxinator start $1
+}
+
+function _tstop() {
+    tmuxinator stop $1
+}
+
+function stoplldb() {
+    if [[ -n "${TMUX}" ]]; then
+        echo | _tstop $1
+    else
+        _tstop $1
+    fi
+}
+
+function startlldb() {
+    if [[ -n "${TMUX}" ]]; then
+        echo | _tstart $1
+    else
+        _tstart $1
+    fi
+}
+
+function startgdb() {
+    local binary_file=""
+    local arg1=$1
+
+    if [[ -f ${arg1} ]]; then
+        binary_file="${arg1}"
+
+    else
+        if [[ -f "bin/${arg1}" ]]; then
+            binary_file="bin/${arg1}"
+        else
+            if [[ -f "build/${arg1}" ]]; then
+                binary_file="build/${arg1}"
+            fi
+        fi
+    fi
+
+    if [[ -n "${binary_file}" ]]; then
+        shift
+        if [[ "${binary_file}" == *.pl ]]; then
+            command perl -d "${binary_file}" "$@"
+        elif [[ "${binary_file}" == *.py ]]; then
+            command python -m pdb "${binary_file}" "$@"
+        else
+            # command cgdb "${binary_file}" "$@"
+            command gdb "${binary_file}" "$@"
+        fi
+    else
+        echo "File not found!"
+    fi
+}
+
+# Create a bootable USB from ISO image
+# dd imagefile.iso /dev/sdc
+# - imagefile.iso: Path to iso file
+# - /dev/sdc: Path to USB mount point
+#   (if USB is mounted at /dev/sdc1 then only need to specify /dev/sdc without
+#   the number)
+# Reference: http://askubuntu.com/a/225177
+function dd() {
+    command sudo dd if="$1" of="$2" oflag=direct bs=1048576
+}
+
+function compress() {
+    # TODO: Add rar compression/extraction & auto-installation
+    echo "${@: -1}"
+    length=$((${#} - 1))
+    declare -a tempArray
+    tempArray=${@:1:$length}
+}
+
+function setup() {
+    local isInstalled=0
+
+    local declare -A installDict
+    installDict["atd"]="at"
+    installDict["pm-suspend"]="pm-utils"
+    installDict["yaourt"]="yaourt"
+    installDict["tree"]="tree"
+    installDict["rdesktop"]="rdesktop"
+    installDict["xdotool"]="xdotool"
+    installDict["sdcv"]="sdcv"
+    installDict["autojump"]="autojump"
+    installDict["rsync"]="rsync"
+    installDict["htop"]="htop"
+    installDict["ranger"]="ranger perl-image-exiftool atool cpio lzop unace zip
+    unzip mpv sxiv highlight transmission-cli unrar"
+    installDict["cmus"]="cmus"
+    # Also create a symlink at $HOME/Music/Library pointing to the music folder
+    # (for example, $HOME/MEGA/Nhạc
+    installDict["ffmpeg"]="ffmpeg"
+    installDict["xev"]="xorg-xev"
+    installDict["zathura"]="zathura zathura-pdf-mupdf zathura-ps zathura-djvu"
+    installDict["tig"]="tig"
+    installDict["feh"]="feh"
+    installDict["vte3"]="vte3"
+    # vimcat belongs to vimpager package
+    installDict["vimpager"]="vimpager"
+    installDict["git"]="git"
+    installDict["wireshark"]="wireshark-gtk"
+    installDict["octave"]="octave"
+    installDict["fuse-exfat"]="fuse-exfat"
+    installDict["ntfs-3g"]="ntfs-3g"
+    installDict["docker"]="docker lxc btrfs-progs"
+    installDict["gptfdisk"]="gptfdisk"
+    installDict["openssh"]="openssh"
+    installDict["sshpass"]="sshpass"
+    installDict["libdiscid"]="libdiscid"
+    installDict["pkgfile"]="pkgfile"
+    installDict["fortune-mod"]="fortune-mod"
+    installDict["cowsay"]="cowsay"
+    installDict["xdpyinfo"]="xdpyinfo"
+    installDict["the_silver_searcher"]="the_silver_searcher"
+    installDict["socat"]="socat"
+    installDict["zsh-syntax-highlighting"]="zsh-syntax-highlighting"
+    installDict["grc"]="grc"
+    installDict["mosh"]="mosh"
+
+    for key in "${!installDict[@]}"; do
+        if [[ -f "/usr/bin/${key}" ]]; then
+            install "${installDict[$key]}"
+            isInstalled=1
+        fi
+    done
+
+    pinstall powerline-status
+
+    if [[ ${isInstalled} == 1 ]]; then
+        enable atd
+        start atd
+        local anhVietDir="/usr/share/stardict/dic/AnhViet"
+        local vietAnhDir="/usr/share/stardict/dic/VietAnh"
+        sudo mkdir -p /usr/share/stardict/dic/
+        extract "${HOME}/.dotfiles/root${anhVietDir}.zip"
+        extract "${HOME}/.dotfiles/root${vietAnhDir}.zip"
+        sudo mv "${HOME}/.dotfiles/root${anhVietDir}" "${anhVietDir}"
+        sudo mv "${HOME}/.dotfiles/root${vietAnhDir}" "${vietAnhDir}"
+        git config --global core.pager "vimpager -c 'source \$HOME/.vimrc'"
+        git config --global core.editor "vim"
+        sudo chgrp users /usr/bin/dumpcap
+        sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/sbin/dumpcap
+
+        sudo ln -s /usr/lib/libgirara-gtk3.so.2.0 /usr/lib/libgirara-gtk3.so.1.0
+        sudo ln -s /usr/lib/libgirara-gtk3.so.1.0 /usr/lib/libgirara-gtk3.so.1
+
+        sysstart docker
+        sysenable docker
+        sysstart sshd
+        sysenable sshd
+    fi
+}
+
+# Docker's functions
+function dbuild() {
+    if [[ $2 == "" ]]; then
+        sudo docker build -t="${USER}/$1" ./
+    else
+        sudo docker build -t="${USER}/$1" -f "$2"
+    fi
+
+}
+
+function groups() {
+    echo "ROOT:\n    $(command sudo groups)"
+    echo
+    echo "REGULAR:\n    $(command groups)"
+}
+
+function members() {
+
+    ROOT_GROUPS="$(command sudo groups)"
+    REGULAR_GROUPS="$(command groups)"
+
+    echo "ROOT:"
+
+    for root_group in ${ROOT_GROUPS}; do
+        echo "    $(sudo getent group ${root_group})"
+    done
+
+    echo
+
+    echo "REGULAR:"
+
+    for regular_group in ${REGULAR_GROUPS}; do
+        echo "    $(getent group ${regular_group})"
+    done
+}
+
+function alarm() {
+    if [[ ($2 == "") && ($1 == "stop") ]]; then
+        pkill -f Osmium.ogg
+
+    elif [[ $2 == "" ]]; then
+        echo "Alarm Time: $1"
+        echo mpv "${HOME}"/.config/i3/Osmium.ogg | at now + "$1" min
+
+    elif [[ $1 == "in" ]]; then
+        echo "Alarm Time: $2"
+        echo mpv "${HOME}"/.config/i3/Osmium.ogg | at now + "${@:2}" min
+
+    elif [[ $1 == "at" ]]; then
+        echo "Alarm Time: $2"
+        echo mpv "${HOME}"/.config/i3/Osmium.ogg | at "${@:2}"
+
+    else
+        echo "alarm(): Unknown Error!"
+        echo "$*"
+    fi
+}
+
+# Automatically cd into the current ranger directory
+function ranger() {
+    lfcd $@
+# local tempfile='/tmp/chosendir'
+#
+# EDITOR=nvim command ranger --choosedir="$tempfile" "${@:-$(pwd)}" --cmd="set preview_images false"
+#
+# test -f "$tempfile" &&
+#     if [ "$(command cat -- "$tempfile")" != "$(echo -n "$(pwd)")" ]; then
+#         cd -- "$(command cat "$tempfile")"
+#     fi
+#     rm -f -- "$tempfile"
+}
+
+function rrdesktop() {
+    rdesktop -X "$(xdotool getactivewindow)" -g 1366x768 "$1"
+}
+
+function rrdesktopsbu() {
+    rrdesktop ts1.cs.stonybrook.edu:22
+}
+
+function sshsbu() {
+    ssh student 130.245.30.52 -p 130
+}
+
+function printDict() {
+    if [[ $1 == "dirDict" ]]; then
+        for key in "${!dirDict[@]}"; do
+            printf "\t\$%-20s %s\n" "$key" "${dirDict[$key]}"
+        done |
+            sort -n -k3
+
+        echo ""
+    fi
+}
+
+function startmysql() {
+    sudo systemctl start mysqld
+    sudo mysql -u phongvcao -p
+}
+
+function stopmysql() {
+    sudo systemctl stop mysqld
+}
+
+function starttomcat() {
+    sudo "${tomcatdir}/startup.sh"
+}
+
+function stoptomcat() {
+    sudo "${tomcatdir}/shutdown.sh"
+}
+
+# Source custom aliases
+if [[ -f "${HOME}/.custom_shell_functions" ]]; then
+    source "${HOME}/.custom_shell_functions"
+fi

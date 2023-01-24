@@ -1,0 +1,99 @@
+# vim:filetype=zsh
+# Frequently-used directories
+export "appsdir"="/usr/share/applications"
+export "fontsdir"="/usr/share/fonts"
+export "xkbdir"="/usr/share/X11/xkb/symbols"
+export "i3dir"="${HOME}/.config/i3"
+export "dunstdir"="${HOME}/dunst"
+export "dotfilesdir"="${HOME}/.dotfiles"
+export "vimrc"="${HOME}/.vimrc"
+export "vimperatorrc"="${HOME}/.vimperatorrc"
+export "bashrc"="${HOME}/.bashrc"
+export "ebircharydir"="${HOME}/MEGA/workspace/eBirchary/EBircharyServers/WebContent"
+export "pathxdir"="${HOME}/MEGA/workspace/pathX"
+export "profileddir"="/etc/profile.d"
+export "powerlinedir"="/usr/lib/python3.5/site-packages/powerline"
+export "workspacedir"="${HOME}/MEGA/workspace"
+export "leveleditordir"="${HOME}/MEGA/workspace/pathXLevelEditor"
+export "tomcatdir"="${HOME}/MEGA/workspace/apache-tomcat-8.0/bin"
+export "codeforcesdir"="${HOME}/MEGA/CodingContests/Codeforces"
+export "codechefdir"="${HOME}/MEGA/CodingContests/CodeChef"
+export "spojdir"="${HOME}/MEGA/CodingContests/SPOJ"
+export "uvadir"="${HOME}/MEGA/CodingContests/UVaOJ"
+export "baitapdir"="${HOME}/Dropbox/phongvcao/B*"
+export "cse337dir"="${HOME}/MEGA/workspace/CSE-337"
+export "cse306dir"="${HOME}/MEGA/workspace/CSE-306"
+export "budhubdir"="${HOME}/MEGA/workspace/BudHub"
+export "projectsdir"="${HOME}/Projects"
+export "linuxdir"="${HOME}/Projects/linux-3.18.7"
+export "pvccomdir"="${HOME}/Projects/phongvcaocom"
+export "vimdevdir"="${HOME}/.vim/plugin"
+export "projecteulerdir"="${HOME}/MEGA/CodingContests/Project Euler"
+export "topcoderdir"="${HOME}/MEGA/CodingContests/TopCoder"
+export "geeksforgeeksdir"="${HOME}/MEGA/CodingContests/GeeksforGeeks"
+export "timusojdir"="${HOME}/MEGA/CodingContests/TimusOJ"
+export "samplesdir"="${HOME}/MEGA/CodingContests/Samples"
+export "xkbdir"="/usr/share/X11/xkb/symbols"
+
+# Necessary environment variables
+export "MANWIDTH"=82
+export "VISUAL"="nvim"
+export "P4MERGE"="${HOME}/.dotfiles/home/config/shell/p4merge.sh"
+export "P4DIFF"="command nvim -d -c 'call SetIndentation()'"
+export "P4EDITOR"="command nvim -f -c 'call MaybeInvokeMergeTool()'"
+export "EDITOR"="${VISUAL}"
+export "PAGER"="command nvim -c 'PAGER' -"
+export "XDG_CONFIG_HOME"="${HOME}/.config"
+export "TMUXINATOR_CONFIG"="${HOME}/.config/tmuxinator"
+export "HISTSIZE"=10000000
+export "HISTFILESIZE"="${HISTSIZE}"
+export "SAVEHIST"="${HISTSIZE}"
+export "HISTFILE"="${HOME}/.shell_history"
+export "HISTCONTROL"="ignoreboth"
+export "HISTIGNORE"="ls:bg:fg:history:exit:cd -:cd:pwd:date:lsg:* --help"
+export "PROMT_COMMAND"="history -a; ${PROMPT_COMMAND}"
+export "IGNOREEOF"=1000000
+export "MAGNET_PREFIX"="magnet:?xt=urn:btih:<URL>"
+export "GLOBIGNORE"=".:.."
+export "LF_LASTDIRPATH"="/tmp/lfcd.tmp"
+export "FZF_DEFAULT_OPTS"="--prompt='(FZF)> ${PWD}/' --layout=reverse --exact --ansi --color=dark,hl:9,hl+:136,bg+:0,fg+:14,info:5,prompt:33,spinner:108,pointer:226,marker:235,header:33 --bind 'ctrl-k:preview-up,ctrl-j:preview-down'"
+
+if [[ "$(uname)" =~ "Linux" ]]; then
+    export "USR_DIR"="/usr"
+    export "VIM"="${USR_DIR}/share/nvim"
+    export "FZF_DEFAULT_COMMAND"="command fdfind -HI --exclude='*.git/' --exec ls -H -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
+elif [[ "$(uname)" =~ "Darwin" ]]; then
+    if [[ "$(uname -m)" =~ "arm" ]]; then
+        export "USR_DIR"="/opt/homebrew"
+    else
+        export "USR_DIR"="/usr/local"
+    fi
+    export "ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR"="/usr/local/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/highlighters"
+    export "VIM"="${USR_DIR}/share/nvim"
+    export "FZF_DEFAULT_COMMAND"="command fd -HI --exclude='*.git/' --exec ls -H -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color -A -d {} \;"
+fi
+
+export "FZF_DEFAULT_COMMAND_DEFAULT"="${FZF_DEFAULT_COMMAND}"
+
+export "LC_CTYPE"="en_US.UTF-8"
+export "LC_NUMERIC"="en_US.UTF-8"
+
+# For Octave and X11
+export "GNUTERM"="x11"
+
+# Run "weather "San Jose" to get the following information
+export "LOCATION"="fips0668000"
+
+# For Docker
+export "DOCKER_HOST"=
+
+# For Ranger
+export "RANGER_LOAD_DEFAULT_RC"="FALSE"
+
+# For SSH
+unset "SSH_ASKPASS"
+
+# Source custom variables
+if [[ -f "${HOME}/.custom_shell_variables" ]]; then
+    source "${HOME}/.custom_shell_variables"
+fi

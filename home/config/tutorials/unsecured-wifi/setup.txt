@@ -1,0 +1,2 @@
+1. Fix Unsecured Wifi connection not showing up log-in page:
+- Go to captive.apple.com & sign in / accept & continue

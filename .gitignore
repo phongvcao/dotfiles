@@ -1,0 +1,11 @@
+backup
+backup/*
+.ccls-cache
+config/cmus/command-history
+config/cmus/search-history
+config/cmus/cache
+config/cmus/autosave
+config/ranger/__pycache__/
+config/ranger/colorschemes/__pycache__/
+config/ranger/history
+*.orig

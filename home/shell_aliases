@@ -1,0 +1,755 @@
+# vim:filetype=zsh
+alias "reload"="source \${HOME}/.bashrc"
+alias "install"="sudo pacman-db-upgrade; sudo pacman -S"
+alias "ainstall"="yaourt -S --aur --noconfirm"
+alias "remove"="sudo pacman -R"
+alias "removeall"="sudo pacman -Rsc"
+alias "autoremove"="sudo pacman -R \$(pacman -Qdtq)"
+alias "autoclean"="sudo pacman --noconfirm -Scc; sudo pacman -R \$(pacman -Qdtq)"
+alias "update"="sudo pacman-db-upgrade; \
+    sudo pacman -Syyu --force; \
+    sudo pacman --noconfirm -Syyu --force; \
+    sudo pacman-db-upgrade; \
+    yaourt --noconfirm -Syyu --aur --force; \
+    sudo python2 -m pip install --upgrade pip; \
+    sudo python3 -m pip install --upgrade pip; \
+    pipreview; \
+    sudo pkgfile --update; \
+    sudo cp ${HOME}/.dotfiles/root${xkbdir}/keypad ${xkbdir}/keypad; \
+    sudo pacman -Scc --noconfirm; \
+    sudo pacman -R \$(pacman -Qdtq) --noconfirm; \
+    cd ${HOME}/.dotfiles >/dev/null 2>&1; \
+    git add -A; \
+    git commit -m 'Commit for merging with Github repo'; \
+    git pull -X theirs --no-edit origin master; \
+    git push origin master; \
+    upgrade_oh_my_zsh; \
+    echo 'y' | command nvim -c 'set nomore' +NeoBundleInstall! +NeoBundleUpdate! +NeoBundleClean! +qall!; \
+    ${HOME}/.tmux/plugins/tpm/bin/update_plugins all; \
+    cd - >/dev/null 2>&1;"
+alias "dbupdate"="sudo pacman -Syy; sudo pacman-db-upgrade"
+alias "installed"="sudo pacman -Qm; sudo yaourt -Qm;"
+alias "tree"="command tree --dirsfirst -C -F -L"
+alias "treehidden"="command tree --dirsfirst -C -F -A -L"
+alias "treefull"="command tree --dirsfirst -C -F"
+alias "sysenable"="sudo systemctl enable"
+alias "sysdisable"="sudo systemctl disable"
+alias "sysstart"="sudo systemctl start"
+alias "sysstop"="sudo systemctl stop"
+alias "sysrestart"="sudo systemctl restart"
+alias "root"="su --login"
+alias "bash"="$(which bash)"
+alias "killeclim"="/usr/share/eclipse/eclim -command shutdown"
+alias "lss"="command_ls -F -X"
+alias "lsc"="command_ls -A -1"
+alias "lsla"="command_ls -L -A"
+alias "lse"="command_ls -A -l -s | command_grep -E \"[\-](([rw\-]{2})x){1,3}\""
+alias "lsd"="command_ls -d -A -l */ .*/"
+alias "ls"="lsg"
+alias "lr"="lsrgr"
+alias "lsa"="lsag"
+alias "diff"="_diff"
+# ln -s -f <original_file> <destination_symlink>
+alias "ln"="command ln -s -f"
+alias "vi"="vim"
+alias "vimrc"="echo 'y' | command nvim -c 'set nomore' +NeoBundleInstall! +NeoBundleUpdate! +NeoBundleClean! +qall!"
+alias "vimo"="VIM='' command vim"
+alias "echo"="echo -e"
+alias "realpath"="realpath"
+alias "mkdir"="mkdir -p"
+alias "cp"="cp -rf"
+alias "gparted"="sudo gparted"
+alias "mkconfig"="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+alias "modprobe"="sudo modprobe"
+alias "lsmod"="lsmod"
+# alias "sudo"="command sudo --preserve-env --set-home"
+# alias "visudo"="command sudo --preserve-env --set-home visudo"
+alias "cowsay"="fortune | cowsay"
+alias "kill"="command kill -9"
+alias "killproc"="pkill"
+alias "killtcp"="fuser -k -n tcp"
+alias "brewfix"="command sudo chown -R \"${USER}\":admin /usr/local; \
+    command sudo chown -R \"${USER}\":admin /Library/Caches/Homebrew; \
+    command sudo chown -R \"${USER}\":admin /Users/phongvcao/Library;"
+alias "chown"="command sudo chown -R \"${USER}\":admin"
+alias "wego"="wego 5"
+alias "wesj"="wego 'San Jose, CA' 5"
+alias "wesc"="wego 'Santa Clara, CA' 5"
+alias "weph"="wego 'Philadelphia, PA' 5"
+alias "weny"="wego 'New York, NY' 5"
+alias "wesb"="wego 'Stony Brook, NY' 5"
+alias "wehn"="wego 'Hanoi, VN' 5"
+alias "wegz"="wego 'GuangZhou, CN' 5"
+alias "weather"="weather-report --metric --cacheage=900"
+alias "nl"="command_nl"
+alias "mosh"="_mosh"
+alias "moshs"="mosh-server"
+alias "mosh-server"="sudo iptables -I INPUT 1 -p udp --dport 60000:61000 -j ACCEPT; \
+                     sudo service iptables save"
+alias "ps"="ps"
+alias "ifconfig"="ifconfig -a"
+alias "sed"="sed -i -r"
+alias "sz"="du -h -a --max-depth=1 -c -L"
+alias "sort"="sort -h -b"
+alias "tmuxredraw"="tmuxattach"
+alias "tmuxrename"="tmux rename-window"
+alias "fixchar"="tput sgr0"
+alias "zip"="command zip --symlinks -r"
+alias "ab"="about"
+alias "abt"="about"
+alias "cal"="calendar"
+alias "codesign"="command codesign --entitlements ~/.config/gdb/gdb.xml -fs gdb-cert /usr/local/bin/gdb"
+alias "command_lldb"="command lldb"
+alias "pdb"="echo 'Remember to add \"import pdb; pdb.set_trace() to the python program\"'; command python3 "
+alias "quit"="exit"
+alias "find"="dfs"
+alias "finb"="bfs"
+alias "ref"="refresh"
+alias "refresh"="cd ${HOME}; cd -"
+alias "mon"="monitor"
+# alias "command_nvim"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
+
+if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
+  #
+  # NOTE: Fix for the text disappearing problems in Nvim:
+  #
+  #   alias "custom_command_nvim"="TERM='' command nvim"
+  #
+  # alias "command_nvim"="TERM='' command nvim"
+else
+  #
+  # NOTE: Fix for the text disappearing problems in Nvim:
+  #
+  #   alias "custom_command_nvim"="TERM='' command nvim"
+  #
+  alias "command_nvim"="custom_command_nvim"
+fi
+alias "clean_nvim_undo"="command rm -rf ~/.vim/undo/; command mkdir -p ~/.vim/undo/"
+alias "clean_nvim_shada"="command rm -rf ~/.local/share/nvim/shada/"
+alias "term"="command_nvim -c 'TTerm' -c 'bd! 1'"
+alias "rm"="_rm"
+alias "watch"="command watch -n 1"
+alias "reloadaudio"="sudo launchctl stop com.apple.audio.coreaudiod && sudo launchctl start com.apple.audio.coreaudiod"
+
+# React + Redux
+alias "cra_npm"="npx create-react-app@latest --use-npm"
+alias "cra"="npx create-react-app@latest"
+alias "cru_npm"="npx create-react-app@latest --use-npm --template redux"
+alias "cru"="npx create-react-app@latest --template redux"
+
+# Force removal of a package
+alias "purge"="sudo dpkg --purge --force-all"
+
+# Single-letter aliases for commonly-used command
+alias "c"="cat"
+alias "C"="command"
+alias "cln"="clean"
+alias "clr"="_clear"
+alias "cr"="_clear"
+alias "rst"="reset"
+alias "cn"="clean"
+alias "w"="stardict"
+alias "W"="vstardict"
+alias "w"=""
+# Type command "color" for more details
+alias "f"="fzf"
+alias "v"="vim"
+alias "V"="vimrc"
+alias "l"="lsg"
+alias "m"="man"
+alias "M"="cmus"
+alias "r"="ranger"
+alias "t"="term"
+alias "s"="sudo"
+alias "S"="_ssh"
+alias "grep"="g"
+alias "a"="ag"
+alias "_"="cd -"
+alias "q"="quit"
+
+# Tmuxinator
+# Never alias tmux as it would hinder FZF
+# alias "tmux"="tmux"
+alias "tmuxlist"="tmux list-sessions"
+alias "tmor"="tmuxinator"
+alias "tstart"="_tstart"
+alias "tstop"="_tstop"
+alias "tlocal"="tmuxinator local"
+alias "topen"="tmuxinator open"
+alias "tlist"="tmuxinator list"
+alias "tcopy"="tmuxinator copy"
+alias "tdelete"="tmuxinator delete"
+alias "tnew"="tmuxinator new"
+# alias "startlldb"="tstart"
+# alias "stoplldb"="tstop"
+alias "chmod"="chmod +x"
+
+# Upload format:
+# upload [source directory] [user]@[instance ip]:[destination directory on instance]
+alias "upload"="rsync -avz -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
+alias "scp"="scp -rp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+alias "_scp"="command scp -rp"
+
+# Download format:
+# download [user]@[instance ip]:[source directory on instance] [path to local storage]
+alias "download"="rsync -chavzP --stats -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
+
+alias "htop"="command htop --user=\${USER}"
+alias "rtop"="command htop --user=root"
+alias "top"="command htop"
+alias "sxiv"="sxiv -baZ"
+alias "mpv"="mpv --loop=inf"
+alias "disks"="sudo gnome-disks"
+alias "openshot"="rm -rf \${HOME}/.openshot && openshot"
+alias "xrdb"="xrdb \${HOME}/.Xresources"
+alias "sourceXresources"="xrdb \${HOME}/.Xresources"
+# alias "cgdb"="debug"
+# These variables are for configuring Qt themes
+alias "qt3config"="export QT_SELECT=3 && qtconfig"
+alias "qt4config"="export QT_SELECT=4 && qtconfig"
+alias "qt5config"="export QT_SELECT=5 && qtconfig"
+
+alias "p2install"="sudo python2 -m pip install --install-option=\"--prefix=${USR_DIR}/\""
+alias "p2installed"="python2 -m pip list"
+alias "p2remove"="sudo python2 -m pip uninstall"
+alias "p2upgrade"="sudo python2 -m pip install --upgrade"
+alias "p2show"="python2 -m pip show"
+alias "p2list"="python2 -m pip list"
+
+alias "pinstall"="sudo pip install --install-option=\"--prefix=${USR_DIR}/\""
+alias "pinstalled"="pip list"
+alias "premove"="sudo pip uninstall"
+alias "pupgrade"="sudo pip install --upgrade"
+alias "pshow"="pip show"
+alias "plist"="pip list"
+
+alias "p3install"="sudo python3 -m pip install --install-option=\"--prefix=${USR_DIR}/\""
+alias "p3installed"="python3 -m pip list"
+alias "p3remove"="sudo python3 -m pip uninstall"
+alias "p3upgrade"="sudo python3 -m pip install --upgrade"
+alias "p3show"="python3 -m pip show"
+alias "p3list"="python3 -m pip list"
+
+
+alias "ninstall"="npm install"
+alias "ninstalled"="npm list"
+alias "nupgrade"="npm update"
+
+# Git aliases
+alias "addall"="git add -A"
+alias "add"="git add"
+alias "clone"="git clone"
+if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
+    alias "commit"="git commit"
+    alias "commim"="git commit -m"
+    alias "commat"="git add -A; git commit"
+    alias "commam"="git add -A; git commit -m"
+    alias "amend"="git commit --amend"
+fi
+alias "resolve"="git mergetool"
+alias "push"="git push"
+alias "fush"="git push --force"
+alias "fetch"="git fetch"
+alias "merge"="git merge"
+alias "check"="git checkout"
+alias "new"="git checkout -b"
+alias "branch"="git branch"
+alias "remote"="git remote"
+alias "info"="echo BRANCH:; git branch -v; echo; echo REMOTE:; git remote -v"
+alias "status"="gitstatus"
+alias "init"="git init"
+alias "pull"="git config pull.rebase false; git pull"
+
+# To modify a commit:
+# - Issue: rebasei <commit_hash>
+# - Modify 'pick' to 'edit' in the line whose commit you want to modify.
+# - Make your changes and then commit them with the same message you had before:
+#   - Issue: commit --all --amend --no-edit
+#     to modify the commit
+# - Issue: rebasec
+#   to return back to the previous head commit
+#
+alias "rebase"="git rebase"
+alias "rebasei"="git rebase --interactive"
+alias "rebasec"="git rebase --continue"
+
+alias "log"="gitlog"
+alias "stash"="git stash"
+alias "unstage"="git rm --cache"
+alias "stage"="git add"
+alias "rename"="git branch -m"
+alias "name"="git config --global user.name"
+alias "email"="git config --global user.email"
+alias "editor"="git config --global core.editor"
+alias "pager"="git config --global core.pager"
+alias "config"="git config --list"
+alias "giff"="gitdiff"
+
+# Docker aliases
+alias "drun"="sudo docker run -d -t -i"
+alias "dcommit"="sudo docker commit --author=\"$(git config --global user.name) <$(git config --global user.email)>\""
+alias "dpush"="sudo docker push"
+alias "dlist"="sudo docker ps -a -n 20"
+alias "dlast"="sudo docker ps -l -n 20"
+alias "dlistall"="sudo docker ps -a -q"
+alias "dimagesall"="sudo docker images -a -q"
+alias "dinfo"="sudo docker info"
+alias "dstart"="sudo docker start"
+alias "drestart"="sudo docker restart"
+alias "dexec"="sudo docker exec -i -t"
+alias "dexecd"="sudo docker exec -d"
+alias "dstop"="sudo docker stop"
+alias "dkill"="sudo docker kill"
+alias "dremove"="sudo docker rm"
+alias "dremovei"="sudo docker rmi"
+alias "dattach"="sudo docker attach"
+alias "dlog"="sudo docker logs -t"
+alias "dtop"="sudo docker top"
+alias "dcreate"="sudo docker create --author=\"$(git config --global user.name) <$(git config --global user.email)>\""
+alias "dstats"="sudo docker stats"
+alias "dinspect"="sudo docker inspect"
+alias "dimages"="sudo docker images"
+alias "dpull"="sudo docker pull"
+alias "dsearch"="sudo docker search"
+alias "dlogin"="sudo docker login"
+alias "dhistory"="sudo docker history"
+alias "dport"="sudo docker port"
+alias "dip"="ip a show docker0"
+
+# Docker archlinux image aliases
+# darchstart runs the available and previously-stopped instance of Docker container
+alias "darchbuild"="sudo docker build -t=\"${USER}/archlinux\" ./"
+alias "darchrun"="sudo docker stop archlinux; \
+    sudo docker rm archlinux; \
+    sudo docker run -d --name archlinux -p 6789:22 -p 8080:80 -p 8443:443\
+    -v /home/${USER}/:/home/${USER} -i -t ${USER}/archlinux"
+alias "darchexec"="sudo docker exec -i -t archlinux /bin/bash"
+alias "darchexecd"="sudo docker exec -d archlinux"
+alias "darchstop"="sudo docker stop archlinux"
+alias "darchssh"="command ssh -A -X -l ${USER} 0.0.0.0 -p 6789"
+
+# Home Assistant (HASS, deCONZ) Docker aliases
+alias "hass"="sudo docker run --init -d --name homeassistant --restart=unless-stopped -v /etc/localtime:/etc/localtime:ro -v /home/phongvcao/MEGA/Home\ Assistant/HASS:/config -v /dev:/dev --privileged --network=host homeassistant/home-assistant:stable"
+# alias "deconz"="sudo docker run -d --name=deconz --net=host --restart=always -v /etc/localtime:/etc/localtime:ro -v ~/MEGA/Home\\ Assistant/deCONZ:/root/.local/share/dresden-elektronik/deCONZ --device=/dev/ttyACM0 -e DECONZ_DEVICE=/dev/ttyACM0 -e DECONZ_WEB_PORT=8080 -e DECONZ_WS_PORT=8443 marthoc/deconz"
+
+#
+# I.   Steps to create LUKS-Encrypted ZFS File Systems:
+#
+# 0. wipedisk /dev/sdaX /dev/sdaY /dev/sdaZ
+# 1. Use gdisk to delete previously-created /dev/sdaY partitions under /dev/sda
+# 2. Use gdisk to create /dev/sdaX under /dev/sda
+# 3. luksformat /dev/sdaX
+# 4. luksopen /dev/sdaX
+# 5. zpoolcreate POOL-NAME /dev/mapper/sdaX_crypt
+# 6. zfscreate POOL-NAME
+#
+#
+# II.  Steps to mounting LUKS-Encrypted ZFS File Systems:
+#
+# 1. zpoolimportluks /dev/sdaX sdaX_crypt POOL-NAME
+#
+#
+# III. Steps to unmounting (safely remove) LUKS-Encrypted ZFS File Systems:
+#
+# 1. zpoolexportluks /dev/mapper/sdaX_crypt POOL-NAME
+#
+
+#
+# ZFS
+#
+# Usage: zpoolcreate POOL-NAME /dev/mapper/sdaX_crypt /dev/mapper/sdaY_crypt
+#        zpoolcreate POOL-NAME /dev/sdaX /dev/sdaY
+#
+#        There should be a ZFS pool named "POOL-NAME" which contains /dev/sdaX
+#        AND /dev/sdaY (or /dev/mapper/sdaX_crypt AND /dev/mapper/sdaY_crypt)
+#        after this command.
+#
+alias "zpoolcreate"="sudo zpool create -o ashift=13 -f"
+#
+# Usage: zfscreate POOL-NAME
+#
+#        Create ZFS file system (a.k.a. ZFS dataset) for all devices under ZFS
+#        pool POOL-NAME.
+#
+#        The ZFS file system should be accessible under /POOL-NAME/data
+#
+alias "zfscreate"="_zfscreate"
+#
+# Usage: zpoolexport POOL-NAME
+#
+#        Safely unmount ZFS file system (a.k.a. ZFS dataset) for all devices
+#        under ZFS pool POOL-NAME
+#
+alias "zpoolexport"="sudo zpool export"
+#
+# Usage: zpoolimport /dev/mapper/sdaX_crypt POOL-NAME
+#        zpoolimport /dev/sdaX POOL-NAME
+#
+#        Mount and Start (a.k.a. Import) ZFS file system and pool POOL-NAME
+#        from device /dev/sdaX (or /dev/mapper/sdaX_crypt). After this
+#        operation, the ZFS file system should be available under
+#        /POOL-NAME/data. The name of the pool (POOL-NAME) is required to create
+#        /POOL-NAME/data mount point.
+#
+alias "zpoolimport"="sudo zpool import -d"
+#
+# Usage: zpoolimportluks /dev/sdaX sdaX_crypt POOL-NAME
+#
+#        Decrypt, Mount and Start (a.k.a. Import) ZFS file system and pool
+#        POOL-NAME locked under LUKS. After this operation, the ZFS file
+#        system should be available under /POOL-NAME/data and the decrypted
+#        LUKS drive should be available under /dev/mapper/sdaX_crypt. The name
+#        of the pool (POOL-NAME) is required to create /POOL-NAME/data mount
+#        point.
+#
+alias "zpoolimportluks"="_zpoolimportluks"
+#
+# Usage: zpoolexportluks /dev/mapper/sdaX_crypt POOL-NAME
+#
+#        Safely Remove (a.k.a. Export) ZFS file system and pool POOL-NAME AND
+#        Encrypt the hard drive locked under LUKS (currently opened under
+#        /dev/mapper/sdaX_crypt). After this operation, the device is ready
+#        to be decrypted, import and use in another computer.
+#
+alias "zpoolexportluks"="_zpoolexportluks"
+#
+# Usage: zpoolscrubstart POOL-NAME
+#
+#        Start scrubbing file systems under pool POOL-NAME
+#
+alias "zpoolscrubstart"="sudo zpool scrub"
+#
+# Usage: zpoolscrubstop POOL-NAME
+#
+#        Stop scrubbing file systems under pool POOL-NAME
+#
+alias "zpoolscrubstart"="sudo zpool scrub -s"
+#
+# Usage: zpoolstatus POOL-NAME
+#
+#        Show status of all ZFS pools
+#
+alias "zpoolstatus"="sudo zpool status -v"
+#
+# Usage: zpooldestroy POOL-NAME
+#
+#        Destroy pool POOL-NAME, even if it is currently mounted with datasets.
+#        This will mess up/delete/destroy the datasets too?
+#
+alias "zpooldestroy"="sudo zpool destroy -f"
+#
+# Usage: zfssnapshot POOL-NAME SNAPSHOT-NAME
+#
+#        Create a ZFS file system snapshot named SNAPSHOT-NAME for pool
+#        POOL-NAME
+#
+alias "zfssnapshot"="_zfssnapshot"
+#
+# Usage: zfssnapshotlist
+#
+#        List all ZFS snapshots currently in the system
+#
+alias "zfssnapshotlist"="sudo zfs list -t snapshot"
+#
+# Usage: zfsdestroy -f POOL-NAME
+#
+#        Destroy ZFS file system and snapshots under pool POOL-NAME
+#
+alias "zfsdestroy"="_zfsdestroy"
+#
+# Usage: zfsbackupinit SRC-POOL-NAME SRC-SNAPSHOT-NAME DEST-POOL-NAME
+#
+#        NOTE: DEST-POOL-NAME must have (1) already existed AND (2) NOT already
+#        had DEST-POOL-NAME/data dataset existed / created.
+#
+#        Backup the entirety of SRC-POOL-NAME/data dataset as it was taken at
+#        snapshot @SRC-SNAPSHOT-NAME to DEST-POOL-NAME.
+#
+alias "zfsbackupinit"="_zfsbackupinit"
+#
+# Usage: zfsbackupinc SRC-POOL-NAME SNAPSHOT-NAME-1 SNAPSHOT-NAME-3 DEST-POOL-NAME
+#
+#        NOTE: DEST-POOL-NAME must have (1) already existed AND (2) already had
+#        DEST-POOL-NAME/data dataset existed / created AND (3) already had
+#        snapshot DEST-POOL-NAME/data@SNAPSHOT-NAME-1 backed-up and in the same
+#        exact condition as SRC-POOL-NAME/data@SNAPSHOT-NAME-1.
+#
+#        Backup SNAPSHOT-NAME-3 to DEST-POOL-NAME/data dataset. SNAPSHOT-NAME-2
+#        will NOT be transferred/backed-up.
+#
+alias "zfsbackupinc"="_zfsbackupinc"
+#
+# Usage: zfsbackupreplica SRC-POOL-NAME SNAPSHOT-NAME-1 SNAPSHOT-NAME-3 DEST-POOL-NAME
+#
+#        NOTE: DEST-POOL-NAME must have (1) already existed AND (2) already had
+#        DEST-POOL-NAME/data dataset existed / created AND (3) already had
+#        snapshot DEST-POOL-NAME/data@SNAPSHOT-NAME-1 backed-up and in the same
+#        exact condition as SRC-POOL-NAME/data@SNAPSHOT-NAME-1.
+#
+#        Backup SNAPSHOT-NAME-3 to DEST-POOL-NAME/data dataset. SNAPSHOT-NAME-2
+#        WILL be transferred/backed-up.
+#
+alias "zfsbackupreplica"="_zfsbackupreplica"
+
+#
+# NTFS
+#
+# Usage: ntfscreate /dev/sdaX
+#
+#        Format /dev/sdaX to NTFS
+#
+alias "ntfscreate"="sudo mkfs.ntfs -f"
+#
+# Usage: ntfsbackup /mnt/sdaX /mnt/sdaY
+#        ntfsbackup /srv/dev-disk-by-uuid-X /srv/dev-disk-by-uuid-Y
+#
+#        Backup all files from NTFS drive partition /dev/sdaX to NTFS drive
+#        partition /dev/sdaY, preserving timestamps, owner, groups, etc.
+#
+#        NOTE: The partitions passed in has to be mount point and not device
+#        paths.
+#
+alias "ntfsbackup"="sudo rsync -rhHpEAXogtW --progress"
+#
+# Usage: ntfsmount /dev/sdaX /mnt/sdaX
+#
+#        Mount NTFS drive /dev/sdaX under /mnt/sdaX folder
+#
+alias "ntfsmount"="sudo mount -t ntfs-3g"
+#
+# Usage: rsyncbackup /mnt/sdaX /mnt/sdaY
+#        rsyncbackup /srv/dev-disk-by-uuid-X /srv/dev-disk-by-uuid-Y
+#
+#        Backup all files from drive partition /dev/sdaX to drive partition
+#        /dev/sdaY, preserving timestamps, owner, groups, etc.
+#
+#        NOTE: The partitions passed in has to be mount point and not device
+#        paths.
+#
+alias "rsyncbackup"="sudo rsync -rhHpEAXogtW --progress"
+
+
+#
+# Usage: free
+#
+#        Show free spaces in RAM & Swap
+#
+alias "free"="command free -h -t -w"
+
+#
+# LUKS
+#
+# Usage: luksformat /dev/sdaX LABEL
+#
+#        /dev/sdaX should be WIPED and have LUKS after this command. /dev/sdaX
+#        will also be assigned label LABEL under /dev/disk-by-label/ and under
+#        sudo lsblk -f
+#
+alias "luksformat"="_luksformat"
+#
+# Usage: luksopen /dev/sdaX sdaX_crypt
+#
+#        /dev/sdaX should now be opened under /dev/mapper/sdaX_crypt
+#
+alias "luksopen"="sudo cryptsetup luksOpen --allow-discards"
+#
+# Usage: luksclose /dev/mapper/sdaX_crypt
+#
+#        /dev/mapper/sdaX_crypt should not be available after this
+#
+alias "luksclose"="sudo cryptsetup luksClose"
+#
+# Usage: lukslabel /dev/sdaX LABEL
+#
+#        /dev/sdaX should now have label LABEL shown under /dev/disk-by-label/
+#        and under sudo lsblk -f
+#
+alias "lukslabel"="_lukslabel"
+#
+# Usage: lukschangekey /dev/sdaX
+#
+#        The command should prompt for existing LUKS password and then let you
+#        enter the new password.
+#
+alias "lukschangekey"="_lukschangekey"
+
+#
+# General Hard Drive (HDD & SSD) operations
+#
+# Usage: gdisk /dev/sda
+#        gdisk /dev/sdb
+#
+#        Perform operations on hard disk drives (e.g. create/delete partition)
+#        Resize operation will need gparted.
+#
+alias "gdisk"="sudo gdisk"
+alias "cgdisk"="sudo cgdisk"
+alias "lsblk"="echo LSBLK:; command sudo lsblk -f; echo; echo DF:; command df -h --output"
+alias "df"="echo LSBLK:; command sudo lsblk -f; echo; echo DF:; command df -h --output"
+#
+# Usage: wipedisk /dev/sdaX
+#
+#        Format /dev/sdaX to an "unformatted" partition
+#
+alias "wipedisk"="_wipedisk"
+
+#
+# Smartmontools (smartctl)
+#
+# Usage: smartctlstatus /dev/sda (NOT /dev/sdaX)
+#
+#        Show the SMART status of the disk.
+#
+alias "smartctlstatus"="sudo smartctl --all"
+#
+# Usage: smartctlsupport /dev/sda (NOT /dev/sdaX)
+#
+#        Show whether the disk supports SMART.
+#
+alias "smartctlsupport"="sudo smartctl -i"
+#
+# Usage: smartctlenable /dev/sda (NOT /dev/sdaX)
+#
+#        Enable SMART attributes on the disk.
+#
+alias "smartctlenable"="sudo smartctl -s on"
+#
+# Usage: smartctldisable /dev/sda (NOT /dev/sdaX)
+#
+#        Disable SMART attributes on the disk.
+#
+alias "smartctldisable"="sudo smartctl -s off"
+#
+# Usage: smartctlenableoffline /dev/sda (NOT /dev/sdaX)
+#
+#        Automatically collects offline information for /dev/sda.
+#
+alias "smartctlenableofflineauto"="sudo smartctl -S on"
+#
+# Usage: smartctldisableoffline /dev/sda (NOT /dev/sdaX)
+#
+#        Disable automatic collection of offline information for /dev/sda.
+#
+alias "smartctldisableofflineauto"="sudo smartctl -S off"
+#
+# Usage: smartctltestoffline /dev/sda (NOT /dev/sdaX)
+#
+#        Run SMART offline test on /dev/sda (Recommended: WEEKLY).
+#
+alias "smartctltestoffline"="sudo smartctl -t offline"
+#
+# Usage: smartctltestshort /dev/sda (NOT /dev/sdaX)
+#
+#        Run SMART short test on /dev/sda (Recommended: WEEKLY).
+#
+alias "smartctltestshort"="sudo smartctl -t short"
+#
+# Usage: smartctltestlong /dev/sda (NOT /dev/sdaX)
+#
+#        Run SMART long test on /dev/sda (Recommended: MONTHLY).
+#
+alias "smartctltestlong"="sudo smartctl -t long"
+#
+# Usage: smartctltestconveyance /dev/sda (NOT /dev/sdaX)
+#
+#        Run SMART long test on /dev/sda (Recommended: ANNUALLY).
+#
+alias "smartctltestconveyance"="sudo smartctl -t conveyance"
+
+#
+# vcgencmd for Raspbian to measure Temperatures of CPUs
+#
+alias "temp"="vcgencmd measure_temp"
+
+# This is only needed for new instance of Docker container
+alias "darchstart"="sudo docker start archlinux"
+
+# Vagrant aliases
+alias "vinit"="vagrant init"
+alias "vup"="vagrant up"
+alias "vssh"="vagrant ssh"
+alias "vsshc"="vagrant ssh-config"
+alias "vdestroy"="vagrant destroy"
+alias "vdestroyf"="vagrant destroy --force"
+# alias "vbox"="vagrant box"
+alias "vadd"="vagrant box add"
+alias "vlist"="vagrant box list"
+alias "vremove"="vagrant box remove"
+alias "vrepackage"="vagrant box repackage"
+alias "vstatus"="vagrant status"
+alias "vreload"="vagrant reload"
+alias "vsuspend"="vagrant suspend"
+alias "vresume"="vagrant resume"
+alias "vhalt"="vagrant halt"
+alias "vprovision"="vagrant provision"
+alias "vuprovision"="vagrant up --provision"
+alias "vrprovision"="vagrant reload --provision"
+
+# VirtualBox aliases
+# The following commands are listed in sequence that you need to run them.
+alias "vboxusers"="sudo usermod -aG vboxusers ${USER}"
+alias "vboxsf"="sudo usermod -aG vboxsf ${USER}"
+# vboxstartvm <name of VM>
+alias "vboxstartvm"="_vboxstartvm"
+# vboxstopvm <name of VM>
+alias "vboxstopvm"="_vboxstopvm"
+
+# vim-stardict aliases
+alias "whatis"="stardict"
+alias "whatvim"="vstardict"
+
+# # vimpager aliases
+alias "less"="${PAGER}"
+alias "zless"="${PAGER}"
+
+# pkgfile aliases - Query which packages a file/folder belongs to
+alias "pkgfile"="command pkgfile --search --verbose --ignorecase"
+alias "pkglist"="command pkgfile --list --directories --verbose --ignorecase --regex"
+alias "pkgupdate"="command sudo pkgfile --update"
+alias "pkgdir"="command pkgfile --search --directories --verbose --ignorecase"
+
+# Ready-baked commands with options
+alias "command_grep"="command grep -E --color=always -T -s -n -H -I -C 5 --exclude-dir={.git,.svn}"
+alias "command_grep_stream"="command grep -E --color=always -T -s -I --exclude-dir={.git,.svn}"
+alias "command_grep_stream_nocolor"="command grep -E --color=never -T -s -I --exclude-dir={.git,.svn}"
+alias "command_fgrep"="command grep -F --color=always -T -s -n -H -I -C 5 --exclude-dir={.git,.svn}"
+alias "command_fgrep_stream"="command grep -F --color=always -T -s -I --exclude-dir={.git,.svn}"
+
+alias "command_rg"="command rg --auto-hybrid-regex --color always --no-heading --no-messages --smart-case -C 5"
+alias "command_rg_stream"="command rg --auto-hybrid-regex --color always --no-heading --no-messages --smart-case --no-line-number"
+alias "command_rg_stream_nocolor"="command rg --auto-hybrid-regex --color never --no-heading --no-messages --smart-case --no-line-number"
+alias "command_frg"="command rg --auto-hybrid-regex --color always --no-heading --no-messages --smart-case -C 5 --fixed-strings"
+alias "command_frg_stream"="command rg --auto-hybrid-regex --color always --no-heading --no-messages --smart-case --no-line-number --fixed-strings"
+
+alias "command_ssh_passwd"="command ssh -X -A -Y -o PreferredAuthentications=password -o PubkeyAuthentication=no -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l"
+alias "command_ssh"="command ssh -X -A -Y -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l"
+alias "command_mosh"="command mosh --ssh='ssh -X -A -Y -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
+alias "command_ag"="command ag --color-path '0;35' --color-match '1;31' --color-line-number '0;32' --nogroup --filename --color --silent --hidden --depth -1 --multiline"
+alias "command_cat"="command cat --number"
+alias "command_tee"="command tee"
+alias "command_nl"="command nl -ba -w 6"
+
+if ! type tmux > /dev/null 2>&1; then
+   alias "command_fzf"="command fzf"
+else
+   alias "command_fzf"="command fzf-tmux"
+fi
+
+# grc (Generic Colorizer) aliases
+alias "grc"="grc -es --colour=on"
+
+# Mac OS X specific
+if [[ "$(uname)" =~ "Darwin" ]]; then
+    alias "gcc"="$(which gcc)"
+    alias "python"="$(which python3)"
+    alias "python2"="$(whereis python)"
+    alias "command_ls"="${USR_DIR}/bin/gls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color"
+else
+    alias "fd"="fdfind"
+    alias "command_ls"="command ls -F -X -L --dereference-command-line-symlink-to-dir --group-directories-first --color"
+fi
+
+# Source custom aliases
+if [[ -f "${HOME}/.custom_shell_aliases" ]]; then
+    source "${HOME}/.custom_shell_aliases"
+fi

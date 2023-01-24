@@ -1,0 +1,45 @@
+1. Fix iOS "Cannot parse response" error (iOS app + WebDAV) by disabling HTTP/2:
+   $ sudo apt install smartmontools
+   $ sudo a2dismod http2
+   $ sudo vim /etc/apache2/conf-enabled/http2.conf
+     - Comment out the first line and replace with `Protocols http/1.1` only:
+       - # Protocols h2 h2c http/1.1
+         Protocols http/1.1
+     - Comment out all H2 & H2Push lines.
+   $ sudo systemctl restart apache2
+   $ sudo systemctl status apache2
+
+2. Optimize NextCloud for RPi 4B:
+   $ sudo vim /etc/php/7.3/fpm/pool.d/www.conf
+     - Change `pm.max_children = 3`
+     - :w
+   $ /etc/init.d/php7.3-fpm restart
+
+3. Enable HEIC/HEIF previews:
+   $ sudo apt install imagemagick
+   $ sudo apt install php-imagick
+   $ (Optional) sudo apt install libheif1 libde265-0
+   $ sudo phpenmod imagick
+   $ sudo systemctl restart {apache2,mysql,php7.3-fpm}
+   
+   $ php -r 'phpinfo();' | grep HEIC
+     => This should show 'HEIC' somewhere in the grep result.
+
+   $ # Install NextCloud's app called "HEIC/HEIF Image Converter"
+
+   $ sudo vim /var/www/nextcloud/config/config.php
+     - 'enable_previews' => true,
+       'enabledPreviewProviders' => array(
+          'OC\\Preview\\PNG',
+          'OC\\Preview\\JPEG',
+          'OC\\Preview\\GIF',
+          'OC\\Preview\\HEIC',
+          'OC\\Preview\\BMP',
+          'OC\\Preview\\XBitmap',
+          'OC\\Preview\\MP3',
+          'OC\\Preview\\TXT',
+          'OC\\Preview\\MarkDown',
+        ),
+
+  References: https://eplt.medium.com/5-minutes-to-install-imagemagick-with-heic-support-on-ubuntu-18-04-digitalocean-fe2d09dcef1
+              https://docs.nextcloud.com/server/20/admin_manual/configuration_server/config_sample_php_parameters.html#previews

@@ -1,0 +1,185 @@
+{
+  "quick_start_guide_added": true, 
+  "book_list_pin_splitter_state": {
+    "__class__": "bytearray", 
+    "__value__": "AAAA/wAAAAEAAAACAAABAAAAAEYA/////wEAAAABAA=="
+  }, 
+  "library_usage_stats": {
+    "/home/phongvcao/Calibre Library": 58
+  }, 
+  "book_details_splitter_horizontal_state": [
+    true, 
+    200
+  ], 
+  "quickview_dialog_books_table_widths": [
+    189, 
+    189, 
+    189
+  ], 
+  "grid view visible": false, 
+  "convert_single_dialog_geom": {
+    "__class__": "bytearray", 
+    "__value__": "AdnQywACAAAAAAOAAAAAvAAAB38AAAOVAAADgAAAANoAAAd/AAADlQAAAAAAAAAAB4A="
+  }, 
+  "convert_bulk_dialog_geom": {
+    "__class__": "bytearray", 
+    "__value__": "AdnQywACAAAAAAOAAAAAvAAAB38AAAOVAAADgAAAANoAAAd/AAADlQAAAAAAAAAAB4A="
+  }, 
+  "custom_colors_for_color_dialog": [
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ]
+  ], 
+  "tag browser search box visible": false, 
+  "book_info_dialog_layout": [
+    {
+      "__class__": "bytearray", 
+      "__value__": "AdnQywACAAAAAADkAAAEOAAABHEAAAc3AAAA5AAABFYAAARxAAAHNwAAAAEAAAAABVY="
+    }, 
+    {
+      "__class__": "bytearray", 
+      "__value__": "AAAA/wAAAAEAAAACAAABXgAAAXAB/////wEAAAABAA=="
+    }
+  ], 
+  "replace_scene_breaks_history": [
+    "", 
+    "<hr />", 
+    "\u2217 \u2217 \u2217", 
+    "\u2022 \u2022 \u2022", 
+    "\u2666 \u2666 \u2666", 
+    "\u2020 \u2020", 
+    "\u2021 \u2021 \u2021", 
+    "\u221e \u221e \u221e", 
+    "\u00a4 \u00a4 \u00a4"
+  ], 
+  "toc_editor_window_geom": {
+    "__class__": "bytearray", 
+    "__value__": "AdnQywACAAAAAAGWAAABVQAABUsAAAPKAAABlgAAAVUAAAVLAAADygAAAAEAAAAABVY="
+  }, 
+  "jobs_dialog_geometry": {
+    "__class__": "bytearray", 
+    "__value__": "AdnQywACAAAAAASBAAABdwAABvkAAAOyAAAEgQAAAZUAAAb5AAADsgAAAAAAAAAAB4A="
+  }, 
+  "search bar visible": true, 
+  "preferences dialog geometry": {
+    "__class__": "bytearray", 
+    "__value__": "AdnQywACAAAAAAVWAAAAAAAACPcAAALPAAAFVgAAAAAAAAj3AAACzwAAAAAAAAAAB4A="
+  }, 
+  "ask_to_manage_device": [
+    "B0C9100424470NFD"
+  ], 
+  "quickview_dialog_geometry": {
+    "__class__": "bytearray", 
+    "__value__": "AdnQywACAAAAAAeWAAABcQAACpUAAALGAAAHlgAAAXEAAAqVAAACxgAAAAAAAAAAB4A="
+  }, 
+  "quickview visible": false, 
+  "cover_browser_splitter_vertical_state": [
+    false, 
+    300
+  ], 
+  "duplicates-question-dialog-geometry": {
+    "__class__": "bytearray", 
+    "__value__": "AdnQywACAAAAAASMAAABXQAABrMAAAL0AAAEjAAAAXsAAAazAAAC9AAAAAAAAAAAB4A="
+  }, 
+  "tag_browser_splitter_horizontal_state": [
+    true, 
+    200
+  ], 
+  "jobs view column layout3": {
+    "__class__": "bytearray", 
+    "__value__": "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAj0AAAAFAQEBAAAAAAAAAAAAAAAAAGT/////AAAAhAAAAAAAAAAFAAAAZAAAAAEAAAAAAAAArQAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAAZAAAAAEAAAAAAAAD6AD/////"
+  }
+}

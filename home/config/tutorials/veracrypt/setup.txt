@@ -1,0 +1,1 @@
+1. Google "veracrypt for mac os x security in a box" to find guide on how to setup VeraCrypt on Mac OS X.

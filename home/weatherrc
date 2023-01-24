@@ -1,0 +1,5 @@
+# vim:ft=conf
+[default]
+description = default settings
+# cachedir = ~/.weather
+# setpath = .:~/.weather:/var/lib/weather-util:/usr/share/weather-util

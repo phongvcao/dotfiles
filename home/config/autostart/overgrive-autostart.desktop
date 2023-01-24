@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Exec=python3 /opt/thefanclub/overgrive/overgrive
+Icon=/opt/thefanclub/overgrive/overgrive.png
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=false
+Name=Google Drive
+GenericName=overgrive
+X-GNOME-FullName=overGrive
+Comment=Google Drive Client

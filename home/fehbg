@@ -1,0 +1,2 @@
+#!/bin/sh
+feh  --image-bg black --bg-center '/home/phongvcao/.config/i3/arch-white.png' '/home/phongvcao/.config/i3/arch-white.png' 

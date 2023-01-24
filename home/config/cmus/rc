@@ -1,0 +1,36 @@
+### Player Controls
+bind -f browser R win-update
+
+bind -f common B player-prev
+bind -f common F player-next
+bind -f common ^S save
+bind -f common S shell gnome-terminal
+bind -f common ^R toggle repeat
+bind -f common r toggle repeat_current
+bind -f common p player-pause
+bind -f common l win-activate
+bind -f common d win-remove
+bind -f common + vol +5%
+bind -f common - vol -5%
+
+bind -f common / push live-filter
+bind -f common , live-filter
+bind -f common L push seek +
+bind -f common H push seek -
+bind -f common A add ~/MEGA/Nhạc
+bind -f common D clear
+
+set format_playlist= %02n - %-40%t  %-10%g  %-20%a  %-20%l  %=  %d
+set format_playlist_va= %02n - %-40%t  %-10%g  %-20%a  %-20%l  %=  %d
+set format_trackwin= %02n - %-40%t  %-10%g  %-20%a  %-20%l %= %d
+set format_trackwin_va= %02n - %-40%t  %-10%g  %-20%a  %-20%l  %=  %d
+set format_title= %t
+set format_current= %02n - %t - %a - %l
+set lib_sort=title filename artist album genre tracknumber
+
+colorscheme solarized-dark
+set repeat=true
+set repeat_current=false
+set scroll_offset=0
+set show_remaining_time=false
+view sorted

@@ -1,0 +1,124 @@
+" vim:filetype=vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" I. Installation Instructions (Linux):
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" 1. Install Vrapper for Eclipse:
+"    http://vrapper.sourceforge.net/home/
+"
+" 2. Copy & Paste this file into ~/.vrapperrc
+"
+" 3. Install Eclipse Color Theme for Eclipse:
+"    http://marketplace.eclipse.org/content/eclipse-color-theme#.U6OsRabkdhE
+"
+" 4. Install Solarized Dark theme for Eclipse:
+"    http://eclipsecolorthemes.org/?view=theme&id=1115
+"
+" 5. Install Relative Line Number Rule:
+"    http://matf.github.io/relativenumberruler/updatesite/
+"    http://matf.github.io/relativenumberruler/
+"
+" 6. ENJOY!
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" II. Installation Instructions (Windows):
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" 1. Install Vrapper for Eclipse:
+"    http://vrapper.sourceforge.net/home/
+"
+" 2. Copy & Paste this file into C:\Users\<your_username>\_vrapperrc
+"
+" 3. Install Eclipse Color Theme for Eclipse:
+"    http://marketplace.eclipse.org/content/eclipse-color-theme#.U6OsRabkdhE
+"
+" 4. Install Solarized Dark theme for Eclipse:
+"    http://eclipsecolorthemes.org/?view=theme&id=1115
+"
+" 5. Install Relative Line Number Rule:
+"    http://matf.github.io/relativenumberruler/updatesite/
+"    http://matf.github.io/relativenumberruler/
+"
+" 6. Install "DejaVu Sans Mono" (Regular & Bold) for Solarized Dark Support
+"
+" 7. ENJOY!
+"
+
+
+set smartindent
+set autoindent
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+" set number
+set cursorline     " highlight current line
+set autochdir
+set softtabstop=4
+set tabstop=4
+set expandtab
+set shiftround
+set shiftwidth=4
+
+
+" move to beginning/end of line
+nnoremap B ^
+nnoremap E $
+" jk is escape
+" $/^ doesn't do anything
+nnoremap $ <nop>
+nnoremap ^ <nop>
+
+inoremap <Esc> <nop>
+vnoremap <Esc> <nop>
+inoremap jk <Esc>l
+vnoremap jk <Esc>
+nnoremap ; :
+nnoremap : ;
+
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+nnoremap ,/ :nohlsearch<CR>
+nnoremap ! 1
+nnoremap @ <S-@>
+nnoremap @j 2j
+nnoremap @h 2h
+nnoremap @k 2k
+nnoremap @l 2l
+nnoremap @! 21
+nnoremap @@ 22
+nnoremap @# 23
+nnoremap @$ 24
+nnoremap @% 25
+nnoremap @^ 26
+nnoremap @& 27
+nnoremap @* 28
+nnoremap @( 29
+nnoremap @) 20
+nnoremap !@ 12
+nnoremap #@ 32
+nnoremap $@ 42
+nnoremap %@ 52
+nnoremap ^@ 62
+nnoremap &@ 72
+nnoremap *@ 82
+nnoremap (@ 92
+nnoremap )@ 02
+nnoremap @d 2d
+nnoremap @y 2y
+nnoremap # 3
+nnoremap $ 4
+nnoremap % 5
+nnoremap ^ 6
+nnoremap & 7
+nnoremap * 8
+nnoremap ( 9
+nnoremap ) 0
