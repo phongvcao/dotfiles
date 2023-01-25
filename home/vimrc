@@ -3775,6 +3775,7 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight CocHintSign ctermbg=0 ctermfg=2 term=underline gui=underline
     autocmd BufEnter * :highlight CocFloating ctermbg=0 term=underline gui=underline
     autocmd BufEnter * :highlight CocMenuSel ctermbg=2 ctermfg=8
+    autocmd BufEnter * :highlight Search ctermbg=3 ctermfg=8 cterm=NONE
 
     " far.vim
     autocmd BufEnter * :highlight FarFilePath ctermfg=5
