@@ -34,10 +34,16 @@ if ! filereadable( expand( '$HOME/.vim/autoload/plug.vim' ) ) || ! isdirectory( 
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall
 else
-    " Install missing plugins on startup
+    " " Install missing plugins on startup
+    " " NOTE: CocInstall & CocUpdate on VimEnter prevents coc.nvim & other plugins
+    " " from working properly.
+    " autocmd VimEnter *
+    "             \ if len( filter( values( g:plugs ), '!isdirectory(v:val.dir)' ) )
+    "             \ | PlugInstall --sync | PlugUpdate --sync | PlugUpgrade | CocIntall | CocUpdate
+    "             \ | endif
     autocmd VimEnter *
                 \ if len( filter( values( g:plugs ), '!isdirectory(v:val.dir)' ) )
-                \ | PlugInstall --sync | PlugUpdate --sync | PlugUpgrade | CocIntall | CocUpdate
+                \ | PlugInstall --sync | PlugUpdate --sync | PlugUpgrade
                 \ | endif
 endif
 
@@ -500,6 +506,7 @@ Plug 'haya14busa/incsearch-fuzzy.vim'
 
 " BEGIN: itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
+Plug 'josa42/vim-lightline-coc'
 Plug 'macthecadillac/lightline-gitdiff'
 " " Uncomment for generating promptline & tmuxline themes
 " Plug 'edkolev/tmuxline.vim'
@@ -1656,16 +1663,41 @@ set signcolumn=yes
 "       \ <SID>check_back_space() ? "\<TAB>" :
 "       \ coc#refresh()
 " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <silent><expr> <C-n>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<C-n>" :
+      \ coc#refresh()
+inoremap <expr><C-p> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" " Make <CR> to accept selected completion item or notify coc.nvim to format
+" " <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+
 if has("unix")
     let s:uname = system("uname -s")
     if s:uname == "Darwin"
-        inoremap <expr><C-@> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh() 
+        " inoremap <expr><C-@> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh() 
     else
-        inoremap <expr><C-Backspace> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh() 
+        " inoremap <expr><C-Backspace> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh() 
     endif
 endif
-inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+" inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+" inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 inoremap <C-r> <C-w>
 inoremap <C-u> <C-c>0Di
 
@@ -1674,8 +1706,8 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <C-n> coc#refresh()
+" " Use <c-space> to trigger completion.
+" inoremap <silent><expr> <C-n> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -1729,6 +1761,7 @@ if exists( 'g:custom_coc_config_home' )
 else
     let g:coc_config_home = $HOME . '/.config/vim'
 endif
+let g:coc_start_at_startup = 1
 let g:coc_global_extensions = [
             \ 'coc-json', 'coc-html', 'coc-css', 'coc-ember', 'coc-java',
             \ 'coc-python', 'coc-angular', 'coc-vimlsp', 'coc-markdownlint',
@@ -2976,17 +3009,17 @@ let g:lightline = {
             \   'paste': 'CustomLightlinePasteMode',
             \ },
             \ 'active': {
-            \   'left': [ [ 'mode', 'zoomed', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
+            \   'left': [ [ 'mode', 'zoomed', 'paste' ],  [ 'readonly', 'filename', 'fugitive' ],
             \             [ 'method', 'modified' ] ],
-            \   'right': [ [ 'lineinfo' ],
-            \              [ 'percent' ],
+            \   'right': [  [ 'lineinfo' ],
+            \              [ 'percent' ],[ 'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status' ],
             \              [ 'diffmode', 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'inactive': {
             \   'left': [ [ 'mode', 'zoomed', 'paste' ], [ 'readonly', 'filename', 'fugitive' ],
             \             [ 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
-            \              [ 'percent' ],
+            \              [ 'percent' ],[ 'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status' ], 
             \              [ 'diffmode', 'fileformat', 'fileencoding', 'filetype' ] ]
             \ },
             \ 'separator': { 'left': '', 'right': '' },
@@ -2995,6 +3028,15 @@ let g:lightline = {
             \   'tabnum': 'CustomLightlineTab',
             \ },
             \ }
+" let g:lightline = {
+"   \   'active': {
+"   \     left': []
+"   \   }
+"   \ }
+
+" vim-lightline-coc settings
+" register compoments:
+call lightline#coc#register()
 
 let g:unite_force_overwrite_statusline = 0
 
@@ -3732,6 +3774,7 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight CocHintFloat ctermbg=2 ctermfg=0 term=underline gui=underline
     autocmd BufEnter * :highlight CocHintSign ctermbg=0 ctermfg=2 term=underline gui=underline
     autocmd BufEnter * :highlight CocFloating ctermbg=0 term=underline gui=underline
+    autocmd BufEnter * :highlight CocMenuSel ctermbg=2 ctermfg=8
 
     " far.vim
     autocmd BufEnter * :highlight FarFilePath ctermfg=5
