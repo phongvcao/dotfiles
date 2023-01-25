@@ -353,7 +353,7 @@ function vim() {
         fi
 
         fzfResult="$(echo ${fzfResult} | command sed -e 's/@$//g')"
-        command_nvim "${fzfResult%?}"
+        command_nvim "${fzfResult}"
         cd "${CURDIR}"
     else
         if [[ -n "$1" ]]; then
@@ -370,7 +370,7 @@ function vim() {
                 fi
 
                 fzfResult="$(echo ${fzfResult} | command sed -e 's/@$//g')"
-                command_nvim "${fzfResult%?}"
+                command_nvim "${fzfResult}"
                 cd "${CURDIR}"
                 # command_nvim -c "FzfMRURec $@"
                 # command_nvim
