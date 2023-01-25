@@ -51,7 +51,8 @@ require('hlslens').setup({
             end
             chunks = {{' ', 'Ignore'}, {text, 'HlSearchLensNear'}}
         else
-            text = (' %s %d '):format(indicator, idx)
+            local cnt = #posList
+            text = (' %s %d / %d '):format(indicator, idx, cnt)
             chunks = {{' ', 'Ignore'}, {text, 'HlSearchLens'}}
         end
         render.setVirt(0, lnum - 1, col - 1, chunks, nearest)

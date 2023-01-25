@@ -2914,20 +2914,20 @@ let g:vim_markdown_folding_disabled = 1
 if !has('nvim')
     nmap n <Plug>(anzu-n-with-echo)
     nmap N <Plug>(anzu-N-with-echo)
+    " Set nogdefault so vim-anzu would match all matches in a line
+    set gdefault
+    " nmap n <Plug>(anzu-n-with-echo)
+    " nmap N <Plug>(anzu-N-with-echo)
+    function! SetNoGDefault()
+        set nogdefault
+    endfunction
+    nnoremap <silent><expr> <Plug>(set-nogdefault) SetNoGDefault()
+    nmap zn <Plug>(set-nogdefault)<Plug>(anzu-jump)<Plug>(anzu-mode)
+    nmap * <Plug>(anzu-star-with-echo)
+    nmap # <Plug>(anzu-sharp-with-echo)
+    let g:anzu_search_limit=1000000
+    let g:anzu_status_format = "%#WarningMsg#%p (%i/%l) %w"
 endif
-" Set nogdefault so vim-anzu would match all matches in a line
-set gdefault
-" nmap n <Plug>(anzu-n-with-echo)
-" nmap N <Plug>(anzu-N-with-echo)
-function! SetNoGDefault()
-    set nogdefault
-endfunction
-nnoremap <silent><expr> <Plug>(set-nogdefault) SetNoGDefault()
-nmap zn <Plug>(set-nogdefault)<Plug>(anzu-jump)<Plug>(anzu-mode)
-nmap * <Plug>(anzu-star-with-echo)
-nmap # <Plug>(anzu-sharp-with-echo)
-let g:anzu_search_limit=1000000
-let g:anzu_status_format = "%#WarningMsg#%p (%i/%l) %w"
 
 " vim-searchhi settings
 let g:searchhi_user_autocmds_enabled = 1
