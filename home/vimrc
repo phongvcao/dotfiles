@@ -3778,6 +3778,7 @@ augroup CustomAutoCmd
     " vim-searchhi settings
     autocmd User SearchHiOn AnzuUpdateSearchStatusOutput
     autocmd User SearchHiOff echo g:anzu_no_match_word
+    
 
     autocmd VimEnter,BufEnter,BufWinEnter * :call SetHighlight()
     autocmd BufEnter,BufRead * :call HighlightCurrentLineNum()
@@ -3786,6 +3787,9 @@ augroup CustomAutoCmd
     autocmd BufEnter *.shell_* set filetype=zsh
     autocmd BufEnter *.jsp set filetype=html
     autocmd FileType vifm set filetype=vim
+
+    " nvim-hlslens settings
+    autocmd BufEnter * :highlight HlSearchLensNear ctermfg=8 ctermbg=2
 
     " ctrlsf.vim settings
     autocmd VimEnter,BufEnter,BufWinEnter * :call SetHighlightCtrlSF()
