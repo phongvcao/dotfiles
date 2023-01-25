@@ -378,7 +378,7 @@ function vim() {
                 CURDIR="${PWD}"
                 DESTFILE="$(readlink -m $1)"
                 cd "$(dirname ${DESTFILE})"
-                command_nvim "${DESTFILE%?}"
+                command_nvim "${DESTFILE}"
                 cd "${CURDIR}"
             fi
         else
