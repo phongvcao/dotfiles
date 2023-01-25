@@ -263,9 +263,13 @@ Plug 'KabbAmine/vCoolor.vim', {
             \ 'on' : [ 'VCoolor', 'VCoolIns', 'VCase' ] }
 Plug 'ntpeters/vim-better-whitespace', {
             \ 'on' : [ 'ToggleWhitespace', 'StripWhitespace' ] }
-Plug 'osyo-manga/vim-anzu'
 
-Plug 'phongvcao/vim-searchhi'
+if !has('nvim')
+    Plug 'osyo-manga/vim-anzu'
+    Plug 'phongvcao/vim-searchhi'
+else
+    Plug 'kevinhwang91/nvim-hlslens'
+endif
 " Plug 'qxxxb/vim-searchhi'
 
 Plug 'prettier/vim-prettier', {
@@ -344,7 +348,11 @@ Plug 'will133/vim-dirdiff', {
             \ 'on' : 'DirDiff' }
 " No lazy-loading for nathanaelkane/vim-indent-guides.
 " It must be started by default
-Plug 'nathanaelkane/vim-indent-guides'
+if !has('nvim')
+    Plug 'nathanaelkane/vim-indent-guides'
+else
+    Plug 'lukas-reineke/indent-blankline.nvim'
+endif
 Plug 'Chiel92/vim-autoformat', {
             \ 'on' : [ 'Autoformat', 'RemoveTrailingSpaces' ] }
 Plug 'tpope/vim-eunuch', {
@@ -363,6 +371,9 @@ Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'moll/vim-bbye'
 Plug 'jreybert/vimagit'
+if has('nvim')
+    Plug 'APZelos/blamer.nvim'
+endif
 " END: junegunn/gv.vim
 
 Plug 'rhysd/git-messenger.vim'
@@ -1979,6 +1990,14 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_default_mapping = 0
 let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar', 'fzf', 'floaterm', 'terminal', 'lf' ]
 
+" indent-blanklines.nvim settings
+highlight IndentBlanklineIndent1 ctermbg=8
+highlight IndentBlanklineIndent2 ctermbg=0
+let g:indent_blankline_show_trailing_blankline_indent = 0
+let g:indent_blankline_char = ''
+let g:indent_blankline_char_highlight_list = [ 'IndentBlanklineIndent1', 'IndentBlanklineIndent2' ]
+let g:indent_blankline_space_char_highlight_list = [ 'IndentBlanklineIndent1', 'IndentBlanklineIndent2' ]
+
 " Solarized Dark settings
 syntax enable
 set background=dark
@@ -2892,8 +2911,10 @@ let g:vim_markdown_folding_disabled = 1
 " vim-anzu
 " After the move, the search status information is output to
 " the command line.
-nmap n <Plug>(anzu-n-with-echo)
-nmap N <Plug>(anzu-N-with-echo)
+if !has('nvim')
+    nmap n <Plug>(anzu-n-with-echo)
+    nmap N <Plug>(anzu-N-with-echo)
+endif
 " Set nogdefault so vim-anzu would match all matches in a line
 set gdefault
 " nmap n <Plug>(anzu-n-with-echo)
@@ -2911,6 +2932,9 @@ let g:anzu_status_format = "%#WarningMsg#%p (%i/%l) %w"
 " vim-searchhi settings
 let g:searchhi_user_autocmds_enabled = 1
 let g:searchhi_redraw_before_on = 1
+
+" nvim-hlslens settings
+" NOTE: Settings are located in $HOME/.config/nvim/init.lua.vim
 
 " Indent customization
 let g:indent_blacklist = [ 'text', 'help', 'markdown' ]
@@ -3818,6 +3842,10 @@ augroup CustomAutoCmd
     " vim-indent-guides
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#002b36 ctermbg=8
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#073642 ctermbg=0
+
+    " indent-blankline.nvim
+    autocmd VimEnter,Colorscheme * :hi IndentBlanklineIndent1 ctermbg=8
+    autocmd VimEnter,Colorscheme * :hi IndentBlanklineIndent2 ctermbg=0
 
     " Go to previously accessed tab
     autocmd TabLeave * let g:lasttab = tabpagenr()

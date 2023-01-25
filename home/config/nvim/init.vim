@@ -10,8 +10,11 @@ let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
 " Set runtimepath for Neovim
 set runtimepath^=~/.vim
 
+" Source init.lua.vim
+source $HOME/.config/nvim/init.lua.vim
+
 " Source vimrc
-source ~/.vimrc
+source $HOME/.vimrc
 
 " " DEBUG: for Neovim debugging purposes
 " call plug#begin('~/.vim/plugged')

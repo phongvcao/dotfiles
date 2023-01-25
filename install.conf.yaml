@@ -110,6 +110,7 @@
     ~/.vimperatorrc: home/vimperatorrc
     ~/.vimrc: home/vimrc
     ~/.config/nvim/init.vim: home/config/nvim/init.vim
+    ~/.config/nvim/init.lua.vim: home/config/nvim/init.lua.vim
     ~/.vrapperrc: home/vrapperrc
     ~/.weatherrc: home/weatherrc
     ~/.wegorc: home/wegorc
