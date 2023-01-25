@@ -3790,6 +3790,7 @@ augroup CustomAutoCmd
 
     " nvim-hlslens settings
     autocmd BufEnter * :highlight HlSearchLensNear ctermfg=8 ctermbg=2
+    autocmd BufEnter * :highlight HlSearchLens ctermfg=8 ctermbg=4
 
     " ctrlsf.vim settings
     autocmd VimEnter,BufEnter,BufWinEnter * :call SetHighlightCtrlSF()
