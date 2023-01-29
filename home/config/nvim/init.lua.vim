@@ -200,6 +200,10 @@ local dap = require('dap')
 --   },
 -- }
 
+if vim.fn.filereadable(HOME ..  '/.config/nvim/vscode/extension/adapter/codelldb') == 0 then
+    vim.api.nvim_err_writeln('init.lua.vim: codelldb does NOT exist! Please follow nvim-dap guide to deploy codelldb in the appropriate directory')
+end
+
 dap.adapters.codelldb = {
   type = 'server',
   port = "${port}",
