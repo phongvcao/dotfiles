@@ -236,7 +236,35 @@ dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
 -- nvim-dap-ui settings
-require('dapui').setup()
+require('dapui').setup({
+    layouts = { {
+        elements = { {
+            id = "scopes",
+            size = 0.25
+        }, {
+            id = "breakpoints",
+            size = 0.25
+        }, {
+            id = "stacks",
+            size = 0.25
+        }, {
+            id = "watches",
+            size = 0.25
+        } },
+        position = "left",
+        size = 60
+    }, {
+        elements = { {
+            id = "repl",
+            size = 0.5
+        }, {
+            id = "console",
+            size = 0.5
+        } },
+        position = "bottom",
+        size = 40
+    } },
+})
 
 -- nvim-dap-virtual-text settings
 require("nvim-dap-virtual-text").setup()
