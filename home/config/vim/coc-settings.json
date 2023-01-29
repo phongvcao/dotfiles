@@ -43,7 +43,7 @@
       "messageDelay": 300,
       "refreshAfterSave": true,
       "refreshOnInsertMode": false,
-      "virtualText": true,
-      "virtualTextCurrentLineOnly": true
+      "virtualText": false,
+      "virtualTextCurrentLineOnly": false
     },
 }

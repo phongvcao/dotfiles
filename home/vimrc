@@ -483,7 +483,7 @@ Plug 'chase/vim-ansible-yaml', {
 Plug 'Glench/Vim-Jinja2-Syntax', {
             \ 'for' : [ 'html', 'xhtml', 'jinja', 'htmldjango' ] }
 
-" Plugin (PHP, WordPress, Drupal)
+" Plugins (PHP, WordPress, Drupal)
 Plug 'tobyS/pdv', {
             \ 'for' : 'php' }
 Plug 'shawncplus/phpcomplete.vim', {
@@ -496,10 +496,10 @@ Plug 'dsawardekar/wordpress.vim', {
 Plug 'arnaud-lb/vim-php-namespace', {
             \ 'for' : 'php' }
 
-" Plugin (CSV)
+" Plugins (CSV)
 Plug 'chrisbra/csv.vim'
 
-" Plugin (Syntax Highlighting & Indentation for ALL languages)
+" Plugins (Syntax Highlighting & Indentation for ALL languages)
 Plug 'sheerun/vim-polyglot'
 
 " BEGIN: garbas/vim-snipmate
@@ -524,6 +524,39 @@ Plug 'macthecadillac/lightline-gitdiff'
 " Plug 'edkolev/promptline.vim'
 Plug 'gcavallanti/vim-noscrollbar'
 " END: itchyny/lightline.vim
+
+" BEGIN: petertriho/nvim-scrollbar
+if has('nvim')
+    Plug 'petertriho/nvim-scrollbar'
+    Plug 'lewis6991/gitsigns.nvim'
+    Plug 'kevinhwang91/nvim-hlslens'
+endif
+" END: petertriho/nvim-scrollbar
+
+" Plugins (Debugging)
+if has('nvim')
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'Pocco81/dap-buddy.nvim'
+
+    " BEGIN: rcarriga/nvim-dap-ui
+    Plug 'folke/neodev.nvim'
+    Plug 'rcarriga/nvim-dap-ui'
+    " END: rcarriga/nvim-dap-ui
+
+    " BEGIN: theHamsta/nvim-dap-virtual-text
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'theHamsta/nvim-dap-virtual-text'
+    " END: theHamsta/nvim-dap-virtual-text
+
+    " BEGIN: nvim-neotest/neotest
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'antoinemadec/FixCursorHold.nvim'
+    Plug 'nvim-neotest/neotest'
+    " END: nvim-neotest/neotest
+else
+    Plug 'puremourning/vimspector'
+endif
 
 " Plugins (gui-specific)
 if has('gui_running')
@@ -3791,6 +3824,26 @@ augroup CustomAutoCmd
     " nvim-hlslens settings
     autocmd BufEnter * :highlight HlSearchLensNear ctermfg=8 ctermbg=2
     autocmd BufEnter * :highlight HlSearchLens ctermfg=8 ctermbg=4
+    
+    " nvim-scrollbar settings
+    " autocmd CmdlineLeave : lua require('scrollbar.handlers.search').handler.hide()
+    autocmd BufEnter * :highlight ScrollbarError ctermfg=1 ctermbg=0
+    autocmd BufEnter * :highlight ScrollbarErrorHandle ctermfg=1 ctermbg=0
+
+    autocmd BufEnter * :highlight ScrollbarWarn ctermfg=1 ctermbg=1
+    autocmd BufEnter * :highlight ScrollbarWarnHandle ctermfg=1 ctermbg=1
+    autocmd BufEnter * :highlight ScrollbarInfo ctermfg=1 ctermbg=1
+    autocmd BufEnter * :highlight ScrollbarInfoHandle ctermfg=1 ctermbg=1
+
+    autocmd BufEnter * :highlight ScrollbarMisc ctermfg=1 ctermbg=1
+    autocmd BufEnter * :highlight ScrollbarMiscHandle ctermfg=1 ctermbg=1
+
+    autocmd BufEnter * :highlight ScrollbarSearch ctermfg=3 ctermbg=0
+    autocmd BufEnter * :highlight ScrollbarSearchHandle ctermfg=3 ctermbg=0
+
+    autocmd BufEnter * :highlight ScrollbarHandle ctermfg=4 ctermbg=4
+    autocmd BufEnter * :highlight ScrollbarCursor ctermfg=4 ctermbg=4
+    autocmd BufEnter * :highlight ScrollbarCursorHandle ctermfg=4 ctermbg=4
 
     " ctrlsf.vim settings
     autocmd VimEnter,BufEnter,BufWinEnter * :call SetHighlightCtrlSF()
