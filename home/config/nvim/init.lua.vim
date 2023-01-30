@@ -243,21 +243,21 @@ vim.fn.sign_define('DapStopped', { text = '>>', texthl = 'CursorLineNr', linehl 
 -- nvim-dap-ui settings
 require('dapui').setup({
     layouts = { {
-        elements = { {
-            id = "scopes",
-            size = 0.25
-        }, {
-            id = "breakpoints",
-            size = 0.25
-        }, {
+        elements = {  {
             id = "stacks",
             size = 0.25
         }, {
             id = "watches",
             size = 0.25
+        }, {
+            id = "scopes",
+            size = 0.25
+        }, {
+            id = "breakpoints",
+            size = 0.25
         } },
         position = "left",
-        size = 75
+        size = 60
     }, {
         elements = { {
             id = "repl",
