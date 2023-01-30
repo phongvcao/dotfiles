@@ -302,4 +302,7 @@ require('codicons').setup()
 -- nvim-dap-virtual-text settings
 require("nvim-dap-virtual-text").setup()
 
+-- which-key.nvim settings
+require('which-key').setup()
+
 EOF
