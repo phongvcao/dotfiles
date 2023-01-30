@@ -3264,8 +3264,8 @@ nnoremap <leader>dq :lua require('dap').terminate()<CR><Esc>
 
 " nvim-dap-ui settings
 nnoremap <leader>dt :lua require('dapui').toggle()<CR>
-nnoremap <leader>dp :lua require("dapui").eval()<CR>
-vnoremap <leader>dp :lua require("dapui").eval()<CR>
+nnoremap <leader>de :lua require("dapui").eval()<CR>
+vnoremap <leader>de :lua require("dapui").eval()<CR>
 
 " vim-fugitive settings
 nnoremap <localleader>dg :Gdiffsplit!<CR>
