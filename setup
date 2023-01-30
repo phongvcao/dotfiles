@@ -27,6 +27,8 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             command chmod u+w /usr/local/share/doc; \
             command chmod u+w /usr/local/share/zsh; \
             command chmod u+w /usr/local/share/zsh/site-functions; \
+        brew tap homebrew/cask-fonts; \
+        brew install --cask font-dejavu-sans-mono-nerd-font; \
         brew install ccls; \
         brew install mosh autossh coreutils; \
         brew install binutils; \
