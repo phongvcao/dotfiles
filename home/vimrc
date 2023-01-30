@@ -81,9 +81,10 @@ Plug 'Shougo/vimproc.vim', {
             \ 'do' : 'make' }
 Plug 'osyo-manga/vim-reanimate', {
             \ 'on' :  [ 'ReanimateLoad', 'ReanimateSave' ] }
-" BEGIN: ryanoasis/vim-devicons 
+if has('nvim')
+    Plug 'nvim-tree/nvim-web-devicons'
+endif
 Plug 'ryanoasis/vim-devicons'
-" END: ryanoasis/vim-devicons
 Plug 'vim-scripts/YankRing.vim'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'hwrod/interactive-replace', {
@@ -288,6 +289,13 @@ Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/vim-easyoperator-phrase'
 Plug 'haya14busa/vim-easyoperator-line'
 " END: easymotion/vim-easymotion
+
+" BEGIN: nvim-pack/nvim-spectre 
+if has('nvim')
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-pack/nvim-spectre'
+endif
+" END: nvim-pack/nvim-spectre 
 
 Plug 'brooth/far.vim', {
             \ 'on' : [ 'Far', 'Farr', 'Farf', 'Refar', 'Fardo', 'Farundo', 'Farp' ] }
@@ -3246,7 +3254,6 @@ function! CustomLightlineFileformat()
 endfunction
 
 " nvim-dap settings
-nnoremap <leader>dt :lua require('dapui').toggle()<CR>
 nnoremap <leader>db :lua require('dap').toggle_breakpoint()<CR>
 nnoremap <leader>dc :lua require('dap').continue()<CR>
 nnoremap <leader>dr :lua require('dap').continue()<CR>
@@ -3254,6 +3261,11 @@ nnoremap <leader>dn :lua require('dap').step_over()<CR>
 nnoremap <leader>ds :lua require('dap').step_into()<CR>
 nnoremap <leader>do :lua require('dap').step_out()<CR>
 nnoremap <leader>dq :lua require('dap').terminate()<CR><Esc>
+
+" nvim-dap-ui settings
+nnoremap <leader>dt :lua require('dapui').toggle()<CR>
+nnoremap <leader>dp :lua require("dapui").eval()<CR>
+vnoremap <leader>dp :lua require("dapui").eval()<CR>
 
 " vim-fugitive settings
 nnoremap <localleader>dg :Gdiffsplit!<CR>
@@ -3894,6 +3906,14 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight DapUIPlayPause ctermfg=4
     autocmd BufEnter * :highlight DapUIRestart ctermfg=4
     autocmd BufEnter * :highlight DapUIUnavailable ctermfg=4
+    autocmd BufEnter * :highlight DapUIStepOverNC ctermfg=4
+    autocmd BufEnter * :highlight DapUIStepIntoNC ctermfg=4
+    autocmd BufEnter * :highlight DapUIStepBackNC ctermfg=4
+    autocmd BufEnter * :highlight DapUIStepOutNC ctermfg=4
+    autocmd BufEnter * :highlight DapUIStopNC ctermfg=4
+    autocmd BufEnter * :highlight DapUIPlayPauseNC ctermfg=4
+    autocmd BufEnter * :highlight DapUIRestartNC ctermfg=4
+    autocmd BufEnter * :highlight DapUIUnavailableNC ctermfg=4
 
     " nvim-hlslens settings
     autocmd BufEnter * :highlight HlSearchLensNear ctermfg=8 ctermbg=2

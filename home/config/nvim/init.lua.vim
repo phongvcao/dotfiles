@@ -257,7 +257,7 @@ require('dapui').setup({
             size = 0.25
         } },
         position = "left",
-        size = 60
+        size = 75
     }, {
         elements = { {
             id = "repl",
@@ -304,5 +304,14 @@ require("nvim-dap-virtual-text").setup()
 
 -- which-key.nvim settings
 require('which-key').setup()
+
+-- nvim-web-devicons settings
+require('nvim-web-devicons').setup()
+
+-- nvim-spectre settings
+require('spectre').setup()
+
+-- show the effects of a search / replace in a live preview window
+vim.o.inccommand = "split"
 
 EOF
