@@ -540,6 +540,7 @@ if has('nvim')
 
     " BEGIN: rcarriga/nvim-dap-ui
     Plug 'folke/neodev.nvim'
+    Plug 'mortepau/codicons.nvim'
     Plug 'rcarriga/nvim-dap-ui'
     " END: rcarriga/nvim-dap-ui
 
@@ -1205,6 +1206,7 @@ nnoremap <localleader>cc :ColorChart<CR>
 " VO	idH		<Plug>(textobj-diff-file)
 " VO	idf		<Plug>(textobj-diff-file)
 " VO	idh		<Plug>(textobj-diff-hunk)
+let g:textobj_diff_no_default_key_mappings = 1
 
 " vim-textobj-datetime settings
 " VISUAL & OPERATOR-PENDING MODES
@@ -1967,17 +1969,17 @@ let g:go_fmt_fail_silently = 1
 let g:go_fmt_autosave = 0
 let g:go_template_autocreate = 0
 let g:go_textobj_enabled = 0
-nnoremap GL :GoDebugStart<CR>
-nnoremap GT :GoDebugTest<CR>
-nnoremap GR :GoDebugRestart<CR>
-nnoremap GQ :GoDebugStop<CR>
-nnoremap GB :GoDebugBreakpoint<CR>
-nnoremap GC :GoDebugContinue<CR>
-nnoremap GN :GoDebugNext<CR>
-nnoremap GS :GoDebugStep<CR>
-nnoremap GO :GoDebugStepOut<CR>
-nnoremap GA :GoDebugSet<Space>
-nnoremap GP :GoDebugPrint<Space>
+" nnoremap GL :GoDebugStart<CR>
+" nnoremap GT :GoDebugTest<CR>
+" nnoremap GR :GoDebugRestart<CR>
+" nnoremap GQ :GoDebugStop<CR>
+" nnoremap GB :GoDebugBreakpoint<CR>
+" nnoremap GC :GoDebugContinue<CR>
+" nnoremap GN :GoDebugNext<CR>
+" nnoremap GS :GoDebugStep<CR>
+" nnoremap GO :GoDebugStepOut<CR>
+" nnoremap GA :GoDebugSet<Space>
+" nnoremap GP :GoDebugPrint<Space>
 let g:go_debug_windows = {
             \ 'vars':       'leftabove 30vnew',
             \ 'stack':      'leftabove 20new',
@@ -2135,7 +2137,7 @@ command! -nargs=* -complete=file ProfilerStart call StartProfileVim( <f-args> )
 command! -nargs=* ProfilerStop call StopProfileVim()
 
 " vim-dict settings
-nnoremap <leader>d :Dict<Space>
+nnoremap <localleader>di :Dict<Space>
 
 " vim-tmux-navigator settings
 let g:tmux_navigator_no_mappings = 1
@@ -3221,6 +3223,16 @@ function! CustomLightlineFileformat()
     return winwidth(0) > 70 ? (&fileformat . ' ' . b:webdev_fileformat_symbol) : ''
 endfunction
 
+" nvim-dap settings
+nnoremap <leader>dt :lua require('dap').toggle()<CR>
+nnoremap <leader>db :lua require('dap').toggle_breakpoint()<CR>
+nnoremap <leader>dc :lua require('dap').continue()<CR>
+nnoremap <leader>dr :lua require('dap').continue()<CR>
+nnoremap <leader>dn :lua require('dap').step_over()<CR>
+nnoremap <leader>ds :lua require('dap').step_into()<CR>
+nnoremap <leader>do :lua require('dap').step_out()<CR>
+nnoremap <leader>dq :lua require('dap').terminate()<CR><Esc>
+
 " vim-fugitive settings
 nnoremap <localleader>dg :Gdiffsplit!<CR>
 let g:fugitive_no_maps = 1
@@ -3828,6 +3840,38 @@ augroup CustomAutoCmd
     autocmd BufEnter *.shell_* set filetype=zsh
     autocmd BufEnter *.jsp set filetype=html
     autocmd FileType vifm set filetype=vim
+
+    " nvim-dap-ui settings
+    autocmd BufEnter * :highlight link DapUIVariable Normal
+    autocmd BufEnter * :highlight DapUIScope ctermfg=4
+    autocmd BufEnter * :highlight DapUIType ctermfg=3
+    autocmd BufEnter * :highlight link DapUIValue Normal
+    autocmd BufEnter * :highlight DapUIModifiedValue ctermfg=4 cterm=bold
+    autocmd BufEnter * :highlight DapUIDecoratio ctermfg=4
+    autocmd BufEnter * :highlight DapUIThrea ctermfg=4
+    autocmd BufEnter * :highlight DapUIStoppedThread ctermfg=4
+    autocmd BufEnter * :highlight link DapUIFrameName Normal
+    autocmd BufEnter * :highlight DapUISource ctermfg=4
+    autocmd BufEnter * :highlight DapUILineNumber ctermfg=2
+    autocmd BufEnter * :highlight link DapUIFloatNormal NormalFloat
+    autocmd BufEnter * :highlight DapUIFloatBorder ctermfg=4
+    autocmd BufEnter * :highlight DapUIWatchesEmpty ctermfg=4
+    autocmd BufEnter * :highlight DapUIWatchesValue ctermfg=4
+    autocmd BufEnter * :highlight DapUIWatchesError ctermfg=1
+    autocmd BufEnter * :highlight DapUIBreakpointsPath ctermfg=4
+    autocmd BufEnter * :highlight DapUIBreakpointsInfo ctermfg=4
+    autocmd BufEnter * :highlight DapUIBreakpointsCurrentLine ctermfg=226 cterm=bold
+    autocmd BufEnter * :highlight link DapUIBreakpointsLine DapUILineNumber
+    autocmd BufEnter * :highlight DapUIBreakpointsDisabledLine ctermfg=4
+    autocmd BufEnter * :highlight link DapUICurrentFrameName DapUIBreakpointsCurrentLine
+    autocmd BufEnter * :highlight DapUIStepOver ctermfg=4
+    autocmd BufEnter * :highlight DapUIStepInto ctermfg=4
+    autocmd BufEnter * :highlight DapUIStepBack ctermfg=4
+    autocmd BufEnter * :highlight DapUIStepOut ctermfg=4
+    autocmd BufEnter * :highlight DapUIStop ctermfg=4
+    autocmd BufEnter * :highlight DapUIPlayPause ctermfg=4
+    autocmd BufEnter * :highlight DapUIRestart ctermfg=4
+    autocmd BufEnter * :highlight DapUIUnavailable ctermfg=4
 
     " nvim-hlslens settings
     autocmd BufEnter * :highlight HlSearchLensNear ctermfg=8 ctermbg=2

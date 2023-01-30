@@ -266,6 +266,34 @@ require('dapui').setup({
     } },
 })
 
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
+
+-- neodev.nvim settings
+require("neodev").setup({
+  library = { plugins = { "nvim-dap-ui" }, types = true },
+  lspconfig = false,
+})
+
+-- vim.lsp.start({
+--   name = "lua-language-server",
+--   cmd = { "lua-language-server" },
+--   before_init = require("neodev.lsp").before_init,
+--   root_dir = vim.fn.getcwd(),
+--   settings = { Lua = {} },
+-- })
+
+-- codicons.nvim settings
+require('codicons').setup()
+
 -- nvim-dap-virtual-text settings
 require("nvim-dap-virtual-text").setup()
 

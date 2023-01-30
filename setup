@@ -51,7 +51,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
             cmake xclip docker curl gpatch htop llvm yarn man-db rustup-init \
             tavianator/tap/bfs atool rar zip p7zip glances ranger flake8 \
-            fzf fd neovim lf highlight ddclient && \
+            fzf fd neovim lf highlight ddclient fontforge && \
         brew install --HEAD universal-ctags/universal-ctags/universal-ctags && \
         $(brew --prefix)/opt/fzf/install && \
         brew install --cask postgres-unofficial && \
@@ -99,6 +99,7 @@ else
     sudo iptables-save
 
     if [ -z "$(command -v ccls)" ]; then
+        sudo add-apt-repository universe && \
 	    sudo apt-get update -y && \
 	    sudo apt-get upgrade -y && \
 	    sudo apt-get dist-upgrade -y && \
@@ -110,7 +111,7 @@ else
 	        curl htop g++ python3-pip lldb clang yarn cargo rustc bfs \
 	        atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
 	        fzf fd-find neovim highlight ddclient qbittorrent postgresql \
-	        postgresql-contrib xmlstarlet && \
+	        postgresql-contrib xmlstarlet fontforge && \
 	    sudo snap install --classic code && \
 	    sudo snap install ccls go --classic && \
 	    sudo snap install universal-ctags*.snap --dangerous && \
@@ -222,6 +223,14 @@ echo
 echo "Installing neovim"
 command python2 -m pip install neovim
 command python3 -m pip install neovim
+
+#
+# Install configparser using pip
+#
+echo
+echo "Installing neovim"
+command python2 -m pip install configparser
+command python3 -m pip install configparser
 
 #
 # Install pdbpp
