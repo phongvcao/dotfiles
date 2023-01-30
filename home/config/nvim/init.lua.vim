@@ -230,10 +230,15 @@ dap.configurations.cpp = {
   },
 }
 
-
 -- If you want to use this for Rust and C, add something like this:
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
+
+vim.fn.sign_define('DapBreakpoint', { text = "B", texthl = "Identifier", linehl = "CursorLine", numhl = "Statement" })
+vim.fn.sign_define('DapBreakpointCondition', { text = "C", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define('DapBreakpointRejected', { text = 'R', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapLogPoint', { text = 'L', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapStopped', { text = '>>', texthl = 'CursorLineNr', linehl = 'CursorLine', numhl = 'CursorLineNr' })
 
 -- nvim-dap-ui settings
 require('dapui').setup({
@@ -270,12 +275,12 @@ local dap, dapui = require("dap"), require("dapui")
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
+-- dap.listeners.before.event_terminated["dapui_config"] = function()
+--   dapui.close()
+-- end
+-- dap.listeners.before.event_exited["dapui_config"] = function()
+--   dapui.close()
+-- end
 
 -- neodev.nvim settings
 require("neodev").setup({

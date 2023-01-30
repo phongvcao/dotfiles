@@ -501,6 +501,7 @@ Plug 'chrisbra/csv.vim'
 
 " Plugins (Syntax Highlighting & Indentation for ALL languages)
 Plug 'sheerun/vim-polyglot'
+Plug 'gerw/vim-HiLinkTrace'
 
 " BEGIN: garbas/vim-snipmate
 Plug 'garbas/vim-snipmate'
@@ -2005,6 +2006,10 @@ map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 map zg/ <Plug>(incsearch-fuzzy-stay)
 
+" vim-HiLinkTrace settings
+" :h group-name: Reveal list of built-in syntax highlighting group names
+" :HLT would reveal linked list of syntax highlighting for word under cursor.
+
 " vim-snipmate settings
 let &rtp.=',~/.vim/plugged/vim-snippets/snippets/'
 let g:snips_no_mappings = 1
@@ -3224,7 +3229,7 @@ function! CustomLightlineFileformat()
 endfunction
 
 " nvim-dap settings
-nnoremap <leader>dt :lua require('dap').toggle()<CR>
+nnoremap <leader>dt :lua require('dapui').toggle()<CR>
 nnoremap <leader>db :lua require('dap').toggle_breakpoint()<CR>
 nnoremap <leader>dc :lua require('dap').continue()<CR>
 nnoremap <leader>dr :lua require('dap').continue()<CR>
