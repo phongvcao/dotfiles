@@ -303,7 +303,16 @@ require('codicons').setup()
 require("nvim-dap-virtual-text").setup()
 
 -- which-key.nvim settings
-require('which-key').setup()
+require('which-key').setup({
+    triggers_blacklist = {
+        -- list of mode / prefixes that should never be hooked by WhichKey
+        -- this is mostly relevant for key maps that start with a native binding
+        -- most people should not need to change this
+        -- i = { "j", "k" },
+        v = { "j", "k" },
+        c = { "j", "k" },
+    },
+})
 
 -- nvim-web-devicons settings
 require('nvim-web-devicons').setup()
