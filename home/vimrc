@@ -1851,6 +1851,8 @@ let g:coc_global_extensions = [
             \ 'coc-flutter', 'coc-stylelint', 'coc-stylelintplus',
             \ 'coc-cssmodules', 'coc-texlab', 'coc-vetur', 'coc-marketplace',
             \ 'coc-protobuf' ]
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
 " let g:coc_global_extensions = [
 "             \ 'coc-highlight', 'coc-calc', 'coc-ecdict',  ]
 
