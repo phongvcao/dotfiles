@@ -1,12 +1,12 @@
 {
     "coc.preferences.echodocSupport": true,
     "languageserver": {
-        "golang": {
-            // NOTE: MacOS-specific path
-            "command": "~/.go/bin/gopls",
-            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-            "filetypes": ["go"]
-        },
+        // // NOTE: MacOS-specific config: Replaced vim-go & gopls with coc-go
+        // "golang": {
+            // "command": "~/.go/bin/gopls",
+            // "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+            // "filetypes": ["go"]
+        // },
         "ccls": {
             // NOTE: MacOS-specific path & config
             "command": "ccls",
@@ -50,8 +50,10 @@
             "module": "/usr/local/lib/node_modules/sql-language-server/dist/bin/cli.js",
             "args": ["up", "--method", "node-ipc"],
             "filetypes": ["sql", "mysql"]
-        }
+        },
     },
+    "go.goplsArgs": ["-remote", "auto"],
+    "go.goplsPath": "~/.go/bin/gopls",
     "diagnostic": {
       "enable": true,
       "displayByAle": true,
@@ -62,7 +64,7 @@
       "messageDelay": 300,
       "refreshAfterSave": true,
       "refreshOnInsertMode": false,
-      "virtualText": false,
+      "virtualText": true,
       "virtualTextCurrentLineOnly": false
     },
 }
