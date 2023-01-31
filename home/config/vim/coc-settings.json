@@ -2,13 +2,15 @@
     "coc.preferences.echodocSupport": true,
     "languageserver": {
         "golang": {
+            // NOTE: MacOS-specific path
             "command": "~/.go/bin/gopls",
             "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
             "filetypes": ["go"]
         },
         "ccls": {
+            // NOTE: MacOS-specific path & config
             "command": "ccls",
-            "filetypes": ["c", "cpp", "objc", "objcpp"],
+            "filetypes": ["c", "cc", "c++", "cpp", "objc", "objcpp"],
             "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
             "initializationOptions": {
                 "cache": {
@@ -31,6 +33,23 @@
                     "resourceDir": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0",
                 }
             }
+        },
+        "dockerfile": {
+            // NOTE: MacOS-specific path
+            "command": "docker-langserver",
+            "filetypes": ["dockerfile"],
+            "args": ["--stdio"]
+        },
+        "kotlin": {
+            // NOTE: MacOS-specific path
+            "command": "~/.config/nvim/vscode/kotlin/server/bin/kotlin-language-server",
+            "filetypes": ["kotlin"]
+        },
+        "sql": {
+            // NOTE: MacOS-specific path
+            "module": "/usr/local/lib/node_modules/sql-language-server/dist/bin/cli.js",
+            "args": ["up", "--method", "node-ipc"],
+            "filetypes": ["sql", "mysql"]
         }
     },
     "diagnostic": {

@@ -273,8 +273,10 @@ else
 endif
 " Plug 'qxxxb/vim-searchhi'
 
+" Plug 'prettier/vim-prettier', {
+"             \ 'do': 'yarn install' }
 Plug 'prettier/vim-prettier', {
-            \ 'do': 'yarn install' }
+            \ 'do': 'yarn install --frozen-lockfile --production' }
 Plug 'Shougo/echodoc.vim'
 Plug 'pechorin/any-jump.vim'
 
@@ -1709,12 +1711,32 @@ let g:DirDiffWindowSize = 20
 let g:bl_no_mappings = 1
 
 " coc.nvim settings
-if !isdirectory('/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include')
-    echoerr ".vimrc: Please double check coc-settings.json to make sure Clang directories for CCLS are up-to-date!!!"
+if !exists('g:custom_vimrc_disable_coc_nvim_cpp') || g:custom_vimrc_disable_coc_nvim_cpp == 0
+    if !isdirectory('/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include')
+        echoerr ".vimrc: Please double check coc-settings.json to make sure Clang directories for CCLS are up-to-date!!!"
+    endif
+
+    if !isdirectory('/Library/Developer/CommandLineTools/usr/lib/clang/14.0.0')
+        echoerr ".vimrc: Please double check coc-settings.json to make sure Clang directories for CCLS are up-to-date!!!"
+    endif
 endif
 
-if !isdirectory('/Library/Developer/CommandLineTools/usr/lib/clang/14.0.0')
-    echoerr ".vimrc: Please double check coc-settings.json to make sure Clang directories for CCLS are up-to-date!!!"
+if !exists('g:custom_vimrc_disable_coc_nvim_dockerfile') || g:custom_vimrc_disable_coc_nvim_dockerfile == 0
+    if !filereadable('/usr/local/bin/docker-langserver')
+        echoerr ".vimrc: Please double check coc-settings.json to make sure docker-langserver path from dockerfile-language-server-nodejs module is up-to-date!!!"
+    endif
+endif
+
+if !exists('g:custom_vimrc_disable_coc_nvim_kotlin') || g:custom_vimrc_disable_coc_nvim_kotlin == 0
+    if !filereadable($HOME . '/.config/nvim/vscode/kotlin/server/bin/kotlin-language-server')
+        echoerr ".vimrc: Please double check coc-settings.json to make sure kotlin-language-server path from fwcd/kotlin-language-server module is up-to-date!!!"
+    endif
+endif
+
+if !exists('g:custom_vimrc_disable_coc_nvim_sql') || g:custom_vimrc_disable_coc_nvim_sql == 0
+    if !filereadable('/usr/local/lib/node_modules/sql-language-server/dist/bin/cli.js')
+        echoerr ".vimrc: Please double check coc-settings.json to make sure sql-language-server/dist/bin/cli.js path from sql-language-server module is up-to-date!!!"
+    endif
 endif
 
 " if hidden is not set, TextEdit might fail.
@@ -1844,13 +1866,14 @@ endif
 let g:coc_start_at_startup = 1
 let g:coc_global_extensions = [
             \ 'coc-json', 'coc-html', 'coc-css', 'coc-ember', 'coc-java',
-            \ 'coc-python', 'coc-angular', 'coc-vimlsp', 'coc-markdownlint',
+            \ 'coc-pyright', 'coc-angular', 'coc-vimlsp', 'coc-markdownlint',
             \ 'coc-tsserver', 'coc-yaml', 'coc-snippets', 'coc-fzf-preview',
             \ 'coc-go', 'coc-emmet', 'coc-cmake', 'coc-xml', 'coc-sql',
             \ 'coc-sourcekit', 'coc-sh', 'coc-floaterm', 'coc-eslint',
             \ 'coc-flutter', 'coc-stylelint', 'coc-stylelintplus',
             \ 'coc-cssmodules', 'coc-texlab', 'coc-vetur', 'coc-marketplace',
-            \ 'coc-protobuf' ]
+            \ 'coc-protobuf', 'coc-sumneko-lua', 'coc-perl', 'coc-rust-analyzer',
+            \ 'coc-sourcekit' ]
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 " let g:coc_global_extensions = [
@@ -3957,6 +3980,7 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight CocFloating ctermbg=0 term=underline gui=underline
     autocmd BufEnter * :highlight CocMenuSel ctermbg=2 ctermfg=8
     autocmd BufEnter * :highlight Search ctermbg=3 ctermfg=8 cterm=NONE
+    autocmd BufRead,BufNewFile *.lua.vim set filetype=lua
 
     " vim-which-key settings
     autocmd BufEnter * :highlight WhichKeyDesc ctermfg=4

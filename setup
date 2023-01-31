@@ -20,6 +20,8 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             command sudo chown -R "$(whoami)" /usr/local/share/zsh; \
             command sudo chown -R "$(whoami)" /usr/local/share/zsh/site-functions; \
 
+        command sudo chown -R 502:20 "/Users/admin/.npm"
+
         command chmod u+w /usr/local/bin; \
             command chmod u+w /usr/local/etc; \
             command chmod u+w /usr/local/sbin; \
@@ -219,7 +221,7 @@ if [ -z "$(command -v pip3)" ]; then
 fi
 
 #
-# Install pynvim
+# Install pynvim using pip
 #
 echo
 echo "Installing pynvim"
@@ -238,12 +240,20 @@ command python3 -m pip install neovim
 # Install configparser using pip
 #
 echo
-echo "Installing neovim"
+echo "Installing configparser"
 command python2 -m pip install configparser
 command python3 -m pip install configparser
 
 #
-# Install pdbpp
+# Install pylint using pip
+#
+echo
+echo "Installing pylint"
+command python2 -m pip install pylint
+command python3 -m pip install pylint
+
+#
+# Install pdbpp using pip
 #
 echo
 echo "Installing pdbpp"
@@ -278,6 +288,20 @@ command sudo python3 -m pip install pygments
 echo
 echo "Installing neovim (node.js extension)"
 sudo npm install -g neovim
+
+#
+# Install dockerfile-language-server-nodejs
+#
+echo
+echo "Installing dockerfile-language-server-nodejs"
+sudo npm install -g dockerfile-language-server-nodejs
+
+#
+# Install sql-language-server
+#
+echo
+echo "Installing sql-language-server"
+sudo npm install -g sql-language-server
 
 #
 # Install neovim-remote
