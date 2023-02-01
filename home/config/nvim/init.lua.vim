@@ -234,10 +234,10 @@ dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
 vim.fn.sign_define('DapBreakpoint', { text = "B", texthl = "Identifier", linehl = "CursorLine", numhl = "Statement" })
-vim.fn.sign_define('DapBreakpointCondition', { text = "C", texthl = "", linehl = "", numhl = "" })
-vim.fn.sign_define('DapBreakpointRejected', { text = 'R', texthl = '', linehl = '', numhl = '' })
-vim.fn.sign_define('DapLogPoint', { text = 'L', texthl = '', linehl = '', numhl = '' })
-vim.fn.sign_define('DapStopped', { text = '>>', texthl = 'CursorLineNr', linehl = 'CursorLine', numhl = 'CursorLineNr' })
+vim.fn.sign_define('DapBreakpointCondition', { text = "C", texthl = "Type", linehl = "CursorLine", numhl = "Statement" })
+vim.fn.sign_define('DapBreakpointRejected', { text = 'R', texthl = 'Special', linehl = 'CursorLine', numhl = 'Statement' })
+vim.fn.sign_define('DapLogPoint', { text = 'L', texthl = 'Ignore', linehl = 'CursorLine', numhl = 'Statement' })
+vim.fn.sign_define('DapStopped', { text = '>>', texthl = 'PreProc', linehl = 'CursorLine', numhl = 'Statement' })
 
 -- nvim-dap-ui settings
 require('dapui').setup({
