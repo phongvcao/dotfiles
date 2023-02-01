@@ -1958,19 +1958,19 @@ function run() {
         javac -d cmake-build-debug/ "$arg1"
         cd cmake-build-debug
 
-    # Now run the Main class
-    if [[ -n "${output_file}" ]]; then
-        finalCommand="command cat ${input_file} | java Main"
-        time ( eval "${finalCommand}" | command_tee "${output_file}" | command_nl )
-        echo "================================================================="
-        echo "||       RUN WITHOUT stdout TO SEE IF THERE'S ANY ERRORS      ||"
-        echo "================================================================="
-    else
-        if [[ -n "${input_file}" ]]; then
-            time ( command cat ${input_file} | java Main )
+        # Now run the Main class
+        if [[ -n "${output_file}" ]]; then
+            finalCommand="command cat ${input_file} | java Main"
+            time ( eval "${finalCommand}" | command_tee "${output_file}" | command_nl )
+            echo "================================================================="
+            echo "||       RUN WITHOUT stdout TO SEE IF THERE'S ANY ERRORS      ||"
+            echo "================================================================="
         else
-            time ( java Main )
-        fi
+            if [[ -n "${input_file}" ]]; then
+                time ( command cat ${input_file} | java Main )
+            else
+                time ( java Main )
+            fi
         fi
         cd ../
     else
@@ -2010,12 +2010,12 @@ function run() {
                 else
                     time ( ${binary_file} )
                 fi
-                fi
-            else
-                echo "File not found!"
             fi
+        else
+            echo "File not found!"
         fi
-    }
+    fi
+}
 
 function calc() {
     local calc_args="$*";
@@ -2039,6 +2039,10 @@ function buildcmake() {
     while [[ "$(pwd)" =~ ".*cmake-build-debug.*" ]]; do
         cd ..
     done
+}
+
+function cleancmake() {
+    command rm -rf ./cmake-build-debug/*
 }
 
 function gdb() {
