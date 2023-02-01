@@ -1711,15 +1711,15 @@ let g:DirDiffWindowSize = 20
 let g:bl_no_mappings = 1
 
 " coc.nvim settings
-if !exists('g:custom_vimrc_disable_coc_nvim_cpp') || g:custom_vimrc_disable_coc_nvim_cpp == 0
-    if !isdirectory('/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include')
-        echoerr ".vimrc: Please double check coc-settings.json to make sure Clang directories for CCLS are up-to-date!!!"
-    endif
-
-    if !isdirectory('/Library/Developer/CommandLineTools/usr/lib/clang/14.0.0')
-        echoerr ".vimrc: Please double check coc-settings.json to make sure Clang directories for CCLS are up-to-date!!!"
-    endif
-endif
+" if !exists('g:custom_vimrc_disable_coc_nvim_cpp') || g:custom_vimrc_disable_coc_nvim_cpp == 0
+"     if !isdirectory('/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include')
+"         echoerr ".vimrc: Please double check coc-settings.json to make sure Clang directories for CCLS are up-to-date!!!"
+"     endif
+"
+"     if !isdirectory('/Library/Developer/CommandLineTools/usr/lib/clang/14.0.0')
+"         echoerr ".vimrc: Please double check coc-settings.json to make sure Clang directories for CCLS are up-to-date!!!"
+"     endif
+" endif
 
 if !exists('g:custom_vimrc_disable_coc_nvim_dockerfile') || g:custom_vimrc_disable_coc_nvim_dockerfile == 0
     if !filereadable('/usr/local/bin/docker-langserver')
@@ -1873,7 +1873,7 @@ let g:coc_global_extensions = [
             \ 'coc-flutter', 'coc-stylelint', 'coc-stylelintplus',
             \ 'coc-cssmodules', 'coc-texlab', 'coc-vetur', 'coc-marketplace',
             \ 'coc-protobuf', 'coc-sumneko-lua', 'coc-perl', 'coc-rust-analyzer',
-            \ 'coc-sourcekit' ]
+            \ 'coc-sourcekit', 'coc-clangd' ]
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 " let g:coc_global_extensions = [
