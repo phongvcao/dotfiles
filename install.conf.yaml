@@ -93,6 +93,7 @@
     ~/.inputrc: home/inputrc
     ~/.lldbinit-lldb: home/lldbinit-lldb
     ~/.lldbinit-Xcode: home/lldbinit-Xcode
+    ~/.lldbinit: home/lldbinit
     ~/.megasync.sh: home/megasync.sh
     ~/.NERDTreeBookmarks: home/NERDTreeBookmarks
     ~/.octaverc: home/octaverc
