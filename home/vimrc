@@ -3280,13 +3280,15 @@ endfunction
 
 " nvim-dap settings
 nnoremap <leader>db :lua require('dap').toggle_breakpoint()<CR>
-nnoremap <leader>dB :lua require('dap').clear_breakpoints()<CR><Esc>
+nnoremap <leader>dB :lua require('dap').clear_breakpoints()<CR>
 nnoremap <leader>dc :lua require('dap').continue()<CR>
 nnoremap <leader>dr :lua require('dap').continue()<CR>
 nnoremap <leader>dn :lua require('dap').step_over()<CR>
 nnoremap <leader>ds :lua require('dap').step_into()<CR>
 nnoremap <leader>do :lua require('dap').step_out()<CR>
 nnoremap <leader>dq :lua require('dap').terminate()<CR><Esc>
+nnoremap <leader>dk :lua require('dap').up()<CR>
+nnoremap <leader>dj :lua require('dap').down()<CR>
 
 " nvim-dap-ui settings
 nnoremap <leader>dt :lua require('dapui').toggle()<CR>
