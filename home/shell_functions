@@ -427,13 +427,14 @@ function dfs() {
         killall fdfind >/dev/null 2>&1
     fi
 
+    filename="$(removeLsSuffix ${filename})"
     if [[ -n "${filename}" ]]; then
         if [[ -d "$(readlink -m ${filename})" ]]; then
             echo "cd ${filename}"
             cd "${filename}"
         else
             echo "vim ${filename}"
-            command_nvim "${filename%?}"
+            command_nvim "${filename}"
         fi
     fi
 }
@@ -465,13 +466,14 @@ function bfs() {
     filename="$(echo ${filename} | command sed -e 's/@$//g')"
     killall bfs >/dev/null 2>&1
 
+    filename="$(removeLsSuffix ${filename})"
     if [[ -n "${filename}" ]]; then
         if [[ -d "${filename}" ]]; then
             echo "cd ${filename}"
             cd "${filename}"
         else
             echo "vim ${filename}"
-            command_nvim "${filename%?}"
+            command_nvim "${filename}"
         fi
     fi
 }
