@@ -2030,6 +2030,7 @@ echo -ne "${calc_args}\n quit" | gcalccmd | sed 's:^> ::g'
 }
 
 function buildcmake() {
+    command rm -rf ./cmake-build-debug/*
     if [[ "$(uname)" =~ "Darwin" ]]; then
         CC="$(which gcc)" CXX="$(which g++)" cmake -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_CXX_COMPILER="$(which g++)" -DCMAKE_CXX_FLAGS="-fno-inline" -DCMAKE_BUILD_TYPE=debug -G 'CodeBlocks - Unix Makefiles' -B ./cmake-build-debug
     else

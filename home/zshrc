@@ -124,7 +124,7 @@ setopt cdablevars
 setopt listpacked
 setopt alwaystoend
 setopt correct
-setopt rmstarwait
+setopt rmstarsilent
 setopt globcomplete
 setopt menucomplete
 setopt zle
