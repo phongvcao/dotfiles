@@ -3280,6 +3280,7 @@ endfunction
 
 " nvim-dap settings
 nnoremap <leader>db :lua require('dap').toggle_breakpoint()<CR>
+nnoremap <leader>dB :lua require('dap').clear_breakpoints()<CR><Esc>
 nnoremap <leader>dc :lua require('dap').continue()<CR>
 nnoremap <leader>dr :lua require('dap').continue()<CR>
 nnoremap <leader>dn :lua require('dap').step_over()<CR>
