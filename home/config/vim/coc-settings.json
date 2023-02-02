@@ -54,6 +54,7 @@
     },
     "go.goplsArgs": ["-remote", "auto"],
     "go.goplsPath": "~/.go/bin/gopls",
+    "clangd.fallbackFlags": [ "-std=c++17" ],
     "diagnostic": {
       "enable": true,
       "displayByAle": true,
