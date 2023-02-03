@@ -3751,7 +3751,7 @@ endfunction
 
 function! SetHighlight()
     set cursorline     " highlight current line
-    set nocursorcolumn   " no highlight current column to speed things up
+    set cursorcolumn   " no highlight current column to speed things up
     highlight Folded ctermfg=10 ctermbg=0
     highlight BookmarkLine ctermbg=0 cterm=underline gui=underline
     highlight BookmarkSign ctermbg=0 ctermfg=7 cterm=underline gui=underline
