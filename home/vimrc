@@ -255,7 +255,8 @@ Plug 'itchyny/vim-parenmatch'
 Plug 'vim-utils/vim-interruptless'
 " No lazy-loading for vim-utils/vim-most-minimal-folds. It will enable itself at FileChangedShell
 Plug 'vim-utils/vim-most-minimal-folds'
-Plug 'boucherm/ShowMotion'
+" Plug 'boucherm/ShowMotion'
+Plug 'phongvcao/ShowMotion'
 Plug 'junegunn/vim-easy-align', {
             \ 'on' : [ 'EasyAlign', 'LiveEasyAlign' ] }
 Plug 'junegunn/goyo.vim', {
@@ -3898,7 +3899,6 @@ augroup CustomAutoCmd
     autocmd VimEnter,BufEnter,BufWinEnter * :call SetHighlight()
     autocmd BufEnter,BufRead * :call HighlightCurrentLineNum()
     autocmd CursorHold,CursorHoldI,BufEnter,FocusGained,FocusLost * :silent! checktime
-    autocmd CursorHold,CursorHoldI,BufEnter,FocusGained,FocusLost * :silent! set cursorcolumn
     autocmd BufEnter *.vrapperrc,*.vimperatorrc,*.ideavimrc set filetype=vim
     autocmd BufEnter *.shell_* set filetype=zsh
     autocmd BufEnter *.jsp set filetype=html
