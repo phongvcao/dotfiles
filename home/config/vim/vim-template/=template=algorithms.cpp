@@ -212,7 +212,8 @@ using std::invalid_argument;
 using std::out_of_range;
 
 //----< limits >----------------------------//
-using std::numeric_limits;
+using std::numeric_limits;                  // ::lowest() & ::max() for smallest & biggest representable value, respectively
+                                            // ::infinity() doesn't really work for `int` since int's ::has_infinity() == false.
 
 //----< numeric >---------------------------//
 using std::iota;

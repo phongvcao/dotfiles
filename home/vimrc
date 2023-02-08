@@ -255,8 +255,8 @@ Plug 'itchyny/vim-parenmatch'
 Plug 'vim-utils/vim-interruptless'
 " No lazy-loading for vim-utils/vim-most-minimal-folds. It will enable itself at FileChangedShell
 Plug 'vim-utils/vim-most-minimal-folds'
-" Plug 'boucherm/ShowMotion'
-Plug 'phongvcao/ShowMotion'
+Plug 'boucherm/ShowMotion'
+" Plug 'phongvcao/ShowMotion'
 Plug 'junegunn/vim-easy-align', {
             \ 'on' : [ 'EasyAlign', 'LiveEasyAlign' ] }
 Plug 'junegunn/goyo.vim', {
@@ -3752,7 +3752,7 @@ endfunction
 
 function! SetHighlight()
     set cursorline     " highlight current line
-    set cursorcolumn   " no highlight current column to speed things up
+    set nocursorcolumn   " no highlight current column to speed things up
     highlight Folded ctermfg=10 ctermbg=0
     highlight BookmarkLine ctermbg=0 cterm=underline gui=underline
     highlight BookmarkSign ctermbg=0 ctermfg=7 cterm=underline gui=underline
