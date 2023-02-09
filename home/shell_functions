@@ -479,6 +479,16 @@ function bfs() {
 }
 
 function _rm() {
+    local filename=""
+    local fdBin=""
+    if [[ "$(uname)" =~ "Darwin" ]]; then
+        killall fd >/dev/null 2>&1
+        fdBin="fd"
+    else
+        killall fdfind >/dev/null 2>&1
+        fdBin="fdfind"
+    fi
+
     if [[ ( -n $1 ) && ( -d "$(readlink -m $1)" || -f "$(readlink -m $1)" ) ]]; then
         command rm -rf "$1"
     else
