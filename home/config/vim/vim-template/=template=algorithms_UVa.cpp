@@ -73,9 +73,9 @@ using std::ifstream;
 using std::getline;
 using std::string;
 using std::to_string;
-using std::stoi;
-using std::stol;
-using std::stoll;
+using std::stoi;                            // PREFERRED stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
+using std::stol;                            // PREFERRED stol() over atol() since stoi() allows conversion from binary & hex strings to int.
+using std::stoll;                           // PREFERRED stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
 
 //----< cmath >-----------------------------//
 using std::sqrt;
@@ -92,9 +92,9 @@ using std::round;                           // Round to nearest integer double
 //----< cstdlib >---------------------------//
 using std::rand;
 using std::srand;
-using std::atoi;
-using std::atol;
-using std::atoll;
+using std::atoi;                            // DEPRECATED: Preferred stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
+using std::atol;                            // DEPRECATED: Preferred stol() over atol() since stoi() allows conversion from binary & hex strings to int.
+using std::atoll;                           // DEPRECATED: Preferred stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
 
 //----< ctime >-----------------------------//
 using std::time;

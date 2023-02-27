@@ -1,4 +1,4 @@
-Added numeric_limits
+Added comments to templatesAdded comments to templates..
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
 #
@@ -6,6 +6,4 @@ Added numeric_limits
 # Changes to be committed:
 #	modified:   =template=algorithms.cpp
 #	modified:   =template=algorithms_UVa.cpp
-#	new file:   COMMIT_EDITMSG
-#	modified:   ../../../vimrc
 #
