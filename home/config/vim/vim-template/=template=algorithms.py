@@ -1,42 +1,3 @@
-# // uncomment to disable assert()
-# // #define NDEBUG
-# #include <cassert>
-# #include <iostream>
-# #include <cstdio>
-# #include <iomanip>
-# #include <ios>
-# #include <sstream>
-# #include <fstream>
-# #include <string>
-# #include <cmath>
-# #include <cstdlib>
-# #include <ctime>
-# #include <functional>
-# #include <array>
-# #include <vector>
-# #include <map>
-# #include <unordered_map>
-# #include <set>
-# #include <unordered_set>
-# #include <list>
-# #include <forward_list>
-# #include <deque>
-# #include <queue>
-# #include <stack>
-# #include <tuple>
-# #include <bitset>
-# #include <iterator>
-# #include <utility>
-# #include <algorithm>
-# #include <memory>
-# #include <cctype>
-# #include <stdexcept>
-# #include <limits>
-# #include <numeric>
-# #include <thread>
-# #include <mutex>
-# #include <condition_variable>
-#
 # //----< iostream >--------------------------//
 # using std::cout;
 # using std::cin;
@@ -107,40 +68,100 @@
 # using std::greater_equal;
 # using std::bind;
 # using namespace std::placeholders;          // placeholders ( _1, _2, ..., _N ) for std::bind
-#
+
+
+from typing import List
 # //----< array >-----------------------------//
 # using std::array;                           // Fixed & Unordered Array
+# PYTHON_USAGE:
+#     l : List[ int ] = []
+#
 #
 # //----< vector >----------------------------//
-# using std::vector;                          // Resizable & Unordered Array
+# using std::vector;
+# PYTHON_USAGE:
+#     l : List[ int ] = []
 #
-# //----< map >-------------------------------//
-# using std::map;                             // Ordered Map (Red-Black Tree)
-# using std::multimap;                        // Ordered Map (Red-Black Tree) & Allow duplicated keys
-#
-# //----< unordered_map >---------------------//
-# using std::unordered_map;                   // HashMap (SeparateChainingHashST)
-# using std::unordered_multimap;              // Ordered Map (Red-Black Tree) & Allow duplicated keys
-#
-# //----< set >-------------------------------//
-# using std::set;                             // Ordered Set (Red-Black Tree)
-# using std::multiset;                        // Ordered Set (Red-Black Tree) & Allow duplicated keys
-#
-# //----< unordered_set >---------------------//
-# using std::unordered_set;                   // HashSet (SeparateChainingHashST)
-# using std::unordered_multiset;              // HashSet (SeparateChainingHashST) & Allow duplicated keys
 #
 # //----< list >------------------------------//
 # using std::list;                            // Doubly-Linked List with size() ( O( 1 ) )
+# PYTHON_USAGE:
+#     l : List[ int ] = []
+#
 #
 # //----< forward_list >----------------------//
 # using std::forward_list;                    // Singly-Linked List without size() function ( so O( N ) if we need to get size() )
+# PYTHON_USAGE:
+#     l : List[ int ] = []
 #
+
+from typing import Dict                       # INIT: d = { key: val }
+# //----< map >-------------------------------//
+# using std::map;                             // Ordered Map (Red-Black Tree)
+# PYTHON_USAGE:
+#     d : Dict[ str, int ] = dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ) )
+#     ds : List[ Tuple[ str, int ] ] = sorted( dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ).items() ) )
+#     ds : List[ Tuple[ str, int ] ] = sorted( d.items() ) )
+#
+#
+# using std::multimap;                        // Ordered Map (Red-Black Tree) & Allow duplicated keys
+# PYTHON_USAGE:
+#     d : Dict[ str, List[ int ] ] = []
+#     ds : List[ Tuple[ str, List[ int ] ] ] = sorted( d.items() )
+#
+#
+# //----< unordered_map >---------------------//
+# using std::unordered_map;                   // HashMap (SeparateChainingHashST)
+# PYTHON_USAGE:
+#     d : Dict[ str, int ] = { key: val }
+#
+#
+# using std::unordered_multimap;              // Ordered Map (Red-Black Tree) & Allow duplicated keys
+# PYTHON_USAGE:
+#     d : Dict[ str, List[ int ] ] = { key: [ val1, val2 ] }
+#
+
+from typing import Set
+# //----< set >-------------------------------//
+# using std::set;                             // Ordered Set (Red-Black Tree)
+# PYTHON_USAGE:
+#     s : Set[ int ] = set( ( 1, 2, 3 ) ) -- set from Tuple
+#     s : Set[ int ] = set( [ 1, 2, 3 ] ) -- set from List
+#     s : Set[ str ] = set( "ABC" )       -- set from str
+#     ss : List[ str ] = sorted( s )      -- sorted list results from sorting Set
+#
+#
+# using std::multiset;                        // Ordered Set (Red-Black Tree) & Allow duplicated keys
+# PYTHON_USAGE:
+#     d : Dict[ str, int ] = { key1: count1, key2: count2 }
+#     ds : List[ Tuple[ str, int ] ] = sorted( d.items() )
+#
+#
+# //----< unordered_set >---------------------//
+# using std::unordered_set;                   // HashSet (SeparateChainingHashST)
+# PYTHON_USAGE:
+#     s : Set[ int ] = set( ( 1, 2, 3 ) ) -- set from Tuple
+#     s : Set[ int ] = set( [ 1, 2, 3 ] ) -- set from List
+#     s : Set[ str ] = set( "ABC" )       -- set from str
+#
+#
+# using std::unordered_multiset;              // HashSet (SeparateChainingHashST) & Allow duplicated keys
+# PYTHON_USAGE:
+#     d : Dict[ str, int ] = { key1: count1, key2: count2 }
+#
+
+from collections import deque
 # //----< deque >-----------------------------//
 # using std::deque;                           // Vector of fixed-size Vectors: 1 fixed-size vector for each end of the deque
-#
+# PYTHON_USAGE:
+#     d : 
+
+from queue import Queue
 # //----< queue >-----------------------------//
 # using std::queue;                           // Non-Iterable & Use std::deque as underlying data structure
+
+from queue import PriorityQueue
+import heapq
 # using std::priority_queue;                  // MaxPQ (MaxHeap) & Non-Iterable.
 # //                                          // => Pass std::greater<> as template params to create MinPQ (MinHeap)
 #
