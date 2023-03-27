@@ -75,24 +75,36 @@ from typing import List
 # using std::array;                           // Fixed & Unordered Array
 # PYTHON_USAGE:
 #     l : List[ int ] = []
+#     l : List[ int ] = [ 1, 2, 3 ]           -- list from List literal
+#     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
+#     l : List[ str ] = list( "ABC" )         -- list from str
 #
 #
 # //----< vector >----------------------------//
 # using std::vector;
 # PYTHON_USAGE:
 #     l : List[ int ] = []
+#     l : List[ int ] = [ 1, 2, 3 ]           -- list from List literal
+#     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
+#     l : List[ str ] = list( "ABC" )         -- list from str
 #
 #
 # //----< list >------------------------------//
 # using std::list;                            // Doubly-Linked List with size() ( O( 1 ) )
 # PYTHON_USAGE:
 #     l : List[ int ] = []
+#     l : List[ int ] = [ 1, 2, 3 ]           -- list from List literal
+#     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
+#     l : List[ str ] = list( "ABC" )         -- list from str
 #
 #
 # //----< forward_list >----------------------//
 # using std::forward_list;                    // Singly-Linked List without size() function ( so O( N ) if we need to get size() )
 # PYTHON_USAGE:
 #     l : List[ int ] = []
+#     l : List[ int ] = [ 1, 2, 3 ]           -- list from List literal
+#     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
+#     l : List[ str ] = list( "ABC" )         -- list from str
 #
 
 from typing import Dict                       # INIT: d = { key: val }
@@ -150,52 +162,171 @@ from typing import Set
 #     d : Dict[ str, int ] = { key1: count1, key2: count2 }
 #
 
+from typing import Deque
 from collections import deque
 # //----< deque >-----------------------------//
 # using std::deque;                           // Vector of fixed-size Vectors: 1 fixed-size vector for each end of the deque
 # PYTHON_USAGE:
-#     d : 
+#     dq : Deque[ int ] = deque( [ 1, 2, 3 ] )
+#     dq : Deque[ int ] = deque( ( 1, 2, 3 ) )
+#     dq : Deque[ str ] = deque( "ABC" )
+#
 
 from queue import Queue
 # //----< queue >-----------------------------//
 # using std::queue;                           // Non-Iterable & Use std::deque as underlying data structure
+# PYTHON_USAGE:
+#     q : Queue[ int ] = Queue( maxsize = 3 )
+#     q : Queue[ int ] = Queue()
+#     q.put( 1 )
+#     q.put( 2 )
+#     q.put( 3 )
+#     while not q.empty():
+#         print( q.qsize() )
+#         print( q.full() )    # check whether q.qsize() == q.maxsize
+#         ele = q.get()
+#
 
 from queue import PriorityQueue
-import heapq
 # using std::priority_queue;                  // MaxPQ (MaxHeap) & Non-Iterable.
 # //                                          // => Pass std::greater<> as template params to create MinPQ (MinHeap)
+# PYTHON_USAGE:
+# MIN_HEAP:
+#     pq : PriorityQueue[ str ] = PriorityQueue( maxsize = 3 )
+#     pq : PriorityQueue[ str ] = PriorityQueue()
+#     pq.put( ( 1, "val1" ) )  -- outputed 1st
+#     pq.put( ( 2, "val4" ) )  -- outputed 3rd
+#     pq.put( ( 2, "val2" ) )  -- outputed 2nd
+#     while not pq.empty():
+#         print( pq.qsize() )
+#         print( pq.full() )    # check whether q.qsize() == q.maxsize
+#         ele = pq.get()
 #
+# MAX_HEAP:
+#     pq : PriorityQueue[ str ] = PriorityQueue( maxsize = 3 )
+#     pq : PriorityQueue[ str ] = PriorityQueue()
+#     pq.put( ( -1, "val1" ) )  -- outputed 3rd
+#     pq.put( ( -2, "val4" ) )  -- outputed 2nd
+#     pq.put( ( -2, "val2" ) )  -- outputed 1st
+#
+#     while not pq.empty():
+#         print( pq.qsize() )
+#         print( pq.full() )    # check whether q.qsize() == q.maxsize
+#         ele = pq.get()
+#
+
 # //----< stack >-----------------------------//
 # using std::stack;                           // Non-Iterable & Use std::deque as underlying data structure
+# PYTHON_USAGE:
+#     st : List[ int ] = []
+#     st.append( 1 )
+#     st.append( 2 )
+#     while st:
+#         print( st.pop() )
 #
+
+from typing import Tuple
 # //----< tuple >-----------------------------//
 # using std::tuple;                           // Non-Iterable & Use std::pair as underlying data structure
 # using std::get;                             // Access & Set element in tuple using get< index >( tuple_var )
+# PYTHON_USAGE:
+#     t : Tuple[ str, int ] = ( "ABC", 1 )
+#     t : Tuple[ int, ... ] = ( 1, 2, 3 )
+#     t : Tuple[ int ] = ( 1 )
+#     t : Tuple[ str, ... ] = ( "A", "B", "C" )
+#     t : Tuple[ str ] = ( "A" )
+#     t : Tuple[ str, int ] = tuple( [ "ABC", 1 ] )
+#     if t[ 0 ] == "ABC":
+#         print( t[ 1 ] )
 #
-# //----< bitset >----------------------------//
-# using std::bitset;
-#
+
+# [ UNSUPPORTED_IN_PYTHON ]//----< bitset >----------------------------//
+# [ UNSUPPORTED_IN_PYTHON ] using std::bitset;
+
+from typing import Iterable
+from typing import Iterator
 # //----< iterator >--------------------------//
 # using std::next;                            // Return an advanced iter without changing original iter
-# using std::prev;                            // Return an decremented iter without changing original iter
-# using std::distance;                        // Calculate distance between 2 iterators
-# using std::inserter;                        // Insert element into first arg starting from position in second arg
+# PYTHON_USAGE:
+#     iterable: Tuple[ int ] = tuple( [ 1, 2, 3, 4 ] )
+#     it = iter( iterable )
+#     for item in it:
+#         print( item )
 #
+
+
+# [ UNSUPPORTED_IN_PYTHON ] using std::prev;                            // Return an decremented iter without changing original iter
+# [ UNSUPPORTED_IN_PYTHON ] using std::distance;                        // Calculate distance between 2 iterators
+# [ UNSUPPORTED_IN_PYTHON ] using std::inserter;                        // Insert element into first arg starting from position in second arg
+
 # //----< utility >---------------------------//
 # using std::pair;
 # using std::make_pair;
 # using std::move;                            // Move resources between objects - typically used with std::unique_ptr<T>
+# PYTHON_USAGE:
+#     t : Tuple[ str, int ] = ( "ABC", 1 )
+#     t : Tuple[ int, ... ] = ( 1, 2, 3 )
+#     t : Tuple[ int ] = ( 1 )
+#     t : Tuple[ str, ... ] = ( "A", "B", "C" )
+#     t : Tuple[ str ] = ( "A" )
+#     t : Tuple[ str, int ] = tuple( [ "ABC", 1 ] )
+#     if t[ 0 ] == "ABC":
+#         print( t[ 1 ] )
 #
+
 # //----< algorithm >-------------------------//
 # using std::fill;
+# PYTHON_USAGE:
+#     a : List[ int ] = [ 0 ] * 100
+#     a[ 2:12 ] = [ 1 ] * 10
+#     a[ 2:12 ] = [ 2 ] * 20
+#     a[ 2:12 ] = [ 3 ] * 5
+#
+
 # using std::max;
+# PYTHON_USAGE:
+#     a : List[ int ] = [ 1, 2, 3, 4, 5 ]
+#     print( max( a ) )              -- output: 5 ( a[ 4 ] )
+#     print( max( a[ 0 ], a[ 3 ] ) ) -- output: 4 ( a[ 3 ] )
+#
+
 # using std::min;
+# PYTHON_USAGE:
+#     a : List[ int ] = [ 1, 2, 3, 4, 5 ]
+#     print( min( a ) )              -- output: 1 ( a[ 0 ] )
+#     print( min( a[ 0 ], a[ 3 ] ) ) -- output: 1 ( a[ 0 ] )
+#
+
 # using std::find;
+# PYTHON_USAGE:
+#     l : List[ int ] = [ 1, 2, 3, 3, 3, 3, 4, 5 ]
+#     print( l.index( 3 ) )     -- output: 2
+#     print( l.index( 3, 4 ) )  -- output: 4
+#
+#     t : Tuple[ int, ... ] = ( 1, 2, 3, 3, 3, 3, 4, 5 )
+#     print( t.index( 3 ) )        -- output: 2
+#     print( t.index( 3, 4 ) )     -- output: 4
+#
+#     s : str = "ABCCCCCD"
+#     print( s.index( "C" ) )      -- output: 2
+#     print( s.index( "C", 4 ) )   -- output: 4
+#
+
 # using std::reverse;
+# PYTHON_USAGE:
+# REVERSE_ALL:
+#     a : List[ int ] = 
+#
+# REVERSE_PARTIAL:
+#
+
 # using std::sort;                            // Intro-Sort (QuickSort => HeapSort when recursion depth exceeds certain level), NOT IN-PLACE & NOT STABLE
 # using std::partial_sort;                    // HeapSort elements in range ( iterFirst, iterLast ) ( exclusively ). IN-PLACE & NOT STABLE
 # using std::stable_sort;                     // Merge-Sort elements. NOT IN-PLACE & STABLE
+
+import heapq
 # using std::sort_heap;                       // HeapSort elements. IN-PLACE & NOT STABLE
+
 # using std::remove;
 # using std::swap;
 # using std::binary_search;
