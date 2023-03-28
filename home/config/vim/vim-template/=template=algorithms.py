@@ -108,12 +108,16 @@ from typing import List
 #
 
 from typing import Dict                       # INIT: d = { key: val }
+from collections import OrderedDict
+from typing import OrderedDict
 # //----< map >-------------------------------//
 # using std::map;                             // Ordered Map (Red-Black Tree)
 # PYTHON_USAGE:
 #     d : Dict[ str, int ] = dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ) )
 #     ds : List[ Tuple[ str, int ] ] = sorted( dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ).items() ) )
 #     ds : List[ Tuple[ str, int ] ] = sorted( d.items() ) )
+#     ds : Dict[ str, int ] = dict( sorted( d.items() ) )
+#     ds : OrderedDict[ str, int ] = OrderedDict( sorted( d.items() ) )
 #
 #
 # using std::multimap;                        // Ordered Map (Red-Black Tree) & Allow duplicated keys
@@ -137,16 +141,21 @@ from typing import Set
 # //----< set >-------------------------------//
 # using std::set;                             // Ordered Set (Red-Black Tree)
 # PYTHON_USAGE:
+#     s : Set[ int ] = { 1, 2, 3, 4, 5 }
 #     s : Set[ int ] = set( ( 1, 2, 3 ) ) -- set from Tuple
 #     s : Set[ int ] = set( [ 1, 2, 3 ] ) -- set from List
 #     s : Set[ str ] = set( "ABC" )       -- set from str
 #     ss : List[ str ] = sorted( s )      -- sorted list results from sorting Set
+#     ss : Dict[ str, bool ] = { key: True for key in sorted( s ) }
+#     ss : OrderedDict[ str, bool ] = OrderedDict( { key: True for key in sorted( s ) } )
 #
 #
 # using std::multiset;                        // Ordered Set (Red-Black Tree) & Allow duplicated keys
 # PYTHON_USAGE:
 #     d : Dict[ str, int ] = { key1: count1, key2: count2 }
 #     ds : List[ Tuple[ str, int ] ] = sorted( d.items() )
+#     ds : Dict[ str, int ] = dict( sorted( d.items() ) )
+#     ds : OrderedDict[ str, int ] = OrderedDict( sorted( d.items() ) )
 #
 #
 # //----< unordered_set >---------------------//
@@ -315,17 +324,71 @@ from typing import Iterator
 # using std::reverse;
 # PYTHON_USAGE:
 # REVERSE_ALL:
-#     a : List[ int ] = 
+#     a : List[ int ] = [ 1, 2, 3, 4, 5 ]
+#     a.reverse()
+#     print( a )
+#
+#     a = list( reversed( a ) )
+#     print( a )
+#
+#     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
+#     t = tuple( reversed( t ) )
+#     print( t )
+#
+#     s : str = "ABC"
+#     s = "".join( reversed( s ) )
+#     print( s )
+#
 #
 # REVERSE_PARTIAL:
+#     a : List[ int ] = [ 1, 2, 3, 4, 5 ]
+#     sa = a[ 1:4 ]
+#     sa.reverse()
+#     print( sa )
+#
+#     sa = a[ 1:4 ]
+#     sa = list( reversed( sa ) )
+#     print( sa )
+#
+#     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
+#     st = t[ 1:4 ]
+#     st = tuple( reversed( st ) )
+#     print( st )
+#
+#     s : str = "ABCDEF"
+#     ss = s[ 1:4 ]
+#     ss = "".join( reversed( ss ) )
+#     print( ss )
 #
 
 # using std::sort;                            // Intro-Sort (QuickSort => HeapSort when recursion depth exceeds certain level), NOT IN-PLACE & NOT STABLE
+# PYTHON_USAGE:
+#     a : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
+#     a.sort( reverse = False, key = myFunc )         -- IN-PLACE & STABLE
+#     print( a )
+#
+#     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
+#     t = tuple( sorted( t, reverse = False ) )       -- NOT IN-PLACE & STABLE
+#     print( t )
+#
+#     s : str = "ABC"
+#     s = "".join( sorted( s, reverse = False ) )     -- NOT IN-PLACE & STABLE
+#     print( s )
+#
+
 # using std::partial_sort;                    // HeapSort elements in range ( iterFirst, iterLast ) ( exclusively ). IN-PLACE & NOT STABLE
+# PYTHON_USAGE:
+#     a : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
+#     a[ 1:4 ] = sorted( a[ 1:4 ], reverse = False )  -- NOT IN-PLACE & STABLE
+#
+
 # using std::stable_sort;                     // Merge-Sort elements. NOT IN-PLACE & STABLE
 
 import heapq
 # using std::sort_heap;                       // HeapSort elements. IN-PLACE & NOT STABLE
+# 
+#
+
 
 # using std::remove;
 # using std::swap;
