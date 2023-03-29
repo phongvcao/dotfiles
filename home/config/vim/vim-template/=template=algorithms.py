@@ -386,21 +386,167 @@ from typing import Iterator
 
 import heapq
 # using std::sort_heap;                       // HeapSort elements. IN-PLACE & NOT STABLE
-# 
+# PYTHON_USAGE:
+# MIN_HEAP:
+#     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
+#     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
+#     heapq.heapify( l )
+#     print( l )
+#
+#     heapq.heappush( l, "G" )
+#     heapq.heappush( l, "G" )
+#
+#     print( heapq.heappop( l ) )
+#
+#     print( heapq.heappushpop( l, "A" ) )  -- output "A"
+#
+#     print( heapq.heapreplace( l, "A" ) )  -- output "B"
+#
+# MAX_HEAP:
+#     class Value:
+#         OPTIONAL_STATIC_VARIABLE_1 = ""
+#         OPTIONAL_STATIC_VARIABLE_2 = ""
+#
+#         def __init__( self, val ):
+#             self.val = val
+#
+#         def __lt__( self, other ):
+#             return self.val > other.val
+#
+#     li : List[ int ] = [ 1, 2, 3, 4, 5 ]
+#     ls : List[ str ] = [ "B", "C", 'D', "E", "E", "E", "F" ]
+#     l : List[ Value ] = [ Value( val ) for val in ls ]
+#     heapq.heapify( l )
+#     for item in l:
+#         print( item.val )
+#
+#     heapq.heappush( l, "B" )
+#     heapq.heappush( l, "B" )
+#
+#     print( heapq.heappop( l ) )
+#
+#     print( heapq.heappushpop( l, "G" ) )  -- output "G"
+#     print( heapq.heapreplace( l, "H" ) )  -- output "G"
 #
 
-
 # using std::remove;
+# PYTHON_USAGE:
+#     l : List[ int ] = [ 1, 2, 3, 4, 5, 6 ]
+#     l : List[ str ] = [ "A", "B", "C", "D", "E", "F" ]
+#
+#     l = l[ :1 ] + l[ 4: ]
+#     del l[ 1:4 ]
+#
+#     d : Dict[ str, int ] = { key1: val1, key2: val2, key3: val3 }
+#     del d[ key1 ]
+#     del d[ key2 ]
+#
+
 # using std::swap;
+# PYTHON_USAGE:
+#     l : List[ int ] = [ 1, 2, 3, 4, 5, 6, 7 ]
+#     l : List[ str ] = [ "A", "B", "C", "D", "E", "F", "G" ]
+#
+#     l[ 1 ], l[ 3 ] = l[ 3 ], l[ 1 ]
+#     l[ 1:3 ], l[ 4:6 ] = l[ 4:6 ], l[ 1:3 ]
+#
+#     d : Dict[ str, int ] = { key1: val1, key2: val2, key3: val3 }
+#     d[ key1 ], d[ key2 ] = d[ key2 ], d[ key1 ]
+#
+
+from bisect import bisect
+from bisect import bisect_left
+from bisect import bisect_right
+from bisect import insort
+from bisect import insort_left
+from bisect import insort_right
 # using std::binary_search;
+# PYTHON_USAGE:
+#     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
+#     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
+#
+#     l.sort()
+#     print( bisect( l, "E", 0, -1 ) )  -- output: 5
+#     print( bisect_left( l, "E", 0, -1 ) )  -- output: 3
+#     print( bisect_right( l, "E", 0, -1 ) )  -- output: 5
+#
+#     l.sort()
+#     insort( l, "E", 0, -1 )  -- insert at the right-most index
+#     print( l )
+#
+#     insort_left( l, "E", 0, -1 )  -- insert at the left-most index
+#     print( l )
+#
+#     print( insort_right( l, "E", 0, -1 ) )  -- insert at the right-most index
+#     print( l )
+#
+
+from itertools import permutations
 # using std::next_permutation;
 # using std::prev_permutation;
+# PYTHON_USAGE:
+#     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
+#     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
+#     for p in permutations( l ):
+#         print( list( p ) )
+#
+#     t : Tuple[ int, ... ] = ( 1, 2, 3, 3, 3, 3, 4, 5 )
+#     for p in permutations( t ):
+#         print( tuple( p ) )
+#
+#     d : Dict[ str, int ] = { key1: val1, key2: val2, key3: val3 }
+#     for p in permutations( d ):
+#         print( dict( p ) )
+#
+#     s : 
+#     for p in permutations( d ):
+#         print( "".join( p ) )
+#
+
 # using std::set_intersection;                // Only works on std::set and not std::unordered_set
+# PYTHON_USAGE:
+#     s1 : Set[ int ] = { 1, 2, 3, 4, 5, 6 }
+#     s2 : Set[ int ] = { 4, 5, 6, 7, 8, 9 }
+#     print( s1.intersection( s2 ) )
+#
+
 # using std::set_difference;                  // Only works on std::set and not std::unordered_set
+# PYTHON_USAGE:
+#     s1 : Set[ int ] = { 1, 2, 3, 4, 5, 6 }
+#     s2 : Set[ int ] = { 4, 5, 6, 7, 8, 9 }
+#     print( s1.difference( s2 ) )
+#
+
 # using std::set_union;
+# PYTHON_USAGE:
+#     s1 : Set[ int ] = { 1, 2, 3, 4, 5, 6 }
+#     s2 : Set[ int ] = { 4, 5, 6, 7, 8, 9 }
+#     print( s1.union( s2 ) )
+#
+
 # using std::lower_bound;                     // Returns iter pointing to first element >= value
+# PYTHON_USAGE:
+#     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
+#     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
+#
+#     l.sort()
+#     print( bisect_left( l, "E", 0, -1 ) )  -- output: 3
+#
+
 # using std::upper_bound;                     // Returns iter pointing to first element > value
+# PYTHON_USAGE:
+#     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
+#     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
+#
+#     l.sort()
+#     print( bisect( l, "E", 0, -1 ) )  -- output: 5
+#     print( bisect_right( l, "E", 0, -1 ) )  -- output: 5
+#
+
 # using std::transform;                       // Apply the given function to a range and store result in another range
+# PYTHON_USAGE:
+#     l : 
+
 # using std::nth_element;
 #
 # //----< memory >----------------------------//
