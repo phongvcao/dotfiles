@@ -75,6 +75,7 @@ from typing import List
 # using std::array;                           // Fixed & Unordered Array
 # PYTHON_USAGE:
 #     l : List[ int ] = []
+#     l : List[ int ] = [ 0 ] * 100
 #     l : List[ int ] = [ 1, 2, 3 ]           -- list from List literal
 #     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
 #     l : List[ str ] = list( "ABC" )         -- list from str
@@ -84,6 +85,7 @@ from typing import List
 # using std::vector;
 # PYTHON_USAGE:
 #     l : List[ int ] = []
+#     l : List[ int ] = [ 0 ] * 100
 #     l : List[ int ] = [ 1, 2, 3 ]           -- list from List literal
 #     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
 #     l : List[ str ] = list( "ABC" )         -- list from str
@@ -93,6 +95,7 @@ from typing import List
 # using std::list;                            // Doubly-Linked List with size() ( O( 1 ) )
 # PYTHON_USAGE:
 #     l : List[ int ] = []
+#     l : List[ int ] = [ 0 ] * 100
 #     l : List[ int ] = [ 1, 2, 3 ]           -- list from List literal
 #     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
 #     l : List[ str ] = list( "ABC" )         -- list from str
@@ -102,6 +105,7 @@ from typing import List
 # using std::forward_list;                    // Singly-Linked List without size() function ( so O( N ) if we need to get size() )
 # PYTHON_USAGE:
 #     l : List[ int ] = []
+#     l : List[ int ] = [ 0 ] * 100
 #     l : List[ int ] = [ 1, 2, 3 ]           -- list from List literal
 #     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
 #     l : List[ str ] = list( "ABC" )         -- list from str
@@ -179,6 +183,16 @@ from collections import deque
 #     dq : Deque[ int ] = deque( [ 1, 2, 3 ] )
 #     dq : Deque[ int ] = deque( ( 1, 2, 3 ) )
 #     dq : Deque[ str ] = deque( "ABC" )
+#
+#     dq.append( "D" )
+#     dq.appendleft( "B" )
+#
+#     print( dq.pop() )
+#     print( dq.popleft() )
+#
+#     print( dq.index( "A", 0, 3 ) )
+#     dq.remove( "A" )
+#     print( dq.count( "A" ) )
 #
 
 from queue import Queue
