@@ -425,10 +425,14 @@ from typing import Iterator
 #
 #     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
 #     t = tuple( sorted( t, reverse = False ) )       -- NOT IN-PLACE & STABLE
+#     t = tuple( sorted( t, key = myFunc, reverse = False ) )       -- NOT IN-PLACE & STABLE
+#     t = tuple( sorted( t, key = lambda x: x, reverse = False ) )       -- NOT IN-PLACE & STABLE
 #     print( t )
 #
 #     s : str = "ABC"
 #     s = "".join( sorted( s, reverse = False ) )     -- NOT IN-PLACE & STABLE
+#     s = "".join( sorted( t, key = myFunc, reverse = False ) )       -- NOT IN-PLACE & STABLE
+#     s = "".join( sorted( t, key = lambda x: x, reverse = False ) )       -- NOT IN-PLACE & STABLE
 #     print( s )
 #
 
@@ -436,6 +440,8 @@ from typing import Iterator
 # PYTHON_USAGE:
 #     a : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
 #     a[ 1:4 ] = sorted( a[ 1:4 ], reverse = False )  -- NOT IN-PLACE & STABLE
+#     a[ 1:4 ] = sorted( a[ 1:4 ], key = myFunc, reverse = False )  -- NOT IN-PLACE & STABLE
+#     a[ 1:4 ] = sorted( a[ 1:4 ], key = lambda x: x, reverse = False )  -- NOT IN-PLACE & STABLE
 #
 
 # using std::stable_sort;                     // Merge-Sort elements. NOT IN-PLACE & STABLE
