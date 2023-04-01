@@ -420,6 +420,7 @@ from typing import Iterator
 # PYTHON_USAGE:
 #     a : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
 #     a.sort( reverse = False, key = myFunc )         -- IN-PLACE & STABLE
+#     a.sort( reverse = False, key = lambda x: x )         -- IN-PLACE & STABLE
 #     print( a )
 #
 #     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
