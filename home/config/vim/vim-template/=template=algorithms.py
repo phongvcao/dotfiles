@@ -121,7 +121,21 @@ from typing import OrderedDict
 #     ds : List[ Tuple[ str, int ] ] = sorted( dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ).items() ) )
 #     ds : List[ Tuple[ str, int ] ] = sorted( d.items() ) )
 #     ds : Dict[ str, int ] = dict( sorted( d.items() ) )
-#     ds : OrderedDict[ str, int ] = OrderedDict( sorted( d.items() ) )
+#     od : OrderedDict[ str, int ] = OrderedDict( sorted( d.items() ) )
+#
+#    val1 = d.get( key1 )
+#    if val1 is not None:
+#        print( val1 )
+#
+#    if key1 in d:
+#        print( d[ key1 ] )
+#
+#    val1 = od.get( key1 )
+#    if val1 is not None:
+#        print( val1 )
+#
+#    if key1 in od:
+#        print( od[ key1 ] )
 #
 #
 # using std::multimap;                        // Ordered Map (Red-Black Tree) & Allow duplicated keys
@@ -153,6 +167,15 @@ from typing import Set
 #     ss : Dict[ str, bool ] = { key: True for key in sorted( s ) }
 #     ss : OrderedDict[ str, bool ] = OrderedDict( { key: True for key in sorted( s ) } )
 #
+#     s.add( 5 )
+#     s.add( 4 )
+#     s.discard( 1 )
+#     s.discard( 4 )
+#     try:
+#         s.remove( 6 )
+#     except KeyError:
+#         print( "6 is not present in set" )
+#
 #
 # using std::multiset;                        // Ordered Set (Red-Black Tree) & Allow duplicated keys
 # PYTHON_USAGE:
@@ -161,6 +184,15 @@ from typing import Set
 #     ds : Dict[ str, int ] = dict( sorted( d.items() ) )
 #     ds : OrderedDict[ str, int ] = OrderedDict( sorted( d.items() ) )
 #
+#     s.add( 5 )
+#     s.add( 4 )
+#     s.discard( 1 )
+#     s.discard( 4 )
+#     try:
+#         s.remove( 6 )
+#     except KeyError:
+#         print( "6 is not present in set" )
+#
 #
 # //----< unordered_set >---------------------//
 # using std::unordered_set;                   // HashSet (SeparateChainingHashST)
@@ -168,6 +200,15 @@ from typing import Set
 #     s : Set[ int ] = set( ( 1, 2, 3 ) ) -- set from Tuple
 #     s : Set[ int ] = set( [ 1, 2, 3 ] ) -- set from List
 #     s : Set[ str ] = set( "ABC" )       -- set from str
+#
+#     s.add( 5 )
+#     s.add( 4 )
+#     s.discard( 1 )
+#     s.discard( 4 )
+#     try:
+#         s.remove( 6 )
+#     except KeyError:
+#         print( "6 is not present in set" )
 #
 #
 # using std::unordered_multiset;              // HashSet (SeparateChainingHashST) & Allow duplicated keys
@@ -589,6 +630,11 @@ from itertools import permutations
 # //----< limits >----------------------------//
 # using std::numeric_limits;                  // ::lowest() & ::max() for smallest & biggest representable value, respectively
 #                                             // ::infinity() only works for `double` / `float` / 'long double'. ::has_infinity() == false for ALL other types.
+# PYTHON_USAGE:
+#     print( -sys.maxint - 1 )
+#     print( sys.maxint )
+#     print( float( '-inf' ) )
+#     print( float( 'inf' ) )
 #
 # //----< numeric >---------------------------//
 # using std::iota;
