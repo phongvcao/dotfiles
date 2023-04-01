@@ -631,8 +631,8 @@ from itertools import permutations
 # using std::numeric_limits;                  // ::lowest() & ::max() for smallest & biggest representable value, respectively
 #                                             // ::infinity() only works for `double` / `float` / 'long double'. ::has_infinity() == false for ALL other types.
 # PYTHON_USAGE:
-#     print( -sys.maxint - 1 )
-#     print( sys.maxint )
+#     print( - sys.maxsize - 1 )
+#     print( sys.maxsize )
 #     print( float( '-inf' ) )
 #     print( float( 'inf' ) )
 #
