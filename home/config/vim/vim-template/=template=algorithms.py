@@ -34,10 +34,73 @@
 # using std::getline;
 # using std::string;
 # using std::to_string;
+
 # using std::stoi;                            // PREFERRED stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
-# using std::stol;                            // PREFERRED stol() over atol() since stoi() allows conversion from binary & hex strings to int.
-# using std::stoll;                           // PREFERRED stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
+# PYTHON_TRICKS:
+#     lc : List[ str ] = [ "" ] * 26
+#     for i in range( 26 ):
+#         lc[ i ] = chr( ord( "a" ) + i )
+#     print( lc )
 #
+#     li : List[ int ] = [ 0 ] * 26
+#     for c in lc:
+#         li[ ord( c ) - ord( "a" ) ] += 1
+#     print( li )
+#
+# PYTHON_USAGE:
+#     print( int( "111111", 2 ) )
+#     print( int( "ABCD", 16 ) )
+#     print( int( "2000", 10 ) )
+#     print( int( "177", 8 ) )
+#
+#     print( float( "177" ) )
+#     print( float( "17.7" ) )
+#
+#
+# using std::stol;                            // PREFERRED stol() over atol() since stoi() allows conversion from binary & hex strings to int.
+# PYTHON_TRICKS:
+#     lc : List[ str ] = [ "" ] * 26
+#     for i in range( 26 ):
+#         lc[ i ] = chr( ord( "a" ) + i )
+#     print( lc )
+#
+#     li : List[ int ] = [ 0 ] * 26
+#     for c in lc:
+#         li[ ord( c ) - ord( "a" ) ] += 1
+#     print( li )
+#
+# PYTHON_USAGE:
+#     print( int( "111111", 2 ) )
+#     print( int( "ABCD", 16 ) )
+#     print( int( "2000", 10 ) )
+#     print( int( "177", 8 ) )
+#
+#     print( float( "177" ) )
+#     print( float( "17.7" ) )
+#
+#
+# using std::stoll;                           // PREFERRED stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
+# PYTHON_TRICKS:
+#     lc : List[ str ] = [ "" ] * 26
+#     for i in range( 26 ):
+#         lc[ i ] = chr( ord( "a" ) + i )
+#     print( lc )
+#
+#     li : List[ int ] = [ 0 ] * 26
+#     for c in lc:
+#         li[ ord( c ) - ord( "a" ) ] += 1
+#     print( li )
+#
+# PYTHON_USAGE:
+#     print( int( "111111", 2 ) )
+#     print( int( "ABCD", 16 ) )
+#     print( int( "2000", 10 ) )
+#     print( int( "177", 8 ) )
+#
+#     print( float( "177" ) )
+#     print( float( "17.7" ) )
+#
+
 # //----< cmath >-----------------------------//
 # using std::sqrt;
 # using std::pow;
@@ -54,9 +117,71 @@
 # using std::rand;
 # using std::srand;
 # using std::atoi;                            // DEPRECATED: Preferred stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
-# using std::atol;                            // DEPRECATED: Preferred stol() over atol() since stoi() allows conversion from binary & hex strings to int.
-# using std::atoll;                           // DEPRECATED: Preferred stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
+# PYTHON_TRICKS:
+#     lc : List[ str ] = [ "" ] * 26
+#     for i in range( 26 ):
+#         lc[ i ] = chr( ord( "a" ) + i )
+#     print( lc )
 #
+#     li : List[ int ] = [ 0 ] * 26
+#     for c in lc:
+#         li[ ord( c ) - ord( "a" ) ] += 1
+#     print( li )
+#
+# PYTHON_USAGE:
+#     print( int( "111111", 2 ) )
+#     print( int( "ABCD", 16 ) )
+#     print( int( "2000", 10 ) )
+#     print( int( "177", 8 ) )
+#
+#     print( float( "177" ) )
+#     print( float( "17.7" ) )
+#
+#
+# using std::atol;                            // DEPRECATED: Preferred stol() over atol() since stoi() allows conversion from binary & hex strings to int.
+# PYTHON_TRICKS:
+#     lc : List[ str ] = [ "" ] * 26
+#     for i in range( 26 ):
+#         lc[ i ] = chr( ord( "a" ) + i )
+#     print( lc )
+#
+#     li : List[ int ] = [ 0 ] * 26
+#     for c in lc:
+#         li[ ord( c ) - ord( "a" ) ] += 1
+#     print( li )
+#
+# PYTHON_USAGE:
+#     print( int( "111111", 2 ) )
+#     print( int( "ABCD", 16 ) )
+#     print( int( "2000", 10 ) )
+#     print( int( "177", 8 ) )
+#
+#     print( float( "177" ) )
+#     print( float( "17.7" ) )
+#
+#
+# using std::atoll;                           // DEPRECATED: Preferred stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
+# PYTHON_TRICKS:
+#     lc : List[ str ] = [ "" ] * 26
+#     for i in range( 26 ):
+#         lc[ i ] = chr( ord( "a" ) + i )
+#     print( lc )
+#
+#     li : List[ int ] = [ 0 ] * 26
+#     for c in lc:
+#         li[ ord( c ) - ord( "a" ) ] += 1
+#     print( li )
+#
+# PYTHON_USAGE:
+#     print( int( "111111", 2 ) )
+#     print( int( "ABCD", 16 ) )
+#     print( int( "2000", 10 ) )
+#     print( int( "177", 8 ) )
+#
+#     print( float( "177" ) )
+#     print( float( "17.7" ) )
+#
+
 # //----< ctime >-----------------------------//
 # using std::time;
 #
