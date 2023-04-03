@@ -101,13 +101,40 @@
 #     print( float( "17.7" ) )
 #
 
+from math import sqrt
 # //----< cmath >-----------------------------//
 # using std::sqrt;
+# PYTHON_USAGE:
+#     print( sqrt( 9 ) )  -- output: 3
+#
+
 # using std::pow;
+# PYTHON_USAGE:
+#     print( 7 ** 2 )
+#     print( 7 ** 2 == 7 * 7 )  -- True
+#
+
+from math import log
 # using std::log;                             // log( <arg> )
+# PYTHON_USAGE:
+#     print( log( 7 ) )  -- log( 7, 'e' )
+#     print( log( 7, 2 ) )
+#     print( log( 7, 2 ) == log( 7 ) / log( 2 ) )  -- True
+#     print( log( 7, 10 ) )
+#     print( log( 7, 10 ) == log( 7 ) / log( 10 ) )  -- True
+#
+
 # using std::exp;                             // e ^ <arg>
+
 # using std::abs;
 # using std::fabs;
+# PYTHON_USAGE:
+#     print( abs( 6 ) )
+#     print( abs( 6.0 ) )
+#     print( abs( -6 ) )
+#     print( abs( -6.0 ) )
+#
+
 # using std::floor;                           // Round down to nearest integer double
 # using std::ceil;                            // Round up to nearest integer double
 # using std::trunc;                           // Truncate the fractional part to get the integer part
@@ -376,10 +403,64 @@ from queue import Queue
 #         ele = q.get()
 #
 
+import heapq
 from queue import PriorityQueue
 # using std::priority_queue;                  // MaxPQ (MaxHeap) & Non-Iterable.
 # //                                          // => Pass std::greater<> as template params to create MinPQ (MinHeap)
 # PYTHON_USAGE:
+# MIN_HEAP:
+#     class Value:
+#         OPTIONAL_STATIC_VARIABLE_1 = ""
+#         OPTIONAL_STATIC_VARIABLE_2 = ""
+#
+#         def __init__( self, val ):
+#             self.val = val
+#
+#         def __lt__( self, other ):
+#             return self.val < other.val
+#
+#     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
+#     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
+#     heapq.heapify( l )
+#     print( l )
+#
+#     heapq.heappush( l, "G" )
+#     heapq.heappush( l, "G" )
+#
+#     print( heapq.heappop( l ) )
+#
+#     print( heapq.heappushpop( l, "A" ) )  -- output "A"
+#
+#     print( heapq.heapreplace( l, "A" ) )  -- output "B"
+#
+# MAX_HEAP:
+#     class Value:
+#         OPTIONAL_STATIC_VARIABLE_1 = ""
+#         OPTIONAL_STATIC_VARIABLE_2 = ""
+#
+#         def __init__( self, val ):
+#             self.val = val
+#
+#         def __lt__( self, other ):
+#             return self.val > other.val
+#
+#     li : List[ int ] = [ 1, 2, 3, 4, 5 ]
+#     ls : List[ str ] = [ "B", "C", 'D', "E", "E", "E", "F" ]
+#     l : List[ Value ] = [ Value( val ) for val in ls ]
+#     heapq.heapify( l )
+#     for item in l:
+#         print( item.val )
+#
+#     heapq.heappush( l, "B" )
+#     heapq.heappush( l, "B" )
+#
+#     print( heapq.heappop( l ) )
+#
+#     print( heapq.heappushpop( l, "G" ) )  -- output "G"
+#     print( heapq.heapreplace( l, "H" ) )  -- output "G"
+#
+#
+# PYTHON_EXTRAS:
 # MIN_HEAP:
 #     pq : PriorityQueue[ str ] = PriorityQueue( maxsize = 3 )
 #     pq : PriorityQueue[ str ] = PriorityQueue()
@@ -443,10 +524,10 @@ from typing import Iterator
 #         print( item )
 #
 
-
 # [ UNSUPPORTED_IN_PYTHON ] using std::prev;                            // Return an decremented iter without changing original iter
 # [ UNSUPPORTED_IN_PYTHON ] using std::distance;                        // Calculate distance between 2 iterators
 # [ UNSUPPORTED_IN_PYTHON ] using std::inserter;                        // Insert element into first arg starting from position in second arg
+#
 
 # //----< utility >---------------------------//
 # using std::pair;
@@ -571,10 +652,19 @@ from typing import Iterator
 
 # using std::stable_sort;                     // Merge-Sort elements. NOT IN-PLACE & STABLE
 
-import heapq
 # using std::sort_heap;                       // HeapSort elements. IN-PLACE & NOT STABLE
 # PYTHON_USAGE:
 # MIN_HEAP:
+#     class Value:
+#         OPTIONAL_STATIC_VARIABLE_1 = ""
+#         OPTIONAL_STATIC_VARIABLE_2 = ""
+#
+#         def __init__( self, val ):
+#             self.val = val
+#
+#         def __lt__( self, other ):
+#             return self.val < other.val
+#
 #     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
 #     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
 #     heapq.heapify( l )
