@@ -232,6 +232,9 @@ from typing import List
 #     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
 #     l : List[ str ] = list( "ABC" )         -- list from str
 #
+#     l : List[ List[ int ] ] = [ [ 0 ] * 2 for i in range( 2 ) ]  -- 2 x 2 List of Lists
+#     l : List[ List[ str ] ] = [ [ "A" ] * 2 for i in range( 2 ) ]  -- 2 x 2 List of Lists
+#
 #
 # //----< vector >----------------------------//
 # using std::vector;
@@ -241,6 +244,9 @@ from typing import List
 #     l : List[ int ] = [ 1, 2, 3 ]           -- list from List literal
 #     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
 #     l : List[ str ] = list( "ABC" )         -- list from str
+#
+#     l : List[ List[ int ] ] = [ [ 0 ] * 2 for i in range( 2 ) ]  -- 2 x 2 List of Lists
+#     l : List[ List[ str ] ] = [ [ "A" ] * 2 for i in range( 2 ) ]  -- 2 x 2 List of Lists
 #
 #
 # //----< list >------------------------------//
@@ -252,6 +258,9 @@ from typing import List
 #     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
 #     l : List[ str ] = list( "ABC" )         -- list from str
 #
+#     l : List[ List[ int ] ] = [ [ 0 ] * 2 for i in range( 2 ) ]  -- 2 x 2 List of Lists
+#     l : List[ List[ str ] ] = [ [ "A" ] * 2 for i in range( 2 ) ]  -- 2 x 2 List of Lists
+#
 #
 # //----< forward_list >----------------------//
 # using std::forward_list;                    // Singly-Linked List without size() function ( so O( N ) if we need to get size() )
@@ -261,6 +270,9 @@ from typing import List
 #     l : List[ int ] = [ 1, 2, 3 ]           -- list from List literal
 #     l : List[ int ] = list( ( 1, 2, 3 ) )   -- list from Tuple
 #     l : List[ str ] = list( "ABC" )         -- list from str
+#
+#     l : List[ List[ int ] ] = [ [ 0 ] * 2 for i in range( 2 ) ]  -- 2 x 2 List of Lists
+#     l : List[ List[ str ] ] = [ [ "A" ] * 2 for i in range( 2 ) ]  -- 2 x 2 List of Lists
 #
 
 from typing import Dict                       # INIT: d = { key: val }
