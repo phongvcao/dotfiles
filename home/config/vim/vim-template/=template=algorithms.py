@@ -622,6 +622,17 @@ from typing import Iterator
 #     print( ss )
 #
 
+# using std::reduce;                          // Add / Concatenate together all elements of iterator range
+# using std::accumulate;                      // Add / Concatenate together all elements of iterator range
+# PYTHON_USAGE:
+#     l : List[ int ] = [ 1, 2, 3, 4, 5 ]
+#     print( sum( l ) )
+#
+#     l : List[ str ] = [ "A", "B", "C" ]
+#     print( "".join( l ) )
+#
+
+
 # using std::sort;                            // Intro-Sort (QuickSort => HeapSort when recursion depth exceeds certain level), NOT IN-PLACE & NOT STABLE
 # PYTHON_USAGE:
 #     a : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]

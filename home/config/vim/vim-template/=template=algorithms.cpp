@@ -171,6 +171,8 @@ using std::max;
 using std::min;
 using std::find;
 using std::reverse;
+using std::reduce;                          // Add / Concatenate together all elements of iterator range
+using std::accumulate;                      // Add / Concatenate together all elements of iterator range
 using std::sort;                            // Intro-Sort (QuickSort => HeapSort when recursion depth exceeds certain level), NOT IN-PLACE & NOT STABLE
 using std::partial_sort;                    // HeapSort elements in range ( iterFirst, iterLast ) ( exclusively ). IN-PLACE & NOT STABLE
 using std::stable_sort;                     // Merge-Sort elements. NOT IN-PLACE & STABLE
