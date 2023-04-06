@@ -33,7 +33,15 @@
 # //----< string >----------------------------//
 # using std::getline;
 # using std::string;
+
 # using std::to_string;
+# PYTHON_USAGE:
+#     print( hex( 5 ) )  -- output: '0x5'
+#
+#     print( bin( 5 ) )  -- output: '0b101'
+#
+#     print( oct( 5 ) )  -- output: '0o5'
+#
 
 # using std::stoi;                            // PREFERRED stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
 # PYTHON_TRICKS:
@@ -400,9 +408,25 @@ from collections import deque
 #     print( dq.count( "A" ) )
 #
 
-from queue import Queue
 # //----< queue >-----------------------------//
 # using std::queue;                           // Non-Iterable & Use std::deque as underlying data structure
+# PYTHON_USAGE:
+#     dq : Deque[ int ] = deque( [ 1, 2, 3 ] )
+#     dq : Deque[ int ] = deque( ( 1, 2, 3 ) )
+#     dq : Deque[ str ] = deque( "ABC" )
+#
+#     dq.append( "D" )
+#     dq.appendleft( "B" )
+#
+#     print( dq.pop() )
+#     print( dq.popleft() )
+#
+#     print( dq.index( "A", 0, 3 ) )
+#     dq.remove( "A" )
+#     print( dq.count( "A" ) )
+#
+#
+from queue import Queue
 # PYTHON_USAGE:
 #     q : Queue[ int ] = Queue( maxsize = 3 )
 #     q : Queue[ int ] = Queue()
