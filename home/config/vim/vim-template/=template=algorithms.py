@@ -42,6 +42,8 @@
 #
 #     print( oct( 5 ) )  -- output: '0o5'
 #
+#     print( str( 5 ) )  -- output: '5'
+#
 
 # using std::stoi;                            // PREFERRED stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
 # PYTHON_TRICKS:
