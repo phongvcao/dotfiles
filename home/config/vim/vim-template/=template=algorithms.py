@@ -122,6 +122,21 @@ from math import sqrt
 # PYTHON_USAGE:
 #     print( 7 ** 2 )
 #     print( 7 ** 2 == 7 * 7 )  -- True
+#     print( 2 ** -1 )  -- output: 0.5
+#     print( 2.0 ** 0.5 )  -- output: 1.4142135623730951
+#
+
+# using std::div;
+# using std::ldiv;
+# using std::lldiv;
+# PYTHON_USAGE:
+#     print( divmod( 8, 3 ) )  -- output: (2, 2)
+#     print( divmod( 8, 3 )[ 0 ] )  -- output: 2
+#     print( divmod( 8, 3 )[ 1 ] )  -- output: 2
+#
+#     print( divmod( 2.6, 0.5 ) )  -- output: (5.0, 0.10000000000000009)
+#     print( divmod( 2.6, 0.5 )[ 0 ] )  -- output: 5.0
+#     print( divmod( 2.6, 0.5 )[ 1 ] )  -- output: 0.10000000000000009
 #
 
 from math import log
@@ -597,12 +612,18 @@ from typing import Iterator
 #     print( max( a ) )              -- output: 5 ( a[ 4 ] )
 #     print( max( a[ 0 ], a[ 3 ] ) ) -- output: 4 ( a[ 3 ] )
 #
+#     s : str = "ABCD"
+#     print( max( s ) )  -- output: "D" ( s[ 3 ] )
+#
 
 # using std::min;
 # PYTHON_USAGE:
 #     a : List[ int ] = [ 1, 2, 3, 4, 5 ]
 #     print( min( a ) )              -- output: 1 ( a[ 0 ] )
 #     print( min( a[ 0 ], a[ 3 ] ) ) -- output: 1 ( a[ 0 ] )
+#
+#     s : str = "ABCD"
+#     print( min( s ) )  -- output: "A" ( s[ 0 ] )
 #
 
 # using std::find;
@@ -664,10 +685,10 @@ from typing import Iterator
 # using std::accumulate;                      // Add / Concatenate together all elements of iterator range
 # PYTHON_USAGE:
 #     l : List[ int ] = [ 1, 2, 3, 4, 5 ]
-#     print( sum( l ) )
+#     print( sum( l ) )  -- output: 15
 #
 #     l : List[ str ] = [ "A", "B", "C" ]
-#     print( "".join( l ) )
+#     print( "".join( l ) )  -- output: "ABC"
 #
 
 
@@ -677,6 +698,10 @@ from typing import Iterator
 #     a.sort( reverse = False, key = myFunc )         -- IN-PLACE & STABLE
 #     a.sort( reverse = False, key = lambda x: x )         -- IN-PLACE & STABLE
 #     print( a )
+#
+#     a : List[ List[ int ] ] = [ [ 1, 3 ], [ 3, 5 ], [ 3, 3 ], [ 5, 3 ], [ 2, 2 ] ]
+#     a.sort( reverse = False )  -- output: [ [ 1, 3 ], [ 2, 2 ], [ 3, 3 ], [ 3, 5 ], [ 5, 3 ] ]
+#     a.sort( reverse = True )  -- output: [ [ 5, 3], [ 3, 5 ], [ 3, 3 ], [ 2, 2 ], [ 1, 3 ] ]
 #
 #     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
 #     t = tuple( sorted( t, reverse = False ) )       -- NOT IN-PLACE & STABLE
