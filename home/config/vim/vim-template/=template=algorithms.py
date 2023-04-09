@@ -424,6 +424,9 @@ from collections import deque
 #     dq.remove( "A" )
 #     print( dq.count( "A" ) )
 #
+#     del dq[ 1 ]
+#     print( dq )
+#
 
 # //----< queue >-----------------------------//
 # using std::queue;                           // Non-Iterable & Use std::deque as underlying data structure
@@ -441,6 +444,9 @@ from collections import deque
 #     print( dq.index( "A", 0, 3 ) )
 #     dq.remove( "A" )
 #     print( dq.count( "A" ) )
+#
+#     del dq[ 1 ]
+#     print( dq )
 #
 #
 from queue import Queue
@@ -909,15 +915,150 @@ from itertools import permutations
 #
 # //----< cctype >----------------------------//
 # using std::isalnum;
+# PYTHON_USAGE:
+#     s = '1'
+#     print( s.isalnum() )  -- output: True
+#     s = '!!!'
+#     print( s.isalnum() )  -- output: False
+#     s = ' aA11Aa!! '
+#     print( s.isalnum() )  -- output: False
+#     s = 'a'
+#     print( s.isalnum() )  -- output: True
+#     s = 'abcde'
+#     print( s.isalnum() )  -- output: True
+#     s = 'A'
+#     print( s.isalnum() )  -- output: True
+#     s = 'ABCDE'
+#     print( s.isalnum() )  -- output: True
+#     s = 'aBCdE'
+#     print( s.isalnum() )  -- output: True
+#     s = 'a12A'
+#     print( s.isalnum() )  -- output: True
+#
+
 # using std::isalpha;
+# PYTHON_USAGE:
+#     s = '1'
+#     print( s.isalpha() )  -- output: False
+#     s = '!!!'
+#     print( s.isalpha() )  -- output: False
+#     s = ' a11a!! '
+#     print( s.isalpha() )  -- output: False
+#     s = ' aA11Aa!! '
+#     print( s.isalpha() )  -- output: False
+#     s = 'a'
+#     print( s.isalpha() )  -- output: True
+#     s = 'abcde'
+#     print( s.isalpha() )  -- output: True
+#     s = 'A'
+#     print( s.isalpha() )  -- output: True
+#     s = 'ABCDE'
+#     print( s.isalpha() )  -- output: True
+#     s = 'aBCdE'
+#     print( s.isalpha() )  -- output: True
+#
+
 # using std::islower;
+# PYTHON_USAGE:
+#     s = '1'
+#     print( s.islower() )  -- output: False
+#     s = '!!!'
+#     print( s.islower() )  -- output: False
+#     s = ' a11a!! '
+#     print( s.islower() )  -- output: True
+#     s = ' aA11Aa!! '
+#     print( s.islower() )  -- output: False
+#     s = 'a'
+#     print( s.islower() )  -- output: True
+#     s = 'abcde'
+#     print( s.islower() )  -- output: True
+#
+
 # using std::isupper;
+# PYTHON_USAGE:
+#     s = '1'
+#     print( s.isupper() )  -- output: False
+#     s = '!!!'
+#     print( s.isupper() )  -- output: False
+#     s = ' A11A!! '
+#     print( s.isupper() )  -- output: True
+#     s = ' aA11Aa!! '
+#     print( s.isupper() )  -- output: False
+#     s = 'A'
+#     print( s.isupper() )  -- output: True
+#     s = 'ABCDE'
+#     print( s.isupper() )  -- output: True
+#
+
 # using std::isdigit;
+# PYTHON_USAGE:
+#     s = '1'
+#     print( s.isdecimal() )  -- output: True
+#     s = '1234'
+#     print( s.isdecimal() )  -- output: True
+#     s = 'a'
+#     print( s.isdecimal() )  -- output: False
+#     s = '  1  '
+#     print( s.isdecimal() )  -- output: False
+#     s = 'a12'
+#     print( s.isdecimal() )  -- output: False
+#     s = 'z12'
+#     print( s.isdecimal() )  -- output: False
+#
+#     s = '1'
+#     print( s.isdigit() )  -- output: True
+#     s = '1234'
+#     print( s.isdigit() )  -- output: True
+#     s = 'a'
+#     print( s.isdigit() )  -- output: False
+#     s = '  1  '
+#     print( s.isdigit() )  -- output: False
+#     s = 'a12'
+#     print( s.isdigit() )  -- output: False
+#     s = 'z12'
+#     print( s.isdigit() )  -- output: False
+#
+#     s = '1'
+#     print( s.isnumeric() )  -- output: True
+#     s = '1234'
+#     print( s.isnumeric() )  -- output: True
+#     s = 'a'
+#     print( s.isnumeric() )  -- output: False
+#     s = '  1  '
+#     print( s.isnumeric() )  -- output: False
+#     s = 'a12'
+#     print( s.isnumeric() )  -- output: False
+#     s = 'z12'
+#     print( s.isnumeric() )  -- output: False
+#
+
 # using std::isspace;                         // Check whether char is whitespace character (space, newline, tab, etc. )
 # using std::isblank;                         // Check whether char is blank character ( space or tab )
-# using std::tolower;
-# using std::toupper;
+# PYTHON_USAGE:
+#     c = 'a'
+#     print( c.isspace() )  -- output: False
+#     c = ' '
+#     print( c.isspace() )  -- output: True
+#     c = ' abcd '
+#     print( c.isspace() )  -- output: False
 #
+
+# using std::tolower;
+# PYTHON_USAGE:
+#     c = 'A'
+#     print( c.lower() )  -- output: 'a'
+#     c = 'ABCDE'
+#     print( c.lower() )  -- output: 'abcde'
+#
+
+# using std::toupper;
+# PYTHON_USAGE:
+#     c = 'a'
+#     print( c.upper() )  -- output: 'A'
+#     c = 'abcde'
+#     print( c.upper() )  -- output: 'ABCDE'
+#
+
 # //----< stdexcept >-------------------------//
 # using std::runtime_error;
 # using std::invalid_argument;

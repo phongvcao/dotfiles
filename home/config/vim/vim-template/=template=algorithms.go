@@ -74,7 +74,7 @@ import "strconv"
 //     fmt.Println( i )  -- output: 2748
 //
 // GO_TRICKS:
-// GO_TRICKS_UNICODE:
+// GO_TRICKS_UNICODE (MOST COMMON):
 //     var s string = "ABCDE"
 //     var lc []rune = []rune( s )
 //     var lc []rune = make( []rune, 26, 26 )
@@ -95,7 +95,7 @@ import "strconv"
 //     }
 //     fmt.Println( li )
 //
-// GO_TRICKS_ASCII:
+// GO_TRICKS_ASCII (LESS COMMON):
 //     var s string = "ABCDE"
 //     var lc []byte = []byte( s )
 //     var lc []byte = make( []byte, 26, 26 )
@@ -228,16 +228,19 @@ import "container/list"
 // //----< forward_list >----------------------//
 // using std::forward_list;                    // Singly-Linked List without size() function ( so O( N ) if we need to get size() )
 // GO_USAGE:
+//     var l *list.List = list.New()
 //     l := list.New()
 //     l.PushBack( "A" )
 //     l.PushFront( "B" )
 //     l.PushBack( "C" )
 //     l.PushFront( "D" )
 //     for node := l.Front(); node != nil; node = node.Next() {
-//         fmt.Println( node.Value )
+//         fmt.Println( node.Value.(string) )
 //     }
-//     fmt.Println( l.Remove( l.Back() ) )  -- output: "C"
-//     fmt.Println( l.Remove( l.Front() ) )  -- output: "D"
+//     var b *list.Element = l.Back()
+//     fmt.Println( l.Remove( b ) )  -- output: "C"
+//     var f *list.Eleemnt = l.Front()
+//     fmt.Println( l.Remove( f ) )  -- output: "D"
 //
 
 // //----< map >-------------------------------//
@@ -300,8 +303,8 @@ import "sort"
 //     }
 //
 //     sort.Ints( keys )
-//
-//     sort.Strings( keys )
+//     sort.Float64s( float64sKeys )
+//     sort.Strings( stringKeys )
 //
 //     sort.Slice( keys, func( i, j int ) bool {    -- sort.Slice() is faster than sort.SliceStable()
 //         return keys[ i ] < keys[ j ]
@@ -368,127 +371,132 @@ import "sort"
 // //----< deque >-----------------------------//
 // using std::deque;                           // Vector of fixed-size Vectors: 1 fixed-size vector for each end of the deque
 // GO_USAGE:
+//     var l *list.List = list.New()
 //     l := list.New()
 //     l.PushBack( "A" )
 //     l.PushFront( "B" )
 //     l.PushBack( "C" )
 //     l.PushFront( "D" )
 //     for node := l.Front(); node != nil; node = node.Next() {
-//         fmt.Println( node.Value )
+//         fmt.Println( node.Value.(string) )
 //     }
-//     fmt.Println( l.Remove( l.Back() ) )  -- output: "C"
-//     fmt.Println( l.Remove( l.Front() ) )  -- output: "D"
+//     var b *list.Element = l.Back()
+//     fmt.Println( l.Remove( b ) )  -- output: "C"
+//     var f *list.Eleemnt = l.Front()
+//     fmt.Println( l.Remove( f ) )  -- output: "D"
 //
 
 // //----< queue >-----------------------------//
 // using std::queue;                           // Non-Iterable & Use std::deque as underlying data structure
 // GO_USAGE:
+//     var l *list.List = list.New()
 //     l := list.New()
 //     l.PushBack( "A" )
 //     l.PushFront( "B" )
 //     l.PushBack( "C" )
 //     l.PushFront( "D" )
 //     for node := l.Front(); node != nil; node = node.Next() {
-//         fmt.Println( node.Value )
+//         fmt.Println( node.Value.(string) )
 //     }
-//     fmt.Println( l.Remove( l.Back() ) )  -- output: "C"
-//     fmt.Println( l.Remove( l.Front() ) )  -- output: "D"
+//     var b *list.Element = l.Back()
+//     fmt.Println( l.Remove( b ) )  -- output: "C"
+//     var f *list.Eleemnt = l.Front()
+//     fmt.Println( l.Remove( f ) )  -- output: "D"
 //
 
-// import heapq
-// from queue import PriorityQueue
+import "container/heap"
 // using std::priority_queue;                  // MaxPQ (MaxHeap) & Non-Iterable.
 // //                                          // => Pass std::greater<> as template params to create MinPQ (MinHeap)
 // GO_USAGE:
 // MIN_HEAP:
 //     type IntHeap []int
 //
-//     func (h IntHeap) Len() int {
-//         return len(h)
+//     func ( h IntHeap ) Len() int {
+//         return len( h )
 //     }
 //
 //     // MIN_HEAP HERE!!!
-//     func (h IntHeap) Less(i, j int) bool {
-//         return h[i] < h[j]
+//     func ( h IntHeap ) Less( i, j int ) bool {
+//         return h[ i ] < h[ j ]
 //     }
 //
-//     func (h IntHeap) Swap(i, j int) {
-//         h[i], h[j] = h[j], h[i]
+//     func ( h IntHeap ) Swap( i, j int ) {
+//         h[ i ], h[ j ] = h[ j ], h[ i ]
 //     }
 //
-//     func (h *IntHeap) Push(x interface{}) {
-//         *h = append(*h, x.(int))
+//     func ( h *IntHeap ) Push( x interface{}  ) {
+//         *h = append( *h, x.( int ) )
 //     }
 //
-//     func (h *IntHeap) Pop() interface{} {
+//     func ( h *IntHeap ) Pop() interface{} {
 //         old := *h
-//         n := len(old)
-//         x := old[n-1]
-//         *h = old[0:n-1]
+//         n := len( old )
+//         x := old[ n - 1 ]
+//         *h = old[ 0 : n - 1 ]
 //         return x
 //     }
 //
 //     func main() {
-//         nums := []int{3,2,20,5,3,1,2,5,6,9,10,4}
+//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
 //
 // 	       // initialize the heap data structure
 //         h := &IntHeap{}
 //
 // 	       // add all the values to heap, O(n log n)
 // 	       for _, val := range nums { // O(n)
-// 		       heap.Push(h, val) // O(log n)
+// 		       heap.Push( h, val ) // O(log n)
 // 	       }
 //
 // 	       // print all the values from the heap
 // 	       // which should be in ascending order
-// 	       for i := 0; i < len(nums); i++ {
-// 	           fmt.Printf("%d,", heap.Pop(h).(int))
+// 	       for i := 0; i < len( nums ); i++ {
+// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
 // 	       }
 //     }
 //
 // MAX_HEAP:
 //     type IntHeap []int
 //
-//     func (h IntHeap) Len() int {
-//         return len(h)
+//     func ( h IntHeap ) Len() int {
+//         return len( h )
 //     }
 //
 //     // MAX_HEAP HERE!!!
-//     func (h IntHeap) Less(i, j int) bool {
-//         return h[i] > h[j]
+//     func ( h IntHeap ) Less( i, j int ) bool {
+//         return h[ i ] > h[ j ]
 //     }
 //
-//     func (h IntHeap) Swap(i, j int) {
-//         h[i], h[j] = h[j], h[i]
+//     func ( h IntHeap ) Swap( i, j int ) {
+//         h[ i ], h[ j ] = h[ j ], h[ i ]
 //     }
 //
-//     func (h *IntHeap) Push(x interface{}) {
-//         *h = append(*h, x.(int))
+//     func ( h *IntHeap ) Push( x interface{}  ) {
+//         *h = append( *h, x.( int ) )
 //     }
 //
-//     func (h *IntHeap) Pop() interface{} {
+//     func ( h *IntHeap ) Pop() interface{} {
 //         old := *h
-//         n := len(old)
-//         x := old[n-1]
-//         *h = old[0:n-1]
+//         n := len( old )
+//         x := old[ n - 1 ]
+//         *h = old[ 0 : n - 1 ]
 //         return x
 //     }
 //
 //     func main() {
-//         nums := []int{3,2,20,5,3,1,2,5,6,9,10,4}
+//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
 //
 // 	       // initialize the heap data structure
 //         h := &IntHeap{}
 //
 // 	       // add all the values to heap, O(n log n)
 // 	       for _, val := range nums { // O(n)
-// 		       heap.Push(h, val) // O(log n)
+// 		       heap.Push( h, val ) // O(log n)
 // 	       }
 //
 // 	       // print all the values from the heap
 // 	       // which should be in ascending order
-// 	       for i := 0; i < len(nums); i++ {
-// 	           fmt.Printf("%d,", heap.Pop(h).(int))
+// 	       for i := 0; i < len( nums ); i++ {
+// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
 // 	       }
 //     }
 //
@@ -708,58 +716,100 @@ import "sort"
 //
 // using std::stable_sort;                     // Merge-Sort elements. NOT IN-PLACE & STABLE
 //
+
 // using std::sort_heap;                       // HeapSort elements. IN-PLACE & NOT STABLE
-// PYTHON_USAGE:
+// GO_USAGE:
 // MIN_HEAP:
-//     class Value:
-//         OPTIONAL_STATIC_VARIABLE_1 = ""
-//         OPTIONAL_STATIC_VARIABLE_2 = ""
+//     type IntHeap []int
 //
-//         def __init__( self, val ):
-//             self.val = val
+//     func ( h IntHeap ) Len() int {
+//         return len( h )
+//     }
 //
-//         def __lt__( self, other ):
-//             return self.val < other.val
+//     // MIN_HEAP HERE!!!
+//     func ( h IntHeap ) Less( i, j int ) bool {
+//         return h[ i ] < h[ j ]
+//     }
 //
-//     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
-//     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
-//     heapq.heapify( l )
-//     print( l )
+//     func ( h IntHeap ) Swap( i, j int ) {
+//         h[ i ], h[ j ] = h[ j ], h[ i ]
+//     }
 //
-//     heapq.heappush( l, "G" )
-//     heapq.heappush( l, "G" )
+//     func ( h *IntHeap ) Push( x interface{}  ) {
+//         *h = append( *h, x.( int ) )
+//     }
 //
-//     print( heapq.heappop( l ) )
+//     func ( h *IntHeap ) Pop() interface{} {
+//         old := *h
+//         n := len( old )
+//         x := old[ n - 1 ]
+//         *h = old[ 0 : n - 1 ]
+//         return x
+//     }
 //
-//     print( heapq.heappushpop( l, "A" ) )  -- output "A"
+//     func main() {
+//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
 //
-//     print( heapq.heapreplace( l, "A" ) )  -- output "B"
+// 	       // initialize the heap data structure
+//         h := &IntHeap{}
+//
+// 	       // add all the values to heap, O(n log n)
+// 	       for _, val := range nums { // O(n)
+// 		       heap.Push( h, val ) // O(log n)
+// 	       }
+//
+// 	       // print all the values from the heap
+// 	       // which should be in ascending order
+// 	       for i := 0; i < len( nums ); i++ {
+// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
+// 	       }
+//     }
 //
 // MAX_HEAP:
-//     class Value:
-//         OPTIONAL_STATIC_VARIABLE_1 = ""
-//         OPTIONAL_STATIC_VARIABLE_2 = ""
+//     type IntHeap []int
 //
-//         def __init__( self, val ):
-//             self.val = val
+//     func ( h IntHeap ) Len() int {
+//         return len( h )
+//     }
 //
-//         def __lt__( self, other ):
-//             return self.val > other.val
+//     // MAX_HEAP HERE!!!
+//     func ( h IntHeap ) Less( i, j int ) bool {
+//         return h[ i ] > h[ j ]
+//     }
 //
-//     li : List[ int ] = [ 1, 2, 3, 4, 5 ]
-//     ls : List[ str ] = [ "B", "C", 'D', "E", "E", "E", "F" ]
-//     l : List[ Value ] = [ Value( val ) for val in ls ]
-//     heapq.heapify( l )
-//     for item in l:
-//         print( item.val )
+//     func ( h IntHeap ) Swap( i, j int ) {
+//         h[ i ], h[ j ] = h[ j ], h[ i ]
+//     }
 //
-//     heapq.heappush( l, "B" )
-//     heapq.heappush( l, "B" )
+//     func ( h *IntHeap ) Push( x interface{}  ) {
+//         *h = append( *h, x.( int ) )
+//     }
 //
-//     print( heapq.heappop( l ) )
+//     func ( h *IntHeap ) Pop() interface{} {
+//         old := *h
+//         n := len( old )
+//         x := old[ n - 1 ]
+//         *h = old[ 0 : n - 1 ]
+//         return x
+//     }
 //
-//     print( heapq.heappushpop( l, "G" ) )  -- output "G"
-//     print( heapq.heapreplace( l, "H" ) )  -- output "G"
+//     func main() {
+//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
+//
+// 	       // initialize the heap data structure
+//         h := &IntHeap{}
+//
+// 	       // add all the values to heap, O(n log n)
+// 	       for _, val := range nums { // O(n)
+// 		       heap.Push( h, val ) // O(log n)
+// 	       }
+//
+// 	       // print all the values from the heap
+// 	       // which should be in ascending order
+// 	       for i := 0; i < len( nums ); i++ {
+// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
+// 	       }
+//     }
 //
 
 // using std::remove;
@@ -792,33 +842,49 @@ import "sort"
 //     m[ key1 ], m[ key3 ] = m[ key3 ], m[ key1 ]
 //
 
-// from bisect import bisect
-// from bisect import bisect_left
-// from bisect import bisect_right
-// from bisect import insort
-// from bisect import insort_left
-// from bisect import insort_right
 // using std::binary_search;
-// PYTHON_USAGE:
-//     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
-//     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
+// GO_USAGE:
+//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
+//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
 //
-//     l.sort()
-//     print( bisect( l, "E", 0, -1 ) )  -- output: 5
-//     print( bisect_left( l, "E", 0, -1 ) )  -- output: 3
-//     print( bisect_right( l, "E", 0, -1 ) )  -- output: 5
+//     lb := sort.Search( len( l ), func( i int ) bool {
+//         return l[ i ] >= 3
+//     })
+//     if lb < len( l ) && l[ lb ] == 3 {
+//         fmt.Println( lb )  -- output: 2
+//     } else {
+//         fmt.Println( lb )  -- output: len( l )
+//     }
 //
-//     l.sort()
-//     insort( l, "E", 0, -1 )  -- insert at the right-most index
-//     print( l )
+//     var l []int = []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 }
+//     l := []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 } 
 //
-//     insort_left( l, "E", 0, -1 )  -- insert at the left-most index
-//     print( l )
+//     ub_desc := sort.Search( len( l ), func( i int ) bool {
+//         return l[ i ] <= 3
+//     })
+//     if ub_desc >= 1 && ub_desc < len( l ) {
+//         fmt.Println( ub_desc - 1 )  -- output: 1
+//     } else {
+//         fmt.Println( ub_desc )  -- output: len( l )
+//     }
 //
-//     print( insort_right( l, "E", 0, -1 ) )  -- insert at the right-most index
-//     print( l )
+// GO_TRICKS:
+//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
+//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
 //
+//     i := sort.SearchInts( l, 3 )
+//     fmt.Println( i )  -- output: 2
 //
+//     i := sort.SearchInts( l, 4 )
+//     fmt.Println( i )  -- output: 7
+//
+//     i := sort.SearchFloat64s( l_float64s, 4.0 )
+//     fmt.Println( i )
+//
+//     i := sort.SearchStrings( l_strings, "abcd" )
+//     fmt.Println( i )
+//
+
 // from itertools import permutations
 // using std::next_permutation;
 // using std::prev_permutation;
@@ -863,27 +929,61 @@ import "sort"
 //
 //
 // using std::lower_bound;                     // Returns iter pointing to first element >= value
-// PYTHON_USAGE:
-//     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
-//     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
+// GO_USAGE:
+//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
+//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
 //
-//     l.sort()
-//     print( bisect_left( l, "E", 0, -1 ) )  -- output: 3
+//     lb := sort.Search( len( l ), func( i int ) bool {
+//         return l[ i ] >= 3
+//     })
+//     if lb < len( l ) {
+//         fmt.Println( lb )  -- output: 2
+//     } else {
+//         fmt.Println( lb )  -- output: len( l )
+//     }
 //
+//     var l []int = []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 }
+//     l := []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 } 
 //
+//     lb_desc := sort.Search( len( l ), func( i int ) bool {
+//         return l[ i ] < 3
+//     })
+//     if lb_desc >= 1 && lb_desc < len( l ) {
+//         fmt.Println( lb_desc - 1 )  -- output: 6
+//     } else {
+//         fmt.Println( lb_desc )  -- output: len( l )
+//     }
+//
+
 // using std::upper_bound;                     // Returns iter pointing to first element > value
-// PYTHON_USAGE:
-//     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
-//     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
+// GO_USAGE:
+//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
+//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
 //
-//     l.sort()
-//     print( bisect( l, "E", 0, -1 ) )  -- output: 5
-//     print( bisect_right( l, "E", 0, -1 ) )  -- output: 5
+//     ub := sort.Search( len( l ), func( i int ) bool {
+//         return l[ i ] > 3
+//     })
+//     if ub < len( l ) {
+//         fmt.Println( ub )  -- output: 6
+//     } else {
+//         fmt.Println( ub )  -- output: len( l )
+//     }
 //
+//     var l []int = []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 }
+//     l := []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 } 
 //
+//     ub_desc := sort.Search( len( l ), func( i int ) bool {
+//         return l[ i ] <= 3
+//     })
+//     if ub_desc >= 1 && ub_desc < len( l ) {
+//         fmt.Println( ub_desc - 1 )  -- output: 1
+//     } else {
+//         fmt.Println( ub_desc )  -- output: len( l )
+//     }
+//
+
 // using std::transform;                       // Apply the given function to a range and store result in another range
 // PYTHON_USAGE:
-//     l : 
 //
 // using std::nth_element;
 //
@@ -894,17 +994,137 @@ import "sort"
 // using std::shared_ptr;
 // using std::weak_ptr;
 //
+
+import "unicode"
+import "strings"
 // //----< cctype >----------------------------//
 // using std::isalnum;
+// GO_USAGE:
+//     c := 'b'
+//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: true
+//     fmt.Println( unicode.IsLetter( 'c' ) || unicode.IsDigit( 'c' ) )  -- output: true
+//
+//     c := 'A'
+//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: true
+//     fmt.Println( unicode.IsLetter( 'B' ) || unicode.IsDigit( 'B' ) )  -- output: true
+//     
+//     c := '1'
+//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: false
+//     fmt.Println( unicode.IsLetter( '2' ) || unicode.IsDigit( '2' ) )  -- output: false
+//
+//     c := '!'
+//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: false
+//     fmt.Println( unicode.IsLetter( '?' ) || unicode.IsDigit( '?' ) )  -- output: false
+//
+
 // using std::isalpha;
+// GO_USAGE:
+//     c := 'b'
+//     fmt.Println( unicode.IsLetter( c ) )  -- output: true
+//     fmt.Println( unicode.IsLetter( 'c' ) )  -- output: true
+//
+//     c := 'A'
+//     fmt.Println( unicode.IsLetter( c ) )  -- output: true
+//     fmt.Println( unicode.IsLetter( 'B' ) )  -- output: true
+//     
+//     c := '1'
+//     fmt.Println( unicode.IsLetter( c ) )  -- output: false
+//     fmt.Println( unicode.IsLetter( '2' ) )  -- output: false
+//
+//     c := '!'
+//     fmt.Println( unicode.IsLetter( c ) )  -- output: false
+//     fmt.Println( unicode.IsLetter( '?' ) )  -- output: false
+//
+
 // using std::islower;
+// GO_USAGE:
+//     c := 'b'
+//     fmt.Println( unicode.IsLower( c ) )  -- output: true
+//     fmt.Println( unicode.IsLower( 'c' ) )  -- output: true
+//
+//     c := 'A'
+//     fmt.Println( unicode.IsLower( c ) )  -- output: false
+//     fmt.Println( unicode.IsLower( 'B' ) )  -- output: false
+//     
+//     c := '1'
+//     fmt.Println( unicode.IsLower( c ) )  -- output: false
+//     fmt.Println( unicode.IsLower( '2' ) )  -- output: false
+//
+//     c := '!'
+//     fmt.Println( unicode.IsLower( c ) )  -- output: false
+//     fmt.Println( unicode.IsLower( '?' ) )  -- output: false
+//
+
 // using std::isupper;
+// GO_USAGE:
+//     c := 'A'
+//     fmt.Println( unicode.IsUpper( c ) )  -- output: true
+//     fmt.Println( unicode.IsUpper( 'B' ) )  -- output: true
+//     
+//     c := 'b'
+//     fmt.Println( unicode.IsUpper( c ) )  -- output: false
+//     fmt.Println( unicode.IsUpper( 'c' ) )  -- output: false
+//
+//     c := '1'
+//     fmt.Println( unicode.IsUpper( c ) )  -- output: false
+//     fmt.Println( unicode.IsUpper( '2' ) )  -- output: false
+//
+//     c := '!'
+//     fmt.Println( unicode.IsUpper( c ) )  -- output: false
+//     fmt.Println( unicode.IsUpper( '?' ) )  -- output: false
+//
+
 // using std::isdigit;
+// GO_USAGE:
+//     c := '1'
+//     fmt.Println( unicode.IsDigit( c ) )  -- output: true
+//     fmt.Println( unicode.IsDigit( '2' ) )  -- output: true
+//
+//     c := 'a'
+//     fmt.Println( unicode.IsDigit( c ) )  -- output: false
+//     fmt.Println( unicode.IsDigit( 'b' ) )  -- output: false
+//
+//     c := '1'
+//     fmt.Println( unicode.IsNumber( c ) )  -- output: true
+//     fmt.Println( unicode.IsNumber( '2' ) )  -- output: true
+//
+//     c := 'a'
+//     fmt.Println( unicode.IsNumber( c ) )  -- output: false
+//     fmt.Println( unicode.IsNumber( 'b' ) )  -- output: false
+//
+
 // using std::isspace;                         // Check whether char is whitespace character (space, newline, tab, etc. )
 // using std::isblank;                         // Check whether char is blank character ( space or tab )
-// using std::tolower;
-// using std::toupper;
+// GO_USAGE:
+//     c := ' '
+//     fmt.Println( unicode.IsSpace( c ) )  -- output: true
+//     fmt.Println( unicode.IsSpace( ' ' ) )  -- output: true
 //
+//     c := 'd'
+//     fmt.Println( unicode.IsSpace( c ) )  -- output: false
+//     fmt.Println( unicode.IsSpace( 'd' ) )  -- output: false
+//
+
+// using std::tolower;
+// GO_USAGE:
+//     c := 'A'
+//     fmt.Println( unicode.ToLower( c ) )  -- output: a
+//     fmt.Println( unicode.ToLower( 'B' ) )  -- output: b
+//
+//     s := "GOPher#$#@"
+//     fmt.Println( strings.ToLower( s ) )  -- output: "gopherr#$#@"
+//
+
+// using std::toupper;
+// GO_USAGE:
+//     c := 'a'
+//     fmt.Println( unicode.ToUpper( c ) )  -- output: A
+//     fmt.Println( unicode.ToUpper( 'b' ) )  -- output: B
+//
+//     s := "Gopher#$#@"
+//     fmt.Println( strings.ToUpper( s ) )  -- output: "GOPHERr#$#@"
+//
+
 // //----< stdexcept >-------------------------//
 // using std::runtime_error;
 // using std::invalid_argument;
