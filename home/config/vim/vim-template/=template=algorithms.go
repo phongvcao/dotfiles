@@ -245,6 +245,9 @@ import "container/list"
 
 // //----< map >-------------------------------//
 // using std::map;                             // Ordered Map (Red-Black Tree)
+// GO_USAGE:
+//
+
 // PYTHON_USAGE:
 //     d : Dict[ str, int ] = dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ) )
 //     ds : List[ Tuple[ str, int ] ] = sorted( dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ).items() ) )
@@ -377,6 +380,9 @@ import "sort"
 //     l.PushFront( "B" )
 //     l.PushBack( "C" )
 //     l.PushFront( "D" )
+//
+//     fmt.Println( l.Len() )  -- output: 4
+//
 //     for node := l.Front(); node != nil; node = node.Next() {
 //         fmt.Println( node.Value.(string) )
 //     }
@@ -384,6 +390,9 @@ import "sort"
 //     fmt.Println( l.Remove( b ) )  -- output: "C"
 //     var f *list.Eleemnt = l.Front()
 //     fmt.Println( l.Remove( f ) )  -- output: "D"
+//
+//     l.Init()  -- initializes / clears list
+//     fmt.Println( l.Len() )  -- output: 0
 //
 
 // //----< queue >-----------------------------//
