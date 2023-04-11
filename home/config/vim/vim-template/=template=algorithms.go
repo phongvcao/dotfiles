@@ -227,6 +227,22 @@ import "container/list"
 // using std::list;                            // Doubly-Linked List with size() ( O( 1 ) )
 // //----< forward_list >----------------------//
 // using std::forward_list;                    // Singly-Linked List without size() function ( so O( N ) if we need to get size() )
+// GO_TRICKS:
+//     var dq []rune = []rune{}
+//     var dq []rune = make( []rune, 0, 6 )
+//     dq := []rune{}
+//     dq := make( []rune, 0, 6 )
+//     dq := []rune{ 'A', 'B', 'C', 'D' }
+//
+//     dq = append( dq, 'A' )  -- push to the back
+//     dq = append( dq, 'B' )  -- push to the back
+//
+//     b := dq[len(dq) - 1]  -- get back element
+//     dq = dq[:len(dq) - 1]  -- remove from the back
+//
+//     f := dq[0]  -- get front element
+//     dq = dq[1:]  -- remove from front - O( 1 )
+//
 // GO_USAGE:
 //     var l *list.List = list.New()
 //     l := list.New()
@@ -398,6 +414,19 @@ import "sort"
 // //----< queue >-----------------------------//
 // using std::queue;                           // Non-Iterable & Use std::deque as underlying data structure
 // GO_USAGE:
+//     var q []rune = []rune{}
+//     var q []rune = make( []rune, 0, 6 )
+//     q := []rune{}
+//     q := make( []rune, 0, 6 )
+//     q := []rune{ 'A', 'B', 'C', 'D' }
+//
+//     q = append( q, 'A' )  -- push to the back
+//     q = append( q, 'B' )  -- push to the back
+//
+//     f := q[0]
+//     q = q[1:]  -- remove from front - O( 1 )
+//
+// GO_TRICKS:
 //     var l *list.List = list.New()
 //     l := list.New()
 //     l.PushBack( "A" )
