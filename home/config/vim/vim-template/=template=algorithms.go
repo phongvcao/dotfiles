@@ -1293,6 +1293,10 @@ import "time"
 // // using this_thread::yield;                   // Yield to other threads
 // // using this_thread::sleep_until;             // Sleep until time point
 // // using this_thread::sleep_for;               // Sleep for time span
+//
+// //----< future >----------------------------//
+// using std::future;
+// using std::async;
 // GO_USAGE:
 //     1. Use a for loop when you want to read from a channel until it is closed.
 //     2. Use a select statement when you want to read from multiple channels at
@@ -1313,6 +1317,7 @@ import "time"
 //     for i := range c {
 //         fmt.Println( i )
 //     }
+//
 // // OUTPUT: 0
 // //         1
 // //         2
@@ -1339,6 +1344,7 @@ import "time"
 //         }
 //         fmt.Println(val)
 //     }
+//
 // // OUTPUT: 0
 // //         1
 // //         2
@@ -1360,6 +1366,7 @@ import "time"
 //     case val := <-ch2:
 //         fmt.Println(val)
 //     }
+//
 // // OUTPUT: 2
 //
 // GO_USAGE_SELECT_UNBUFFERED_CHANNEL_FOR_LOOP:
@@ -1379,6 +1386,7 @@ import "time"
 //             fmt.Println(val)
 //         }
 //     }
+//
 // // OUTPUT: 2
 // //         1
 //
@@ -1422,6 +1430,7 @@ import "time"
 //             break
 //         }
 //     }
+//
 // // OUTPUT: Received string: one
 // //         Received integer: 1
 // //         Received string: two
@@ -1448,6 +1457,7 @@ import "time"
 //     }
 //     wg.Wait()
 //     fmt.Println("All workers done")
+//
 // // OUTPUT: Worker 1 starting
 // //         Worker 5 starting
 // //         Worker 2 starting
@@ -1481,6 +1491,7 @@ import "time"
 //     // and the receive operation will block until a sender
 //     // writes a value to the channel
 //     // fmt.Println(<-ch)  // uncomment this to see it block
+//
 // // OUTPUT: 1
 // //         2
 //
@@ -1500,6 +1511,7 @@ import "time"
 //     for val := range ch {
 //         fmt.Println(val)
 //     }
+//
 // // OUTPUT: 0
 // //         1
 // //         2
@@ -1528,6 +1540,7 @@ import "time"
 //     case val2 := <-ch2:
 //         fmt.Println("Received value from channel 2:", val2)
 //     }
+//
 // // OUTPUT: EITHER: Received value from channel 1: 0
 // //                 Received value from channel 2: 0
 //
@@ -1562,6 +1575,7 @@ import "time"
 //     // close the channels
 //     close(channelA)
 //     close(channelB)
+//
 // // OUTPUT: received from channelA: hello
 // //         received from channelB: foo
 // //         received from channelB: bar
@@ -1606,6 +1620,7 @@ import "time"
 //     // close the channels
 //     close(channelA)
 //     close(channelB)
+//
 // // OUTPUT: received from channelA: hello
 // //         received from channelA: world
 // //         received from channelB: foo
@@ -1655,6 +1670,7 @@ import "time"
 //         wg.Wait()
 //         fmt.Println("Final count:", count)
 //     }
+//
 // // OUTPUT: Decrementing: -1
 // //         Decrementing: -2
 // //         Decrementing: -2
@@ -1699,6 +1715,7 @@ import "time"
 //         wg.Wait()
 //         fmt.Println("Final count:", count)
 //     }
+//
 // // OUTPUT: Decrementing: -1
 // //         Decrementing: -2
 // //         Decrementing: -3

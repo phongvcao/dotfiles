@@ -1110,7 +1110,10 @@ from itertools import permutations
 # using std::gcd;
 # using std::lcm;
 # using std::partial_sum;                     // Calculate partial_sum of range beginIter, endIter and put result to 3rd argument outIter
-#
+
+from threading import Thread
+from threading import get_ident
+import time
 # //----< thread >----------------------------//
 # using std::thread;
 # namespace this_thread = std::this_thread;   // Manipulate / Info of the current thread
@@ -1118,7 +1121,103 @@ from itertools import permutations
 # // using this_thread::yield;                   // Yield to other threads
 # // using this_thread::sleep_until;             // Sleep until time point
 # // using this_thread::sleep_for;               // Sleep for time span
+# PYTHON_USAGE:
+#     class Solution:
+#         def print_number(self, num, result):
+#             for i in range(5):
+#                 print(f"Thread {get_ident()} printing {num}")
+#                 time.sleep(0.5)  # sleep for 500ms
+#             result[0] = num * 100  # Store the result of the calculation in the reference parameter
 #
+#         def run_threads(self):
+#             print(f"Main thread {get_ident()} started.")
+#
+#             result1, result2 = [0], [0]
+#             # Create two threads and start them running the print_number function with different arguments
+#             t1 = Thread(target=self.print_number, args=(1, result1))
+#             t2 = Thread(target=self.print_number, args=(2, result2))
+#
+#             # Start the threads
+#             t1.start()
+#             t2.start()
+#
+#             # Wait for the threads to finish executing before continuing
+#             t1.join()
+#             t2.join()
+#
+#             print(f"Result 1: {result1[0]}")
+#             print(f"Result 2: {result2[0]}")
+#             print(f"Main thread {get_ident()} finished.")
+#
+#     if __name__ == '__main__':
+#         s = Solution()
+#         s.run_threads()
+#
+# # OUTPUT: Main thread 140596034899008 started.
+# #         Thread 140596009713920 printing 1
+# #         Thread 140596000321536 printing 2
+# #         Thread 140596009713920 printing 1
+# #         Thread 140596000321536 printing 2
+# #         Thread 140596009713920 printing 1
+# #         Thread 140596000321536 printing 2
+# #         Thread 140596009713920 printing 1
+# #         Thread 140596000321536 printing 2
+# #         Thread 140596009713920 printing 1
+# #         Thread 140596000321536 printing 2
+# #         Result 1: 100
+# #         Result 2: 200
+# #         Main thread 140596034899008 finished.
+#
+
+import concurrent.futures
+# //----< future >----------------------------//
+# using std::future;
+# using std::async;
+# PYTHON_USAGE:
+#     class Solution:
+#         def print_number(self, num):
+#             for i in range(5):
+#                 print(f"Thread {get_ident()} printing {num}")
+#                 time.sleep(0.5)
+#             return num * 100
+#
+#         def run_threads(self):
+#             print(f"Main thread {get_ident()} started.")
+#
+#             with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+#                 # Create two futures and submit them to the executor
+#                 future1 = executor.submit(self.print_number, 1)
+#                 future2 = executor.submit(self.print_number, 2)
+#
+#                 # Wait for the futures to complete
+#                 result1 = future1.result()
+#                 result2 = future2.result()
+#
+#             print(f"Result 1: {result1}")
+#             print(f"Result 2: {result2}")
+#             print(f"Main thread {get_ident()} finished.")
+#
+#     if __name__ == '__main__':
+#         s = Solution()
+#         s.run_threads()
+#
+# # OUTPUT: Main thread <some thread ID> started.
+# #         Thread <some thread ID> printing 1
+# #         Thread <some thread ID> printing 2
+# #         Thread <some thread ID> printing 1
+# #         Thread <some thread ID> printing 2
+# #         Thread <some thread ID> printing 1
+# #         Thread <some thread ID> printing 2
+# #         Thread <some thread ID> printing 1
+# #         Thread <some thread ID> printing 2
+# #         Thread <some thread ID> printing 1
+# #         Thread <some thread ID> printing 2
+# #         Result 1: 100
+# #         Result 2: 200
+# #         Main thread <some thread ID> finished.
+#
+
+from threading import Lock
 # //----< mutex >-----------------------------//
 # using std::mutex;                           // Basic mutex
 # using std::timed_mutex;                     // mutex with a timeout. CAN BE LOCKED & UNLOCKED
@@ -1128,10 +1227,95 @@ from itertools import permutations
 # using std::lock_guard;                      // strictly scope-based mutex ownership wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION 
 # using std::scoped_lock;                     // deadlock-avoiding RAII wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION
 # using std::unique_lock;                     // movable mutex ownership wrapper. CAN BE LOCKED & UNLOCKED
+# PYTHON_USAGE:
+#     class Solution:
+#         def __init__(self):
+#             self.mtx = Lock()
 #
+#         def print_numbers(self, n, result):
+#             self.mtx.acquire()  # acquire the mutex lock
+#             for i in range(1, n+1):
+#                 print(i, end=' ')
+#                 result.append(i)
+#             print()
+#             self.mtx.release()  # release the mutex lock
+#
+#         def run_threads(self):
+#             num_threads = 4
+#             threads = [None] * num_threads
+#             results = [[] for _ in range(num_threads)]
+#
+#             # start the threads
+#             for i in range(num_threads):
+#                 threads[i] = Thread(target=self.print_numbers, args=(10, results[i]))
+#                 threads[i].start()
+#
+#             # wait for the threads to finish
+#             for i in range(num_threads):
+#                 threads[i].join()
+#
+#             # print out the results
+#             for i in range(num_threads):
+#                 print(f"Result {i}: {' '.join(str(x) for x in results[i])}")
+#
+#     if __name__ == '__main__':
+#         s = Solution()
+#         s.run_threads()
+#
+#     # OUTPUT: 1 2 3 4 5 6 7 8 9 10 
+#     #         1 2 3 4 5 6 7 8 9 10 
+#     #         1 2 3 4 5 6 7 8 9 10 
+#     #         1 2 3 4 5 6 7 8 9 10 
+#     #         Result 0: 1 2 3 4 5 6 7 8 9 10
+#     #         Result 1: 1 2 3 4 5 6 7 8 9 10
+#     #         Result 2: 1 2 3 4 5 6 7 8 9 10
+#     #         Result 3: 1 2 3 4 5 6 7 8 9 10
+#
+
+from threading import Condition
 # //----< condition_variable >----------------//
 # using std::condition_variable;
+# PYTHON_USAGE:
+#     class Solution:
+#         def __init__(self):
+#             self.mtx = Lock()
+#             self.cv = Condition(self.mtx)
+#             self.dataReady = False
 #
+#         def producer(self):
+#             time.sleep(0.5)
+#             print("Producer: preparing data...")
+#             time.sleep(0.5)
+#             with self.mtx:
+#                 self.dataReady = True
+#                 self.cv.notify()
+#
+#         def consumer(self):
+#             print("Consumer: waiting for data...")
+#             with self.mtx:
+#                 self.cv.wait_for(lambda: self.dataReady)
+#                 self.dataReady = False
+#             print("Consumer: processing data...")
+#
+#         def run_threads(self):
+#             t1 = Thread(target=self.producer)
+#             t2 = Thread(target=self.consumer)
+#
+#             t1.start()
+#             t2.start()
+#
+#             t1.join()
+#             t2.join()
+#
+#     if __name__ == '__main__':
+#         s = Solution()
+#         s.run_threads()
+#
+# # OUTPUT: Consumer: waiting for data...
+# #         Producer: preparing data...
+# #         Consumer: processing data...
+#
+
 # //----< chrono >----------------------------//
 # using std::ratio;                           // Represents exact rational (e.g. ratio< 1, 3 >)
 #

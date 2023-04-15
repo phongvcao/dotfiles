@@ -34,6 +34,7 @@
 #include <limits>
 #include <numeric>
 #include <thread>
+#include <future>
 #include <mutex>
 #include <condition_variable>
 
@@ -164,6 +165,8 @@ using std::inserter;                        // Insert element into first arg sta
 using std::pair;
 using std::make_pair;
 using std::move;                            // Move resources between objects - typically used with std::unique_ptr<T>
+using std::ref;                             // Returns a reference that can be used to modify the referenced object
+using std::cref;                            // Returns a const reference that cannot be modified
 
 //----< algorithm >-------------------------//
 using std::fill;
@@ -231,40 +234,109 @@ namespace this_thread = std::this_thread;   // Manipulate / Info of the current 
 // using this_thread::sleep_until;             // Sleep until time point
 // using this_thread::sleep_for;               // Sleep for time span
 // CPP_USAGE:
-//     // A simple function that takes an integer argument and prints it repeatedly
-//     void print_number(int num) {
-//         for (int i = 0; i < 5; ++i) {
-//             cout << "Thread " << this_thread::get_id() << " printing " << num << endl;
-//             this_thread::sleep_for(chrono::milliseconds(500)); // sleep for 500ms
+//     class Solution {
+//     private:
+//         void print_number(int num, int& result) {
+//             for (int i = 0; i < 5; ++i) {
+//                 cout << "Thread " << this_thread::get_id() << " printing " << num << endl;
+//                 this_thread::sleep_for(chrono::milliseconds(500)); // sleep for 500ms
+//             }
+//             result = num * 100; // Store the result of the calculation in the reference parameter
 //         }
-//     }
+//     public:
+//         void run_threads() {
+//             cout << "Main thread " << this_thread::get_id() << " started." << endl;
+//
+//             int result1, result2;
+//             // Create two threads and start them running the print_number function with different arguments
+//             thread t1(&Solution::print_number, this, 1, ref(result1));
+//             thread t2(&Solution::print_number, this, 2, ref(result2));
+//
+//             // Wait for the threads to finish executing before continuing
+//             t1.join();
+//             t2.join();
+//
+//             cout << "Result 1: " << result1 << endl;
+//             cout << "Result 2: " << result2 << endl;
+//             cout << "Main thread " << this_thread::get_id() << " finished." << endl;
+//         }
+//     };
 //
 //     int main() {
-//         cout << "Main thread " << this_thread::get_id() << " started." << endl;
-//
-//         // Create two threads and start them running the print_number function with different arguments
-//         thread t1(print_number, 1);
-//         thread t2(print_number, 2);
-//
-//         // Wait for the threads to finish executing before continuing
-//         t1.join();
-//         t2.join();
-//
-//         cout << "Main thread " << this_thread::get_id() << " finished." << endl;
+//         Solution s;
+//         s.run_threads();
 //         return 0;
 //     }
-// OUTPUT: Main thread 139675940214592 started.
-//         Thread 139675898066688 printing 1
-//         Thread 139675915851008 printing 2
-//         Thread 139675898066688 printing 1
-//         Thread 139675915851008 printing 2
-//         Thread 139675898066688 printing 1
-//         Thread 139675915851008 printing 2
-//         Thread 139675898066688 printing 1
-//         Thread 139675915851008 printing 2
-//         Thread 139675898066688 printing 1
-//         Thread 139675915851008 printing 2
-//         Main thread 139675940214592 finished.
+//
+// // OUTPUT: Main thread 139675940214592 started.
+// //         Thread 139675898066688 printing 1
+// //         Thread 139675915851008 printing 2
+// //         Thread 139675898066688 printing 1
+// //         Thread 139675915851008 printing 2
+// //         Thread 139675898066688 printing 1
+// //         Thread 139675915851008 printing 2
+// //         Thread 139675898066688 printing 1
+// //         Thread 139675915851008 printing 2
+// //         Thread 139675898066688 printing 1
+// //         Thread 139675915851008 printing 2
+// //         Result 1: 100
+// //         Result 2: 200
+// //         Main thread 139675940214592 finished.
+//
+
+//----< future >----------------------------//
+using std::future;
+using std::async;
+// CPP_USAGE:
+//     class Solution {
+//     private:
+//         void print_number(int num, int& result) {
+//             for (int i = 0; i < 5; ++i) {
+//                 cout << "Thread " << this_thread::get_id() << " printing " << num << endl;
+//                 this_thread::sleep_for(chrono::milliseconds(500)); // sleep for 500ms
+//             }
+//             result = num * 100; // Store the result of the calculation in the reference parameter
+//         }
+//
+//     public:
+//         void run() {
+//             cout << "Main thread " << this_thread::get_id() << " started." << endl;
+//
+//             future<void> f1 = async(&Solution::print_number, this, 1, ref(result1_));
+//             future<void> f2 = async(&Solution::print_number, this, 2, ref(result2_));
+//
+//             f1.get();
+//             f2.get();
+//
+//             cout << "Result 1: " << result1_ << endl;
+//             cout << "Result 2: " << result2_ << endl;
+//             cout << "Main thread " << this_thread::get_id() << " finished." << endl;
+//         }
+//
+//     private:
+//         int result1_, result2_;
+//     };
+//
+//     int main() {
+//         Solution sol;
+//         sol.run();
+//         return 0;
+//     }
+//
+// // OUTPUT: Main thread [thread id] started.
+// //         Thread [thread id] printing 1
+// //         Thread [thread id] printing 2
+// //         Thread [thread id] printing 1
+// //         Thread [thread id] printing 2
+// //         Thread [thread id] printing 1
+// //         Thread [thread id] printing 2
+// //         Thread [thread id] printing 1
+// //         Thread [thread id] printing 2
+// //         Thread [thread id] printing 1
+// //         Thread [thread id] printing 2
+// //         Result 1: 100
+// //         Result 2: 200
+// //         Main thread [thread id] finished.
 //
 
 //----< mutex >-----------------------------//
@@ -277,72 +349,113 @@ using std::lock_guard;                      // strictly scope-based mutex owners
 using std::scoped_lock;                     // deadlock-avoiding RAII wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION
 using std::unique_lock;                     // movable mutex ownership wrapper. CAN BE LOCKED & UNLOCKED
 // CPP_USAGE:
-//     mutex mtx; // create a mutex object
+//     class Solution {
+//     private:
+//         mutex mtx; // create a mutex object
 //
-//     void printNumbers(int n) {
-//         mtx.lock(); // acquire the mutex lock
-//         for (int i = 1; i <= n; i++) {
-//             cout << i << " ";
+//         void printNumbers(int n, vector<int>& result) {
+//             mtx.lock(); // acquire the mutex lock
+//             for (int i = 1; i <= n; i++) {
+//                 cout << i << " ";
+//                 result.push_back(i);
+//             }
+//             cout << endl;
+//             mtx.unlock(); // release the mutex lock
 //         }
-//         cout << endl;
-//         mtx.unlock(); // release the mutex lock
-//     }
+//
+//     public:
+//         void run_threads() {
+//             const int numThreads = 4;
+//             thread threads[numThreads];
+//             vector<vector<int>> results(numThreads);
+//
+//             // start the threads
+//             for (int i = 0; i < numThreads; i++) {
+//                 threads[i] = thread(&Solution::printNumbers, this, 10, ref(results[i]));
+//             }
+//
+//             // wait for the threads to finish
+//             for (int i = 0; i < numThreads; i++) {
+//                 threads[i].join();
+//             }
+//
+//             // print out the results
+//             for (int i = 0; i < numThreads; i++) {
+//                 cout << "Result " << i << ": ";
+//                 for (int j = 0; j < results[i].size(); j++) {
+//                     cout << results[i][j] << " ";
+//                 }
+//                 cout << endl;
+//             }
+//         }
+//     };
 //
 //     int main() {
-//         const int numThreads = 4;
-//         thread threads[numThreads];
-//
-//         // start the threads
-//         for (int i = 0; i < numThreads; i++) {
-//             threads[i] = thread(printNumbers, 10);
-//         }
-//
-//         // wait for the threads to finish
-//         for (int i = 0; i < numThreads; i++) {
-//             threads[i].join();
-//         }
-//
+//         Solution s;
+//         s.run_threads();
 //         return 0;
 //     }
+//
+// // OUTPUT: 1 2 3 4 5 6 7 8 9 10 
+// //         1 2 3 4 5 6 7 8 9 10 
+// //         1 2 3 4 5 6 7 8 9 10 
+// //         1 2 3 4 5 6 7 8 9 10 
+// //         Result 0: 1 2 3 4 5 6 7 8 9 10 
+// //         Result 1: 1 2 3 4 5 6 7 8 9 10 
+// //         Result 2: 1 2 3 4 5 6 7 8 9 10 
+// //         Result 3: 1 2 3 4 5 6 7 8 9 10 
 //
 
 //----< condition_variable >----------------//
 using std::condition_variable;
 // CPP_USAGE:
-//     mutex mtx; // create a mutex object
-//     condition_variable cv; // create a condition variable object
+//     class Solution {
+//     private:
+//         mutex mtx; // create a mutex object
+//         condition_variable cv; // create a condition variable object
 //
-//     bool dataReady = false;
+//         bool dataReady = false;
 //
-//     void producer() {
-//         this_thread::sleep_for(chrono::milliseconds(500));
-//         cout << "Producer: preparing data..." << endl;
-//         this_thread::sleep_for(chrono::milliseconds(500));
-//         {
-//             lock_guard<mutex> lock(mtx);
-//             dataReady = true;
+//         void producer() {
+//             this_thread::sleep_for(chrono::milliseconds(500));
+//             cout << "Producer: preparing data..." << endl;
+//             this_thread::sleep_for(chrono::milliseconds(500));
+//             {
+//                 lock_guard<mutex> lock(mtx);
+//                 dataReady = true;
+//             }
+//             cv.notify_one();
 //         }
-//         cv.notify_one();
-//     }
 //
-//     void consumer() {
-//         cout << "Consumer: waiting for data..." << endl;
-//         {
-//             unique_lock<mutex> lock(mtx);
-//             cv.wait(lock, []{ return dataReady; });
+//         void consumer() {
+//             cout << "Consumer: waiting for data..." << endl;
+//             {
+//                 unique_lock<mutex> lock(mtx);
+//                 cv.wait(lock, [this]{ return dataReady; });
+//             }
+//             cout << "Consumer: processing data..." << endl;
 //         }
-//         cout << "Consumer: processing data..." << endl;
-//     }
+//
+//     public:
+//         void run_threads() {
+//             thread t1(&Solution::producer, this);
+//             thread t2(&Solution::consumer, this);
+//
+//             t1.join();
+//             t2.join();
+//         }
+//     };
 //
 //     int main() {
-//         thread t1(producer);
-//         thread t2(consumer);
-//
-//         t1.join();
-//         t2.join();
+//         Solution s;
+//         s.run_threads();
 //
 //         return 0;
 //     }
+//
+// // OUTPUT: Producer: preparing data...
+// //         Consumer: waiting for data...
+// //         Consumer: processing data...
 //
 
 //----< chrono >----------------------------//
