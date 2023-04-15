@@ -1,3 +1,4 @@
+import sys
 # //----< iostream >--------------------------//
 # using std::cout;
 # using std::cin;
@@ -10,7 +11,22 @@
 # using std::fprintf;
 # using std::sprintf;
 # using std::snprintf;
+# PYTHON_USAGE:
+#     for line in sys.stdin:
+#         if 'Exit' == line.rstrip():
+#             break
+#         print( "Processing Message from sys.stdin *****{line}*****" )
+#     print( "Done" )
 #
+#     while True:
+#         data = input( "Please enter the message:\n" )
+#         if 'Exit' == data:
+#             break
+#         print( "Processing Message from input() *****{data}*****" )
+#     print( "Done" )
+#
+
+
 # //----< iomanip >---------------------------//
 # using std::setprecision;
 # using std::setw;
@@ -29,7 +45,23 @@
 # //----< fstream >---------------------------//
 # using std::ofstream;
 # using std::ifstream;
+
+import json
+# PYTHON_USAGE:
+#     s =  '{ "name": "John", "age": 30, "city": "New York"}'
+#     o = json.loads( s )
+#     print( o[ "age" ] )  -- output: 30
 #
+#     o = {
+#         "name": "John",
+#         "age": 30,
+#         "city": "New York"
+#     }
+#     s = json.dumps( o )
+#     s = json.dumps( o, indent = 4, separators = ( ". ", " = " ) )
+#     print( s )
+#
+
 # //----< string >----------------------------//
 # using std::getline;
 # using std::string;

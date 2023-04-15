@@ -230,6 +230,42 @@ namespace this_thread = std::this_thread;   // Manipulate / Info of the current 
 // using this_thread::yield;                   // Yield to other threads
 // using this_thread::sleep_until;             // Sleep until time point
 // using this_thread::sleep_for;               // Sleep for time span
+// CPP_USAGE:
+//     // A simple function that takes an integer argument and prints it repeatedly
+//     void print_number(int num) {
+//         for (int i = 0; i < 5; ++i) {
+//             cout << "Thread " << this_thread::get_id() << " printing " << num << endl;
+//             this_thread::sleep_for(chrono::milliseconds(500)); // sleep for 500ms
+//         }
+//     }
+//
+//     int main() {
+//         cout << "Main thread " << this_thread::get_id() << " started." << endl;
+//
+//         // Create two threads and start them running the print_number function with different arguments
+//         thread t1(print_number, 1);
+//         thread t2(print_number, 2);
+//
+//         // Wait for the threads to finish executing before continuing
+//         t1.join();
+//         t2.join();
+//
+//         cout << "Main thread " << this_thread::get_id() << " finished." << endl;
+//         return 0;
+//     }
+// OUTPUT: Main thread 139675940214592 started.
+//         Thread 139675898066688 printing 1
+//         Thread 139675915851008 printing 2
+//         Thread 139675898066688 printing 1
+//         Thread 139675915851008 printing 2
+//         Thread 139675898066688 printing 1
+//         Thread 139675915851008 printing 2
+//         Thread 139675898066688 printing 1
+//         Thread 139675915851008 printing 2
+//         Thread 139675898066688 printing 1
+//         Thread 139675915851008 printing 2
+//         Main thread 139675940214592 finished.
+//
 
 //----< mutex >-----------------------------//
 using std::mutex;                           // Basic mutex
@@ -240,9 +276,74 @@ using std::lock;                            // locks specified mutexes. CAN BE L
 using std::lock_guard;                      // strictly scope-based mutex ownership wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION 
 using std::scoped_lock;                     // deadlock-avoiding RAII wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION
 using std::unique_lock;                     // movable mutex ownership wrapper. CAN BE LOCKED & UNLOCKED
+// CPP_USAGE:
+//     mutex mtx; // create a mutex object
+//
+//     void printNumbers(int n) {
+//         mtx.lock(); // acquire the mutex lock
+//         for (int i = 1; i <= n; i++) {
+//             cout << i << " ";
+//         }
+//         cout << endl;
+//         mtx.unlock(); // release the mutex lock
+//     }
+//
+//     int main() {
+//         const int numThreads = 4;
+//         thread threads[numThreads];
+//
+//         // start the threads
+//         for (int i = 0; i < numThreads; i++) {
+//             threads[i] = thread(printNumbers, 10);
+//         }
+//
+//         // wait for the threads to finish
+//         for (int i = 0; i < numThreads; i++) {
+//             threads[i].join();
+//         }
+//
+//         return 0;
+//     }
+//
 
 //----< condition_variable >----------------//
 using std::condition_variable;
+// CPP_USAGE:
+//     mutex mtx; // create a mutex object
+//     condition_variable cv; // create a condition variable object
+//
+//     bool dataReady = false;
+//
+//     void producer() {
+//         this_thread::sleep_for(chrono::milliseconds(500));
+//         cout << "Producer: preparing data..." << endl;
+//         this_thread::sleep_for(chrono::milliseconds(500));
+//         {
+//             lock_guard<mutex> lock(mtx);
+//             dataReady = true;
+//         }
+//         cv.notify_one();
+//     }
+//
+//     void consumer() {
+//         cout << "Consumer: waiting for data..." << endl;
+//         {
+//             unique_lock<mutex> lock(mtx);
+//             cv.wait(lock, []{ return dataReady; });
+//         }
+//         cout << "Consumer: processing data..." << endl;
+//     }
+//
+//     int main() {
+//         thread t1(producer);
+//         thread t2(consumer);
+//
+//         t1.join();
+//         t2.join();
+//
+//         return 0;
+//     }
+//
 
 //----< chrono >----------------------------//
 using std::ratio;                           // Represents exact rational (e.g. ratio< 1, 3 >)

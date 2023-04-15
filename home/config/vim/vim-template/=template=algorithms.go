@@ -32,9 +32,6 @@ package main
 // using std::ofstream;
 // using std::ifstream;
 //
-// //----< string >----------------------------//
-// using std::getline;
-// using std::string;
 
 import "fmt"
 import "strconv"
@@ -116,6 +113,110 @@ import "strconv"
 //     }
 //     fmt.Println( li )
 //
+
+import "encoding/json"
+// GO_USAGE:
+//     type Person struct {
+//         Name string `json:"name"`
+//         Age  int    `json:"age"`
+//     }
+//
+//     // Encoding JSON string from struct
+//     person := Person{ Name: "John", Age: 30 }
+//     personJSON, err := json.Marshal( person )
+//     if err != nil {
+//         panic( err.Error() )
+//     }
+//     fmt.Println( string( personJSON ) )
+//
+//     // Decoding JSON string into struct
+//     var decodedPerson Person
+//     err = json.Unmarshal (personJSON, &decodedPerson )
+//     if err != nil {
+//         panic( err.Error() )
+//     }
+//     fmt.Printf( "Name: %s, Age: %d\n", decodedPerson.Name, decodedPerson.Age )
+//
+
+import "database/sql"
+import _ "github.com/go-sql-driver/mysql"
+// NOTES:
+// Connecting to a database programmatically involves the following steps:
+//     1. Importing the appropriate database driver package in your
+//        programming language.
+//        => For example, in Golang, you would import the "database/sql"
+//           package and the package for your specific database driver (e.g.
+//           "github.com/go-sql-driver/mysql" for MySQL).
+//     2. Creating a connection string that contains the necessary information
+//        to connect to the database.
+//        => This usually includes the database server address, the username
+//           and password to authenticate with the database, and any other
+//           relevant options or parameters.
+//     3. Opening a connection to the database using the connection string and
+//        the appropriate driver function.
+//        => In most programming languages, this involves calling a specific
+//           function or method to establish a connection.
+//     4. Executing queries or statements on the database as needed to
+//        retrieve or modify data.
+//     5. Closing the database connection when it is no longer needed.
+//
+// GO_USAGE:
+//     db, err := sql.Open("mysql", "username:password@tcp(hostname:port)/databasename")
+//     if err != nil {
+//         panic(err.Error())
+//     }
+//     defer db.Close()
+//
+//     err = db.Ping()
+//     if err != nil {
+//         panic(err.Error())
+//     }
+//
+//     // Non-transactional query
+//     rows, err := db.Query("SELECT name, age FROM users WHERE age > ?", 25)
+//     if err != nil {
+//         panic(err.Error())
+//     }
+//     defer rows.Close()
+//
+//     for rows.Next() {
+//         var name string
+//         var age int
+//         err := rows.Scan(&name, &age)
+//         if err != nil {
+//             panic(err.Error())
+//         }
+//         fmt.Printf("Name: %s, Age: %d\n", name, age)
+//     }
+//
+//     // Transactional query
+//     tx, err := db.Begin()
+//     if err != nil {
+//         panic(err.Error())
+//     }
+//
+//     _, err = tx.Exec("UPDATE users SET age = ? WHERE name = ?", 30, "John")
+//     if err != nil {
+//         tx.Rollback()
+//         panic(err.Error())
+//     }
+//
+//     _, err = tx.Exec("DELETE FROM users WHERE age < ?", 30)
+//     if err != nil {
+//         tx.Rollback()
+//         panic(err.Error())
+//     }
+//
+//     err = tx.Commit()
+//     if err != nil {
+//         panic(err.Error())
+//     }
+//     fmt.Println("Successfully executed transactional queries!")
+//
+
+// //----< string >----------------------------//
+// using std::getline;
+// using std::string;
 
 import "math"
 // //----< cmath >-----------------------------//
@@ -1182,7 +1283,9 @@ import "strings"
 // using std::gcd;
 // using std::lcm;
 // using std::partial_sum;                     // Calculate partial_sum of range beginIter, endIter and put result to 3rd argument outIter
-//
+
+import "sync"
+import "time"
 // //----< thread >----------------------------//
 // using std::thread;
 // namespace this_thread = std::this_thread;   // Manipulate / Info of the current thread
@@ -1190,7 +1293,327 @@ import "strings"
 // // using this_thread::yield;                   // Yield to other threads
 // // using this_thread::sleep_until;             // Sleep until time point
 // // using this_thread::sleep_for;               // Sleep for time span
+// GO_USAGE:
+//     1. Use a for loop when you want to read from a channel until it is closed.
+//     2. Use a select statement when you want to read from multiple channels at
+//     the same time.
 //
+// GO_USAGE_UNBUFFERED_CHANNEL:
+//     c := make( chan int ) // Create a channel of integers
+//
+//     // Start a goroutine to send integers to the channel
+//     go func() {
+//         for i := 0; i < 5; i++ {
+//             c <- i
+//         }
+//         close( c ) // Close the channel when done sending
+//     }()
+//
+//     // Receive integers from the channel and print them
+//     for i := range c {
+//         fmt.Println( i )
+//     }
+// // OUTPUT: 0
+// //         1
+// //         2
+// //         3
+// //         4
+//
+// GO_USAGE_UNBUFFERED_CHANNEL:
+//     // Create an unbuffered channel
+//     ch := make(chan int)
+//
+//     // Start a goroutine to send values to the channel
+//     go func() {
+//         for i := 0; i < 5; i++ {
+//             ch <- i
+//         }
+//         close(ch)
+//     }()
+//
+//     // Read values from the channel using a for loop
+//     for {
+//         val, ok := <-ch
+//         if !ok {
+//             break
+//         }
+//         fmt.Println(val)
+//     }
+// // OUTPUT: 0
+// //         1
+// //         2
+// //         3
+// //         4
+//
+// GO_USAGE_SELECT_UNBUFFERED_CHANNEL:
+//     ch1 := make(chan int)
+//     ch2 := make(chan int)
+//     go func() {
+//         ch1 <- 1
+//     }()
+//     go func() {
+//         ch2 <- 2
+//     }()
+//     select {
+//     case val := <-ch1:
+//         fmt.Println(val)
+//     case val := <-ch2:
+//         fmt.Println(val)
+//     }
+// // OUTPUT: 2
+//
+// GO_USAGE_SELECT_UNBUFFERED_CHANNEL_FOR_LOOP:
+//     ch1 := make(chan int)
+//     ch2 := make(chan int)
+//     go func() {
+//         ch1 <- 1
+//     }()
+//     go func() {
+//         ch2 <- 2
+//     }()
+//     for i := 0; i < 2; i++ {
+//         select {
+//         case val := <-ch1:
+//             fmt.Println(val)
+//         case val := <-ch2:
+//             fmt.Println(val)
+//         }
+//     }
+// // OUTPUT: 2
+// //         1
+//
+// GO_USAGE_SELECT_UNBUFFERED_CHANNEL_FOR_LOOP_ADVANCED:
+//     c1 := make( chan int )
+//     c2 := make( chan string )
+//
+//     // Start a goroutine to send integers to c1
+//     go func() {
+//         for i := 1; i <= 5; i++ {
+//             c1 <- i
+//             time.Sleep( time.Millisecond * 500 )
+//         }
+//         close( c1 )
+//     }()
+//
+//     // Start a goroutine to send strings to c2
+//     go func() {
+//         for _, s := range []string{ "one", "two", "three", "four", "five" } {
+//             c2 <- s
+//             time.Sleep( time.Millisecond * 250 )
+//         }
+//         close( c2 )
+//     }()
+//
+//     // Use a select statement to receive values from c1 and c2
+//     for {
+//         select {
+//         case i, ok := <-c1:
+//             if !ok {
+//                 c1 = nil
+//             }
+//             fmt.Printf( "Received integer: %d\n", i)
+//         case s, ok := <-c2:
+//             if !ok {
+//                 c2 = nil
+//             }
+//             fmt.Printf( "Received string: %s\n", s )
+//         }
+//         if c1 == nil && c2 == nil {
+//             break
+//         }
+//     }
+// // OUTPUT: Received string: one
+// //         Received integer: 1
+// //         Received string: two
+// //         Received integer: 2
+// //         Received string: three
+// //         Received string: four
+// //         Received string: five
+// //         Received integer: 3
+// //         Received string: 
+// //         Received integer: 4
+// //         Received integer: 5
+// //         Received integer: 0
+//
+// GO_USAGE_WAIT_GROUP:
+//     var wg sync.WaitGroup
+//     for i := 1; i <= 5; i++ {
+//         wg.Add(1)
+//         go func(id int, wg *sync.WaitGroup) {
+//             defer wg.Done()
+//             fmt.Printf("Worker %d starting\n", id)
+//             time.Sleep(time.Second)
+//             fmt.Printf("Worker %d done\n", id)
+//         }(i, &wg)
+//     }
+//     wg.Wait()
+//     fmt.Println("All workers done")
+// // OUTPUT: Worker 1 starting
+// //         Worker 5 starting
+// //         Worker 2 starting
+// //         Worker 3 starting
+// //         Worker 4 starting
+// //         Worker 5 done
+// //         Worker 4 done
+// //         Worker 1 done
+// //         Worker 3 done
+// //         Worker 2 done
+// //         All workers done
+//
+// GO_USAGE_BUFFERED_CHANNEL:
+//     // Create a buffered channel with a capacity of 2
+//     ch := make(chan int, 2)
+//
+//     // Send values to the channel
+//     ch <- 1
+//     ch <- 2
+//
+//     // Attempt to send a third value, but the channel is full
+//     // and the send operation will block until a receiver
+//     // reads a value from the channel
+//     // ch <- 3  // uncomment this to see it block
+//
+//     // Read values from the channel
+//     fmt.Println(<-ch)
+//     fmt.Println(<-ch)
+//
+//     // Attempt to read a third value, but the channel is empty
+//     // and the receive operation will block until a sender
+//     // writes a value to the channel
+//     // fmt.Println(<-ch)  // uncomment this to see it block
+// // OUTPUT: 1
+// //         2
+//
+// GO_USAGE_BUFFERED_CHANNEL:
+//     // Create a buffered channel with a capacity of 5
+//     ch := make(chan int, 5)
+//
+//     // Start a goroutine to send values to the channel
+//     go func() {
+//         for i := 0; i < 10; i++ {
+//             ch <- i
+//         }
+//         close(ch)
+//     }()
+//
+//     // Read values from the channel using a for loop
+//     for val := range ch {
+//         fmt.Println(val)
+//     }
+// // OUTPUT: 0
+// //         1
+// //         2
+// //         3
+// //         4
+// //         5
+// //         6
+// //         7
+// //         8
+// //         9
+//
+// GO_USAGE_SELECT_BUFFERED_CHANNEL:
+//     ch1 := make(chan int, 10)
+//     ch2 := make(chan int, 10)
+//
+//     // send values to the channels
+//     for i := 0; i < 10; i++ {
+//         ch1 <- i
+//         ch2 <- i * 2
+//     }
+//
+//     // use select statement to read from the channels
+//     select {
+//     case val1 := <-ch1:
+//         fmt.Println("Received value from channel 1:", val1)
+//     case val2 := <-ch2:
+//         fmt.Println("Received value from channel 2:", val2)
+//     }
+// // OUTPUT: EITHER: Received value from channel 1: 0
+// //                 Received value from channel 2: 0
+//
+// GO_USAGE_SELECT_BUFFERED_CHANNEL_FOR_LOOP:
+//     // create two buffered channels with capacities of 3
+//     channelA := make(chan string, 3)
+//     channelB := make(chan string, 3)
+//
+//     // add values to channelA
+//     channelA <- "hello"
+//     channelA <- "world"
+//     channelA <- "!"
+//
+//     // add values to channelB
+//     channelB <- "foo"
+//     channelB <- "bar"
+//     channelB <- "baz"
+//
+//     // use a for loop to receive values from both channels
+//     // and print them out
+//     for i := 0; i < 6; i++ {
+//         select {
+//         case msg := <-channelA:
+//             fmt.Println("received from channelA:", msg)
+//         case msg := <-channelB:
+//             fmt.Println("received from channelB:", msg)
+//         default:
+//             fmt.Println("no messages received")
+//         }
+//     }
+//
+//     // close the channels
+//     close(channelA)
+//     close(channelB)
+// // OUTPUT: received from channelA: hello
+// //         received from channelB: foo
+// //         received from channelB: bar
+// //         received from channelA: world
+// //         received from channelA: !
+// //         received from channelB: baz
+//
+// GO_USAGE_SELECT_BUFFERED_CHANNEL_FOR_LOOP_ADVANCED:
+//     // create two buffered channels with capacities of 3
+//     channelA := make(chan string, 3)
+//     channelB := make(chan string, 3)
+//
+//     // add values to channelA
+//     channelA <- "hello"
+//     channelA <- "world"
+//     channelA <- "!"
+//
+//     // add values to channelB
+//     channelB <- "foo"
+//     channelB <- "bar"
+//     channelB <- "baz"
+//
+//     // use a nested for loop to receive values from both channels
+//     // and print them out
+//     for {
+//         for i := 0; i < 2; i++ {
+//             select {
+//             case msg := <-channelA:
+//                 fmt.Println("received from channelA:", msg)
+//             case msg := <-channelB:
+//                 fmt.Println("received from channelB:", msg)
+//             default:
+//                 fmt.Println("no messages received")
+//                 break
+//             }
+//         }
+//         if len(channelA) == 0 && len(channelB) == 0 {
+//             break
+//         }
+//     }
+//
+//     // close the channels
+//     close(channelA)
+//     close(channelB)
+// // OUTPUT: received from channelA: hello
+// //         received from channelA: world
+// //         received from channelB: foo
+// //         received from channelA: !
+// //         received from channelB: bar
+// //         received from channelB: baz
+//
+
 // //----< mutex >-----------------------------//
 // using std::mutex;                           // Basic mutex
 // using std::timed_mutex;                     // mutex with a timeout. CAN BE LOCKED & UNLOCKED
@@ -1200,10 +1623,143 @@ import "strings"
 // using std::lock_guard;                      // strictly scope-based mutex ownership wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION 
 // using std::scoped_lock;                     // deadlock-avoiding RAII wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION
 // using std::unique_lock;                     // movable mutex ownership wrapper. CAN BE LOCKED & UNLOCKED
+// GO_USAGE_MUTEX:
+//     var count int
+//     var wg sync.WaitGroup
+//     var mutex sync.Mutex
 //
+//     func increment() {
+//         defer wg.Done()
+//         for i := 0; i < 5; i++ {
+//             mutex.Lock()   // Lock the mutex before accessing the shared variable
+//             count++
+//             mutex.Unlock() // Unlock the mutex after accessing the shared variable
+//             fmt.Println("Incrementing:", count)
+//         }
+//     }
+//
+//     func decrement() {
+//         defer wg.Done()
+//         for i := 0; i < 5; i++ {
+//             mutex.Lock()   // Lock the mutex before accessing the shared variable
+//             count--
+//             mutex.Unlock() // Unlock the mutex after accessing the shared variable
+//             fmt.Println("Decrementing:", count)
+//         }
+//     }
+//
+//     func main() {
+//         wg.Add(2)
+//         go increment()
+//         go decrement()
+//         wg.Wait()
+//         fmt.Println("Final count:", count)
+//     }
+// // OUTPUT: Decrementing: -1
+// //         Decrementing: -2
+// //         Decrementing: -2
+// //         Decrementing: -3
+// //         Decrementing: -4
+// //         Incrementing: -1
+// //         Incrementing: -3
+// //         Incrementing: -2
+// //         Incrementing: -1
+// //         Incrementing: 0
+// //         Final count: 0
+//
+// GO_USAGE_MUTEX:
+//     var count int
+//     var wg sync.WaitGroup
+//     var mutex sync.Mutex
+//
+//     func increment() {
+//         defer wg.Done()
+//         mutex.Lock() // Lock the mutex before accessing the shared variable
+//         for i := 0; i < 5; i++ {
+//             count++
+//             fmt.Println("Incrementing:", count)
+//         }
+//         mutex.Unlock() // Unlock the mutex after accessing the shared variable
+//     }
+//
+//     func decrement() {
+//         defer wg.Done()
+//         mutex.Lock() // Lock the mutex before accessing the shared variable
+//         for i := 0; i < 5; i++ {
+//             count--
+//             fmt.Println("Decrementing:", count)
+//         }
+//         mutex.Unlock() // Unlock the mutex after accessing the shared variable
+//     }
+//
+//     func main() {
+//         wg.Add(2)
+//         go increment()
+//         go decrement()
+//         wg.Wait()
+//         fmt.Println("Final count:", count)
+//     }
+// // OUTPUT: Decrementing: -1
+// //         Decrementing: -2
+// //         Decrementing: -3
+// //         Decrementing: -4
+// //         Decrementing: -5
+// //         Incrementing: -4
+// //         Incrementing: -3
+// //         Incrementing: -2
+// //         Incrementing: -1
+// //         Incrementing: 0
+// //         Final count: 0
+//
+
 // //----< condition_variable >----------------//
 // using std::condition_variable;
+// GO_USAGE:
+//     var data []int
+//     var cond *sync.Cond = sync.NewCond(&sync.Mutex{})
 //
+//     func producer() {
+//         for i := 0; i < 5; i++ {
+//             cond.L.Lock()
+//             data = append(data, i)
+//             fmt.Println("Producer produced:", i)
+//             cond.Signal()
+//             cond.L.Unlock()
+//         }
+//     }
+//
+//     func consumer() {
+//         for i := 0; i < 5; i++ {
+//             cond.L.Lock()
+//             for len(data) == 0 {
+//                 cond.Wait()
+//             }
+//             val := data[0]
+//             data = data[1:]
+//             fmt.Println("Consumer consumed:", val)
+//             cond.L.Unlock()
+//         }
+//     }
+//
+//     func main() {
+//         go producer()
+//         go consumer()
+//
+//         // Wait for goroutines to complete
+//         var wg sync.WaitGroup
+//         wg.Add(2)
+//         go func() {
+//             defer wg.Done()
+//             producer()
+//         }()
+//         go func() {
+//             defer wg.Done()
+//             consumer()
+//         }()
+//         wg.Wait()
+//     }
+//
+
 // //----< chrono >----------------------------//
 // using std::ratio;                           // Represents exact rational (e.g. ratio< 1, 3 >)
 //
