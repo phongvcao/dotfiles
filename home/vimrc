@@ -3524,6 +3524,7 @@ else
 endif
 let g:templates_no_autocmd = 1
 command! AlCppTemplate Template algorithms.cpp
+command! AlCTemplate Template algorithms.c
 command! AlGoTemplate Template algorithms.go
 command! AlJavaTemplate Template algorithms.java
 command! AlPyTemplate Template algorithms.py
