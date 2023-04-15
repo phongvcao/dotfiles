@@ -234,40 +234,40 @@ namespace this_thread = std::this_thread;   // Manipulate / Info of the current 
 // using this_thread::sleep_until;             // Sleep until time point
 // using this_thread::sleep_for;               // Sleep for time span
 // CPP_USAGE:
-//     class Solution {
-//     private:
-//         void print_number(int num, int& result) {
-//             for (int i = 0; i < 5; ++i) {
-//                 cout << "Thread " << this_thread::get_id() << " printing " << num << endl;
-//                 this_thread::sleep_for(chrono::milliseconds(500)); // sleep for 500ms
-//             }
-//             result = num * 100; // Store the result of the calculation in the reference parameter
-//         }
-//     public:
-//         void run_threads() {
-//             cout << "Main thread " << this_thread::get_id() << " started." << endl;
-//
-//             int result1, result2;
-//             // Create two threads and start them running the print_number function with different arguments
-//             thread t1(&Solution::print_number, this, 1, ref(result1));
-//             thread t2(&Solution::print_number, this, 2, ref(result2));
-//
-//             // Wait for the threads to finish executing before continuing
-//             t1.join();
-//             t2.join();
-//
-//             cout << "Result 1: " << result1 << endl;
-//             cout << "Result 2: " << result2 << endl;
-//             cout << "Main thread " << this_thread::get_id() << " finished." << endl;
-//         }
-//     };
-//
-//     int main() {
-//         Solution s;
-//         s.run_threads();
-//         return 0;
-//     }
-//
+    class Solution {
+    private:
+        void print_number(int num, int& result) {
+            for (int i = 0; i < 5; ++i) {
+                cout << "Thread " << this_thread::get_id() << " printing " << num << endl;
+                this_thread::sleep_for(chrono::milliseconds(500)); // sleep for 500ms
+            }
+            result = num * 100; // Store the result of the calculation in the reference parameter
+        }
+    public:
+        void run_threads() {
+            cout << "Main thread " << this_thread::get_id() << " started." << endl;
+
+            int result1, result2;
+            // Create two threads and start them running the print_number function with different arguments
+            thread t1(&Solution::print_number, this, 1, ref(result1));
+            thread t2(&Solution::print_number, this, 2, ref(result2));
+
+            // Wait for the threads to finish executing before continuing
+            t1.join();
+            t2.join();
+
+            cout << "Result 1: " << result1 << endl;
+            cout << "Result 2: " << result2 << endl;
+            cout << "Main thread " << this_thread::get_id() << " finished." << endl;
+        }
+    };
+
+    int main() {
+        Solution s;
+        s.run_threads();
+        return 0;
+    }
+
 // // OUTPUT: Main thread 139675940214592 started.
 // //         Thread 139675898066688 printing 1
 // //         Thread 139675915851008 printing 2
