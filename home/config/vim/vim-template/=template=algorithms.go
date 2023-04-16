@@ -1302,6 +1302,12 @@ import "time"
 //     2. Use a select statement when you want to read from multiple channels at
 //     the same time.
 //
+// GO_USAGE:
+//     1. WaitGroup is a good choice for simple synchronization tasks where
+//        the number of goroutines is fixed and known in advance.
+//     2. Channels are better for more complex tasks where synchronization
+//        and communication between goroutines is required.
+//
 // GO_USAGE_UNBUFFERED_CHANNEL:
 //     c := make( chan int ) // Create a channel of integers
 //
@@ -1350,6 +1356,27 @@ import "time"
 // //         2
 // //         3
 // //         4
+//
+// GO_USAGE_BUFFERED_CHANNEL:
+//     nums := []int{1, 2, 3, 4, 5}
+//     done := make(chan bool)
+//
+//     for _, num := range nums {
+//         go func(n int) {
+//             fmt.Println(n)
+//             done <- true
+//         }(num)
+//     }
+//
+//     for i := 0; i < len(nums); i++ {
+//         <-done
+//     }
+//
+// // OUTPUT: 1
+// //         2
+// //         3
+// //         4
+// //         5
 //
 // GO_USAGE_SELECT_UNBUFFERED_CHANNEL:
 //     ch1 := make(chan int)
