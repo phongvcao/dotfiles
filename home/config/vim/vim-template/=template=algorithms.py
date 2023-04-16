@@ -635,6 +635,19 @@ from typing import Iterator
 #         print( t[ 1 ] )
 #
 
+# using std::ref;                             // Returns a reference that can be used to modify the referenced object
+# using std::cref;                            // Returns a const reference that cannot be modified
+# PYTHON_USAGE:
+#     def add_one(n: List[int]) -> None:
+#         n[0] += 1
+#
+#     x = [5]
+#     add_one(x)
+#     print(x[0])
+#
+# # OUTPUT: 6
+#
+
 # //----< algorithm >-------------------------//
 # using std::fill;
 # PYTHON_USAGE:

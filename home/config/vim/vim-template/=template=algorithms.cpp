@@ -7,6 +7,7 @@
 #include <ios>
 #include <sstream>
 #include <fstream>
+// #include "json.hpp"                      // https://github.com/nlohmann/json
 #include <string>
 #include <cmath>
 #include <cstdlib>
@@ -69,6 +70,70 @@ using std::istringstream;
 //----< fstream >---------------------------//
 using std::ofstream;
 using std::ifstream;
+
+//----< "json.hpp" >------------------------//
+// using json = nlohmann::json;
+// CPP_USAGE:
+// CPP_USAGE_READ:
+//     // Read in the JSON data from a file
+//     std::ifstream input_file("example.json");
+//     json j;
+//     input_file >> j;
+//
+//     // Access values in the JSON data
+//     std::string name = j["name"];
+//     int age = j["age"];
+//     bool is_student = j["is_student"];
+//     std::vector<std::string> courses = j["courses"];
+//
+//     // Print out the values
+//     std::cout << "Name: " << name << std::endl;
+//     std::cout << "Age: " << age << std::endl;
+//     std::cout << "Is Student: " << (is_student ? "Yes" : "No") << std::endl;
+//     std::cout << "Courses:" << std::endl;
+//     for (const auto& course : courses)
+//     {
+//         std::cout << "  - " << course << std::endl;
+//     }
+//
+// // OUTPUT: Name: John Doe
+// //         Age: 25
+// //         Is Student: Yes
+// //         Courses:
+// //             - Math
+// //             - Science
+// //             - History
+//
+// CPP_USAGE_WRITE:
+//     // Create a C++ object to encode as JSON
+//     std::string name = "John Doe";
+//     int age = 25;
+//     bool is_student = true;
+//     std::vector<std::string> courses = {"Math", "Science", "History"};
+//
+//     // Create a JSON object and assign values from the C++ object
+//     json j;
+//     j["name"] = name;
+//     j["age"] = age;
+//     j["is_student"] = is_student;
+//     j["courses"] = courses;
+//
+//     // Print the JSON object to the console
+//     std::cout << j.dump(4) << std::endl;
+//
+//     return 0;
+//
+// // OUTPUT: {
+// //             "name": "John Doe",
+// //             "age": 25,
+// //             "is_student": true,
+// //             "courses": [
+// //                 "Math",
+// //                 "Science",
+// //                 "History"
+// //             ]
+// //         }
+//
 
 //----< string >----------------------------//
 using std::getline;
