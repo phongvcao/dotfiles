@@ -1397,6 +1397,48 @@ from threading import Condition
 # #         Consumer: processing data...
 #
 
+from threading import Semaphore
+# PYTHON_USAGE_SEMAPHORE:
+#     sem = Semaphore(2)  # create a semaphore with a maximum of 2 threads
+#     threads = []
+#
+#     def worker(i):
+#         sem.acquire()  # acquire the semaphore
+#         print(f'Worker {i} started')
+#         # do some work
+#         print(f'Worker {i} finished')
+#         sem.release()  # release the semaphore
+#
+#     for i in range(1, 11):
+#         t = Thread(target=worker, args=(i,))
+#         threads.append(t)
+#         t.start()
+#
+#     for t in threads:
+#         t.join()
+#
+# # OUTPUT: Worker 1 started
+# #         Worker 2 started
+# #         Worker 2 finished
+# #         Worker 1 finished
+# #         Worker 3 started
+# #         Worker 4 started
+# #         Worker 4 finished
+# #         Worker 3 finished
+# #         Worker 5 started
+# #         Worker 6 started
+# #         Worker 6 finished
+# #         Worker 5 finished
+# #         Worker 7 started
+# #         Worker 8 started
+# #         Worker 8 finished
+# #         Worker 7 finished
+# #         Worker 9 started
+# #         Worker 10 started
+# #         Worker 9 finished
+# #         Worker 10 finished
+#
+
 # //----< chrono >----------------------------//
 # using std::ratio;                           // Represents exact rational (e.g. ratio< 1, 3 >)
 #

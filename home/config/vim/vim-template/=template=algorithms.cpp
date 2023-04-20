@@ -716,6 +716,61 @@ using std::condition_variable;
 // //         Consumer: processing data...
 //
 
+// CPP_USAGE_SEMAPHORE:
+//     class Solution {
+//         public:
+//             void run() {
+//                 for (int i = 1; i <= num_threads; ++i) {
+//                     thread t(&Solution::thread_function, this, i);
+//                     t.detach();
+//                 }
+//
+//                 while (true) { }
+//             }
+//
+//         private:
+//             static const int num_threads = 10;
+//             int count = 0;
+//             mutex mtx;
+//             condition_variable cv;
+//
+//             void thread_function(int i) {
+//                 unique_lock<mutex> lock(mtx);
+//                 cv.wait(lock, [this]() { return count < 2; });
+//                 ++count;
+//                 lock.unlock();
+//
+//                 cout << "Thread " << i << " started" << endl;
+//                 // do some work
+//                 cout << "Thread " << i << " finished" << endl;
+//
+//                 lock_guard<mutex> guard(mtx);
+//                 --count;
+//                 cv.notify_one();
+//             }
+//         };
+//
+// // OUTPUT: Thread 1 started
+// //         Thread 2 started
+// //         Thread 3 started
+// //         Thread 4 started
+// //         Thread 2 finished
+// //         Thread 1 finished
+// //         Thread 5 started
+// //         Thread 6 started
+// //         Thread 7 started
+// //         Thread 8 started
+// //         Thread 4 finished
+// //         Thread 3 finished
+// //         Thread 9 started
+// //         Thread 10 started
+// //         Thread 7 finished
+// //         Thread 6 finished
+// //         Thread 10 finished
+// //         Thread 9 finished
+// //         Thread 8 finished
+//
+
 //----< chrono >----------------------------//
 using std::ratio;                           // Represents exact rational (e.g. ratio< 1, 3 >)
 

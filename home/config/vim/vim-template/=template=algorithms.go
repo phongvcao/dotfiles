@@ -1805,6 +1805,60 @@ import "time"
 //         wg.Wait()
 //     }
 //
+// // OUTPUT: Producer produced: 0
+// //         Consumer consumed: 0
+// //         Producer produced: 1
+// //         Consumer consumed: 1
+// //         Producer produced: 2
+// //         Consumer consumed: 2
+// //         Producer produced: 3
+// //         Consumer consumed: 3
+// //         Producer produced: 4
+// //         Consumer consumed: 4
+//
+
+// GO_USAGE_SEMAPHORE:
+//     sem := make(chan struct{}, 2) // create a channel with a buffer size of 2
+//         var wg sync.WaitGroup
+//
+//         for i := 1; i <= 10; i++ {
+//             wg.Add(1)
+//
+//             go func(i int) {
+//                 sem <- struct{}{} // acquire the semaphore
+//                 defer func() { <-sem }() // release the semaphore
+//
+//                 fmt.Printf("Goroutine %d started\n", i)
+//                 // do some work
+//                 fmt.Printf("Goroutine %d finished\n", i)
+//
+//                 wg.Done()
+//             }(i)
+//         }
+//
+//         wg.Wait()
+//
+// // OUTPUT: Goroutine 1 started
+// //         Goroutine 2 started
+// //         Goroutine 2 finished
+// //         Goroutine 1 finished
+// //         Goroutine 3 started
+// //         Goroutine 4 started
+// //         Goroutine 3 finished
+// //         Goroutine 5 started
+// //         Goroutine 6 started
+// //         Goroutine 7 started
+// //         Goroutine 8 started
+// //         Goroutine 4 finished
+// //         Goroutine 6 finished
+// //         Goroutine 5 finished
+// //         Goroutine 9 started
+// //         Goroutine 10 started
+// //         Goroutine 7 finished
+// //         Goroutine 8 finished
+// //         Goroutine 9 finished
+// //         Goroutine 10 finished
+//
 
 // //----< chrono >----------------------------//
 // using std::ratio;                           // Represents exact rational (e.g. ratio< 1, 3 >)
