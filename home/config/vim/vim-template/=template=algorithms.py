@@ -47,6 +47,8 @@ import sys
 # using std::ifstream;
 
 import json
+# //----< nlohmann/json.hpp >-----------------//
+# using json = nlohmann::json;
 # PYTHON_USAGE:
 #     s =  '{ "name": "John", "age": 30, "city": "New York"}'
 #     o = json.loads( s )
@@ -1341,6 +1343,38 @@ from threading import Condition
 # using std::chrono::seconds;                 // Duration in seconds
 # using std::chrono::minutes;                 // Duration in minutes
 # using std::chrono::hours;                   // Duration in hours
+#
+
+import requests
+# //----< curlpp/*.hpp >----------------------//
+# PYTHON_USAGE:
+# PYTHON_USAGE_HTTP_GET:
+#     getUrl = "https://www.example.com"
+#     resp = requests.get(getUrl)
+#
+#     if resp.status_code != 200:
+#         print("Error: Could not retrieve data from", getUrl)
+#         exit()
+#
+#     body = resp.content
+#     print(body)
+#
+# PYTHON_USAGE_HTTP_POST:
+#     # Initialize the JSON data
+#     jsonData = {"key1": "value1", "key2": "value2"}
+#     jsonValue = json.dumps(jsonData).encode('utf-8')
+#
+#     # Set the URL to send the POST request to
+#     postUrl = "http://www.example.com"
+#
+#     # Create a new POST request
+#     resp = requests.post(postUrl,
+#                          data=jsonValue,
+#                          headers={"Content-Type": "application/json"})
+#
+#     # Print the response status code and body
+#     print("Response Status:", resp.status_code)
+#     print("RESPONSE BODY: ", resp.text)
 #
 # //------------------------------------------//
 #

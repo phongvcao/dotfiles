@@ -115,6 +115,8 @@ import "strconv"
 //
 
 import "encoding/json"
+//----< nlohmann/json.hpp >-----------------//
+// using json = nlohmann::json;
 // GO_USAGE:
 //     type Person struct {
 //         Name string `json:"name"`
@@ -1816,6 +1818,69 @@ import "time"
 // using std::chrono::seconds;                 // Duration in seconds
 // using std::chrono::minutes;                 // Duration in minutes
 // using std::chrono::hours;                   // Duration in hours
+//
+
+import "net/http"
+import "ioutil"
+import "bytes"
+// //----< curlpp/*.hpp >----------------------//
+// GO_USAGE:
+// GO_USAGE_HTTP_GET:
+//     getUrl := "https://wwww.example.com"
+//     resp, err := http.Get(getUrl)
+//     if err != nil {
+//         log.Fatal(err)
+//     }
+//
+//     defer resp.Body.Close()
+//
+//     body, err := ioutil.ReadAll(resp.Body)
+//     if err != nil {
+//         log.Fatal(err)
+//     }
+//     fmt.Println(body)
+//
+// GO_USAGE_HTTP_POST:
+//     // Initialize the JSON data
+//     jsonData := map[string]string{
+//         "key1": "value1",
+//         "key2": "value2",
+//     }
+//     jsonValue, _ := json.Marshal(jsonData)
+//
+//     // Set the URL to send the POST request to
+//     postUrl := "http://www.example.com"
+//
+//     // Create a new HTTP client
+//     client := &http.Client{}
+//
+//     // Create a new POST request
+//     req, err := http.NewRequest("POST", postUrl, bytes.NewBuffer(jsonValue))
+//     if err != nil {
+//         fmt.Println("ERROR Creating Post Request: ", err)
+//         return
+//     }
+//
+//     // Set the request header
+//     req.Header.Set("Content-Type", "application/json")
+//
+//     // Send the POST request
+//     resp, err := client.Do(req)
+//     if err != nil {
+//         fmt.Println("ERROR Sending Post Request: ", err)
+//         return
+//     }
+//
+//     // Print the response status code and body
+//     fmt.Println("Response Status:", resp.Status)
+//     buf := new(bytes.Buffer)
+//     _, err = buf.ReadFrom(resp.Body)
+//     if err != nil {
+//         fmt.Println("ERROR Getting Response: ", err)
+//         return
+//     }
+//     fmt.Println("RESPONSE BODY: ", buf.String())
+//
 //
 // //------------------------------------------//
 //
