@@ -8,6 +8,7 @@
 #include <sstream>
 #include <fstream>
 // #include <nlohmann/json.hpp>                // https://github.com/nlohmann/json
+// #include <mysqlx/xdevapi.h>                 // https://github.com/mysql/mysql-connector-cpp
 #include <string>
 #include <cmath>
 #include <cstdlib>
@@ -233,6 +234,48 @@ using std::ifstream;
 // //                 }
 // //             ]
 // //         }
+//
+
+//----< mysqlx/xdevapi.h >------------------//
+// CPP_USAGE:
+//     // Connect to the database
+//     mysqlx::Session session("mysqlx://username:password@hostname:port/databasename");
+//     if (!session.isValid()) {
+//         cerr << "Failed to connect to the database: " << session.getErrorMessage() << endl;
+//         return 1;
+//     }
+//     cout << "Connected to the database!" << endl;
+//
+//     // Non-transactional query
+//     mysqlx::Result result = session.sql("SELECT name, age FROM users WHERE age > ?").bind(25).execute();
+//     while (result.hasNext()) {
+//         auto row = result.fetchOne();
+//         string name = row[0];
+//         int age = row[1];
+//         cout << "Name: " << name << ", Age: " << age << endl;
+//     }
+//
+//     // Transactional query
+//     mysqlx::Transaction transaction(session);
+//     try {
+//         transaction.start();
+//
+//         mysqlx::SqlStatement update = session.sql("UPDATE users SET age = ? WHERE name = ?");
+//         update.bind(30).bind("John").execute();
+//
+//         mysqlx::SqlStatement del = session.sql("DELETE FROM users WHERE age < ?");
+//         del.bind(30).execute();
+//
+//         transaction.commit();
+//         cout << "Successfully executed transactional queries!" << endl;
+//     } catch (mysqlx::Error& error) {
+//         transaction.rollback();
+//         cerr << "Failed to execute transactional queries: " << error.what() << endl;
+//         return 1;
+//     }
+//
+//     // Close the connection
+//     session.close();
 //
 
 //----< string >----------------------------//
