@@ -1657,6 +1657,42 @@ import "time"
 // //         received from channelB: bar
 // //         received from channelB: baz
 //
+// //----< future >----------------------------//
+// using std::future;
+// using std::async;
+// GO_USAGE:
+//     func printNumbers() {
+//         for i := 1; i <= 5; i++ {
+//             fmt.Println(i)
+//             time.Sleep(500 * time.Millisecond)
+//         }
+//     }
+//
+//     func printLetters() {
+//         for letter := 'a'; letter <= 'e'; letter++ {
+//             fmt.Printf("%c\n", letter)
+//             time.Sleep(500 * time.Millisecond)
+//         }
+//     }
+//
+//     func main() {
+//         go printNumbers()
+//         go printLetters()
+//
+//         time.Sleep(3000 * time.Millisecond)
+//     }
+//
+// // OUTPUT: 1
+// //         a
+// //         2
+// //         b
+// //         3
+// //         c
+// //         4
+// //         d
+// //         5
+// //         e
+//
 
 // //----< mutex >-----------------------------//
 // using std::mutex;                           // Basic mutex

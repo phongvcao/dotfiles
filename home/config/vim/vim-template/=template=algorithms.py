@@ -1255,6 +1255,7 @@ import concurrent.futures
 # using std::future;
 # using std::async;
 # PYTHON_USAGE:
+# PYTHON_USAGE_FUTURE:
 #     class Solution:
 #         def print_number(self, num):
 #             for i in range(5):
@@ -1296,6 +1297,34 @@ import concurrent.futures
 # #         Result 1: 100
 # #         Result 2: 200
 # #         Main thread <some thread ID> finished.
+#
+# PYTHON_USAGE_ASYNC:
+#     def printNumbers():
+#         for i in range(1, 6):
+#             print(i)
+#             time.sleep(0.5)
+#
+#     def printLetters():
+#         for letter in ['a', 'b', 'c', 'd', 'e']:
+#             print(letter)
+#             time.sleep(0.5)
+#
+#     if __name__ == '__main__':
+#         threading.Thread(target=printNumbers).start()
+#         threading.Thread(target=printLetters).start()
+#
+#         time.sleep(3)
+#
+# # OUTPUT: 1
+# #         a
+# #         2
+# #         b
+# #         3
+# #         c
+# #         4
+# #         d
+# #         5
+# #         e
 #
 
 from threading import Lock

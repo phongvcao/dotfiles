@@ -547,6 +547,7 @@ namespace this_thread = std::this_thread;   // Manipulate / Info of the current 
 using std::future;
 using std::async;
 // CPP_USAGE:
+// CPP_USAGE_FUTURE:
 //     class Solution {
 //     private:
 //         void print_number(int num, int& result) {
@@ -596,6 +597,42 @@ using std::async;
 // //         Result 1: 100
 // //         Result 2: 200
 // //         Main thread [thread id] finished.
+//
+// CPP_USAGE_ASYNC:
+//     void print_numbers() {
+//         for (int i = 1; i <= 5; i++) {
+//             std::cout << i << std::endl;
+//             std::this_thread::sleep_for(std::chrono::milliseconds(500));
+//         }
+//     }
+//
+//     void print_letters() {
+//         for (char letter = 'a'; letter <= 'e'; letter++) {
+//             std::cout << letter << std::endl;
+//             std::this_thread::sleep_for(std::chrono::milliseconds(500));
+//         }
+//     }
+//
+//     int main() {
+//         auto task1 = std::async(std::launch::async, print_numbers);
+//         auto task2 = std::async(std::launch::async, print_letters);
+//
+//         task1.wait();
+//         task2.wait();
+//
+//         return 0;
+//     }
+//
+// // OUTPUT: 1
+// //         a
+// //         2
+// //         b
+// //         3
+// //         c
+// //         4
+// //         d
+// //         5
+// //         e
 //
 
 //----< mutex >-----------------------------//
