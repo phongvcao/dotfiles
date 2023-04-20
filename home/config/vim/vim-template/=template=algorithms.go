@@ -1661,6 +1661,59 @@ import "time"
 // using std::future;
 // using std::async;
 // GO_USAGE:
+// GO_USAGE_FUTURE:
+//     type Solution struct {
+//     }
+//
+//     func (s *Solution) printNumber(num int, wg *sync.WaitGroup) int {
+//         for i := 0; i < 5; i++ {
+//             fmt.Printf("Thread %d printing %d\n", goroutineID(), num)
+//             time.Sleep(500 * time.Millisecond)
+//         }
+//         wg.Done()
+//         return num * 100
+//     }
+//
+//     func (s *Solution) runThreads() {
+//         fmt.Printf("Main thread %d started.\n", goroutineID())
+//
+//         var wg sync.WaitGroup
+//         wg.Add(2)
+//
+//         go func() {
+//             defer wg.Done()
+//             s.printNumber(1, &wg)
+//         }()
+//
+//         go func() {
+//             defer wg.Done()
+//             s.printNumber(2, &wg)
+//         }()
+//
+//         wg.Wait()
+//
+//         fmt.Printf("Main thread %d finished.\n", goroutineID())
+//     }
+//
+//     func goroutineID() int {
+//         return int(time.Now().UnixNano())
+//     }
+//
+// // OUTPUT: Thread 1 printing 1
+// //         Thread 2 printing 2
+// //         Thread 2 printing 2
+// //         Thread 1 printing 1
+// //         Thread 1 printing 1
+// //         Thread 2 printing 2
+// //         Thread 2 printing 2
+// //         Thread 1 printing 1
+// //         Thread 2 printing 2
+// //         Thread 1 printing 1
+// //         Result 1: 100
+// //         Result 2: 200
+// //         Main thread ... finished.
+//
+// GO_USAGE_ASYNC:
 //     func printNumbers() {
 //         for i := 1; i <= 5; i++ {
 //             fmt.Println(i)
