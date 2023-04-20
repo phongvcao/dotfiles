@@ -64,6 +64,72 @@ import json
 #     print( s )
 #
 
+# import mysql.connector                      // https://github.com/mysql/mysql-connector-python
+# NOTES:
+# Connecting to a database programmatically involves the following steps:
+#     1. Importing the appropriate database driver package in your
+#        programming language.
+#        => For example, in Golang, you would import the "database/sql"
+#           package and the package for your specific database driver (e.g.
+#           "github.com/go-sql-driver/mysql" for MySQL).
+#     2. Creating a connection string that contains the necessary information
+#        to connect to the database.
+#        => This usually includes the database server address, the username
+#           and password to authenticate with the database, and any other
+#           relevant options or parameters.
+#     3. Opening a connection to the database using the connection string and
+#        the appropriate driver function.
+#        => In most programming languages, this involves calling a specific
+#           function or method to establish a connection.
+#     4. Executing queries or statements on the database as needed to
+#        retrieve or modify data.
+#     5. Closing the database connection when it is no longer needed.
+#
+# PYTHON_USAGE:
+#     # Connect to the database
+#     db = mysql.connector.connect(
+#         host="hostname",
+#         user="username",
+#         password="password",
+#         database="databasename"
+#     )
+#
+#     # Check if there is an error
+#     if db.is_connected():
+#         print("Connected to the database!")
+#
+#     # Non-transactional query
+#     cursor = db.cursor()
+#     query = "SELECT name, age FROM users WHERE age > %s"
+#     cursor.execute(query, (25,))
+#     result = cursor.fetchall()
+#     for row in result:
+#         name, age = row
+#     print(f"Name: {name}, Age: {age}")
+#
+#     # Transactional query
+#     cursor = db.cursor()
+#     try:
+#         # Begin a transaction
+#         cursor.execute("START TRANSACTION")
+#
+#         # Execute queries
+#         cursor.execute("UPDATE users SET age = %s WHERE name = %s", (30, "John"))
+#         cursor.execute("DELETE FROM users WHERE age < %s", (30,))
+#
+#         # Commit the transaction
+#         db.commit()
+#         print("Successfully executed transactional queries!")
+#     except mysql.connector.Error as error:
+#         # Rollback the transaction if there is an error
+#         db.rollback()
+#         print(f"Failed to execute transactional queries: {error}")
+#     finally:
+#         # Close the cursor and database connection
+#         cursor.close()
+#         db.close()
+#
+
 # //----< string >----------------------------//
 # using std::getline;
 # using std::string;
