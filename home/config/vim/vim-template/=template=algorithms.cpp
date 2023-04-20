@@ -7,7 +7,7 @@
 #include <ios>
 #include <sstream>
 #include <fstream>
-// #include "json.hpp"                      // https://github.com/nlohmann/json
+// #include <nlohmann/json.hpp>                // https://github.com/nlohmann/json
 #include <string>
 #include <cmath>
 #include <cstdlib>
@@ -34,10 +34,14 @@
 #include <stdexcept>
 #include <limits>
 #include <numeric>
+#include <atomic>
 #include <thread>
 #include <future>
 #include <mutex>
 #include <condition_variable>
+// #include <curlpp/cURLpp.hpp>                // https://github.com/jpbarrette/curlpp
+// #include <curlpp/Easy.hpp>
+// #include <curlpp/Options.hpp>
 
 //----< iostream >--------------------------//
 using std::cout;
@@ -71,66 +75,162 @@ using std::istringstream;
 using std::ofstream;
 using std::ifstream;
 
-//----< "json.hpp" >------------------------//
+//----< nlohmann/json.hpp >-----------------//
 // using json = nlohmann::json;
 // CPP_USAGE:
+// CPP_USAGE_CMAKELISTS_TXT:
+//     cmake_minimum_required( VERSION 3.13 )
+//
+//     set(CMAKE_C_COMPILER "clang")
+//     set(CMAKE_C_FLAGS_DEBUG "-g")
+//     set(CMAKE_C_FLAGS "-fno-inline")
+//     set(CMAKE_C_FLAGS "-fno-inline-functions")
+//
+//     set(CMAKE_CXX_COMPILER "clang++")
+//     set(CMAKE_CXX_FLAGS_DEBUG "-g")
+//     set(CMAKE_CXX_FLAGS "-fno-inline")
+//     set(CMAKE_CXX_FLAGS "-fno-inline-functions")
+//
+//     cmake_minimum_required(VERSION 3.13)
+//     project(Coding_Assignments)
+//
+//     set(CMAKE_CXX_STANDARD 17)
+//
+//     # Find the nlohmann_json library
+//     find_package(nlohmann_json REQUIRED)
+//
+//     # Set the include path for nlohmann-json
+//     include_directories(/usr/local/opt/nlohmann-json/include)
+//
+//     # Add your project files
+//     add_executable(CodingAssessment CodingAssessment.cpp)
+//
+//     # Link against all of the libraries
+//     target_link_libraries(CodingAssessment nlohmann_json)
+//
+//
 // CPP_USAGE_READ:
-//     // Read in the JSON data from a file
-//     std::ifstream input_file("example.json");
-//     json j;
-//     input_file >> j;
+//     using json = nlohmann::json;
 //
-//     // Access values in the JSON data
-//     std::string name = j["name"];
-//     int age = j["age"];
-//     bool is_student = j["is_student"];
-//     std::vector<std::string> courses = j["courses"];
+//     class Person {
+//     public:
+//         string name;
+//         int age;
+//         string city;
 //
-//     // Print out the values
-//     std::cout << "Name: " << name << std::endl;
-//     std::cout << "Age: " << age << std::endl;
-//     std::cout << "Is Student: " << (is_student ? "Yes" : "No") << std::endl;
-//     std::cout << "Courses:" << std::endl;
-//     for (const auto& course : courses)
-//     {
-//         std::cout << "  - " << course << std::endl;
+//         Person(string name, int age, string city) : name(name), age(age), city(city) {}
+//     };
+//
+//     void from_json(const json& j, Person& p) {
+//         j.at("name").get_to(p.name);
+//         j.at("age").get_to(p.age);
+//         j.at("city").get_to(p.city);
 //     }
 //
-// // OUTPUT: Name: John Doe
+//     int main() {
+//         string json_str = R"(
+//             {
+//                 "people": [
+//                     {
+//                         "name": "John Smith",
+//                         "age": 30,
+//                         "city": "New York"
+//                     },
+//                     {
+//                         "name": "Jane Doe",
+//                         "age": 25,
+//                         "city": "San Francisco"
+//                     },
+//                     {
+//                         "name": "Bob Johnson",
+//                         "age": 40,
+//                         "city": "Chicago"
+//                     }
+//                 ]
+//             }
+//         )";
+//
+//         json j = json::parse(json_str);
+//
+//         vector<Person> people = j.at("people").get<vector<Person>>();
+//
+//         for (const auto& person : people) {
+//             cout << "Name: " << person.name << endl;
+//             cout << "Age: " << person.age << endl;
+//             cout << "City: " << person.city << endl;
+//             cout << endl;
+//         }
+//
+//         return 0;
+//     }
+//
+// // OUTPUT: Name: John Smith
+// //         Age: 30
+// //         City: New York
+// //
+// //         Name: Jane Doe
 // //         Age: 25
-// //         Is Student: Yes
-// //         Courses:
-// //             - Math
-// //             - Science
-// //             - History
+// //         City: San Francisco
+// //
+// //         Name: Bob Johnson
+// //         Age: 40
+// //         City: Chicago
 //
 // CPP_USAGE_WRITE:
-//     // Create a C++ object to encode as JSON
-//     std::string name = "John Doe";
-//     int age = 25;
-//     bool is_student = true;
-//     std::vector<std::string> courses = {"Math", "Science", "History"};
+//     using json = nlohmann::json;
 //
-//     // Create a JSON object and assign values from the C++ object
-//     json j;
-//     j["name"] = name;
-//     j["age"] = age;
-//     j["is_student"] = is_student;
-//     j["courses"] = courses;
+//     // Define a to_json() function to convert a Person object to a json object
+//     void to_json(json& j, const Person& p) {
+//         j = json{{"name", p.name}, {"age", p.age}, {"city", p.city}};
+//     }
 //
-//     // Print the JSON object to the console
-//     std::cout << j.dump(4) << std::endl;
+//     class Person {
+//     public:
+//         string name;
+//         int age;
+//         string city;
 //
-//     return 0;
+//         Person(string name, int age, string city) : name(name), age(age), city(city) {}
+//     };
+//
+//     int main() {
+//         vector<Person> people = {
+//             {"John Smith", 30, "New York"},
+//             {"Jane Doe", 25, "San Francisco"},
+//             {"Bob Johnson", 40, "Chicago"}
+//         };
+//
+//         json j;
+//
+//         j["people"] = json::array(); // create an empty JSON array inside the j object
+//
+//         for (const auto& person : people) {
+//             json person_json = person;  // encode a Person object to a json object
+//             j["people"].push_back(person_json);  // add the json object to the "people" array
+//         }
+//
+//         cout << j.dump(4) << endl;  // print the json object
+//
+//         return 0;
+//     }
 //
 // // OUTPUT: {
-// //             "name": "John Doe",
-// //             "age": 25,
-// //             "is_student": true,
-// //             "courses": [
-// //                 "Math",
-// //                 "Science",
-// //                 "History"
+// //             "people": [
+// //                 {
+// //                     "name": "John Smith",
+// //                     "age": 30,
+// //                     "city": "New York"
+// //                 },
+// //                 {
+// //                     "name": "Jane Doe",
+// //                     "age": 25,
+// //                     "city": "San Francisco"
+// //                 },
+// //                 {
+// //                     "name": "Bob Johnson",
+// //                     "age": 40,
+// //                     "city": "Chicago"
+// //                 }
 // //             ]
 // //         }
 //
@@ -290,6 +390,56 @@ using std::iota;
 using std::gcd;
 using std::lcm;
 using std::partial_sum;                     // Calculate partial_sum of range beginIter, endIter and put result to 3rd argument outIter
+
+//----< atomic >----------------------------//
+using std::atomic_flag;
+using std::memory_order_acquire;
+using std::memory_order_release;
+// CPP_USAGE:
+//     class SpinLock {
+//     private:
+//         atomic_flag flag;
+//
+//     public:
+//         SpinLock() : flag(ATOMIC_FLAG_INIT) {}
+//
+//         void lock() {
+//             while (flag.test_and_set(memory_order_acquire)) {
+//                 // busy waiting loop
+//             }
+//         }
+//
+//         void unlock() {
+//             flag.clear(memory_order_release);
+//         }
+//     };
+//
+//     SpinLock lock;
+//
+//     void increment_counter(int& counter) {
+//         for (int i = 0; i < 1000000; ++i) {
+//             lock.lock();
+//             ++counter;
+//             lock.unlock();
+//         }
+//     }
+//
+//     int main() {
+//         int counter = 0;
+//
+//         thread t1(increment_counter, ref(counter));
+//         thread t2(increment_counter, ref(counter));
+//
+//         t1.join();
+//         t2.join();
+//
+//         cout << "Counter value: " << counter << endl;
+//
+//         return 0;
+//     }
+//
+// // OUTPUT: Counter value: 2000000
+//
 
 //----< thread >----------------------------//
 using std::thread;
@@ -535,6 +685,85 @@ using std::chrono::milliseconds;            // Duration in milliseconds
 using std::chrono::seconds;                 // Duration in seconds
 using std::chrono::minutes;                 // Duration in minutes
 using std::chrono::hours;                   // Duration in hours
+
+//----< curlpp/*.hpp >----------------------//
+// CPP_USAGE:
+// CPP_USAGE_CMAKELISTS_TXT:
+//     cmake_minimum_required( VERSION 3.13 )
+//
+//     set(CMAKE_C_COMPILER "clang")
+//     set(CMAKE_C_FLAGS_DEBUG "-g")
+//     set(CMAKE_C_FLAGS "-fno-inline")
+//     set(CMAKE_C_FLAGS "-fno-inline-functions")
+//
+//     set(CMAKE_CXX_COMPILER "clang++")
+//     set(CMAKE_CXX_FLAGS_DEBUG "-g")
+//     set(CMAKE_CXX_FLAGS "-fno-inline")
+//     set(CMAKE_CXX_FLAGS "-fno-inline-functions")
+//
+//     cmake_minimum_required(VERSION 3.13)
+//     project(Coding_Assignments)
+//
+//     set(CMAKE_CXX_STANDARD 17)
+//
+//     # Find the curlpp library
+//     find_library(CURLPP_LIB curlpp)
+//     find_library(CURL_LIB curl)
+//
+//     # Set the include path for curlpp
+//     include_directories(/usr/local/opt/curlpp/include)
+//     # Set the include path for curl
+//     include_directories(/usr/local/opt/curl/include)
+//
+//     # Add your project files
+//     add_executable(CodingAssessment CodingAssessment.cpp)
+//
+//     # Link against the curlpp library
+//     target_link_libraries(CodingAssessment ${CURLPP_LIB} ${CURL_LIB})
+//
+// CPP_USAGE_HTTP_GET:
+//     curlpp::Cleanup cleanup;
+//     curlpp::Easy request;
+//     try {
+//         curlpp::options::Url getUrlOpt("https://wwww.example.com/");
+//         ostringstream response;
+//         curlpp::options::WriteStream writeStream(&response);
+//
+//         request.setOpt(getUrlOpt);
+//         request.setOpt(writeStream);
+//
+//         request.perform();
+//         cout << response.str() << endl;
+//     } catch (curlpp::LibcurlRuntimeError& e) {
+//         cerr << "Error: " << e.what() << endl;
+//     }
+//
+// CPP_USAGE_HTTP_POST:
+//     curlpp::Cleanup cleanup;
+//     curlpp::Easy request;
+//     try {
+//         curlpp::options::Url postUrlOpt("https://www.example.com/");
+//         request.setOpt(postUrlOpt);
+//
+//         curlpp::options::Post postOpt(true);
+//         request.setOpt(postOpt);
+//
+//         string data = "key1=value1&key2=value2";
+//         curlpp::options::PostFields postFields(data);
+//         request.setOpt(postFields);
+//
+//         ostringstream response;
+//         curlpp::options::WriteStream writeStream(&response);
+//         request.setOpt(writeStream);
+//
+//         request.perform();
+//         cout << response.str() << endl;
+//     } catch (curlpp::LibcurlRuntimeError& e) {
+//         cerr << "Error: " << e.what() << endl;
+//     }
+//
+
+
 
 //------------------------------------------//
 
