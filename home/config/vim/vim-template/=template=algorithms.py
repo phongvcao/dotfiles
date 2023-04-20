@@ -1353,6 +1353,51 @@ from threading import Lock
 #     #         Result 3: 1 2 3 4 5 6 7 8 9 10
 #
 
+from threading import RLock
+# //----< shared_mutex >----------------------//
+# using std::shared_mutex;
+# NOTES:
+#     1. Use Read-Write Locks, we can let multiple threads accessing counter for
+#     reading simultaneously without blocking each other. 
+#     2. Also Read-Write Locks only allows 1 single thread to increment the counter
+#     while blocking all other write calls.
+#     3. When Reads >>> Writes, and we need to require Locks for all reads, RWLock
+#     is clearly better performant than traditional Mutex.
+#
+# PYTHON_USAGE:
+# PYTHON_USAGE_READ_WRITE_LOCKS:
+#     class SafeCounter:
+#         def __init__(self):
+#             self.count = 0
+#             self.mux = RLock()
+#
+#         def Inc(self):
+#             self.mux.acquire()
+#             self.count += 1
+#             self.mux.release()
+#
+#         def Value(self):
+#             with self.mux:
+#                 return self.count
+#
+#     def main():
+#         threads = []
+#         counter = SafeCounter()
+#
+#         for i in range(10):
+#             t = Thread(target=lambda: [
+#                 counter.Inc() for _ in range(100)])
+#             threads.append(t)
+#             t.start()
+#
+#         for t in threads:
+#             t.join()
+#
+#         print("Final count: ", counter.Value())
+#
+#     # OUTPUT: Final count: 1000
+#
+
 from threading import Condition
 # //----< condition_variable >----------------//
 # using std::condition_variable;

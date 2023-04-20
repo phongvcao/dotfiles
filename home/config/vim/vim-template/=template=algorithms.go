@@ -1758,6 +1758,58 @@ import "time"
 // //         Final count: 0
 //
 
+// //----< shared_mutex >----------------------//
+// using std::shared_mutex;
+// NOTES:
+//     1. Use Read-Write Locks, we can let multiple threads accessing counter for
+//     reading simultaneously without blocking each other. 
+//     2. Also Read-Write Locks only allows 1 single thread to increment the counter
+//     while blocking all other write calls.
+//     3. When Reads >>> Writes, and we need to require Locks for all reads, RWLock
+//     is clearly better performant than traditional Mutex.
+//
+// GO_USAGE:
+// GO_USAGE_READ_WRITE_LOCKS:
+//     type SafeCounter struct {
+//         count int
+//         mux   sync.RWMutex
+//     }
+//
+//     func (c *SafeCounter) Inc() {
+//         c.mux.Lock()
+//         c.count++
+//         c.mux.Unlock()
+//     }
+//
+//     func (c *SafeCounter) Value() int {
+//         c.mux.RLock()
+//         defer c.mux.RUnlock()
+//         return c.count
+//     }
+//
+//     func main() {
+//         var wg sync.WaitGroup
+//         counter := SafeCounter{}
+//
+//         for i := 0; i < 10; i++ {
+//             wg.Add(1)
+//             go func() {
+//                 for j := 0; j < 100; j++ {
+//                     counter.Inc()
+//                     time.Sleep(time.Millisecond)
+//                 }
+//                 wg.Done()
+//             }()
+//         }
+//
+//         wg.Wait()
+//
+//         fmt.Println("Final count: ", counter.Value())
+//     }
+//
+// // OUTPUT: Final count: 1000
+//
+
 // //----< condition_variable >----------------//
 // using std::condition_variable;
 // GO_USAGE:

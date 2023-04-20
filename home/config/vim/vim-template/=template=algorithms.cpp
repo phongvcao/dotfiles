@@ -39,6 +39,7 @@
 #include <thread>
 #include <future>
 #include <mutex>
+#include <shared_mutex>
 #include <condition_variable>
 // #include <curlpp/cURLpp.hpp>                // https://github.com/jpbarrette/curlpp
 // #include <curlpp/Easy.hpp>
@@ -662,6 +663,58 @@ using std::unique_lock;                     // movable mutex ownership wrapper. 
 // //         Result 1: 1 2 3 4 5 6 7 8 9 10 
 // //         Result 2: 1 2 3 4 5 6 7 8 9 10 
 // //         Result 3: 1 2 3 4 5 6 7 8 9 10 
+//
+
+//----< shared_mutex >----------------------//
+using std::shared_mutex;
+// NOTES:
+//     1. Use Read-Write Locks, we can let multiple threads accessing counter for
+//     reading simultaneously without blocking each other. 
+//     2. Also Read-Write Locks only allows 1 single thread to increment the counter
+//     while blocking all other write calls.
+//     3. When Reads >>> Writes, and we need to require Locks for all reads, RWLock
+//     is clearly better performant than traditional Mutex.
+//
+// CPP_USAGE:
+// CPP_USAGE_READ_WRITE_LOCKS:
+//     class SafeCounter {
+//     public:
+//         SafeCounter() : count(0) {}
+//
+//         void Inc() {
+//             std::lock_guard<std::mutex> lock(m);
+//             ++count;
+//         }
+//
+//         int Value() const {
+//             std::shared_lock<std::shared_mutex> lock(m);
+//             return count;
+//         }
+//
+//     private:
+//         int count;
+//         mutable std::shared_mutex m;
+//     };
+//
+//     int main() {
+//         SafeCounter counter;
+//         std::vector<std::thread> threads;
+//         for (int i = 0; i < 10; ++i) {
+//             threads.emplace_back([&counter]() {
+//                 for (int j = 0; j < 100; ++j) {
+//                     counter.Inc();
+//                     std::this_thread::sleep_for(std::chrono::milliseconds(1));
+//                 }
+//             });
+//         }
+//         for (auto& t : threads) {
+//             t.join();
+//         }
+//         std::cout << "Final count: " << counter.Value() << std::endl;
+//         return 0;
+//     }
+//
+// // OUTPUT: Final count: 1000
 //
 
 //----< condition_variable >----------------//
