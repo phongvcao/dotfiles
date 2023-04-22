@@ -1,4 +1,5 @@
-/* Here's the basic syntax for creating a table in MySQL:
+/*
+ * Here's the basic syntax for creating a table in MySQL:
  *
  *     table_name is the name of the table you want to create
  *
@@ -56,7 +57,8 @@ CREATE TABLE courses (
 
 
 
-/* Here is a complete syntax for the INSERT statement in MySQL:
+/*
+ * Here is a complete syntax for the INSERT statement in MySQL:
  *
  *     INSERT INTO is an optional keyword to specify that data is being
  *     inserted into a table.
@@ -114,7 +116,8 @@ INSERT INTO courses (name, instructor, start_date, end_date, num_students, price
 
 
 
-/* Here is the complete syntax for the UPDATE statement in MySQL:
+/*
+ * Here is the complete syntax for the UPDATE statement in MySQL:
  *
  *     Here, table_name is the name of the table that you want to update, and
  *     column_name is the name of the column that you want to update.
@@ -209,7 +212,8 @@ FROM table_reference [, table_reference ...]
 
 
 
-/* This selects the name of each student along with the name of the course they
+/*
+ * This selects the name of each student along with the name of the course they
  * are enrolled in using an inner join.
  */
 SELECT students.name, courses.name
@@ -218,7 +222,8 @@ INNER JOIN courses ON students.id = courses.id;
 
 
 
-/* This selects the name of each student along with the name of the course they
+/*
+ * This selects the name of each student along with the name of the course they
  * are enrolled in using a left join. Students without a course will still be 
  * included in the result set, with a null value for the course name.
  */
@@ -228,7 +233,8 @@ LEFT JOIN courses ON students.id = courses.id;
 
 
 
-/* This selects the name of each student along with the name of the course they
+/* 
+ * This selects the name of each student along with the name of the course they
  * are enrolled in using a right join. Courses without a student will still be
  * included in the result set, with a null value for the student name.
  */
@@ -238,8 +244,10 @@ RIGHT JOIN courses ON students.id = courses.id;
 
 
 
-/* Full Outer Join (MySQL does not have a full outer join, but we can simulate
+/* 
+ * Full Outer Join (MySQL does not have a full outer join, but we can simulate
  * it using a union of a left join and a right join):
+ *
  * This selects the name of each student along with the name of the course they
  * are enrolled in using a full outer join. This is achieved by taking the
  * union of a left join and a right join, which combines the rows from both
@@ -256,7 +264,9 @@ RIGHT JOIN courses ON students.id = courses.id;
 
 
 
-/* In MySQL, you can use the LIKE operator to match a value against patterns.
+/*
+ * In MySQL, you can use the LIKE operator to match a value against patterns.
+ *
  * The basic syntax for using LIKE is as follows:
  *
  * The LIKE operator uses two special characters to match patterns:
@@ -267,14 +277,16 @@ SELECT column_name(s)
 FROM table_name
 WHERE column_name LIKE pattern;
 
-/* To select all the rows from a table called my_table where the name column
+/* 
+ * To select all the rows from a table called my_table where the name column
  * starts with the letter "J", you can use the following query:
  */
 SELECT *
 FROM my_table
 WHERE name LIKE 'J%';
 
-/* To select all the rows from a table called my_table where the name column
+/* 
+ * To select all the rows from a table called my_table where the name column
  * contains the letter "o" as the second character, you can use the following
  * query:
  */
