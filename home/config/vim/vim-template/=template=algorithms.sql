@@ -88,7 +88,9 @@ INSERT [INTO] table_name [(column1 [, column2, ..., columnN])]
 VALUES (value1 [, value2, ..., valueN]);
 
 INSERT [INTO] table_name [(column1 [, column2, ..., columnN])]
-SELECT select_statement;
+SELECT column1, column2, columnn3, ...
+FROM source_table
+WHERE condition;
 
 INSERT INTO students (name, age, gender) VALUES
     ('John Doe', 18, 'M'),
@@ -142,6 +144,12 @@ SET column_name1 = expression1, column_name2 = expression2, ...
 [ORDER BY ...]
 [LIMIT row_count]
 
+UPDATE [LOW_PRIORITY] [IGNORE] table_name
+SET column_name1 = expression1, column_name2 = expression2, ...
+[WHERE column_name = (SELECT column_name FROM table_name WHERE condition)]
+[ORDER BY ...]
+[LIMIT row_count]
+
 UPDATE students SET age = 23 WHERE name = 'Mark Smith' OR name = 'Alex Kim';
 
 UPDATE students SET gender = 'M' WHERE name = 'Adam Smith';
@@ -166,6 +174,11 @@ UPDATE students SET gender = 'M' WHERE name = 'Adam Smith';
  */
 DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM table_name
 [WHERE condition]
+[ORDER BY ...]
+[LIMIT row_count]
+
+DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM table_name
+[WHERE column_name IN (SELECT column_name FROM TABLE_NAME WHERE condition)]
 [ORDER BY ...]
 [LIMIT row_count]
 
@@ -293,3 +306,83 @@ WHERE name LIKE 'J%';
 SELECT *
 FROM my_table
 WHERE name LIKE '_o%';
+
+
+
+/*
+ * AVG: Returns the average value of a numeric column.
+ */
+SELECT AVG(salary)
+FROM employees;
+
+
+
+/*
+ * CONCAT: Concatenates two or more strings together.
+ */
+SELECT CONCAT(first_name, ' ', last_name) AS full_name
+FROM employees;
+
+
+
+/*
+ * COUNT: Returns the number of rows in a table or the number of non-NULL
+ * values in a column.
+ */
+SELECT COUNT(*)
+FROM employees;
+
+
+
+/*
+ * DATE_FORMAT: Formats a date value based on the specified format.
+ */
+SELECT DATE_FORMAT(hire_date, '%m/%d/%Y') AS formatted_hire_date
+FROM employees;
+
+
+
+/*
+ * IF: Returns a value based on a condition.
+ */
+SELECT IF(salary > 50000, 'High Salary', 'Low Salary') AS salary_level
+FROM employees;
+
+
+
+/*
+ * MAX: Returns the maximum value in a column.
+ */
+SELECT MAX(salary)
+FROM employees;
+
+
+
+/*
+ * MIN: Returns the minimum value in a column.
+ */
+SELECT MIN(salary)
+FROM employees;
+
+
+
+/*
+ * NOW: Returns the current date and time.
+ */
+SELECT NOW() AS current_datetime;
+
+
+
+/*
+ * ROUND: Rounds a numeric value to a specified number of decimal places.
+ */
+SELECT ROUND(salary, 2) AS rounded_salary
+FROM employees;
+
+
+
+/*
+ * SUBSTRING: Extracts a substring from a string.
+ */
+SELECT SUBSTRING(first_name, 1, 3) AS initials 
+FROM employees;
