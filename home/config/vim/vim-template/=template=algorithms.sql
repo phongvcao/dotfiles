@@ -213,7 +213,8 @@ DELETE FROM students WHERE name = 'Adam Smith';
  *
  *     LIMIT (optional) limits the number of rows returned.
  *
- * NOTE that the square brackets indicate that the enclosed items are optional.
+ *     NOTE that the square brackets indicate that the enclosed items are
+ *     optional.
  */
 SELECT [DISTINCT | ALL] select_expression [, select_expression ...]
 FROM table_reference [, table_reference ...]
@@ -232,6 +233,10 @@ FROM table_reference [, table_reference ...]
 SELECT students.name, courses.name
 FROM students
 INNER JOIN courses ON students.id = courses.id;
+
+SELECT students.name, courses.name
+FROM students
+JOIN courses ON students.id = courses.id;
 
 
 
@@ -386,3 +391,14 @@ FROM employees;
  */
 SELECT SUBSTRING(first_name, 1, 3) AS initials 
 FROM employees;
+
+
+
+/*
+ * DATEDIFF: Gets the difference BETWEEN 2 dates.
+ */
+SELECT *
+FROM orders
+JOIN customers
+ON orders.customer_id = customers.customer_id
+WHERE DATEDIFF(CURDATE(), orders.order_date) <= 30;
