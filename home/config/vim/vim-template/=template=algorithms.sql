@@ -238,6 +238,24 @@ SELECT students.name, courses.name
 FROM students
 JOIN courses ON students.id = courses.id;
 
+SELECT MIN(ABS(p1.x - p2.x)) AS shortest
+FROM Point AS p1 INNER JOIN Point AS p2 ON p2.x > p1.x
+WHERE ABS(p1.x - p2.x) != 0;
+
+SELECT MIN(ABS(p1.x - p2.x)) AS shortest
+FROM Point AS p1 JOIN Point AS p2 ON p2.x > p1.x
+WHERE ABS(p1.x - p2.x) != 0;
+
+
+
+/*
+ * This performs multiplication OF the 2 tables using Matrix multiplication
+ * by using JOIN without any ON conditioning.
+ */
+SELECT students.name, courses.name
+FROM students
+INNER JOIN courses;
+
 
 
 /*
@@ -249,6 +267,10 @@ SELECT students.name, courses.name
 FROM students
 LEFT JOIN courses ON students.id = courses.id;
 
+SELECT MIN(ABS(p1.x - p2.x)) AS shortest
+FROM Point AS p1 LEFT JOIN Point AS p2 ON p2.x > p1.x
+WHERE ABS(p1.x - p2.x) != 0;
+
 
 
 /* 
@@ -259,6 +281,10 @@ LEFT JOIN courses ON students.id = courses.id;
 SELECT students.name, courses.name
 FROM students
 RIGHT JOIN courses ON students.id = courses.id;
+
+SELECT MIN(ABS(p1.x - p2.x)) AS shortest
+FROM Point AS p1 RIGHT JOIN Point AS p2 ON p2.x > p1.x
+WHERE ABS(p1.x - p2.x) != 0;
 
 
 
@@ -279,6 +305,59 @@ UNION
 SELECT students.name, courses.name
 FROM students
 RIGHT JOIN courses ON students.id = courses.id;
+
+
+
+/*
+ * NOT IN: Exclude values that match a subquery result or a list of explicit
+ * values. It can be a useful tool for filtering data in complex queries.
+ */
+SELECT * 
+FROM employees 
+WHERE department_id NOT IN 
+  (SELECT department_id 
+   FROM departments 
+   WHERE department_name = 'Sales');
+
+SELECT * 
+FROM employees 
+WHERE department_id NOT IN (1, 3, 5);
+
+
+
+/*
+ * The general format of a SELECT CASE statement in MySQL:
+ *
+ *     expression is the column or expression you want to evaluate.
+ *
+ *     value1, value2, etc. are the values you want to compare the expression
+ *     to.
+ *
+ *     result1, result2, etc. are the results you want to output if the
+ *     expression matches the corresponding value.
+ *
+ *     ELSE is an optional keyword that specifies the result to output if none
+ *     of the previous conditions match. If no ELSE clause is specified and
+ *     none of the conditions match, the result will be NULL.
+ *
+ *     output_column is the alias name you want to give to the result column.
+ */
+SELECT
+   CASE expression
+      WHEN value1 THEN result1
+      WHEN value2 THEN result2
+      ...
+      [ELSE else_result]
+   END as output_column
+FROM table_name;
+
+SELECT
+   CASE
+      WHEN sales >= 1000 THEN 'High'
+      WHEN sales >= 500 AND sales < 1000 THEN 'Medium'
+      ELSE 'Low'
+   END as sales_category
+FROM sales_data;
 
 
 
@@ -402,3 +481,48 @@ FROM orders
 JOIN customers
 ON orders.customer_id = customers.customer_id
 WHERE DATEDIFF(CURDATE(), orders.order_date) <= 30;
+
+
+
+/*
+ * DIV: Gets the integer division result of 2 numbers.
+ */
+SELECT *
+FROM my_table
+WHERE column1 DIV 10 = 5;
+
+
+
+/*
+ * MOD: Gets the integer modulo result of 2 numbers.
+ */
+SELECT *
+FROM numbers
+WHERE MOD(num, 3) = 0;
+
+
+
+/*
+ * '/': Gets the float / double division result of 2 numbers.
+ */
+SELECT product_id, price 
+FROM products 
+WHERE price / 10 < 1;
+
+
+
+/*
+ * ABS: Gets absolute difference of 2 numbers.
+ */
+SELECT ABS(score1 - score2) AS absolute_difference
+FROM scores;
+
+
+/*
+ * COMPLEX EXAMPLES:
+ */
+SELECT ROUND(IFNULL(
+        (SELECT COUNT(DISTINCT requester_id, accepter_id) FROM RequestAccepted)
+        /
+        (SELECT COUNT(DISTINCT sender_id, send_to_id) FROM FriendRequest), 0), 2)
+AS accept_rate;
