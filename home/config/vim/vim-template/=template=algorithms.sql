@@ -154,6 +154,21 @@ UPDATE students SET age = 23 WHERE name = 'Mark Smith' OR name = 'Alex Kim';
 
 UPDATE students SET gender = 'M' WHERE name = 'Adam Smith';
 
+UPDATE my_table
+SET column1 = CASE
+   WHEN column2 = 'value1' THEN 'new_value1'
+   WHEN column2 = 'value2' THEN 'new_value2'
+   ELSE column1
+END
+WHERE column3 = 'some_value';
+
+UPDATE Salary
+SET sex =
+CASE
+    WHEN sex = "f" then "m"
+    ELSE "f"
+END;
+
 
 
 /*
@@ -500,6 +515,10 @@ SELECT *
 FROM numbers
 WHERE MOD(num, 3) = 0;
 
+SELECT *
+FROM numbers
+WHERE num % 3 = 0;
+
 
 
 /*
@@ -516,6 +535,43 @@ WHERE price / 10 < 1;
  */
 SELECT ABS(score1 - score2) AS absolute_difference
 FROM scores;
+
+
+
+/*
+ * SQRT(x): returns the square root of x.
+ */
+SELECT SQRT(25);
+
+SELECT SQRT(my_column) FROM my_table;
+
+
+
+/*
+ * POWER(x, y): returns x raised to the power of y.
+ */
+SELECT POWER(2, 3);
+
+SELECT POWER(my_column, 2) FROM my_table;
+
+
+
+/*
+ * LOG(x): returns the natural logarithm (base e) of x.
+ */
+SELECT LOG(2.718281828);
+
+SELECT LOG(my_column) FROM my_table;
+
+
+
+/*
+ * LOG10(x): returns the base-10 logarithm of x.
+ */
+SELECT LOG10(1000);
+
+SELECT LOG10(my_column) FROM my_table;
+
 
 
 /*
