@@ -242,6 +242,25 @@ FROM table_reference [, table_reference ...]
 
 
 /*
+ * GROUP BY: Group rows from a table based on one or more columns.
+ *
+ *     It allows you to perform aggregate functions (such as SUM(), COUNT(),
+ *     AVG(), MIN(), MAX(), etc.) on the groups, and return a single row for
+ *     each group.
+ */
+SELECT column1, column2, ..., aggregate_function(columnX)
+FROM table_name
+WHERE condition
+GROUP BY column1, column2, ...
+
+SELECT actor_id, director_id
+FROM ActorDirector
+GROUP BY actor_id, director_id
+HAVING COUNT(timestamp) >= 3;
+
+
+
+/*
  * This selects the name of each student along with the name of the course they
  * are enrolled in using an inner join.
  */
@@ -260,6 +279,24 @@ WHERE ABS(p1.x - p2.x) != 0;
 SELECT MIN(ABS(p1.x - p2.x)) AS shortest
 FROM Point AS p1 JOIN Point AS p2 ON p2.x > p1.x
 WHERE ABS(p1.x - p2.x) != 0;
+
+SELECT customers.name
+FROM customers
+INNER JOIN (
+  SELECT customer_id
+  FROM orders
+  WHERE order_date = '2023-04-24'
+) AS subquery
+ON customers.id = subquery.customer_id;
+
+SELECT customers.name
+FROM customers
+JOIN (
+  SELECT customer_id
+  FROM orders
+  WHERE order_date = '2023-04-24'
+) AS subquery
+ON customers.id = subquery.customer_id;
 
 
 
@@ -320,6 +357,48 @@ UNION
 SELECT students.name, courses.name
 FROM students
 RIGHT JOIN courses ON students.id = courses.id;
+
+
+
+/*
+ * UNION: Combine the results of two or more SELECT statements into a single
+ * result set that INCLUDES ONLY DISTINCT ROWS.
+ *
+ * NOTE: The rows in the two SELECT statements of a UNION or UNION ALL
+ *       statement do not have to be the same.
+ *
+ *       However, the columns selected in each SELECT statement must have the
+ *       same data types and be in the same order in both statements, and the
+ *       number of columns in each SELECT statement must be the same.
+ */
+SELECT column1, column2, ..., columnN
+FROM table1
+[WHERE condition1]
+UNION
+SELECT column1, column2, ..., columnN
+FROM table2
+[WHERE condition2];
+
+
+
+/*
+ * UNION ALL: Combine the results of two or more SELECT statements into a
+ * single result set, but it includes all rows, including duplicates
+ *
+ * NOTE: The rows in the two SELECT statements of a UNION or UNION ALL
+ *       statement do not have to be the same.
+ *
+ *       However, the columns selected in each SELECT statement must have the
+ *       same data types and be in the same order in both statements, and the
+ *       number of columns in each SELECT statement must be the same.
+ */
+SELECT column1, column2, ..., columnN
+FROM table1
+[WHERE condition1]
+UNION ALL
+SELECT column1, column2, ..., columnN
+FROM table2
+[WHERE condition2];
 
 
 
@@ -455,6 +534,17 @@ FROM employees;
 SELECT MAX(salary)
 FROM employees;
 
+SELECT salary
+FROM employees
+ORDER BY salary DESC
+LIMIT 1
+
+SELECT COUNT(employee_id)
+FROM Project
+GROUP BY project_id
+ORDER BY COUNT(employee_id) DESC
+LIMIT 1
+
 
 
 /*
@@ -463,12 +553,44 @@ FROM employees;
 SELECT MIN(salary)
 FROM employees;
 
+SELECT salary
+FROM employees
+ORDER BY salary ASC
+LIMIT 1
+
+SELECT COUNT(employee_id)
+FROM Project
+GROUP BY project_id
+ORDER BY COUNT(employee_id) ASC
+LIMIT 1
+
+SELECT player_id, MIN(event_date)
+FROM Activity
+GROUP BY player_id;
+
 
 
 /*
  * NOW: Returns the current date and time.
  */
 SELECT NOW() AS current_datetime;
+
+
+
+/*
+ * STR_TO_DATE: Convert date & time string to DATE objects.
+ */
+SELECT *
+FROM orders
+WHERE DATE(created_at) = STR_TO_DATE('2023-04-23 00:00:00', '%Y-%m-%d %H:%i:%s');
+
+
+
+/*
+* DATE_FORMAT: Convert DATE objects TO date & time string
+*/
+SELECT DATE_FORMAT(date_column, '%Y-%m-%d %H:%i:%s') AS datetime_string
+FROM my_table;
 
 
 
@@ -571,6 +693,79 @@ SELECT LOG(my_column) FROM my_table;
 SELECT LOG10(1000);
 
 SELECT LOG10(my_column) FROM my_table;
+
+
+
+/*
+ * DISTINCT: Return only distinct (unique) values in a query result.
+ *
+ *           It is often used in conjunction with the SELECT statement to
+ *           remove duplicate values from the output.
+ *
+ *           Can be used in conjunction with any aggregate function, including
+ *           COUNT, SUM, AVG, MIN, and MAX, to retrieve unique values from the 
+ *           result set.
+ */
+SELECT DISTINCT column_name1, column_name2, ...
+FROM table_name;
+WHERE condition;
+
+SELECT aggregate_function(DISTINCT column_name)
+FROM table_name
+WHERE condition;
+
+
+
+/*
+ * Here is a comprehensive list of aggregate functions in MySQL:
+ *
+ *     AVG(): Calculates the average of the selected values.
+ *
+ *     COUNT(): Returns the number of rows in the selected column.
+ *
+ *     MAX(): Returns the maximum value of the selected column.
+ *
+ *     MIN(): Returns the minimum value of the selected column.
+ *
+ *     SUM(): Calculates the sum of the selected values.
+ *
+ *     GROUP_CONCAT(): Concatenates strings from multiple rows into a single
+ *                     string.
+ *
+ *     STD(): Calculates the standard deviation of a population.
+ *
+ *     STDDEV_POP(): Calculates the standard deviation of a population.
+ *
+ *     STDDEV_SAMP(): Calculates the standard deviation of a sample.
+ *
+ *     VAR_POP(): Calculates the variance of a population.
+ *
+ *     VAR_SAMP(): Calculates the variance of a sample.
+ *
+ *     VARIANCE(): Calculates the variance of a population or sample, depending
+ *                 on the context.
+ * 
+ * These functions can be used in the SELECT statement with or without the
+ * DISTINCT keyword to calculate aggregate values over selected columns or
+ * groups of rows.
+ *
+ * NOTE: GROUP BY clause is used to group rows before applying aggregate
+ *       functions, and must be used in conjunction with the SELECT statement
+ *       or HAVING clause when using aggregate functions.
+ *
+ *       Aggregate functions in MySQL can be placed in the SELECT statement,
+ *       HAVING clause, and ORDER BY clause.
+ *
+ *       In the SELECT statement, aggregate functions are used to calculate
+ *       values over columns or groups of rows, and can be used with or without
+ *       the DISTINCT keyword.
+ *
+ *       In the HAVING clause, aggregate functions are used to filter groups of
+ *       rows based on a specified condition.
+ *
+ *       In the ORDER BY clause, aggregate functions are used to sort the
+ *       output of the SELECT statement by the calculated aggregate values.
+ */
 
 
 

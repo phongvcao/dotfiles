@@ -1747,6 +1747,45 @@ import "time"
 // //         e
 //
 
+// NOTE:
+//
+//     Threads Synchronization Ranking: LEAST-To-MOST Overhead:
+//
+//     1. Sync.Mutex: This is the least expensive synchronization primitive in
+//        the list because it involves the least coordination between
+//        goroutines. It's typically used for protecting shared memory access
+//        in a critical section.
+//  
+//     2. Buffered channels: These channels allow sending and receiving data
+//        asynchronously, and they buffer a limited number of values. Since the
+//        values are buffered, there's less coordination between the sender and
+//        receiver, which reduces the overhead.
+//
+//     3. Sync.RWMutex: This is a read-write lock that allows for multiple
+//        readers or a single writer. It's less expensive than a Mutex because
+//        multiple readers can acquire the lock at the same time, but it still
+//        involves some overhead due to the coordination between the readers
+//        and writer.
+//
+//     4. Sync.WaitGroup: This is a synchronization primitive that allows a
+//        group of goroutines to wait for each other to complete. It involves
+//        tracking the number of active goroutines, and the WaitGroup is
+//        blocked until all goroutines have completed. While it's not as heavy
+//        as unbuffered channels, it still involves coordination and tracking
+//        of goroutines, which can be expensive.
+//
+//     5. Unbuffered channels: These channels block the sender until the
+//        receiver is ready to receive the value, and vice versa. The
+//        communication between the sender and receiver can be expensive,
+//        especially when there are multiple goroutines involved, which can
+//        lead to significant overhead.
+//
+//     Again, it's important to note that the performance overhead of these
+//     synchronization primitives can vary depending on the specific use case
+//     and the number of goroutines involved, so it's always recommended to
+//     measure and profile the code to determine the actual overhead.
+//
+
 // //----< mutex >-----------------------------//
 // using std::mutex;                           // Basic mutex
 // using std::timed_mutex;                     // mutex with a timeout. CAN BE LOCKED & UNLOCKED
