@@ -703,6 +703,24 @@ from typing import Iterator
 #         print( t[ 1 ] )
 #
 
+from typing import Optional
+# //----< optional >--------------------------//
+# using std::optional;                        // Expresses that a value may or may not be present
+# PYTHON_USAGE:
+#     def get_value() -> Optional[int]:
+#         # Return an optional integer value
+#         return 42
+#
+#     # Get the optional value
+#     optional_value = get_value()
+#
+#     # Check if the optional has a value
+#     if optional_value is not None:
+#         print("Optional value:", optional_value)
+#     else:
+#         print("Optional value is None")
+#
+
 # using std::ref;                             // Returns a reference that can be used to modify the referenced object
 # using std::cref;                            // Returns a const reference that cannot be modified
 # PYTHON_USAGE:

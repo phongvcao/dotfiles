@@ -29,6 +29,7 @@
 #include <bitset>
 #include <iterator>
 #include <utility>
+#include <optional>
 #include <algorithm>
 #include <memory>
 #include <cctype>
@@ -376,6 +377,33 @@ using std::make_pair;
 using std::move;                            // Move resources between objects - typically used with std::unique_ptr<T>
 using std::ref;                             // Returns a reference that can be used to modify the referenced object
 using std::cref;                            // Returns a const reference that cannot be modified
+
+//----< optional >--------------------------//
+using std::optional;                        // Expresses that a value may or may not be present
+// CPP_USAGE:
+//     std::optional<int> optionalValue;
+//
+//     // Assign a value to the optional
+//     optionalValue = 42;
+//
+//     // Check if the optional has a value
+//     if (optionalValue.has_value()) {
+//         // Access the value using the dereference operator or value() function
+//         std::cout << "Optional value: " << *optionalValue << std::endl;
+//         // or
+//         // std::cout << "Optional value: " << optionalValue.value() << std::endl;
+//     } else {
+//         std::cout << "Optional value is empty" << std::endl;
+//     }
+//
+//     // Reset the optional to empty
+//     optionalValue.reset();
+//
+//     // Check if the optional is empty
+//     if (!optionalValue.has_value()) {
+//         std::cout << "Optional value is empty" << std::endl;
+//     }
+//
 
 //----< algorithm >-------------------------//
 using std::fill;

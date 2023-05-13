@@ -1,5 +1,3 @@
-package main
-
 // //----< iostream >--------------------------//
 // using std::cout;
 // using std::cin;
@@ -33,115 +31,127 @@ package main
 // using std::ifstream;
 //
 
-import "fmt"
-import "strconv"
 // using std::to_string;
-// GO_USAGE:
-//     fmt.Printf( strconv.FormatInt( 15, 16 ) )  -- output: 'f'
+// SWIFT_USAGE:
+//     let number = 42
+//     let numberString = String( number ) // Creates a string representation of the number
+//     print( numberString ) // Output: "42"
 //
-//     fmt.Printf( strconv.FormatInt( 15, 2 ) )  -- output: '1111'
+//     let name = "John"
+//     let nameString = String( describing: name ) // Creates a string representation of the name
+//     print( nameString ) // Output: "John"
 //
-//     fmt.Printf( strconv.FormatInt( 15, 8 ) )  -- output: '17'
+//     let array = [ 1, 2, 3 ]
+//     let arrayString = String( describing: array ) // Creates a string representation of the array
+//     print( arrayString ) // Output: "[1, 2, 3]"
 //
-//     fmt.Printf( strconv.Itoa( 17 ) )  -- output: '17'
-//
-//     fmt.Printf( fmt.Sprintf( "%d", 15 ) )  -- output: '15'
-//
-//
-// using std::stoi;                            // PREFERRED stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
-// using std::stol;                            // PREFERRED stol() over atol() since stoi() allows conversion from binary & hex strings to int.
-// using std::stoll;                           // PREFERRED stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
-// using std::atoi;                            // DEPRECATED: Preferred stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
-// using std::atol;                            // DEPRECATED: Preferred stol() over atol() since stoi() allows conversion from binary & hex strings to int.
-// using std::atoll;                           // DEPRECATED: Preferred stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
-// GO_USAGE:
-//     fmt.Println( strconv.Atoi( "123" ) )  -- output: 123
-//     fmt.Println( strconv.Atoi( "-123" ) )  -- output: -123
-//
-//     i, err := strconv.ParseInt( "123", 10, 64 )
-//     fmt.Println( i )  -- output: 123
-//
-//     i, err := strconv.ParseInt( "-123", 10, 64 )
-//     fmt.Println( i )  -- output: -123
-//
-//     i, err := strconv.ParseInt( "111", 2, 64 )
-//     fmt.Println( i )  -- output: 7
-//
-//     i, err := strconv.ParseInt( "ABC", 16, 64 )
-//     fmt.Println( i )  -- output: 2748
-//
-// GO_TRICKS:
-// GO_TRICKS_UNICODE (MOST COMMON):
-//     var s string = "ABCDE"
-//     var lc []rune = []rune( s )
-//     var lc []rune = make( []rune, 26, 26 )
-//     lc := make( []rune, 26, 26 )
-//
-//     for i := 0; i < 26; i++ {
-//         lc[ i ] = rune( int( 'a' ) + i )
-//     }
-//     for i := 0; i < 26; i++ {
-//         fmt.Printf( "%c\n", lc[ i ] )
+//     class Person {
+//         let name: String
+//         let age: Int
+//         
+//         init( name: String, age: Int ) {
+//             self.name = name
+//             self.age = age
+//         }
+//         
+//         var description: String {
+//             return "Person - Name: \(name), Age: \(age)"
+//         }
 //     }
 //
-//     var li []int = make( []int, 26, 26 )
-//     li := make( []int, 26, 26 )
-//
-//     for _, c := range lc {
-//         li[ int( c ) - int( 'a' ) ] += 1
-//     }
-//     fmt.Println( li )
-//
-// GO_TRICKS_ASCII (LESS COMMON):
-//     var s string = "ABCDE"
-//     var lc []byte = []byte( s )
-//     var lc []byte = make( []byte, 26, 26 )
-//     lc := make( []byte, 26, 26 )
-//
-//     for i := 0; i < 26; i++ {
-//         lc[ i ] = byte( int( 'a' ) + i )
-//     }
-//     for i := 0; i < 26; i++ {
-//         fmt.Printf( "%c\n", lc[ i ] )
-//     }
-//
-//     var li []int = make( []int, 26, 26 )
-//     li := make( []int, 26, 26 )
-//
-//     for _, c := range lc {
-//         li[ int( c ) - int( 'a' ) ] += 1
-//     }
-//     fmt.Println( li )
+//     let person = Person( name: "John", age: 25 )
+//     let personString = String( describing: person )
+//     print( personString ) // Output: "Person - Name: John, Age: 25"
 //
 
-import "encoding/json"
+// using std::stoi;                            // PREFERRED stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
+// SWIFT_USAGE:
+//     let value = Int( "42" )
+//     print( value )
+//
+//     let value = Int32( "42" )
+//     print( value )
+//
+
+// using std::stol;                            // PREFERRED stol() over atol() since stoi() allows conversion from binary & hex strings to int.
+// SWIFT_USAGE:
+//     let value = Int64( "42" )
+//     print( value )
+//
+//     let value = Int( "42" )
+//     print( value )
+//
+
+import BigInt
+// using std::stoll;                           // PREFERRED stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
+// SWIFT_USAGE:
+//     let value = BigInt("1234567890123456789")
+//     print( value )
+//
+
+// using std::atoi;                            // DEPRECATED: Preferred stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
+// SWIFT_USAGE:
+//     let value = Int( "42" )
+//     print( value )
+//
+//     let value = Int32( "42" )
+//     print( value )
+//
+
+// using std::atol;                            // DEPRECATED: Preferred stol() over atol() since stoi() allows conversion from binary & hex strings to int.
+// SWIFT_USAGE:
+//     let value = Int( "42" )
+//     print( value )
+//
+//     let value = Int32( "42" )
+//     print( value )
+//
+
+// using std::atoll;                           // DEPRECATED: Preferred stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
+// SWIFT_USAGE:
+//     let value = BigInt("1234567890123456789")
+//     print( value )
+//
+
+import Foundation
 //----< nlohmann/json.hpp >-----------------//
 // using json = nlohmann::json;
-// GO_USAGE:
-//     type Person struct {
-//         Name string `json:"name"`
-//         Age  int    `json:"age"`
+// SWIFT_USAGE:
+//     class Person: Codable {
+//         let name: String
+//         let age: Int
+//         
+//         init(name: String, age: Int) {
+//             self.name = name
+//             self.age = age
+//         }
 //     }
 //
-//     // Encoding JSON string from struct
-//     person := Person{ Name: "John", Age: 30 }
-//     personJSON, err := json.Marshal( person )
-//     if err != nil {
-//         panic( err.Error() )
+//     // Encoding JSON string from class instance
+//     let person = Person(name: "John", age: 30)
+//     let encoder = JSONEncoder()
+//     let personJSON: Data
+//     do {
+//         personJSON = try encoder.encode(person)
+//         if let jsonString = String(data: personJSON, encoding: .utf8) {
+//             print(jsonString)
+//         }
+//     } catch {
+//         fatalError("Failed to encode person to JSON: \(error)")
 //     }
-//     fmt.Println( string( personJSON ) )
 //
-//     // Decoding JSON string into struct
-//     var decodedPerson Person
-//     err = json.Unmarshal (personJSON, &decodedPerson )
-//     if err != nil {
-//         panic( err.Error() )
+//     // Decoding JSON string into class instance
+//     let decoder = JSONDecoder()
+//     do {
+//         let decodedPerson = try decoder.decode(Person.self, from: personJSON)
+//         print("Name: \(decodedPerson.name), Age: \(decodedPerson.age)")
+//     } catch {
+//         fatalError("Failed to decode JSON into person: \(error)")
 //     }
-//     fmt.Printf( "Name: %s, Age: %d\n", decodedPerson.Name, decodedPerson.Age )
 //
 
-import "database/sql"
-import _ "github.com/go-sql-driver/mysql"
+import NIO
+import MySQLNIO
 // NOTES:
 // Connecting to a database programmatically involves the following steps:
 //     1. Importing the appropriate database driver package in your
@@ -162,113 +172,133 @@ import _ "github.com/go-sql-driver/mysql"
 //        retrieve or modify data.
 //     5. Closing the database connection when it is no longer needed.
 //
-// GO_USAGE:
-//     db, err := sql.Open("mysql", "username:password@tcp(hostname:port)/databasename")
-//     if err != nil {
-//         panic(err.Error())
-//     }
-//     defer db.Close()
+// SWIFT_USAGE:
+//     let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+//     defer { try! group.syncShutdownGracefully() }
 //
-//     err = db.Ping()
-//     if err != nil {
-//         panic(err.Error())
-//     }
+//     let configuration = MySQLConfiguration(
+//         hostname: "hostname",
+//         username: "username",
+//         password: "password",
+//         database: "databasename"
+//     )
 //
-//     // Non-transactional query
-//     rows, err := db.Query("SELECT name, age FROM users WHERE age > ?", 25)
-//     if err != nil {
-//         panic(err.Error())
-//     }
-//     defer rows.Close()
+//     let eventLoop = group.next()
+//     let connection = MySQLConnection.connect(configuration: configuration, on: eventLoop).wait()
 //
-//     for rows.Next() {
-//         var name string
-//         var age int
-//         err := rows.Scan(&name, &age)
-//         if err != nil {
-//             panic(err.Error())
+//     let query = """
+//         SELECT name, age FROM users WHERE age > ?
+//         """
+//
+//     let result = connection.simpleQuery(query, [25]).wait()
+//     let rows = try result.get()
+//     for row in rows {
+//         guard let name = row[0]?.string, let age = row[1]?.int else {
+//             fatalError("Error extracting values from row")
 //         }
-//         fmt.Printf("Name: %s, Age: %d\n", name, age)
+//         print("Name: \(name), Age: \(age)")
 //     }
 //
-//     // Transactional query
-//     tx, err := db.Begin()
-//     if err != nil {
-//         panic(err.Error())
+//     let tx = connection.startTransaction().wait()
+//
+//     let updateQuery = """
+//         UPDATE users SET age = ? WHERE name = ?
+//         """
+//     let deleteQuery = """
+//         DELETE FROM users WHERE age < ?
+//         """
+//
+//     do {
+//         try tx.simpleQuery(updateQuery, [30, "John"]).wait()
+//         try tx.simpleQuery(deleteQuery, [30]).wait()
+//         try tx.commit().wait()
+//         print("Successfully executed transactional queries!")
+//     } catch {
+//         tx.rollback().whenComplete { _ in
+//             fatalError("Error executing transactional queries: \(error)")
+//         }
 //     }
 //
-//     _, err = tx.Exec("UPDATE users SET age = ? WHERE name = ?", 30, "John")
-//     if err != nil {
-//         tx.Rollback()
-//         panic(err.Error())
-//     }
-//
-//     _, err = tx.Exec("DELETE FROM users WHERE age < ?", 30)
-//     if err != nil {
-//         tx.Rollback()
-//         panic(err.Error())
-//     }
-//
-//     err = tx.Commit()
-//     if err != nil {
-//         panic(err.Error())
-//     }
-//     fmt.Println("Successfully executed transactional queries!")
+//     connection.close()
+//     try! group.syncShutdownGracefully()
 //
 
 // //----< string >----------------------------//
 // using std::getline;
+// SWIFT_USAGE:
+//     var input = ""
+//     while let line = readLine() {
+//         input += line
+//     }
+//     print("Input: \(input)")
+//
+//     let lines = input.components(separatedBy: CharacterSet.newlines)
+//     for line in lines {
+//         print(line)
+//     }
+//
+
 // using std::string;
 
 import "math"
 // //----< cmath >-----------------------------//
 // using std::sqrt;
-// GO_USAGE:
-//     fmt.Println( math.Sqrt( 9 ) )  -- output: 3
+// SWIFT_USAGE:
+//     let number = 9.0
+//     let result = sqrt(number)
+//
+//     print(result)
 //
 
 // using std::pow;
-// GO_USAGE:
-//     fmt.Println( math.Pow( 7, 2 ) )
-//     fmt.Println( math.Pow( 7, 2 ) == 7 * 7 )  -- True
-//     fmt.Println( math.Pow( 2, -1 ) )  -- output: 0.5
-//     fmt.Println( math.Pow( 2.0, 0.5 ) )  -- output: 1.4142135623730951
+// SWIFT_USAGE:
+//     print(pow(7, 2))
+//     print(pow(7, 2) == 7 * 7)
+//     print(pow(2, -1))
+//     print(pow(2.0, 0.5))
 //
-//     fmt.Println( math.Pow10( 2 ) )  -- output: 100
-//     fmt.Println( math.Pow10( 5 ) == 100000 )  -- True
+//     print(pow(10, 2))
+//     print(pow(10, 5) == 100000)
 //
 
 import "math/bits"
 // using std::div;
 // using std::ldiv;
 // using std::lldiv;
-// GO_USAGE:
-//     quo, rem := bits.Div( 0, 7, 3 )
-//     fmt.Printf( "quo: %d ; rem: %d\n", quo, rem )  -- output: 2, 1
+// SWIFT_USAGE:
+//     let dividend = 7
+//     let divisor = 3
+//     let (quo, rem) = dividend.quotientAndRemainder(dividingBy: divisor)
+//     print("quo: \(quo) ; rem: \(rem)")
 //
-//     quo, rem := bits.Div32( 0, 7, 3 )
-//     fmt.Printf( "quo: %d ; rem: %d\n", quo, rem )  -- output: 2, 1
+//     let dividend: Int32 = 7
+//     let divisor: Int32 = 3
+//     let (quo, rem) = dividend.quotientAndRemainder(dividingBy: divisor)
+//     print("quo: \(quo) ; rem: \(rem)")
 //
-//     quo, rem := bits.Div64( 0, 7, 3 )
-//     fmt.Printf( "quo: %d ; rem: %d\n", quo, rem )  -- output: 2, 1
+//     let dividend: Int64 = 7
+//     let divisor: Int64 = 3
+//     let (quo, rem) = dividend.quotientAndRemainder(dividingBy: divisor)
+//     print("quo: \(quo) ; rem: \(rem)")
 //
 
 // using std::log;                             // log( <arg> )
-// GO_USAGE:
-//     fmt.Println( math.Log( 10 ) )
-//     fmt.Println( math.Log2( 10 ) )
-//     fmt.Println( math.Log10( 10 ) )
+// SWIFT_USAGE:
+//     print(log(10))      // Output: 2.302585092994046
+//     print(log2(10))     // Output: 3.321928094887362
+//     print(log10(10))    // Output: 1.0
 //
-//
+
 // using std::exp;                             // e ^ <arg>
 //
+
 // using std::abs;
 // using std::fabs;
-// GO_USAGE:
-//     print( math.Abs( 6 ) )
-//     print( math.Abs( 6.0 ) )
-//     print( math.Abs( -6 ) )
-//     print( math.Abs( -6.0 ) )
+// SWIFT_USAGE:
+//     print(abs(6))       // Output: 6
+//     print(abs(6.0))     // Output: 6.0
+//     print(abs(-6))      // Output: 6
+//     print(abs(-6.0))    // Output: 6.0
 //
 
 // using std::floor;                           // Round down to nearest integer double
@@ -293,367 +323,250 @@ import "math/bits"
 // using std::bind;
 // using namespace std::placeholders;          // placeholders ( _1, _2, ..., _N ) for std::bind
 //
-//
-// from typing import List
+
 // //----< array >-----------------------------//
 // using std::array;                           // Fixed & Unordered Array
-// GO_USAGE:
-//     l := []int{}
-//     l := []int{ 1, 1, 1, 1, 1 }
-//     l := make( []int )
-//     l := make( []int, 0, 5 )
-//
-//     l := make( []int, 10, 10 )
-//     for i := 0; i < 10; i++ {
-//         l[ i ] = i
-//     }
-//     fmt.Println( l )
-//
-//
 // //----< vector >----------------------------//
 // using std::vector;
-// GO_USAGE:
-//     l := []int{}
-//     l := []int{ 1, 1, 1, 1, 1 }
-//     l := make( []int )
-//     l := make( []int, 0, 5 )
+// SWIFT_USAGE:
+//     var l: [Int] = []
+//     var l: [Int] = [1, 1, 1, 1, 1]
+//     var l = [Int]()
 //
-//     l := make( []int, 10, 10 )
-//     for i := 0; i < 10; i++ {
-//         l[ i ] = i
-//     }
-//     fmt.Println( l )
+//     var l = [Int](repeating: 0, count: 0)         // Create an array with a repeating initial value and count
+//     var l = [Int](repeating: 0, count: 5)         // Create an array with a repeating initial value and count
+//
+//     var l = Array<Int>(repeating: 0, count: 5)    // Another way to create an array with a repeating initial value and count
+//     var l = Array<Int>(0...4)                     // Create an array from a range
+//
+//     var l = (0...4).map { $0 }                    // Create an array using map function
+//     var l = (0..<10).map { $0 }                   // Create an array using map function with a range
+//
+//     var l = stride(from: 0, through: 4, by: 1).map { $0 }   // Create an array using stride and map
+//     print(l)
 //
 
-import "container/list"
 // //----< list >------------------------------//
 // using std::list;                            // Doubly-Linked List with size() ( O( 1 ) )
+//
+
 // //----< forward_list >----------------------//
 // using std::forward_list;                    // Singly-Linked List without size() function ( so O( N ) if we need to get size() )
-// GO_TRICKS:
-//     var dq []rune = []rune{}
-//     var dq []rune = make( []rune, 0, 6 )
-//     dq := []rune{}
-//     dq := make( []rune, 0, 6 )
-//     dq := []rune{ 'A', 'B', 'C', 'D' }
+// SWIFT_USAGE:
+//     var l: [Int] = []
+//     var l: [Int] = Array(repeating: 0, count: 100)
+//     var l: [Int] = [1, 2, 3]
+//     var l: [Int] = Array((1, 2, 3))
+//     var l: [String] = Array("ABC")
 //
-//     dq = append( dq, 'A' )  -- push to the back
-//     dq = append( dq, 'B' )  -- push to the back
-//
-//     b := dq[len(dq) - 1]  -- get back element
-//     dq = dq[:len(dq) - 1]  -- remove from the back
-//
-//     f := dq[0]  -- get front element
-//     dq = dq[1:]  -- remove from front - O( 1 )
-//
-// GO_USAGE:
-//     var l *list.List = list.New()
-//     l := list.New()
-//     l.PushBack( "A" )
-//     l.PushFront( "B" )
-//     l.PushBack( "C" )
-//     l.PushFront( "D" )
-//     for node := l.Front(); node != nil; node = node.Next() {
-//         fmt.Println( node.Value.(string) )
-//     }
-//     var b *list.Element = l.Back()
-//     fmt.Println( l.Remove( b ) )  -- output: "C"
-//     var f *list.Eleemnt = l.Front()
-//     fmt.Println( l.Remove( f ) )  -- output: "D"
+//     var l: [[Int]] = Array(repeating: Array(repeating: 0, count: 2), count: 2)
+//     var l: [[String]] = Array(repeating: Array(repeating: "A", count: 2), count: 2)
 //
 
 // //----< map >-------------------------------//
 // using std::map;                             // Ordered Map (Red-Black Tree)
-// GO_USAGE:
+// SWIFT_USAGE:
+//     let d = ["b": 2, "a": 1, "c": 3]
+//     for key in d.keys.sorted() {
+//         if let value = d[key] {
+//             print("Key: \(key), Value: \(value)")
+//         }
+//     }
+//
+//     let d = ["b": 2, "a": 1, "c": 3]
+//     let sortedArr = d.sorted { $0.key < $1.key }
+//     let sortedDict = Dictionary(uniqueKeysWithValues: sortedArr)
 //
 
-// PYTHON_USAGE:
-//     d : Dict[ str, int ] = dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ) )
-//     ds : List[ Tuple[ str, int ] ] = sorted( dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ).items() ) )
-//     ds : List[ Tuple[ str, int ] ] = sorted( d.items() ) )
-//     ds : Dict[ str, int ] = dict( sorted( d.items() ) )
-//     od : OrderedDict[ str, int ] = OrderedDict( sorted( d.items() ) )
-//
-//    val1 = d.get( key1 )
-//    if val1 is not None:
-//        print( val1 )
-//
-//    if key1 in d:
-//        print( d[ key1 ] )
-//
-//    val1 = od.get( key1 )
-//    if val1 is not None:
-//        print( val1 )
-//
-//    if key1 in od:
-//        print( od[ key1 ] )
-//
-//
 // using std::multimap;                        // Ordered Map (Red-Black Tree) & Allow duplicated keys
-// PYTHON_USAGE:
-//     d : Dict[ str, List[ int ] ] = []
-//     ds : List[ Tuple[ str, List[ int ] ] ] = sorted( d.items() )
+// SWIFT_USAGE:
+//     var d: [String: [Int]] = [:]
+//     var ds: [(String, [Int])] = d.sorted { $0.key < $1.key }
+//     func insert(d: [String: [Int]], _ key: Key, _ value: Value) {
+//         if d[key] == nil {
+//             d[key] = [value]
+//         } else {
+//             d[key]?.append(value)
+//         }
+//     }
 //
+//     func find(d: [String: [Int]], _ key: Key) -> [Value]? {
+//         return d[key]
+//     }
 //
+//     func erase(d: [String: [Int]], _ key: Key) {
+//         d[key] = nil
+//     }
+//
+//     // Example usage
+//     insert("key1", "value1")
+//     insert("key2", "value2")
+//     insert("key1", "value3")
+//
+//     print(find("key1"))  // Output: Optional(["value1", "value3"])
+//     print(find("key2"))  // Output: Optional(["value2"])
+//
+//     erase("key1")
+//
+//     print(find("key1"))  // Output: nil
+//
+
 // //----< unordered_map >---------------------//
 // using std::unordered_map;                   // HashMap (SeparateChainingHashST)
-// PYTHON_USAGE:
-//     d : Dict[ str, int ] = { key: val }
+// SWIFT_USAGE:
+//     var d: [String: Int] = ["key": value]
 //
-//
+
 // using std::unordered_multimap;              // Ordered Map (Red-Black Tree) & Allow duplicated keys
-// PYTHON_USAGE:
-//     d : Dict[ str, List[ int ] ] = { key: [ val1, val2 ] }
+// SWIFT_USAGE:
+//     let d: [String: [Int]] = ["key": [val1, val2]]
 //
-//
-import "sort"
+
 // //----< set >-------------------------------//
 // using std::set;                             // Ordered Set (Red-Black Tree)
-// GO_USAGE:
-//     var s = map[ int ]bool{}
-//     var s = make( map[ int ]bool, 0, 5 )  -- Init set with size 0 and capacity 5
-//     s := map[ int ]bool{}
-//     s := make( map[ int ]bool )  -- Init set with size 0 and initial capacity 0
+// SWIFT_USAGE:
+//     let s: Set<Int> = [5, 2, 8, 3, 1]
+//     let sortedArray = s.sorted()
+//     print(sortedArray)
 //
-//     s[ 0 ] = True
-//     s[ 1 ] = True
-//     s[ 4 ] = True
-//
-//     keys = []int{}
-//     for i := range s {
-//         keys = append( keys, i )
+//     let s: Set<Int> = [5, 2, 8, 3, 1]
+//     let sortedArray = s.sorted()
+//     for element in sortedArray {
+//         print(element)
 //     }
 //
-//     sort.Ints( keys )
-//     sort.Float64s( float64sKeys )
-//     sort.Strings( stringKeys )
-//
-//     sort.Slice( keys, func( i, j int ) bool {    -- sort.Slice() is faster than sort.SliceStable()
-//         return keys[ i ] < keys[ j ]
-//     })
-//
-//     sort.SliceStable( keys, func( i, j int ) bool {
-//         return keys[ i ] < keys[ j ]
-//     })
-//
-//     for _, k := range keys {
-//         fmt.Println( k, s[ k ] )
+//     if s.contains(6) {
+//         print("Value 6 exists in the set")
+//     } else {
+//         print("Value 6 does not exist in the set")
 //     }
 //
-//     for len( s ) > 0 {
-//         delete( s, 0 )
-//         delete( s, 1 )
-//         delete( s, 4 )
-//     }
-//
-//     if _, ok := s[ 0 ]; !ok {
-//         fmt.Println( fmt.Errorf( "First Element NOT Found!!!" ) )
-//     }
-//
-//
+
 // using std::multiset;                        // Ordered Set (Red-Black Tree) & Allow duplicated keys
-// GO_USAGE:
-//     d : Dict[ str, int ] = { key1: count1, key2: count2 }
-//     ds : List[ Tuple[ str, int ] ] = sorted( d.items() )
-//     ds : Dict[ str, int ] = dict( sorted( d.items() ) )
-//     ds : OrderedDict[ str, int ] = OrderedDict( sorted( d.items() ) )
+// SWIFT_USAGE:
+//     var s: [String: Int] = ["key1": count1, "key2": count2]
+//     s["5"] = 1
+//     s["4"] = 1
+//     s["1"] = 1
+//     s["1"] = nil
+//     s["4"] = nil
+//     s["6"] = nil  // no effects if key doesn't exist'
 //
-//     s.add( 5 )
-//     s.add( 4 )
-//     s.discard( 1 )
-//     s.discard( 4 )
-//     try:
-//         s.remove( 6 )
-//     except KeyError:
-//         print( "6 is not present in set" )
+//     let sortedKeys = s.keys.sorted()
 //
+//     for key in sortedKeys {
+//         if let value = s[key] {
+//             print("\(key): \(value)")
+//         }
+//     }
 //
+//     if let _ = d["key1"] {
+//         print("Key 'key1' exists in the dictionary")
+//     } else {
+//         print("Key 'key1' does not exist in the dictionary")
+//     }
+//
+//     if d.contains(where: { $0.key == "key1" }) {
+//         print("Key 'key1' exists in the dictionary")
+//     } else {
+//         print("Key 'key1' does not exist in the dictionary")
+//     }
+//
+
 // //----< unordered_set >---------------------//
 // using std::unordered_set;                   // HashSet (SeparateChainingHashST)
-// PYTHON_USAGE:
-//     s : Set[ int ] = set( ( 1, 2, 3 ) ) -- set from Tuple
-//     s : Set[ int ] = set( [ 1, 2, 3 ] ) -- set from List
-//     s : Set[ str ] = set( "ABC" )       -- set from str
+// SWIFT_USAGE:
+//     var s: Set<Int> = [5, 2, 8, 3, 1]
+//     print(sortedArray)
 //
-//     s.add( 5 )
-//     s.add( 4 )
-//     s.discard( 1 )
-//     s.discard( 4 )
-//     try:
-//         s.remove( 6 )
-//     except KeyError:
-//         print( "6 is not present in set" )
+//     s.insert(5)
+//     s.insert(4)
+//     s.remove(1)
+//     s.remove(4)
 //
+//     for element in sortedArray {
+//         print(element)
+//     }
 //
+//     if s.contains(6) {
+//         print("Value 6 exists in the set")
+//     } else {
+//         print("Value 6 does not exist in the set")
+//     }
+//
+
 // using std::unordered_multiset;              // HashSet (SeparateChainingHashST) & Allow duplicated keys
-// PYTHON_USAGE:
-//     d : Dict[ str, int ] = { key1: count1, key2: count2 }
+// SWIFT_USAGE:
+//     var ms: [String: Int] = [:] // Dictionary to simulate unordered_multiset
+//
+//     // Insert operation
+//     ms["apple", default: 0] += 1
+//     ms["banana", default: 0] += 1
+//     ms["apple", default: 0] += 1
+//
+//     // Edit operation (increment count)
+//     ms["banana"] = 3
+//
+//     // Delete operation
+//     ms.removeValue(forKey: "apple")
+//
+//     // Contains operation
+//     let containsBanana = ms["banana"] != nil
+//     let containsApple = ms["apple"] != nil
+//
+//     // Iterate over the multiset
+//     for (element, count) in ms {
+//         print("\(element): \(count)")
+//     }
+//
+//     print("Contains banana: \(containsBanana)") // Output: true
+//     print("Contains apple: \(containsApple)") // Output: false
 //
 
 // //----< deque >-----------------------------//
 // using std::deque;                           // Vector of fixed-size Vectors: 1 fixed-size vector for each end of the deque
-// GO_USAGE:
-//     var l *list.List = list.New()
-//     l := list.New()
-//     l.PushBack( "A" )
-//     l.PushFront( "B" )
-//     l.PushBack( "C" )
-//     l.PushFront( "D" )
-//
-//     fmt.Println( l.Len() )  -- output: 4
-//
-//     for node := l.Front(); node != nil; node = node.Next() {
-//         fmt.Println( node.Value.(string) )
-//     }
-//     var b *list.Element = l.Back()
-//     fmt.Println( l.Remove( b ) )  -- output: "C"
-//     var f *list.Eleemnt = l.Front()
-//     fmt.Println( l.Remove( f ) )  -- output: "D"
-//
-//     l.Init()  -- initializes / clears list
-//     fmt.Println( l.Len() )  -- output: 0
+// SWIFT_USAGE:
+//     Implement Doubly-Linked List.
 //
 
 // //----< queue >-----------------------------//
 // using std::queue;                           // Non-Iterable & Use std::deque as underlying data structure
-// GO_USAGE:
-//     var q []rune = []rune{}
-//     var q []rune = make( []rune, 0, 6 )
-//     q := []rune{}
-//     q := make( []rune, 0, 6 )
-//     q := []rune{ 'A', 'B', 'C', 'D' }
-//
-//     q = append( q, 'A' )  -- push to the back
-//     q = append( q, 'B' )  -- push to the back
-//
-//     f := q[0]
-//     q = q[1:]  -- remove from front - O( 1 )
-//
-// GO_TRICKS:
-//     var l *list.List = list.New()
-//     l := list.New()
-//     l.PushBack( "A" )
-//     l.PushFront( "B" )
-//     l.PushBack( "C" )
-//     l.PushFront( "D" )
-//     for node := l.Front(); node != nil; node = node.Next() {
-//         fmt.Println( node.Value.(string) )
-//     }
-//     var b *list.Element = l.Back()
-//     fmt.Println( l.Remove( b ) )  -- output: "C"
-//     var f *list.Eleemnt = l.Front()
-//     fmt.Println( l.Remove( f ) )  -- output: "D"
+// SWIFT_USAGE:
+//     Implement Singly-Linked List.
 //
 
 import "container/heap"
 // using std::priority_queue;                  // MaxPQ (MaxHeap) & Non-Iterable.
 // //                                          // => Pass std::greater<> as template params to create MinPQ (MinHeap)
-// GO_USAGE:
-// MIN_HEAP:
-//     type IntHeap []int
-//
-//     func ( h IntHeap ) Len() int {
-//         return len( h )
-//     }
-//
-//     // MIN_HEAP HERE!!!
-//     func ( h IntHeap ) Less( i, j int ) bool {
-//         return h[ i ] < h[ j ]
-//     }
-//
-//     func ( h IntHeap ) Swap( i, j int ) {
-//         h[ i ], h[ j ] = h[ j ], h[ i ]
-//     }
-//
-//     func ( h *IntHeap ) Push( x interface{}  ) {
-//         *h = append( *h, x.( int ) )
-//     }
-//
-//     func ( h *IntHeap ) Pop() interface{} {
-//         old := *h
-//         n := len( old )
-//         x := old[ n - 1 ]
-//         *h = old[ 0 : n - 1 ]
-//         return x
-//     }
-//
-//     func main() {
-//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
-//
-// 	       // initialize the heap data structure
-//         h := &IntHeap{}
-//
-// 	       // add all the values to heap, O(n log n)
-// 	       for _, val := range nums { // O(n)
-// 		       heap.Push( h, val ) // O(log n)
-// 	       }
-//
-// 	       // print all the values from the heap
-// 	       // which should be in ascending order
-// 	       for i := 0; i < len( nums ); i++ {
-// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
-// 	       }
-//     }
-//
-// MAX_HEAP:
-//     type IntHeap []int
-//
-//     func ( h IntHeap ) Len() int {
-//         return len( h )
-//     }
-//
-//     // MAX_HEAP HERE!!!
-//     func ( h IntHeap ) Less( i, j int ) bool {
-//         return h[ i ] > h[ j ]
-//     }
-//
-//     func ( h IntHeap ) Swap( i, j int ) {
-//         h[ i ], h[ j ] = h[ j ], h[ i ]
-//     }
-//
-//     func ( h *IntHeap ) Push( x interface{}  ) {
-//         *h = append( *h, x.( int ) )
-//     }
-//
-//     func ( h *IntHeap ) Pop() interface{} {
-//         old := *h
-//         n := len( old )
-//         x := old[ n - 1 ]
-//         *h = old[ 0 : n - 1 ]
-//         return x
-//     }
-//
-//     func main() {
-//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
-//
-// 	       // initialize the heap data structure
-//         h := &IntHeap{}
-//
-// 	       // add all the values to heap, O(n log n)
-// 	       for _, val := range nums { // O(n)
-// 		       heap.Push( h, val ) // O(log n)
-// 	       }
-//
-// 	       // print all the values from the heap
-// 	       // which should be in ascending order
-// 	       for i := 0; i < len( nums ); i++ {
-// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
-// 	       }
-//     }
+// SWIFT_USAGE:
+//     N/A - Have to Sort the Collection.
 //
 
 // //----< stack >-----------------------------//
 // using std::stack;                           // Non-Iterable & Use std::deque as underlying data structure
-// GO_USAGE:
-//     var st []int = []int{}
-//     st := []int{}
+// SWIFT_USAGE:
+//     var st: [Int] = []
 //
-//     st = append( st, 1 )
-//     st = append( st, 2 )
-//     st = append( st, 3 )
-//     for len(st) > 0 {
-//         fmt.Println( st[ len( st ) - 1 ] )
-//         st = st[ : len( st ) - 1 ]
+//     // push elements onto the stack
+//     st.append(1)
+//     st.append(2)
+//     st.append(3)
+//
+//     // pop an element from the stack
+//     if let poppedElement = st.popLast() {
+//         print("Popped element: \(poppedElement)") // Output: Popped element: 3
+//     }
+//
+//     // peek at the top element of the stack
+//     if let topElement = st.last {
+//         print("Top element: \(topElement)") // Output: Top element: 2
+//     }
+//
+//     // check if the stack is empty
+//     if st.isEmpty {
+//         print("Stack is empty")
+//     } else {
+//         print("Stack is not empty")
 //     }
 //
 
@@ -690,7 +603,35 @@ import "container/heap"
 // [ UNSUPPORTED_IN_PYTHON ] using std::distance;                        // Calculate distance between 2 iterators
 // [ UNSUPPORTED_IN_PYTHON ] using std::inserter;                        // Insert element into first arg starting from position in second arg
 //
+
+// //----< optional >--------------------------//
+// using std::optional;                        // Expresses that a value may or may not be present
+// SWIFT_USAGE:
+//     var optionalValue: Optional<Int>
+//     var optionalValue = Optional<Int>(nil)
+//     var optionalValue = Int?(nil)
 //
+//     var optionalValue: Int?    // Preferred!!!
+//
+//     // Assign a value to the optional
+//     optionalValue = 42
+//
+//     // Check if the optional has a value
+//     if let value = optionalValue {
+//         print("Optional value: \(value)")
+//     } else {
+//         print("Optional value is nil")
+//     }
+//
+//     // Reset the optional to nil
+//     optionalValue = nil
+//
+//     // Check if the optional is nil
+//     if optionalValue == nil {
+//         print("Optional value is nil")
+//     }
+//
+
 // //----< utility >---------------------------//
 // using std::pair;
 // using std::make_pair;
@@ -705,29 +646,7 @@ import "container/heap"
 //     if t[ 0 ] == "ABC":
 //         print( t[ 1 ] )
 //
-
-// //----< optional >--------------------------//
-// using std::optional;                        // Expresses that a value may or may not be present
-// GO_USAGE:
-//     func getValue() *int {
-//         // Return a pointer to an integer value
-//         value := 42
-//         return &value
-//     }
 //
-//     func main() {
-//         // Get the optional value
-//         optionalValue := getValue()
-//
-//         // Check if the optional has a value
-//         if optionalValue != nil {
-//             fmt.Println("Optional value:", *optionalValue)
-//         } else {
-//             fmt.Println("Optional value is nil")
-//         }
-//     }
-//
-
 // //----< algorithm >-------------------------//
 // using std::fill;
 // PYTHON_USAGE:
