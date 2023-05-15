@@ -240,7 +240,6 @@ import MySQLNIO
 
 // using std::string;
 
-import "math"
 // //----< cmath >-----------------------------//
 // using std::sqrt;
 // SWIFT_USAGE:
@@ -261,7 +260,6 @@ import "math"
 //     print(pow(10, 5) == 100000)
 //
 
-import "math/bits"
 // using std::div;
 // using std::ldiv;
 // using std::lldiv;
@@ -344,6 +342,33 @@ import "math/bits"
 //
 //     var l = stride(from: 0, through: 4, by: 1).map { $0 }   // Create an array using stride and map
 //     print(l)
+//
+// SWIFT_TRICKS:
+//     let numbers = [1, 2, 3, 4, 5]
+//
+//     for number in numbers {
+//         print(number)
+//     }
+//
+//     for (index, number) in numbers.enumerated() {
+//         print("Index: \(index), Number: \(number)")
+//     }
+//
+//     numbers.forEach { number in
+//         print(number)
+//     }
+//
+//     for i in 1...5 {
+//         print(i)
+//     }
+//
+//     for i in stride(from: 1, through: 5, by: 2) {
+//         print(i)
+//     }
+//
+//     for i in (1...5).reversed() {
+//         print(i)
+//     }
 //
 
 // //----< list >------------------------------//
@@ -535,7 +560,6 @@ import "math/bits"
 //     Implement Singly-Linked List.
 //
 
-import "container/heap"
 // using std::priority_queue;                  // MaxPQ (MaxHeap) & Non-Iterable.
 // //                                          // => Pass std::greater<> as template params to create MinPQ (MinHeap)
 // SWIFT_USAGE:
@@ -574,34 +598,133 @@ import "container/heap"
 // //----< tuple >-----------------------------//
 // using std::tuple;                           // Non-Iterable & Use std::pair as underlying data structure
 // using std::get;                             // Access & Set element in tuple using get< index >( tuple_var )
-// PYTHON_USAGE:
-//     t : Tuple[ str, int ] = ( "ABC", 1 )
-//     t : Tuple[ int, ... ] = ( 1, 2, 3 )
-//     t : Tuple[ int ] = ( 1 )
-//     t : Tuple[ str, ... ] = ( "A", "B", "C" )
-//     t : Tuple[ str ] = ( "A" )
-//     t : Tuple[ str, int ] = tuple( [ "ABC", 1 ] )
-//     if t[ 0 ] == "ABC":
-//         print( t[ 1 ] )
+// SWIFT_USAGE:
+//     let emptyTuple = ()
+//     let person = (name: "John", 25)
+//     let person = (name: "John", age: 25)
 //
+//     // Creating a tuple
+//     let person: (String, Int, Double) = ("John", 25, 175.5)
 //
-// [ UNSUPPORTED_IN_PYTHON ]//----< bitset >----------------------------//
-// [ UNSUPPORTED_IN_PYTHON ] using std::bitset;
+//     // Accessing tuple elements
+//     let name = person.0
+//     let age = person.1
+//     let height = person.2
 //
-// from typing import Iterable
-// from typing import Iterator
+//     print("Name: \(name)")
+//     print("Age: \(age)")
+//     print("Height: \(height)")
+//
+//     // Decomposing tuple elements
+//     let (personName, personAge, personHeight) = person
+//
+//     print("Name: \(personName)")
+//     print("Age: \(personAge)")
+//     print("Height: \(personHeight)")
+//
+//     // Naming tuple elements
+//     let namedPerson: (name: String, age: Int, height: Double) = ("Jane", 30, 165.7)
+//
+//     let namedName = namedPerson.name
+//     let namedAge = namedPerson.age
+//     let namedHeight = namedPerson.height
+//
+//     print("Name: \(namedName)")
+//     print("Age: \(namedAge)")
+//     print("Height: \(namedHeight)")
+//
+//     // Decomposing named tuple elements
+//     let (namedPersonName, namedPersonAge, namedPersonHeight) = namedPerson
+//
+//     print("Name: \(namedPersonName)")
+//     print("Age: \(namedPersonAge)")
+//     print("Height: \(namedPersonHeight)")
+//
+//     for element in person {
+//         print(element)
+//     }
+//
+//     for (index, element) in person.enumerated() {
+//         print("Element at index \(index): \(element)")
+//     }
+//
+//     print(person.0) // Accessing the first element
+//     print(person.1) // Accessing the second element
+//
+
+//----< bitset >----------------------------//
+// using std::bitset;
+// SWIFT_USAGE:
+// SWIFT_USAGE_ARRAY_BOOL:
+//     var bitset: [Bool] = Array(repeating: false, count: 64)
+//
+//     // Set bit at index 2 to true
+//     bitset[2] = true
+//
+//     // Set bit at index 5 to true
+//     bitset[5] = true
+//
+//     // Get the value of bit at index 2
+//     let bit2 = bitset[2]
+//     print(bit2) // true
+//
+//     // Get the value of bit at index 5
+//     let bit5 = bitset[5]
+//     print(bit5) // true
+//
+// SWIFT_USAGE_UINT64:
+//     var bitset: [Bool] = Array(repeating: false, count: 64)
+//
+//     // Set bit at index 2 to true
+//     bitset[2] = true
+//
+//     // Set bit at index 5 to true
+//     bitset[5] = true
+//
+//     // Get the value of bit at index 2
+//     let bit2 = bitset[2]
+//     print(bit2) // true
+//
+//     // Get the value of bit at index 5
+//     let bit5 = bitset[5]
+//     print(bit5) // true
+//
+
 // //----< iterator >--------------------------//
+// using std::iterator;                        // Provides the common functionality and typedefs required for creating custom iterators
+// SWIFT_USAGE:
+//     let numbers = [1, 2, 3, 4, 5]
+//     var iterator = numbers.makeIterator()
+//
+//     while let next = iterator.next() {
+//         print(next)
+//     }
+//
+
 // using std::next;                            // Return an advanced iter without changing original iter
-// PYTHON_USAGE:
-//     iterable: Tuple[ int ] = tuple( [ 1, 2, 3, 4 ] )
-//     it = iter( iterable )
-//     for item in it:
-//         print( item )
+// SWIFT_USAGE:
+//     let numbers = [1, 2, 3, 4, 5]
 //
+//     // Get the iterator to the second element
+//     let iterator = numbers.makeIterator()
+//     iterator.advanced(by: 1)
 //
-// [ UNSUPPORTED_IN_PYTHON ] using std::prev;                            // Return an decremented iter without changing original iter
-// [ UNSUPPORTED_IN_PYTHON ] using std::distance;                        // Calculate distance between 2 iterators
-// [ UNSUPPORTED_IN_PYTHON ] using std::inserter;                        // Insert element into first arg starting from position in second arg
+//     // Alternatively, you can use the index of a collection
+//     let index = numbers.index(numbers.startIndex, offsetBy: 1)
+//     numbers[index]
+//
+
+// [ UNSUPPORTED_IN_SWIFT ] using std::prev;                            // Return an decremented iter without changing original iter
+// [ UNSUPPORTED_IN_SWIFT ] using std::distance;                        // Calculate distance between 2 iterators
+
+// using std::inserter;                        // Insert element into first arg starting from position in second arg
+// SWIFT_USAGE:
+//     var numbers = [1, 2, 3, 4, 5]
+//     let element = 10
+//     let index = 2
+//
+//     numbers.insert(element, at: index)
+//     print(numbers) // Output: [1, 2, 10, 3, 4, 5]
 //
 
 // //----< optional >--------------------------//
@@ -636,437 +759,292 @@ import "container/heap"
 // using std::pair;
 // using std::make_pair;
 // using std::move;                            // Move resources between objects - typically used with std::unique_ptr<T>
-// PYTHON_USAGE:
-//     t : Tuple[ str, int ] = ( "ABC", 1 )
-//     t : Tuple[ int, ... ] = ( 1, 2, 3 )
-//     t : Tuple[ int ] = ( 1 )
-//     t : Tuple[ str, ... ] = ( "A", "B", "C" )
-//     t : Tuple[ str ] = ( "A" )
-//     t : Tuple[ str, int ] = tuple( [ "ABC", 1 ] )
-//     if t[ 0 ] == "ABC":
-//         print( t[ 1 ] )
+// SWIFT_USAGE:
+//     let t: (Int, String) = (42, "Hello")
+//     let t = (42, "Hello")  // Swift can infer the type of the tuple
+//     let t = (first: 42, second: "Hello")
 //
+//     typealias MyPair = (Int, String)
+//     let pair: MyPair = (42, "Hello")
 //
+//     let t: (String, Int) = ("ABC", 1)
+//     let t: (Int, Int, Int) = (1, 2, 3)
+//     let t: (Int) = (1)
+//     let t: (String, String, String) = ("A", "B", "C")
+//     let t: (String) = ("A")
+//     let t: (String, Int) = ("ABC", 1)
+//
+//     if t.0 == "ABC" {
+//         print(t.1)
+//     }
+//
+
 // //----< algorithm >-------------------------//
 // using std::fill;
-// PYTHON_USAGE:
-//     a : List[ int ] = [ 0 ] * 100
-//     a[ 2:12 ] = [ 1 ] * 10
-//     a[ 2:12 ] = [ 2 ] * 20
-//     a[ 2:12 ] = [ 3 ] * 5
+// SWIFT_USAGE:
+//     var array = [1, 2, 3, 4, 5]
+//     array.assign(repeating: 0, count: array.count)
+//
+//     print(array)  // Output: [0, 0, 0, 0, 0]
 //
 
 // using std::max;
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 4, 5, 6 }
-//     l := []int{ 1, 2, 3, 4, 5, 6 }
+// SWIFT_USAGE:
+//     let a: [Int] = [1, 2, 3, 4, 5]
+//     print(a.max()!)                // Output: Optional(5) (the maximum element in the array)
 //
-//     maxNum := - math.MaxFloat64
-//     maxNum := - math.MaxFloat32
-//     maxNum := math.MinInt
-//     maxNum := math.MinInt8
-//     maxNum := math.MinInt16
-//     maxNum := math.MinInt32
-//     maxNum := math.MinInt64
-//     for _, num := range l {
-//         maxNum = int( math.Max( float64( maxNum ), float64( num ) ) )
+//     print(max(a[0], a[3]))        // Output: 4 (the maximum between a[0] and a[3])
+//
+//     let s: String = "ABCD"
+//     print(s.max()!)         // Output: "A" (s[0])
+//     print(String(s.max() ?? ""))  // Output: "D" (the maximum character in the string)
+//
+//     var l = [1, 2, 3, 4, 5, 6]
+//
+//     var maxNum = -Double.greatestFiniteMagnitude
+//     var maxNum = -Float.greatestFiniteMagnitude
+//     var maxNum = Int.min
+//     var maxNum = Int8.min
+//     var maxNum = Int16.min
+//     var maxNum = Int32.min
+//     var maxNum = Int64.min
+//     var maxNum = UInt.min
+//     var maxNum = UInt8.min
+//     var maxNum = UInt16.min
+//     var maxNum = UInt32.min
+//     var maxNum = UInt64.min
+//
+//     for num in l {
+//         maxNum = max(maxNum, Double(num))
 //     }
-//     fmt.Println( maxNum )  -- output: 6
+//
+//     print(maxNum) // Output: 6.0
 //
 
 // using std::min;
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 4, 5, 6 }
-//     l := []int{ 1, 2, 3, 4, 5, 6 }
+// SWIFT_USAGE:
+//     let a: [Int] = [1, 2, 3, 4, 5]
+//     print(a.min()!)                 // Output: 1 (a[0])
+//     print(min(a[0], a[3]))          // Output: 1 (a[0])
 //
-//     minNum := math.MaxFloat64
-//     minNum := math.MaxFloat32
-//     minNum := math.MaxInt
-//     minNum := math.MaxInt8
-//     minNum := math.MaxInt16
-//     minNum := math.MaxInt32
-//     minNum := math.MaxInt64
-//     minNum := math.MaxUint
-//     minNum := math.MaxUint8
-//     minNum := math.MaxUint16
-//     minNum := math.MaxUint32
-//     minNum := math.MaxUint64
+//     let s: String = "ABCD"
+//     print(s.min()!)         // Output: "A" (s[0])
+//     print(String(s.min()!))         // Output: "A" (s[0])
 //
-//     for _, num := range l {
-//         minNum = int( math.Min( float64( minNum ), float64( num ) ) )
+//     var l = [1, 2, 3, 4, 5, 6]
+//
+//     var minNum = Double.greatestFiniteMagnitude
+//     var minNum = Float.greatestFiniteMagnitude
+//     var minNum = Int.max
+//     var minNum = Int8.max
+//     var minNum = Int16.max
+//     var minNum = Int32.max
+//     var minNum = Int64.max
+//     var minNum = UInt.max
+//     var minNum = UInt8.max
+//     var minNum = UInt16.max
+//     var minNum = UInt32.max
+//     var minNum = UInt64.max
+//
+//     for num in l {
+//         minNum = min(minNum, Double(num))
 //     }
-//     fmt.Println( minNum )  -- output: 1
+//
+//     print(minNum) // Output: 1.0
 //
 
 // using std::find;
-// PYTHON_USAGE:
-//     l : List[ int ] = [ 1, 2, 3, 3, 3, 3, 4, 5 ]
-//     print( l.index( 3 ) )     -- output: 2
-//     print( l.index( 3, 4 ) )  -- output: 4
+// SWIFT_USAGE:
+//     let array = [1, 2, 3, 4, 5]
 //
-//     t : Tuple[ int, ... ] = ( 1, 2, 3, 3, 3, 3, 4, 5 )
-//     print( t.index( 3 ) )        -- output: 2
-//     print( t.index( 3, 4 ) )     -- output: 4
+//     if let index = array.firstIndex(where: { $0 > 3 }) {
+//         print("Element found at index:", index)
+//     } else {
+//         print("Element not found")
+//     }
 //
-//     s : str = "ABCCCCCD"
-//     print( s.index( "C" ) )      -- output: 2
-//     print( s.index( "C", 4 ) )   -- output: 4
+//     let set: Set<String> = ["apple", "banana", "orange"]
 //
+//     if let element = set.first(where: { $0.hasPrefix("b") }) {
+//         print("Element found:", element)
+//     } else {
+//         print("Element not found")
+//     }
 //
+//     let dict = ["key1": 10, "key2": 20, "key3": 30]
+//
+//     if let key = dict.first(where: { $0.value > 20 })?.key {
+//         print("Key found:", key)
+//     } else {
+//         print("Key not found")
+//     }
+//
+
 // using std::reverse;
-// PYTHON_USAGE:
+// SWIFT_USAGE:
 // REVERSE_ALL:
-//     a : List[ int ] = [ 1, 2, 3, 4, 5 ]
+//     var a: [Int] = [1, 2, 3, 4, 5]
 //     a.reverse()
-//     print( a )
+//     print(a)
 //
-//     a = list( reversed( a ) )
-//     print( a )
+//     a = Array(a.reversed())
+//     print(a)
 //
-//     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
-//     t = tuple( reversed( t ) )
-//     print( t )
+//     var t: (Int, Int, Int, Int, Int) = (1, 2, 3, 4, 5)
+//     t = (t.4, t.3, t.2, t.1, t.0)
+//     print(t)
 //
-//     s : str = "ABC"
-//     s = "".join( reversed( s ) )
-//     print( s )
-//
+//     var s: String = "ABC"
+//     s = String(s.reversed())
+//     print(s)
 //
 // REVERSE_PARTIAL:
-//     a : List[ int ] = [ 1, 2, 3, 4, 5 ]
-//     sa = a[ 1:4 ]
+//     var a: [Int] = [1, 2, 3, 4, 5]
+//     var sa = Array(a[1..<4])
 //     sa.reverse()
-//     print( sa )
+//     print(sa)
 //
-//     sa = a[ 1:4 ]
-//     sa = list( reversed( sa ) )
-//     print( sa )
+//     sa = Array(a[1..<4])
+//     sa = Array(sa.reversed())
+//     print(sa)
 //
-//     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
-//     st = t[ 1:4 ]
-//     st = tuple( reversed( st ) )
-//     print( st )
+//     var t: (Int, Int, Int, Int, Int) = (1, 2, 3, 4, 5)
+//     var st = (t.1, t.2, t.3)
+//     st = (st.2, st.1, st.0)
+//     print(st)
 //
-//     s : str = "ABCDEF"
-//     ss = s[ 1:4 ]
-//     ss = "".join( reversed( ss ) )
-//     print( ss )
+//     var s: String = "ABCDEF"
+//     var ss = String(s[s.index(s.startIndex, offsetBy: 1)..<s.index(s.startIndex, offsetBy: 4)])
+//     ss = String(ss.reversed())
+//     print(ss)
 //
-//
+
 // using std::reduce;                          // Add / Concatenate together all elements of iterator range
 // using std::accumulate;                      // Add / Concatenate together all elements of iterator range
-// PYTHON_USAGE:
-//     l : List[ int ] = [ 1, 2, 3, 4, 5 ]
-//     print( sum( l ) )  -- output: 15
+// SWIFT_USAGE:
+//     let l: [Int] = [1, 2, 3, 4, 5]
+//     let sumResult = l.reduce(0, +)
+//     print(sumResult)  // Output: 15
 //
-//     l : List[ str ] = [ "A", "B", "C" ]
-//     print( "".join( l ) )  -- output: "ABC"
+//     let l: [String] = ["A", "B", "C"]
+//     let joinedString = l.joined()
+//     print(joinedString)  // Output: "ABC"
 //
-//
-//
+
 // using std::sort;                            // Intro-Sort (QuickSort => HeapSort when recursion depth exceeds certain level), NOT IN-PLACE & NOT STABLE
-// PYTHON_USAGE:
-//     a : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
-//     a.sort( reverse = False, key = myFunc )         -- IN-PLACE & STABLE
-//     a.sort( reverse = False, key = lambda x: x )         -- IN-PLACE & STABLE
-//     print( a )
+// SWIFT_USAGE:
+//     var a: [Int] = [5, 4, 3, 2, 1, 0]
+//     a.sort(by: myFunc)  // IN-PLACE & STABLE
+//     print(a)
 //
-//     a : List[ List[ int ] ] = [ [ 1, 3 ], [ 3, 5 ], [ 3, 3 ], [ 5, 3 ], [ 2, 2 ] ]
-//     a.sort( reverse = False )  -- output: [ [ 1, 3 ], [ 2, 2 ], [ 3, 3 ], [ 3, 5 ], [ 5, 3 ] ]
-//     a.sort( reverse = True )  -- output: [ [ 5, 3], [ 3, 5 ], [ 3, 3 ], [ 2, 2 ], [ 1, 3 ] ]
+//     var a: [[Int]] = [[1, 3], [3, 5], [3, 3], [5, 3], [2, 2]]
+//     a.sort()  // Output: [[1, 3], [2, 2], [3, 3], [3, 5], [5, 3]]
+//     a.sort(by: { $0 > $1 })  // Output: [[5, 3], [3, 5], [3, 3], [2, 2], [1, 3]]
 //
-//     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
-//     t = tuple( sorted( t, reverse = False ) )       -- NOT IN-PLACE & STABLE
-//     t = tuple( sorted( t, key = myFunc, reverse = False ) )       -- NOT IN-PLACE & STABLE
-//     t = tuple( sorted( t, key = lambda x: x, reverse = False ) )       -- NOT IN-PLACE & STABLE
-//     print( t )
+//     var t: (Int, Int, Int, Int, Int) = (1, 2, 3, 4, 5)
+//     t = tuple(sorted(t, by: myFunc))  // NOT IN-PLACE & STABLE
+//     print(t)
 //
-//     s : str = "ABC"
-//     s = "".join( sorted( s, reverse = False ) )     -- NOT IN-PLACE & STABLE
-//     s = "".join( sorted( t, key = myFunc, reverse = False ) )       -- NOT IN-PLACE & STABLE
-//     s = "".join( sorted( t, key = lambda x: x, reverse = False ) )       -- NOT IN-PLACE & STABLE
-//     print( s )
+//     var s: String = "ABC"
+//     s = String(sorted(s, by: myFunc))  // NOT IN-PLACE & STABLE
+//     print(s)
 //
-//
+
 // using std::partial_sort;                    // HeapSort elements in range ( iterFirst, iterLast ) ( exclusively ). IN-PLACE & NOT STABLE
-// PYTHON_USAGE:
-//     a : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
-//     a[ 1:4 ] = sorted( a[ 1:4 ], reverse = False )  -- NOT IN-PLACE & STABLE
-//     a[ 1:4 ] = sorted( a[ 1:4 ], key = myFunc, reverse = False )  -- NOT IN-PLACE & STABLE
-//     a[ 1:4 ] = sorted( a[ 1:4 ], key = lambda x: x, reverse = False )  -- NOT IN-PLACE & STABLE
+// SWIFT_USAGE:
+//     var a: [Int] = [5, 4, 3, 2, 1, 0]
+//     a[1..<4] = a[1..<4].sorted()  // NOT IN-PLACE & STABLE
+//     print(a)
 //
+//     var a: [Int] = [5, 4, 3, 2, 1, 0]
+//     a[1..<4] = a[1..<4].sorted(by: myFunc)  // NOT IN-PLACE & STABLE
+//     print(a)
 //
+//     var a: [Int] = [5, 4, 3, 2, 1, 0]
+//     a[1..<4] = a[1..<4].sorted(by: { $0 < $1 })  // NOT IN-PLACE & STABLE
+//     print(a)
+//
+
 // using std::stable_sort;                     // Merge-Sort elements. NOT IN-PLACE & STABLE
 //
 
 // using std::sort_heap;                       // HeapSort elements. IN-PLACE & NOT STABLE
-// GO_USAGE:
-// MIN_HEAP:
-//     type IntHeap []int
-//
-//     func ( h IntHeap ) Len() int {
-//         return len( h )
-//     }
-//
-//     // MIN_HEAP HERE!!!
-//     func ( h IntHeap ) Less( i, j int ) bool {
-//         return h[ i ] < h[ j ]
-//     }
-//
-//     func ( h IntHeap ) Swap( i, j int ) {
-//         h[ i ], h[ j ] = h[ j ], h[ i ]
-//     }
-//
-//     func ( h *IntHeap ) Push( x interface{}  ) {
-//         *h = append( *h, x.( int ) )
-//     }
-//
-//     func ( h *IntHeap ) Pop() interface{} {
-//         old := *h
-//         n := len( old )
-//         x := old[ n - 1 ]
-//         *h = old[ 0 : n - 1 ]
-//         return x
-//     }
-//
-//     func main() {
-//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
-//
-// 	       // initialize the heap data structure
-//         h := &IntHeap{}
-//
-// 	       // add all the values to heap, O(n log n)
-// 	       for _, val := range nums { // O(n)
-// 		       heap.Push( h, val ) // O(log n)
-// 	       }
-//
-// 	       // print all the values from the heap
-// 	       // which should be in ascending order
-// 	       for i := 0; i < len( nums ); i++ {
-// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
-// 	       }
-//     }
-//
-// MAX_HEAP:
-//     type IntHeap []int
-//
-//     func ( h IntHeap ) Len() int {
-//         return len( h )
-//     }
-//
-//     // MAX_HEAP HERE!!!
-//     func ( h IntHeap ) Less( i, j int ) bool {
-//         return h[ i ] > h[ j ]
-//     }
-//
-//     func ( h IntHeap ) Swap( i, j int ) {
-//         h[ i ], h[ j ] = h[ j ], h[ i ]
-//     }
-//
-//     func ( h *IntHeap ) Push( x interface{}  ) {
-//         *h = append( *h, x.( int ) )
-//     }
-//
-//     func ( h *IntHeap ) Pop() interface{} {
-//         old := *h
-//         n := len( old )
-//         x := old[ n - 1 ]
-//         *h = old[ 0 : n - 1 ]
-//         return x
-//     }
-//
-//     func main() {
-//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
-//
-// 	       // initialize the heap data structure
-//         h := &IntHeap{}
-//
-// 	       // add all the values to heap, O(n log n)
-// 	       for _, val := range nums { // O(n)
-// 		       heap.Push( h, val ) // O(log n)
-// 	       }
-//
-// 	       // print all the values from the heap
-// 	       // which should be in ascending order
-// 	       for i := 0; i < len( nums ); i++ {
-// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
-// 	       }
-//     }
 //
 
 // using std::remove;
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 4, 5, 6 }
-//     l := []int{ 1, 2, 3, 4, 5, 6 }
+// SWIFT_USAGE:
+//     var l: [Int] = [1, 2, 3, 4, 5, 6]
 //
-//     l = append( l[ :1 ], l[ 4: ]... )
-//     l = append( l[ :1 ], l[ 2: ]... )
-//     l = l[ 1: ]
-//     l = l[ :len( l ) - 1 ]
+//     l = Array(l[..<1] + l[4...])
+//     l = Array(l[..<1] + l[2...])
+//     l = Array(l[1...])
+//     l = Array(l[..<l.count - 1])
 //
-//     var m map[string]int = map[string]int{ key1: val1, key2: val2, key3: val3 }
-//     m := map[string]int{ key1: val1, key2: val2, key3: val3 }
-//     
-//     delete( m, key1 )
-//     delete( m, key2 )
+//     var m: [String: Int] = ["key1": val1, "key2": val2, "key3": val3]
+//
+//     m["key1"] = nil
+//     m["key2"] = nil
 //
 
 // using std::swap;
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 4, 5, 6 }
-//     l := []int{ 1, 2, 3, 4, 5, 6 }
+// SWIFT_USAGE:
+//     var l: [Int] = [1, 2, 3, 4, 5, 6]
+//     (l[1], l[3]) = (l[3], l[1])
 //
-//     l[ 1 ], l[ 3 ] = l[ 3 ], l[ 1 ]
+//     var m: [String: Int] = ["key1": val1, "key2": val2, "key3": val3]
+//     (m["key1"], m["key3"]) = (m["key3"], m["key1"])
 //
-//     var m map[string]int = map[string]int{ key1: val1, key2: val2, key3: val3 }
-//     m := map[string]int{ key1: val1, key2: val2, key3: val3 }
+//     var l: [Int] = [1, 2, 3, 4, 5, 6]
+//     l.swapAt(1, 3)
 //
-//     m[ key1 ], m[ key3 ] = m[ key3 ], m[ key1 ]
-//
-
-// using std::binary_search;
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
-//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
-//
-//     lb := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] >= 3
-//     })
-//     if lb < len( l ) && l[ lb ] == 3 {
-//         fmt.Println( lb )  -- output: 2
-//     } else {
-//         fmt.Println( lb )  -- output: len( l )
-//     }
-//
-//     var l []int = []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 }
-//     l := []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 } 
-//
-//     ub_desc := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] <= 3
-//     })
-//     if ub_desc >= 1 && ub_desc < len( l ) {
-//         fmt.Println( ub_desc - 1 )  -- output: 1
-//     } else {
-//         fmt.Println( ub_desc )  -- output: len( l )
-//     }
-//
-// GO_TRICKS:
-//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
-//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
-//
-//     i := sort.SearchInts( l, 3 )
-//     fmt.Println( i )  -- output: 2
-//
-//     i := sort.SearchInts( l, 4 )
-//     fmt.Println( i )  -- output: 7
-//
-//     i := sort.SearchFloat64s( l_float64s, 4.0 )
-//     fmt.Println( i )
-//
-//     i := sort.SearchStrings( l_strings, "abcd" )
-//     fmt.Println( i )
+//     var m: [String: Int] = ["key1": val1, "key2": val2, "key3": val3]
+//     m.swapAt("key1", "key3")
 //
 
-// from itertools import permutations
-// using std::next_permutation;
-// using std::prev_permutation;
-// PYTHON_USAGE:
-//     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
-//     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
-//     for p in permutations( l ):
-//         print( list( p ) )
-//
-//     t : Tuple[ int, ... ] = ( 1, 2, 3, 3, 3, 3, 4, 5 )
-//     for p in permutations( t ):
-//         print( tuple( p ) )
-//
-//     d : Dict[ str, int ] = { key1: val1, key2: val2, key3: val3 }
-//     for p in permutations( d ):
-//         print( dict( p ) )
-//
-//     s : 
-//     for p in permutations( d ):
-//         print( "".join( p ) )
-//
-//
+// [ UNSUPPORTED_IN_SWIFT ] using std::binary_search;
+
+// [ UNSUPPORTED_IN_SWIFT ] using std::next_permutation;
+// [ UNSUPPORTED_IN_SWIFT ] using std::prev_permutation;
+
 // using std::set_intersection;                // Only works on std::set and not std::unordered_set
-// PYTHON_USAGE:
-//     s1 : Set[ int ] = { 1, 2, 3, 4, 5, 6 }
-//     s2 : Set[ int ] = { 4, 5, 6, 7, 8, 9 }
-//     print( s1.intersection( s2 ) )
+// SWIFT_USAGE:
+//     let s1: Set<Int> = [1, 2, 3, 4, 5, 6]
+//     let s2: Set<Int> = [4, 5, 6, 7, 8, 9]
 //
-//
-// using std::set_difference;                  // Only works on std::set and not std::unordered_set
-// PYTHON_USAGE:
-//     s1 : Set[ int ] = { 1, 2, 3, 4, 5, 6 }
-//     s2 : Set[ int ] = { 4, 5, 6, 7, 8, 9 }
-//     print( s1.difference( s2 ) )
-//
-//
-// using std::set_union;
-// PYTHON_USAGE:
-//     s1 : Set[ int ] = { 1, 2, 3, 4, 5, 6 }
-//     s2 : Set[ int ] = { 4, 5, 6, 7, 8, 9 }
-//     print( s1.union( s2 ) )
-//
-//
-// using std::lower_bound;                     // Returns iter pointing to first element >= value
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
-//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
-//
-//     lb := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] >= 3
-//     })
-//     if lb < len( l ) {
-//         fmt.Println( lb )  -- output: 2
-//     } else {
-//         fmt.Println( lb )  -- output: len( l )
-//     }
-//
-//     var l []int = []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 }
-//     l := []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 } 
-//
-//     lb_desc := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] < 3
-//     })
-//     if lb_desc >= 1 && lb_desc < len( l ) {
-//         fmt.Println( lb_desc - 1 )  -- output: 6
-//     } else {
-//         fmt.Println( lb_desc )  -- output: len( l )
-//     }
+//     let intersection = s1.intersection(s2)
+//     print(intersection)  // Output: [6, 4, 5]
 //
 
-// using std::upper_bound;                     // Returns iter pointing to first element > value
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
-//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
+// using std::set_difference;                  // Only works on std::set and not std::unordered_set
+// SWIFT_USAGE:
+//     let s1: Set<Int> = [1, 2, 3, 4, 5, 6]
+//     let s2: Set<Int> = [4, 5, 6, 7, 8, 9]
 //
-//     ub := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] > 3
-//     })
-//     if ub < len( l ) {
-//         fmt.Println( ub )  -- output: 6
-//     } else {
-//         fmt.Println( ub )  -- output: len( l )
-//     }
+//     let difference = s1.subtracting(s2)
+//     print(difference)  // Output: [3, 2, 1]
 //
-//     var l []int = []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 }
-//     l := []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 } 
+
+// using std::set_union;
+// SWIFT_USAGE:
+//     var s1: Set<Int> = [1, 2, 3, 4, 5, 6]
+//     var s2: Set<Int> = [4, 5, 6, 7, 8, 9]
 //
-//     ub_desc := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] <= 3
-//     })
-//     if ub_desc >= 1 && ub_desc < len( l ) {
-//         fmt.Println( ub_desc - 1 )  -- output: 1
-//     } else {
-//         fmt.Println( ub_desc )  -- output: len( l )
-//     }
+//     let unionSet = s1.union(s2)
+//     print(unionSet)
 //
+
+// [ UNSUPPORTED_IN_SWIFT ] using std::lower_bound;                     // Returns iter pointing to first element >= value
+// [ UNSUPPORTED_IN_SWIFT ] using std::upper_bound;                     // Returns iter pointing to first element > value
 
 // using std::transform;                       // Apply the given function to a range and store result in another range
-// PYTHON_USAGE:
+// SWIFT_USAGE:
+//     let numbers = [1, 2, 3, 4, 5]
 //
+//     let transformedNumbers = numbers.map { $0 * 2 }
+//
+//     print(transformedNumbers) // Output: [2, 4, 6, 8, 10]
+//
+
 // using std::nth_element;
 //
 // //----< memory >----------------------------//
@@ -1077,64 +1055,62 @@ import "container/heap"
 // using std::weak_ptr;
 //
 
-import "unicode"
-import "strings"
 // //----< cctype >----------------------------//
 // using std::isalnum;
-// GO_USAGE:
-//     c := 'b'
-//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: true
-//     fmt.Println( unicode.IsLetter( 'c' ) || unicode.IsDigit( 'c' ) )  -- output: true
+// SWIFT_USAGE:
+//     let c: Character = "b"
+//     print(CharacterSet.letters.contains(c) || CharacterSet.decimalDigits.contains(c))  // Output: true
+//     print(CharacterSet.letters.contains("c") || CharacterSet.decimalDigits.contains("c"))  // Output: true
 //
-//     c := 'A'
-//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: true
-//     fmt.Println( unicode.IsLetter( 'B' ) || unicode.IsDigit( 'B' ) )  -- output: true
-//     
-//     c := '1'
-//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: false
-//     fmt.Println( unicode.IsLetter( '2' ) || unicode.IsDigit( '2' ) )  -- output: false
+//     let c: Character = "A"
+//     print(CharacterSet.letters.contains(c) || CharacterSet.decimalDigits.contains(c))  // Output: true
+//     print(CharacterSet.letters.contains("B") || CharacterSet.decimalDigits.contains("B"))  // Output: true
 //
-//     c := '!'
-//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: false
-//     fmt.Println( unicode.IsLetter( '?' ) || unicode.IsDigit( '?' ) )  -- output: false
+//     let c: Character = "1"
+//     print(CharacterSet.letters.contains(c) || CharacterSet.decimalDigits.contains(c))  // Output: false
+//     print(CharacterSet.letters.contains("2") || CharacterSet.decimalDigits.contains("2"))  // Output: false
+//
+//     let c: Character = "!"
+//     print(CharacterSet.letters.contains(c) || CharacterSet.decimalDigits.contains(c))  // Output: false
+//     print(CharacterSet.letters.contains("?") || CharacterSet.decimalDigits.contains("?"))  // Output: false
 //
 
 // using std::isalpha;
-// GO_USAGE:
-//     c := 'b'
-//     fmt.Println( unicode.IsLetter( c ) )  -- output: true
-//     fmt.Println( unicode.IsLetter( 'c' ) )  -- output: true
+// SWIFT_USAGE:
+//     let c: Character = "b"
+//     print(c.isLetter)  // Output: true
+//     print(Character("c").isLetter)  // Output: true
 //
-//     c := 'A'
-//     fmt.Println( unicode.IsLetter( c ) )  -- output: true
-//     fmt.Println( unicode.IsLetter( 'B' ) )  -- output: true
-//     
-//     c := '1'
-//     fmt.Println( unicode.IsLetter( c ) )  -- output: false
-//     fmt.Println( unicode.IsLetter( '2' ) )  -- output: false
+//     let c: Character = "A"
+//     print(c.isLetter)  // Output: true
+//     print(Character("B").isLetter)  // Output: true
 //
-//     c := '!'
-//     fmt.Println( unicode.IsLetter( c ) )  -- output: false
-//     fmt.Println( unicode.IsLetter( '?' ) )  -- output: false
+//     let c: Character = "1"
+//     print(c.isLetter)  // Output: false
+//     print(Character("2").isLetter)  // Output: false
+//
+//     let c: Character = "!"
+//     print(c.isLetter)  // Output: false
+//     print(Character("?").isLetter)  // Output: false
 //
 
 // using std::islower;
-// GO_USAGE:
-//     c := 'b'
-//     fmt.Println( unicode.IsLower( c ) )  -- output: true
-//     fmt.Println( unicode.IsLower( 'c' ) )  -- output: true
+// SWIFT_USAGE:
+//     let c: Character = "b"
+//     print(c.isLowercase)  // Output: true
+//     print(Character("c").isLowercase)  // Output: true
 //
-//     c := 'A'
-//     fmt.Println( unicode.IsLower( c ) )  -- output: false
-//     fmt.Println( unicode.IsLower( 'B' ) )  -- output: false
-//     
-//     c := '1'
-//     fmt.Println( unicode.IsLower( c ) )  -- output: false
-//     fmt.Println( unicode.IsLower( '2' ) )  -- output: false
+//     let c: Character = "A"
+//     print(c.isLowercase)  // Output: false
+//     print(Character("B").isLowercase)  // Output: false
 //
-//     c := '!'
-//     fmt.Println( unicode.IsLower( c ) )  -- output: false
-//     fmt.Println( unicode.IsLower( '?' ) )  -- output: false
+//     let c: Character = "1"
+//     print(c.isLowercase)  // Output: false
+//     print(Character("2").isLowercase)  // Output: false
+//
+//     let c: Character = "!"
+//     print(c.isLowercase)  // Output: false
+//     print(Character("?").isLowercase)  // Output: false
 //
 
 // using std::isupper;
@@ -1227,8 +1203,6 @@ import "strings"
 // using std::lcm;
 // using std::partial_sum;                     // Calculate partial_sum of range beginIter, endIter and put result to 3rd argument outIter
 
-import "sync"
-import "time"
 // //----< thread >----------------------------//
 // using std::thread;
 // namespace this_thread = std::this_thread;   // Manipulate / Info of the current thread
@@ -1996,9 +1970,6 @@ import "time"
 // using std::chrono::hours;                   // Duration in hours
 //
 
-import "net/http"
-import "ioutil"
-import "bytes"
 // //----< curlpp/*.hpp >----------------------//
 // GO_USAGE:
 // GO_USAGE_HTTP_GET:

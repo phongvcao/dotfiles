@@ -678,6 +678,9 @@ import "container/heap"
 // from typing import Iterable
 // from typing import Iterator
 // //----< iterator >--------------------------//
+// using std::iterator;                        // Provides the common functionality and typedefs required for creating custom iterators
+//
+
 // using std::next;                            // Return an advanced iter without changing original iter
 // PYTHON_USAGE:
 //     iterable: Tuple[ int ] = tuple( [ 1, 2, 3, 4 ] )

@@ -366,6 +366,7 @@ using std::get;                             // Access & Set element in tuple usi
 using std::bitset;
 
 //----< iterator >--------------------------//
+using std::iterator;                        // Provides the common functionality and typedefs required for creating custom iterators
 using std::next;                            // Return an advanced iter without changing original iter
 using std::prev;                            // Return an decremented iter without changing original iter
 using std::distance;                        // Calculate distance between 2 iterators
