@@ -51,6 +51,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew install neofetch; \
         brew install zsh; \
         brew install xmlstarlet; \
+        brew install rust; \
         brew install git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
             cmake xclip docker curl gpatch htop llvm yarn man-db rustup-init \
