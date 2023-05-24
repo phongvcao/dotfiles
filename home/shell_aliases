@@ -115,7 +115,7 @@ if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
   #
   #   alias "custom_command_nvim"="TERM='' command nvim"
   #
-  # alias "command_nvim"="TERM='' command nvim"
+  alias "command_nvim"="TERM='' command nvim"
 else
   #
   # NOTE: Fix for the text disappearing problems in Nvim:
