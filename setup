@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 if [[ "$(uname)" =~ "Darwin" ]]; then
     if [ -z "$(command -v brew)" ]; then
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
     if [ -z "$(command -v ccls)" ]; then
         command sudo chown -R "$(whoami)":admin /usr/local/bin; \
