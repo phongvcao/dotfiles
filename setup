@@ -54,7 +54,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew install rust; \
         brew install git tmux vim gnu-indent gnu-sed gnu-tar gnu-which gnutls grep gzip \
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
-            cmake xclip docker curl gpatch htop llvm yarn man-db rustup-init \
+            cmake xclip curl gpatch htop llvm yarn man-db rustup-init \
             tavianator/tap/bfs atool rar zip p7zip glances ranger flake8 \
             fzf fd neovim lf highlight ddclient fontforge kubernetes-cli curlpp \
             nlohmann-json; \

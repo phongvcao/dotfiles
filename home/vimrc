@@ -47,6 +47,11 @@ else
                 \ | endif
 endif
 
+function! InitializeCoc()
+    call coc#util#install()
+    exec 'CocInstall`
+endfunction
+
 call plug#begin('~/.vim/plugged')
 
 " My Plugs here:
@@ -149,7 +154,8 @@ endif
 
 " BEGIN: neoclide/coc.nvim
 Plug 'neoclide/coc.nvim', {
-            \ 'branch' : 'release' }
+            \ 'branch' : 'release',
+            \ 'do' : { -> InitializeCoc() } }
 if has( 'unix' )
     Plug 'wellle/tmux-complete.vim'
 endif
@@ -676,8 +682,10 @@ set smartcase
 set noshowmatch
 set visualbell
 set ffs=unix,dos,mac
-set printfont=DejaVuSansMono_Nerd_Font:h10:b:cDEFAULT
-set printoptions=number:y
+if !has('nvim')
+    set printfont=DejaVuSansMono_Nerd_Font:h10:b:cDEFAULT
+    set printoptions=number:y
+endif
 set autoread
 set title
 set encoding=utf8
@@ -1823,12 +1831,12 @@ inoremap <expr> <C-y> pumvisible() ? "\<C-y>" : ""
 " " Use `[g` and `]g` to navigate diagnostics
 " nmap <silent> [g <Plug>(coc-diagnostic-prev)
 " nmap <silent> ]g <Plug>(coc-diagnostic-next)
-"
-" " Remap keys for gotos
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " " Use K to show documentation in preview window
 " nnoremap <silent> K :call <SID>show_documentation()<CR>
