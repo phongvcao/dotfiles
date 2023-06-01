@@ -3045,7 +3045,11 @@ let g:searchhi_redraw_before_on = 1
 
 " Indent customization
 let g:indent_blacklist = [ 'text', 'help', 'markdown' ]
-let g:space_tabs_blacklist = [ 'make' ]
+if exists( 'g:custom_vimrc_space_tabs_blacklist' )
+    let g:space_tabs_blacklist = g:custom_vimrc_space_tabs_blacklist
+else
+    let g:space_tabs_blacklist = [ 'make' ]
+endif
 function! SetIndentation()
     set autoindent
     set cindent
