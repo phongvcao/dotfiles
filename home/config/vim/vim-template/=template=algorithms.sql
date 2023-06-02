@@ -777,3 +777,25 @@ SELECT ROUND(IFNULL(
         /
         (SELECT COUNT(DISTINCT sender_id, send_to_id) FROM FriendRequest), 0), 2)
 AS accept_rate;
+
+
+/*
+ * Session Variables In MySQL:
+ #
+ * Syntax: @<variable_name>
+ */
+
+SET @discount = 0.1;
+SELECT price, price * (1 - @discount) AS discounted_price FROM products;
+
+SET @row_number := 0;
+SELECT @row_number := @row_number + 1 AS row_number, name FROM customers;
+
+SELECT department, AVG(salary) AS avg_salary, (@rank := @rank + 1) AS rank
+FROM employees, (SELECT @rank := 0) AS r
+GROUP BY department
+ORDER BY avg_salary DESC;
+
+SELECT amount, (@sum := @sum + amount) AS cumulative_sum
+FROM transactions, (SELECT @sum := 0) AS s
+ORDER BY transaction_date;
