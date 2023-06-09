@@ -166,7 +166,7 @@ if has( 'unix' )
     Plug 'chrisbra/SudoEdit.vim'
 endif
 
-" Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 Plug 'osyo-manga/vim-over'
 Plug 'terryma/vim-multiple-cursors'
 
