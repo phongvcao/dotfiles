@@ -118,6 +118,7 @@ Plug 'liuchengxu/vista.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'kshenoy/vim-signature'
 Plug 'markwu/vim-mrufiles'
+Plug 'antoinemadec/coc-fzf'
 if !has('nvim')
     Plug 'yuki-ycino/fzf-preview.vim', {
                 \ 'branch': 'release' }
@@ -165,7 +166,7 @@ if has( 'unix' )
     Plug 'chrisbra/SudoEdit.vim'
 endif
 
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'osyo-manga/vim-over'
 Plug 'terryma/vim-multiple-cursors'
 

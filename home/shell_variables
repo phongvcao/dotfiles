@@ -57,6 +57,7 @@ export "MAGNET_PREFIX"="magnet:?xt=urn:btih:<URL>"
 export "GLOBIGNORE"=".:.."
 export "LF_LASTDIRPATH"="/tmp/lfcd.tmp"
 export "FZF_DEFAULT_OPTS"="--prompt='(FZF)> ${PWD}/' --layout=reverse --exact --ansi --color=dark,hl:9,hl+:136,bg+:0,fg+:14,info:5,prompt:33,spinner:108,pointer:226,marker:235,header:33 --bind 'ctrl-k:preview-up,ctrl-j:preview-down'"
+export "BAT_THEME"="ansi"
 
 if [[ "$(uname)" =~ "Linux" ]]; then
     export "USR_DIR"="/usr"
@@ -106,3 +107,4 @@ unset "SSH_ASKPASS"
 if [[ -f "${HOME}/.custom_shell_variables" ]]; then
     source "${HOME}/.custom_shell_variables"
 fi
+
