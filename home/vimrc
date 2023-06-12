@@ -575,10 +575,10 @@ if has('nvim')
     Plug 'nvim-neotest/neotest'
     " END: nvim-neotest/neotest
 
-    Plug 'folke/which-key.nvim'
+    " Plug 'folke/which-key.nvim'
 else
     Plug 'puremourning/vimspector'
-    Plug 'liuchengxu/vim-which-key'
+    " Plug 'liuchengxu/vim-which-key'
 endif
 
 " Plugins (gui-specific)
@@ -666,11 +666,15 @@ set noswapfile
 
 " +clipboard doesn't work on ssh / mosh connection
 " ( X11 / GUI must be running )
-if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
-    set clipboard=unnamedplus,unnamed
+if has('g:custom_set_clipboard')
+    execute 'set clipboard=' . g:custom_set_clipboard
 else
-    if has('$DISPLAY')
-        set clipboard=
+    if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
+        set clipboard=unnamedplus,unnamed
+    else
+        if has('$DISPLAY')
+            set clipboard=
+        endif
     endif
 endif
 set backspace=2
@@ -777,10 +781,14 @@ if has( 'clipboard' ) && !exists( '${SSH_CLIENT}' )
     nnoremap <C-v> i<C-r>+<C-c>
     if has("unix")
         let s:uname = system("uname -s")
-        if s:uname == "Darwin"
-            nnoremap p "+p
+        if has('g:custom_nnoremap_p')
+            execute 'nnoremap p ' . g:custom_nnoremap_p
         else
-            nnoremap p "*p
+            if s:uname == "Darwin"
+                nnoremap p "+p
+            else
+                nnoremap p "*p
+            endif
         endif
     endif
 else
@@ -1115,19 +1123,19 @@ nnoremap <localleader>N :call WordNavigation(0)<CR>
 let g:sudo_tee = '/usr/bin/tee'
 nnoremap <leader>sw :SudoWrite!<CR>
 
-if has('nvim')
-    " which-key.nvim settings
-    set timeout
-    set timeoutlen=300
-else
-    " vim-which-key settings
-    set timeout
-    set timeoutlen=300
-    let g:mapleader = ","
-    let g:maplocalleader = '.'
-    nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
-    nnoremap <silent> <localleader> :<c-u>WhichKey  '.'<CR>
-endif
+" if has('nvim')
+"     " which-key.nvim settings
+"     set timeout
+"     set timeoutlen=300
+" else
+"     " vim-which-key settings
+"     set timeout
+"     set timeoutlen=300
+"     let g:mapleader = ","
+"     let g:maplocalleader = '.'
+"     nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
+"     nnoremap <silent> <localleader> :<c-u>WhichKey  '.'<CR>
+" endif
 
 " unicode.vim settings
 nnoremap <localleader>us :SearchUnicode<Space>
@@ -1871,7 +1879,7 @@ augroup end
 if exists( 'g:custom_coc_config_home' )
     let g:coc_config_home = g:custom_coc_config_home 
 else
-    let g:coc_config_home = $HOME . '/.config/vim'
+    let g:coc_config_home = $HOME . '/.config/vim/coc-settings-default'
 endif
 let g:coc_start_at_startup = 1
 let g:coc_global_extensions = [
@@ -2002,8 +2010,18 @@ else
     let g:ale_lint_on_filetype_changed = 1
 endif
 
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_save = 1
+if has('g:custom_ale_lint_on_enter')
+    let g:ale_lint_on_enter = g:custom_ale_lint_on_enter
+else
+    let g:ale_lint_on_enter = 1
+endif
+
+if has('g:custom_ale_lint_on_save')
+    let g:ale_lint_on_save = g:custom_ale_lint_on_save
+else
+    let g:ale_lint_on_save = 1
+endif
+
 let g:ale_update_tagstack = 0
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
@@ -2295,7 +2313,8 @@ let g:yankring_paste_n_akey =''
 let g:yankring_max_history = 1000
 let g:yankring_max_element_length = 10000000
 let g:yankring_buffer_name = "Yank History"
-let g:yankring_manual_clipboard_check = 1
+" let g:yankring_manual_clipboard_check = 1
+let g:yankring_manual_clipboard_check = 0
 let g:yankring_n_keys = ''
 nnoremap <leader>p :silent! YRShow<CR>:setlocal wrap relativenumber number<CR>
 nnoremap <leader>sp :silent! YRSearch<CR>:setlocal wrap relativenumber number<CR>
@@ -4017,9 +4036,9 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight Search ctermbg=3 ctermfg=8 cterm=NONE
     autocmd BufRead,BufNewFile *.lua.vim set filetype=lua
 
-    " vim-which-key settings
-    autocmd BufEnter * :highlight WhichKeyDesc ctermfg=4
-    autocmd BufEnter * :highlight WhichKey ctermfg=2
+    " " vim-which-key settings
+    " autocmd BufEnter * :highlight WhichKeyDesc ctermfg=4
+    " autocmd BufEnter * :highlight WhichKey ctermfg=2
 
     " far.vim
     autocmd BufEnter * :highlight FarFilePath ctermfg=5
