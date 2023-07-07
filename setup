@@ -288,6 +288,12 @@ command sudo python3 -m pip install pygments
 # command sudo python2 -m pip install pygments
 
 #
+# Install nvm (Node Version Manager)
+#
+echo
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+
+#
 # Install neovim (node.js extension)
 #
 echo
