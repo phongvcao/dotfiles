@@ -293,6 +293,20 @@ function keystroke() {
     command cat > /dev/null
 }
 
+function command_zsh() {
+    echo "RUN THE FOLLOWING COMMANDS TO LOAD nvm:"
+    echo "export NVM_DIR=\"$HOME/.config/nvm\""
+    echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\""
+    echo "[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\""
+    zsh -d -f -i
+}
+
+function load_nvm() {
+    export NVM_DIR="$HOME/.config/nvm" 
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm 
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
+
 function man() {
     if [[ -n $2 ]]; then
         command_nvim -c "Tman $1 $2 | tabclose 1"
