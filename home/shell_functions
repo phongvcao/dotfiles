@@ -994,7 +994,7 @@ function gr() {
             if [[ -t 0 ]]; then
                 command_nvim -c "CtrlSFRg '$1'"
             else
-                command_frg_stream "$1"
+                command_rg_stream "$1"
             fi
         else
             command_nvim -c 'let g:far#window_layout="current" | silent! Farp'
