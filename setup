@@ -57,7 +57,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             cmake xclip curl gpatch htop llvm yarn man-db rustup-init \
             tavianator/tap/bfs atool rar zip p7zip glances ranger flake8 \
             fzf fd neovim lf highlight ddclient fontforge kubernetes-cli curlpp \
-            nlohmann-json; \
+            nlohmann-json jq hq; \
         brew install --HEAD universal-ctags/universal-ctags/universal-ctags; \
         $(brew --prefix)/opt/fzf/install; \
         brew install --cask postgres-unofficial; \
@@ -118,7 +118,7 @@ else
 	        atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
 	        fzf fd-find neovim highlight ddclient qbittorrent postgresql \
 	        postgresql-contrib xmlstarlet fontforge nlohmann-json3-dev \
-	        libcurl4 libcurlpp0 && \
+	        libcurl4 libcurlpp0 jq hq && \
 	    sudo snap install --classic code && \
 	    sudo snap install ccls go --classic && \
         sudo snap install kubectl --classic && \
