@@ -556,6 +556,7 @@ endif
 if has('nvim')
     Plug 'mfussenegger/nvim-dap'
     Plug 'Pocco81/dap-buddy.nvim'
+    Plug 'leoluz/nvim-dap-go'
 
     " BEGIN: rcarriga/nvim-dap-ui
     Plug 'folke/neodev.nvim'
@@ -575,10 +576,10 @@ if has('nvim')
     Plug 'nvim-neotest/neotest'
     " END: nvim-neotest/neotest
 
-    " Plug 'folke/which-key.nvim'
+    Plug 'folke/which-key.nvim'
 else
     Plug 'puremourning/vimspector'
-    " Plug 'liuchengxu/vim-which-key'
+    Plug 'liuchengxu/vim-which-key'
 endif
 
 " Plugins (gui-specific)
@@ -1123,19 +1124,19 @@ nnoremap <localleader>N :call WordNavigation(0)<CR>
 let g:sudo_tee = '/usr/bin/tee'
 nnoremap <leader>sw :SudoWrite!<CR>
 
-" if has('nvim')
-"     " which-key.nvim settings
-"     set timeout
-"     set timeoutlen=300
-" else
-"     " vim-which-key settings
-"     set timeout
-"     set timeoutlen=300
-"     let g:mapleader = ","
-"     let g:maplocalleader = '.'
-"     nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
-"     nnoremap <silent> <localleader> :<c-u>WhichKey  '.'<CR>
-" endif
+if has('nvim')
+    " which-key.nvim settings
+    set timeout
+    set timeoutlen=300
+else
+    " vim-which-key settings
+    set timeout
+    set timeoutlen=300
+    let g:mapleader = ","
+    let g:maplocalleader = '.'
+    nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
+    nnoremap <silent> <localleader> :<c-u>WhichKey  '.'<CR>
+endif
 
 " unicode.vim settings
 nnoremap <localleader>us :SearchUnicode<Space>
@@ -4036,9 +4037,9 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight Search ctermbg=3 ctermfg=8 cterm=NONE
     autocmd BufRead,BufNewFile *.lua.vim set filetype=lua
 
-    " " vim-which-key settings
-    " autocmd BufEnter * :highlight WhichKeyDesc ctermfg=4
-    " autocmd BufEnter * :highlight WhichKey ctermfg=2
+    " vim-which-key settings
+    autocmd BufEnter * :highlight WhichKeyDesc ctermfg=4
+    autocmd BufEnter * :highlight WhichKey ctermfg=2
 
     " far.vim
     autocmd BufEnter * :highlight FarFilePath ctermfg=5

@@ -2143,6 +2143,17 @@ function startlldb() {
     fi
 }
 
+function debuggo() {
+    local arg1=$1
+    local arg2=$2
+    local debugHost="127.0.0.1:38697"
+
+    if [[ -n "$2" ]]; then
+        local debugHost="127.0.0.1:${arg2}"
+    fi
+    dlv debug -l ${debugHost} --build-flags="-gcflags='-N -l'" --headless ${arg1}
+}
+
 function startgdb() {
     local binary_file=""
     local arg1=$1

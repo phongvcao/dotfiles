@@ -281,6 +281,25 @@ end
 --   dapui.close()
 -- end
 
+-- nvim-dap-go settings
+require('dap-go').setup({
+    dap_configurations = {
+        connect = {
+            host = "127.0.0.1",
+            port = "38697"
+        },
+        {
+            type = "go",
+            name = "Attach Remote",
+            mode = "remote",
+            request = "attach",
+        },
+    },
+    delve = {
+        port = "38697",
+    },
+})
+
 -- neodev.nvim settings
 require("neodev").setup({
   library = { plugins = { "nvim-dap-ui" }, types = true },
@@ -301,17 +320,17 @@ require('codicons').setup()
 -- nvim-dap-virtual-text settings
 require("nvim-dap-virtual-text").setup()
 
--- -- which-key.nvim settings
--- require('which-key').setup({
---     triggers_blacklist = {
---         -- list of mode / prefixes that should never be hooked by WhichKey
---         -- this is mostly relevant for key maps that start with a native binding
---         -- most people should not need to change this
---         -- i = { "j", "k" },
---         v = { "j", "k" },
---         c = { "j", "k" },
---     },
--- })
+-- which-key.nvim settings
+require('which-key').setup({
+    triggers_blacklist = {
+        -- list of mode / prefixes that should never be hooked by WhichKey
+        -- this is mostly relevant for key maps that start with a native binding
+        -- most people should not need to change this
+        -- i = { "j", "k" },
+        v = { "j", "k" },
+        c = { "j", "k" },
+    },
+})
 
 -- nvim-web-devicons settings
 require('nvim-web-devicons').setup()
