@@ -100,6 +100,9 @@ source $ZSH/oh-my-zsh.sh >/tmp/error 2>/dev/null
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 autoload -Uz compinit
 compinit
+# For backward-kill-word to kill less words.
+autoload -U select-word-style
+select-word-style bash
 
 setopt shwordsplit
 setopt histreduceblanks
