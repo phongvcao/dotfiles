@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Command</key>
-	<string></string>
+	<string>/opt/homebrew/bin/zsh</string>
 	<key>Default Bookmark Guid</key>
 	<string>AF335C5E-8792-4F72-BA12-88EE85916075</string>
 	<key>HapticFeedbackForEsc</key>
@@ -1314,7 +1314,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>DejaVuSansMNF-Bold 10</string>
+			<string>DejaVuSansMNF-Bold 9</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
