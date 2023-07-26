@@ -109,6 +109,7 @@ alias "refresh"="cd ${HOME}; cd -"
 alias "mon"="monitor"
 # alias "command_nvim"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
 alias "gofmt"="command gofmt -s -w"
+alias "lintgo"="command golangci-lint run"
 
 if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
   #
