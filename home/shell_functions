@@ -251,6 +251,66 @@ function gitlog() {
     cd "${CURDIR}"
 }
 
+function lintgo() {
+    local target="$1"
+
+    if [ -f "${target}" ]; then
+        local current_dir="${PWD}"
+        local absolute_path="$(readlink -f "${target}")"
+        if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+            top_level="$(command git rev-parse --show-toplevel)"
+            cd "${top_level}"
+        fi
+        command_lintgo "${absolute_path}"
+        cd "${current_dir}"
+    else
+        if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+            # Get the list of staged and unstaged Go files
+            local committed_files=()
+            local staged_files=()
+            local unstaged_files=()
+
+            if [ -n "${BASH_VERSION}" ]; then
+                if [ -z "${target}" ]; then
+                    # Get staged and unstaged Go files for the current working directory
+                    local most_recent_commit=$(git rev-parse HEAD)
+                    readarray -t committed_files < <(command git diff-tree --no-commit-id --name-only -r "${most_recent_commit}")
+                    readarray -t staged_files < <(command git diff --cached --name-only)
+                    readarray -t unstaged_files < <(command git diff --name-only)
+                else
+                    # Get committed Go files for the given commit hash
+                    readarray -t committed_files < <(command git diff-tree --no-commit-id --name-only -r "${target}")
+                    readarray -t staged_files < <(command git diff --cached --name-only)
+                    readarray -t unstaged_files < <(command git diff --name-only)
+                fi
+            elif [ -n "${ZSH_VERSION}" ]; then
+                if [ -z "${target}" ]; then
+                    # Get staged and unstaged Go files for the current working directory
+                    local most_recent_commit=$(git rev-parse HEAD)
+                    IFS=$'\n' committed_files=($(command git diff-tree --no-commit-id --name-only -r "${most_recent_commit}"))
+                    IFS=$'\n' staged_files=($(command git diff --cached --name-only))
+                    IFS=$'\n' unstaged_files=($(command git diff --name-only))
+                else
+                    # Get committed Go files for the given commit hash
+                    IFS=$'\n' committed_files=($(command git diff-tree --no-commit-id --name-only -r "${target}"))
+                    IFS=$'\n' staged_files=($(command git diff --cached --name-only))
+                    IFS=$'\n' unstaged_files=($(command git diff --name-only))
+                fi
+            fi
+
+            top_level="$(command git rev-parse --show-toplevel)"
+            current_dir="${PWD}"
+            cd "${top_level}"
+
+            # Run command_lintgo command on each file
+            for file in "${staged_files[@]}" "${unstaged_files[@]}" "${committed_files[@]}"; do
+                command_lintgo "${top_level}/${file}"
+            done
+            cd "${current_dir}"
+        fi
+    fi
+}
+
 function gop() {
     if [[ $1 == 'back' ]]; then
         export GOPATH=${GOPATH}:$(readlink -f $2)

@@ -109,7 +109,7 @@ alias "refresh"="cd ${HOME}; cd -"
 alias "mon"="monitor"
 # alias "command_nvim"="command nvim -c 'let g:fzf_preview_bufferlines_path = \"${PWD}\"'"
 alias "gofmt"="command gofmt -s -w"
-alias "lintgo"="command golangci-lint run"
+alias "command_lintgo"="command golangci-lint run -j 8"
 
 if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
   #
@@ -238,15 +238,15 @@ alias "ninstalled"="npm list"
 alias "nupgrade"="npm update"
 
 # Git aliases
-alias "addall"="git add -A"
-alias "add"="git add"
+alias "addall"="command git add -A"
+alias "add"="command git add"
 alias "clone"="git clone"
 if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
-    alias "commit"="git commit"
-    alias "commim"="git commit -m"
-    alias "commat"="git add -A; git commit"
-    alias "commam"="git add -A; git commit -m"
-    alias "amend"="git commit --amend"
+    alias "commit"="command git commit"
+    alias "commim"="command git commit -m"
+    alias "commat"="command git add -A; git commit"
+    alias "commam"="command git add -A; git commit -m"
+    alias "amend"="command git commit --amend"
 fi
 alias "resolve"="git mergetool"
 alias "push"="git push"
