@@ -247,6 +247,8 @@ if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
     alias "commat"="command git add -A; git commit"
     alias "commam"="command git add -A; git commit -m"
     alias "amend"="command git commit --amend"
+    alias "unstage"="command git reset"
+    alias "revert"="command git checkout --"
 fi
 alias "resolve"="git mergetool"
 alias "push"="git push"
