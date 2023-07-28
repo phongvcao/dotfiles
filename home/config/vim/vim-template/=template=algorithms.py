@@ -677,7 +677,6 @@ from typing import Iterator
 # //----< iterator >--------------------------//
 # using std::iterator;                        // Provides the common functionality and typedefs required for creating custom iterators
 #
-
 # using std::next;                            // Return an advanced iter without changing original iter
 # PYTHON_USAGE:
 #     iterable: Tuple[ int ] = tuple( [ 1, 2, 3, 4 ] )
@@ -1576,8 +1575,8 @@ import requests
 #                          headers={"Content-Type": "application/json"})
 #
 #     # Print the response status code and body
-#     print("Response Status:", resp.status_code)
-#     print("RESPONSE BODY: ", resp.text)
+#     print("Response Status: ", resp.status_code)
+#     print("Response Body: ", resp.text)
 #
 # //------------------------------------------//
 #
