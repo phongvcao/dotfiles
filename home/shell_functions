@@ -2210,6 +2210,9 @@ function debuggo() {
 
     if [[ -n "$2" ]]; then
         local debugHost="127.0.0.1:${arg2}"
+        kill -9 $(lsof -i:${arg2}) > /dev/null 2>&1
+    else
+        kill -9 $(lsof -i:38697) > /dev/null 2>&1
     fi
     dlv debug -l ${debugHost} --build-flags="-gcflags='-N -l'" --headless ${arg1}
 }
