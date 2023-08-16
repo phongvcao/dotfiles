@@ -242,6 +242,7 @@ alias "addall"="command git add -A"
 alias "add"="command git add"
 alias "clone"="git clone"
 if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
+    alias "log"="command git log"
     alias "commit"="command git commit"
     alias "commim"="command git commit -m"
     alias "commat"="command git add -A; git commit"
@@ -251,6 +252,7 @@ if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
     alias "unstage"="command git reset"
     alias "revert"="command git checkout --"
 else
+    alias "log"="command git log"
     alias "commit"="command git commit"
     alias "commim"="command git commit -m"
     alias "commat"="command git add -A; git commit"
