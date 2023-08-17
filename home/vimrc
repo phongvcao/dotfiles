@@ -3146,6 +3146,9 @@ function! SetIndentation()
     endif
 endfunction
 
+" jq custom function
+command! -nargs=0 JsonFormat :%!jq --indent 4 .
+
 " javascript-libraries-syntax.vim
 let g:used_javascript_libs = 'jquery,underscore,backbone,angularjs,angularui'
 
