@@ -217,6 +217,19 @@ function promptlineVcsBranch() {
     fi
 }
 
+function merge() {
+    echo "INFO: Rebasing local branch $3 with remote branch $1/$2"
+    # git fetch origin
+    echo "INFO: git fetch $1"
+    command git fetch $1
+    # git checkout mybranch
+    echo "INFO: git checkout $3"
+    command git checkout $3
+    # git rebase origin/main
+    echo "INFO: git rebase $1/$2"
+    command git rebase $1/$2
+}
+
 function br() {
     command git -C /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask fetch --unshallow
     command sudo chown -R $(whoami) /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
