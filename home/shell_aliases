@@ -288,7 +288,7 @@ alias "pull"="git config pull.rebase false; git pull"
 #
 alias "rebase"="git rebase"
 alias "rebasei"="git rebase --interactive"
-alias "rebasec"="git rebase --continue"
+alias "next"="git rebase --continue"
 
 alias "glog"="gitlog"
 alias "stash"="git stash"
