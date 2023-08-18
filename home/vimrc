@@ -4080,7 +4080,7 @@ augroup CustomAutoCmd
 
     autocmd BufRead,BufEnter * setlocal colorcolumn=80 textwidth=0
     autocmd FileType,BufEnter * :call SetOmnifunc()
-    autocmd BufNewFile,BufRead *.jinja2,*.j2,*.jinja,*.html,*.htm,*.nunjucks,*.nunjs set filetype=jinja
+    autocmd BufNewFile,BufRead *.jinja2,*.j2,*.jinja,*.nunjucks,*.nunjs set filetype=jinja
 
     " vim-indent-guides
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#002b36 ctermbg=8
