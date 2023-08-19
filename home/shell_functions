@@ -22,6 +22,11 @@ function xtract() {
     cd ../
 }
 
+function sshadd() {
+    eval $(ssh-agent -s)
+    ssh-add "${HOME}/.ssh/id_ed25519_$1"
+}
+
 function stopwatch() {
     BEGIN=$(date +%s)
 
