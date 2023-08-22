@@ -263,7 +263,7 @@ else
     alias "revert"="command git checkout --"
 fi
 alias "resolve"="git mergetool"
-alias "push"="git push"
+alias "push"="echo 'NOTE: PLEASE sshadd FIRST IF PUSHING TO NON-DEFAULT REPO'; git push"
 alias "fush"="git push --force"
 alias "fetch"="git fetch"
 # alias "merge"="git merge"
