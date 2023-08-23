@@ -121,10 +121,10 @@ Plug 'markwu/vim-mrufiles'
 Plug 'antoinemadec/coc-fzf'
 if !has('nvim')
     Plug 'yuki-ycino/fzf-preview.vim', {
-                \ 'branch': 'release' }
+                \ 'branch': 'main' }
 else
     Plug 'yuki-ycino/fzf-preview.vim', {
-                \ 'branch': 'release',
+                \ 'branch': 'main',
                 \ 'do': ':UpdateRemotePlugins' }
 endif
 " END: junegunn/fzf.vim
