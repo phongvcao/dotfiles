@@ -275,7 +275,8 @@ alias "remote"="git remote"
 alias "info"="echo BRANCH:; git branch -v; echo; echo REMOTE:; git remote -v"
 alias "gstatus"="gitstatus"
 alias "init"="git init"
-alias "pull"="git config pull.rebase false; git pull"
+# alias "pull"="git config pull.rebase false; git pull"
+alias "pull"="merge"
 
 # To modify a commit:
 # - Issue: rebasei <commit_hash>
