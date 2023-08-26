@@ -51,6 +51,14 @@
             "args": ["up", "--method", "node-ipc"],
             "filetypes": ["sql", "mysql"]
         },
+        "intelephense": {
+            "command": "intelephense",
+            "args": ["--stdio"],
+            "filetypes": ["php"],
+            "initializationOptions": {
+                "storagePath": "/tmp/intelephense",
+            },
+        },
     },
     "go.goplsArgs": ["-remote", "auto"],
     "go.goplsPath": "~/.go/bin/gopls",
@@ -66,6 +74,6 @@
       "refreshAfterSave": true,
       "refreshOnInsertMode": false,
       "virtualText": true,
-      "virtualTextCurrentLineOnly": false
+      "virtualTextCurrentLineOnly": false,
     },
 }

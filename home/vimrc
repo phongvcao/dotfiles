@@ -504,8 +504,8 @@ Plug 'Glench/Vim-Jinja2-Syntax', {
 " Plugins (PHP, WordPress, Drupal)
 Plug 'tobyS/pdv', {
             \ 'for' : 'php' }
-Plug 'shawncplus/phpcomplete.vim', {
-            \ 'for' : 'php' }
+" Plug 'shawncplus/phpcomplete.vim', {
+"             \ 'for' : 'php' }
 Plug 'miya0001/vim-dict-wordpress', {
             \ 'for' : 'php' }
 Plug 'dsawardekar/wordpress.vim', {
@@ -513,6 +513,13 @@ Plug 'dsawardekar/wordpress.vim', {
 
 Plug 'arnaud-lb/vim-php-namespace', {
             \ 'for' : 'php' }
+Plug 'yaegassy/coc-intelephense',{
+            \ 'do': 'yarn install --frozen-lockfile'}
+Plug 'phpactor/phpactor', {
+            \ 'for': 'php',
+            \ 'do': 'composer install --no-dev -o'}
+Plug 'stephpy/vim-php-cs-fixer', { 
+            \ 'for': 'php' }
 
 " Plugins (CSV)
 Plug 'chrisbra/csv.vim'
@@ -1758,6 +1765,36 @@ if !exists('g:custom_vimrc_disable_coc_nvim_sql') || g:custom_vimrc_disable_coc_
     endif
 endif
 
+if executable('intelephense')
+  augroup LspPHPIntelephense
+    au!
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'intelephense',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'intelephense --stdio']},
+        \ 'whitelist': ['php'],
+        \ 'initialization_options': {'storagePath': '/tmp/intelephense'},
+        \ 'workspace_config': {
+        \   'intelephense': {
+        \     'files': {
+        \       'maxSize': 1000000,
+        \       'associations': ['*.php', '*.phtml'],
+        \       'exclude': [],
+        \     },
+        \     'completion': {
+        \       'insertUseDeclaration': v:true,
+        \       'fullyQualifyGlobalConstantsAndFunctions': v:false,
+        \       'triggerParameterHints': v:true,
+        \       'maxItems': 100,
+        \     },
+        \     'format': {
+        \       'enable': v:true
+        \     },
+        \   },
+        \ }
+        \})
+  augroup END
+endif
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 
@@ -1892,7 +1929,7 @@ let g:coc_global_extensions = [
             \ 'coc-flutter', 'coc-stylelint', 'coc-stylelintplus',
             \ 'coc-cssmodules', 'coc-texlab', 'coc-vetur', 'coc-marketplace',
             \ 'coc-protobuf', 'coc-sumneko-lua', 'coc-perl', 'coc-rust-analyzer',
-            \ 'coc-sourcekit', 'coc-clangd' ]
+            \ 'coc-sourcekit', 'coc-clangd', 'coc-phpls' ]
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 " let g:coc_global_extensions = [
@@ -2628,11 +2665,11 @@ nnoremap <localleader>V :call InvokeFzfMRUFilesTopSplit()<CR>
 
 nnoremap <localleader>t :tabnew<CR>:FzfMruFiles<CR>
 nnoremap <leader>sf :call ToggleSearchFoldOpen()<CR>
-nnoremap ov :FzfMRUSplit<Space>
-nnoremap oh :FzfMRUVSplit<Space>
-nnoremap OV :FzfMRUTopSplit<Space>
-nnoremap OH :FzfMRULeftVSplit<Space>
-nnoremap ot :FzfMRUTab<Space>
+nnoremap ov :silent! FzfMRUSplit<Space>
+nnoremap oh :silent! FzfMRUVSplit<Space>
+nnoremap OV :silent! FzfMRUTopSplit<Space>
+nnoremap OH :silent! FzfMRULeftVSplit<Space>
+nnoremap ot :silent! silent! FzfMRUTab<Space>
 " nnoremap O :FzfMRU<CR>
 nnoremap <leader>o :execute "FzfMRU ./"<CR>
 
