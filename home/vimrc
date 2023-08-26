@@ -409,8 +409,9 @@ Plug 'keith/swift.vim', {
             \ 'for' : [ 'swift' ] }
 
 " Plugins (SQL)
-Plug 'vf42/AutoSQLUpperCase.vim', {
-            \ 'for' : 'sql' }
+" Plug 'vf42/AutoSQLUpperCase.vim', {
+"             \ 'for' : 'sql' }
+Plug 'jsborjesson/vim-uppercase-sql'
 
 " Plugins (Python)
 Plug 'fs111/pydoc.vim', {
