@@ -164,7 +164,7 @@ alias "r"="ranger"
 alias "t"="term"
 alias "s"="sudo"
 alias "S"="_ssh"
-alias "grep"="g"
+# alias "grep"="g"
 alias "a"="ag"
 alias "_"="cd -"
 alias "q"="quit"
@@ -681,6 +681,24 @@ alias "temp"="vcgencmd measure_temp"
 
 # This is only needed for new instance of Docker container
 alias "darchstart"="sudo docker start archlinux"
+
+# PHP aliases
+alias "p"="php"
+alias "pconfig"="php --ini; pecl config-show"
+alias "phpconfig"="pconfig"
+alias "phpini"="pconfig"
+alias "puse"="phpbrew use"
+alias "pinstallext"="pecl install"
+alias "pinstalllib"="pear install"
+alias "pinstall"="phpbrew install"
+alias "pvariants"="phpbrew variants"
+alias "pknown"="phpbrew known"
+alias "plist"="phpbrew list"
+alias "pinit"="command rm -rf ${HOME}/.phpbrew; phpbrew init"
+alias "pclean"="command rm -rf ${HOME}/.phpbrew/build"
+
+# Node aliases
+alias "nuse"="nvm use"
 
 # Vagrant aliases
 alias "vinit"="vagrant init"

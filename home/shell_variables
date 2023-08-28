@@ -108,3 +108,5 @@ if [[ -f "${HOME}/.custom_shell_variables" ]]; then
     source "${HOME}/.custom_shell_variables"
 fi
 
+export "PHPBREW_SET_PROMPT"=1
+export "PHPBREW_RC_ENABLE"=1
