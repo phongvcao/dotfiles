@@ -29,8 +29,6 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             command chmod u+w /usr/local/share/doc; \
             command chmod u+w /usr/local/share/zsh; \
             command chmod u+w /usr/local/share/zsh/site-functions; \
-        brew tap kabel/php-ext; \
-        brew install php-imap; \
         brew tap homebrew/cask-fonts; \
         brew install --cask font-dejavu-sans-mono-nerd-font; \
         brew install ccls; \
@@ -122,7 +120,7 @@ else
 	        atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
 	        fzf fd-find neovim highlight ddclient qbittorrent postgresql \
 	        postgresql-contrib xmlstarlet fontforge nlohmann-json3-dev \
-	        libcurl4 libcurlpp0 jq hq php-cli php-mysql openssl zstd pkg-config
+	        libcurl4 libcurlpp0 jq hq openssl zstd pkg-config phpbrew \
 	        libc6-dev && \
 	    sudo snap install --classic code && \
 	    sudo snap install ccls go --classic && \

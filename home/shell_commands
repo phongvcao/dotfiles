@@ -28,6 +28,27 @@ if [[ -n "$DISPLAY" && -n "$(command which xrdb)" && ! -n "${SSH_CLIENT}" ]]; th
     xrdb "${HOME}"/.Xresources
 fi
 
+
+
+# # Check if phpbrew is installed
+# if command -v phpbrew &>/dev/null; then
+#     # Get the latest installed PHP version
+#     latest_php=$(phpbrew list | grep -E 'php-[0-9]+\.[0-9]+\.[0-9]+' | tail -n1 | awk '{print $1}')
+#     
+#     # Get the currently active PHP version
+#     current_php=$(phpbrew current)
+#     
+#     # Compare versions and switch if necessary
+#     if [ "$latest_php" != "$current_php" ]; then
+#         echo "Switching to the latest installed PHP version: $latest_php"
+#         phpbrew use "$latest_php"
+#     else
+#         echo "Already using the latest installed PHP version: $latest_php"
+#     fi
+# else
+#     echo "phpbrew is not installed."
+# fi
+
 # exec >/dev/tty 2>/dev/tty </dev/tty
 
 # PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%d %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
