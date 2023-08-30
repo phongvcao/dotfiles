@@ -224,6 +224,10 @@ function promptlineVcsBranch() {
 
 function merge() {
     echo "HELP: merge <remote> <remote_branch> <local_branch>"
+    if [[ -z "$3" ]]; then
+        echo "INFO: Please input all information: <remote> <remote_branch> <local_branch>"
+        return
+    fi
     echo "INFO: Rebasing local branch $3 with remote branch $1/$2"
     # git fetch origin
     echo "INFO: git fetch $1"
