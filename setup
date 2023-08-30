@@ -168,7 +168,7 @@ fi
 # Install PHP 8.2.9 (for WordPress)
 # https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions
 #
-phpbrew install php-8.2.9 +bz2=/usr/local/opt/bzip2 +default +dbs +zts +ftp +exif +intl +hash +opcache +iconv +xmlrpc +sodium +zlib +ftp
+phpbrew install -j $(nproc) php-8.2.9 +bz2=/usr/local/opt/bzip2 +default +dbs +zts +ftp +exif +intl +hash +opcache +iconv +xmlrpc +sodium +zlib +ftp
 cd ~/.phpbrew/build/php-8.2.9/ext
 pecl install mysql curl json dom exif fileinfo hash igbinary imagick intl mbstring openssl pcre xml zip apcu memcached opcache redis bc filter image iconv simplexml sodium xmlreader zlib ssh2 ftp sockets
 
