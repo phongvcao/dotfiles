@@ -238,6 +238,7 @@ alias "ninstalled"="npm list"
 alias "nupgrade"="npm update"
 
 # Git aliases
+alias "changes"="command git show --no-color -p HEAD"
 alias "addall"="command git add -A"
 alias "add"="command git add"
 alias "clone"="git clone"
