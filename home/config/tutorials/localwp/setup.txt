@@ -1,0 +1,6 @@
+* If LocalWP cannot edit /etc/hosts file, add the following entries to the hosts
+file (replace example.local with the domain shown in LocalWP - e.g.
+fictional-university.local)
+
+::1 example.local
+127.0.0.1 example.local
