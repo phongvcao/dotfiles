@@ -19,6 +19,3 @@
     # cmd = command nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
     trustExitCode = false
     keepBackup = true
-
-[url "git@github.com:"]
-    insteadOf = https://github.com/

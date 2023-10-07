@@ -20,8 +20,5 @@
     trustExitCode = false
     keepBackup = true
 
-[url "git@github.com:"]
-    insteadOf = https://github.com/
-
 [include]
     path = ${HOME}/.custom_gitconfig
