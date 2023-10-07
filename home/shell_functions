@@ -1715,6 +1715,24 @@ function color() {
     fi
     echo "";
 
+    echo "Solarized Dark settings"
+    echo "cterm: 0  => gui: #073642 => base02"
+    echo "cterm: 1  => gui: #dc322f => red"
+    echo "cterm: 2  => gui: #859900 => green"
+    echo "cterm: 3  => gui: #b58900 => yellow"
+    echo "cterm: 4  => gui: #268bd2 => blue"
+    echo "cterm: 5  => gui: #d33682 => magenta"
+    echo "cterm: 6  => gui: #2aa198 => cyan"
+    echo "cterm: 7  => gui: #eee8d5 => base2"
+    echo "cterm: 8  => gui: #002b36 => base03"
+    echo "cterm: 9  => gui: #cb4b16 => orange"
+    echo "cterm: 10 => gui: #586e75 => base01"
+    echo "cterm: 11 => gui: #657b83 => base00"
+    echo "cterm: 12 => gui: #839496 => base0"
+    echo "cterm: 13 => gui: #6c71c4 => violet"
+    echo "cterm: 14 => gui: #93a1a1 => base1"
+    echo "cterm: 15 => gui: #fdf6e3 => base3"
+
     tput sgr0
 }
 
