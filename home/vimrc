@@ -3007,6 +3007,7 @@ inoremap {; {<CR>};<C-c>O
 inoremap {, {<CR>},<C-c>O
 inoremap [; [<CR>];<C-c>O
 inoremap [, [<CR>],<C-c>O
+inoremap <? <?php  ?><left><left><left>
 inoremap " ""<left>
 inoremap ' ''<left>
 inoremap ` ``<left>
@@ -3025,6 +3026,7 @@ inoremap {<Space> {  }<C-c><left>i
 inoremap {<CR> {<CR>}<C-c>O
 inoremap (<CR> (<CR>)<C-c>O
 inoremap [<CR> [<CR>]<C-c>O
+inoremap <<CR> <?php<CR><CR><CR><CR>?><up><up>
 
 " vim-over settings
 let g:over#command_line#enable_import_commandline_map = 0
