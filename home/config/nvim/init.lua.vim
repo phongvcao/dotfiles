@@ -17,7 +17,7 @@ lua <<EOF
 -- require('packer').startup(function()
 --     use 'wbthomason/packer.nvim' -- Package manager
 --     use {
---         'kevinhwang91/nvim-hlslens',
+--         -- 'kevinhwang91/nvim-hlslens',
 --         -- config = function()
 --         --     -- require('hlslens').setup() is not required
 --         --     require("scrollbar.handlers.search").setup({
@@ -102,6 +102,7 @@ lua <<EOF
 
 HOME = os.getenv('HOME')
 
+--[[
 -- nvim-hlslens settings
 require('hlslens').setup({
     override_lens = function(render, posList, nearest, idx, relIdx)
@@ -136,20 +137,21 @@ require('hlslens').setup({
     --     require("scrollbar.handlers.search").handler.show(plist.start_pos)
     -- end,
 })
+--]]
 
 
 local kopts = {noremap = true, silent = true}
 
-vim.api.nvim_set_keymap('n', 'n',
-    [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-    kopts)
-vim.api.nvim_set_keymap('n', 'N',
-    [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-    kopts)
-vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- vim.api.nvim_set_keymap('n', 'n',
+--     [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+--     kopts)
+-- vim.api.nvim_set_keymap('n', 'N',
+--     [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+--     kopts)
+-- vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
 
 vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
 

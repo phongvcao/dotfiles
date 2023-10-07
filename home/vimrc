@@ -273,12 +273,12 @@ Plug 'KabbAmine/vCoolor.vim', {
 Plug 'ntpeters/vim-better-whitespace', {
             \ 'on' : [ 'ToggleWhitespace', 'StripWhitespace' ] }
 
-if !has('nvim')
+" if !has('nvim')
     Plug 'osyo-manga/vim-anzu'
     Plug 'phongvcao/vim-searchhi'
-else
-    Plug 'kevinhwang91/nvim-hlslens'
-endif
+" else
+    " Plug 'kevinhwang91/nvim-hlslens'
+" endif
 " Plug 'qxxxb/vim-searchhi'
 
 " Plug 'prettier/vim-prettier', {
@@ -556,7 +556,7 @@ Plug 'gcavallanti/vim-noscrollbar'
 if has('nvim')
     Plug 'petertriho/nvim-scrollbar'
     Plug 'lewis6991/gitsigns.nvim'
-    Plug 'kevinhwang91/nvim-hlslens'
+    " Plug 'kevinhwang91/nvim-hlslens'
 endif
 " END: petertriho/nvim-scrollbar
 
@@ -3093,7 +3093,7 @@ let g:vim_markdown_folding_disabled = 1
 " vim-anzu
 " After the move, the search status information is output to
 " the command line.
-if !has('nvim')
+" if !has('nvim')
     nmap n <Plug>(anzu-n-with-echo)
     nmap N <Plug>(anzu-N-with-echo)
     " Set nogdefault so vim-anzu would match all matches in a line
@@ -3109,7 +3109,7 @@ if !has('nvim')
     nmap # <Plug>(anzu-sharp-with-echo)
     let g:anzu_search_limit=1000000
     let g:anzu_status_format = "%#WarningMsg#%p (%i/%l) %w"
-endif
+" endif
 
 " vim-searchhi settings
 let g:searchhi_user_autocmds_enabled = 1
