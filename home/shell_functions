@@ -246,7 +246,8 @@ function br() {
     command chmod u+w /usr/local/bin /usr/local/etc /usr/local/sbin /usr/local/share /usr/local/share/doc
     eval "brew update"
     eval "brew upgrade"
-    eval "brew cask upgrade --greedy"
+    eval "brew update --cask --greedy"
+    eval "brew upgrade --cask --greedy"
     eval "brew $@"
 }
 

@@ -3310,7 +3310,7 @@ function! CustomLightlineFilename()
         let b:webdev_filetype_symbol = WebDevIconsGetFileTypeSymbol()
     endif
 
-    let l:filename = system('readlink -f ' . expand('%:p'))
+    let l:filename = system('readlink -f ' . fnameescape(expand('%:p')))
     if l:filename !~ '^/.*'
         return b:webdev_filetype_symbol . ' '  
     endif
