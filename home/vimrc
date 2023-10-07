@@ -730,8 +730,8 @@ set nospell
 set equalalways
 set nostartofline
 set nojoinspaces
-set fillchars+=eob:\ 
 set fillchars+=vert:│
+set fillchars+=eob:\ 
 set selection=inclusive
 nnoremap <Space>t %
 nnoremap <leader>P :hardcopy ><Space>
