@@ -730,6 +730,7 @@ set nospell
 set equalalways
 set nostartofline
 set nojoinspaces
+set fillchars+=eob:\ 
 set fillchars+=vert:│
 set selection=inclusive
 nnoremap <Space>t %
