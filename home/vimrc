@@ -2180,14 +2180,31 @@ let g:indent_guides_default_mapping = 0
 let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar', 'fzf', 'floaterm', 'terminal', 'lf' ]
 
 " indent-blanklines.nvim settings
-highlight IndentBlanklineIndent1 ctermbg=8
-highlight IndentBlanklineIndent2 ctermbg=0
+highlight IndentBlanklineIndent1 ctermbg=8 guibg=#002b36
+highlight IndentBlanklineIndent2 ctermbg=0 guibg=#073642
 let g:indent_blankline_show_trailing_blankline_indent = 0
 let g:indent_blankline_char = ''
 let g:indent_blankline_char_highlight_list = [ 'IndentBlanklineIndent1', 'IndentBlanklineIndent2' ]
 let g:indent_blankline_space_char_highlight_list = [ 'IndentBlanklineIndent1', 'IndentBlanklineIndent2' ]
 
 " Solarized Dark settings
+" cterm: 0  => gui: #073642 => base02
+" cterm: 1  => gui: #dc322f => red
+" cterm: 2  => gui: #859900 => green
+" cterm: 3  => gui: #b58900 => yellow
+" cterm: 4  => gui: #268bd2 => blue
+" cterm: 5  => gui: #d33682 => magenta
+" cterm: 6  => gui: #2aa198 => cyan
+" cterm: 7  => gui: #eee8d5 => base2
+" cterm: 8  => gui: #002b36 => base03
+" cterm: 9  => gui: #cb4b16 => orange
+" cterm: 10 => gui: #586e75 => base01
+" cterm: 11 => gui: #657b83 => base00
+" cterm: 12 => gui: #839496 => base0
+" cterm: 13 => gui: #6c71c4 => violet
+" cterm: 14 => gui: #93a1a1 => base1
+" cterm: 15 => gui: #fdf6e3 => base3
+
 syntax enable
 set background=dark
 let g:solarized_termtrans=1
@@ -2839,7 +2856,7 @@ let g:peekaboo_ins_prefix = '<Insert>'
 " vim-swoop settings
 let g:swoopUseDefaultKeyMap = 0
 nnoremap R :silent! call SwoopMulti()<CR>
-let g:swoopHighlight = ["hi! SwoopBufferLineHi ctermfg=4 ctermbg=8", "hi! SwoopPatternHi ctermfg=8 ctermbg=3"]
+let g:swoopHighlight = ["hi! SwoopBufferLineHi ctermfg=4 guifg=#268bd2 ctermbg=8 guibg=#002b36", "hi! SwoopPatternHi ctermfg=8 guifg=#002b36 ctermbg=3 guibg=#b58900"]
 let g:defaultWinSwoopHeight = 30
 function! FreezeSwoopContext()
     if expand('%f') =~? 'swoopBuf'
@@ -3693,7 +3710,7 @@ function! s:goyo_enter()
     call SetHighlight()
     call HighlightVertSplit()
     call HighlightEasyMotion()
-    highlight StatusLine ctermfg=12 ctermbg=8
+    highlight StatusLine ctermfg=12 guifg=#839496 ctermbg=8 guibg=#002b36
 endfunction
 
 function! s:goyo_leave()
@@ -3701,7 +3718,7 @@ function! s:goyo_leave()
     call SetHighlight()
     call HighlightVertSplit()
     call HighlightEasyMotion()
-    highlight StatusLine ctermfg=0 ctermbg=12
+    highlight StatusLine ctermfg=0 guifg=#073642 ctermbg=12 guibg=#839496
 endfunction
 
 " csv.vim settings
@@ -3712,10 +3729,10 @@ endfunction
 " endif
 " let g:csv_highlight_column = 'y'
 " let g:csv_hiGroup = 'IncSearch0
-highlight CSVColumnOdd ctermbg=0 ctermfg=2
-highlight CSVColumnEven ctermbg=8 ctermfg=3
-highlight CSVColumnHeaderOdd ctermbg=0 ctermfg=9
-highlight CSVColumnHeaderEven ctermbg=8 ctermfg=9
+highlight CSVColumnOdd ctermbg=0 guibg=#073642 ctermfg=2 guifg=#859900
+highlight CSVColumnEven ctermbg=8 guibg=#002b36 ctermfg=3 guifg=#b58900
+highlight CSVColumnHeaderOdd ctermbg=0 guibg=#073642 ctermfg=9 guifg=#cb4b16
+highlight CSVColumnHeaderEven ctermbg=8 guibg=#002b36 ctermfg=9 guifg=#cb4b16
 nnoremap <localleader>ca :AddColumn<CR>
 nnoremap <localleader>cA :%ArrangeColumn!<CR>
 nnoremap <localleader>cu :%UnArrangeColumn<CR>
@@ -3855,51 +3872,50 @@ endfunction
 function! SetHighlight()
     set cursorline     " highlight current line
     set nocursorcolumn   " no highlight current column to speed things up
-    highlight Folded ctermfg=10 ctermbg=0
-    highlight BookmarkLine ctermbg=0 cterm=underline gui=underline
-    highlight BookmarkSign ctermbg=0 ctermfg=7 cterm=underline gui=underline
-    highlight BookmarkAnnotationSign ctermbg=0 ctermfg=7 cterm=underline gui=underline
-    highlight BookmarkAnnotationLine ctermbg=0 ctermfg=7 cterm=underline gui=underline
+    highlight Folded ctermfg=10 guifg=#586e75 ctermbg=0 guibg=#073642
+    highlight BookmarkLine ctermbg=0 guibg=#073642 cterm=underline gui=underline
+    highlight BookmarkSign ctermbg=0 guibg=#073642 ctermfg=7 guifg=#eee8d5 cterm=underline gui=underline
+    highlight BookmarkAnnotationSign ctermbg=0 guibg=#073642 ctermfg=7 guifg=#eee8d5 cterm=underline gui=underline
+    highlight BookmarkAnnotationLine ctermbg=0 guibg=#073642 ctermfg=7 guifg=#eee8d5 cterm=underline gui=underline
     highlight MatchTag ctermfg=234 ctermbg=lightblue guifg=#002b36 guibg=lightblue
-    highlight SignColumn guibg=#002b36
-    highlight SignColumn ctermbg=8
+    highlight SignColumn ctermbg=8 guibg=#002b36
     
     " vim-signature settings
-    highlight SignatureMarkText ctermfg=9 ctermbg=8
-    highlight SignatureMarkerText ctermfg=9 ctermbg=8
+    highlight SignatureMarkText ctermfg=9 guifg=#cb4b16 ctermbg=8 guibg=#002b36
+    highlight SignatureMarkerText ctermfg=9 guifg=#cb4b16 ctermbg=8 guibg=#002b36
 
     " interactive-replace settings
-    highlight IntSearchHL ctermfg=8 ctermbg=3
+    highlight IntSearchHL ctermfg=8 guifg=#002b36 ctermbg=3 guibg=#b58900
 
     " ShowMotion's highlights
     let s:uname = system("uname -s")
     if s:uname =~ ".*Darwin.*"
-        highlight ShowMotion_SmallMotionGroup cterm=NONE ctermfg=8 ctermbg=4
-        highlight ShowMotion_BigMotionGroup cterm=NONE ctermfg=8 ctermbg=4
-        highlight ShowMotion_CharSearchGroup cterm=NONE ctermfg=8 ctermbg=4
+        highlight ShowMotion_SmallMotionGroup cterm=NONE ctermfg=8 guifg=#002b36 ctermbg=4 guibg=#268bd2
+        highlight ShowMotion_BigMotionGroup cterm=NONE ctermfg=8 guifg=#002b36 ctermbg=4 guibg=#268bd2
+        highlight ShowMotion_CharSearchGroup cterm=NONE ctermfg=8 guifg=#002b36 ctermbg=4 guibg=#268bd2
     else
-        highlight ShowMotion_SmallMotionGroup ctermbg=4 ctermfg=8
-        highlight ShowMotion_BigMotionGroup ctermbg=4 ctermfg=8
-        highlight ShowMotion_CharSearchGroup ctermbg=4 ctermfg=8
+        highlight ShowMotion_SmallMotionGroup ctermbg=4 guibg=#268bd2 ctermfg=8 guifg=#002b36
+        highlight ShowMotion_BigMotionGroup ctermbg=4 guibg=#268bd2 ctermfg=8 guifg=#002b36
+        highlight ShowMotion_CharSearchGroup ctermbg=4 guibg=#268bd2 ctermfg=8 guifg=#002b36
     endif
 
     " lightline.vim settings
-    " highlight EndOfBuffer ctermfg=8 ctermbg=8
-    highlight StatusLine term=NONE cterm=NONE gui=NONE ctermfg=12 ctermbg=0
-    highlight NonText term=NONE cterm=NONE gui=NONE ctermfg=8 ctermbg=8
-    highlight WildMenu term=NONE cterm=NONE gui=NONE ctermfg=8 ctermbg=4
-    highlight Pmenu term=NONE cterm=NONE gui=NONE ctermfg=12 ctermbg=0
-    highlight PmenuSel term=NONE cterm=NONE gui=NONE ctermfg=0 ctermbg=2
-    highlight PmenuSbar term=NONE cterm=NONE gui=NONE ctermfg=0 ctermbg=0
-    highlight PmenuThumb term=NONE cterm=NONE gui=NONE ctermfg=0 ctermbg=2
+    " highlight EndOfBuffer ctermfg=8 guifg=#002b36 ctermbg=8 guibg=#002b36
+    highlight StatusLine term=NONE cterm=NONE gui=NONE ctermfg=12 guifg=#839496 ctermbg=0 guibg=#073642
+    highlight NonText term=NONE cterm=NONE gui=NONE ctermfg=8 guifg=#002b36 ctermbg=8 guibg=#002b36
+    highlight WildMenu term=NONE cterm=NONE gui=NONE ctermfg=8 guifg=#002b36 ctermbg=4 guibg=#268bd2
+    highlight Pmenu term=NONE cterm=NONE gui=NONE ctermfg=12 guifg=#839496 ctermbg=0 guibg=#073642
+    highlight PmenuSel term=NONE cterm=NONE gui=NONE ctermfg=0 guifg=#073642 ctermbg=2 guibg=#859900
+    highlight PmenuSbar term=NONE cterm=NONE gui=NONE ctermfg=0 guifg=#073642 ctermbg=0 guibg=#073642
+    highlight PmenuThumb term=NONE cterm=NONE gui=NONE ctermfg=0 guifg=#073642 ctermbg=2 guibg=#859900
 
     " vim-floaterm settings
-    highlight FloatermBorder ctermfg=10 ctermbg=8
+    highlight FloatermBorder ctermfg=10 guifg=#586e75 ctermbg=8 guibg=#002b36
 
     " vim-signify settings
-    highlight SignifySignAdd    ctermfg=2 ctermbg=8 cterm=NONE
-    highlight SignifySignDelete ctermfg=1 ctermbg=8 cterm=NONE 
-    highlight SignifySignChange ctermfg=3 ctermbg=8 cterm=NONE  
+    highlight SignifySignAdd    ctermfg=2 guifg=#859900 ctermbg=8 guibg=#002b36 cterm=NONE
+    highlight SignifySignDelete ctermfg=1 guifg=#dc322f ctermbg=8 guibg=#002b36 cterm=NONE 
+    highlight SignifySignChange ctermfg=3 guifg=#b58900 ctermbg=8 guibg=#002b36 cterm=NONE  
 endfunction
 
 function! IsI3Running()
@@ -3944,11 +3960,11 @@ endfunction
 
 function! HighlightCurrentLineNum()
     set cursorline
-    highlight! CursorLineNr ctermfg=226 cterm=bold guifg=Yellow gui=bold
+    highlight! CursorLineNr ctermfg=226 guifg=#fdff01 cterm=bold gui=bold
 endfunction
 
 function! HighlightVertSplit()
-    highlight VertSplit ctermbg=8 guibg=NONE ctermfg=11 guifg=#93a1a1 
+    highlight VertSplit ctermbg=8 guibg=#002b36 ctermfg=11 guifg=#657b83
 endfunction
 
 " vim-easymotion settings
@@ -3956,12 +3972,12 @@ function! HighlightEasyMotion()
     " Highlight color of easymotion is same as incsearch.vim
     " since easymotion has a search for char mode by pressing
     " <Space>/
-    highlight EasyMotionTarget ctermfg=9 ctermbg=none
-    highlight EasyMotionTarget2First ctermfg=9 ctermbg=none
-    highlight EasyMotionTarget2Second ctermfg=9 ctermbg=none
-    highlight EasyMotionMoveHL ctermfg=9 ctermbg=none
-    highlight EasyMotionIncSearch ctermfg=9 ctermbg=none
-    highlight EasyMotionShade ctermfg=10 ctermbg=none
+    highlight EasyMotionTarget ctermfg=9 guifg=#cb4b16 ctermbg=none
+    highlight EasyMotionTarget2First ctermfg=9 guifg=#cb4b16 ctermbg=none
+    highlight EasyMotionTarget2Second ctermfg=9 guifg=#cb4b16 ctermbg=none
+    highlight EasyMotionMoveHL ctermfg=9 guifg=#cb4b16 ctermbg=none
+    highlight EasyMotionIncSearch ctermfg=9 guifg=#cb4b16 ctermbg=none
+    highlight EasyMotionShade ctermfg=10 guifg=#586e75 ctermbg=none
 endfunction
 
 let g:easymotion#is_active = 0
@@ -3990,7 +4006,7 @@ augroup CustomAutoCmd
     autocmd BufEnter * :execute 'silent! set modifiable'
 
     " ParenMatch settings
-    autocmd BufEnter * :highlight ParenMatch term=bold cterm=bold ctermfg=12 ctermbg=1 guibg=DarkCyan
+    autocmd BufEnter * :highlight ParenMatch term=bold cterm=bold ctermfg=12 guifg=#839496 ctermbg=1 guibg=#dc322f
     autocmd BufEnter * :syntax sync fromstart
 
     " vim-searchhi settings
@@ -4008,104 +4024,106 @@ augroup CustomAutoCmd
 
     " nvim-dap-ui settings
     autocmd BufEnter * :highlight link DapUIVariable Normal
-    autocmd BufEnter * :highlight DapUIScope ctermfg=4
-    autocmd BufEnter * :highlight DapUIType ctermfg=3
+    autocmd BufEnter * :highlight DapUIScope ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIType ctermfg=3 guifg=#b58900
     autocmd BufEnter * :highlight link DapUIValue Normal
-    autocmd BufEnter * :highlight DapUIModifiedValue ctermfg=4 cterm=bold
-    autocmd BufEnter * :highlight DapUIDecoratio ctermfg=4
-    autocmd BufEnter * :highlight DapUIThrea ctermfg=4
-    autocmd BufEnter * :highlight DapUIStoppedThread ctermfg=4
+    autocmd BufEnter * :highlight DapUIModifiedValue ctermfg=4 guifg=#268bd2 cterm=bold
+    autocmd BufEnter * :highlight DapUIDecoratio ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIThrea ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIStoppedThread ctermfg=4 guifg=#268bd2
     autocmd BufEnter * :highlight link DapUIFrameName Normal
-    autocmd BufEnter * :highlight DapUISource ctermfg=4
-    autocmd BufEnter * :highlight DapUILineNumber ctermfg=2
+    autocmd BufEnter * :highlight DapUISource ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUILineNumber ctermfg=2 guifg=#859900
     autocmd BufEnter * :highlight link DapUIFloatNormal NormalFloat
-    autocmd BufEnter * :highlight DapUIFloatBorder ctermfg=4
-    autocmd BufEnter * :highlight DapUIWatchesEmpty ctermfg=4
-    autocmd BufEnter * :highlight DapUIWatchesValue ctermfg=4
-    autocmd BufEnter * :highlight DapUIWatchesError ctermfg=1
-    autocmd BufEnter * :highlight DapUIBreakpointsPath ctermfg=4
-    autocmd BufEnter * :highlight DapUIBreakpointsInfo ctermfg=4
-    autocmd BufEnter * :highlight DapUIBreakpointsCurrentLine ctermfg=226 cterm=bold
+    autocmd BufEnter * :highlight DapUIFloatBorder ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIWatchesEmpty ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIWatchesValue ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIWatchesError ctermfg=1 guifg=#dc322f
+    autocmd BufEnter * :highlight DapUIBreakpointsPath ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIBreakpointsInfo ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIBreakpointsCurrentLine ctermfg=2 guifg=#85990026 cterm=bold
     autocmd BufEnter * :highlight link DapUIBreakpointsLine DapUILineNumber
-    autocmd BufEnter * :highlight DapUIBreakpointsDisabledLine ctermfg=4
+    autocmd BufEnter * :highlight DapUIBreakpointsDisabledLine ctermfg=4 guifg=#268bd2
     autocmd BufEnter * :highlight link DapUICurrentFrameName DapUIBreakpointsCurrentLine
-    autocmd BufEnter * :highlight DapUIStepOver ctermfg=4
-    autocmd BufEnter * :highlight DapUIStepInto ctermfg=4
-    autocmd BufEnter * :highlight DapUIStepBack ctermfg=4
-    autocmd BufEnter * :highlight DapUIStepOut ctermfg=4
-    autocmd BufEnter * :highlight DapUIStop ctermfg=4
-    autocmd BufEnter * :highlight DapUIPlayPause ctermfg=4
-    autocmd BufEnter * :highlight DapUIRestart ctermfg=4
-    autocmd BufEnter * :highlight DapUIUnavailable ctermfg=4
-    autocmd BufEnter * :highlight DapUIStepOverNC ctermfg=4
-    autocmd BufEnter * :highlight DapUIStepIntoNC ctermfg=4
-    autocmd BufEnter * :highlight DapUIStepBackNC ctermfg=4
-    autocmd BufEnter * :highlight DapUIStepOutNC ctermfg=4
-    autocmd BufEnter * :highlight DapUIStopNC ctermfg=4
-    autocmd BufEnter * :highlight DapUIPlayPauseNC ctermfg=4
-    autocmd BufEnter * :highlight DapUIRestartNC ctermfg=4
-    autocmd BufEnter * :highlight DapUIUnavailableNC ctermfg=4
+    autocmd BufEnter * :highlight DapUIStepOver ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIStepInto ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIStepBack ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIStepOut ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIStop ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIPlayPause ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIRestart ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIUnavailable ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIStepOverNC ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIStepIntoNC ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIStepBackNC ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIStepOutNC ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIStopNC ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIPlayPauseNC ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIRestartNC ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIUnavailableNC ctermfg=4 guifg=#268bd2
 
     " nvim-hlslens settings
-    autocmd BufEnter * :highlight HlSearchLensNear ctermfg=8 ctermbg=2
-    autocmd BufEnter * :highlight HlSearchLens ctermfg=8 ctermbg=4
+    autocmd BufEnter * :highlight HlSearchLensNear ctermfg=8 guifg=#002b36 ctermbg=2 guibg=#859900
+    autocmd BufEnter * :highlight HlSearchLens ctermfg=8 guifg=#002b36 ctermbg=4 guibg=#268bd2
     
     " nvim-scrollbar settings
     " autocmd CmdlineLeave : lua require('scrollbar.handlers.search').handler.hide()
-    autocmd BufEnter * :highlight ScrollbarError ctermfg=1 ctermbg=0
-    autocmd BufEnter * :highlight ScrollbarErrorHandle ctermfg=1 ctermbg=0
+    autocmd BufEnter * :highlight ScrollbarError ctermfg=1 guifg=#dc322f ctermbg=0 guibg=#073642
+    autocmd BufEnter * :highlight ScrollbarErrorHandle ctermfg=1 guifg=#dc322f ctermbg=0 guibg=#073642
 
-    autocmd BufEnter * :highlight ScrollbarWarn ctermfg=1 ctermbg=1
-    autocmd BufEnter * :highlight ScrollbarWarnHandle ctermfg=1 ctermbg=1
-    autocmd BufEnter * :highlight ScrollbarInfo ctermfg=1 ctermbg=1
-    autocmd BufEnter * :highlight ScrollbarInfoHandle ctermfg=1 ctermbg=1
+    autocmd BufEnter * :highlight ScrollbarWarn ctermfg=1 guifg=#dc322f ctermbg=1 guibg=#dc322f
+    autocmd BufEnter * :highlight ScrollbarWarnHandle ctermfg=1 guifg=#dc322f ctermbg=1 guibg=#dc322f
+    autocmd BufEnter * :highlight ScrollbarInfo ctermfg=1 guifg=#dc322f ctermbg=1 guibg=#dc322f
+    autocmd BufEnter * :highlight ScrollbarInfoHandle ctermfg=1 guifg=#dc322f ctermbg=1 guibg=#dc322f
 
-    autocmd BufEnter * :highlight ScrollbarMisc ctermfg=1 ctermbg=1
-    autocmd BufEnter * :highlight ScrollbarMiscHandle ctermfg=1 ctermbg=1
+    autocmd BufEnter * :highlight ScrollbarMisc ctermfg=1 guifg=#dc322f ctermbg=1 guibg=#dc322f
+    autocmd BufEnter * :highlight ScrollbarMiscHandle ctermfg=1 guifg=#dc322f ctermbg=1 guibg=#dc322f
 
-    autocmd BufEnter * :highlight ScrollbarSearch ctermfg=3 ctermbg=0
-    autocmd BufEnter * :highlight ScrollbarSearchHandle ctermfg=3 ctermbg=0
+    autocmd BufEnter * :highlight ScrollbarSearch ctermfg=3 guifg=#b58900 ctermbg=0 guibg=#073642
+    autocmd BufEnter * :highlight ScrollbarSearchHandle ctermfg=3 guifg=#b58900 ctermbg=0 guibg=#073642
 
-    autocmd BufEnter * :highlight ScrollbarHandle ctermfg=4 ctermbg=4
-    autocmd BufEnter * :highlight ScrollbarCursor ctermfg=4 ctermbg=4
-    autocmd BufEnter * :highlight ScrollbarCursorHandle ctermfg=4 ctermbg=4
+    autocmd BufEnter * :highlight ScrollbarHandle ctermfg=4 guifg=#268bd2 ctermbg=4 guibg=#268bd2
+    autocmd BufEnter * :highlight ScrollbarCursor ctermfg=4 guifg=#268bd2 ctermbg=4 guibg=#268bd2
+    autocmd BufEnter * :highlight ScrollbarCursorHandle ctermfg=4 guifg=#268bd2 ctermbg=4 guibg=#268bd2
 
     " ctrlsf.vim settings
     autocmd VimEnter,BufEnter,BufWinEnter * :call SetHighlightCtrlSF()
     autocmd FileType ctrlsf :call SetHighlightCtrlSF()
 
     " coc.nvim settings
-    autocmd BufEnter * :highlight CocErrorFloat ctermbg=9 ctermfg=0 term=underline gui=underline
-    autocmd BufEnter * :highlight CocErrorSign ctermbg=0 ctermfg=9 term=underline gui=underline
-    autocmd BufEnter * :highlight CocWarningFloat ctermbg=3 ctermfg=0 term=underline gui=underline
-    autocmd BufEnter * :highlight CocWarningSign ctermbg=0 ctermfg=3 term=underline gui=underline
-    autocmd BufEnter * :highlight CocInfoFloat ctermbg=4 ctermfg=0 term=underline gui=underline
-    autocmd BufEnter * :highlight CocInfoSign ctermbg=0 ctermfg=4 term=underline gui=underline
-    autocmd BufEnter * :highlight CocHintFloat ctermbg=2 ctermfg=0 term=underline gui=underline
-    autocmd BufEnter * :highlight CocHintSign ctermbg=0 ctermfg=2 term=underline gui=underline
-    autocmd BufEnter * :highlight CocFloating ctermbg=0 term=underline gui=underline
-    autocmd BufEnter * :highlight CocMenuSel ctermbg=2 ctermfg=8
-    autocmd BufEnter * :highlight Search ctermbg=3 ctermfg=8 cterm=NONE
+    autocmd BufEnter * :highlight CocErrorFloat ctermbg=9 guibg=#cb4b16 ctermfg=0 guifg=#073642 term=underline gui=underline
+    autocmd BufEnter * :highlight CocErrorSign ctermbg=0 guibg=#073642 ctermfg=9 guifg=#cb4b16 term=underline gui=underline
+    autocmd BufEnter * :highlight CocWarningFloat ctermbg=3 guibg=#b58900 ctermfg=0 guifg=#073642 term=underline gui=underline
+    autocmd BufEnter * :highlight CocWarningSign ctermbg=0 guibg=#073642 ctermfg=3 guifg=#b58900 term=underline gui=underline
+    autocmd BufEnter * :highlight CocInfoFloat ctermbg=4 guibg=#268bd2 ctermfg=0 guifg=#073642 term=underline gui=underline
+    autocmd BufEnter * :highlight CocInfoSign ctermbg=0 guibg=#073642 ctermfg=4 guifg=#268bd2 term=underline gui=underline
+    autocmd BufEnter * :highlight CocHintFloat ctermbg=2 guibg=#859900 ctermfg=0 guifg=#073642 term=underline gui=underline
+    autocmd BufEnter * :highlight CocHintSign ctermbg=0 guibg=#073642 ctermfg=2 guifg=#859900 term=underline gui=underline
+    autocmd BufEnter * :highlight CocFloating ctermbg=0 guibg=#073642
+    autocmd BufEnter * :highlight CocMenuSel ctermbg=2 guibg=#859900 ctermfg=8 guifg=#002b36
+    autocmd BufEnter * :highlight CocSearch ctermbg=0 guibg=#073642 ctermfg=9 guifg=#cb4b16 cterm=NONE gui=NONE
+    autocmd BufEnter * :highlight Search ctermbg=3 guibg=#b58900 ctermfg=8 guifg=#002b36 cterm=NONE gui=NONE
+
     autocmd BufRead,BufNewFile *.lua.vim set filetype=lua
 
     " vim-which-key settings
-    autocmd BufEnter * :highlight WhichKeyDesc ctermfg=4
-    autocmd BufEnter * :highlight WhichKey ctermfg=2
+    autocmd BufEnter * :highlight WhichKeyDesc ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight WhichKey ctermfg=2 guifg=#859900
 
     " far.vim
-    autocmd BufEnter * :highlight FarFilePath ctermfg=5
-    autocmd BufEnter * :highlight FarSearchVal ctermfg=9
-    autocmd BufEnter * :highlight FarReplaceVal ctermfg=9
-    autocmd BufEnter * :highlight FarFileStats ctermfg=2
-    autocmd BufEnter * :highlight FarStatusLine ctermbg=8 ctermfg=4
-    autocmd BufEnter * :highlight FarExcludedItem ctermfg=10
+    autocmd BufEnter * :highlight FarFilePath ctermfg=5 guifg=#d33682
+    autocmd BufEnter * :highlight FarSearchVal ctermfg=9 guifg=#cb4b16
+    autocmd BufEnter * :highlight FarReplaceVal ctermfg=9 guifg=#cb4b16
+    autocmd BufEnter * :highlight FarFileStats ctermfg=2 guifg=#859900
+    autocmd BufEnter * :highlight FarStatusLine ctermbg=8 guibg=#002b36 ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight FarExcludedItem ctermfg=10 guifg=#586e75
 
     " goyo.vim settings
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
     autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
     " MatchTag settings
-    autocmd BufEnter * :highlight MatchParen ctermfg=8 ctermbg=lightblue guifg=#002b36 guibg=lightblue
+    autocmd BufEnter * :highlight MatchParen ctermfg=8 guifg=#002b36 ctermbg=lightblue guibg=lightblue
 
     autocmd SourcePre * call HighlightVertSplit()
     " autocmd VimEnter,GUIEnter,VimLeave * :call DeleteSessionLocks()
@@ -4131,12 +4149,12 @@ augroup CustomAutoCmd
     autocmd BufNewFile,BufRead *.jinja2,*.j2,*.jinja,*.nunjucks,*.nunjs set filetype=jinja
 
     " vim-indent-guides
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#002b36 ctermbg=8
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#073642 ctermbg=0
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=8 guibg=#002b36
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0 guibg=#073642
 
     " indent-blankline.nvim
-    autocmd VimEnter,Colorscheme * :hi IndentBlanklineIndent1 ctermbg=8
-    autocmd VimEnter,Colorscheme * :hi IndentBlanklineIndent2 ctermbg=0
+    autocmd VimEnter,Colorscheme * :hi IndentBlanklineIndent1 ctermbg=8 guibg=#002b36
+    autocmd VimEnter,Colorscheme * :hi IndentBlanklineIndent2 ctermbg=0 guibg=#073642
 
     " Go to previously accessed tab
     autocmd TabLeave * let g:lasttab = tabpagenr()
