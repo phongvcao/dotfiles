@@ -2210,7 +2210,7 @@ set background=dark
 let g:solarized_termtrans=1
 " colorscheme solarized
 set termguicolors
-colorscheme solarized8
+colorscheme solarized8_flat
 
 " winresizer settings
 let g:winresizer_start_key = '+'
@@ -3961,6 +3961,8 @@ endfunction
 function! HighlightCurrentLineNum()
     set cursorline
     highlight! CursorLineNr ctermfg=226 guifg=#fdff01 cterm=bold gui=bold
+    highlight! CursorLine ctermbg=0 guibg=#073642 cterm=bold gui=bold
+    highlight! SignColumn ctermbg=8 guibg=#002b36 cterm=bold gui=bold
 endfunction
 
 function! HighlightVertSplit()
