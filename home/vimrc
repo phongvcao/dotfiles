@@ -658,7 +658,6 @@ set wildmode=full
 set lazyredraw     " redraw only when we need to.
 set spell          " enable Spell-checking
 set laststatus=2
-set t_Co=256
 set tenc=utf8
 " space open/closes folds
 " nnoremap <CR> za
@@ -2201,7 +2200,11 @@ syntax enable
 set background=dark
 let g:solarized_termtrans=1
 " colorscheme solarized
-set termguicolors
+if exists('+termguicolors')
+    set termguicolors
+else
+    set t_Co=256
+endif
 colorscheme solarized8_flat
 
 " winresizer settings
