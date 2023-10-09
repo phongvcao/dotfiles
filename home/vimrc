@@ -2202,7 +2202,7 @@ set background=dark
 let g:solarized_termtrans=1
 " colorscheme solarized
 set termguicolors
-colorscheme solarized8_flat
+colorscheme solarized8
 
 " winresizer settings
 let g:winresizer_start_key = '+'
