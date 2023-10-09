@@ -342,6 +342,20 @@ require('nvim-web-devicons').setup()
 -- nvim-spectre settings
 require('spectre').setup()
 
+-- indent-blankline.nvim settings
+local highlight = {
+    "CursorColumn",
+    "Whitespace",
+}
+require("ibl").setup {
+    indent = { highlight = highlight, char = "" },
+    whitespace = {
+        highlight = highlight,
+        remove_blankline_trail = false,
+    },
+    scope = { enabled = false },
+}
+
 -- show the effects of a search / replace in a live preview window
 vim.o.inccommand = "split"
 

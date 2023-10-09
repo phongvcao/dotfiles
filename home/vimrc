@@ -2179,14 +2179,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_default_mapping = 0
 let g:indent_guides_exclude_filetypes = [ 'tree', 'stardict', 'gundo', 'gitv', 'unite', 'help', 'nerdtree', 'calendar', 'fzf', 'floaterm', 'terminal', 'lf' ]
 
-" indent-blanklines.nvim settings
-highlight IndentBlanklineIndent1 ctermbg=8 guibg=#002b36
-highlight IndentBlanklineIndent2 ctermbg=0 guibg=#073642
-let g:indent_blankline_show_trailing_blankline_indent = 0
-let g:indent_blankline_char = ''
-let g:indent_blankline_char_highlight_list = [ 'IndentBlanklineIndent1', 'IndentBlanklineIndent2' ]
-let g:indent_blankline_space_char_highlight_list = [ 'IndentBlanklineIndent1', 'IndentBlanklineIndent2' ]
-
 " Solarized Dark settings
 " cterm: 0  => gui: #073642 => base02
 " cterm: 1  => gui: #dc322f => red
@@ -3210,6 +3202,11 @@ function! SetIndentation()
 
     if index(g:space_tabs_blacklist, &filetype) >= 0
         setlocal noexpandtab
+    endif
+
+
+    if &filetype ==# 'php'
+        setlocal indentexpr=
     endif
 endfunction
 
