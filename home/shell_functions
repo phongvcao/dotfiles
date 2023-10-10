@@ -2268,7 +2268,7 @@ function debuggotest() {
         debugPort=${arg2}
     fi
     kill -9 $(lsof -i:${debugPort}) > /dev/null 2>&1
-    dlv test . --headless --build-flags="-gcflags='-N -l'" --listen=:${debugPort} ${arg1}
+    dlv test ${arg1} --headless --build-flags="-gcflags='-N -l'" --listen=:${debugPort}
 }
 
 function startgdb() {
