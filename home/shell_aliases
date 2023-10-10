@@ -142,6 +142,10 @@ alias "cru"="npx create-react-app@latest --template redux"
 # Force removal of a package
 alias "purge"="sudo dpkg --purge --force-all"
 
+# Debugging
+alias "dg"="debuggo"
+alias "dgt"="debuggotest"
+
 # Single-letter aliases for commonly-used command
 alias "c"="cat"
 alias "C"="command"
