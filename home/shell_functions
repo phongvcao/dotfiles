@@ -2260,7 +2260,10 @@ function debuggo() {
 }
 
 function debuggotest() {
-    local arg1=$1
+    local arg1='.'
+    if [[ -n "$1" ]]; then
+        arg1=$1
+    fi
     local arg2=$2
     local debugPort="38697"
 
