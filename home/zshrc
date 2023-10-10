@@ -264,6 +264,7 @@ bindkey "^p" "" # yank
 bindkey "\t" "" # <Tab> - menu-complete
 bindkey "\v" "" # <Tab> - menu-complete
 bindkey -s "jk" ""
+bindkey "\t" end-of-line # <Tab> - menu-complete
 
 # bindkey '^[[Z' reverse-menu-complete
 export KEYTIMEOUT=30

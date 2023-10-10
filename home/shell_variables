@@ -110,3 +110,6 @@ fi
 
 export "PHPBREW_SET_PROMPT"=1
 export "PHPBREW_RC_ENABLE"=1
+
+# zsh-autosuggestions settings
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
