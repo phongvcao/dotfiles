@@ -2259,6 +2259,18 @@ function debuggo() {
     dlv debug -l ${debugHost} --build-flags="-gcflags='-N -l'" --headless ${arg1}
 }
 
+function debuggotest() {
+    local arg1=$1
+    local arg2=$2
+    local debugPort="38697"
+
+    if [[ -n "$2" ]]; then
+        debugPort=${arg2}
+    fi
+    kill -9 $(lsof -i:${debugPort}) > /dev/null 2>&1
+    dlv test . --headless --build-flags="-gcflags='-N -l'" --listen=:${debugPort} ${arg1}
+}
+
 function startgdb() {
     local binary_file=""
     local arg1=$1
