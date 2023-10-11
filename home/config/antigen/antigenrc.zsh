@@ -27,10 +27,10 @@ antigen bundle zdharma-continuum/fast-syntax-highlighting
 antigen bundle zdharma-continuum/history-search-multi-word --branch=main
 antigen bundle joel-porquet/zsh-dircolors-solarized.git
 
-# NVM bundle
-export NVM_LAZY_LOAD=true
-antigen bundle lukechilds/zsh-nvm
-antigen bundle Sparragus/zsh-auto-nvm-use
+# # NVM bundle
+# export NVM_LAZY_LOAD=true
+# antigen bundle lukechilds/zsh-nvm
+# antigen bundle Sparragus/zsh-auto-nvm-use
 
 # # Load the theme.
 antigen theme romkatv/powerlevel10k
