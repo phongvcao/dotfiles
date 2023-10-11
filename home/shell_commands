@@ -1,7 +1,7 @@
-# vim:filetype=zsh
-if [[ -f $HOME/.dircolors/dircolors.ansi-dark ]]; then
-    eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
-fi
+# # vim:filetype=zsh
+# if [[ -f $HOME/.dircolors/dircolors.ansi-dark ]]; then
+#     eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
+# fi
 
 if [[ -n "$DISPLAY" && "$TERM" == "xterm" ]]; then
     export TERM=xterm-256color

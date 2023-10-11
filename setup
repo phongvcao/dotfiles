@@ -151,18 +151,18 @@ chsh -s $(which zsh)
 #
 cargo install ripgrep --features pcre2
 
-#
-# Install dircolors-solarized
-#
-if [[ ! -d "${HOME}/.dircolors/" ]]; then
-    echo
-    echo "Installing dircolors-solarized"
-    curl -fLo ${HOME}/.dircolors/dircolors.ansi-dark --create-dirs \
-        https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark
-    if [[ -f $HOME/.dircolors/dircolors.ansi-dark ]]; then
-        eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
-    fi
-fi
+# #
+# # Install dircolors-solarized
+# #
+# if [[ ! -d "${HOME}/.dircolors/" ]]; then
+#     echo
+#     echo "Installing dircolors-solarized"
+#     curl -fLo ${HOME}/.dircolors/dircolors.ansi-dark --create-dirs \
+#         https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark
+#     if [[ -f $HOME/.dircolors/dircolors.ansi-dark ]]; then
+#         eval `dircolors $HOME/.dircolors/dircolors.ansi-dark`
+#     fi
+# fi
 
 #
 # Install PHP 8.2.9 (for WordPress)
@@ -210,23 +210,23 @@ if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-#
-# Install powerlevel10k
-#
-if [[ ! -d "${HOME}/.oh-my-zsh/custom/themes/powerlevel10k" ]]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-fi
+# #
+# # Install powerlevel10k
+# #
+# if [[ ! -d "${HOME}/.oh-my-zsh/custom/themes/powerlevel10k" ]]; then
+#     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+# fi
 
-#
-# Install autojump
-#
-if [ -z "$(command -v autojump)" ]; then
-    echo
-    echo "Installing autojump"
-    command git clone git://github.com/wting/autojump.git
-    cd autojump
-    ./install.py
-fi
+# #
+# # Install autojump
+# #
+# if [ -z "$(command -v autojump)" ]; then
+#     echo
+#     echo "Installing autojump"
+#     command git clone git://github.com/wting/autojump.git
+#     cd autojump
+#     ./install.py
+# fi
 
 #
 # Install pip3 and pip2
@@ -301,11 +301,11 @@ echo "Installing pygments"
 command sudo python3 -m pip install pygments
 # command sudo python2 -m pip install pygments
 
-#
-# Install nvm (Node Version Manager)
-#
-echo
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+# #
+# # Install nvm (Node Version Manager)
+# #
+# echo
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 
 #
 # Install neovim (node.js extension)

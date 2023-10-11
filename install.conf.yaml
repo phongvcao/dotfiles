@@ -74,6 +74,7 @@
     ~/.config/alacritty: home/config/alacritty
     ~/.vim/ftplugin: home/vim/ftplugin
     ~/.vim/autoload/floaterm: home/vim/autoload/floaterm
+    ~/.zsh-dircolors.config: home/zsh-dircolors.config
 
     ~/.gdbinit.d: home/gdbinit.d
     ~/.grc: home/grc
