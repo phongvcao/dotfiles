@@ -1,6 +1,6 @@
 # NOTE: Bundles are installed into ${HOME}/.antigen/bundles/
 if [[ "$(uname)" =~ "Darwin" ]]; then
-    source /usr/local/share/antigen/antigen.zsh
+    source $(command brew --prefix)/share/antigen/antigen.zsh
 else
     source /usr/share/zsh-antigen/antigen.zsh
 fi
