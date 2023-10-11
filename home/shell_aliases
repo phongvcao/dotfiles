@@ -71,6 +71,7 @@ alias "killtcp"="fuser -k -n tcp"
 alias "brewfix"="command sudo chown -R \"${USER}\":admin /usr/local; \
     command sudo chown -R \"${USER}\":admin /Library/Caches/Homebrew; \
     command sudo chown -R \"${USER}\":admin /Users/phongvcao/Library;"
+alias "j"="z"
 alias "chown"="command sudo chown -R \"${USER}\":admin"
 alias "wego"="wego 5"
 alias "wesj"="wego 'San Jose, CA' 5"

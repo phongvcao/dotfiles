@@ -66,7 +66,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-syntax-highlighting zsh-autosuggestions colored-man-pages)
+# plugins=(zsh-syntax-highlighting zsh-autosuggestions colored-man-pages)
 
 # User configuration
 # export PATH="/usr/bin/vendor_perl:/usr/bin/core_perl:$PATH"
@@ -277,6 +277,7 @@ bindkey -M viins "^u" backward-kill-line
 bindkey -M viins "^r" backward-kill-word
 bindkey -M viins "^n" expand-or-complete
 bindkey -M viins "^p" reverse-menu-complete
+bindkey -M viins "^h" history-search-multi-word
 
 bindkey -M vicmd "a" vi-add-eol
 bindkey -M vicmd "j" history-search-forward
