@@ -65,6 +65,7 @@
     ~/.config/gdb: home/config/gdb
     ~/.config/lldb: home/config/lldb
     ~/.config/tutorials: home/config/tutorials
+    ~/.config/antigen: home/config/antigen
     ~/.config/pudb/pudb.cfg: home/config/pudb/pudb.cfg
     ~/Library/Application Support/glances:
         if: '[ `uname` = Darwin ]'
