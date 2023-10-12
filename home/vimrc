@@ -1925,7 +1925,13 @@ augroup end
 if exists( 'g:custom_coc_config_home' )
     let g:coc_config_home = g:custom_coc_config_home 
 else
-    let g:coc_config_home = $HOME . '/.config/vim/coc-settings-default'
+    let s:uname = system("uname -s")
+    if s:uname =~ ".*Darwin.*"
+        let s:brew_prefix = system('brew --prefix')
+        let g:coc_config_home = $HOME . '/.config/vim' . s:brew_prefix . '/coc-settings-default'
+    else
+        let g:coc_config_home = $HOME . '/.config/vim/coc-settings-default'
+    endif
 endif
 let g:coc_start_at_startup = 1
 let g:coc_global_extensions = [
