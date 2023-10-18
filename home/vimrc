@@ -4038,8 +4038,8 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight DapUIType ctermfg=3 guifg=#b58900
     autocmd BufEnter * :highlight link DapUIValue Normal
     autocmd BufEnter * :highlight DapUIModifiedValue ctermfg=4 guifg=#268bd2 cterm=bold
-    autocmd BufEnter * :highlight DapUIDecoratio ctermfg=4 guifg=#268bd2
-    autocmd BufEnter * :highlight DapUIThrea ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIDecoration ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight DapUIThread ctermfg=4 guifg=#268bd2
     autocmd BufEnter * :highlight DapUIStoppedThread ctermfg=4 guifg=#268bd2
     autocmd BufEnter * :highlight link DapUIFrameName Normal
     autocmd BufEnter * :highlight DapUISource ctermfg=4 guifg=#268bd2
@@ -4072,6 +4072,18 @@ augroup CustomAutoCmd
     autocmd BufEnter * :highlight DapUIRestartNC ctermfg=4 guifg=#268bd2
     autocmd BufEnter * :highlight DapUIUnavailableNC ctermfg=4 guifg=#268bd2
 
+    autocmd BufEnter * :highlight default DapUIStepOver ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight default DapUIStepInto ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight default DapUIStepBack ctermfg=4 guifg=#268bd2
+    autocmd BufEnter * :highlight default DapUIStepOut ctermfg=4 guifg=#268bd2 
+    autocmd BufEnter * :highlight default DapUIStop ctermfg=4 guifg=#268bd2 
+    autocmd BufEnter * :highlight default DapUIPlayPause ctermfg=4 guifg=#268bd2 
+    autocmd BufEnter * :highlight default DapUIRestart ctermfg=4 guifg=#268bd2 
+    autocmd BufEnter * :highlight default DapUIUnavailable ctermfg=4 guifg=#268bd2 
+
+    autocmd BufEnter * :highlight default DapUIWinSelect ctermfg=4 guifg=268bd2
+    autocmd BufEnter * :highlight default link DapUINormal Normal
+
     " hi default link DapUINormal Normal
     " hi default link DapUIVariable Normal
     " hi default DapUIScope guifg=#00F1F5
@@ -4094,16 +4106,6 @@ augroup CustomAutoCmd
     " hi default DapUIBreakpointsCurrentLine guifg=#A9FF68 gui=bold
     " hi default link DapUIBreakpointsLine DapUILineNumber
     " hi default DapUIBreakpointsDisabledLine guifg=#424242
-    " hi default link DapUICurrentFrameName DapUIBreakpointsCurrentLine
-    " hi default DapUIStepOver guifg=#00f1f5
-    " hi default DapUIStepInto guifg=#00f1f5
-    " hi default DapUIStepBack guifg=#00f1f5
-    " hi default DapUIStepOut guifg=#00f1f5
-    " hi default DapUIStop guifg=#F70067
-    " hi default DapUIPlayPause guifg=#A9FF68
-    " hi default DapUIRestart guifg=#A9FF68
-    " hi default DapUIUnavailable guifg=#424242
-    " hi default DapUIWinSelect ctermfg=Cyan guifg=#00f1f5 gui=bold
     " hi default link DapUIEndofBuffer EndofBuffer
 
     " nvim-hlslens settings
