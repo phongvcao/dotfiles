@@ -123,3 +123,7 @@ export PATH="/usr/local/opt/openssl/bin:${PATH}"
 export LDFLAGS="${LDFLAGS} -L/usr/local/opt/openssl/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
 export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/openssl/include -I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi

@@ -58,7 +58,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             cmake xclip curl gpatch htop llvm yarn man-db rustup-init \
             tavianator/tap/bfs atool rar zip p7zip glances ranger flake8 \
             fzf fd neovim lf highlight ddclient fontforge kubernetes-cli curlpp \
-            nlohmann-json jq hq openssl zstd pkg-config libiconv antigen; \
+            nlohmann-json jq hq openssl zstd pkg-config libiconv antigen pyenv; \
         brew install phpbrew; \
         brew install --HEAD universal-ctags/universal-ctags/universal-ctags; \
         $(brew --prefix)/opt/fzf/install; \
@@ -121,7 +121,7 @@ else
 	        fzf fd-find neovim highlight ddclient qbittorrent postgresql \
 	        postgresql-contrib xmlstarlet fontforge nlohmann-json3-dev \
 	        libcurl4 libcurlpp0 jq hq openssl zstd pkg-config phpbrew php-pear\
-	        libc6-dev zsh-antigen && \
+	        libc6-dev zsh-antigen pyenv && \
 	    sudo snap install --classic code && \
 	    sudo snap install ccls go --classic && \
         sudo snap install kubectl --classic && \
