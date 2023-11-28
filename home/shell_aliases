@@ -112,6 +112,13 @@ alias "mon"="monitor"
 alias "gofmt"="command gofmt -s -w"
 alias "command_lintgo"="command golangci-lint run -j 8"
 
+alias "llmfast"="ollama run deepseek-coder:6.7b-instruct-q8_0"
+alias "llmslow"="ollama run deepseek-coder:33b-instruct-q3_K_M"
+alias "llmrun"="ollama run"
+alias "llmserve"="ollama serve"
+alias "llmlist"="ollama list"
+alias "llmrm"="ollama rm"
+
 if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
   #
   # NOTE: Fix for the text disappearing problems in Nvim:
