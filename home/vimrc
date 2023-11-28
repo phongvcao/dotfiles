@@ -88,6 +88,7 @@ Plug 'osyo-manga/vim-reanimate', {
             \ 'on' :  [ 'ReanimateLoad', 'ReanimateSave' ] }
 if has('nvim')
     Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'David-Kunz/gen.nvim'
 endif
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-scripts/YankRing.vim'

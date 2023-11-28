@@ -356,6 +356,17 @@ require("ibl").setup {
     scope = { enabled = false },
 }
 
+-- get.nvim settings
+require('gen').setup({
+    model = "deepseek-coder:6.7b-instruct-q8_0",
+    display_mode = "vsplit",
+    show_prompt = false,
+    show_model = false,
+})
+
+vim.keymap.set({ 'n', 'v' }, '<leader>G', ':Gen<CR>')
+
+
 -- show the effects of a search / replace in a live preview window
 vim.o.inccommand = "split"
 
