@@ -360,8 +360,8 @@ require("ibl").setup {
 require('gen').setup({
     model = "deepseek-coder:6.7b-instruct-q8_0",
     display_mode = "vsplit",
-    show_prompt = false,
-    show_model = false,
+    show_prompt = true,
+    show_model = true,
 })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>G', ':Gen<CR>')
