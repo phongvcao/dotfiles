@@ -121,6 +121,7 @@ alias "llmrm"="ollama rm"
 alias "llmui"="docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway --name ollama-webui --restart always ghcr.io/ollama-webui/ollama-webui:main"
 alias "llmuiopen"="echo 'http://localhost:3000/'"
 alias "llmhost"="echo 'http://localhost:11434/'"
+alias "llmupdate"="echo 'Current models:' && ollama list && echo; ollama list | command grep -v 'NAME' | awk '{print \$1}' | xargs -I{} ollama pull {}; echo; echo 'Updated models:'; ollama list"
 
 if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
   #
