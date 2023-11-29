@@ -385,6 +385,8 @@ fi
 #
 ollama run deepseek-coder:6.7b-instruct-q8_0
 ollama run deepseek-coder:33b-instruct-q3_K_M
+ollama run mistral:7b-instruct-fp16
+# docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway --name ollama-webui --restart always ghcr.io/ollama-webui/ollama-webui:main
 
 #
 # Clean up

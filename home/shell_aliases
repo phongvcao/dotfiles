@@ -115,9 +115,12 @@ alias "command_lintgo"="command golangci-lint run -j 8"
 alias "llmfast"="ollama run deepseek-coder:6.7b-instruct-q8_0"
 alias "llmslow"="ollama run deepseek-coder:33b-instruct-q3_K_M"
 alias "llmrun"="ollama run"
-alias "llmserve"="ollama serve"
+alias "llmserve"="command kill -9 $(lsof -t -i:11434) > /dev/null 2>&1; ollama serve"
 alias "llmlist"="ollama list"
 alias "llmrm"="ollama rm"
+alias "llmui"="docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway --name ollama-webui --restart always ghcr.io/ollama-webui/ollama-webui:main"
+alias "llmuiopen"="echo 'http://localhost:3000/'"
+alias "llmhost"="echo 'http://localhost:11434/'"
 
 if [ ! -f "${HOME}/.custom_shell_aliases" ]; then
   #
