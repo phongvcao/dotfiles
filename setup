@@ -382,6 +382,10 @@ fi
 
 #
 # Install Ollama & DeepSeek Coder
+# 
+# NOTE: We only run the Web UI inside Docker and NOT the entire ollama inside
+# Docker for maximum performance of the LLMs. Running LLMs inside Docker, even
+# though easy and hassle-free, would greatly limit LLMs' performance.
 #
 ollama run deepseek-coder:6.7b-instruct-q8_0
 ollama run deepseek-coder:33b-instruct-q3_K_M
