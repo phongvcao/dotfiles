@@ -356,12 +356,13 @@ require("ibl").setup {
     scope = { enabled = false },
 }
 
--- get.nvim settings
+-- gen.nvim settings
 require('gen').setup({
     model = "deepseek-coder:6.7b-instruct-q8_0",
-    display_mode = "vsplit",
-    show_prompt = true,
+    -- display_mode = "vsplit",
+    -- show_prompt = false, -- show_prompt = true messes up Model's response
     show_model = true,
+    -- no_auto_close = true,
 })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>G', ':Gen<CR>')
