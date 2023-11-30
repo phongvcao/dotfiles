@@ -359,14 +359,33 @@ require("ibl").setup {
 -- gen.nvim settings
 require('gen').setup({
     model = "deepseek-coder:6.7b-instruct-q8_0",
-    -- display_mode = "vsplit",
-    -- show_prompt = false, -- show_prompt = true messes up Model's response
+    display_mode = "vsplit",
+    show_prompt = true,
     show_model = true,
-    -- no_auto_close = true,
+    no_auto_close = true,
+    prompts = {
+        Prompt_Before_Selected_Text = {
+            prompt = "$input\n\n$text",
+        },
+        Prompt_After_Selected_Text = {
+            prompt = "$text\n\n$input",
+        },
+        Prompt_Only = { prompt = "$input", replace = true },
+        Selected_Text_Only = { prompt = "$context", replace = true },
+        Generate_With_Prompt_Only = { prompt = "$input", replace = true },
+        Generate_With_Selected_Text_Only = { prompt = "$context", replace = true },
+        Generate_With_Prompt_Before_Selected_Text = {
+            prompt = "$input\n\n$text",
+            replace = true,
+        },
+        Generate_With_Prompt_After_Selected_Text = {
+            prompt = "$text\n\n$input",
+            replace = true,
+        },
+    }
 })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>G', ':Gen<CR>')
-
 
 -- show the effects of a search / replace in a live preview window
 vim.o.inccommand = "split"
