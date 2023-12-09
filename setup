@@ -230,6 +230,13 @@ fi
 # fi
 
 #
+# Install python2
+#
+if [ -z "$(command -v python2)" ]; then
+    command pyenv install 2
+fi
+
+#
 # Install pip3 and pip2
 #
 if [ -z "$(command -v pip3)" ]; then
