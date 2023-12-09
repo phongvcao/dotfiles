@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Command</key>
-	<string>/opt/homebrew/bin/zsh</string>
+	<string></string>
 	<key>Default Bookmark Guid</key>
 	<string>AF335C5E-8792-4F72-BA12-88EE85916075</string>
 	<key>HapticFeedbackForEsc</key>
