@@ -96,6 +96,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew install --cask libreoffice; \
         brew install --cask visual-studio-code; \
         brew install --cask google-cloud-sdk; \
+        brew install --cask alfred; \
         # If this doesn't work for Cryptomator, we probably need to manually
         # download osxfuse 4.x versions on Github: https://osxfuse.github.io/
         brew install --cask macfuse; \
