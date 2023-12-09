@@ -214,9 +214,9 @@ alias "_scp"="command scp -rp"
 # download [user]@[instance ip]:[source directory on instance] [path to local storage]
 alias "download"="rsync -chavzP --stats -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'"
 
-alias "htop"="command htop --user=\${USER}"
-alias "rtop"="command htop --user=root"
-alias "top"="command htop"
+alias "htop"="command htop --user=\${USER} --sort-key=PERCENT_CPU"
+alias "rtop"="command htop --user=root --sort-key=PERCENT_CPU"
+alias "top"="command sudo htop --sort-key=PERCENT_CPU"
 alias "sxiv"="sxiv -baZ"
 alias "mpv"="mpv --loop=inf"
 alias "disks"="sudo gnome-disks"
