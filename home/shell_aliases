@@ -95,7 +95,7 @@ alias "mosh-server"="sudo iptables -I INPUT 1 -p udp --dport 60000:61000 -j ACCE
 alias "ps"="ps"
 alias "ifconfig"="ifconfig -a"
 alias "sed"="sed -i -r"
-alias "sz"="du -h -a --max-depth=1 -c -L"
+alias "sz"="gdu-go"
 alias "sort"="sort -h -b"
 alias "tmuxredraw"="tmuxattach"
 alias "tmuxrename"="tmux rename-window"
