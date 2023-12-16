@@ -1756,7 +1756,7 @@ let g:bl_no_mappings = 1
 "     endif
 " endif
 let g:coc_start_at_startup = 0
-nnoremap <leader><leader><leader> :silent! CocRestart<CR>
+nnoremap <leader><leader><leader> :silent! CocStart<CR>:silent! CocEnable<CR>
 nnoremap <leader><leader><localleader> :CocDisable<CR>
 
 if !exists('g:custom_vimrc_disable_coc_nvim_dockerfile') || g:custom_vimrc_disable_coc_nvim_dockerfile == 0
@@ -4157,7 +4157,7 @@ augroup CustomAutoCmd
     autocmd BufRead,BufNewFile *.lua.vim set filetype=lua
 
     autocmd BufRead,FileType * silent! CocDisable
-    autocmd BufRead,FileType * silent! call coc#rpc#stop()
+    " autocmd BufRead,FileType * silent! call coc#rpc#stop()
 
     " vim-which-key settings
     autocmd BufEnter * :highlight WhichKeyDesc ctermfg=4 guifg=#268bd2
