@@ -1755,6 +1755,9 @@ let g:bl_no_mappings = 1
 "         echoerr ".vimrc: Please double check coc-settings.json to make sure Clang directories for CCLS are up-to-date!!!"
 "     endif
 " endif
+let g:coc_start_at_startup = 0
+nnoremap ce :silent! CocRestart<CR>
+nnoremap cd :CocDisable<CR>
 
 if !exists('g:custom_vimrc_disable_coc_nvim_dockerfile') || g:custom_vimrc_disable_coc_nvim_dockerfile == 0
     if !filereadable('/usr/local/bin/docker-langserver')
