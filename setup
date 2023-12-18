@@ -64,6 +64,8 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew install --HEAD universal-ctags/universal-ctags/universal-ctags; \
         $(brew --prefix)/opt/fzf/install; \
         brew install --cask postgres-unofficial; \
+        brew install --cask eloston-chromium; \
+        brew install --cask librewolf; \
         brew install --cask nextcloud; \
         brew install --cask transmission; \
         brew install --cask calibre; \
@@ -99,6 +101,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew install --cask google-cloud-sdk; \
         brew install --cask rectangle; \
         brew install --cask alfred; \
+        brew install --cask obs; \
         # If this doesn't work for Cryptomator, we probably need to manually
         # download osxfuse 4.x versions on Github: https://osxfuse.github.io/
         brew install --cask macfuse; \
