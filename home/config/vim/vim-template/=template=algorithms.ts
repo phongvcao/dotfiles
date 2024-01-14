@@ -1473,149 +1473,300 @@ import mysql from 'mysql2/promise';
 //
 
 // using std::binary_search;
-
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
-//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
+// TYPESCRIPT_USAGE:
+//     const l1: number[] = [1, 2, 3, 3, 3, 3, 3, 5, 6];
 //
-//     lb := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] >= 3
-//     })
-//     if lb < len( l ) && l[ lb ] == 3 {
-//         fmt.Println( lb )  -- output: 2
+//     const lb1: number = lowerBound(l1, 3);
+//
+//     if (lb1 < l1.length && l1[lb1] === 3) {
+//         console.log(lb1);  // output: 2
 //     } else {
-//         fmt.Println( lb )  -- output: len( l )
+//         console.log(l1.length);
 //     }
 //
-//     var l []int = []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 }
-//     l := []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 } 
+//     const l2: number[] = [6, 5, 3, 3, 3, 3, 3, 2, 1];
 //
-//     ub_desc := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] <= 3
-//     })
-//     if ub_desc >= 1 && ub_desc < len( l ) {
-//         fmt.Println( ub_desc - 1 )  -- output: 1
+//     const ubDesc: number = upperBoundDescending(l2, 3);
+//
+//     if (ubDesc >= 1 && ubDesc < l2.length) {
+//         console.log(ubDesc - 1);  // output: 1
 //     } else {
-//         fmt.Println( ub_desc )  -- output: len( l )
+//         console.log(ubDesc);  // output: l2.length
 //     }
 //
-// GO_TRICKS:
-//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
-//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
+//     // Binary Search functions
+//     function lowerBound(arr: number[], target: number): number {
+//         let low = 0;
+//         let high = arr.length;
 //
-//     i := sort.SearchInts( l, 3 )
-//     fmt.Println( i )  -- output: 2
+//         while (low < high) {
+//             const mid = Math.floor((low + high) / 2);
+//             if (arr[mid] < target) {
+//                 low = mid + 1;
+//             } else {
+//                 high = mid;
+//             }
+//         }
 //
-//     i := sort.SearchInts( l, 4 )
-//     fmt.Println( i )  -- output: 7
+//         return low;
+//     }
 //
-//     i := sort.SearchFloat64s( l_float64s, 4.0 )
-//     fmt.Println( i )
+//     function upperBoundDescending(arr: number[], target: number): number {
+//         let low = 0;
+//         let high = arr.length;
 //
-//     i := sort.SearchStrings( l_strings, "abcd" )
-//     fmt.Println( i )
+//         while (low < high) {
+//             const mid = Math.floor((low + high) / 2);
+//             if (arr[mid] <= target) {
+//                 low = mid + 1;
+//             } else {
+//                 high = mid;
+//             }
+//         }
+//
+//         return low;
+//     }
+//
+//
+// TYPESCRIPT_USAGE_SUBOPTIMAL:
+//     const l1: number[] = [1, 2, 3, 3, 3, 3, 3, 5, 6];
+//
+//     const lb1: number = l1.findIndex((num) => num >= 3);
+//
+//     if (lb1 !== -1 && l1[lb1] === 3) {
+//         console.log(lb1);  // output: 2
+//     } else {
+//         console.log(l1.length);
+//     }
+//
+//     const l2: number[] = [6, 5, 3, 3, 3, 3, 3, 2, 1];
+//
+//     const ubDesc: number = l2.findIndex((num) => num <= 3);
+//
+//     if (ubDesc >= 1 && ubDesc < l2.length) {
+//         console.log(ubDesc - 1);  // output: 1
+//     } else {
+//         console.log(ubDesc);  // output: l2.length
+//     }
+//
+//
+// TYPESCRIPT_TRICKS:
+//     const l: number[] = [1, 2, 3, 3, 3, 3, 3, 5, 6];
+//
+//     const i1: number = binarySearchInts(l, 3);
+//     console.log(i1);  // output: 2
+//
+//     const i2: number = binarySearchInts(l, 4);
+//     console.log(i2);  // output: 7
+//
+//     const lFloat64s: number[] = [1.0, 2.0, 3.0, 3.0, 3.0, 3.0, 3.0, 5.0, 6.0];
+//     const i3: number = binarySearchFloat64s(lFloat64s, 4.0);
+//     console.log(i3);
+//
+//     const lStrings: string[] = ["abcd", "efgh", "ijkl"];
+//     const i4: number = binarySearchStrings(lStrings, "abcd");
+//     console.log(i4);
+//
+//     // Binary Search functions
+//     function binarySearchInts(arr: number[], target: number): number {
+//         let low = 0;
+//         let high = arr.length - 1;
+//
+//         while (low <= high) {
+//             const mid = Math.floor((low + high) / 2);
+//             const midValue = arr[mid];
+//
+//             if (midValue === target) {
+//                 return mid; // Element found
+//             } else if (midValue < target) {
+//                 low = mid + 1; // Search the right half
+//             } else {
+//                 high = mid - 1; // Search the left half
+//             }
+//         }
+//
+//         return -1; // Element not found
+//     }
+//
+//     function binarySearchFloat64s(arr: number[], target: number): number {
+//         // Adjust as needed based on the actual requirements and data types
+//         return binarySearchInts(arr, target);
+//     }
+//
+//     function binarySearchStrings(arr: string[], target: string): number {
+//         let low = 0;
+//         let high = arr.length - 1;
+//
+//         while (low <= high) {
+//             const mid = Math.floor((low + high) / 2);
+//             const midValue = arr[mid];
+//
+//             if (midValue === target) {
+//                 return mid; // Element found
+//             } else if (midValue < target) {
+//                 low = mid + 1; // Search the right half
+//             } else {
+//                 high = mid - 1; // Search the left half
+//             }
+//         }
+//
+//         return -1; // Element not found
+//     }
 //
 
-// from itertools import permutations
 // using std::next_permutation;
 // using std::prev_permutation;
-// PYTHON_USAGE:
-//     l : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
-//     l : List[ str ] = [ "F", "E", "E", "E", "D", "C", "B" ]
-//     for p in permutations( l ):
-//         print( list( p ) )
+// TYPESCRIPT_USAGE:
+//     const l: number[] = [5, 4, 3, 2, 1, 0];
+//     const lStrings: string[] = ["F", "E", "E", "E", "D", "C", "B"];
 //
-//     t : Tuple[ int, ... ] = ( 1, 2, 3, 3, 3, 3, 4, 5 )
-//     for p in permutations( t ):
-//         print( tuple( p ) )
+//     // Permutations for arrays
+//     const permutationsL: number[][] = permutations(l);
+//     permutationsL.forEach(p => console.log(p));
 //
-//     d : Dict[ str, int ] = { key1: val1, key2: val2, key3: val3 }
-//     for p in permutations( d ):
-//         print( dict( p ) )
+//     const permutationsLStrings: string[][] = permutations(lStrings);
+//     permutationsLStrings.forEach(p => console.log(p));
 //
-//     s : 
-//     for p in permutations( d ):
-//         print( "".join( p ) )
+//     // Permutations for tuples
+//     const t: number[] = [1, 2, 3, 3, 3, 3, 4, 5];
+//     const permutationsT: number[][] = permutations(t);
+//     permutationsT.forEach(p => console.log(p));
+//
+//     // Permutations for objects (dictionary)
+//     const d: Record<string, number> = { key1: 1, key2: 2, key3: 3 };
+//     const permutationsD: Record<string, number>[] = permutations(Object.entries(d));
+//     permutationsD.forEach(p => console.log(Object.fromEntries(p)));
+//
+//     // Permutations for strings
+//     const s: string = "abc";
+//     const permutationsS: string[][] = permutations(s.split(""));
+//     permutationsS.forEach(p => console.log(p.join("")));
+//
+//     // Permutations function
+//     function permutations<T>(arr: T[]): T[][] {
+//         const result: T[][] = [];
+//         const used: boolean[] = Array(arr.length).fill(false);
+//         const currentPermutation: T[] = [];
+//
+//         function backtrack() {
+//             if (currentPermutation.length === arr.length) {
+//                 result.push([...currentPermutation]);
+//                 return;
+//             }
+//
+//             for (let i = 0; i < arr.length; i++) {
+//                 if (used[i]) continue;
+//
+//                 used[i] = true;
+//                 currentPermutation.push(arr[i]);
+//
+//                 backtrack();
+//
+//                 used[i] = false;
+//                 currentPermutation.pop();
+//             }
+//         }
+//
+//         backtrack();
+//         return result;
+//     }
 //
 //
 // using std::set_intersection;                // Only works on std::set and not std::unordered_set
-// PYTHON_USAGE:
-//     s1 : Set[ int ] = { 1, 2, 3, 4, 5, 6 }
-//     s2 : Set[ int ] = { 4, 5, 6, 7, 8, 9 }
-//     print( s1.intersection( s2 ) )
+// TYPESCRIPT_USAGE:
+//     const s1: Set<number> = new Set([1, 2, 3, 4, 5, 6]);
+//     const s2: Set<number> = new Set([4, 5, 6, 7, 8, 9]);
+//
+//     const intersection: Set<number> = new Set([...s1].filter(value => s2.has(value)));
+//
+//     console.log(intersection);
 //
 //
 // using std::set_difference;                  // Only works on std::set and not std::unordered_set
-// PYTHON_USAGE:
-//     s1 : Set[ int ] = { 1, 2, 3, 4, 5, 6 }
-//     s2 : Set[ int ] = { 4, 5, 6, 7, 8, 9 }
-//     print( s1.difference( s2 ) )
+// TYPESCRIPT_USAGE:
+//     const s1: Set<number> = new Set([1, 2, 3, 4, 5, 6]);
+//     const s2: Set<number> = new Set([4, 5, 6, 7, 8, 9]);
+//
+//     const difference: Set<number> = new Set([...s1].filter(value => !s2.has(value)));
+//
+//     console.log(difference);
 //
 //
 // using std::set_union;
-// PYTHON_USAGE:
-//     s1 : Set[ int ] = { 1, 2, 3, 4, 5, 6 }
-//     s2 : Set[ int ] = { 4, 5, 6, 7, 8, 9 }
-//     print( s1.union( s2 ) )
+// TYPESCRIPT_USAGE:
+//     const s1: Set<number> = new Set([1, 2, 3, 4, 5, 6]);
+//     const s2: Set<number> = new Set([4, 5, 6, 7, 8, 9]);
 //
+//     const unionSet: Set<number> = new Set([...s1, ...s2]);
 //
+//     console.log(unionSet);
+//
+
 // using std::lower_bound;                     // Returns iter pointing to first element >= value
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
-//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
+// TYPESCRIPT_USAGE:
+//     const l: number[] = [1, 2, 3, 3, 3, 3, 3, 5, 6];
 //
-//     lb := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] >= 3
-//     })
-//     if lb < len( l ) {
-//         fmt.Println( lb )  -- output: 2
-//     } else {
-//         fmt.Println( lb )  -- output: len( l )
+//     // lower_bound equivalent function
+//     function lowerBound(arr: number[], value: number): number {
+//         let low = 0;
+//         let high = arr.length;
+//
+//         while (low < high) {
+//             const mid = Math.floor((low + high) / 2);
+//
+//             if (arr[mid] < value) {
+//                 low = mid + 1;
+//             } else {
+//                 high = mid;
+//             }
+//         }
+//
+//         return low;
 //     }
 //
-//     var l []int = []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 }
-//     l := []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 } 
+//     // Search for value >= 3
+//     const lb: number = lowerBound(l, 3);
+//     console.log(lb < l.length ? lb : l.length); // Output: 2
 //
-//     lb_desc := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] < 3
-//     })
-//     if lb_desc >= 1 && lb_desc < len( l ) {
-//         fmt.Println( lb_desc - 1 )  -- output: 6
-//     } else {
-//         fmt.Println( lb_desc )  -- output: len( l )
-//     }
+//     // Search for value < 3 in descending order
+//     const lbDesc: number = lowerBound(l.reverse(), 3);
+//     const resultDesc: number = lbDesc >= 1 && lbDesc < l.length ? l.length - lbDesc - 1 : l.length;
+//     console.log(resultDesc); // Output: 6
 //
 
 // using std::upper_bound;                     // Returns iter pointing to first element > value
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
-//     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
+// TYPESCRIPT_USAGE:
+//     const l: number[] = [1, 2, 3, 3, 3, 3, 3, 5, 6];
 //
-//     ub := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] > 3
-//     })
-//     if ub < len( l ) {
-//         fmt.Println( ub )  -- output: 6
-//     } else {
-//         fmt.Println( ub )  -- output: len( l )
+//     // upper_bound equivalent function
+//     function upperBound(arr: number[], value: number): number {
+//         let low = 0;
+//         let high = arr.length;
+//
+//         while (low < high) {
+//             const mid = Math.floor((low + high) / 2);
+//
+//             if (arr[mid] <= value) {
+//                 low = mid + 1;
+//             } else {
+//                 high = mid;
+//             }
+//         }
+//
+//         return low;
 //     }
 //
-//     var l []int = []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 }
-//     l := []int{ 6, 5, 3, 3, 3, 3, 3, 2, 1 } 
+//     // Search for value > 3
+//     const ub: number = upperBound(l, 3);
+//     console.log(ub < l.length ? ub : l.length); // Output: 6
 //
-//     ub_desc := sort.Search( len( l ), func( i int ) bool {
-//         return l[ i ] <= 3
-//     })
-//     if ub_desc >= 1 && ub_desc < len( l ) {
-//         fmt.Println( ub_desc - 1 )  -- output: 1
-//     } else {
-//         fmt.Println( ub_desc )  -- output: len( l )
-//     }
+//     // Search for value <= 3 in descending order
+//     const ubDesc: number = upperBound(l.reverse(), 3);
+//     const resultDesc: number = ubDesc >= 1 && ubDesc < l.length ? l.length - ubDesc - 1 : l.length;
+//     console.log(resultDesc); // Output: 1
 //
 
 // using std::transform;                       // Apply the given function to a range and store result in another range
-// PYTHON_USAGE:
-//
 // using std::nth_element;
 //
 // //----< memory >----------------------------//
@@ -1630,130 +1781,252 @@ import "unicode"
 import "strings"
 // //----< cctype >----------------------------//
 // using std::isalnum;
-// GO_USAGE:
-//     c := 'b'
-//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: true
-//     fmt.Println( unicode.IsLetter( 'c' ) || unicode.IsDigit( 'c' ) )  -- output: true
+// TYPESCRIPT_USAGE:
+//     const c1: string = 'b';
+//     console.log(isLetterOrDigit(c1)); // Output: true
 //
-//     c := 'A'
-//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: true
-//     fmt.Println( unicode.IsLetter( 'B' ) || unicode.IsDigit( 'B' ) )  -- output: true
-//     
-//     c := '1'
-//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: false
-//     fmt.Println( unicode.IsLetter( '2' ) || unicode.IsDigit( '2' ) )  -- output: false
+//     const c2: string = 'c';
+//     console.log(isLetterOrDigit(c2)); // Output: true
 //
-//     c := '!'
-//     fmt.Println( unicode.IsLetter( c ) || unicode.IsDigit( c ) )  -- output: false
-//     fmt.Println( unicode.IsLetter( '?' ) || unicode.IsDigit( '?' ) )  -- output: false
+//     const c3: string = 'A';
+//     console.log(isLetterOrDigit(c3)); // Output: true
+//
+//     const c4: string = 'B';
+//     console.log(isLetterOrDigit(c4)); // Output: true
+//
+//     const c5: string = '1';
+//     console.log(isLetterOrDigit(c5)); // Output: false
+//
+//     const c6: string = '2';
+//     console.log(isLetterOrDigit(c6)); // Output: false
+//
+//     const c7: string = '!';
+//     console.log(isLetterOrDigit(c7)); // Output: false
+//
+//     const c8: string = '?';
+//     console.log(isLetterOrDigit(c8)); // Output: false
+//
+//     // Function to check if a character is a letter or a digit
+//     function isLetterOrDigit(c: string): boolean {
+//         return isLetter(c) || isDigit(c);
+//     }
+//
+//     // Function to check if a character is a letter or a digit
+//     function isLetterOrDigit(c: string): boolean {
+//         return /[a-zA-Z0-9]/.test(c);
+//     }
+//
+//     // Function to check if a character is a letter
+//     function isLetter(c: string): boolean {
+//         return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+//     }
+//
+//     // Function to check if a character is a digit
+//     function isDigit(c: string): boolean {
+//         return c >= '0' && c <= '9';
+//     }
 //
 
 // using std::isalpha;
-// GO_USAGE:
-//     c := 'b'
-//     fmt.Println( unicode.IsLetter( c ) )  -- output: true
-//     fmt.Println( unicode.IsLetter( 'c' ) )  -- output: true
+// TYPESCRIPT_USAGE:
+//     const c1: string = 'b';
+//     console.log(isLetter(c1)); // Output: true
 //
-//     c := 'A'
-//     fmt.Println( unicode.IsLetter( c ) )  -- output: true
-//     fmt.Println( unicode.IsLetter( 'B' ) )  -- output: true
-//     
-//     c := '1'
-//     fmt.Println( unicode.IsLetter( c ) )  -- output: false
-//     fmt.Println( unicode.IsLetter( '2' ) )  -- output: false
+//     const c2: string = 'c';
+//     console.log(isLetter(c2)); // Output: true
 //
-//     c := '!'
-//     fmt.Println( unicode.IsLetter( c ) )  -- output: false
-//     fmt.Println( unicode.IsLetter( '?' ) )  -- output: false
+//     const c3: string = 'A';
+//     console.log(isLetter(c3)); // Output: true
+//
+//     const c4: string = 'B';
+//     console.log(isLetter(c4)); // Output: true
+//
+//     const c5: string = '1';
+//     console.log(isLetter(c5)); // Output: false
+//
+//     const c6: string = '2';
+//     console.log(isLetter(c6)); // Output: false
+//
+//     const c7: string = '!';
+//     console.log(isLetter(c7)); // Output: false
+//
+//     const c8: string = '?';
+//     console.log(isLetter(c8)); // Output: false
+//
+//     // Function to check if a character is a letter
+//     function isLetter(c: string): boolean {
+//         return /[a-zA-Z]/.test(c);
+//     }
+//
+//     // Function to check if a character is a letter
+//     function isLetter(c: string): boolean {
+//         const lowercaseC = c.toLowerCase();
+//         return lowercaseC >= 'a' && lowercaseC <= 'z';
+//     }
 //
 
 // using std::islower;
-// GO_USAGE:
-//     c := 'b'
-//     fmt.Println( unicode.IsLower( c ) )  -- output: true
-//     fmt.Println( unicode.IsLower( 'c' ) )  -- output: true
+// TYPESCRIPT_USAGE:
+//     const c1: string = 'b';
+//     console.log(isLower(c1)); // Output: true
 //
-//     c := 'A'
-//     fmt.Println( unicode.IsLower( c ) )  -- output: false
-//     fmt.Println( unicode.IsLower( 'B' ) )  -- output: false
-//     
-//     c := '1'
-//     fmt.Println( unicode.IsLower( c ) )  -- output: false
-//     fmt.Println( unicode.IsLower( '2' ) )  -- output: false
+//     const c2: string = 'c';
+//     console.log(isLower(c2)); // Output: true
 //
-//     c := '!'
-//     fmt.Println( unicode.IsLower( c ) )  -- output: false
-//     fmt.Println( unicode.IsLower( '?' ) )  -- output: false
+//     const c3: string = 'A';
+//     console.log(isLower(c3)); // Output: false
+//
+//     const c4: string = 'B';
+//     console.log(isLower(c4)); // Output: false
+//
+//     const c5: string = '1';
+//     console.log(isLower(c5)); // Output: false
+//
+//     const c6: string = '2';
+//     console.log(isLower(c6)); // Output: false
+//
+//     const c7: string = '!';
+//     console.log(isLower(c7)); // Output: false
+//
+//     const c8: string = '?';
+//     console.log(isLower(c8)); // Output: false
+//
+//     // Function to check if a character is lowercase
+//     function isLower(c: string): boolean {
+//         return /[a-z]/.test(c);
+//     }
+//
+//     // Function to check if a character is lowercase
+//     function isLower(c: string): boolean {
+//         return c >= 'a' && c <= 'z';
+//     }
 //
 
 // using std::isupper;
-// GO_USAGE:
-//     c := 'A'
-//     fmt.Println( unicode.IsUpper( c ) )  -- output: true
-//     fmt.Println( unicode.IsUpper( 'B' ) )  -- output: true
-//     
-//     c := 'b'
-//     fmt.Println( unicode.IsUpper( c ) )  -- output: false
-//     fmt.Println( unicode.IsUpper( 'c' ) )  -- output: false
+// TYPESCRIPT_USAGE:
+//     // Function to check if a character is uppercase
+//     function isUpper(c: string): boolean {
+//         return c >= 'A' && c <= 'Z';
+//     }
 //
-//     c := '1'
-//     fmt.Println( unicode.IsUpper( c ) )  -- output: false
-//     fmt.Println( unicode.IsUpper( '2' ) )  -- output: false
+//     // TypeScript Usage:
+//     const c1: string = 'A';
+//     console.log(isUpper(c1)); // Output: true
 //
-//     c := '!'
-//     fmt.Println( unicode.IsUpper( c ) )  -- output: false
-//     fmt.Println( unicode.IsUpper( '?' ) )  -- output: false
+//     const c2: string = 'b';
+//     console.log(isUpper(c2)); // Output: false
+//
+//     const c3: string = '1';
+//     console.log(isUpper(c3)); // Output: false
+//
+//     const c4: string = '!';
+//     console.log(isUpper(c4)); // Output: false
+//
+//     const c5: string = '?';
+//     console.log(isUpper(c5)); // Output: false
 //
 
 // using std::isdigit;
-// GO_USAGE:
-//     c := '1'
-//     fmt.Println( unicode.IsDigit( c ) )  -- output: true
-//     fmt.Println( unicode.IsDigit( '2' ) )  -- output: true
+// TYPESCRIPT_USAGE:
+//     // Function to check if a character is a digit
+//     function isDigit(c: string): boolean {
+//         return c >= '0' && c <= '9';
+//     }
 //
-//     c := 'a'
-//     fmt.Println( unicode.IsDigit( c ) )  -- output: false
-//     fmt.Println( unicode.IsDigit( 'b' ) )  -- output: false
+//     // Function to check if a character is a number
+//     function isNumber(c: string): boolean {
+//         return !isNaN(Number(c));
+//     }
 //
-//     c := '1'
-//     fmt.Println( unicode.IsNumber( c ) )  -- output: true
-//     fmt.Println( unicode.IsNumber( '2' ) )  -- output: true
+//     // TypeScript Usage:
+//     const c1: string = '1';
+//     console.log(isDigit(c1));   // Output: true
+//     console.log(isNumber(c1));  // Output: true
 //
-//     c := 'a'
-//     fmt.Println( unicode.IsNumber( c ) )  -- output: false
-//     fmt.Println( unicode.IsNumber( 'b' ) )  -- output: false
+//     const c2: string = 'a';
+//     console.log(isDigit(c2));   // Output: false
+//     console.log(isNumber(c2));  // Output: false
+//
+//     const c3: string = '2';
+//     console.log(isDigit(c3));   // Output: true
+//     console.log(isNumber(c3));  // Output: true
+//
+//     const c4: string = 'b';
+//     console.log(isDigit(c4));   // Output: false
+//     console.log(isNumber(c4));  // Output: false
 //
 
 // using std::isspace;                         // Check whether char is whitespace character (space, newline, tab, etc. )
 // using std::isblank;                         // Check whether char is blank character ( space or tab )
-// GO_USAGE:
-//     c := ' '
-//     fmt.Println( unicode.IsSpace( c ) )  -- output: true
-//     fmt.Println( unicode.IsSpace( ' ' ) )  -- output: true
+// TYPESCRIPT_USAGE:
+//     // Function to check whether a character is a whitespace character (space, newline, tab, etc.)
+//     function isSpace(c: string): boolean {
+//         return /\s/.test(c);
+//     }
 //
-//     c := 'd'
-//     fmt.Println( unicode.IsSpace( c ) )  -- output: false
-//     fmt.Println( unicode.IsSpace( 'd' ) )  -- output: false
+//     // Function to check whether a character is a blank character (space or tab)
+//     function isBlank(c: string): boolean {
+//         return /\s/.test(c) && !/\S/.test(c);
+//     }
+//
+//     // TypeScript Usage:
+//     const c1: string = ' ';
+//     console.log(isSpace(c1));  // Output: true
+//     console.log(isSpace(' '));  // Output: true
+//
+//     const c2: string = 'd';
+//     console.log(isSpace(c2));  // Output: false
+//     console.log(isSpace('d'));  // Output: false
+//
+//     const c3: string = '\t';
+//     console.log(isBlank(c3));  // Output: true (tab is considered a blank character)
+//
+//     const c4: string = 'A';
+//     console.log(isBlank(c4));  // Output: false
 //
 
 // using std::tolower;
-// GO_USAGE:
-//     c := 'A'
-//     fmt.Println( unicode.ToLower( c ) )  -- output: a
-//     fmt.Println( unicode.ToLower( 'B' ) )  -- output: b
+// TYPESCRIPT_USAGE:
+//     // Function to convert a character to lowercase
+//     function toLower(c: string): string {
+//         return c.toLowerCase();
+//     }
 //
-//     s := "GOPher#$#@"
-//     fmt.Println( strings.ToLower( s ) )  -- output: "gopherr#$#@"
+//     // Function to convert a string to lowercase
+//     function toLowerCase(s: string): string {
+//         return s.toLowerCase();
+//     }
+//
+//     // TypeScript Usage:
+//     const c1: string = 'A';
+//     console.log(toLower(c1));  // Output: a
+//     console.log(toLower('B'));  // Output: b
+//
+//     const s: string = "GOPher#$#@";
+//     console.log(toLowerCase(s));  // Output: "gopherr#$#@"
 //
 
 // using std::toupper;
-// GO_USAGE:
-//     c := 'a'
-//     fmt.Println( unicode.ToUpper( c ) )  -- output: A
-//     fmt.Println( unicode.ToUpper( 'b' ) )  -- output: B
+// TYPESCRIPT_USAGE:
+//     // Function to convert a character to uppercase
+//     function toUpper(c: string): string {
+//         return c.toUpperCase();
+//     }
 //
-//     s := "Gopher#$#@"
-//     fmt.Println( strings.ToUpper( s ) )  -- output: "GOPHERr#$#@"
+//     // Function to convert a string to uppercase
+//     function toUpperString(s: string): string {
+//         return s.toUpperCase();
+//     }
+//
+//     // TypeScript Usage:
+//     const charA = 'a';
+//     console.log(toUpper(charA));  // Output: A
+//
+//     const charB = 'b';
+//     console.log(toUpper(charB));  // Output: B
+//
+//     const strGopher = 'Gopher#$#@';
+//     console.log(toUpperString(strGopher));  // Output: GOPHER#$#@
 //
 
 // //----< stdexcept >-------------------------//
@@ -1764,11 +2037,12 @@ import "strings"
 // //----< limits >----------------------------//
 // using std::numeric_limits;                  // ::lowest() & ::max() for smallest & biggest representable value, respectively
 //                                             // ::infinity() only works for `double` / `float` / 'long double'. ::has_infinity() == false for ALL other types.
-// PYTHON_USAGE:
-//     print( - sys.maxsize - 1 )
-//     print( sys.maxsize )
-//     print( float( '-inf' ) )
-//     print( float( 'inf' ) )
+// TYPESCRIPT_USAGE:
+//     console.log(Number.MIN_SAFE_INTEGER);  // Smallest representable integer value
+//     console.log(Number.MAX_SAFE_INTEGER);  // Largest representable integer value
+//     console.log(Number.NEGATIVE_INFINITY);  // Negative (float) infinity
+//     console.log(Number.POSITIVE_INFINITY);  // Positive (float) infinity
+//
 //
 // //----< numeric >---------------------------//
 // using std::iota;
@@ -1776,8 +2050,6 @@ import "strings"
 // using std::lcm;
 // using std::partial_sum;                     // Calculate partial_sum of range beginIter, endIter and put result to 3rd argument outIter
 
-import "sync"
-import "time"
 // //----< thread >----------------------------//
 // using std::thread;
 // namespace this_thread = std::this_thread;   // Manipulate / Info of the current thread
@@ -1789,492 +2061,44 @@ import "time"
 // //----< future >----------------------------//
 // using std::future;
 // using std::async;
-// GO_USAGE:
-//     1. Use a for loop when you want to read from a channel until it is closed.
-//     2. Use a select statement when you want to read from multiple channels at
-//     the same time.
+// TYPESCRIPT_USAGE:
+//     class Solution {
+//         printNumber(num: number): Promise<number> {
+//             return new Promise((resolve) => {
+//                 let count = 0;
 //
-// GO_USAGE:
-//     1. WaitGroup is a good choice for simple synchronization tasks where
-//        the number of goroutines is fixed and known in advance.
-//     2. Channels are better for more complex tasks where synchronization
-//        and communication between goroutines is required.
+//                 const printInterval = setInterval(() => {
+//                     console.log(`Thread ${num} printing ${num}`);
+//                     count++;
 //
-// GO_USAGE_UNBUFFERED_CHANNEL:
-//     c := make( chan int ) // Create a channel of integers
-//
-//     // Start a goroutine to send integers to the channel
-//     go func() {
-//         for i := 0; i < 5; i++ {
-//             c <- i
+//                     if (count === 5) {
+//                         clearInterval(printInterval);
+//                         resolve(num * 100);
+//                     }
+//                 }, 500);
+//             });
 //         }
-//         close( c ) // Close the channel when done sending
-//     }()
 //
-//     // Receive integers from the channel and print them
-//     for i := range c {
-//         fmt.Println( i )
-//     }
+//         async runThreads() {
+//             console.log(`Main thread started.`);
 //
-// // OUTPUT: 0
-// //         1
-// //         2
-// //         3
-// //         4
+//             const start = Date.now();
 //
-// GO_USAGE_UNBUFFERED_CHANNEL:
-//     // Create an unbuffered channel
-//     ch := make(chan int)
+//             // Creating two promises and awaiting their resolution
+//             const result1 = await this.printNumber(1);
+//             const result2 = await this.printNumber(2);
 //
-//     // Start a goroutine to send values to the channel
-//     go func() {
-//         for i := 0; i < 5; i++ {
-//             ch <- i
-//         }
-//         close(ch)
-//     }()
+//             const end = Date.now();
 //
-//     // Read values from the channel using a for loop
-//     for {
-//         val, ok := <-ch
-//         if !ok {
-//             break
-//         }
-//         fmt.Println(val)
-//     }
-//
-// // OUTPUT: 0
-// //         1
-// //         2
-// //         3
-// //         4
-//
-// GO_USAGE_BUFFERED_CHANNEL:
-//     nums := []int{1, 2, 3, 4, 5}
-//     done := make(chan bool)
-//
-//     for _, num := range nums {
-//         go func(n int) {
-//             fmt.Println(n)
-//             done <- true
-//         }(num)
-//     }
-//
-//     for i := 0; i < len(nums); i++ {
-//         <-done
-//     }
-//
-// // OUTPUT: 1
-// //         2
-// //         3
-// //         4
-// //         5
-//
-// GO_USAGE_SELECT_UNBUFFERED_CHANNEL:
-//     ch1 := make(chan int)
-//     ch2 := make(chan int)
-//     go func() {
-//         ch1 <- 1
-//     }()
-//     go func() {
-//         ch2 <- 2
-//     }()
-//     select {
-//     case val := <-ch1:
-//         fmt.Println(val)
-//     case val := <-ch2:
-//         fmt.Println(val)
-//     }
-//
-// // OUTPUT: 2
-//
-// GO_USAGE_SELECT_UNBUFFERED_CHANNEL_FOR_LOOP:
-//     ch1 := make(chan int)
-//     ch2 := make(chan int)
-//     go func() {
-//         ch1 <- 1
-//     }()
-//     go func() {
-//         ch2 <- 2
-//     }()
-//     for i := 0; i < 2; i++ {
-//         select {
-//         case val := <-ch1:
-//             fmt.Println(val)
-//         case val := <-ch2:
-//             fmt.Println(val)
+//             console.log(`Result 1: ${result1}`);
+//             console.log(`Result 2: ${result2}`);
+//             console.log(`Main thread finished. Elapsed time: ${end - start} milliseconds`);
 //         }
 //     }
 //
-// // OUTPUT: 2
-// //         1
-//
-// GO_USAGE_SELECT_UNBUFFERED_CHANNEL_FOR_LOOP_ADVANCED:
-//     c1 := make( chan int )
-//     c2 := make( chan string )
-//
-//     // Start a goroutine to send integers to c1
-//     go func() {
-//         for i := 1; i <= 5; i++ {
-//             c1 <- i
-//             time.Sleep( time.Millisecond * 500 )
-//         }
-//         close( c1 )
-//     }()
-//
-//     // Start a goroutine to send strings to c2
-//     go func() {
-//         for _, s := range []string{ "one", "two", "three", "four", "five" } {
-//             c2 <- s
-//             time.Sleep( time.Millisecond * 250 )
-//         }
-//         close( c2 )
-//     }()
-//
-//     // Use a select statement to receive values from c1 and c2
-//     for {
-//         select {
-//         case i, ok := <-c1:
-//             if !ok {
-//                 c1 = nil
-//             }
-//             fmt.Printf( "Received integer: %d\n", i)
-//         case s, ok := <-c2:
-//             if !ok {
-//                 c2 = nil
-//             }
-//             fmt.Printf( "Received string: %s\n", s )
-//         }
-//         if c1 == nil && c2 == nil {
-//             break
-//         }
-//     }
-//
-// // OUTPUT: Received string: one
-// //         Received integer: 1
-// //         Received string: two
-// //         Received integer: 2
-// //         Received string: three
-// //         Received string: four
-// //         Received string: five
-// //         Received integer: 3
-// //         Received string: 
-// //         Received integer: 4
-// //         Received integer: 5
-// //         Received integer: 0
-//
-// GO_USAGE_WAIT_GROUP:
-//     var wg sync.WaitGroup
-//     for i := 1; i <= 5; i++ {
-//         wg.Add(1)
-//         go func(id int, wg *sync.WaitGroup) {
-//             defer wg.Done()
-//             fmt.Printf("Worker %d starting\n", id)
-//             time.Sleep(time.Second)
-//             fmt.Printf("Worker %d done\n", id)
-//         }(i, &wg)
-//     }
-//     wg.Wait()
-//     fmt.Println("All workers done")
-//
-// // OUTPUT: Worker 1 starting
-// //         Worker 5 starting
-// //         Worker 2 starting
-// //         Worker 3 starting
-// //         Worker 4 starting
-// //         Worker 5 done
-// //         Worker 4 done
-// //         Worker 1 done
-// //         Worker 3 done
-// //         Worker 2 done
-// //         All workers done
-//
-// GO_USAGE_BUFFERED_CHANNEL:
-//     // Create a buffered channel with a capacity of 2
-//     ch := make(chan int, 2)
-//
-//     // Send values to the channel
-//     ch <- 1
-//     ch <- 2
-//
-//     // Attempt to send a third value, but the channel is full
-//     // and the send operation will block until a receiver
-//     // reads a value from the channel
-//     // ch <- 3  // uncomment this to see it block
-//
-//     // Read values from the channel
-//     fmt.Println(<-ch)
-//     fmt.Println(<-ch)
-//
-//     // Attempt to read a third value, but the channel is empty
-//     // and the receive operation will block until a sender
-//     // writes a value to the channel
-//     // fmt.Println(<-ch)  // uncomment this to see it block
-//
-// // OUTPUT: 1
-// //         2
-//
-// GO_USAGE_BUFFERED_CHANNEL:
-//     // Create a buffered channel with a capacity of 5
-//     ch := make(chan int, 5)
-//
-//     // Start a goroutine to send values to the channel
-//     go func() {
-//         for i := 0; i < 10; i++ {
-//             ch <- i
-//         }
-//         close(ch)
-//     }()
-//
-//     // Read values from the channel using a for loop
-//     for val := range ch {
-//         fmt.Println(val)
-//     }
-//
-// // OUTPUT: 0
-// //         1
-// //         2
-// //         3
-// //         4
-// //         5
-// //         6
-// //         7
-// //         8
-// //         9
-//
-// GO_USAGE_SELECT_BUFFERED_CHANNEL:
-//     ch1 := make(chan int, 10)
-//     ch2 := make(chan int, 10)
-//
-//     // send values to the channels
-//     for i := 0; i < 10; i++ {
-//         ch1 <- i
-//         ch2 <- i * 2
-//     }
-//
-//     // use select statement to read from the channels
-//     select {
-//     case val1 := <-ch1:
-//         fmt.Println("Received value from channel 1:", val1)
-//     case val2 := <-ch2:
-//         fmt.Println("Received value from channel 2:", val2)
-//     }
-//
-// // OUTPUT: EITHER: Received value from channel 1: 0
-// //                 Received value from channel 2: 0
-//
-// GO_USAGE_SELECT_BUFFERED_CHANNEL_FOR_LOOP:
-//     // create two buffered channels with capacities of 3
-//     channelA := make(chan string, 3)
-//     channelB := make(chan string, 3)
-//
-//     // add values to channelA
-//     channelA <- "hello"
-//     channelA <- "world"
-//     channelA <- "!"
-//
-//     // add values to channelB
-//     channelB <- "foo"
-//     channelB <- "bar"
-//     channelB <- "baz"
-//
-//     // use a for loop to receive values from both channels
-//     // and print them out
-//     for i := 0; i < 6; i++ {
-//         select {
-//         case msg := <-channelA:
-//             fmt.Println("received from channelA:", msg)
-//         case msg := <-channelB:
-//             fmt.Println("received from channelB:", msg)
-//         default:
-//             fmt.Println("no messages received")
-//         }
-//     }
-//
-//     // close the channels
-//     close(channelA)
-//     close(channelB)
-//
-// // OUTPUT: received from channelA: hello
-// //         received from channelB: foo
-// //         received from channelB: bar
-// //         received from channelA: world
-// //         received from channelA: !
-// //         received from channelB: baz
-//
-// GO_USAGE_SELECT_BUFFERED_CHANNEL_FOR_LOOP_ADVANCED:
-//     // create two buffered channels with capacities of 3
-//     channelA := make(chan string, 3)
-//     channelB := make(chan string, 3)
-//
-//     // add values to channelA
-//     channelA <- "hello"
-//     channelA <- "world"
-//     channelA <- "!"
-//
-//     // add values to channelB
-//     channelB <- "foo"
-//     channelB <- "bar"
-//     channelB <- "baz"
-//
-//     // use a nested for loop to receive values from both channels
-//     // and print them out
-//     for {
-//         for i := 0; i < 2; i++ {
-//             select {
-//             case msg := <-channelA:
-//                 fmt.Println("received from channelA:", msg)
-//             case msg := <-channelB:
-//                 fmt.Println("received from channelB:", msg)
-//             default:
-//                 fmt.Println("no messages received")
-//                 break
-//             }
-//         }
-//         if len(channelA) == 0 && len(channelB) == 0 {
-//             break
-//         }
-//     }
-//
-//     // close the channels
-//     close(channelA)
-//     close(channelB)
-//
-// // OUTPUT: received from channelA: hello
-// //         received from channelA: world
-// //         received from channelB: foo
-// //         received from channelA: !
-// //         received from channelB: bar
-// //         received from channelB: baz
-//
-// //----< future >----------------------------//
-// using std::future;
-// using std::async;
-// GO_USAGE:
-// GO_USAGE_FUTURE:
-//     type Solution struct {
-//     }
-//
-//     func (s *Solution) printNumber(num int, wg *sync.WaitGroup) int {
-//         for i := 0; i < 5; i++ {
-//             fmt.Printf("Thread %d printing %d\n", goroutineID(), num)
-//             time.Sleep(500 * time.Millisecond)
-//         }
-//         wg.Done()
-//         return num * 100
-//     }
-//
-//     func (s *Solution) runThreads() {
-//         fmt.Printf("Main thread %d started.\n", goroutineID())
-//
-//         var wg sync.WaitGroup
-//         wg.Add(2)
-//
-//         go func() {
-//             defer wg.Done()
-//             s.printNumber(1, &wg)
-//         }()
-//
-//         go func() {
-//             defer wg.Done()
-//             s.printNumber(2, &wg)
-//         }()
-//
-//         wg.Wait()
-//
-//         fmt.Printf("Main thread %d finished.\n", goroutineID())
-//     }
-//
-//     func goroutineID() int {
-//         return int(time.Now().UnixNano())
-//     }
-//
-// // OUTPUT: Thread 1 printing 1
-// //         Thread 2 printing 2
-// //         Thread 2 printing 2
-// //         Thread 1 printing 1
-// //         Thread 1 printing 1
-// //         Thread 2 printing 2
-// //         Thread 2 printing 2
-// //         Thread 1 printing 1
-// //         Thread 2 printing 2
-// //         Thread 1 printing 1
-// //         Result 1: 100
-// //         Result 2: 200
-// //         Main thread ... finished.
-//
-// GO_USAGE_ASYNC:
-//     func printNumbers() {
-//         for i := 1; i <= 5; i++ {
-//             fmt.Println(i)
-//             time.Sleep(500 * time.Millisecond)
-//         }
-//     }
-//
-//     func printLetters() {
-//         for letter := 'a'; letter <= 'e'; letter++ {
-//             fmt.Printf("%c\n", letter)
-//             time.Sleep(500 * time.Millisecond)
-//         }
-//     }
-//
-//     func main() {
-//         go printNumbers()
-//         go printLetters()
-//
-//         time.Sleep(3000 * time.Millisecond)
-//     }
-//
-// // OUTPUT: 1
-// //         a
-// //         2
-// //         b
-// //         3
-// //         c
-// //         4
-// //         d
-// //         5
-// //         e
-//
-
-//
-// NOTE:
-//
-//     Threads Synchronization Ranking: LEAST-To-MOST Overhead:
-//
-//     1. Sync.Mutex: This is the least expensive synchronization primitive in
-//        the list because it involves the least coordination between
-//        goroutines. It's typically used for protecting shared memory access
-//        in a critical section.
-//  
-//     2. Buffered channels: These channels allow sending and receiving data
-//        asynchronously, and they buffer a limited number of values. Since the
-//        values are buffered, there's less coordination between the sender and
-//        receiver, which reduces the overhead.
-//
-//     3. Sync.RWMutex: This is a read-write lock that allows for multiple
-//        readers or a single writer. It's less expensive than a Mutex because
-//        multiple readers can acquire the lock at the same time, but it still
-//        involves some overhead due to the coordination between the readers
-//        and writer.
-//
-//     4. Sync.WaitGroup: This is a synchronization primitive that allows a
-//        group of goroutines to wait for each other to complete. It involves
-//        tracking the number of active goroutines, and the WaitGroup is
-//        blocked until all goroutines have completed. While it's not as heavy
-//        as unbuffered channels, it still involves coordination and tracking
-//        of goroutines, which can be expensive.
-//
-//     5. Unbuffered channels: These channels block the sender until the
-//        receiver is ready to receive the value, and vice versa. The
-//        communication between the sender and receiver can be expensive,
-//        especially when there are multiple goroutines involved, which can
-//        lead to significant overhead.
-//
-//     Again, it's important to note that the performance overhead of these
-//     synchronization primitives can vary depending on the specific use case
-//     and the number of goroutines involved, so it's always recommended to
-//     measure and profile the code to determine the actual overhead.
+//     // Running the async function
+//     const solution = new Solution();
+//     solution.runThreads();
 //
 
 // //----< mutex >-----------------------------//
