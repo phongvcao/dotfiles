@@ -103,6 +103,8 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
         brew install --cask alfred; \
         brew install --cask obs; \
         brew install --cask shureplus-motiv; \
+        brew install --cask openvpn-connect; \
+        brew install --cask audacity; \
         # If this doesn't work for Cryptomator, we probably need to manually
         # download osxfuse 4.x versions on Github: https://osxfuse.github.io/
         brew install --cask macfuse; \

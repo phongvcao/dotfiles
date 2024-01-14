@@ -1,5 +1,3 @@
-package main
-
 // //----< iostream >--------------------------//
 // using std::cout;
 // using std::cin;
