@@ -138,7 +138,7 @@ import mysql from 'mysql2/promise';
 //        retrieve or modify data.
 //     5. Closing the database connection when it is no longer needed.
 //
-// TYPPESCRIPT USAGE:
+// TYPESCRIPT_USAGE:
 //     async function executeQueries() {
 //         // Creating a MySQL connection pool
 //         const pool = await mysql.createPool({
@@ -506,184 +506,506 @@ import mysql from 'mysql2/promise';
 
 // //----< deque >-----------------------------//
 // using std::deque;                           // Vector of fixed-size Vectors: 1 fixed-size vector for each end of the deque
-// GO_USAGE:
-//     var l *list.List = list.New()
-//     l := list.New()
-//     l.PushBack( "A" )
-//     l.PushFront( "B" )
-//     l.PushBack( "C" )
-//     l.PushFront( "D" )
-//
-//     fmt.Println( l.Len() )  -- output: 4
-//
-//     for node := l.Front(); node != nil; node = node.Next() {
-//         fmt.Println( node.Value.(string) )
+// TYPESCRIPT_USAGE:
+//     class Node<T> {
+//         constructor(public value: T, public prev: Node<T> | null = null, public next: Node<T> | null = null) {}
 //     }
-//     var b *list.Element = l.Back()
-//     fmt.Println( l.Remove( b ) )  -- output: "C"
-//     var f *list.Eleemnt = l.Front()
-//     fmt.Println( l.Remove( f ) )  -- output: "D"
 //
-//     l.Init()  -- initializes / clears list
-//     fmt.Println( l.Len() )  -- output: 0
+//     class LinkedList<T> {
+//         private head: Node<T> | null = null;
+//         private tail: Node<T> | null = null;
+//         private length: number = 0;
+//
+//         pushBack(value: T): void {
+//             const newNode = new Node(value, this.tail, null);
+//             if (!this.head) {
+//                 this.head = newNode;
+//             }
+//             if (this.tail) {
+//                 this.tail.next = newNode;
+//             }
+//             this.tail = newNode;
+//             this.length++;
+//         }
+//
+//         pushFront(value: T): void {
+//             const newNode = new Node(value, null, this.head);
+//             if (!this.tail) {
+//                 this.tail = newNode;
+//             }
+//             if (this.head) {
+//                 this.head.prev = newNode;
+//             }
+//             this.head = newNode;
+//             this.length++;
+//         }
+//
+//         frontNode(): Node<T> | null {
+//             return this.head;
+//         }
+//
+//         backNode(): Node<T> | null {
+//             return this.tail;
+//         }
+//
+//         remove(node: Node<T>): T | null {
+//             if (!node.prev) {
+//                 this.head = node.next;
+//             } else {
+//                 node.prev.next = node.next;
+//             }
+//
+//             if (!node.next) {
+//                 this.tail = node.prev;
+//             } else {
+//                 node.next.prev = node.prev;
+//             }
+//
+//             this.length--;
+//
+//             return node.value;
+//         }
+//
+//         clear(): void {
+//             this.head = null;
+//             this.tail = null;
+//             this.length = 0;
+//         }
+//
+//         getLength(): number {
+//             return this.length;
+//         }
+//
+//         *[Symbol.iterator](): IterableIterator<T> {
+//             let current = this.head;
+//             while (current) {
+//                 yield current.value;
+//                 current = current.next;
+//             }
+//         }
+//     }
+//
+//     // Example usage
+//     const l = new LinkedList<string>();
+//
+//     l.pushBack("A");
+//     l.pushFront("B");
+//     l.pushBack("C");
+//     l.pushFront("D");
+//
+//     // Output: 4
+//     console.log(l.getLength());
+//
+//     // Iterating through the list
+//     for (const node of l) {
+//         console.log(node); // Output: D B A C
+//     }
+//
+//     // Removing an element from the back
+//     const b = l.backNode();
+//     console.log(l.remove(b!)); // Output: C
+//
+//     // Removing an element from the front
+//     const f = l.frontNode();
+//     console.log(l.remove(f!)); // Output: D
+//
+//     // Initializing/clearing the list
+//     l.clear();
+//     // Output: 0
+//     console.log(l.getLength());
+//
+// TYPESCRIPT_TRICKS_SUBOPTIMAL:
+//     const deque: string[] = [];
+//
+//     // Push to the back
+//     deque.push("A");
+//     // Push to the front
+//     deque.unshift("B");
+//     // Push to the back
+//     deque.push("C");
+//     // Push to the front - O( N )
+//     deque.unshift("D");
+//
+//     // Output: 4
+//     console.log(deque.length);
+//
+//     // Iterating through the deque
+//     for (const element of deque) {
+//     console.log(element);
+//     }
+//
+//     // Get the back element and remove it
+//     const backElement = deque.pop();
+//     console.log(backElement); // Output: "C"
+//
+//     // Get the front element and remove it - O( N )
+//     const frontElement = deque.shift();
+//     console.log(frontElement); // Output: "D"
+//
+//     // Initializing/clearing the deque
+//     deque.length = 0;
+//
+//     // Output: 0
+//     console.log(deque.length);
 //
 
 // //----< queue >-----------------------------//
 // using std::queue;                           // Non-Iterable & Use std::deque as underlying data structure
-// GO_USAGE:
-//     var q []rune = []rune{}
-//     var q []rune = make( []rune, 0, 6 )
-//     q := []rune{}
-//     q := make( []rune, 0, 6 )
-//     q := []rune{ 'A', 'B', 'C', 'D' }
-//
-//     q = append( q, 'A' )  -- push to the back
-//     q = append( q, 'B' )  -- push to the back
-//
-//     f := q[0]
-//     q = q[1:]  -- remove from front - O( 1 )
-//
-// GO_TRICKS:
-//     var l *list.List = list.New()
-//     l := list.New()
-//     l.PushBack( "A" )
-//     l.PushFront( "B" )
-//     l.PushBack( "C" )
-//     l.PushFront( "D" )
-//     for node := l.Front(); node != nil; node = node.Next() {
-//         fmt.Println( node.Value.(string) )
+// TYPESCRIPT_USAGE:
+//     class Node<T> {
+//         constructor(public value: T, public next: Node<T> | null = null) {}
 //     }
-//     var b *list.Element = l.Back()
-//     fmt.Println( l.Remove( b ) )  -- output: "C"
-//     var f *list.Eleemnt = l.Front()
-//     fmt.Println( l.Remove( f ) )  -- output: "D"
+//
+//     class LinkedList<T> {
+//         private head: Node<T> | null = null;
+//         private tail: Node<T> | null = null;
+//
+//         add(value: T): void {
+//             const newNode = new Node(value);
+//             if (!this.head) {
+//                 this.head = newNode;
+//                 this.tail = newNode;
+//             } else {
+//                 this.tail!.next = newNode;
+//                 this.tail = newNode;
+//             }
+//         }
+//
+//         addFirst(value: T): void {
+//             const newNode = new Node(value);
+//             newNode.next = this.head;
+//             this.head = newNode;
+//             if (!this.tail) {
+//                 this.tail = newNode;
+//             }
+//         }
+//
+//         remove(node: Node<T>): T | undefined {
+//             if (this.head === node) {
+//                 this.head = node.next;
+//             } else {
+//                 let current = this.head;
+//                 while (current && current.next !== node) {
+//                     current = current.next;
+//                 }
+//                 if (current) {
+//                     current.next = node.next;
+//                 }
+//             }
+//
+//             if (this.tail === node) {
+//                 this.tail = null;
+//             }
+//
+//             return node.value;
+//         }
+//
+//         get first(): Node<T> | null {
+//             return this.head;
+//         }
+//
+//         get last(): Node<T> | null {
+//             return this.tail;
+//         }
+//
+//         *[Symbol.iterator](): IterableIterator<T> {
+//             let current = this.head;
+//             while (current) {
+//                 yield current.value;
+//                 current = current.next;
+//             }
+//         }
+//     }
+//
+//     // Example usage
+//     const l = new LinkedList<string>();
+//
+//     l.add("A");
+//     l.addFirst("B");
+//     l.add("C");
+//     l.addFirst("D");
+//
+//     // Iterating through the list
+//     for (const node of l) {
+//         console.log(node); // Output: D B A C
+//     }
+//
+//     // Getting the back element and removing it
+//     const b = l.last;
+//     console.log(l.remove(b!)); // Output: C
+//
+//     // Getting the front element and removing it
+//     const f = l.first;
+//     console.log(l.remove(f!)); // Output: D
+//
+//
+// TYPESCRIPT_TRICKS_SUBOPTIMAL:
+//     let q: string[] = [];
+//     // or
+//     // let q: string[] = new Array<string>();
+//     // or
+//     // let q: string[] = new Array<string>(6);
+//     // or
+//     // let q: string[] = ['A', 'B', 'C', 'D'];
+//
+//     // Push to the back
+//     q.push('A');
+//     // Push to the back
+//     q.push('B');
+//
+//     // Access front element
+//     const f: string | undefined = q[0];
+//     console.log(f);
+//
+//     // Remove from front (shift operation)
+//     q.shift();
+//
+//     console.log(q);  // Output: ['B']
 //
 
-import "container/heap"
 // using std::priority_queue;                  // MaxPQ (MaxHeap) & Non-Iterable.
 // //                                          // => Pass std::greater<> as template params to create MinPQ (MinHeap)
-// GO_USAGE:
+// TYPESCRIPT_USAGE:
 // MIN_HEAP:
-//     type IntHeap []int
+//     class PriorityQueue<T> {
+//         private heap: T[] = [];
 //
-//     func ( h IntHeap ) Len() int {
-//         return len( h )
+//         constructor(private compare: (a: T, b: T) => number) {}
+//
+//         get length(): number {
+//             return this.heap.length;
+//         }
+//
+//         private less(i: number, j: number): boolean {
+//             return this.compare(this.heap[i], this.heap[j]) < 0;
+//         }
+//
+//         private swap(i: number, j: number): void {
+//             [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+//         }
+//
+//         push(value: T): void {
+//             this.heap.push(value);
+//             this.heapifyUp();
+//         }
+//
+//         pop(): T | undefined {
+//             const length = this.length;
+//             if (length === 0) {
+//                 return undefined;
+//             }
+//
+//             this.swap(0, length - 1);
+//             const poppedValue = this.heap.pop();
+//             this.heapifyDown();
+//             return poppedValue;
+//         }
+//
+//         private heapifyUp(): void {
+//             let current = this.length - 1;
+//             while (current > 0) {
+//                 const parent = Math.floor((current - 1) / 2);
+//                 if (this.less(current, parent)) {
+//                     this.swap(current, parent);
+//                     current = parent;
+//                 } else {
+//                     break;
+//                 }
+//             }
+//         }
+//
+//         private heapifyDown(): void {
+//             let current = 0;
+//             while (true) {
+//                 const leftChild = 2 * current + 1;
+//                 const rightChild = 2 * current + 2;
+//                 let smallest = current;
+//
+//                 if (leftChild < this.length && this.less(leftChild, smallest)) {
+//                     smallest = leftChild;
+//                 }
+//
+//                 if (rightChild < this.length && this.less(rightChild, smallest)) {
+//                     smallest = rightChild;
+//                 }
+//
+//                 if (smallest !== current) {
+//                     this.swap(current, smallest);
+//                     current = smallest;
+//                 } else {
+//                     break;
+//                 }
+//             }
+//         }
 //     }
 //
-//     // MIN_HEAP HERE!!!
-//     func ( h IntHeap ) Less( i, j int ) bool {
-//         return h[ i ] < h[ j ]
-//     }
+//     // Example usage with a min-heap (number comparison)
+//     const minHeap = new PriorityQueue<number>((a, b) => a - b);
 //
-//     func ( h IntHeap ) Swap( i, j int ) {
-//         h[ i ], h[ j ] = h[ j ], h[ i ]
-//     }
+//     minHeap.push(3);
+//     minHeap.push(1);
+//     minHeap.push(4);
 //
-//     func ( h *IntHeap ) Push( x interface{}  ) {
-//         *h = append( *h, x.( int ) )
-//     }
+//     console.log(minHeap.pop()); // Output: 1
+//     console.log(minHeap.pop()); // Output: 3
+//     console.log(minHeap.pop()); // Output: 4
 //
-//     func ( h *IntHeap ) Pop() interface{} {
-//         old := *h
-//         n := len( old )
-//         x := old[ n - 1 ]
-//         *h = old[ 0 : n - 1 ]
-//         return x
-//     }
 //
-//     func main() {
-//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
+// MIN_HEAP_TRICKS:
+//     const values: number[] = [];
 //
-// 	       // initialize the heap data structure
-//         h := &IntHeap{}
+//     values.push(3);
+//     values.push(1);
+//     values.push(4);
 //
-// 	       // add all the values to heap, O(n log n)
-// 	       for _, val := range nums { // O(n)
-// 		       heap.Push( h, val ) // O(log n)
-// 	       }
+//     // Sorting in ascending order (min-heap)
+//     const sortedValues = values.sort((a, b) => a - b);
 //
-// 	       // print all the values from the heap
-// 	       // which should be in ascending order
-// 	       for i := 0; i < len( nums ); i++ {
-// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
-// 	       }
-//     }
+//     console.log(sortedValues); // Output: [1, 3, 4]
+//
 //
 // MAX_HEAP:
-//     type IntHeap []int
+//     class MaxHeap<T> {
+//         private heap: T[] = [];
 //
-//     func ( h IntHeap ) Len() int {
-//         return len( h )
+//         constructor(private compare: (a: T, b: T) => number) {}
+//
+//         get length(): number {
+//             return this.heap.length;
+//         }
+//
+//         private greater(i: number, j: number): boolean {
+//             return this.compare(this.heap[i], this.heap[j]) > 0;
+//         }
+//
+//         private swap(i: number, j: number): void {
+//             [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+//         }
+//
+//         push(value: T): void {
+//             this.heap.push(value);
+//             this.heapifyUp();
+//         }
+//
+//         pop(): T | undefined {
+//             const length = this.length;
+//             if (length === 0) {
+//                 return undefined;
+//             }
+//
+//             this.swap(0, length - 1);
+//             const poppedValue = this.heap.pop();
+//             this.heapifyDown();
+//             return poppedValue;
+//         }
+//
+//         private heapifyUp(): void {
+//             let current = this.length - 1;
+//             while (current > 0) {
+//                 const parent = Math.floor((current - 1) / 2);
+//                 if (this.greater(current, parent)) {
+//                     this.swap(current, parent);
+//                     current = parent;
+//                 } else {
+//                     break;
+//                 }
+//             }
+//         }
+//
+//         private heapifyDown(): void {
+//             let current = 0;
+//             while (true) {
+//                 const leftChild = 2 * current + 1;
+//                 const rightChild = 2 * current + 2;
+//                 let largest = current;
+//
+//                 if (leftChild < this.length && this.greater(leftChild, largest)) {
+//                     largest = leftChild;
+//                 }
+//
+//                 if (rightChild < this.length && this.greater(rightChild, largest)) {
+//                     largest = rightChild;
+//                 }
+//
+//                 if (largest !== current) {
+//                     this.swap(current, largest);
+//                     current = largest;
+//                 } else {
+//                     break;
+//                 }
+//             }
+//         }
 //     }
 //
-//     // MAX_HEAP HERE!!!
-//     func ( h IntHeap ) Less( i, j int ) bool {
-//         return h[ i ] > h[ j ]
-//     }
+//     // Example usage with a max-heap (number comparison)
+//     const maxHeap = new MaxHeap<number>((a, b) => a - b);
 //
-//     func ( h IntHeap ) Swap( i, j int ) {
-//         h[ i ], h[ j ] = h[ j ], h[ i ]
-//     }
+//     maxHeap.push(3);
+//     maxHeap.push(1);
+//     maxHeap.push(4);
 //
-//     func ( h *IntHeap ) Push( x interface{}  ) {
-//         *h = append( *h, x.( int ) )
-//     }
+//     console.log(maxHeap.pop()); // Output: 4
+//     console.log(maxHeap.pop()); // Output: 3
+//     console.log(maxHeap.pop()); // Output: 1
 //
-//     func ( h *IntHeap ) Pop() interface{} {
-//         old := *h
-//         n := len( old )
-//         x := old[ n - 1 ]
-//         *h = old[ 0 : n - 1 ]
-//         return x
-//     }
 //
-//     func main() {
-//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
+// MAX_HEAP_TRICKS:
+//     const values = [];
+//     values.push(3)
+//     values.push(1)
+//     values.push(4)
 //
-// 	       // initialize the heap data structure
-//         h := &IntHeap{}
+//     // Sorting in descending order
+//     const sortedValues = values.sort((a, b) => b - a);
 //
-// 	       // add all the values to heap, O(n log n)
-// 	       for _, val := range nums { // O(n)
-// 		       heap.Push( h, val ) // O(log n)
-// 	       }
-//
-// 	       // print all the values from the heap
-// 	       // which should be in ascending order
-// 	       for i := 0; i < len( nums ); i++ {
-// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
-// 	       }
-//     }
+//     console.log(sortedValues); // Output: [4, 3, 1]
 //
 
 // //----< stack >-----------------------------//
 // using std::stack;                           // Non-Iterable & Use std::deque as underlying data structure
-// GO_USAGE:
-//     var st []int = []int{}
-//     st := []int{}
+// TYPESCRIPT_USAGE:
+//     // Using an array as a stack
+//     const st: number[] = [];
 //
-//     st = append( st, 1 )
-//     st = append( st, 2 )
-//     st = append( st, 3 )
-//     for len(st) > 0 {
-//         fmt.Println( st[ len( st ) - 1 ] )
-//         st = st[ : len( st ) - 1 ]
+//     // Pushing elements onto the stack
+//     st.push(1);
+//     st.push(2);
+//     st.push(3);
+//
+//     // Popping and printing elements until the stack is empty
+//     while (st.length > 0) {
+//         console.log(st[st.length - 1]);
+//         console.log(st.pop());
 //     }
 //
 
-// from typing import Tuple
 // //----< tuple >-----------------------------//
 // using std::tuple;                           // Non-Iterable & Use std::pair as underlying data structure
 // using std::get;                             // Access & Set element in tuple using get< index >( tuple_var )
-// PYTHON_USAGE:
-//     t : Tuple[ str, int ] = ( "ABC", 1 )
-//     t : Tuple[ int, ... ] = ( 1, 2, 3 )
-//     t : Tuple[ int ] = ( 1 )
-//     t : Tuple[ str, ... ] = ( "A", "B", "C" )
-//     t : Tuple[ str ] = ( "A" )
-//     t : Tuple[ str, int ] = tuple( [ "ABC", 1 ] )
-//     if t[ 0 ] == "ABC":
-//         print( t[ 1 ] )
+// TYPESCRIPT_USAGE:
+//     // Tuple with specific types
+//     const t1: [string, number] = ["ABC", 1];
+//
+//     // Tuple with variable number of elements of type int
+//     const t2: number[] = [1, 2, 3];
+//
+//     // Tuple with a single element of type int
+//     const t3: [number] = [1];
+//
+//     // Tuple with variable number of elements of type string
+//     const t4: string[] = ["A", "B", "C"];
+//
+//     // Tuple with a single element of type string
+//     const t5: [string] = ["A"];
+//
+//     // Creating a tuple using a function (similar to Python tuple())
+//     const createTuple = <T extends any[]>(...elements: T): T => elements;
+//     const t6 = createTuple("ABC", 1);
+//
+//     // Accessing elements in the tuple
+//     if (t1[0] === "ABC") {
+//         console.log(t1[1]);
+//     }
 //
 //
 // [ UNSUPPORTED_IN_PYTHON ]//----< bitset >----------------------------//
@@ -725,288 +1047,414 @@ import "container/heap"
 
 // //----< optional >--------------------------//
 // using std::optional;                        // Expresses that a value may or may not be present
-// GO_USAGE:
-//     func getValue() *int {
-//         // Return a pointer to an integer value
-//         value := 42
-//         return &value
+// TYPESCRIPT_USAGE:
+//     function getValue(): number | undefined {
+//         // Return a number or undefined
+//         const value = 42;
+//         return value;
 //     }
 //
-//     func main() {
+//     function main() {
 //         // Get the optional value
-//         optionalValue := getValue()
+//         const optionalValue = getValue();
 //
 //         // Check if the optional has a value
-//         if optionalValue != nil {
-//             fmt.Println("Optional value:", *optionalValue)
+//         if (optionalValue !== undefined) {
+//             console.log("Optional value:", optionalValue);
 //         } else {
-//             fmt.Println("Optional value is nil")
+//             console.log("Optional value is undefined");
 //         }
 //     }
+//
+//     // Calling the main function
+//     main();
 //
 
 // //----< algorithm >-------------------------//
 // using std::fill;
-// PYTHON_USAGE:
-//     a : List[ int ] = [ 0 ] * 100
-//     a[ 2:12 ] = [ 1 ] * 10
-//     a[ 2:12 ] = [ 2 ] * 20
-//     a[ 2:12 ] = [ 3 ] * 5
+// TYPESCRIPT_USAGE:
+//     // Creating an array filled with 0
+//     const a: number[] = Array(100).fill(0);
+//
+//     // Setting a range of elements to 1
+//     a.fill(1, 2, 12);
+//
+//     // Setting the same range to 2
+//     a.fill(2, 2, 12);
+//
+//     // Setting the same range to 3
+//     a.fill(3, 2, 12);
+//
+//     console.log(a);
 //
 
 // using std::max;
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 4, 5, 6 }
-//     l := []int{ 1, 2, 3, 4, 5, 6 }
+// TYPESCRIPT_USAGE:
+//     const l: number[] = [1, 2, 3, 4, 5, 6];
 //
-//     maxNum := - math.MaxFloat64
-//     maxNum := - math.MaxFloat32
-//     maxNum := math.MinInt
-//     maxNum := math.MinInt8
-//     maxNum := math.MinInt16
-//     maxNum := math.MinInt32
-//     maxNum := math.MinInt64
-//     for _, num := range l {
-//         maxNum = int( math.Max( float64( maxNum ), float64( num ) ) )
+//     let maxNum = Number.MIN_SAFE_INTEGER;
+//
+//     for (const num of l) {
+//     maxNum = Math.max(maxNum, num);
 //     }
-//     fmt.Println( maxNum )  -- output: 6
+//
+//     console.log(maxNum); // Output: 6
 //
 
 // using std::min;
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 4, 5, 6 }
-//     l := []int{ 1, 2, 3, 4, 5, 6 }
+// TYPESCRIPT_USAGE:
+//     const l: number[] = [1, 2, 3, 4, 5, 6];
 //
-//     minNum := math.MaxFloat64
-//     minNum := math.MaxFloat32
-//     minNum := math.MaxInt
-//     minNum := math.MaxInt8
-//     minNum := math.MaxInt16
-//     minNum := math.MaxInt32
-//     minNum := math.MaxInt64
-//     minNum := math.MaxUint
-//     minNum := math.MaxUint8
-//     minNum := math.MaxUint16
-//     minNum := math.MaxUint32
-//     minNum := math.MaxUint64
+//     let minNum = Number.MAX_SAFE_INTEGER;
 //
-//     for _, num := range l {
-//         minNum = int( math.Min( float64( minNum ), float64( num ) ) )
+//     for (const num of l) {
+//     minNum = Math.min(minNum, num);
 //     }
-//     fmt.Println( minNum )  -- output: 1
+//
+//     console.log(minNum); // Output: 1
 //
 
 // using std::find;
-// PYTHON_USAGE:
-//     l : List[ int ] = [ 1, 2, 3, 3, 3, 3, 4, 5 ]
-//     print( l.index( 3 ) )     -- output: 2
-//     print( l.index( 3, 4 ) )  -- output: 4
+// TYPESCRIPT_USAGE:
+//     // For arrays
+//     const l: number[] = [1, 2, 3, 3, 3, 3, 4, 5];
 //
-//     t : Tuple[ int, ... ] = ( 1, 2, 3, 3, 3, 3, 4, 5 )
-//     print( t.index( 3 ) )        -- output: 2
-//     print( t.index( 3, 4 ) )     -- output: 4
+//     console.log(l.indexOf(3));    // Output: 2
+//     console.log(l.indexOf(3, 4)); // Output: 4
 //
-//     s : str = "ABCCCCCD"
-//     print( s.index( "C" ) )      -- output: 2
-//     print( s.index( "C", 4 ) )   -- output: 4
+//     // For tuples (arrays in TypeScript)
+//     const t: number[] = [1, 2, 3, 3, 3, 3, 4, 5];
 //
+//     console.log(t.indexOf(3));    // Output: 2
+//     console.log(t.indexOf(3, 4)); // Output: 4
 //
+//     // For strings
+//     const s: string = "ABCCCCCD";
+//
+//     console.log(s.indexOf("C"));    // Output: 2
+//     console.log(s.indexOf("C", 4)); // Output: 4
+//
+
 // using std::reverse;
-// PYTHON_USAGE:
-// REVERSE_ALL:
-//     a : List[ int ] = [ 1, 2, 3, 4, 5 ]
-//     a.reverse()
-//     print( a )
+// TYPESCRIPT_USAGE:
+// REVERSE_ALL
+//     let a: number[] = [1, 2, 3, 4, 5];
+//     a.reverse();
+//     console.log(a);
 //
-//     a = list( reversed( a ) )
-//     print( a )
+//     a = [...a].reverse();
+//     console.log(a);
 //
-//     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
-//     t = tuple( reversed( t ) )
-//     print( t )
+//     let t: number[] = [1, 2, 3, 4, 5];
+//     t = [...t].reverse();
+//     console.log(t);
 //
-//     s : str = "ABC"
-//     s = "".join( reversed( s ) )
-//     print( s )
+//     let s: string = "ABC";
+//     s = s.split("").reverse().join("");
+//     console.log(s);
 //
+//     // REVERSE_PARTIAL
+//     a = [1, 2, 3, 4, 5];
+//     let sa: number[] = a.slice(1, 4);
+//     sa.reverse();
+//     console.log(sa);
+//
+//     sa = a.slice(1, 4).slice().reverse();
+//     console.log(sa);
+//
+//     t = [1, 2, 3, 4, 5];
+//     let st: number[] = t.slice(1, 4);
+//     st = st.slice().reverse();
+//     console.log(st);
+//
+//     s = "ABCDEF";
+//     let ss: string = s.slice(1, 4).split("").reverse().join("");
+//     console.log(ss);
 //
 // REVERSE_PARTIAL:
-//     a : List[ int ] = [ 1, 2, 3, 4, 5 ]
-//     sa = a[ 1:4 ]
-//     sa.reverse()
-//     print( sa )
+//     let a: number[] = [1, 2, 3, 4, 5];
+//     let sa: number[] = a.slice(1, 4).reverse();
+//     console.log(sa);
 //
-//     sa = a[ 1:4 ]
-//     sa = list( reversed( sa ) )
-//     print( sa )
+//     sa = a.slice(1, 4).slice().reverse();
+//     console.log(sa);
 //
-//     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
-//     st = t[ 1:4 ]
-//     st = tuple( reversed( st ) )
-//     print( st )
+//     let t: [number, number, number, number, number] = [1, 2, 3, 4, 5];
+//     let st: [number, number, number] = t.slice(1, 4).reverse() as [number, number, number];
+//     console.log(st);
 //
-//     s : str = "ABCDEF"
-//     ss = s[ 1:4 ]
-//     ss = "".join( reversed( ss ) )
-//     print( ss )
+//     let s: string = "ABCDEF";
+//     let ss: string = s.slice(1, 4).split('').reverse().join('');
+//     console.log(ss);
 //
-//
+
 // using std::reduce;                          // Add / Concatenate together all elements of iterator range
 // using std::accumulate;                      // Add / Concatenate together all elements of iterator range
-// PYTHON_USAGE:
-//     l : List[ int ] = [ 1, 2, 3, 4, 5 ]
-//     print( sum( l ) )  -- output: 15
+// TYPESCRIPT_USAGE:
+//     // Using reduce
+//     let l: number[] = [1, 2, 3, 4, 5];
+//     let sum: number = l.reduce((acc, num) => acc + num, 0);
+//     console.log(sum);  // Output: 15
 //
-//     l : List[ str ] = [ "A", "B", "C" ]
-//     print( "".join( l ) )  -- output: "ABC"
+//     let strList: string[] = ["A", "B", "C"];
+//     let concatenatedStr: string = strList.reduce((acc, str) => acc + str, "");
+//     console.log(concatenatedStr);  // Output: "ABC"
 //
+//     // Using accumulate (a custom implementation)
+//     function accumulate<T>(arr: T[], initialValue: T, callback: (acc: T, el: T) => T): T {
+//         let accumulator: T = initialValue;
+//         for (const element of arr) {
+//             accumulator = callback(accumulator, element);
+//         }
+//         return accumulator;
+//     }
 //
+//     let sumWithAccumulate: number = accumulate(l, 0, (acc, num) => acc + num);
+//     console.log(sumWithAccumulate);  // Output: 15
 //
+//     let strWithAccumulate: string = accumulate(strList, "", (acc, str) => acc + str);
+//     console.log(strWithAccumulate);  // Output: "ABC"
+//
+
 // using std::sort;                            // Intro-Sort (QuickSort => HeapSort when recursion depth exceeds certain level), NOT IN-PLACE & NOT STABLE
-// PYTHON_USAGE:
-//     a : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
-//     a.sort( reverse = False, key = myFunc )         -- IN-PLACE & STABLE
-//     a.sort( reverse = False, key = lambda x: x )         -- IN-PLACE & STABLE
-//     print( a )
+// TYPESCRIPT_USAGE:
+//     // Sort an array of numbers with a custom function
+//     let a: number[] = [5, 4, 3, 2, 1, 0];
+//     a.sort((x, y) => myFunc(x, y)); // Replace myFunc with your custom comparison function
+//     console.log(a);
 //
-//     a : List[ List[ int ] ] = [ [ 1, 3 ], [ 3, 5 ], [ 3, 3 ], [ 5, 3 ], [ 2, 2 ] ]
-//     a.sort( reverse = False )  -- output: [ [ 1, 3 ], [ 2, 2 ], [ 3, 3 ], [ 3, 5 ], [ 5, 3 ] ]
-//     a.sort( reverse = True )  -- output: [ [ 5, 3], [ 3, 5 ], [ 3, 3 ], [ 2, 2 ], [ 1, 3 ] ]
+//     // Sort a list of lists of numbers
+//     let nestedList: number[][] = [[1, 3], [3, 5], [3, 3], [5, 3], [2, 2]];
+//     nestedList.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+//     console.log(nestedList);
 //
-//     t : Tuple[ int, ... ] = ( 1, 2, 3, 4, 5 )
-//     t = tuple( sorted( t, reverse = False ) )       -- NOT IN-PLACE & STABLE
-//     t = tuple( sorted( t, key = myFunc, reverse = False ) )       -- NOT IN-PLACE & STABLE
-//     t = tuple( sorted( t, key = lambda x: x, reverse = False ) )       -- NOT IN-PLACE & STABLE
-//     print( t )
+//     // Sort a tuple of numbers (not in-place)
+//     let t: number[] = [1, 2, 3, 4, 5];
+//     let sortedT: number[] = Array.from(t).sort((x, y) => myFunc(x, y)); // Replace myFunc with your custom comparison function
+//     console.log(sortedT);
 //
-//     s : str = "ABC"
-//     s = "".join( sorted( s, reverse = False ) )     -- NOT IN-PLACE & STABLE
-//     s = "".join( sorted( t, key = myFunc, reverse = False ) )       -- NOT IN-PLACE & STABLE
-//     s = "".join( sorted( t, key = lambda x: x, reverse = False ) )       -- NOT IN-PLACE & STABLE
-//     print( s )
+//     // Sort a string (not in-place)
+//     let s: string = "ABC";
+//     let sortedS: string = Array.from(s).sort((x, y) => x.localeCompare(y)).join("");
+//     console.log(sortedS);
 //
-//
+
 // using std::partial_sort;                    // HeapSort elements in range ( iterFirst, iterLast ) ( exclusively ). IN-PLACE & NOT STABLE
-// PYTHON_USAGE:
-//     a : List[ int ] = [ 5, 4, 3, 2, 1, 0 ]
-//     a[ 1:4 ] = sorted( a[ 1:4 ], reverse = False )  -- NOT IN-PLACE & STABLE
-//     a[ 1:4 ] = sorted( a[ 1:4 ], key = myFunc, reverse = False )  -- NOT IN-PLACE & STABLE
-//     a[ 1:4 ] = sorted( a[ 1:4 ], key = lambda x: x, reverse = False )  -- NOT IN-PLACE & STABLE
+// TYPESCRIPT_USAGE:
+//     // Partially sort elements in range [start, end) using TypeScript
+//     function partialSort<T>(arr: T[], start: number, end: number, compareFn?: (a: T, b: T) => number): void {
+//         const sortedSlice = arr.slice(start, end).sort(compareFn);
+//         arr.splice(start, sortedSlice.length, ...sortedSlice);
+//     }
+//
+//     // Example usage
+//     let a: number[] = [5, 4, 3, 2, 1, 0];
+//     partialSort(a, 1, 4); // Sort elements at indices 1, 2, and 3 in-place
+//     console.log(a); // Output: [5, 1, 2, 3, 4, 0]
 //
 //
 // using std::stable_sort;                     // Merge-Sort elements. NOT IN-PLACE & STABLE
 //
 
 // using std::sort_heap;                       // HeapSort elements. IN-PLACE & NOT STABLE
-// GO_USAGE:
+// TYPESCRIPT_USAGE:
 // MIN_HEAP:
-//     type IntHeap []int
+//     class MinHeap<T> {
+//         private heap: T[] = [];
 //
-//     func ( h IntHeap ) Len() int {
-//         return len( h )
+//         get length(): number {
+//             return this.heap.length;
+//         }
+//
+//         private less(i: number, j: number): boolean {
+//             return this.heap[i] < this.heap[j];
+//         }
+//
+//         private swap(i: number, j: number): void {
+//             [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+//         }
+//
+//         push(value: T): void {
+//             this.heap.push(value);
+//             this.heapifyUp();
+//         }
+//
+//         pop(): T | undefined {
+//             const length = this.length;
+//             if (length === 0) {
+//                 return undefined;
+//             }
+//
+//             this.swap(0, length - 1);
+//             const poppedValue = this.heap.pop();
+//             this.heapifyDown();
+//             return poppedValue;
+//         }
+//
+//         private heapifyUp(): void {
+//             let current = this.length - 1;
+//             while (current > 0) {
+//                 const parent = Math.floor((current - 1) / 2);
+//                 if (this.less(current, parent)) {
+//                     this.swap(current, parent);
+//                     current = parent;
+//                 } else {
+//                     break;
+//                 }
+//             }
+//         }
+//
+//         private heapifyDown(): void {
+//             let current = 0;
+//             while (true) {
+//                 const leftChild = 2 * current + 1;
+//                 const rightChild = 2 * current + 2;
+//                 let smallest = current;
+//
+//                 if (leftChild < this.length && this.less(leftChild, smallest)) {
+//                     smallest = leftChild;
+//                 }
+//
+//                 if (rightChild < this.length && this.less(rightChild, smallest)) {
+//                     smallest = rightChild;
+//                 }
+//
+//                 if (smallest !== current) {
+//                     this.swap(current, smallest);
+//                     current = smallest;
+//                 } else {
+//                     break;
+//                 }
+//             }
+//         }
 //     }
 //
-//     // MIN_HEAP HERE!!!
-//     func ( h IntHeap ) Less( i, j int ) bool {
-//         return h[ i ] < h[ j ]
+//     // Example usage with a min-heap (number comparison)
+//     const nums: number[] = [3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4];
+//     const minHeap = new MinHeap<number>();
+//
+//     // add all the values to the heap
+//     for (const val of nums) {
+//         minHeap.push(val);
 //     }
 //
-//     func ( h IntHeap ) Swap( i, j int ) {
-//         h[ i ], h[ j ] = h[ j ], h[ i ]
+//     // print all the values from the heap
+//     // which should be in ascending order
+//     while (minHeap.length > 0) {
+//         console.log(minHeap.pop());
 //     }
 //
-//     func ( h *IntHeap ) Push( x interface{}  ) {
-//         *h = append( *h, x.( int ) )
-//     }
-//
-//     func ( h *IntHeap ) Pop() interface{} {
-//         old := *h
-//         n := len( old )
-//         x := old[ n - 1 ]
-//         *h = old[ 0 : n - 1 ]
-//         return x
-//     }
-//
-//     func main() {
-//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
-//
-// 	       // initialize the heap data structure
-//         h := &IntHeap{}
-//
-// 	       // add all the values to heap, O(n log n)
-// 	       for _, val := range nums { // O(n)
-// 		       heap.Push( h, val ) // O(log n)
-// 	       }
-//
-// 	       // print all the values from the heap
-// 	       // which should be in ascending order
-// 	       for i := 0; i < len( nums ); i++ {
-// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
-// 	       }
-//     }
 //
 // MAX_HEAP:
-//     type IntHeap []int
+// class MaxHeap<T> {
+//     private heap: T[] = [];
 //
-//     func ( h IntHeap ) Len() int {
-//         return len( h )
+//     get length(): number {
+//         return this.heap.length;
 //     }
 //
-//     // MAX_HEAP HERE!!!
-//     func ( h IntHeap ) Less( i, j int ) bool {
-//         return h[ i ] > h[ j ]
+//     private greater(i: number, j: number): boolean {
+//         return this.heap[i] > this.heap[j];
 //     }
 //
-//     func ( h IntHeap ) Swap( i, j int ) {
-//         h[ i ], h[ j ] = h[ j ], h[ i ]
+//     private swap(i: number, j: number): void {
+//         [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
 //     }
 //
-//     func ( h *IntHeap ) Push( x interface{}  ) {
-//         *h = append( *h, x.( int ) )
+//     push(value: T): void {
+//         this.heap.push(value);
+//         this.heapifyUp();
 //     }
 //
-//     func ( h *IntHeap ) Pop() interface{} {
-//         old := *h
-//         n := len( old )
-//         x := old[ n - 1 ]
-//         *h = old[ 0 : n - 1 ]
-//         return x
+//     pop(): T | undefined {
+//         const length = this.length;
+//         if (length === 0) {
+//             return undefined;
+//         }
+//
+//         this.swap(0, length - 1);
+//         const poppedValue = this.heap.pop();
+//         this.heapifyDown();
+//         return poppedValue;
 //     }
 //
-//     func main() {
-//         nums := []int{ 3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4 }
-//
-// 	       // initialize the heap data structure
-//         h := &IntHeap{}
-//
-// 	       // add all the values to heap, O(n log n)
-// 	       for _, val := range nums { // O(n)
-// 		       heap.Push( h, val ) // O(log n)
-// 	       }
-//
-// 	       // print all the values from the heap
-// 	       // which should be in ascending order
-// 	       for i := 0; i < len( nums ); i++ {
-// 	           fmt.Printf( "%d,", heap.Pop( h ).( int ) )
-// 	       }
+//     private heapifyUp(): void {
+//         let current = this.length - 1;
+//         while (current > 0) {
+//             const parent = Math.floor((current - 1) / 2);
+//             if (this.greater(current, parent)) {
+//                 this.swap(current, parent);
+//                 current = parent;
+//             } else {
+//                 break;
+//             }
+//         }
 //     }
+//
+//     private heapifyDown(): void {
+//         let current = 0;
+//         while (true) {
+//             const leftChild = 2 * current + 1;
+//             const rightChild = 2 * current + 2;
+//             let largest = current;
+//
+//             if (leftChild < this.length && this.greater(leftChild, largest)) {
+//                 largest = leftChild;
+//             }
+//
+//             if (rightChild < this.length && this.greater(rightChild, largest)) {
+//                 largest = rightChild;
+//             }
+//
+//             if (largest !== current) {
+//                 this.swap(current, largest);
+//                 current = largest;
+//             } else {
+//                 break;
+//             }
+//         }
+//     }
+// }
+//
+// // Example usage with a max-heap (number comparison)
+// const nums: number[] = [3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4];
+// const maxHeap = new MaxHeap<number>();
+//
+// // add all the values to the heap
+// for (const val of nums) {
+//     maxHeap.push(val);
+// }
+//
+// // print all the values from the heap
+// // which should be in descending order
+// while (maxHeap.length > 0) {
+//     console.log(maxHeap.pop());
+// }
 //
 
 // using std::remove;
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 4, 5, 6 }
-//     l := []int{ 1, 2, 3, 4, 5, 6 }
+// TYPESCRIPT_USAGE:
+//     // Example usage with an array
+//     let l: number[] = [1, 2, 3, 4, 5, 6];
 //
-//     l = append( l[ :1 ], l[ 4: ]... )
-//     l = append( l[ :1 ], l[ 2: ]... )
-//     l = l[ 1: ]
-//     l = l[ :len( l ) - 1 ]
+//     // Remove elements at index 1 and from index 4 to the end
+//     l.splice(1, 1, ...l.slice(4));
 //
-//     var m map[string]int = map[string]int{ key1: val1, key2: val2, key3: val3 }
-//     m := map[string]int{ key1: val1, key2: val2, key3: val3 }
-//     
-//     delete( m, key1 )
-//     delete( m, key2 )
+//     // Remove elements at index 1 and from index 2 to the end
+//     l.splice(1, 1, ...l.slice(2));
+//
+//     // Remove the first element
+//     l.splice(0, 1);
+//
+//     // Remove the last element
+//     l.splice(l.length - 1, 1);
+//
+//     // Example usage with an object
+//     let m: { [key: string]: number } = { key1: val1, key2: val2, key3: val3 };
+//
+//     // Delete entries with key1 and key2
+//     delete m.key1;
+//     delete m.key2;
 //
 
 // using std::swap;
