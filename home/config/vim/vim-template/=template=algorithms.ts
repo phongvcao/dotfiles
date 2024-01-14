@@ -1,5 +1,3 @@
-package main
-
 // //----< iostream >--------------------------//
 // using std::cout;
 // using std::cin;
@@ -33,20 +31,17 @@ package main
 // using std::ifstream;
 //
 
-import "fmt"
-import "strconv"
 // using std::to_string;
-// GO_USAGE:
-//     fmt.Printf( strconv.FormatInt( 15, 16 ) )  -- output: 'f'
+// TYPESCRIPT_USAGE:
+//     console.log((15).toString(16));  // output: 'f'
 //
-//     fmt.Printf( strconv.FormatInt( 15, 2 ) )  -- output: '1111'
+//     console.log((15).toString(2));   // output: '1111'
 //
-//     fmt.Printf( strconv.FormatInt( 15, 8 ) )  -- output: '17'
+//     console.log((15).toString(8));   // output: '17'
 //
-//     fmt.Printf( strconv.Itoa( 17 ) )  -- output: '17'
+//     console.log(String(17));         // output: '17'
 //
-//     fmt.Printf( fmt.Sprintf( "%d", 15 ) )  -- output: '15'
-//
+//     console.log(`${15}`);            // output: '15'
 //
 // using std::stoi;                            // PREFERRED stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
 // using std::stol;                            // PREFERRED stol() over atol() since stoi() allows conversion from binary & hex strings to int.
@@ -54,94 +49,75 @@ import "strconv"
 // using std::atoi;                            // DEPRECATED: Preferred stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
 // using std::atol;                            // DEPRECATED: Preferred stol() over atol() since stoi() allows conversion from binary & hex strings to int.
 // using std::atoll;                           // DEPRECATED: Preferred stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
-// GO_USAGE:
-//     fmt.Println( strconv.Atoi( "123" ) )  -- output: 123
-//     fmt.Println( strconv.Atoi( "-123" ) )  -- output: -123
+// TYPESCRIPT_USAGE:
+//     // Output: 123
+//     console.log(parseInt("123"));
 //
-//     i, err := strconv.ParseInt( "123", 10, 64 )
-//     fmt.Println( i )  -- output: 123
+//     // Output: -123
+//     console.log(parseInt("-123"));
 //
-//     i, err := strconv.ParseInt( "-123", 10, 64 )
-//     fmt.Println( i )  -- output: -123
+//     // Output: 123
+//     let i = parseInt("123", 10);
+//     console.log(i);
 //
-//     i, err := strconv.ParseInt( "111", 2, 64 )
-//     fmt.Println( i )  -- output: 7
+//     // Output: -123
+//     i = parseInt("-123", 10);
+//     console.log(i);
 //
-//     i, err := strconv.ParseInt( "ABC", 16, 64 )
-//     fmt.Println( i )  -- output: 2748
+//     // Output: 7
+//     i = parseInt("111", 2);
+//     console.log(i);
 //
-// GO_TRICKS:
-// GO_TRICKS_UNICODE (MOST COMMON):
-//     var s string = "ABCDE"
-//     var lc []rune = []rune( s )
-//     var lc []rune = make( []rune, 26, 26 )
-//     lc := make( []rune, 26, 26 )
+//     // Output: 2748
+//     i = parseInt("ABC", 16);
+//     console.log(i);
 //
-//     for i := 0; i < 26; i++ {
-//         lc[ i ] = rune( int( 'a' ) + i )
-//     }
-//     for i := 0; i < 26; i++ {
-//         fmt.Printf( "%c\n", lc[ i ] )
-//     }
+// TYPESCRIPT_TRICKS:
+//     // Creating an array of runes (Unicode characters)
+//     let lc: string[] = new Array(26);
 //
-//     var li []int = make( []int, 26, 26 )
-//     li := make( []int, 26, 26 )
-//
-//     for _, c := range lc {
-//         li[ int( c ) - int( 'a' ) ] += 1
-//     }
-//     fmt.Println( li )
-//
-// GO_TRICKS_ASCII (LESS COMMON):
-//     var s string = "ABCDE"
-//     var lc []byte = []byte( s )
-//     var lc []byte = make( []byte, 26, 26 )
-//     lc := make( []byte, 26, 26 )
-//
-//     for i := 0; i < 26; i++ {
-//         lc[ i ] = byte( int( 'a' ) + i )
-//     }
-//     for i := 0; i < 26; i++ {
-//         fmt.Printf( "%c\n", lc[ i ] )
+//     for (let i = 0; i < 26; i++) {
+//         lc[i] = String.fromCharCode('a'.charCodeAt(0) + i);
 //     }
 //
-//     var li []int = make( []int, 26, 26 )
-//     li := make( []int, 26, 26 )
-//
-//     for _, c := range lc {
-//         li[ int( c ) - int( 'a' ) ] += 1
+//     for (let i = 0; i < 26; i++) {
+//         console.log(lc[i]);
 //     }
-//     fmt.Println( li )
+//
+//     // Creating an array of ints and counting occurrences
+//     let li: number[] = new Array(26).fill(0);
+//
+//     for (let c of lc) {
+//         li[c.charCodeAt(0) - 'a'.charCodeAt(0)] += 1;
+//     }
+//
+//     console.log(li);
 //
 
-import "encoding/json"
 //----< nlohmann/json.hpp >-----------------//
 // using json = nlohmann::json;
-// GO_USAGE:
-//     type Person struct {
-//         Name string `json:"name"`
-//         Age  int    `json:"age"`
+// TYPESCRIPT_USAGE:
+//     class Person {
+//         name: string;
+//         age: number;
+//
+//         constructor(name: string, age: number) {
+//             this.name = name;
+//             this.age = age;
+//         }
 //     }
 //
-//     // Encoding JSON string from struct
-//     person := Person{ Name: "John", Age: 30 }
-//     personJSON, err := json.Marshal( person )
-//     if err != nil {
-//         panic( err.Error() )
-//     }
-//     fmt.Println( string( personJSON ) )
+//     // Encoding JSON string from class instance
+//     const person = new Person("John", 30);
+//     const personJSON = JSON.stringify(person);
+//     console.log(personJSON);
 //
-//     // Decoding JSON string into struct
-//     var decodedPerson Person
-//     err = json.Unmarshal (personJSON, &decodedPerson )
-//     if err != nil {
-//         panic( err.Error() )
-//     }
-//     fmt.Printf( "Name: %s, Age: %d\n", decodedPerson.Name, decodedPerson.Age )
+//     // Decoding JSON string into class instance
+//     const decodedPerson: Person = JSON.parse(personJSON);
+//     console.log(`Name: ${decodedPerson.name}, Age: ${decodedPerson.age}`);
 //
 
-import "database/sql"
-import _ "github.com/go-sql-driver/mysql"
+import mysql from 'mysql2/promise';
 // NOTES:
 // Connecting to a database programmatically involves the following steps:
 //     1. Importing the appropriate database driver package in your
@@ -162,115 +138,130 @@ import _ "github.com/go-sql-driver/mysql"
 //        retrieve or modify data.
 //     5. Closing the database connection when it is no longer needed.
 //
-// GO_USAGE:
-//     db, err := sql.Open("mysql", "username:password@tcp(hostname:port)/databasename")
-//     if err != nil {
-//         panic(err.Error())
-//     }
-//     defer db.Close()
+// TYPPESCRIPT USAGE:
+//     async function executeQueries() {
+//         // Creating a MySQL connection pool
+//         const pool = await mysql.createPool({
+//             host: 'hostname',
+//             user: 'username',
+//             password: 'password',
+//             database: 'databasename',
+//             port: port,  // Replace 'port' with the actual port number
+//         });
 //
-//     err = db.Ping()
-//     if err != nil {
-//         panic(err.Error())
-//     }
+//         try {
+//             // Non-transactional query
+//             const [rows, fields] = await pool.query('SELECT name, age FROM users WHERE age > ?', [25]);
 //
-//     // Non-transactional query
-//     rows, err := db.Query("SELECT name, age FROM users WHERE age > ?", 25)
-//     if err != nil {
-//         panic(err.Error())
-//     }
-//     defer rows.Close()
+//             for (const row of rows) {
+//                 console.log(`Name: ${row.name}, Age: ${row.age}`);
+//             }
 //
-//     for rows.Next() {
-//         var name string
-//         var age int
-//         err := rows.Scan(&name, &age)
-//         if err != nil {
-//             panic(err.Error())
+//             // Transactional query
+//             const connection = await pool.getConnection();
+//
+//             try {
+//                 await connection.beginTransaction();
+//
+//                 await connection.execute('UPDATE users SET age = ? WHERE name = ?', [30, 'John']);
+//                 await connection.execute('DELETE FROM users WHERE age < ?', [30]);
+//
+//                 await connection.commit();
+//                 console.log('Successfully executed transactional queries!');
+//             } catch (transactionError) {
+//                 await connection.rollback();
+//                 throw transactionError;
+//             } finally {
+//                 connection.release();
+//             }
+//         } catch (error) {
+//             console.error(error);
+//         } finally {
+//             // Closing the connection pool
+//             await pool.end();
 //         }
-//         fmt.Printf("Name: %s, Age: %d\n", name, age)
 //     }
 //
-//     // Transactional query
-//     tx, err := db.Begin()
-//     if err != nil {
-//         panic(err.Error())
-//     }
-//
-//     _, err = tx.Exec("UPDATE users SET age = ? WHERE name = ?", 30, "John")
-//     if err != nil {
-//         tx.Rollback()
-//         panic(err.Error())
-//     }
-//
-//     _, err = tx.Exec("DELETE FROM users WHERE age < ?", 30)
-//     if err != nil {
-//         tx.Rollback()
-//         panic(err.Error())
-//     }
-//
-//     err = tx.Commit()
-//     if err != nil {
-//         panic(err.Error())
-//     }
-//     fmt.Println("Successfully executed transactional queries!")
+//     // Execute the queries
+//     executeQueries();
 //
 
 // //----< string >----------------------------//
 // using std::getline;
 // using std::string;
 
-import "math"
 // //----< cmath >-----------------------------//
 // using std::sqrt;
-// GO_USAGE:
-//     fmt.Println( math.Sqrt( 9 ) )  -- output: 3
+// TYPESCRIPT_USAGE:
+//     console.log(Math.sqrt(9));  // output: 3
 //
 
 // using std::pow;
-// GO_USAGE:
-//     fmt.Println( math.Pow( 7, 2 ) )
-//     fmt.Println( math.Pow( 7, 2 ) == 7 * 7 )  -- True
-//     fmt.Println( math.Pow( 2, -1 ) )  -- output: 0.5
-//     fmt.Println( math.Pow( 2.0, 0.5 ) )  -- output: 1.4142135623730951
+// TYPESCRIPT_USAGE:
+//     // Square root
+//     console.log(Math.sqrt(9));  // output: 3
 //
-//     fmt.Println( math.Pow10( 2 ) )  -- output: 100
-//     fmt.Println( math.Pow10( 5 ) == 100000 )  -- True
+//     // Power function
+//     console.log(Math.pow(7, 2));
+//     console.log(Math.pow(7, 2) === 7 * 7);  // True
+//     console.log(Math.pow(2, -1));  // output: 0.5
+//     console.log(Math.pow(2.0, 0.5));  // output: 1.4142135623730951
+//
+//     // Power of 10
+//     console.log(Math.pow(10, 2));  // output: 100
+//     console.log(Math.pow(10, 5) === 100000);  // True
 //
 
-import "math/bits"
 // using std::div;
 // using std::ldiv;
 // using std::lldiv;
-// GO_USAGE:
-//     quo, rem := bits.Div( 0, 7, 3 )
-//     fmt.Printf( "quo: %d ; rem: %d\n", quo, rem )  -- output: 2, 1
+// TYPESCRIPT_USAGE:
+//     const { quo, rem } = bitsDiv(0, 7, 3);
+//     console.log(`quo: ${quo} ; rem: ${rem}`);  // output: 2, 1
 //
-//     quo, rem := bits.Div32( 0, 7, 3 )
-//     fmt.Printf( "quo: %d ; rem: %d\n", quo, rem )  -- output: 2, 1
+//     const { quo: quo32, rem: rem32 } = bitsDiv32(0, 7, 3);
+//     console.log(`quo: ${quo32} ; rem: ${rem32}`);  // output: 2, 1
 //
-//     quo, rem := bits.Div64( 0, 7, 3 )
-//     fmt.Printf( "quo: %d ; rem: %d\n", quo, rem )  -- output: 2, 1
+//     const { quo: quo64, rem: rem64 } = bitsDiv64(0, 7, 3);
+//     console.log(`quo: ${quo64} ; rem: ${rem64}`);  // output: 2, 1
+//
+//     // Function definitions
+//     function bitsDiv(a: number, b: number, c: number): { quo: number; rem: number } {
+//         const quo = Math.floor(a / c);
+//         const rem = a % c;
+//         return { quo, rem };
+//     }
+//
+//     function bitsDiv32(a: number, b: number, c: number): { quo: number; rem: number } {
+//         const quo = Math.floor(a / c);
+//         const rem = a % c;
+//         return { quo, rem };
+//     }
+//
+//     function bitsDiv64(a: number, b: number, c: number): { quo: number; rem: number } {
+//         const quo = Math.floor(a / c);
+//         const rem = a % c;
+//         return { quo, rem };
+//     }
 //
 
 // using std::log;                             // log( <arg> )
-// GO_USAGE:
-//     fmt.Println( math.Log( 10 ) )
-//     fmt.Println( math.Log2( 10 ) )
-//     fmt.Println( math.Log10( 10 ) )
+// TYPESCRIPT_USAGE:
+//     console.log(Math.log(10));
+//     console.log(Math.log2(10));
+//     console.log(Math.log10(10));
 //
-//
+
 // using std::exp;                             // e ^ <arg>
 //
 // using std::abs;
 // using std::fabs;
-// GO_USAGE:
-//     print( math.Abs( 6 ) )
-//     print( math.Abs( 6.0 ) )
-//     print( math.Abs( -6 ) )
-//     print( math.Abs( -6.0 ) )
+// TYPESCRIPT_USAGE:
+//     console.log(Math.abs(6));
+//     console.log(Math.abs(6.0));
+//     console.log(Math.abs(-6));
+//     console.log(Math.abs(-6.0));
 //
-
 // using std::floor;                           // Round down to nearest integer double
 // using std::ceil;                            // Round up to nearest integer double
 // using std::trunc;                           // Truncate the fractional part to get the integer part
@@ -297,197 +288,220 @@ import "math/bits"
 // from typing import List
 // //----< array >-----------------------------//
 // using std::array;                           // Fixed & Unordered Array
-// GO_USAGE:
-//     l := []int{}
-//     l := []int{ 1, 1, 1, 1, 1 }
-//     l := make( []int )
-//     l := make( []int, 0, 5 )
+// TYPESCRIPT_USAGE:
+//     let l: number[] = [];
+//     console.log(l);
 //
-//     l := make( []int, 10, 10 )
-//     for i := 0; i < 10; i++ {
-//         l[ i ] = i
+//     let l1: number[] = [1, 1, 1, 1, 1];
+//     console.log(l1);
+//
+//     let l2: number[] = new Array<number>();
+//     console.log(l2);
+//
+//     let l3: number[] = new Array<number>(0, 5);
+//     console.log(l3);
+//
+//     let l4: number[] = new Array<number>(10);
+//     for (let i = 0; i < 10; i++) {
+//         l4[i] = i;
 //     }
-//     fmt.Println( l )
-//
-//
-// //----< vector >----------------------------//
-// using std::vector;
-// GO_USAGE:
-//     l := []int{}
-//     l := []int{ 1, 1, 1, 1, 1 }
-//     l := make( []int )
-//     l := make( []int, 0, 5 )
-//
-//     l := make( []int, 10, 10 )
-//     for i := 0; i < 10; i++ {
-//         l[ i ] = i
-//     }
-//     fmt.Println( l )
+//     console.log(l4);
 //
 
-import "container/list"
+// //----< vector >----------------------------//
+// using std::vector;
+// TYPESCRIPT_USAGE:
+//     let l: number[] = [];
+//     console.log(l);
+//
+//     let l1: number[] = [1, 1, 1, 1, 1];
+//     console.log(l1);
+//
+//     let l2: number[] = new Array<number>();
+//     console.log(l2);
+//
+//     let l3: number[] = new Array<number>(0, 5);
+//     console.log(l3);
+//
+//     let l4: number[] = new Array<number>(10).fill(0).map((_, i) => i);
+//     console.log(l4);
+//
+
 // //----< list >------------------------------//
 // using std::list;                            // Doubly-Linked List with size() ( O( 1 ) )
 // //----< forward_list >----------------------//
 // using std::forward_list;                    // Singly-Linked List without size() function ( so O( N ) if we need to get size() )
-// GO_TRICKS:
-//     var dq []rune = []rune{}
-//     var dq []rune = make( []rune, 0, 6 )
-//     dq := []rune{}
-//     dq := make( []rune, 0, 6 )
-//     dq := []rune{ 'A', 'B', 'C', 'D' }
+// TYPESCRIPT_TRICKS:
+//     let dq: string[] = [];
+//     let dq1: string[] = new Array<string>(0);
+//     let dq2: string[] = [];
+//     let dq3: string[] = new Array<string>(0);
 //
-//     dq = append( dq, 'A' )  -- push to the back
-//     dq = append( dq, 'B' )  -- push to the back
+//     let dq4: string[] = ['A', 'B', 'C', 'D'];
 //
-//     b := dq[len(dq) - 1]  -- get back element
-//     dq = dq[:len(dq) - 1]  -- remove from the back
+//     // Push to the back
+//     dq4.push('A');
+//     dq4.push('B');
 //
-//     f := dq[0]  -- get front element
-//     dq = dq[1:]  -- remove from front - O( 1 )
+//     // Get back element
+//     let b: string | undefined = dq4[dq4.length - 1];
 //
-// GO_USAGE:
-//     var l *list.List = list.New()
-//     l := list.New()
-//     l.PushBack( "A" )
-//     l.PushFront( "B" )
-//     l.PushBack( "C" )
-//     l.PushFront( "D" )
-//     for node := l.Front(); node != nil; node = node.Next() {
-//         fmt.Println( node.Value.(string) )
-//     }
-//     var b *list.Element = l.Back()
-//     fmt.Println( l.Remove( b ) )  -- output: "C"
-//     var f *list.Eleemnt = l.Front()
-//     fmt.Println( l.Remove( f ) )  -- output: "D"
+//     // Remove from the back
+//     dq4.pop();
+//
+//     // Get front element
+//     let f: string | undefined = dq4[0];
+//
+//     // Remove from front - O(1)
+//     dq4.shift();
 //
 
 // //----< map >-------------------------------//
 // using std::map;                             // Ordered Map (Red-Black Tree)
-// GO_USAGE:
+// TYPESCRIPT_USAGE:
+//     const dic_keys: string[] = ["key1", "key2", "key3"];
+//     const d: { [key: string]: number[] } = Object.fromEntries(dic_keys.map((key) => [key, []]));
 //
-
-// PYTHON_USAGE:
-//     d : Dict[ str, int ] = dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ) )
-//     ds : List[ Tuple[ str, int ] ] = sorted( dict( zip( dic_keys, ( [] for _ in dic_keys ) ) ).items() ) )
-//     ds : List[ Tuple[ str, int ] ] = sorted( d.items() ) )
-//     ds : Dict[ str, int ] = dict( sorted( d.items() ) )
-//     od : OrderedDict[ str, int ] = OrderedDict( sorted( d.items() ) )
+//     const ds: [string, number][] = Object.entries(d).sort();
+//     const sortedD: { [key: string]: number[] } = Object.fromEntries(Object.entries(d).sort());
+//     const od: { [key: string]: number[] } = Object.fromEntries(Object.entries(d).sort());
 //
-//    val1 = d.get( key1 )
-//    if val1 is not None:
-//        print( val1 )
+//     // val1 = d.get(key1);
+//     const key1 = "key1";
+//     const val1 = d[key1];
+//     if (val1 !== undefined) {
+//         console.log(val1);
+//     }
 //
-//    if key1 in d:
-//        print( d[ key1 ] )
+//     // if key1 in d:
+//     if (key1 in d) {
+//         console.log(d[key1]);
+//     }
 //
-//    val1 = od.get( key1 )
-//    if val1 is not None:
-//        print( val1 )
+//     // val1 = od.get(key1);
+//     const val1FromOd = od[key1];
+//     if (val1FromOd !== undefined) {
+//         console.log(val1FromOd);
+//     }
 //
-//    if key1 in od:
-//        print( od[ key1 ] )
-//
+//     // if key1 in od:
+//     if (key1 in od) {
+//         console.log(od[key1]);
+//     }
 //
 // using std::multimap;                        // Ordered Map (Red-Black Tree) & Allow duplicated keys
-// PYTHON_USAGE:
-//     d : Dict[ str, List[ int ] ] = []
-//     ds : List[ Tuple[ str, List[ int ] ] ] = sorted( d.items() )
+// TYPESCRIPT_USAGE:
+//     const d = new Map<string, number[]>();
+//
+//     // Add values to the map
+//     d.set("key1", [1, 2, 3]);
+//     d.set("key2", [4, 5]);
+//     d.set("key3", [6, 7, 8]);
+//
+//     // Convert map items to sorted list of tuples
+//     const ds: [string, number[]][] = Array.from(d.entries()).sort();
+//
+//     console.log(ds);
 //
 //
 // //----< unordered_map >---------------------//
 // using std::unordered_map;                   // HashMap (SeparateChainingHashST)
-// PYTHON_USAGE:
-//     d : Dict[ str, int ] = { key: val }
+// TYPESCRIPT_USAGE:
+//     const d: Record<string, number> = { key: val };
 //
 //
 // using std::unordered_multimap;              // Ordered Map (Red-Black Tree) & Allow duplicated keys
-// PYTHON_USAGE:
-//     d : Dict[ str, List[ int ] ] = { key: [ val1, val2 ] }
+// TYPESCRIPT_USAGE:
+//     const d: Record<string, number[]> = { key: [val1, val2] };
 //
-//
-import "sort"
+
 // //----< set >-------------------------------//
 // using std::set;                             // Ordered Set (Red-Black Tree)
-// GO_USAGE:
-//     var s = map[ int ]bool{}
-//     var s = make( map[ int ]bool, 0, 5 )  -- Init set with size 0 and capacity 5
-//     s := map[ int ]bool{}
-//     s := make( map[ int ]bool )  -- Init set with size 0 and initial capacity 0
+// TYPESCRIPT_USAGE:
+//     let s: Record<number, boolean> = {};
+//     // or
+//     let s: Record<number, boolean> = Object.create(null);
 //
-//     s[ 0 ] = True
-//     s[ 1 ] = True
-//     s[ 4 ] = True
+//     // or with an initial capacity (not a direct equivalent)
+//     let s: Record<number, boolean> = {};
 //
-//     keys = []int{}
-//     for i := range s {
-//         keys = append( keys, i )
+//     s[0] = true;
+//     s[1] = true;
+//     s[4] = true;
+//
+//     const keys: number[] = Object.keys(s).map(Number);
+//
+//     keys.sort((a, b) => a - b);
+//
+//     keys.forEach(k => {
+//         console.log(k, s[k]);
+//     });
+//
+//     while (Object.keys(s).length > 0) {
+//         delete s[0];
+//         delete s[1];
+//         delete s[4];
 //     }
 //
-//     sort.Ints( keys )
-//     sort.Float64s( float64sKeys )
-//     sort.Strings( stringKeys )
-//
-//     sort.Slice( keys, func( i, j int ) bool {    -- sort.Slice() is faster than sort.SliceStable()
-//         return keys[ i ] < keys[ j ]
-//     })
-//
-//     sort.SliceStable( keys, func( i, j int ) bool {
-//         return keys[ i ] < keys[ j ]
-//     })
-//
-//     for _, k := range keys {
-//         fmt.Println( k, s[ k ] )
-//     }
-//
-//     for len( s ) > 0 {
-//         delete( s, 0 )
-//         delete( s, 1 )
-//         delete( s, 4 )
-//     }
-//
-//     if _, ok := s[ 0 ]; !ok {
-//         fmt.Println( fmt.Errorf( "First Element NOT Found!!!" ) )
+//     if (!(0 in s)) {
+//         console.error("First Element NOT Found!!!");
 //     }
 //
 //
 // using std::multiset;                        // Ordered Set (Red-Black Tree) & Allow duplicated keys
-// GO_USAGE:
-//     d : Dict[ str, int ] = { key1: count1, key2: count2 }
-//     ds : List[ Tuple[ str, int ] ] = sorted( d.items() )
-//     ds : Dict[ str, int ] = dict( sorted( d.items() ) )
-//     ds : OrderedDict[ str, int ] = OrderedDict( sorted( d.items() ) )
+// TYPESCRIPT_USAGE:
+//     const d: Record<string, number> = { key1: count1, key2: count2 };
 //
-//     s.add( 5 )
-//     s.add( 4 )
-//     s.discard( 1 )
-//     s.discard( 4 )
-//     try:
-//         s.remove( 6 )
-//     except KeyError:
-//         print( "6 is not present in set" )
+//     const ds: [string, number][] = Object.entries(d).sort(([a], [b]) => a.localeCompare(b));
+//
+//     const dsDict: Record<string, number> = Object.fromEntries(ds);
+//
+//     // Assuming you have an OrderedDict implementation, if not, use a Map for ordered behavior
+//     // const dsOrderedDict: Map<string, number> = new Map(ds);
+//
+//     const s = new Set<number>();
+//
+//     s.add(5);
+//     s.add(4);
+//     s.delete(1);
+//     s.delete(4);
+//
+//     try {
+//         s.delete(6);
+//     } catch (e) {
+//         console.log("6 is not present in set");
+//     }
 //
 //
 // //----< unordered_set >---------------------//
 // using std::unordered_set;                   // HashSet (SeparateChainingHashST)
-// PYTHON_USAGE:
-//     s : Set[ int ] = set( ( 1, 2, 3 ) ) -- set from Tuple
-//     s : Set[ int ] = set( [ 1, 2, 3 ] ) -- set from List
-//     s : Set[ str ] = set( "ABC" )       -- set from str
+// TYPESCRIPT_USAGE:
+//     const s1: Set<number> = new Set([1, 2, 3]); // set from Array
+//     const s2: Set<number> = new Set("ABC");     // set from string
 //
-//     s.add( 5 )
-//     s.add( 4 )
-//     s.discard( 1 )
-//     s.discard( 4 )
-//     try:
-//         s.remove( 6 )
-//     except KeyError:
-//         print( "6 is not present in set" )
+//     s1.add(5);
+//     s1.add(4);
+//     s1.delete(1);
+//     s1.delete(4);
+//
+//     try {
+//         s1.delete(6);
+//     } catch (e) {
+//         console.log("6 is not present in set");
+//     }
+//
+//     console.log(s1);
 //
 //
 // using std::unordered_multiset;              // HashSet (SeparateChainingHashST) & Allow duplicated keys
-// PYTHON_USAGE:
-//     d : Dict[ str, int ] = { key1: count1, key2: count2 }
+// TYPESCRIPT_USAGE:
+//     const d: Record<string, number[]> = { key1: [count1], key2: [count2] };
+//
+//     // Add additional counts for keys
+//     d.key1.push(anotherCountForKey1);
+//     d.key2.push(anotherCountForKey2);
+//
+//     console.log(d);
 //
 
 // //----< deque >-----------------------------//
