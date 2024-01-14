@@ -117,7 +117,6 @@
 //     console.log(`Name: ${decodedPerson.name}, Age: ${decodedPerson.age}`);
 //
 
-import mysql from 'mysql2/promise';
 // NOTES:
 // Connecting to a database programmatically involves the following steps:
 //     1. Importing the appropriate database driver package in your
@@ -139,6 +138,8 @@ import mysql from 'mysql2/promise';
 //     5. Closing the database connection when it is no longer needed.
 //
 // TYPESCRIPT_USAGE:
+//     import mysql from 'mysql2/promise';
+//
 //     async function executeQueries() {
 //         // Creating a MySQL connection pool
 //         const pool = await mysql.createPool({
@@ -284,8 +285,7 @@ import mysql from 'mysql2/promise';
 // using std::bind;
 // using namespace std::placeholders;          // placeholders ( _1, _2, ..., _N ) for std::bind
 //
-//
-// from typing import List
+
 // //----< array >-----------------------------//
 // using std::array;                           // Fixed & Unordered Array
 // TYPESCRIPT_USAGE:
@@ -1011,8 +1011,6 @@ import mysql from 'mysql2/promise';
 // [ UNSUPPORTED_IN_PYTHON ]//----< bitset >----------------------------//
 // [ UNSUPPORTED_IN_PYTHON ] using std::bitset;
 //
-// from typing import Iterable
-// from typing import Iterator
 // //----< iterator >--------------------------//
 // using std::iterator;                        // Provides the common functionality and typedefs required for creating custom iterators
 //
@@ -1777,8 +1775,6 @@ import mysql from 'mysql2/promise';
 // using std::weak_ptr;
 //
 
-import "unicode"
-import "strings"
 // //----< cctype >----------------------------//
 // using std::isalnum;
 // TYPESCRIPT_USAGE:
@@ -2110,249 +2106,292 @@ import "strings"
 // using std::lock_guard;                      // strictly scope-based mutex ownership wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION 
 // using std::scoped_lock;                     // deadlock-avoiding RAII wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION
 // using std::unique_lock;                     // movable mutex ownership wrapper. CAN BE LOCKED & UNLOCKED
-// GO_USAGE_MUTEX:
-//     var count int
-//     var wg sync.WaitGroup
-//     var mutex sync.Mutex
+// TYPESCRIPT_USAGE:
+//     class Solution {
+//         private isMutexLocked: boolean = false;
 //
-//     func increment() {
-//         defer wg.Done()
-//         for i := 0; i < 5; i++ {
-//             mutex.Lock()   // Lock the mutex before accessing the shared variable
-//             count++
-//             mutex.Unlock() // Unlock the mutex after accessing the shared variable
-//             fmt.Println("Incrementing:", count)
+//         private async acquireMutex(): Promise<void> {
+//             while (this.isMutexLocked) {
+//                 await new Promise(resolve => setTimeout(resolve, 10));
+//             }
+//             this.isMutexLocked = true;
+//         }
+//
+//         private releaseMutex(): void {
+//             this.isMutexLocked = false;
+//         }
+//
+//         private async printNumbers(n: number, result: number[]): Promise<void> {
+//             await this.acquireMutex();
+//             try {
+//                 for (let i = 1; i <= n; i++) {
+//                     console.log(i, end=' ');
+//                     result.push(i);
+//                 }
+//                 console.log();
+//             } finally {
+//                 this.releaseMutex();
+//             }
+//         }
+//
+//         async runThreads(): Promise<void> {
+//             const numThreads = 4;
+//             const threads: Promise<void>[] = [];
+//             const results: number[][] = [];
+//
+//             for (let i = 0; i < numThreads; i++) {
+//                 results[i] = [];
+//                 threads.push(this.printNumbers(10, results[i]));
+//             }
+//
+//             await Promise.all(threads);
+//
+//             for (let i = 0; i < numThreads; i++) {
+//                 console.log(`Result ${i}: ${results[i].join(' ')}`);
+//             }
 //         }
 //     }
 //
-//     func decrement() {
-//         defer wg.Done()
-//         for i := 0; i < 5; i++ {
-//             mutex.Lock()   // Lock the mutex before accessing the shared variable
-//             count--
-//             mutex.Unlock() // Unlock the mutex after accessing the shared variable
-//             fmt.Println("Decrementing:", count)
-//         }
-//     }
-//
-//     func main() {
-//         wg.Add(2)
-//         go increment()
-//         go decrement()
-//         wg.Wait()
-//         fmt.Println("Final count:", count)
-//     }
-//
-// // OUTPUT: Decrementing: -1
-// //         Decrementing: -2
-// //         Decrementing: -2
-// //         Decrementing: -3
-// //         Decrementing: -4
-// //         Incrementing: -1
-// //         Incrementing: -3
-// //         Incrementing: -2
-// //         Incrementing: -1
-// //         Incrementing: 0
-// //         Final count: 0
-//
-// GO_USAGE_MUTEX:
-//     var count int
-//     var wg sync.WaitGroup
-//     var mutex sync.Mutex
-//
-//     func increment() {
-//         defer wg.Done()
-//         mutex.Lock() // Lock the mutex before accessing the shared variable
-//         for i := 0; i < 5; i++ {
-//             count++
-//             fmt.Println("Incrementing:", count)
-//         }
-//         mutex.Unlock() // Unlock the mutex after accessing the shared variable
-//     }
-//
-//     func decrement() {
-//         defer wg.Done()
-//         mutex.Lock() // Lock the mutex before accessing the shared variable
-//         for i := 0; i < 5; i++ {
-//             count--
-//             fmt.Println("Decrementing:", count)
-//         }
-//         mutex.Unlock() // Unlock the mutex after accessing the shared variable
-//     }
-//
-//     func main() {
-//         wg.Add(2)
-//         go increment()
-//         go decrement()
-//         wg.Wait()
-//         fmt.Println("Final count:", count)
-//     }
-//
-// // OUTPUT: Decrementing: -1
-// //         Decrementing: -2
-// //         Decrementing: -3
-// //         Decrementing: -4
-// //         Decrementing: -5
-// //         Incrementing: -4
-// //         Incrementing: -3
-// //         Incrementing: -2
-// //         Incrementing: -1
-// //         Incrementing: 0
-// //         Final count: 0
+//     const s = new Solution();
+//     s.runThreads();
 //
 
 // //----< shared_mutex >----------------------//
 // using std::shared_mutex;
-// NOTES:
-//     1. Use Read-Write Locks, we can let multiple threads accessing counter for
-//     reading simultaneously without blocking each other. 
-//     2. Also Read-Write Locks only allows 1 single thread to increment the counter
-//     while blocking all other write calls.
-//     3. When Reads >>> Writes, and we need to require Locks for all reads, RWLock
-//     is clearly better performant than traditional Mutex.
+// TYPESCRIPT_USAGE:
+//     class SafeCounter {
+//         private count: number = 0;
+//         private lock: boolean = false;
 //
-// GO_USAGE:
-// GO_USAGE_READ_WRITE_LOCKS:
-//     type SafeCounter struct {
-//         count int
-//         mux   sync.RWMutex
-//     }
+//         // Increment the counter safely
+//         Inc(): void {
+//             while (this.lock) {
+//                 // Wait for the lock to be released
+//             }
 //
-//     func (c *SafeCounter) Inc() {
-//         c.mux.Lock()
-//         c.count++
-//         c.mux.Unlock()
-//     }
-//
-//     func (c *SafeCounter) Value() int {
-//         c.mux.RLock()
-//         defer c.mux.RUnlock()
-//         return c.count
-//     }
-//
-//     func main() {
-//         var wg sync.WaitGroup
-//         counter := SafeCounter{}
-//
-//         for i := 0; i < 10; i++ {
-//             wg.Add(1)
-//             go func() {
-//                 for j := 0; j < 100; j++ {
-//                     counter.Inc()
-//                     time.Sleep(time.Millisecond)
-//                 }
-//                 wg.Done()
-//             }()
+//             this.lock = true; // Acquire the lock
+//             this.count += 1;
+//             this.lock = false; // Release the lock
 //         }
 //
-//         wg.Wait()
+//         // Get the current counter value safely
+//         Value(): number {
+//             while (this.lock) {
+//                 // Wait for the lock to be released
+//             }
 //
-//         fmt.Println("Final count: ", counter.Value())
+//             this.lock = true; // Acquire the lock
+//             const value = this.count;
+//             this.lock = false; // Release the lock
+//             return value;
+//         }
 //     }
 //
-// // OUTPUT: Final count: 1000
+//     // Function to simulate multiple threads incrementing the counter
+//     function simulateThreads(counter: SafeCounter): Promise<void> {
+//         const threads: Promise<void>[] = [];
+//
+//         for (let i = 0; i < 10; i++) {
+//             const thread = new Promise<void>((resolve) => {
+//                 for (let _ = 0; _ < 100; _++) {
+//                     counter.Inc();
+//                 }
+//                 resolve();
+//             });
+//
+//             threads.push(thread);
+//         }
+//
+//         return Promise.all(threads);
+//     }
+//
+//     // Main function
+//     async function main() {
+//         const counter = new SafeCounter();
+//         await simulateThreads(counter);
+//         console.log("Final count:", counter.Value());
+//     }
+//
+//     // Run the main function
+//     main();
 //
 
 // //----< condition_variable >----------------//
 // using std::condition_variable;
-// GO_USAGE:
-//     var data []int
-//     var cond *sync.Cond = sync.NewCond(&sync.Mutex{})
+// TYPESCRIPT_USAGE:
+//     class ConditionVariable {
+//         private listeners: (() => void)[] = [];
 //
-//     func producer() {
-//         for i := 0; i < 5; i++ {
-//             cond.L.Lock()
-//             data = append(data, i)
-//             fmt.Println("Producer produced:", i)
-//             cond.Signal()
-//             cond.L.Unlock()
+//         async wait(): Promise<void> {
+//             return new Promise<void>((resolve) => {
+//                 this.listeners.push(resolve);
+//             });
 //         }
-//     }
 //
-//     func consumer() {
-//         for i := 0; i < 5; i++ {
-//             cond.L.Lock()
-//             for len(data) == 0 {
-//                 cond.Wait()
+//         signal(): void {
+//             const listener = this.listeners.shift();
+//             if (listener) {
+//                 listener();
 //             }
-//             val := data[0]
-//             data = data[1:]
-//             fmt.Println("Consumer consumed:", val)
-//             cond.L.Unlock()
 //         }
 //     }
 //
-//     func main() {
-//         go producer()
-//         go consumer()
+//     class SyncMutex {
+//         private locked: boolean = false;
 //
-//         // Wait for goroutines to complete
-//         var wg sync.WaitGroup
-//         wg.Add(2)
-//         go func() {
-//             defer wg.Done()
-//             producer()
-//         }()
-//         go func() {
-//             defer wg.Done()
-//             consumer()
-//         }()
-//         wg.Wait()
+//         async lock(): Promise<void> {
+//             return new Promise<void>((resolve) => {
+//                 const acquireLock = () => {
+//                     if (!this.locked) {
+//                         this.locked = true;
+//                         resolve();
+//                     } else {
+//                         setImmediate(acquireLock);
+//                     }
+//                 };
+//
+//                 acquireLock();
+//             });
+//         }
+//
+//         unlock(): void {
+//             this.locked = false;
+//         }
 //     }
 //
-// // OUTPUT: Producer produced: 0
-// //         Consumer consumed: 0
-// //         Producer produced: 1
-// //         Consumer consumed: 1
-// //         Producer produced: 2
-// //         Consumer consumed: 2
-// //         Producer produced: 3
-// //         Consumer consumed: 3
-// //         Producer produced: 4
-// //         Consumer consumed: 4
+//     class SyncCond {
+//         private mutex: SyncMutex;
+//         private condition: ConditionVariable;
+//
+//         constructor(mutex: SyncMutex) {
+//             this.mutex = mutex;
+//             this.condition = new ConditionVariable();
+//         }
+//
+//         async wait(): Promise<void> {
+//             await this.condition.wait();
+//             this.mutex.unlock();
+//         }
+//
+//         signal(): void {
+//             this.condition.signal();
+//         }
+//     }
+//
+//     const data: number[] = [];
+//     const mutex = new SyncMutex();
+//     const cond = new SyncCond(mutex);
+//
+//     async function producer() {
+//         for (let i = 0; i < 5; i++) {
+//             await mutex.lock();
+//             data.push(i);
+//             console.log("Producer produced:", i);
+//             cond.signal();
+//             mutex.unlock();
+//         }
+//     }
+//
+//     async function consumer() {
+//         for (let i = 0; i < 5; i++) {
+//             await mutex.lock();
+//             while (data.length === 0) {
+//                 await cond.wait();
+//             }
+//             const val = data.shift();
+//             console.log("Consumer consumed:", val);
+//             mutex.unlock();
+//         }
+//     }
+//
+//     async function main() {
+//         // Run producer and consumer concurrently
+//         await Promise.all([producer(), consumer()]);
+//
+//         // Ensure that producer and consumer have completed before exiting
+//         await Promise.all([producer(), consumer()]);
+//
+//         // OUTPUT: Producer produced: 0
+//         //         Consumer consumed: 0
+//         //         Producer produced: 1
+//         //         Consumer consumed: 1
+//         //         Producer produced: 2
+//         //         Consumer consumed: 2
+//         //         Producer produced: 3
+//         //         Consumer consumed: 3
+//         //         Producer produced: 4
+//         //         Consumer consumed: 4
+//     }
+//
+//     main();
 //
 
-// GO_USAGE_SEMAPHORE:
-//     sem := make(chan struct{}, 2) // create a channel with a buffer size of 2
-//         var wg sync.WaitGroup
+// TYPESCRIPT_USAGE_SEMAPHORE:
+//     class Semaphore {
+//         private count: number;
 //
-//         for i := 1; i <= 10; i++ {
-//             wg.Add(1)
-//
-//             go func(i int) {
-//                 sem <- struct{}{} // acquire the semaphore
-//                 defer func() { <-sem }() // release the semaphore
-//
-//                 fmt.Printf("Goroutine %d started\n", i)
-//                 // do some work
-//                 fmt.Printf("Goroutine %d finished\n", i)
-//
-//                 wg.Done()
-//             }(i)
+//         constructor(private maxCount: number) {
+//             this.count = maxCount;
 //         }
 //
-//         wg.Wait()
+//         acquire(): Promise<void> {
+//             return new Promise((resolve) => {
+//                 const wait = () => {
+//                     if (this.count > 0) {
+//                         this.count--;
+//                         resolve();
+//                     } else {
+//                         setTimeout(wait, 10);
+//                     }
+//                 };
+//                 wait();
+//             });
+//         }
 //
-// // OUTPUT: Goroutine 1 started
-// //         Goroutine 2 started
-// //         Goroutine 2 finished
-// //         Goroutine 1 finished
-// //         Goroutine 3 started
-// //         Goroutine 4 started
-// //         Goroutine 3 finished
-// //         Goroutine 5 started
-// //         Goroutine 6 started
-// //         Goroutine 7 started
-// //         Goroutine 8 started
-// //         Goroutine 4 finished
-// //         Goroutine 6 finished
-// //         Goroutine 5 finished
-// //         Goroutine 9 started
-// //         Goroutine 10 started
-// //         Goroutine 7 finished
-// //         Goroutine 8 finished
-// //         Goroutine 9 finished
-// //         Goroutine 10 finished
+//         release(): void {
+//             this.count++;
+//         }
+//     }
+//
+//     class Thread {
+//         constructor(private target: Function, private args: any[]) {}
+//
+//         start(): void {
+//             this.target(...this.args);
+//         }
+//
+//         join(): Promise<void> {
+//             return new Promise((resolve) => {
+//                 setTimeout(() => {
+//                     resolve();
+//                 }, 0);
+//             });
+//         }
+//     }
+//
+//     const sem = new Semaphore(2);
+//     const threads: Thread[] = [];
+//
+//     async function worker(i: number): Promise<void> {
+//         await sem.acquire();
+//         console.log(`Worker ${i} started`);
+//         // do some work
+//         console.log(`Worker ${i} finished`);
+//         sem.release();
+//     }
+//
+//     for (let i = 1; i <= 10; i++) {
+//         const t = new Thread(worker, [i]);
+//         threads.push(t);
+//         t.start();
+//     }
+//
+//     async function runThreads(): Promise<void> {
+//         await Promise.all(threads.map((t) => t.join()));
+//     }
+//
+//     // Run the threads
+//     runThreads();
 //
 
 // //----< chrono >----------------------------//
@@ -2369,66 +2408,108 @@ import "strings"
 // using std::chrono::hours;                   // Duration in hours
 //
 
-import "net/http"
-import "ioutil"
-import "bytes"
 // //----< curlpp/*.hpp >----------------------//
-// GO_USAGE:
-// GO_USAGE_HTTP_GET:
-//     getUrl := "https://wwww.example.com"
-//     resp, err := http.Get(getUrl)
-//     if err != nil {
-//         log.Fatal(err)
-//     }
+// TYPESCRIPT_USAGE:
+// TYPESCRIPT_USAGE_FRONTEND:
+//     // HTTP GET
+//     const getUrl = 'https://www.example.com';
 //
-//     defer resp.Body.Close()
+//     fetch(getUrl)
+//     .then((response) => response.text())
+//     .then((data) => {
+//         console.log(data);
+//     })
+//     .catch((error) => {
+//         console.error('Error:', error);
+//     });
 //
-//     body, err := ioutil.ReadAll(resp.Body)
-//     if err != nil {
-//         log.Fatal(err)
-//     }
-//     fmt.Println(body)
+//     // HTTP POST
+//     const postUrl = 'http://www.example.com';
+//     const jsonData = JSON.stringify({
+//         key1: 'value1',
+//         key2: 'value2'
+//     });
 //
-// GO_USAGE_HTTP_POST:
-//     // Initialize the JSON data
-//     jsonData := map[string]string{
-//         "key1": "value1",
-//         "key2": "value2",
-//     }
-//     jsonValue, _ := json.Marshal(jsonData)
+//     fetch(postUrl, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: jsonData
+//     })
+//     .then((response) => response.text())
+//     .then((data) => {
+//         console.log('Response Status:', response.status);
+//         console.log('RESPONSE BODY:', data);
+//     })
+//     .catch((error) => {
+//         console.error('Error:', error);
+//     });
 //
-//     // Set the URL to send the POST request to
-//     postUrl := "http://www.example.com"
 //
-//     // Create a new HTTP client
-//     client := &http.Client{}
+// TYPESCRIPT_USAGE_BACKEND:
+//     import * as https from 'https';
+//     import * as http from 'http';
 //
-//     // Create a new POST request
-//     req, err := http.NewRequest("POST", postUrl, bytes.NewBuffer(jsonValue))
-//     if err != nil {
-//         fmt.Println("ERROR Creating Post Request: ", err)
-//         return
-//     }
+//     // HTTP GET
+//     const getUrl = 'https://www.example.com';
+//     https.get(getUrl, (resp) => {
+//         let data = '';
 //
-//     // Set the request header
-//     req.Header.Set("Content-Type", "application/json")
+//         // A chunk of data has been received.
+//         resp.on('data', (chunk) => {
+//             data += chunk;
+//         });
 //
-//     // Send the POST request
-//     resp, err := client.Do(req)
-//     if err != nil {
-//         fmt.Println("ERROR Sending Post Request: ", err)
-//         return
-//     }
+//         // The whole response has been received.
+//         resp.on('end', () => {
+//             console.log(data);
+//         });
 //
-//     // Print the response status code and body
-//     fmt.Println("Response Status:", resp.Status)
-//     buf := new(bytes.Buffer)
-//     _, err = buf.ReadFrom(resp.Body)
-//     if err != nil {
-//         fmt.Println("ERROR Getting Response: ", err)
-//         return
-//     }
-//     fmt.Println("RESPONSE BODY: ", buf.String())
+//     }).on('error', (err) => {
+//         console.log(`Error: ${err.message}`);
+//     });
+//
+//     // HTTP POST
+//     const jsonData = JSON.stringify({
+//         key1: 'value1',
+//         key2: 'value2'
+//     });
+//
+//     const postUrl = 'http://www.example.com';
+//
+//     const options: http.RequestOptions = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Content-Length': Buffer.byteLength(jsonData)
+//         }
+//     };
+//
+//     const req = http.request(postUrl, options, (resp) => {
+//         let data = '';
+//
+//         // A chunk of data has been received.
+//         resp.on('data', (chunk) => {
+//             data += chunk;
+//         });
+//
+//         // The whole response has been received.
+//         resp.on('end', () => {
+//             console.log('Response Status:', resp.statusCode);
+//             console.log('RESPONSE BODY:', data);
+//         });
+//
+//     });
+//
+//     // Handle errors
+//     req.on('error', (err) => {
+//         console.log(`Error: ${err.message}`);
+//     });
+//
+//     // Send the request with the JSON data
+//     req.write(jsonData);
+//     req.end();
 //
 //
 // //------------------------------------------//
