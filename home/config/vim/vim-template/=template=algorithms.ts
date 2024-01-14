@@ -1458,19 +1458,22 @@ import mysql from 'mysql2/promise';
 //
 
 // using std::swap;
-// GO_USAGE:
-//     var l []int = []int{ 1, 2, 3, 4, 5, 6 }
-//     l := []int{ 1, 2, 3, 4, 5, 6 }
+// TYPESCRIPT_USAGE:
+//     // Example usage with an array
+//     let l: number[] = [1, 2, 3, 4, 5, 6];
 //
-//     l[ 1 ], l[ 3 ] = l[ 3 ], l[ 1 ]
+//     // Swap elements at index 1 and 3
+//     [l[1], l[3]] = [l[3], l[1]];
 //
-//     var m map[string]int = map[string]int{ key1: val1, key2: val2, key3: val3 }
-//     m := map[string]int{ key1: val1, key2: val2, key3: val3 }
+//     // Example usage with an object
+//     let m: { [key: string]: number } = { key1: val1, key2: val2, key3: val3 };
 //
-//     m[ key1 ], m[ key3 ] = m[ key3 ], m[ key1 ]
+//     // Swap values associated with key1 and key3
+//     [m.key1, m.key3] = [m.key3, m.key1];
 //
 
 // using std::binary_search;
+
 // GO_USAGE:
 //     var l []int = []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 }
 //     l := []int{ 1, 2, 3, 3, 3, 3, 3, 5, 6 } 
