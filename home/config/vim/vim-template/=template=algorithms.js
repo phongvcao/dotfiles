@@ -96,7 +96,7 @@
 
 //----< nlohmann/json.hpp >-----------------//
 // using json = nlohmann::json;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     class Person {
 //         constructor(name, age) {
 //             this.name = name;
@@ -1116,73 +1116,73 @@
 //     console.log(maxNum); // Output: 6
 //
 
-// TYPESCRIPT_USAGE:
-//     const l: number[] = [1, 2, 3, 4, 5, 6];
+// JAVASCRIPT_USAGE:
+//     const l = [1, 2, 3, 4, 5, 6];
 //
 //     let maxNum = Number.MIN_SAFE_INTEGER;
 //
 //     for (const num of l) {
-//     maxNum = Math.max(maxNum, num);
+//         maxNum = Math.max(maxNum, num);
 //     }
 //
 //     console.log(maxNum); // Output: 6
 //
 
 // using std::min;
-// TYPESCRIPT_USAGE:
-//     const l: number[] = [1, 2, 3, 4, 5, 6];
+// JAVASCRIPT_USAGE:
+//     const l = [1, 2, 3, 4, 5, 6];
 //
 //     let minNum = Number.MAX_SAFE_INTEGER;
 //
 //     for (const num of l) {
-//     minNum = Math.min(minNum, num);
+//         minNum = Math.min(minNum, num);
 //     }
 //
 //     console.log(minNum); // Output: 1
 //
 
 // using std::find;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // For arrays
-//     const l: number[] = [1, 2, 3, 3, 3, 3, 4, 5];
+//     const l = [1, 2, 3, 3, 3, 3, 4, 5];
 //
 //     console.log(l.indexOf(3));    // Output: 2
 //     console.log(l.indexOf(3, 4)); // Output: 4
 //
-//     // For tuples (arrays in TypeScript)
-//     const t: number[] = [1, 2, 3, 3, 3, 3, 4, 5];
+//     // For tuples (arrays in JavaScript)
+//     const t = [1, 2, 3, 3, 3, 3, 4, 5];
 //
 //     console.log(t.indexOf(3));    // Output: 2
 //     console.log(t.indexOf(3, 4)); // Output: 4
 //
 //     // For strings
-//     const s: string = "ABCCCCCD";
+//     const s = "ABCCCCCD";
 //
 //     console.log(s.indexOf("C"));    // Output: 2
 //     console.log(s.indexOf("C", 4)); // Output: 4
 //
 
 // using std::reverse;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 // REVERSE_ALL
-//     let a: number[] = [1, 2, 3, 4, 5];
+//     let a = [1, 2, 3, 4, 5];
 //     a.reverse();
 //     console.log(a);
 //
 //     a = [...a].reverse();
 //     console.log(a);
 //
-//     let t: number[] = [1, 2, 3, 4, 5];
+//     let t = [1, 2, 3, 4, 5];
 //     t = [...t].reverse();
 //     console.log(t);
 //
-//     let s: string = "ABC";
+//     let s = "ABC";
 //     s = s.split("").reverse().join("");
 //     console.log(s);
 //
 //     // REVERSE_PARTIAL
 //     a = [1, 2, 3, 4, 5];
-//     let sa: number[] = a.slice(1, 4);
+//     let sa = a.slice(1, 4);
 //     sa.reverse();
 //     console.log(sa);
 //
@@ -1190,123 +1190,125 @@
 //     console.log(sa);
 //
 //     t = [1, 2, 3, 4, 5];
-//     let st: number[] = t.slice(1, 4);
+//     let st = t.slice(1, 4);
 //     st = st.slice().reverse();
 //     console.log(st);
 //
 //     s = "ABCDEF";
-//     let ss: string = s.slice(1, 4).split("").reverse().join("");
+//     let ss = s.slice(1, 4).split("").reverse().join("");
 //     console.log(ss);
 //
+//
 // REVERSE_PARTIAL:
-//     let a: number[] = [1, 2, 3, 4, 5];
-//     let sa: number[] = a.slice(1, 4).reverse();
+//     let a = [1, 2, 3, 4, 5];
+//     let sa = a.slice(1, 4).reverse();
 //     console.log(sa);
 //
 //     sa = a.slice(1, 4).slice().reverse();
 //     console.log(sa);
 //
-//     let t: [number, number, number, number, number] = [1, 2, 3, 4, 5];
-//     let st: [number, number, number] = t.slice(1, 4).reverse() as [number, number, number];
+//     let t = [1, 2, 3, 4, 5];
+//     let st = t.slice(1, 4).reverse();
 //     console.log(st);
 //
-//     let s: string = "ABCDEF";
-//     let ss: string = s.slice(1, 4).split('').reverse().join('');
+//     let s = "ABCDEF";
+//     let ss = s.slice(1, 4).split('').reverse().join('');
 //     console.log(ss);
 //
 
 // using std::reduce;                          // Add / Concatenate together all elements of iterator range
 // using std::accumulate;                      // Add / Concatenate together all elements of iterator range
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Using reduce
-//     let l: number[] = [1, 2, 3, 4, 5];
-//     let sum: number = l.reduce((acc, num) => acc + num, 0);
+//     let l = [1, 2, 3, 4, 5];
+//     let sum = l.reduce((acc, num) => acc + num, 0);
 //     console.log(sum);  // Output: 15
 //
-//     let strList: string[] = ["A", "B", "C"];
-//     let concatenatedStr: string = strList.reduce((acc, str) => acc + str, "");
+//     let strList = ["A", "B", "C"];
+//     let concatenatedStr = strList.reduce((acc, str) => acc + str, "");
 //     console.log(concatenatedStr);  // Output: "ABC"
 //
 //     // Using accumulate (a custom implementation)
-//     function accumulate<T>(arr: T[], initialValue: T, callback: (acc: T, el: T) => T): T {
-//         let accumulator: T = initialValue;
+//     function accumulate(arr, initialValue, callback) {
+//         let accumulator = initialValue;
 //         for (const element of arr) {
 //             accumulator = callback(accumulator, element);
 //         }
 //         return accumulator;
 //     }
 //
-//     let sumWithAccumulate: number = accumulate(l, 0, (acc, num) => acc + num);
+//     let sumWithAccumulate = accumulate(l, 0, (acc, num) => acc + num);
 //     console.log(sumWithAccumulate);  // Output: 15
 //
-//     let strWithAccumulate: string = accumulate(strList, "", (acc, str) => acc + str);
+//     let strWithAccumulate = accumulate(strList, "", (acc, str) => acc + str);
 //     console.log(strWithAccumulate);  // Output: "ABC"
-//
 
 // using std::sort;                            // Intro-Sort (QuickSort => HeapSort when recursion depth exceeds certain level), NOT IN-PLACE & NOT STABLE
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Sort an array of numbers with a custom function
-//     let a: number[] = [5, 4, 3, 2, 1, 0];
+//     let a = [5, 4, 3, 2, 1, 0];
 //     a.sort((x, y) => myFunc(x, y)); // Replace myFunc with your custom comparison function
 //     console.log(a);
 //
 //     // Sort a list of lists of numbers
-//     let nestedList: number[][] = [[1, 3], [3, 5], [3, 3], [5, 3], [2, 2]];
+//     let nestedList = [[1, 3], [3, 5], [3, 3], [5, 3], [2, 2]];
 //     nestedList.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
 //     console.log(nestedList);
 //
 //     // Sort a tuple of numbers (not in-place)
-//     let t: number[] = [1, 2, 3, 4, 5];
-//     let sortedT: number[] = Array.from(t).sort((x, y) => myFunc(x, y)); // Replace myFunc with your custom comparison function
+//     let t = [1, 2, 3, 4, 5];
+//     let sortedT = Array.from(t).sort((x, y) => myFunc(x, y)); // Replace myFunc with your custom comparison function
 //     console.log(sortedT);
 //
 //     // Sort a string (not in-place)
-//     let s: string = "ABC";
-//     let sortedS: string = Array.from(s).sort((x, y) => x.localeCompare(y)).join("");
+//     let s = "ABC";
+//     let sortedS = Array.from(s).sort((x, y) => x.localeCompare(y)).join("");
 //     console.log(sortedS);
 //
 
 // using std::partial_sort;                    // HeapSort elements in range ( iterFirst, iterLast ) ( exclusively ). IN-PLACE & NOT STABLE
-// TYPESCRIPT_USAGE:
-//     // Partially sort elements in range [start, end) using TypeScript
-//     function partialSort<T>(arr: T[], start: number, end: number, compareFn?: (a: T, b: T) => number): void {
+// JAVASCRIPT_USAGE:
+//     // Partially sort elements in range [start, end) using JavaScript
+//     function partialSort(arr, start, end, compareFn) {
 //         const sortedSlice = arr.slice(start, end).sort(compareFn);
 //         arr.splice(start, sortedSlice.length, ...sortedSlice);
 //     }
 //
 //     // Example usage
-//     let a: number[] = [5, 4, 3, 2, 1, 0];
+//     let a = [5, 4, 3, 2, 1, 0];
 //     partialSort(a, 1, 4); // Sort elements at indices 1, 2, and 3 in-place
 //     console.log(a); // Output: [5, 1, 2, 3, 4, 0]
 //
-//
+
 // using std::stable_sort;                     // Merge-Sort elements. NOT IN-PLACE & STABLE
 //
 
 // using std::sort_heap;                       // HeapSort elements. IN-PLACE & NOT STABLE
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 // MIN_HEAP:
-//     class MinHeap<T> {
-//         private heap: T[] = [];
+//     class MinHeap {
+//         constructor() {
+//             this.heap = [];
+//         }
 //
-//         get length(): number {
+//         get length() {
 //             return this.heap.length;
 //         }
 //
-//         private less(i: number, j: number): boolean {
+//         less(i, j) {
 //             return this.heap[i] < this.heap[j];
 //         }
 //
-//         private swap(i: number, j: number): void {
+//         swap(i, j) {
 //             [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
 //         }
 //
-//         push(value: T): void {
+//         push(value) {
 //             this.heap.push(value);
 //             this.heapifyUp();
 //         }
 //
-//         pop(): T | undefined {
+//         pop() {
 //             const length = this.length;
 //             if (length === 0) {
 //                 return undefined;
@@ -1318,7 +1320,7 @@
 //             return poppedValue;
 //         }
 //
-//         private heapifyUp(): void {
+//         heapifyUp() {
 //             let current = this.length - 1;
 //             while (current > 0) {
 //                 const parent = Math.floor((current - 1) / 2);
@@ -1331,7 +1333,7 @@
 //             }
 //         }
 //
-//         private heapifyDown(): void {
+//         heapifyDown() {
 //             let current = 0;
 //             while (true) {
 //                 const leftChild = 2 * current + 1;
@@ -1357,8 +1359,8 @@
 //     }
 //
 //     // Example usage with a min-heap (number comparison)
-//     const nums: number[] = [3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4];
-//     const minHeap = new MinHeap<number>();
+//     const nums = [3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4];
+//     const minHeap = new MinHeap();
 //
 //     // add all the values to the heap
 //     for (const val of nums) {
@@ -1373,27 +1375,29 @@
 //
 //
 // MAX_HEAP:
-// class MaxHeap<T> {
-//     private heap: T[] = [];
+// class MaxHeap {
+//     constructor() {
+//         this.heap = [];
+//     }
 //
-//     get length(): number {
+//     get length() {
 //         return this.heap.length;
 //     }
 //
-//     private greater(i: number, j: number): boolean {
+//     greater(i, j) {
 //         return this.heap[i] > this.heap[j];
 //     }
 //
-//     private swap(i: number, j: number): void {
+//     swap(i, j) {
 //         [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
 //     }
 //
-//     push(value: T): void {
+//     push(value) {
 //         this.heap.push(value);
 //         this.heapifyUp();
 //     }
 //
-//     pop(): T | undefined {
+//     pop() {
 //         const length = this.length;
 //         if (length === 0) {
 //             return undefined;
@@ -1405,7 +1409,7 @@
 //         return poppedValue;
 //     }
 //
-//     private heapifyUp(): void {
+//     heapifyUp() {
 //         let current = this.length - 1;
 //         while (current > 0) {
 //             const parent = Math.floor((current - 1) / 2);
@@ -1418,7 +1422,7 @@
 //         }
 //     }
 //
-//     private heapifyDown(): void {
+//     heapifyDown() {
 //         let current = 0;
 //         while (true) {
 //             const leftChild = 2 * current + 1;
@@ -1444,8 +1448,8 @@
 // }
 //
 // // Example usage with a max-heap (number comparison)
-// const nums: number[] = [3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4];
-// const maxHeap = new MaxHeap<number>();
+// const nums = [3, 2, 20, 5, 3, 1, 2, 5, 6, 9, 10, 4];
+// const maxHeap = new MaxHeap();
 //
 // // add all the values to the heap
 // for (const val of nums) {
@@ -1460,9 +1464,9 @@
 //
 
 // using std::remove;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Example usage with an array
-//     let l: number[] = [1, 2, 3, 4, 5, 6];
+//     let l = [1, 2, 3, 4, 5, 6];
 //
 //     // Remove elements at index 1 and from index 4 to the end
 //     l.splice(1, 1, ...l.slice(4));
@@ -1477,7 +1481,7 @@
 //     l.splice(l.length - 1, 1);
 //
 //     // Example usage with an object
-//     let m: { [key: string]: number } = { key1: val1, key2: val2, key3: val3 };
+//     let m = { key1: val1, key2: val2, key3: val3 };
 //
 //     // Delete entries with key1 and key2
 //     delete m.key1;
@@ -1485,25 +1489,25 @@
 //
 
 // using std::swap;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Example usage with an array
-//     let l: number[] = [1, 2, 3, 4, 5, 6];
+//     let l = [1, 2, 3, 4, 5, 6];
 //
 //     // Swap elements at index 1 and 3
 //     [l[1], l[3]] = [l[3], l[1]];
 //
 //     // Example usage with an object
-//     let m: { [key: string]: number } = { key1: val1, key2: val2, key3: val3 };
+//     let m = { key1: val1, key2: val2, key3: val3 };
 //
 //     // Swap values associated with key1 and key3
 //     [m.key1, m.key3] = [m.key3, m.key1];
 //
 
 // using std::binary_search;
-// TYPESCRIPT_USAGE:
-//     const l1: number[] = [1, 2, 3, 3, 3, 3, 3, 5, 6];
+// JAVASCRIPT_USAGE:
+//     const l1 = [1, 2, 3, 3, 3, 3, 3, 5, 6];
 //
-//     const lb1: number = lowerBound(l1, 3);
+//     const lb1 = lowerBound(l1, 3);
 //
 //     if (lb1 < l1.length && l1[lb1] === 3) {
 //         console.log(lb1);  // output: 2
@@ -1511,9 +1515,9 @@
 //         console.log(l1.length);
 //     }
 //
-//     const l2: number[] = [6, 5, 3, 3, 3, 3, 3, 2, 1];
+//     const l2 = [6, 5, 3, 3, 3, 3, 3, 2, 1];
 //
-//     const ubDesc: number = upperBoundDescending(l2, 3);
+//     const ubDesc = upperBoundDescending(l2, 3);
 //
 //     if (ubDesc >= 1 && ubDesc < l2.length) {
 //         console.log(ubDesc - 1);  // output: 1
@@ -1522,7 +1526,7 @@
 //     }
 //
 //     // Binary Search functions
-//     function lowerBound(arr: number[], target: number): number {
+//     function lowerBound(arr, target) {
 //         let low = 0;
 //         let high = arr.length;
 //
@@ -1538,7 +1542,7 @@
 //         return low;
 //     }
 //
-//     function upperBoundDescending(arr: number[], target: number): number {
+//     function upperBoundDescending(arr, target) {
 //         let low = 0;
 //         let high = arr.length;
 //
@@ -1555,10 +1559,10 @@
 //     }
 //
 //
-// TYPESCRIPT_USAGE_SUBOPTIMAL:
-//     const l1: number[] = [1, 2, 3, 3, 3, 3, 3, 5, 6];
+// JAVASCRIPT_USAGE_SUBOPTIMAL:
+//     const l1 = [1, 2, 3, 3, 3, 3, 3, 5, 6];
 //
-//     const lb1: number = l1.findIndex((num) => num >= 3);
+//     const lb1 = l1.findIndex((num) => num >= 3);
 //
 //     if (lb1 !== -1 && l1[lb1] === 3) {
 //         console.log(lb1);  // output: 2
@@ -1566,9 +1570,9 @@
 //         console.log(l1.length);
 //     }
 //
-//     const l2: number[] = [6, 5, 3, 3, 3, 3, 3, 2, 1];
+//     const l2 = [6, 5, 3, 3, 3, 3, 3, 2, 1];
 //
-//     const ubDesc: number = l2.findIndex((num) => num <= 3);
+//     const ubDesc = l2.findIndex((num) => num <= 3);
 //
 //     if (ubDesc >= 1 && ubDesc < l2.length) {
 //         console.log(ubDesc - 1);  // output: 1
@@ -1577,25 +1581,25 @@
 //     }
 //
 //
-// TYPESCRIPT_TRICKS:
-//     const l: number[] = [1, 2, 3, 3, 3, 3, 3, 5, 6];
+// JAVASCRIPT_TRICKS:
+//     const l = [1, 2, 3, 3, 3, 3, 3, 5, 6];
 //
-//     const i1: number = binarySearchInts(l, 3);
+//     const i1 = binarySearchInts(l, 3);
 //     console.log(i1);  // output: 2
 //
-//     const i2: number = binarySearchInts(l, 4);
+//     const i2 = binarySearchInts(l, 4);
 //     console.log(i2);  // output: 7
 //
-//     const lFloat64s: number[] = [1.0, 2.0, 3.0, 3.0, 3.0, 3.0, 3.0, 5.0, 6.0];
-//     const i3: number = binarySearchFloat64s(lFloat64s, 4.0);
+//     const lFloat64s = [1.0, 2.0, 3.0, 3.0, 3.0, 3.0, 3.0, 5.0, 6.0];
+//     const i3 = binarySearchFloat64s(lFloat64s, 4.0);
 //     console.log(i3);
 //
-//     const lStrings: string[] = ["abcd", "efgh", "ijkl"];
-//     const i4: number = binarySearchStrings(lStrings, "abcd");
+//     const lStrings = ["abcd", "efgh", "ijkl"];
+//     const i4 = binarySearchStrings(lStrings, "abcd");
 //     console.log(i4);
 //
 //     // Binary Search functions
-//     function binarySearchInts(arr: number[], target: number): number {
+//     function binarySearchInts(arr, target) {
 //         let low = 0;
 //         let high = arr.length - 1;
 //
@@ -1615,12 +1619,12 @@
 //         return -1; // Element not found
 //     }
 //
-//     function binarySearchFloat64s(arr: number[], target: number): number {
+//     function binarySearchFloat64s(arr, target) {
 //         // Adjust as needed based on the actual requirements and data types
 //         return binarySearchInts(arr, target);
 //     }
 //
-//     function binarySearchStrings(arr: string[], target: string): number {
+//     function binarySearchStrings(arr, target) {
 //         let low = 0;
 //         let high = arr.length - 1;
 //
@@ -1643,37 +1647,37 @@
 
 // using std::next_permutation;
 // using std::prev_permutation;
-// TYPESCRIPT_USAGE:
-//     const l: number[] = [5, 4, 3, 2, 1, 0];
-//     const lStrings: string[] = ["F", "E", "E", "E", "D", "C", "B"];
+// JAVASCRIPT_USAGE:
+//     const l = [5, 4, 3, 2, 1, 0];
+//     const lStrings = ["F", "E", "E", "E", "D", "C", "B"];
 //
 //     // Permutations for arrays
-//     const permutationsL: number[][] = permutations(l);
+//     const permutationsL = permutations(l);
 //     permutationsL.forEach(p => console.log(p));
 //
-//     const permutationsLStrings: string[][] = permutations(lStrings);
+//     const permutationsLStrings = permutations(lStrings);
 //     permutationsLStrings.forEach(p => console.log(p));
 //
 //     // Permutations for tuples
-//     const t: number[] = [1, 2, 3, 3, 3, 3, 4, 5];
-//     const permutationsT: number[][] = permutations(t);
+//     const t = [1, 2, 3, 3, 3, 3, 4, 5];
+//     const permutationsT = permutations(t);
 //     permutationsT.forEach(p => console.log(p));
 //
 //     // Permutations for objects (dictionary)
-//     const d: Record<string, number> = { key1: 1, key2: 2, key3: 3 };
-//     const permutationsD: Record<string, number>[] = permutations(Object.entries(d));
+//     const d = { key1: 1, key2: 2, key3: 3 };
+//     const permutationsD = permutations(Object.entries(d));
 //     permutationsD.forEach(p => console.log(Object.fromEntries(p)));
 //
 //     // Permutations for strings
-//     const s: string = "abc";
-//     const permutationsS: string[][] = permutations(s.split(""));
+//     const s = "abc";
+//     const permutationsS = permutations(s.split(""));
 //     permutationsS.forEach(p => console.log(p.join("")));
 //
 //     // Permutations function
-//     function permutations<T>(arr: T[]): T[][] {
-//         const result: T[][] = [];
-//         const used: boolean[] = Array(arr.length).fill(false);
-//         const currentPermutation: T[] = [];
+//     function permutations(arr) {
+//         const result = [];
+//         const used = Array(arr.length).fill(false);
+//         const currentPermutation = [];
 //
 //         function backtrack() {
 //             if (currentPermutation.length === arr.length) {
@@ -1698,43 +1702,43 @@
 //         return result;
 //     }
 //
-//
+
 // using std::set_intersection;                // Only works on std::set and not std::unordered_set
-// TYPESCRIPT_USAGE:
-//     const s1: Set<number> = new Set([1, 2, 3, 4, 5, 6]);
-//     const s2: Set<number> = new Set([4, 5, 6, 7, 8, 9]);
+// JAVASCRIPT_USAGE:
+//     const s1 = new Set([1, 2, 3, 4, 5, 6]);
+//     const s2 = new Set([4, 5, 6, 7, 8, 9]);
 //
-//     const intersection: Set<number> = new Set([...s1].filter(value => s2.has(value)));
+//     const intersection = new Set([...s1].filter(value => s2.has(value)));
 //
 //     console.log(intersection);
 //
 //
 // using std::set_difference;                  // Only works on std::set and not std::unordered_set
-// TYPESCRIPT_USAGE:
-//     const s1: Set<number> = new Set([1, 2, 3, 4, 5, 6]);
-//     const s2: Set<number> = new Set([4, 5, 6, 7, 8, 9]);
+// JAVASCRIPT_USAGE:
+//     const s1 = new Set([1, 2, 3, 4, 5, 6]);
+//     const s2 = new Set([4, 5, 6, 7, 8, 9]);
 //
-//     const difference: Set<number> = new Set([...s1].filter(value => !s2.has(value)));
+//     const difference = new Set([...s1].filter(value => !s2.has(value)));
 //
 //     console.log(difference);
 //
 //
 // using std::set_union;
-// TYPESCRIPT_USAGE:
-//     const s1: Set<number> = new Set([1, 2, 3, 4, 5, 6]);
-//     const s2: Set<number> = new Set([4, 5, 6, 7, 8, 9]);
+// JAVASCRIPT_USAGE:
+//     const s1 = new Set([1, 2, 3, 4, 5, 6]);
+//     const s2 = new Set([4, 5, 6, 7, 8, 9]);
 //
-//     const unionSet: Set<number> = new Set([...s1, ...s2]);
+//     const unionSet = new Set([...s1, ...s2]);
 //
 //     console.log(unionSet);
 //
-
+//
 // using std::lower_bound;                     // Returns iter pointing to first element >= value
-// TYPESCRIPT_USAGE:
-//     const l: number[] = [1, 2, 3, 3, 3, 3, 3, 5, 6];
+// JAVASCRIPT_USAGE:
+//     const l = [1, 2, 3, 3, 3, 3, 3, 5, 6];
 //
 //     // lower_bound equivalent function
-//     function lowerBound(arr: number[], value: number): number {
+//     function lowerBound(arr, value) {
 //         let low = 0;
 //         let high = arr.length;
 //
@@ -1752,21 +1756,21 @@
 //     }
 //
 //     // Search for value >= 3
-//     const lb: number = lowerBound(l, 3);
+//     const lb = lowerBound(l, 3);
 //     console.log(lb < l.length ? lb : l.length); // Output: 2
 //
 //     // Search for value < 3 in descending order
-//     const lbDesc: number = lowerBound(l.reverse(), 3);
-//     const resultDesc: number = lbDesc >= 1 && lbDesc < l.length ? l.length - lbDesc - 1 : l.length;
+//     const lbDesc = lowerBound(l.slice().reverse(), 3);
+//     const resultDesc = lbDesc >= 1 && lbDesc < l.length ? l.length - lbDesc - 1 : l.length;
 //     console.log(resultDesc); // Output: 6
 //
 
 // using std::upper_bound;                     // Returns iter pointing to first element > value
-// TYPESCRIPT_USAGE:
-//     const l: number[] = [1, 2, 3, 3, 3, 3, 3, 5, 6];
+// JAVASCRIPT_USAGE:
+//     const l = [1, 2, 3, 3, 3, 3, 3, 5, 6];
 //
 //     // upper_bound equivalent function
-//     function upperBound(arr: number[], value: number): number {
+//     function upperBound(arr, value) {
 //         let low = 0;
 //         let high = arr.length;
 //
@@ -1784,12 +1788,12 @@
 //     }
 //
 //     // Search for value > 3
-//     const ub: number = upperBound(l, 3);
+//     const ub = upperBound(l, 3);
 //     console.log(ub < l.length ? ub : l.length); // Output: 6
 //
 //     // Search for value <= 3 in descending order
-//     const ubDesc: number = upperBound(l.reverse(), 3);
-//     const resultDesc: number = ubDesc >= 1 && ubDesc < l.length ? l.length - ubDesc - 1 : l.length;
+//     const ubDesc = upperBound(l.slice().reverse(), 3);
+//     const resultDesc = ubDesc >= 1 && ubDesc < l.length ? l.length - ubDesc - 1 : l.length;
 //     console.log(resultDesc); // Output: 1
 //
 
@@ -1806,244 +1810,244 @@
 
 // //----< cctype >----------------------------//
 // using std::isalnum;
-// TYPESCRIPT_USAGE:
-//     const c1: string = 'b';
+// JAVASCRIPT_USAGE:
+//     const c1 = 'b';
 //     console.log(isLetterOrDigit(c1)); // Output: true
 //
-//     const c2: string = 'c';
+//     const c2 = 'c';
 //     console.log(isLetterOrDigit(c2)); // Output: true
 //
-//     const c3: string = 'A';
+//     const c3 = 'A';
 //     console.log(isLetterOrDigit(c3)); // Output: true
 //
-//     const c4: string = 'B';
+//     const c4 = 'B';
 //     console.log(isLetterOrDigit(c4)); // Output: true
 //
-//     const c5: string = '1';
+//     const c5 = '1';
 //     console.log(isLetterOrDigit(c5)); // Output: false
 //
-//     const c6: string = '2';
+//     const c6 = '2';
 //     console.log(isLetterOrDigit(c6)); // Output: false
 //
-//     const c7: string = '!';
+//     const c7 = '!';
 //     console.log(isLetterOrDigit(c7)); // Output: false
 //
-//     const c8: string = '?';
+//     const c8 = '?';
 //     console.log(isLetterOrDigit(c8)); // Output: false
 //
 //     // Function to check if a character is a letter or a digit
-//     function isLetterOrDigit(c: string): boolean {
+//     function isLetterOrDigit(c) {
 //         return isLetter(c) || isDigit(c);
 //     }
 //
 //     // Function to check if a character is a letter or a digit
-//     function isLetterOrDigit(c: string): boolean {
+//     function isLetterOrDigit(c) {
 //         return /[a-zA-Z0-9]/.test(c);
 //     }
 //
 //     // Function to check if a character is a letter
-//     function isLetter(c: string): boolean {
+//     function isLetter(c) {
 //         return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 //     }
 //
 //     // Function to check if a character is a digit
-//     function isDigit(c: string): boolean {
+//     function isDigit(c) {
 //         return c >= '0' && c <= '9';
 //     }
 //
 
 // using std::isalpha;
-// TYPESCRIPT_USAGE:
-//     const c1: string = 'b';
+// JAVASCRIPT_USAGE:
+//     const c1 = 'b';
 //     console.log(isLetter(c1)); // Output: true
 //
-//     const c2: string = 'c';
+//     const c2 = 'c';
 //     console.log(isLetter(c2)); // Output: true
 //
-//     const c3: string = 'A';
+//     const c3 = 'A';
 //     console.log(isLetter(c3)); // Output: true
 //
-//     const c4: string = 'B';
+//     const c4 = 'B';
 //     console.log(isLetter(c4)); // Output: true
 //
-//     const c5: string = '1';
+//     const c5 = '1';
 //     console.log(isLetter(c5)); // Output: false
 //
-//     const c6: string = '2';
+//     const c6 = '2';
 //     console.log(isLetter(c6)); // Output: false
 //
-//     const c7: string = '!';
+//     const c7 = '!';
 //     console.log(isLetter(c7)); // Output: false
 //
-//     const c8: string = '?';
+//     const c8 = '?';
 //     console.log(isLetter(c8)); // Output: false
 //
 //     // Function to check if a character is a letter
-//     function isLetter(c: string): boolean {
+//     function isLetter(c) {
 //         return /[a-zA-Z]/.test(c);
 //     }
 //
-//     // Function to check if a character is a letter
-//     function isLetter(c: string): boolean {
+//     // Function to check if a character is a letter (case-insensitive)
+//     function isLetter(c) {
 //         const lowercaseC = c.toLowerCase();
 //         return lowercaseC >= 'a' && lowercaseC <= 'z';
 //     }
 //
 
 // using std::islower;
-// TYPESCRIPT_USAGE:
-//     const c1: string = 'b';
+// JAVASCRIPT_USAGE:
+//     const c1 = 'b';
 //     console.log(isLower(c1)); // Output: true
 //
-//     const c2: string = 'c';
+//     const c2 = 'c';
 //     console.log(isLower(c2)); // Output: true
 //
-//     const c3: string = 'A';
+//     const c3 = 'A';
 //     console.log(isLower(c3)); // Output: false
 //
-//     const c4: string = 'B';
+//     const c4 = 'B';
 //     console.log(isLower(c4)); // Output: false
 //
-//     const c5: string = '1';
+//     const c5 = '1';
 //     console.log(isLower(c5)); // Output: false
 //
-//     const c6: string = '2';
+//     const c6 = '2';
 //     console.log(isLower(c6)); // Output: false
 //
-//     const c7: string = '!';
+//     const c7 = '!';
 //     console.log(isLower(c7)); // Output: false
 //
-//     const c8: string = '?';
+//     const c8 = '?';
 //     console.log(isLower(c8)); // Output: false
 //
 //     // Function to check if a character is lowercase
-//     function isLower(c: string): boolean {
+//     function isLower(c) {
 //         return /[a-z]/.test(c);
 //     }
 //
 //     // Function to check if a character is lowercase
-//     function isLower(c: string): boolean {
+//     function isLower(c) {
 //         return c >= 'a' && c <= 'z';
 //     }
 //
 
 // using std::isupper;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Function to check if a character is uppercase
-//     function isUpper(c: string): boolean {
+//     function isUpper(c) {
 //         return c >= 'A' && c <= 'Z';
 //     }
 //
-//     // TypeScript Usage:
-//     const c1: string = 'A';
+//     // JavaScript Usage:
+//     const c1 = 'A';
 //     console.log(isUpper(c1)); // Output: true
 //
-//     const c2: string = 'b';
+//     const c2 = 'b';
 //     console.log(isUpper(c2)); // Output: false
 //
-//     const c3: string = '1';
+//     const c3 = '1';
 //     console.log(isUpper(c3)); // Output: false
 //
-//     const c4: string = '!';
+//     const c4 = '!';
 //     console.log(isUpper(c4)); // Output: false
 //
-//     const c5: string = '?';
+//     const c5 = '?';
 //     console.log(isUpper(c5)); // Output: false
 //
 
 // using std::isdigit;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Function to check if a character is a digit
-//     function isDigit(c: string): boolean {
+//     function isDigit(c) {
 //         return c >= '0' && c <= '9';
 //     }
 //
 //     // Function to check if a character is a number
-//     function isNumber(c: string): boolean {
+//     function isNumber(c) {
 //         return !isNaN(Number(c));
 //     }
 //
-//     // TypeScript Usage:
-//     const c1: string = '1';
+//     // JavaScript Usage:
+//     const c1 = '1';
 //     console.log(isDigit(c1));   // Output: true
 //     console.log(isNumber(c1));  // Output: true
 //
-//     const c2: string = 'a';
+//     const c2 = 'a';
 //     console.log(isDigit(c2));   // Output: false
 //     console.log(isNumber(c2));  // Output: false
 //
-//     const c3: string = '2';
+//     const c3 = '2';
 //     console.log(isDigit(c3));   // Output: true
 //     console.log(isNumber(c3));  // Output: true
 //
-//     const c4: string = 'b';
+//     const c4 = 'b';
 //     console.log(isDigit(c4));   // Output: false
 //     console.log(isNumber(c4));  // Output: false
 //
 
 // using std::isspace;                         // Check whether char is whitespace character (space, newline, tab, etc. )
 // using std::isblank;                         // Check whether char is blank character ( space or tab )
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Function to check whether a character is a whitespace character (space, newline, tab, etc.)
-//     function isSpace(c: string): boolean {
+//     function isSpace(c) {
 //         return /\s/.test(c);
 //     }
 //
 //     // Function to check whether a character is a blank character (space or tab)
-//     function isBlank(c: string): boolean {
+//     function isBlank(c) {
 //         return /\s/.test(c) && !/\S/.test(c);
 //     }
 //
-//     // TypeScript Usage:
-//     const c1: string = ' ';
+//     // JavaScript Usage:
+//     const c1 = ' ';
 //     console.log(isSpace(c1));  // Output: true
 //     console.log(isSpace(' '));  // Output: true
 //
-//     const c2: string = 'd';
+//     const c2 = 'd';
 //     console.log(isSpace(c2));  // Output: false
 //     console.log(isSpace('d'));  // Output: false
 //
-//     const c3: string = '\t';
+//     const c3 = '\t';
 //     console.log(isBlank(c3));  // Output: true (tab is considered a blank character)
 //
-//     const c4: string = 'A';
+//     const c4 = 'A';
 //     console.log(isBlank(c4));  // Output: false
 //
 
 // using std::tolower;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Function to convert a character to lowercase
-//     function toLower(c: string): string {
+//     function toLower(c) {
 //         return c.toLowerCase();
 //     }
 //
 //     // Function to convert a string to lowercase
-//     function toLowerCase(s: string): string {
+//     function toLowerCase(s) {
 //         return s.toLowerCase();
 //     }
 //
-//     // TypeScript Usage:
-//     const c1: string = 'A';
+//     // JavaScript Usage:
+//     const c1 = 'A';
 //     console.log(toLower(c1));  // Output: a
 //     console.log(toLower('B'));  // Output: b
 //
-//     const s: string = "GOPher#$#@";
+//     const s = "GOPher#$#@";
 //     console.log(toLowerCase(s));  // Output: "gopherr#$#@"
 //
 
 // using std::toupper;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Function to convert a character to uppercase
-//     function toUpper(c: string): string {
+//     function toUpper(c) {
 //         return c.toUpperCase();
 //     }
 //
 //     // Function to convert a string to uppercase
-//     function toUpperString(s: string): string {
+//     function toUpperString(s) {
 //         return s.toUpperCase();
 //     }
 //
-//     // TypeScript Usage:
+//     // JavaScript Usage:
 //     const charA = 'a';
 //     console.log(toUpper(charA));  // Output: A
 //
@@ -2062,7 +2066,7 @@
 // //----< limits >----------------------------//
 // using std::numeric_limits;                  // ::lowest() & ::max() for smallest & biggest representable value, respectively
 //                                             // ::infinity() only works for `double` / `float` / 'long double'. ::has_infinity() == false for ALL other types.
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     console.log(Number.MIN_SAFE_INTEGER);  // Smallest representable integer value
 //     console.log(Number.MAX_SAFE_INTEGER);  // Largest representable integer value
 //     console.log(Number.NEGATIVE_INFINITY);  // Negative (float) infinity
@@ -2086,9 +2090,9 @@
 // //----< future >----------------------------//
 // using std::future;
 // using std::async;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     class Solution {
-//         printNumber(num: number): Promise<number> {
+//         printNumber(num) {
 //             return new Promise((resolve) => {
 //                 let count = 0;
 //
@@ -2135,22 +2139,24 @@
 // using std::lock_guard;                      // strictly scope-based mutex ownership wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION 
 // using std::scoped_lock;                     // deadlock-avoiding RAII wrapper. LOCK ON CONSTRUCTION & UNLOCK ON DESTRUCTION
 // using std::unique_lock;                     // movable mutex ownership wrapper. CAN BE LOCKED & UNLOCKED
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     class Solution {
-//         private isMutexLocked: boolean = false;
+//         constructor() {
+//             this.isMutexLocked = false;
+//         }
 //
-//         private async acquireMutex(): Promise<void> {
+//         async acquireMutex() {
 //             while (this.isMutexLocked) {
 //                 await new Promise(resolve => setTimeout(resolve, 10));
 //             }
 //             this.isMutexLocked = true;
 //         }
 //
-//         private releaseMutex(): void {
+//         releaseMutex() {
 //             this.isMutexLocked = false;
 //         }
 //
-//         private async printNumbers(n: number, result: number[]): Promise<void> {
+//         async printNumbers(n, result) {
 //             await this.acquireMutex();
 //             try {
 //                 for (let i = 1; i <= n; i++) {
@@ -2163,10 +2169,10 @@
 //             }
 //         }
 //
-//         async runThreads(): Promise<void> {
+//         async runThreads() {
 //             const numThreads = 4;
-//             const threads: Promise<void>[] = [];
-//             const results: number[][] = [];
+//             const threads = [];
+//             const results = [];
 //
 //             for (let i = 0; i < numThreads; i++) {
 //                 results[i] = [];
@@ -2187,13 +2193,15 @@
 
 // //----< shared_mutex >----------------------//
 // using std::shared_mutex;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     class SafeCounter {
-//         private count: number = 0;
-//         private lock: boolean = false;
+//         constructor() {
+//             this.count = 0;
+//             this.lock = false;
+//         }
 //
 //         // Increment the counter safely
-//         Inc(): void {
+//         Inc() {
 //             while (this.lock) {
 //                 // Wait for the lock to be released
 //             }
@@ -2204,7 +2212,7 @@
 //         }
 //
 //         // Get the current counter value safely
-//         Value(): number {
+//         Value() {
 //             while (this.lock) {
 //                 // Wait for the lock to be released
 //             }
@@ -2217,11 +2225,11 @@
 //     }
 //
 //     // Function to simulate multiple threads incrementing the counter
-//     function simulateThreads(counter: SafeCounter): Promise<void> {
-//         const threads: Promise<void>[] = [];
+//     function simulateThreads(counter) {
+//         const threads = [];
 //
 //         for (let i = 0; i < 10; i++) {
-//             const thread = new Promise<void>((resolve) => {
+//             const thread = new Promise((resolve) => {
 //                 for (let _ = 0; _ < 100; _++) {
 //                     counter.Inc();
 //                 }
@@ -2247,17 +2255,19 @@
 
 // //----< condition_variable >----------------//
 // using std::condition_variable;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     class ConditionVariable {
-//         private listeners: (() => void)[] = [];
+//         constructor() {
+//             this.listeners = [];
+//         }
 //
-//         async wait(): Promise<void> {
-//             return new Promise<void>((resolve) => {
+//         async wait() {
+//             return new Promise((resolve) => {
 //                 this.listeners.push(resolve);
 //             });
 //         }
 //
-//         signal(): void {
+//         signal() {
 //             const listener = this.listeners.shift();
 //             if (listener) {
 //                 listener();
@@ -2266,10 +2276,12 @@
 //     }
 //
 //     class SyncMutex {
-//         private locked: boolean = false;
+//         constructor() {
+//             this.locked = false;
+//         }
 //
-//         async lock(): Promise<void> {
-//             return new Promise<void>((resolve) => {
+//         async lock() {
+//             return new Promise((resolve) => {
 //                 const acquireLock = () => {
 //                     if (!this.locked) {
 //                         this.locked = true;
@@ -2283,31 +2295,28 @@
 //             });
 //         }
 //
-//         unlock(): void {
+//         unlock() {
 //             this.locked = false;
 //         }
 //     }
 //
 //     class SyncCond {
-//         private mutex: SyncMutex;
-//         private condition: ConditionVariable;
-//
-//         constructor(mutex: SyncMutex) {
+//         constructor(mutex) {
 //             this.mutex = mutex;
 //             this.condition = new ConditionVariable();
 //         }
 //
-//         async wait(): Promise<void> {
+//         async wait() {
 //             await this.condition.wait();
 //             this.mutex.unlock();
 //         }
 //
-//         signal(): void {
+//         signal() {
 //             this.condition.signal();
 //         }
 //     }
 //
-//     const data: number[] = [];
+//     const data = [];
 //     const mutex = new SyncMutex();
 //     const cond = new SyncCond(mutex);
 //
@@ -2339,6 +2348,7 @@
 //
 //         // Ensure that producer and consumer have completed before exiting
 //         await Promise.all([producer(), consumer()]);
+//     }
 //
 //         // OUTPUT: Producer produced: 0
 //         //         Consumer consumed: 0
@@ -2355,15 +2365,14 @@
 //     main();
 //
 
-// TYPESCRIPT_USAGE_SEMAPHORE:
+// JAVASCRIPT_USAGE_SEMAPHORE:
 //     class Semaphore {
-//         private count: number;
-//
-//         constructor(private maxCount: number) {
+//         constructor(maxCount) {
+//             this.maxCount = maxCount;
 //             this.count = maxCount;
 //         }
 //
-//         acquire(): Promise<void> {
+//         acquire() {
 //             return new Promise((resolve) => {
 //                 const wait = () => {
 //                     if (this.count > 0) {
@@ -2377,19 +2386,22 @@
 //             });
 //         }
 //
-//         release(): void {
+//         release() {
 //             this.count++;
 //         }
 //     }
 //
 //     class Thread {
-//         constructor(private target: Function, private args: any[]) {}
+//         constructor(target, args) {
+//             this.target = target;
+//             this.args = args;
+//         }
 //
-//         start(): void {
+//         start() {
 //             this.target(...this.args);
 //         }
 //
-//         join(): Promise<void> {
+//         join() {
 //             return new Promise((resolve) => {
 //                 setTimeout(() => {
 //                     resolve();
@@ -2399,9 +2411,9 @@
 //     }
 //
 //     const sem = new Semaphore(2);
-//     const threads: Thread[] = [];
+//     const threads = [];
 //
-//     async function worker(i: number): Promise<void> {
+//     async function worker(i) {
 //         await sem.acquire();
 //         console.log(`Worker ${i} started`);
 //         // do some work
@@ -2415,12 +2427,8 @@
 //         t.start();
 //     }
 //
-//     async function runThreads(): Promise<void> {
-//         await Promise.all(threads.map((t) => t.join()));
-//     }
-//
-//     // Run the threads
-//     runThreads();
+//     async function runThreads() {
+//         await Promise.all(threads.ma
 //
 
 // //----< chrono >----------------------------//
@@ -2438,19 +2446,19 @@
 //
 
 // //----< curlpp/*.hpp >----------------------//
-// TYPESCRIPT_USAGE:
-// TYPESCRIPT_USAGE_FRONTEND:
+// JAVASCRIPT_USAGE:
+// JAVASCRIPT_USAGE_FRONTEND:
 //     // HTTP GET
 //     const getUrl = 'https://www.example.com';
 //
 //     fetch(getUrl)
-//     .then((response) => response.text())
-//     .then((data) => {
-//         console.log(data);
-//     })
-//     .catch((error) => {
-//         console.error('Error:', error);
-//     });
+//         .then((response) => response.text())
+//         .then((data) => {
+//             console.log(data);
+//         })
+//         .catch((error) => {
+//             console.error('Error:', error);
+//         });
 //
 //     // HTTP POST
 //     const postUrl = 'http://www.example.com';
@@ -2476,13 +2484,12 @@
 //     });
 //
 //
-// TYPESCRIPT_USAGE_BACKEND:
-//     import * as https from 'https';
-//     import * as http from 'http';
+// JAVASCRIPT_USAGE_BACKEND:
+//     // HTTP GET (Node.js backend)
+//     const https = require('https');
 //
-//     // HTTP GET
-//     const getUrl = 'https://www.example.com';
-//     https.get(getUrl, (resp) => {
+//     const getUrlNode = 'https://www.example.com';
+//     https.get(getUrlNode, (resp) => {
 //         let data = '';
 //
 //         // A chunk of data has been received.
@@ -2499,15 +2506,12 @@
 //         console.log(`Error: ${err.message}`);
 //     });
 //
-//     // HTTP POST
-//     const jsonData = JSON.stringify({
-//         key1: 'value1',
-//         key2: 'value2'
-//     });
+//     // HTTP POST (Node.js backend)
+//     const http = require('http');
 //
-//     const postUrl = 'http://www.example.com';
+//     const postUrlNode = 'http://www.example.com';
 //
-//     const options: http.RequestOptions = {
+//     const options = {
 //         method: 'POST',
 //         headers: {
 //             'Content-Type': 'application/json',
@@ -2515,7 +2519,7 @@
 //         }
 //     };
 //
-//     const req = http.request(postUrl, options, (resp) => {
+//     const req = http.request(postUrlNode, options, (resp) => {
 //         let data = '';
 //
 //         // A chunk of data has been received.
