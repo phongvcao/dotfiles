@@ -1016,11 +1016,13 @@
 //
 
 // using std::next;                            // Return an advanced iter without changing original iter
-// PYTHON_USAGE:
-//     iterable: Tuple[ int ] = tuple( [ 1, 2, 3, 4 ] )
-//     it = iter( iterable )
-//     for item in it:
-//         print( item )
+// TYPESCRIPT_USAGE:
+//     const iterable: number[] = [1, 2, 3, 4];
+//     const it: IterableIterator<number> = iterable[Symbol.iterator]();
+//
+//     for (const item of it) {
+//         console.log(item);
+//     }
 //
 //
 // [ UNSUPPORTED_IN_PYTHON ] using std::prev;                            // Return an decremented iter without changing original iter
@@ -1032,15 +1034,19 @@
 // using std::pair;
 // using std::make_pair;
 // using std::move;                            // Move resources between objects - typically used with std::unique_ptr<T>
-// PYTHON_USAGE:
-//     t : Tuple[ str, int ] = ( "ABC", 1 )
-//     t : Tuple[ int, ... ] = ( 1, 2, 3 )
-//     t : Tuple[ int ] = ( 1 )
-//     t : Tuple[ str, ... ] = ( "A", "B", "C" )
-//     t : Tuple[ str ] = ( "A" )
-//     t : Tuple[ str, int ] = tuple( [ "ABC", 1 ] )
-//     if t[ 0 ] == "ABC":
-//         print( t[ 1 ] )
+// TYPESCRIPT_USAGE:
+//     type Tuple<T extends any[]> = [...T];
+//
+//     const t1: Tuple<[string, number]> = ["ABC", 1];
+//     const t2: Tuple<number[]> = [1, 2, 3];
+//     const t3: Tuple<[number]> = [1];
+//     const t4: Tuple<string[]> = ["A", "B", "C"];
+//     const t5: Tuple<[string]> = ["A"];
+//     const t6: Tuple<[string, number]> = ["ABC", 1];
+//
+//     if (t6[0] === "ABC") {
+//         console.log(t6[1]);
+//     }
 //
 
 // //----< optional >--------------------------//

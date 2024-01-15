@@ -32,7 +32,7 @@
 //
 
 // using std::to_string;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     console.log((15).toString(16));  // output: 'f'
 //
 //     console.log((15).toString(2));   // output: '1111'
@@ -49,7 +49,7 @@
 // using std::atoi;                            // DEPRECATED: Preferred stoi() over atoi() since stoi() allows conversion from binary & hex strings to int.
 // using std::atol;                            // DEPRECATED: Preferred stol() over atol() since stoi() allows conversion from binary & hex strings to int.
 // using std::atoll;                           // DEPRECATED: Preferred stoll() over atoll() since stoi() allows conversion from binary & hex strings to int.
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Output: 123
 //     console.log(parseInt("123"));
 //
@@ -72,9 +72,9 @@
 //     i = parseInt("ABC", 16);
 //     console.log(i);
 //
-// TYPESCRIPT_TRICKS:
+// JAVASCRIPT_TRICKS:
 //     // Creating an array of runes (Unicode characters)
-//     let lc: string[] = new Array(26);
+//     let lc = new Array(26);
 //
 //     for (let i = 0; i < 26; i++) {
 //         lc[i] = String.fromCharCode('a'.charCodeAt(0) + i);
@@ -85,7 +85,7 @@
 //     }
 //
 //     // Creating an array of ints and counting occurrences
-//     let li: number[] = new Array(26).fill(0);
+//     let li = new Array(26).fill(0);
 //
 //     for (let c of lc) {
 //         li[c.charCodeAt(0) - 'a'.charCodeAt(0)] += 1;
@@ -98,10 +98,7 @@
 // using json = nlohmann::json;
 // TYPESCRIPT_USAGE:
 //     class Person {
-//         name: string;
-//         age: number;
-//
-//         constructor(name: string, age: number) {
+//         constructor(name, age) {
 //             this.name = name;
 //             this.age = age;
 //         }
@@ -113,7 +110,7 @@
 //     console.log(personJSON);
 //
 //     // Decoding JSON string into class instance
-//     const decodedPerson: Person = JSON.parse(personJSON);
+//     const decodedPerson = JSON.parse(personJSON);
 //     console.log(`Name: ${decodedPerson.name}, Age: ${decodedPerson.age}`);
 //
 
@@ -137,8 +134,8 @@
 //        retrieve or modify data.
 //     5. Closing the database connection when it is no longer needed.
 //
-// TYPESCRIPT_USAGE:
-//     import mysql from 'mysql2/promise';
+// JAVASCRIPT_USAGE:
+//     const mysql = require('mysql2/promise');
 //
 //     async function executeQueries() {
 //         // Creating a MySQL connection pool
@@ -193,12 +190,12 @@
 
 // //----< cmath >-----------------------------//
 // using std::sqrt;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     console.log(Math.sqrt(9));  // output: 3
 //
 
 // using std::pow;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Square root
 //     console.log(Math.sqrt(9));  // output: 3
 //
@@ -216,7 +213,7 @@
 // using std::div;
 // using std::ldiv;
 // using std::lldiv;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     const { quo, rem } = bitsDiv(0, 7, 3);
 //     console.log(`quo: ${quo} ; rem: ${rem}`);  // output: 2, 1
 //
@@ -227,19 +224,19 @@
 //     console.log(`quo: ${quo64} ; rem: ${rem64}`);  // output: 2, 1
 //
 //     // Function definitions
-//     function bitsDiv(a: number, b: number, c: number): { quo: number; rem: number } {
+//     function bitsDiv(a, b, c) {
 //         const quo = Math.floor(a / c);
 //         const rem = a % c;
 //         return { quo, rem };
 //     }
 //
-//     function bitsDiv32(a: number, b: number, c: number): { quo: number; rem: number } {
+//     function bitsDiv32(a, b, c) {
 //         const quo = Math.floor(a / c);
 //         const rem = a % c;
 //         return { quo, rem };
 //     }
 //
-//     function bitsDiv64(a: number, b: number, c: number): { quo: number; rem: number } {
+//     function bitsDiv64(a, b, c) {
 //         const quo = Math.floor(a / c);
 //         const rem = a % c;
 //         return { quo, rem };
@@ -247,7 +244,7 @@
 //
 
 // using std::log;                             // log( <arg> )
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     console.log(Math.log(10));
 //     console.log(Math.log2(10));
 //     console.log(Math.log10(10));
@@ -257,7 +254,7 @@
 //
 // using std::abs;
 // using std::fabs;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     console.log(Math.abs(6));
 //     console.log(Math.abs(6.0));
 //     console.log(Math.abs(-6));
@@ -288,20 +285,20 @@
 
 // //----< array >-----------------------------//
 // using std::array;                           // Fixed & Unordered Array
-// TYPESCRIPT_USAGE:
-//     let l: number[] = [];
+// JAVASCRIPT_USAGE:
+//     let l = [];
 //     console.log(l);
 //
-//     let l1: number[] = [1, 1, 1, 1, 1];
+//     let l1 = [1, 1, 1, 1, 1];
 //     console.log(l1);
 //
-//     let l2: number[] = new Array<number>();
+//     let l2 = new Array();
 //     console.log(l2);
 //
-//     let l3: number[] = new Array<number>(0, 5);
+//     let l3 = new Array(0, 5);
 //     console.log(l3);
 //
-//     let l4: number[] = new Array<number>(10);
+//     let l4 = new Array(10);
 //     for (let i = 0; i < 10; i++) {
 //         l4[i] = i;
 //     }
@@ -310,20 +307,20 @@
 
 // //----< vector >----------------------------//
 // using std::vector;
-// TYPESCRIPT_USAGE:
-//     let l: number[] = [];
+// JAVASCRIPT_USAGE:
+//     let l = [];
 //     console.log(l);
 //
-//     let l1: number[] = [1, 1, 1, 1, 1];
+//     let l1 = [1, 1, 1, 1, 1];
 //     console.log(l1);
 //
-//     let l2: number[] = new Array<number>();
+//     let l2 = new Array();
 //     console.log(l2);
 //
-//     let l3: number[] = new Array<number>(0, 5);
+//     let l3 = new Array(0, 5);
 //     console.log(l3);
 //
-//     let l4: number[] = new Array<number>(10).fill(0).map((_, i) => i);
+//     let l4 = new Array(10).fill(0).map((_, i) => i);
 //     console.log(l4);
 //
 
@@ -331,26 +328,26 @@
 // using std::list;                            // Doubly-Linked List with size() ( O( 1 ) )
 // //----< forward_list >----------------------//
 // using std::forward_list;                    // Singly-Linked List without size() function ( so O( N ) if we need to get size() )
-// TYPESCRIPT_TRICKS:
-//     let dq: string[] = [];
-//     let dq1: string[] = new Array<string>(0);
-//     let dq2: string[] = [];
-//     let dq3: string[] = new Array<string>(0);
+// JAVASCRIPT_TRICKS:
+//     let dq = [];
+//     let dq1 = new Array(0);
+//     let dq2 = [];
+//     let dq3 = new Array(0);
 //
-//     let dq4: string[] = ['A', 'B', 'C', 'D'];
+//     let dq4 = ['A', 'B', 'C', 'D'];
 //
 //     // Push to the back
 //     dq4.push('A');
 //     dq4.push('B');
 //
 //     // Get back element
-//     let b: string | undefined = dq4[dq4.length - 1];
+//     let b = dq4[dq4.length - 1];
 //
 //     // Remove from the back
 //     dq4.pop();
 //
 //     // Get front element
-//     let f: string | undefined = dq4[0];
+//     let f = dq4[0];
 //
 //     // Remove from front - O(1)
 //     dq4.shift();
@@ -358,13 +355,13 @@
 
 // //----< map >-------------------------------//
 // using std::map;                             // Ordered Map (Red-Black Tree)
-// TYPESCRIPT_USAGE:
-//     const dic_keys: string[] = ["key1", "key2", "key3"];
-//     const d: { [key: string]: number[] } = Object.fromEntries(dic_keys.map((key) => [key, []]));
+// JAVASCRIPT_USAGE:
+//     const dic_keys = ["key1", "key2", "key3"];
+//     const d = Object.fromEntries(dic_keys.map((key) => [key, []]));
 //
-//     const ds: [string, number][] = Object.entries(d).sort();
-//     const sortedD: { [key: string]: number[] } = Object.fromEntries(Object.entries(d).sort());
-//     const od: { [key: string]: number[] } = Object.fromEntries(Object.entries(d).sort());
+//     const ds = Object.entries(d).sort();
+//     const sortedD = Object.fromEntries(Object.entries(d).sort());
+//     const od = Object.fromEntries(Object.entries(d).sort());
 //
 //     // val1 = d.get(key1);
 //     const key1 = "key1";
@@ -389,47 +386,45 @@
 //         console.log(od[key1]);
 //     }
 //
+
 // using std::multimap;                        // Ordered Map (Red-Black Tree) & Allow duplicated keys
-// TYPESCRIPT_USAGE:
-//     const d = new Map<string, number[]>();
+// JAVASCRIPT_USAGE:
+//     const d = new Map();
 //
 //     // Add values to the map
 //     d.set("key1", [1, 2, 3]);
 //     d.set("key2", [4, 5]);
 //     d.set("key3", [6, 7, 8]);
 //
-//     // Convert map items to sorted list of tuples
-//     const ds: [string, number[]][] = Array.from(d.entries()).sort();
+//     // Convert map items to a sorted list of tuples
+//     const ds = Array.from(d.entries()).sort();
 //
 //     console.log(ds);
 //
 //
 // //----< unordered_map >---------------------//
 // using std::unordered_map;                   // HashMap (SeparateChainingHashST)
-// TYPESCRIPT_USAGE:
-//     const d: Record<string, number> = { key: val };
+// JAVASCRIPT_USAGE:
+//     const d = { key: val };
 //
 //
 // using std::unordered_multimap;              // Ordered Map (Red-Black Tree) & Allow duplicated keys
-// TYPESCRIPT_USAGE:
-//     const d: Record<string, number[]> = { key: [val1, val2] };
+// JAVASCRIPT_USAGE:
+//     const d = { key: [val1, val2] };
 //
 
 // //----< set >-------------------------------//
 // using std::set;                             // Ordered Set (Red-Black Tree)
-// TYPESCRIPT_USAGE:
-//     let s: Record<number, boolean> = {};
+// JAVASCRIPT_USAGE:
+//     let s = {};
 //     // or
-//     let s: Record<number, boolean> = Object.create(null);
-//
-//     // or with an initial capacity (not a direct equivalent)
-//     let s: Record<number, boolean> = {};
+//     // let s = Object.create(null);
 //
 //     s[0] = true;
 //     s[1] = true;
 //     s[4] = true;
 //
-//     const keys: number[] = Object.keys(s).map(Number);
+//     const keys = Object.keys(s).map(Number);
 //
 //     keys.sort((a, b) => a - b);
 //
@@ -449,17 +444,17 @@
 //
 //
 // using std::multiset;                        // Ordered Set (Red-Black Tree) & Allow duplicated keys
-// TYPESCRIPT_USAGE:
-//     const d: Record<string, number> = { key1: count1, key2: count2 };
+// JAVASCRIPT_USAGE:
+//     const d = { key1: count1, key2: count2 };
 //
-//     const ds: [string, number][] = Object.entries(d).sort(([a], [b]) => a.localeCompare(b));
+//     const ds = Object.entries(d).sort(([a], [b]) => a.localeCompare(b));
 //
-//     const dsDict: Record<string, number> = Object.fromEntries(ds);
+//     const dsDict = Object.fromEntries(ds);
 //
 //     // Assuming you have an OrderedDict implementation, if not, use a Map for ordered behavior
-//     // const dsOrderedDict: Map<string, number> = new Map(ds);
+//     // const dsOrderedDict = new Map(ds);
 //
-//     const s = new Set<number>();
+//     const s = new Set();
 //
 //     s.add(5);
 //     s.add(4);
@@ -475,18 +470,19 @@
 //
 // //----< unordered_set >---------------------//
 // using std::unordered_set;                   // HashSet (SeparateChainingHashST)
-// TYPESCRIPT_USAGE:
-//     const s1: Set<number> = new Set([1, 2, 3]); // set from Array
-//     const s2: Set<number> = new Set("ABC");     // set from string
+// JAVASCRIPT_USAGE:
+//     const s1 = new Set([1, 2, 3]); // set from Array
+//     const s2 = new Set("ABC");     // set from string
 //
 //     s1.add(5);
 //     s1.add(4);
 //     s1.delete(1);
 //     s1.delete(4);
 //
-//     try {
+//     // Check if 6 is present in the set
+//     if (s1.has(6)) {
 //         s1.delete(6);
-//     } catch (e) {
+//     } else {
 //         console.log("6 is not present in set");
 //     }
 //
@@ -494,8 +490,11 @@
 //
 //
 // using std::unordered_multiset;              // HashSet (SeparateChainingHashST) & Allow duplicated keys
-// TYPESCRIPT_USAGE:
-//     const d: Record<string, number[]> = { key1: [count1], key2: [count2] };
+// JAVASCRIPT_USAGE:
+//     const d = {
+//         key1: [count1],
+//         key2: [count2]
+//     };
 //
 //     // Add additional counts for keys
 //     d.key1.push(anotherCountForKey1);
@@ -506,17 +505,23 @@
 
 // //----< deque >-----------------------------//
 // using std::deque;                           // Vector of fixed-size Vectors: 1 fixed-size vector for each end of the deque
-// TYPESCRIPT_USAGE:
-//     class Node<T> {
-//         constructor(public value: T, public prev: Node<T> | null = null, public next: Node<T> | null = null) {}
+// JAVASCRIPT_USAGE:
+//     class Node {
+//         constructor(value, prev = null, next = null) {
+//             this.value = value;
+//             this.prev = prev;
+//             this.next = next;
+//         }
 //     }
 //
-//     class LinkedList<T> {
-//         private head: Node<T> | null = null;
-//         private tail: Node<T> | null = null;
-//         private length: number = 0;
+//     class LinkedList {
+//         constructor() {
+//             this.head = null;
+//             this.tail = null;
+//             this.length = 0;
+//         }
 //
-//         pushBack(value: T): void {
+//         pushBack(value) {
 //             const newNode = new Node(value, this.tail, null);
 //             if (!this.head) {
 //                 this.head = newNode;
@@ -528,7 +533,7 @@
 //             this.length++;
 //         }
 //
-//         pushFront(value: T): void {
+//         pushFront(value) {
 //             const newNode = new Node(value, null, this.head);
 //             if (!this.tail) {
 //                 this.tail = newNode;
@@ -540,15 +545,15 @@
 //             this.length++;
 //         }
 //
-//         frontNode(): Node<T> | null {
+//         frontNode() {
 //             return this.head;
 //         }
 //
-//         backNode(): Node<T> | null {
+//         backNode() {
 //             return this.tail;
 //         }
 //
-//         remove(node: Node<T>): T | null {
+//         remove(node) {
 //             if (!node.prev) {
 //                 this.head = node.next;
 //             } else {
@@ -566,27 +571,27 @@
 //             return node.value;
 //         }
 //
-//         clear(): void {
+//         clear() {
 //             this.head = null;
 //             this.tail = null;
 //             this.length = 0;
 //         }
 //
-//         getLength(): number {
-//             return this.length;
-//         }
+//     getLength() {
+//         return this.length;
+//     }
 //
-//         *[Symbol.iterator](): IterableIterator<T> {
-//             let current = this.head;
-//             while (current) {
-//                 yield current.value;
-//                 current = current.next;
-//             }
+//     *[Symbol.iterator]() {
+//         let current = this.head;
+//         while (current) {
+//         yield current.value;
+//         current = current.next;
 //         }
+//     }
 //     }
 //
 //     // Example usage
-//     const l = new LinkedList<string>();
+//     const l = new LinkedList();
 //
 //     l.pushBack("A");
 //     l.pushFront("B");
@@ -598,24 +603,25 @@
 //
 //     // Iterating through the list
 //     for (const node of l) {
-//         console.log(node); // Output: D B A C
+//     console.log(node); // Output: D B A C
 //     }
 //
 //     // Removing an element from the back
 //     const b = l.backNode();
-//     console.log(l.remove(b!)); // Output: C
+//     console.log(l.remove(b)); // Output: C
 //
 //     // Removing an element from the front
 //     const f = l.frontNode();
-//     console.log(l.remove(f!)); // Output: D
+//     console.log(l.remove(f)); // Output: D
 //
 //     // Initializing/clearing the list
 //     l.clear();
 //     // Output: 0
 //     console.log(l.getLength());
 //
-// TYPESCRIPT_TRICKS_SUBOPTIMAL:
-//     const deque: string[] = [];
+//
+// JAVASCRIPT_TRICKS_SUBOPTIMAL:
+//     const deque = [];
 //
 //     // Push to the back
 //     deque.push("A");
@@ -623,7 +629,7 @@
 //     deque.unshift("B");
 //     // Push to the back
 //     deque.push("C");
-//     // Push to the front - O( N )
+//     // Push to the front - O(N)
 //     deque.unshift("D");
 //
 //     // Output: 4
@@ -631,14 +637,14 @@
 //
 //     // Iterating through the deque
 //     for (const element of deque) {
-//     console.log(element);
+//         console.log(element);
 //     }
 //
 //     // Get the back element and remove it
 //     const backElement = deque.pop();
 //     console.log(backElement); // Output: "C"
 //
-//     // Get the front element and remove it - O( N )
+//     // Get the front element and remove it - O(N)
 //     const frontElement = deque.shift();
 //     console.log(frontElement); // Output: "D"
 //
@@ -651,27 +657,32 @@
 
 // //----< queue >-----------------------------//
 // using std::queue;                           // Non-Iterable & Use std::deque as underlying data structure
-// TYPESCRIPT_USAGE:
-//     class Node<T> {
-//         constructor(public value: T, public next: Node<T> | null = null) {}
+// JAVASCRIPT_USAGE:
+//     class Node {
+//         constructor(value, next = null) {
+//             this.value = value;
+//             this.next = next;
+//         }
 //     }
 //
-//     class LinkedList<T> {
-//         private head: Node<T> | null = null;
-//         private tail: Node<T> | null = null;
+//     class LinkedList {
+//         constructor() {
+//             this.head = null;
+//             this.tail = null;
+//         }
 //
-//         add(value: T): void {
+//         add(value) {
 //             const newNode = new Node(value);
 //             if (!this.head) {
 //                 this.head = newNode;
 //                 this.tail = newNode;
 //             } else {
-//                 this.tail!.next = newNode;
+//                 this.tail.next = newNode;
 //                 this.tail = newNode;
 //             }
 //         }
 //
-//         addFirst(value: T): void {
+//         addFirst(value) {
 //             const newNode = new Node(value);
 //             newNode.next = this.head;
 //             this.head = newNode;
@@ -680,7 +691,7 @@
 //             }
 //         }
 //
-//         remove(node: Node<T>): T | undefined {
+//         remove(node) {
 //             if (this.head === node) {
 //                 this.head = node.next;
 //             } else {
@@ -700,15 +711,15 @@
 //             return node.value;
 //         }
 //
-//         get first(): Node<T> | null {
+//         get first() {
 //             return this.head;
 //         }
 //
-//         get last(): Node<T> | null {
+//         get last() {
 //             return this.tail;
 //         }
 //
-//         *[Symbol.iterator](): IterableIterator<T> {
+//         *[Symbol.iterator]() {
 //             let current = this.head;
 //             while (current) {
 //                 yield current.value;
@@ -718,7 +729,7 @@
 //     }
 //
 //     // Example usage
-//     const l = new LinkedList<string>();
+//     const l = new LinkedList();
 //
 //     l.add("A");
 //     l.addFirst("B");
@@ -732,21 +743,21 @@
 //
 //     // Getting the back element and removing it
 //     const b = l.last;
-//     console.log(l.remove(b!)); // Output: C
+//     console.log(l.remove(b)); // Output: C
 //
 //     // Getting the front element and removing it
 //     const f = l.first;
-//     console.log(l.remove(f!)); // Output: D
+//     console.log(l.remove(f)); // Output: D
 //
 //
-// TYPESCRIPT_TRICKS_SUBOPTIMAL:
-//     let q: string[] = [];
+// JAVASCRIPT_TRICKS_SUBOPTIMAL:
+//     let q = [];
 //     // or
-//     // let q: string[] = new Array<string>();
+//     // let q = new Array();
 //     // or
-//     // let q: string[] = new Array<string>(6);
+//     // let q = new Array(6);
 //     // or
-//     // let q: string[] = ['A', 'B', 'C', 'D'];
+//     // let q = ['A', 'B', 'C', 'D'];
 //
 //     // Push to the back
 //     q.push('A');
@@ -754,7 +765,7 @@
 //     q.push('B');
 //
 //     // Access front element
-//     const f: string | undefined = q[0];
+//     const f = q[0];
 //     console.log(f);
 //
 //     // Remove from front (shift operation)
@@ -765,31 +776,32 @@
 
 // using std::priority_queue;                  // MaxPQ (MaxHeap) & Non-Iterable.
 // //                                          // => Pass std::greater<> as template params to create MinPQ (MinHeap)
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 // MIN_HEAP:
-//     class PriorityQueue<T> {
-//         private heap: T[] = [];
+//     class PriorityQueue {
+//         constructor(compare) {
+//             this.compare = compare;
+//             this.heap = [];
+//         }
 //
-//         constructor(private compare: (a: T, b: T) => number) {}
-//
-//         get length(): number {
+//         get length() {
 //             return this.heap.length;
 //         }
 //
-//         private less(i: number, j: number): boolean {
+//         less(i, j) {
 //             return this.compare(this.heap[i], this.heap[j]) < 0;
 //         }
 //
-//         private swap(i: number, j: number): void {
+//         swap(i, j) {
 //             [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
 //         }
 //
-//         push(value: T): void {
+//         push(value) {
 //             this.heap.push(value);
 //             this.heapifyUp();
 //         }
 //
-//         pop(): T | undefined {
+//         pop() {
 //             const length = this.length;
 //             if (length === 0) {
 //                 return undefined;
@@ -801,7 +813,7 @@
 //             return poppedValue;
 //         }
 //
-//         private heapifyUp(): void {
+//         heapifyUp() {
 //             let current = this.length - 1;
 //             while (current > 0) {
 //                 const parent = Math.floor((current - 1) / 2);
@@ -814,7 +826,7 @@
 //             }
 //         }
 //
-//         private heapifyDown(): void {
+//         heapifyDown() {
 //             let current = 0;
 //             while (true) {
 //                 const leftChild = 2 * current + 1;
@@ -840,7 +852,7 @@
 //     }
 //
 //     // Example usage with a min-heap (number comparison)
-//     const minHeap = new PriorityQueue<number>((a, b) => a - b);
+//     const minHeap = new PriorityQueue((a, b) => a - b);
 //
 //     minHeap.push(3);
 //     minHeap.push(1);
@@ -852,7 +864,7 @@
 //
 //
 // MIN_HEAP_TRICKS:
-//     const values: number[] = [];
+//     const values = [];
 //
 //     values.push(3);
 //     values.push(1);
@@ -865,29 +877,30 @@
 //
 //
 // MAX_HEAP:
-//     class MaxHeap<T> {
-//         private heap: T[] = [];
+//     class MaxHeap {
+//         constructor(compare) {
+//             this.compare = compare;
+//             this.heap = [];
+//         }
 //
-//         constructor(private compare: (a: T, b: T) => number) {}
-//
-//         get length(): number {
+//         get length() {
 //             return this.heap.length;
 //         }
 //
-//         private greater(i: number, j: number): boolean {
+//         greater(i, j) {
 //             return this.compare(this.heap[i], this.heap[j]) > 0;
 //         }
 //
-//         private swap(i: number, j: number): void {
+//         swap(i, j) {
 //             [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
 //         }
 //
-//         push(value: T): void {
+//         push(value) {
 //             this.heap.push(value);
 //             this.heapifyUp();
 //         }
 //
-//         pop(): T | undefined {
+//         pop() {
 //             const length = this.length;
 //             if (length === 0) {
 //                 return undefined;
@@ -899,7 +912,7 @@
 //             return poppedValue;
 //         }
 //
-//         private heapifyUp(): void {
+//         heapifyUp() {
 //             let current = this.length - 1;
 //             while (current > 0) {
 //                 const parent = Math.floor((current - 1) / 2);
@@ -912,7 +925,7 @@
 //             }
 //         }
 //
-//         private heapifyDown(): void {
+//         heapifyDown() {
 //             let current = 0;
 //             while (true) {
 //                 const leftChild = 2 * current + 1;
@@ -938,7 +951,7 @@
 //     }
 //
 //     // Example usage with a max-heap (number comparison)
-//     const maxHeap = new MaxHeap<number>((a, b) => a - b);
+//     const maxHeap = new MaxHeap((a, b) => a - b);
 //
 //     maxHeap.push(3);
 //     maxHeap.push(1);
@@ -951,9 +964,9 @@
 //
 // MAX_HEAP_TRICKS:
 //     const values = [];
-//     values.push(3)
-//     values.push(1)
-//     values.push(4)
+//     values.push(3);
+//     values.push(1);
+//     values.push(4);
 //
 //     // Sorting in descending order
 //     const sortedValues = values.sort((a, b) => b - a);
@@ -963,9 +976,9 @@
 
 // //----< stack >-----------------------------//
 // using std::stack;                           // Non-Iterable & Use std::deque as underlying data structure
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Using an array as a stack
-//     const st: number[] = [];
+//     const st = [];
 //
 //     // Pushing elements onto the stack
 //     st.push(1);
@@ -982,24 +995,24 @@
 // //----< tuple >-----------------------------//
 // using std::tuple;                           // Non-Iterable & Use std::pair as underlying data structure
 // using std::get;                             // Access & Set element in tuple using get< index >( tuple_var )
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Tuple with specific types
-//     const t1: [string, number] = ["ABC", 1];
+//     const t1 = ["ABC", 1];
 //
 //     // Tuple with variable number of elements of type int
-//     const t2: number[] = [1, 2, 3];
+//     const t2 = [1, 2, 3];
 //
 //     // Tuple with a single element of type int
-//     const t3: [number] = [1];
+//     const t3 = [1];
 //
 //     // Tuple with variable number of elements of type string
-//     const t4: string[] = ["A", "B", "C"];
+//     const t4 = ["A", "B", "C"];
 //
 //     // Tuple with a single element of type string
-//     const t5: [string] = ["A"];
+//     const t5 = ["A"];
 //
 //     // Creating a tuple using a function (similar to Python tuple())
-//     const createTuple = <T extends any[]>(...elements: T): T => elements;
+//     const createTuple = (...elements) => elements;
 //     const t6 = createTuple("ABC", 1);
 //
 //     // Accessing elements in the tuple
@@ -1016,11 +1029,13 @@
 //
 
 // using std::next;                            // Return an advanced iter without changing original iter
-// PYTHON_USAGE:
-//     iterable: Tuple[ int ] = tuple( [ 1, 2, 3, 4 ] )
-//     it = iter( iterable )
-//     for item in it:
-//         print( item )
+// JAVASCRIPT_USAGE:
+//     const iterable = [1, 2, 3, 4];
+//     const it = iterable[Symbol.iterator]();
+//
+//     for (const item of it) {
+//         console.log(item);
+//     }
 //
 //
 // [ UNSUPPORTED_IN_PYTHON ] using std::prev;                            // Return an decremented iter without changing original iter
@@ -1032,21 +1047,23 @@
 // using std::pair;
 // using std::make_pair;
 // using std::move;                            // Move resources between objects - typically used with std::unique_ptr<T>
-// PYTHON_USAGE:
-//     t : Tuple[ str, int ] = ( "ABC", 1 )
-//     t : Tuple[ int, ... ] = ( 1, 2, 3 )
-//     t : Tuple[ int ] = ( 1 )
-//     t : Tuple[ str, ... ] = ( "A", "B", "C" )
-//     t : Tuple[ str ] = ( "A" )
-//     t : Tuple[ str, int ] = tuple( [ "ABC", 1 ] )
-//     if t[ 0 ] == "ABC":
-//         print( t[ 1 ] )
+// JAVASCRIPT_USAGE:
+//     const t1 = ["ABC", 1];
+//     const t2 = [1, 2, 3];
+//     const t3 = [1];
+//     const t4 = ["A", "B", "C"];
+//     const t5 = ["A"];
+//     const t6 = ["ABC", 1];
+//
+//     if (t6[0] === "ABC") {
+//         console.log(t6[1]);
+//     }
 //
 
 // //----< optional >--------------------------//
 // using std::optional;                        // Expresses that a value may or may not be present
-// TYPESCRIPT_USAGE:
-//     function getValue(): number | undefined {
+// JAVASCRIPT_USAGE:
+//     function getValue() {
 //         // Return a number or undefined
 //         const value = 42;
 //         return value;
@@ -1070,9 +1087,9 @@
 
 // //----< algorithm >-------------------------//
 // using std::fill;
-// TYPESCRIPT_USAGE:
+// JAVASCRIPT_USAGE:
 //     // Creating an array filled with 0
-//     const a: number[] = Array(100).fill(0);
+//     const a = Array(100).fill(0);
 //
 //     // Setting a range of elements to 1
 //     a.fill(1, 2, 12);
@@ -1087,6 +1104,18 @@
 //
 
 // using std::max;
+// JAVASCRIPT_USAGE:
+//     const l = [1, 2, 3, 4, 5, 6];
+//
+//     let maxNum = Number.MIN_SAFE_INTEGER;
+//
+//     for (const num of l) {
+//         maxNum = Math.max(maxNum, num);
+//     }
+//
+//     console.log(maxNum); // Output: 6
+//
+
 // TYPESCRIPT_USAGE:
 //     const l: number[] = [1, 2, 3, 4, 5, 6];
 //
