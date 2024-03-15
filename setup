@@ -59,7 +59,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             tavianator/tap/bfs atool rar zip p7zip glances ranger flake8 \
             fzf fd neovim lf highlight ddclient fontforge kubernetes-cli curlpp \
             nlohmann-json jq hq openssl zstd pkg-config libiconv antigen pyenv \
-            goenv librewolf gdu-go; \
+            goenv librewolf gdu minikube \
         brew install phpbrew; \
         brew install --HEAD universal-ctags/universal-ctags/universal-ctags; \
         $(brew --prefix)/opt/fzf/install; \
@@ -145,6 +145,8 @@ else
             # sudo apt-get install -y bat 
             # NOTE: Also install ungoogled-chromium
 	    fi
+	    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+        sudo dpkg -i minikube_latest_amd64.deb
     fi
 
     if [[ -n "${SSH_CLIENT}" ]]; then
