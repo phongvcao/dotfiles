@@ -57,7 +57,7 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
             screen wget bash emacs gdb m4 make nano file-formula python svn unzip \
             cmake xclip curl gpatch htop llvm yarn man-db rustup-init ollama \
             tavianator/tap/bfs atool rar zip p7zip glances ranger flake8 \
-            fzf fd neovim lf highlight ddclient fontforge kubernetes-cli curlpp \
+            fzf fd neovim lf highlight ddclient fontforge curlpp \
             nlohmann-json jq hq openssl zstd pkg-config libiconv antigen pyenv \
             goenv librewolf gdu minikube \
         brew install phpbrew; \
@@ -136,6 +136,7 @@ else
         sudo snap install kubectl --classic && \
         sudo snap install google-cloud-sdk --classic && \
 	    sudo snap install universal-ctags*.snap --dangerous && \
+	    sudo snap install kubectl --classic && \
 	    sudo snap install golangci-lint && \
 	    GO11MODULE="on" go get -u github.com/gokcehan/lf && \
 	    mv ~/go ~/.go
