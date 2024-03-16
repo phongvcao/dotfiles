@@ -120,17 +120,17 @@ else
 	    sudo apt-get update -y && \
 	    sudo apt-get upgrade -y && \
 	    sudo apt-get dist-upgrade -y && \
-	    sudo apt-get install -y zsh git mosh autossh neofetch ctags nodejs npm \
+	    sudo apt-get install -y zsh git mosh autossh neofetch universal-ctags nodejs npm \
 	        vim-gtk3 tmux llvm less openssh-server coreutils binutils diffutils ed \
 	        findutils gawk watch patch wdiff rsync indent sed tar grep gzip screen \
-	        wget bash emacs gdb patch m4 make nano python unzip cmake snapd \
+	        wget bash emacs gdb patch m4 make nano unzip cmake snapd \
 	        ibus-unikey feh xclip vagrant docker bleachbit gparted bleachbit \
 	        curl htop g++ python3-pip lldb clang yarn cargo rustc bfs \
 	        atool unrar zip libarchive-tools p7zip-full glances ranger flake8 \
 	        fzf fd-find neovim highlight ddclient qbittorrent postgresql \
 	        postgresql-contrib xmlstarlet fontforge nlohmann-json3-dev \
-	        libcurl4 libcurlpp0 jq hq openssl zstd pkg-config phpbrew php-pear\
-	        libc6-dev zsh-antigen pyenv ollama librewolf goenv gdu-go && \
+	        libcurl4 libcurlpp0 jq openssl zstd pkg-config php-pear\
+	        libc6-dev zsh-antigen gdu && \
 	    sudo snap install --classic code && \
 	    sudo snap install ccls go --classic && \
         sudo snap install kubectl --classic && \
@@ -138,16 +138,34 @@ else
 	    sudo snap install universal-ctags*.snap --dangerous && \
 	    sudo snap install kubectl --classic && \
 	    sudo snap install golangci-lint && \
+	    sudo snap install --edge ollama && \
+	    sudo snap install --edge pyenv && \
+	    sudo snap install orf-hq && \
 	    GO11MODULE="on" go get -u github.com/gokcehan/lf && \
 	    mv ~/go ~/.go
         if [[ -z "${SSH_CLIENT}" ]]; then
-            sudo apt-get install -y shutter python-pip
+            sudo apt-get install -y shutter python3-pip
             sudo snap install -y alacritty --classic
-            # sudo apt-get install -y bat 
+            sudo apt-get install -y bat 
             # NOTE: Also install ungoogled-chromium
 	    fi
 	    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
         sudo dpkg -i minikube_latest_amd64.deb
+
+        sudo apt install curl
+        sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+
+        echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
+        sudo apt update
+
+        sudo apt install brave-browser
+
+        curl -L -O https://github.com/phpbrew/phpbrew/releases/latest/download/phpbrew.phar
+        chmod +x phpbrew.phar
+
+        # Move the file to some directory within your $PATH
+        sudo mv phpbrew.phar /usr/local/bin/phpbrew
     fi
 
     if [[ -n "${SSH_CLIENT}" ]]; then
