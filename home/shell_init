@@ -7,6 +7,7 @@ PATH_PREFIX="/usr/bin/vendor_perl:/usr/bin/core_perl:${HOME}/Library/Python/3.7/
 PATH_PREFIX="/usr/lib/jvm/default/bin:/usr/bin/site_perl:${PATH_PREFIX}"
 PATH_PREFIX="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:${PATH_PREFIX}"
 PATH_PREFIX="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/grep/libexec/gnubin:${PATH_PREFIX}"
+PATH_PREFIX="/snap/bin:${PATH_PREFIX}"
 if [[ "$(uname)" =~ "Darwin" ]]; then
     if [[ "$(uname -m)" =~ "arm" ]]; then
         coreutils_version="$(ls /opt/homebrew/Cellar/coreutils | tail -n 1)"

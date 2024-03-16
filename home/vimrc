@@ -370,7 +370,7 @@ Plug 'will133/vim-dirdiff', {
 if !has('nvim')
     Plug 'nathanaelkane/vim-indent-guides'
 else
-    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'master' }
 endif
 Plug 'Chiel92/vim-autoformat', {
             \ 'on' : [ 'Autoformat', 'RemoveTrailingSpaces' ] }
