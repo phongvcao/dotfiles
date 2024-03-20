@@ -212,22 +212,8 @@ if [[ "$(uname)" =~ "Darwin" ]]; then
     FONT_DIR="${HOME}/Library/Fonts"
 fi
 if [[ -d "${FONT_DIR}" ]]; then
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Nerd_Font_Complete_Mono_Windows_Compatible.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Nerd_Font_Complete_Mono.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Nerd_Font_Complete_Windows_Compatible.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Windows%20Compatible.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Nerd_Font_Complete.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Oblique_Nerd_Font_Complete_Mono_Windows_Compatible.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Italic/complete/DejaVu%20Sans%20Mono%20Oblique%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Oblique_Nerd_Font_Complete_Mono.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Italic/complete/DejaVu%20Sans%20Mono%20Oblique%20Nerd%20Font%20Complete%20Mono.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Oblique_Nerd_Font_Complete_Windows_Compatible.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Italic/complete/DejaVu%20Sans%20Mono%20Oblique%20Nerd%20Font%20Complete%20Windows%20Compatible.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Oblique_Nerd_Font_Complete.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Italic/complete/DejaVu%20Sans%20Mono%20Oblique%20Nerd%20Font%20Complete.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Nerd_Font_Complete_Mono_Windows_Compatible.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Nerd_Font_Complete_Mono.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Nerd_Font_Complete_Windows_Compatible.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete%20Windows%20Compatible.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Nerd_Font_Complete.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Oblique_Nerd_Font_Complete_Mono_Windows_Compatible.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Bold-Italic/complete/DejaVu%20Sans%20Mono%20Bold%20Oblique%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Oblique_Nerd_Font_Complete_Mono.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Bold-Italic/complete/DejaVu%20Sans%20Mono%20Bold%20Oblique%20Nerd%20Font%20Complete%20Mono.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Oblique_Nerd_Font_Complete_Windows_Compatible.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Bold-Italic/complete/DejaVu%20Sans%20Mono%20Bold%20Oblique%20Nerd%20Font%20Complete%20Windows%20Compatible.ttf?raw=true
-    curl -fLo ${FONT_DIR}/DejaVu_Sans_Mono_Bold_Oblique_Nerd_Font_Complete.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/Bold-Italic/complete/DejaVu%20Sans%20Mono%20Bold%20Oblique%20Nerd%20Font%20Complete.ttf?raw=true
+    curl -fLo ${FONT_DIR}/DejaVuSansMNerdFont-Regular.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/DejaVuSansMNerdFont-Regular.ttf 
+    curl -fLo ${FONT_DIR}/DejaVuSansMNerdFont-Bold.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Bold/DejaVuSansMNerdFont-Bold.ttf 
     fc-cache -f -v
 fi
 

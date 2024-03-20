@@ -34,22 +34,22 @@ unfocused_hollow = true
 TERM = "xterm-256color"
 
 [font]
-size = 10.0
+size = 9
 
 [font.bold]
-family = "DejaVuSansM Nerd Font Mono"
+family = "DejaVuSansM Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "DejaVuSansM Nerd Font Mono"
+family = "DejaVuSansM Nerd Font"
 style = "Bold Oblique"
 
 [font.italic]
-family = "DejaVuSansM Nerd Font Mono"
+family = "DejaVuSansM Nerd Font"
 style = "Bold Oblique"
 
 [font.normal]
-family = "DejaVuSansM Nerd Font Mono"
+family = "DejaVuSansM Nerd Font"
 style = "Bold"
 
 [font.offset]
@@ -456,7 +456,7 @@ multiplier = 0
 [window]
 decorations = "full"
 dynamic_title = true
-option_as_alt = "Both"
+# option_as_alt = "Both"
 startup_mode = "Maximized"
 title = "Alacritty"
 
