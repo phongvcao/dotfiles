@@ -571,6 +571,7 @@ if has('nvim')
     Plug 'folke/neodev.nvim'
     Plug 'mortepau/codicons.nvim'
     Plug 'rcarriga/nvim-dap-ui'
+    Plug 'nvim-neotest/nvim-nio'
     " END: rcarriga/nvim-dap-ui
 
     " BEGIN: theHamsta/nvim-dap-virtual-text
